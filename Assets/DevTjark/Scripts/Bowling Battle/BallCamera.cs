@@ -1,4 +1,4 @@
-// using DependencyInjection;
+using DependencyInjection;
 using UnityEngine;
 
 public class BallCamera : MonoBehaviour
@@ -6,7 +6,7 @@ public class BallCamera : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private Vector3 offset;
     
-    // [Inject] private BallSpawner ballSpawner;
+    [Inject] private BallSpawner ballSpawner;
 
     private void Update()
     {
@@ -15,7 +15,7 @@ public class BallCamera : MonoBehaviour
     
     private void SetCameraPosition()
     {
-        // if (ballSpawner.CurrentBallInstance == null) return;
-        // transform.position = ballSpawner.CurrentBallInstance.transform.position + offset;
+        if (ballSpawner.CurrentBallInstance == null) return;
+        transform.position = ballSpawner.CurrentBallInstance.transform.position + offset;
     }
 }
