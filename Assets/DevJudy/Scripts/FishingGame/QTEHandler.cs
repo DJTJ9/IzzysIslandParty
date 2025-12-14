@@ -237,6 +237,7 @@ public class QTEHandler : MonoBehaviour
         }
     }
 
+    // ----------- Button Mash Event -------------
     [ContextMenu("ButtonMashEvent")]
     public void StartButtonMashQTE()
     {

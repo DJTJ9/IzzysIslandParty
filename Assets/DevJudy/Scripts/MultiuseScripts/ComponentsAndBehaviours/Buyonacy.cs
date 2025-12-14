@@ -31,7 +31,7 @@ public class Buoyancy : MonoBehaviour
     private Vector3 Center => transform.position + centerOffset;
 
     // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
         //get components
         waveCreator = FindFirstObjectByType<WaveCreator>();
@@ -50,7 +50,7 @@ public class Buoyancy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         pointUnderWater = false;
 
@@ -92,7 +92,6 @@ public class Buoyancy : MonoBehaviour
         //rotation
         if (pointUnderWater)
         {
-            Debug.Log("under watter");
             //attach to water surface
             targetUp = Vector3.SmoothDamp(transform.up, targetUp, ref smoothVectorRotation, 0.2f);
             rb.rotation = Quaternion.FromToRotation(transform.up, targetUp) * rb.rotation;

@@ -42,8 +42,8 @@ namespace FishingGame.QuickTimeEvent
         private float successCounter = 0f;
 
         private bool rtsOverlapping;
-        private bool barQTESuccessful = false;
-        private bool barQTERunning = false;
+        public bool BarQTESuccessful {get; private set;}
+        public bool BarQTERunning { get; private set; }
 
         // TODO add enumerator so the event only lasts around 7-8 seconds max
         private void Start()
@@ -64,14 +64,12 @@ namespace FishingGame.QuickTimeEvent
 
             targetRT = target.GetComponent<RectTransform>();
             catcherRT = catcher.GetComponent<RectTransform>();
-
-
         }
 
         public void StartBarQTE()
         {
-            barQTERunning = true;
-            barQTESuccessful = false;
+            BarQTERunning = true;
+            BarQTESuccessful = false;
 
             barQTEHolder.SetActive(true);
 
@@ -162,7 +160,7 @@ namespace FishingGame.QuickTimeEvent
 
             if (successCounter >= successThreshold)
             {
-                barQTESuccessful = true;
+                BarQTESuccessful = true;
                 StopBarQTE();
             }
             else if (successCounter <= failThreshold)
@@ -176,7 +174,7 @@ namespace FishingGame.QuickTimeEvent
             successCounter = 0;
             successSlider.value = successCounter;
 
-            barQTERunning = false;
+            BarQTERunning = false;
 
             // Disable the gameObjects
             barQTEHolder.SetActive(false);

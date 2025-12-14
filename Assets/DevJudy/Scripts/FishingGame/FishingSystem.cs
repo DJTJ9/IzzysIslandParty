@@ -9,13 +9,12 @@ namespace FishingGame{
     {
         [Header("Dependencies: ")]
         [SerializeField] private UITextManager textManager;
-
         [SerializeField] private FishingRodController fishingRodController;
 
         [Header("Variables: ")]
         private static FishingSystem instance;
 
-        [SerializeField] private UnityEvent onFishCaughEvent;
+        [SerializeField] private UnityEvent onFishCaughtEvent;
 
         [SerializeField] private List<So_Fish> fishList;
         [SerializeField] private Vector2 secondsUntilFishBiteRange;
@@ -46,6 +45,11 @@ namespace FishingGame{
             return null;
         }
 
+        private void Start()
+        {
+            onFishCaughtEvent.AddListener(catchEventHandler.ChooseRandomEvent);
+        }
+        
         public void StartFishing()
         {
             fishing = true;
@@ -123,9 +127,12 @@ namespace FishingGame{
 
                 if (PressedCatch)
                 {
+                    Debug.Log("Pressed Catch");
+                    
                     fishing = false;
 
-                    onFishCaughEvent.Invoke();
+                    // onFishCaughtEvent.Invoke();
+                   catchEventHandler.ChooseRandomEvent(); 
 
                     yield return new WaitUntil(() => catchEventHandler.CatchEventFinished);
 

@@ -5,15 +5,14 @@ using System;
 public class WaveCreator : MonoBehaviour
 {
     private MeshCollider meshCollider;
-
-    [SerializeField] private Transform playerTransform;
-
-    //Public Properties
+    
+    //Properties
     [SerializeField] private int dimension = 10;
     [SerializeField] private float uvScale = 2f;
     [SerializeField] private Octave[] octaves;
 
-    // Player
+    // --Player--
+    //[SerializeField] private Transform playerTransform;
     private Vector3 previousPlayerPosition;
     [SerializeField] private float updateThreshold;
 
