@@ -151,7 +151,7 @@ namespace FishingGame{
             {
                 // Show caught fish (via Text and/or Picture)!!
 
-                textManager.UpdateScoreText(caughtFish.Points);
+                textManager.UpdatePointsText(caughtFish.Points);
                 Debug.Log("Congrats!! You caught a " + caughtFish.FishName);
 
                 fishingRodController.PullBackFishingRod();

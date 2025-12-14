@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace FishingGame.QuickTimeEvent
 {
@@ -42,16 +44,21 @@ namespace FishingGame.QuickTimeEvent
         private float successCounter = 0f;
 
         private bool rtsOverlapping;
-        public bool BarQTESuccessful {get; private set;}
+        public bool BarQTESuccessful { get; private set; }
         public bool BarQTERunning { get; private set; }
 
         // TODO add enumerator so the event only lasts around 7-8 seconds max
+
+        private RawImage catcherImage;
+
         private void Start()
         {
             if (target == null)
                 Debug.LogError("Target is null");
             if (catcher == null)
                 Debug.LogError("Catcher is null");
+
+            catcherImage = catcher.GetComponent<RawImage>();
 
             if (successSlider == null)
                 Debug.LogError("SuccessSlider is null");
@@ -66,6 +73,7 @@ namespace FishingGame.QuickTimeEvent
             catcherRT = catcher.GetComponent<RectTransform>();
         }
 
+        [ContextMenu("Start Bar qte")]
         public void StartBarQTE()
         {
             BarQTERunning = true;
@@ -143,7 +151,16 @@ namespace FishingGame.QuickTimeEvent
             Rect rect1 = new Rect(_rt1.position.x, _rt1.position.y, _rt1.rect.width, _rt1.rect.height);
             Rect rect2 = new Rect(_rt2.position.x, _rt2.position.y, _rt2.rect.width, _rt2.rect.height);
 
-            return rect1.Overlaps(rect2);
+            bool overlap = rect1.Overlaps(rect2);
+
+            if (overlap)
+                catcherImage.color = Color.green;
+            else
+            {
+                catcherImage.color = Color.red;
+            }
+
+            return overlap;
         }
 
         private void OverlappingCalculation()

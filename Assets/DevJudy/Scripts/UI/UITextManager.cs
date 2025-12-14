@@ -6,35 +6,37 @@ namespace UIScripts
 {
     public class UITextManager : MonoBehaviour
     {
-        
         // --- Update Text
-        
-        [SerializeField] private TextMeshProUGUI scoreText;
+
+        [SerializeField] private TextMeshProUGUI pointsText;
         private int currentScore = 0;
-        
-        public void UpdateScoreText(int _addedPoints)
+
+        public void UpdatePointsText(int _addedPoints)
         {
             currentScore += _addedPoints;
-            scoreText.text = "Points: " + currentScore.ToString();
+            pointsText.text = "Points: " + currentScore.ToString();
         }
-        
+
         // --- UpdateTimer
 
         [Header("GameObjects: ")]
         [SerializeField] private TextMeshProUGUI timerText;
+
         [SerializeField] private GameOverManager gameOverManager;
-    
+
         [Header("Variables: ")]
         private float time;
+
         private float minutes;
         private float seconds;
         private float milliseconds;
-    
+
         [SerializeField] private float durationInMinutes;
         [SerializeField] private float deductionFeedbackDuration = 2f;
-    
+
         private bool updateTimer = false;
         [SerializeField] private bool timerRunningDown;
+        [SerializeField] private bool startTimerOnLevelStart;
 
         private bool timerFinished;
 
@@ -58,7 +60,8 @@ namespace UIScripts
 
         private void Start()
         {
-            //StartTimer();
+            if (startTimerOnLevelStart)
+                StartTimer();
         }
 
         public void StartTimer()
@@ -70,7 +73,7 @@ namespace UIScripts
 
             updateTimer = true;
         }
-    
+
         // Update is called once per frame
         private void FixedUpdate()
         {
@@ -92,7 +95,7 @@ namespace UIScripts
 
             StartCoroutine(TimeDeductionFeedback());
         }
-    
+
         private void DisplayRunningTimer()
         {
             time += Time.fixedDeltaTime;
@@ -112,7 +115,7 @@ namespace UIScripts
                 gameOverManager.SetGameOver();
             }
         }
-        
+
         private void TimeToTimerTextFormat(float _time)
         {
             minutes = Mathf.FloorToInt(_time / 60);

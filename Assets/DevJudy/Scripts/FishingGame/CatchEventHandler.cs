@@ -52,7 +52,7 @@ namespace FishingGame
             else if (random == 1)
                 MackerelEvent();
             else
-                barQTE.StartBarQTE();
+                WelsEvent();
         }
 
         public void FlounderEvent()
@@ -193,6 +193,7 @@ namespace FishingGame
             if (!failedEncounter)
                 CatchEventSuccess = true;
 
+            Debug.Log("WelsEvent over ");
             CatchEventFinished = true;
 
             welsEventCoroutine = null;
@@ -210,15 +211,18 @@ namespace FishingGame
 
             if (barQTE.BarQTESuccessful)
             {
+                Debug.Log("BarQTE successful");
                     caughtFish = true;
             }
             else
             {
+                Debug.Log("BarQTE not successful");
+
                 failedEncounter = true;
                 caughtFish = false;
             }
 
-            barQTE = null;
+            barQTECoroutine = null;
             yield return null;
         }
     }
