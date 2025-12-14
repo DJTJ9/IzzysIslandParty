@@ -1,16 +1,14 @@
 using UnityEngine;
+using UnityEngine.Events;
 
-public class SO_Fish : MonoBehaviour
+[CreateAssetMenu(menuName = "Fishing/Create Fish")]
+public class So_Fish : ScriptableObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [field: SerializeField] public string FishName { get; private set; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [field: SerializeField] public int Probability { get; private set; }
+    
+    [field: SerializeField] public int Points { get; private set; }
+
+    [field: SerializeField] public UnityEvent CatchTimeEvent;
 }
