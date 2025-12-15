@@ -1,0 +1,52 @@
+.header {
+    font-size: 40px;
+    -unity-text-align: upper-center;
+    color: rgb(255, 255, 255);
+    -unity-font-definition: url("project://database/Assets/DevJudy/ByOthers/Fonts/DroidSansMono.ttf?fileID=12800000&guid=08a7d2fa259a5174fb39c30cd0780b12&type=3#DroidSansMono");
+    -unity-font-style: bold;
+    margin-top: 3%;
+    align-items: center;
+    justify-content: space-between;
+    align-self: center;
+    width: 30%;
+    height: 15%;
+    margin-bottom: 3px;
+}
+
+.gameSelectorContainer {
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: center;
+    align-self: center;
+    align-content: center;
+    align-items: center;
+}
+
+.levelButton {
+    height: 40%;
+    padding-left: 0;
+    margin-right: 5%;
+    margin-left: 5%;
+    width: 25%;
+    transition-duration: 0.35s;
+    justify-content: space-between;
+    visibility: visible;
+    flex-shrink: 1;
+    flex-grow: 0;
+    background-image: url("project://database/Assets/Suriyun/Yippy%20Kawaii/UI/Bear_icon.png?fileID=21300000&guid=c6d2c686caa36ce439c36bad87553796&type=3#Bear_icon");
+    font-size: 30px;
+}
+
+.levelButton:hover {
+    scale: 1.1 1.1;
+}
+
+.hide {
+    display: flex;
+}
+
+.visible {
+}
+
+.button {
+}
