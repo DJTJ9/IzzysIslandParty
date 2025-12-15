@@ -294,7 +294,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1500256527}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &84485861
 MonoBehaviour:
@@ -314,13 +314,13 @@ MonoBehaviour:
   successSlider: {fileID: 613366436}
   targetMaxMovementLeft: -360
   targetMaxMovementRight: 360
-  targetMoveSpeed: 200
-  targetChangeFrequency: 0.02
+  targetMoveSpeed: 230
+  targetChangeFrequency: 0.025
   catcherMaxMovementLeft: -387
   catcherMaxMovementRight: 387
-  catcherMoveSpeed: 220
-  successIncrement: 5
-  failDecrement: 10
+  catcherMoveSpeed: 235
+  successIncrement: 15
+  failDecrement: 15
   successThreshold: 50
   failThreshold: -50
 --- !u!114 &84485862
@@ -2091,8 +2091,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 328818943}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2963,7 +2963,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1240749040
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3345,6 +3345,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1450187887}
+  - {fileID: 84485860}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1613139489
@@ -4144,7 +4145,7 @@ RectTransform:
   m_Father: {fileID: 5090666}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -5.2, y: 0}
   m_SizeDelta: {x: 9.6, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4706,7 +4707,6 @@ SceneRoots:
   - {fileID: 1757134244}
   - {fileID: 132921295}
   - {fileID: 147697070}
-  - {fileID: 84485860}
   - {fileID: 1500256527}
   - {fileID: 2014647222}
   - {fileID: 120655305}

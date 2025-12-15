@@ -15,4 +15,14 @@ namespace enums
         Scale,
         None,
     }
+
+    public enum EFish
+    {
+        Wels,
+        Salmon,
+        Mackerel,
+        Flounder,
+        RainbowTrout,
+        Sturgeon,
+    }
 }

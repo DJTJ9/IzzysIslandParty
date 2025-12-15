@@ -44,11 +44,6 @@ namespace FishingGame{
             Debug.LogError("FishingSystem instance is null");
             return null;
         }
-
-        private void Start()
-        {
-            onFishCaughtEvent.AddListener(catchEventHandler.ChooseRandomEvent);
-        }
         
         public void StartFishing()
         {
@@ -132,7 +127,7 @@ namespace FishingGame{
                     fishing = false;
 
                     // onFishCaughtEvent.Invoke();
-                   catchEventHandler.ChooseRandomEvent(); 
+                   catchEventHandler.StartFishEvent(caughtFish.FishType); 
 
                     yield return new WaitUntil(() => catchEventHandler.CatchEventFinished);
 

@@ -1,3 +1,4 @@
+using enums;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,6 +7,8 @@ public class So_Fish : ScriptableObject
 {
     [field: SerializeField] public string FishName { get; private set; }
 
+    [field: SerializeField] public EFish FishType { get; private set; }
+    
     [field: SerializeField] public int Probability { get; private set; }
     
     [field: SerializeField] public int Points { get; private set; }

@@ -72,10 +72,10 @@ namespace FishingGame.QuickTimeEvent
             targetRT = target.GetComponent<RectTransform>();
             catcherRT = catcher.GetComponent<RectTransform>();
         }
-
-        [ContextMenu("Start Bar qte")]
+        
         public void StartBarQTE()
         {
+            Debug.Log("Started bar qte");
             BarQTERunning = true;
             BarQTESuccessful = false;
 
@@ -148,10 +148,7 @@ namespace FishingGame.QuickTimeEvent
 
         private bool CheckIfRTsOverlapping(RectTransform _rt1, RectTransform _rt2)
         {
-            Rect rect1 = new Rect(_rt1.position.x, _rt1.position.y, _rt1.rect.width, _rt1.rect.height);
-            Rect rect2 = new Rect(_rt2.position.x, _rt2.position.y, _rt2.rect.width, _rt2.rect.height);
-
-            bool overlap = rect1.Overlaps(rect2);
+            bool overlap = Overlaps(_rt1, _rt2);
 
             if (overlap)
                 catcherImage.color = Color.green;
@@ -161,6 +158,21 @@ namespace FishingGame.QuickTimeEvent
             }
 
             return overlap;
+        }
+
+        private bool Overlaps(RectTransform _a, RectTransform _b)
+        {
+            return WorldRect(_a).Overlaps(WorldRect(_b));
+        }
+
+        private Rect WorldRect(RectTransform _rectTransform)
+        {
+            Vector2 sizeDelta = _rectTransform.sizeDelta;
+            float rectTransformWidth = sizeDelta.x * _rectTransform.lossyScale.x;
+            float rectTransformHeight = sizeDelta.y * _rectTransform.lossyScale.y;
+
+            Vector3 position = _rectTransform.position;
+            return new Rect(position.x - rectTransformWidth / 2f, position.y - rectTransformHeight / 2f, rectTransformWidth, rectTransformHeight);
         }
 
         private void OverlappingCalculation()

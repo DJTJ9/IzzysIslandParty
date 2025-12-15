@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using enums;
 using FishingGame.QuickTimeEvent;
 using UnityEngine;
 
@@ -30,12 +30,10 @@ namespace FishingGame
         [SerializeField] private QTEHandler qteHandler;
 
         private int quickTimeEventCounter = 0;
-        private int numberOfDifferentQuickTimeEvents = 6; //(from flounder)
-        private int numberOfEventsToPerform = 3; // (From flounder)
-        private List<float> secondsToPressButtons = new List<float>() { 5f, 3f, 1.5f }; //(from flounder)
-        private List<So_Fish> quickTimeEvents; // List<QuickTimeEvents>-> press button a, press button c, press two buttons, etc
+        
+        private int numberOfEventsToPerform = 3; // (to be got from flounder)
 
-        public void ChooseRandomEvent()
+        public void StartFishEvent(EFish _fishToCatch)
         {
             CatchEventFinished = false;
             CatchEventSuccess = false;
@@ -47,11 +45,29 @@ namespace FishingGame
 
             Debug.Log("ChoseRandomEvent: " + random);
 
-            if (random == 0)
-                FlounderEvent();
-            else if (random == 1)
-                MackerelEvent();
-            else
+            switch (_fishToCatch)
+            {
+                case EFish.Wels:
+                case EFish.Salmon:
+                    WelsEvent();
+                    break;
+                
+                case EFish.RainbowTrout:
+                case EFish.Flounder:
+                    FlounderEvent();
+                    break;
+                
+                case EFish.Mackerel:
+                case EFish.Sturgeon:
+                    MackerelEvent();
+                    break;
+            }
+            
+           if (random == 0)
+               FlounderEvent();
+           else if (random == 1)
+               MackerelEvent();
+           else
                 WelsEvent();
         }
 
@@ -202,6 +218,7 @@ namespace FishingGame
 
         private IEnumerator BarQTE()
         {
+            Debug.Log("Started coroutine");
            barQTE.StartBarQTE();
 
             while (barQTE.BarQTERunning)
