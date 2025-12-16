@@ -74,7 +74,7 @@ public class PlayerControllerMinigolfMayhem : MonoBehaviour {
 
         lookInputAction = playerInput.actions["Look"];
 
-        shootInputAction = playerInput.actions["Shoot"];
+        shootInputAction = playerInput.actions["LeftMouse"];
         shootInputAction.started += OnShootInput;
     }
 
