@@ -60,7 +60,7 @@ namespace Pathfinding
                         sw.Stop();
                         pathFound = true;
 
-                        Debug.Log(string.Format("Path found in {0}ms", sw.ElapsedMilliseconds));
+                        Debug.Log($"Path found in {sw.ElapsedMilliseconds}ms");
                         break;
                     }
 
@@ -69,7 +69,8 @@ namespace Pathfinding
                         if (!neighbour.Walkable || closedSet.Contains(neighbour))
                             continue;
 
-                        int newCostToNeighbour = currentPathfindingNodeToCheck.GCost + GetDistance(currentPathfindingNodeToCheck, neighbour);
+                        int newCostToNeighbour = currentPathfindingNodeToCheck.GCost + GetDistance(currentPathfindingNodeToCheck, neighbour) 
+                                                                                     + neighbour.MovementPenalty;
 
                         if (newCostToNeighbour < neighbour.GCost || !openSet.Contains(neighbour))
                         {
@@ -80,6 +81,8 @@ namespace Pathfinding
 
                             if (!openSet.Contains(neighbour))
                                 openSet.Add(neighbour);
+                            else
+                                openSet.UpdateItem(neighbour);
                         }
                     }
                 }
