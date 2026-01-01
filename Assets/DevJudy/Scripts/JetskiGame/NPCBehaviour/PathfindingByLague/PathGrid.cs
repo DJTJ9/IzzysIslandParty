@@ -6,7 +6,12 @@ namespace Pathfinding
     [DefaultExecutionOrder(-100)]
     public class PathGrid : MonoBehaviour
     {
+        [SerializeField] private TerrainType[] walkableTerrains;
         [SerializeField] private LayerMask untreadableLayer;
+        private LayerMask walkableLayer;
+
+        [SerializeField] private int obstacleProximityPenalty = 10;
+
         [SerializeField] private Vector2 gridWorldSize;
         [SerializeField] private float nodeSize;
 
@@ -17,12 +22,17 @@ namespace Pathfinding
 
         private PathfindingNode[,] grid;
 
+        private Dictionary<int, int> walkableRegionsDictionary = new Dictionary<int, int>();
+
+        private int penaltyMin = int.MaxValue;
+        private int penaltyMax = int.MinValue;
+
         public int MaxSize
         {
             get { return gridSizeX * gridSizeY; }
         }
 
-        private void Start()
+        private void Awake()
         {
             // Otherwise the grid to worldPosition calculation is messed up
             transform.position = Vector3.zero;
@@ -37,12 +47,17 @@ namespace Pathfinding
             gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
             gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
 
+            foreach (TerrainType terrain in walkableTerrains)
+            {
+                walkableLayer.value |= terrain.TerrainMask.value;
+                walkableRegionsDictionary.Add((int)Mathf.Log(terrain.TerrainMask.value, 2), terrain.TerrainPenalty);
+            }
+
             CreateGrid();
         }
 
         private void CreateGrid()
         {
-            bool pointIsWalkable = false;
             Vector3 worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x / 2 - Vector3.forward * gridWorldSize.y / 2;
 
             grid = new PathfindingNode[gridSizeX, gridSizeY];
@@ -53,15 +68,29 @@ namespace Pathfinding
                 {
                     Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeSize) +
                                          Vector3.forward * (y * nodeDiameter + nodeSize);
+                    
+                    bool pointIsWalkable = !Physics.CheckSphere(worldPoint, nodeDiameter, untreadableLayer);
 
+                    int movementPenalty = 0;
 
-                    pointIsWalkable = Physics.CheckSphere(worldPoint, nodeDiameter);
-                    //pointIsWalkable = !Physics.CheckSphere(worldPoint, nodeDiameter, untreadableLayer);
+                    if (pointIsWalkable)
+                    {
+                        Ray ray = new Ray(worldPoint + Vector3.up * 25, Vector3.down);
+                        RaycastHit hit;
 
+                        if (Physics.Raycast(ray, out hit, 50f, walkableLayer))
+                        {
+                            walkableRegionsDictionary.TryGetValue(hit.collider.gameObject.layer, out movementPenalty);
+                        }
+                    }
+                    else
+                        movementPenalty += obstacleProximityPenalty;
 
-                    grid[x, y] = new PathfindingNode(worldPoint, pointIsWalkable, new Vector2(x, y));
+                    grid[x, y] = new PathfindingNode(worldPoint, pointIsWalkable, new Vector2(x, y), movementPenalty);
                 }
             }
+
+            BlurPenaltyMap(3);
         }
 
         public PathfindingNode GetNodeFromWorldPosition(Vector3 _worldPos)
@@ -72,9 +101,62 @@ namespace Pathfinding
             int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
             int y = Mathf.RoundToInt((gridSizeY - 1) * percentY);
 
-            PathfindingNode pathfindingNode = grid[x, y];
+            return grid[x, y];
+        }
 
-            return pathfindingNode;
+        private void BlurPenaltyMap(int _blurSize)
+        {
+            int kernelSize = _blurSize * 2 + 1;
+            int kernelExtents = kernelSize - 1 / 2;
+
+            int[,] penaltyHorizontal = new int[gridSizeX, gridSizeY];
+            int[,] penaltyVertical = new int[gridSizeX, gridSizeY];
+
+            for (int y = 0; y < gridSizeY; y++)
+            {
+                for (int x = -kernelExtents; x <= kernelExtents; x++)
+                {
+                    int sampleX = Mathf.Clamp(x, 0, kernelExtents);
+
+                    penaltyHorizontal[0, y] += grid[sampleX, y].MovementPenalty;
+                }
+
+                for (int x = 1; x < gridSizeX; x++)
+                {
+                    int removeIndex = Mathf.Clamp(x - kernelExtents - 1, 0, gridSizeX);
+                    int addIndex = Mathf.Clamp(x + kernelExtents - 1, 0, gridSizeX - 1);
+
+                    penaltyHorizontal[x, y] = penaltyHorizontal[x - 1, y] - grid[removeIndex, y].MovementPenalty + grid[addIndex, y].MovementPenalty;
+                }
+            }
+
+            for (int x = 0; x < gridSizeX; x++)
+            {
+                for (int y = -kernelExtents; y <= kernelExtents; y++)
+                {
+                    int sampleY = Mathf.Clamp(x, 0, kernelExtents);
+
+                    penaltyVertical[x, 0] += penaltyHorizontal[x, sampleY];
+                }
+
+                for (int y = 1; y < gridSizeY; y++)
+                {
+                    int removeIndex = Mathf.Clamp(y - kernelExtents - 1, 0, gridSizeY);
+                    int addIndex = Mathf.Clamp(y + kernelExtents - 1, 0, gridSizeY - 1);
+
+                    penaltyVertical[x, y] = penaltyVertical[x, y - 1] - penaltyHorizontal[x, removeIndex] + penaltyHorizontal[x, addIndex];
+
+                    int blurredPenalty = Mathf.RoundToInt((float)penaltyVertical[x, y] / (kernelSize * kernelSize));
+                    grid[x, y].MovementPenalty = blurredPenalty;
+
+                    if (blurredPenalty > penaltyMax)
+                        penaltyMax = blurredPenalty;
+
+                    if (blurredPenalty < penaltyMin)
+                        penaltyMin = blurredPenalty;
+                }
+            }
+
         }
 
         public List<PathfindingNode> GetNeighbours(PathfindingNode _pathfindingNode)
@@ -113,7 +195,9 @@ namespace Pathfinding
             {
                 foreach (PathfindingNode node in grid)
                 {
-                    Gizmos.color = node.Walkable ? Color.white : Color.red;
+                    Gizmos.color = Color.Lerp(Color.white, Color.black, Mathf.InverseLerp(penaltyMin, penaltyMax, node.MovementPenalty));
+
+                    Gizmos.color = node.Walkable ? Gizmos.color : Color.red;
 
                     Gizmos.DrawCube(node.WorldPosition, Vector3.one * (nodeDiameter));
                 }

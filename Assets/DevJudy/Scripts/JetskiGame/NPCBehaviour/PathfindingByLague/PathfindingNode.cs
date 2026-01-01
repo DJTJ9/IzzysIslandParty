@@ -13,20 +13,23 @@ namespace Pathfinding
         public readonly int GridPositionX;
         public readonly int GridPositionY;
         public readonly Vector3 WorldPosition;
+
+        public int MovementPenalty;
       
         public readonly bool Walkable;
-
         public PathfindingNode Parent;
       
         public int HeapIndex { get; set; }
       
 
-        public PathfindingNode(Vector3 _pos, bool _walkable, Vector2 _gridPosition)
+        public PathfindingNode(Vector3 _pos, bool _walkable, Vector2 _gridPosition, int _movementPenalty)
         {
             WorldPosition = _pos;
             Walkable = _walkable;
             GridPositionX = (int)_gridPosition.x;
             GridPositionY = (int)_gridPosition.y;
+            
+            MovementPenalty = _movementPenalty;
         }
       
         public int CompareTo(PathfindingNode _pathfindingNodeToCompare)

@@ -5,7 +5,7 @@ using System;
 public class WaveCreator : MonoBehaviour
 {
     private MeshCollider meshCollider;
-    
+
     //Properties
     [SerializeField] private int dimension = 10;
     [SerializeField] private float uvScale = 2f;
@@ -20,6 +20,9 @@ public class WaveCreator : MonoBehaviour
     private MeshFilter meshFilter;
     private Mesh mesh;
 
+
+    [SerializeField] private bool showMesh;
+
     private int Index(int _x, int _z)
     {
         return _x * (dimension + 1) + _z;
@@ -29,9 +32,14 @@ public class WaveCreator : MonoBehaviour
     {
         return Index((int)_x, (int)_z);
     }
-
-    [ContextMenu("Generate Mesh")]
+    
     private void Awake()
+    {
+        SetupMesh();
+    }
+
+    [ContextMenu("Show Mesh")]
+    private void SetupMesh()
     {
         //Mesh Setup
         mesh = new Mesh();
@@ -41,16 +49,18 @@ public class WaveCreator : MonoBehaviour
         mesh.triangles = GenerateTries();
         mesh.uv = GenerateUVs();
 
-
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
 
-        meshFilter = gameObject.AddComponent<MeshFilter>();
+        if (!TryGetComponent<MeshFilter>(out meshFilter))
+            meshFilter = gameObject.AddComponent<MeshFilter>();
+        
         meshFilter.mesh = mesh;
 
-        meshCollider = GetComponent<MeshCollider>();
-        if (meshCollider != null)
-            meshCollider.sharedMesh = mesh;
+        if (!TryGetComponent<MeshCollider>(out meshCollider))
+            meshCollider = gameObject.AddComponent<MeshCollider>();
+        
+        meshCollider.sharedMesh = mesh;
     }
 
     // This is called by the buoyancy components

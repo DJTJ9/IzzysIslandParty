@@ -24,6 +24,9 @@ namespace Pathfinding
             pathRequestManager = GetComponent<PathRequestManager>();
             if (pathRequestManager == null)
                 Debug.LogError("PathRequestManager not found");
+            
+           // openSet = new Heap<PathfindingNode>(pathGrid.MaxSize);
+           // closedSet = new HashSet<PathfindingNode>();
         }
 
         public void StartFindPath(Vector3 _startPos, Vector3 _targetPos)
@@ -36,7 +39,7 @@ namespace Pathfinding
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
-            Vector3[] pathPoints = new Vector3[0];
+            Vector3[] pathPoints = Array.Empty<Vector3>();
             bool pathFound = false;
 
             PathfindingNode startPathfindingNode = pathGrid.GetNodeFromWorldPosition(_startPos);
@@ -45,6 +48,9 @@ namespace Pathfinding
             // Maybe invert the if so there are less brackets
             if (startPathfindingNode.Walkable && targetPathfindingNode.Walkable)
             {
+                // openSet.Clear(pathGrid.MaxSize);
+                // closedSet.Clear();
+                
                 openSet = new Heap<PathfindingNode>(pathGrid.MaxSize);
                 closedSet = new HashSet<PathfindingNode>();
 
@@ -60,7 +66,7 @@ namespace Pathfinding
                         sw.Stop();
                         pathFound = true;
 
-                        Debug.Log(string.Format("Path found in {0}ms", sw.ElapsedMilliseconds));
+                        Debug.Log($"Path found in {sw.ElapsedMilliseconds}ms");
                         break;
                     }
 
@@ -69,7 +75,8 @@ namespace Pathfinding
                         if (!neighbour.Walkable || closedSet.Contains(neighbour))
                             continue;
 
-                        int newCostToNeighbour = currentPathfindingNodeToCheck.GCost + GetDistance(currentPathfindingNodeToCheck, neighbour);
+                        int newCostToNeighbour = currentPathfindingNodeToCheck.GCost + GetDistance(currentPathfindingNodeToCheck, neighbour) 
+                                                                                     + neighbour.MovementPenalty;
 
                         if (newCostToNeighbour < neighbour.GCost || !openSet.Contains(neighbour))
                         {
@@ -80,6 +87,8 @@ namespace Pathfinding
 
                             if (!openSet.Contains(neighbour))
                                 openSet.Add(neighbour);
+                            else
+                                openSet.UpdateItem(neighbour);
                         }
                     }
                 }
@@ -115,11 +124,10 @@ namespace Pathfinding
         {
             List<Vector3> pathPoints = new List<Vector3>();
             Vector2 previousDirection = Vector2.zero;
-            Vector2 newDirection = Vector2.zero;
 
             for (int i = 1; i < _path.Count; i++)
             {
-                newDirection = new Vector2(_path[i - 1].GridPositionX - _path[i].GridPositionX, _path[i - 1].GridPositionY - _path[i].GridPositionY);
+                var newDirection = new Vector2(_path[i - 1].GridPositionX - _path[i].GridPositionX, _path[i - 1].GridPositionY - _path[i].GridPositionY);
 
                 if (newDirection != previousDirection)
                     pathPoints.Add(_path[i].WorldPosition);
