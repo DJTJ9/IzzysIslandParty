@@ -13,7 +13,7 @@ using Attribute = System.Attribute;
 using static VInspector.VInspectorState;
 using static VInspector.Libs.VUtils;
 using static VInspector.Libs.VGUI;
-
+// using static VTools.VDebug;
 
 
 namespace VInspector
@@ -73,7 +73,10 @@ namespace VInspector
                 }
                 void count()
                 {
-                    kvpsProp.arraySize = EditorGUI.DelayedIntField(headerRect.SetWidthFromRight(48 + EditorGUI.indentLevel * 15), kvpsProp.arraySize);
+                    if (kvpsProp_byPropPath[prop.propertyPath].hasMultipleDifferentValues) return;
+
+                    kvpsProp_byPropPath[prop.propertyPath].arraySize = EditorGUI.DelayedIntField(headerRect.SetWidthFromRight(48 + EditorGUI.indentLevel * 15), kvpsProp_byPropPath[prop.propertyPath].arraySize);
+
                 }
                 void repeatedKeysWarning()
                 {
@@ -83,10 +86,10 @@ namespace VInspector
                     var hasRepeatedKeys = false;
                     var hasNullKeys = false;
 
-                    for (int i = 0; i < kvpsProp.arraySize; i++)
+                    for (int i = 0; i < kvpsProp_byPropPath[prop.propertyPath].arraySize; i++)
                     {
-                        hasRepeatedKeys |= kvpsProp.GetArrayElementAtIndex(i).FindPropertyRelative("isKeyRepeated").boolValue;
-                        hasNullKeys |= kvpsProp.GetArrayElementAtIndex(i).FindPropertyRelative("isKeyNull").boolValue;
+                        hasRepeatedKeys |= kvpsProp_byPropPath[prop.propertyPath].GetArrayElementAtIndex(i).FindPropertyRelative("isKeyRepeated").boolValue;
+                        hasNullKeys |= kvpsProp_byPropPath[prop.propertyPath].GetArrayElementAtIndex(i).FindPropertyRelative("isKeyNull").boolValue;
                     }
 
                     if (!hasRepeatedKeys && !hasNullKeys) return;
@@ -125,7 +128,7 @@ namespace VInspector
 
                 SetupList(prop);
 
-                list.DoList(indentedRect.AddHeightFromBottom(-EditorGUIUtility.singleLineHeight - 3));
+                lists_byPropPath[prop.propertyPath].DoList(indentedRect.AddHeightFromBottom(-EditorGUIUtility.singleLineHeight - 3));
             }
 
 
@@ -145,15 +148,15 @@ namespace VInspector
             if (prop.isExpanded)
             {
                 SetupList(prop);
-                height += list.GetHeight() + 3;
+                height += lists_byPropPath[prop.propertyPath].GetHeight() + 3;
             }
 
             return height;
         }
 
-        float GetListElementHeight(int index)
+        float GetListElementHeight(int index, SerializedProperty prop)
         {
-            var kvpProp = kvpsProp.GetArrayElementAtIndex(index);
+            var kvpProp = kvpsProp_byPropPath[prop.propertyPath].GetArrayElementAtIndex(index);
             var keyProp = kvpProp.FindPropertyRelative("Key");
             var valueProp = kvpProp.FindPropertyRelative("Value");
 
@@ -173,13 +176,13 @@ namespace VInspector
 
         }
 
-        void DrawListElement(Rect rect, int index, bool isActive, bool isFocused)
+        void DrawListElement(Rect rect, int index, bool isActive, bool isFocused, SerializedProperty prop)
         {
             Rect keyRect;
             Rect valueRect;
             Rect dividerRect;
 
-            var kvpProp = kvpsProp.GetArrayElementAtIndex(index);
+            var kvpProp = kvpsProp_byPropPath[prop.propertyPath].GetArrayElementAtIndex(index);
             var keyProp = kvpProp.FindPropertyRelative("Key");
             var valueProp = kvpProp.FindPropertyRelative("Value");
 
@@ -290,38 +293,43 @@ namespace VInspector
 
         }
 
-        bool IsSingleLine(SerializedProperty prop) => prop.propertyType != SerializedPropertyType.Generic || !prop.hasVisibleChildren;
+        bool IsSingleLine(SerializedProperty prop) => prop.propertyType != SerializedPropertyType.Generic || !prop.hasVisibleChildren || prop.type == "AssetReference";
 
 
 
         public void SetupList(SerializedProperty prop)
         {
-            if (list != null) return;
+            if (lists_byPropPath.ContainsKey(prop.propertyPath)) return;
 
             SetupProps(prop);
 
-            this.list = new ReorderableList(kvpsProp.serializedObject, kvpsProp, true, false, true, true);
-            this.list.drawElementCallback = DrawListElement;
-            this.list.elementHeightCallback = GetListElementHeight;
-            this.list.drawNoneElementCallback = DrawDictionaryIsEmpty;
+            lists_byPropPath[prop.propertyPath] = new ReorderableList(kvpsProp_byPropPath[prop.propertyPath].serializedObject, kvpsProp_byPropPath[prop.propertyPath], true, false, true, true);
+            lists_byPropPath[prop.propertyPath].drawElementCallback = (q, w, e, r) => DrawListElement(q, w, e, r, prop);
+            lists_byPropPath[prop.propertyPath].elementHeightCallback = (q) => GetListElementHeight(q, prop);
+            lists_byPropPath[prop.propertyPath].drawNoneElementCallback = DrawDictionaryIsEmpty;
 
         }
-        ReorderableList list;
+
+        Dictionary<string, ReorderableList> lists_byPropPath = new();
+        // ReorderableList list;
+
         bool isDividerDragged;
 
 
         public void SetupProps(SerializedProperty prop)
         {
-            if (this.prop != null) return;
+            if (kvpsProp_byPropPath.ContainsKey(prop.propertyPath)) return;
 
-            this.prop = prop;
-            this.kvpsProp = prop.FindPropertyRelative("serializedKvps");
+            kvpsProp_byPropPath[prop.propertyPath] = prop.FindPropertyRelative("serializedKvps");
+
             this.dividerPosProp = prop.FindPropertyRelative("dividerPos");
 
 
         }
-        SerializedProperty prop;
-        SerializedProperty kvpsProp;
+
+        Dictionary<string, SerializedProperty> kvpsProp_byPropPath = new();
+        // SerializedProperty kvpsProp;
+
         SerializedProperty dividerPosProp;
 
     }
@@ -332,19 +340,56 @@ namespace VInspector
     {
         public override void OnGUI(Rect rect, SerializedProperty prop, GUIContent label)
         {
-            var variants = ((VariantsAttribute)attribute).variants;
+
+            var variantsAttribtue = (VariantsAttribute)attribute;
+
+
+            if (variantsAttribtue.variants.Length == 1 && variantsAttribtue.variants[0] is string dynamicCollectionName)
+            {
+                var target = prop.serializedObject.targetObject;
+
+
+
+
+                IEnumerable ienum = null;
+
+                if (target.GetType().GetMember(dynamicCollectionName, maxBindingFlags).FirstOrDefault() is MemberInfo collectionMember)
+                    if (collectionMember is MethodInfo methodInfo)
+                        ienum = methodInfo.Invoke(target, null) as IEnumerable;
+                    else
+                        ienum = target.GetMemberValue(dynamicCollectionName) as IEnumerable;
+
+
+
+                if (ienum != null)
+                {
+                    var variantsList = new List<object>();
+
+                    foreach (var r in ienum)
+                        variantsList.Add(r);
+
+                    variantsAttribtue.variants = variantsList.ToArray();
+                }
+
+
+            }
+
+            var variantsArray = variantsAttribtue.variants;
+
+
+
 
 
             EditorGUI.BeginProperty(rect, label, prop);
 
-            var iCur = prop.hasMultipleDifferentValues ? -1 : variants.ToList().IndexOf(prop.GetBoxedValue());
+            var iCur = prop.hasMultipleDifferentValues ? -1 : variantsArray.ToList().IndexOf(prop.GetBoxedValue());
 
-            var iNew = EditorGUI.IntPopup(rect, label.text, iCur, variants.Select(r => r.ToString()).ToArray(), Enumerable.Range(0, variants.Length).ToArray());
+            var iNew = EditorGUI.IntPopup(rect, label.text, iCur, variantsArray.Select(r => r.ToString()).ToArray(), Enumerable.Range(0, variantsArray.Length).ToArray());
 
             if (iNew != -1)
-                prop.SetBoxedValue(variants[iNew]);
+                prop.SetBoxedValue(variantsArray[iNew]);
             else if (!prop.hasMultipleDifferentValues)
-                prop.SetBoxedValue(variants[0]);
+                prop.SetBoxedValue(variantsArray[0]);
 
             EditorGUI.EndProperty();
 
@@ -416,6 +461,37 @@ namespace VInspector
 
             EditorGUI.EndProperty();
 
+
+        }
+    }
+
+
+
+
+    [CustomPropertyDrawer(typeof(TagAttribute))]
+    public class TagDrawer : PropertyDrawer
+    {
+        public override void OnGUI(Rect rect, SerializedProperty prop, GUIContent label)
+        {
+            EditorGUI.BeginProperty(rect, label, prop);
+
+            prop.stringValue = EditorGUI.TagField(rect, label, prop.stringValue);
+
+            EditorGUI.EndProperty();
+
+        }
+    }
+
+    [CustomPropertyDrawer(typeof(LayerAttribute))]
+    public class LayerDrawer : PropertyDrawer
+    {
+        public override void OnGUI(Rect rect, SerializedProperty prop, GUIContent label)
+        {
+            EditorGUI.BeginProperty(rect, label, prop);
+
+            prop.intValue = EditorGUI.LayerField(rect, label, prop.intValue);
+
+            EditorGUI.EndProperty();
 
         }
     }

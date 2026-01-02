@@ -13,7 +13,7 @@ using static VInspector.VInspector;
 using static VInspector.VInspectorState;
 using static VInspector.Libs.VUtils;
 using static VInspector.Libs.VGUI;
-
+// using static VTools.VDebug;
 
 
 namespace VInspector
@@ -464,7 +464,8 @@ namespace VInspector
 
                         void invokeCallbacks() => methodInfos.ForEach(r => targets.ForEach(rr => r.Invoke(rr, null)));
 
-                        invokeCallbacks();
+                        // invokeCallbacks();
+                        AbstractEditor.toCallAfterModifyingSO += invokeCallbacks;
 
                         valueChangedCallbacks_byUndoPosition[EditorUtils.GetCurrendUndoGroupIndex()] = invokeCallbacks;
 
@@ -1001,6 +1002,10 @@ namespace VInspector
                     }
 
                     if (member is MethodInfo method)
+                    {
+                        if (method.DeclaringType.IsGenericType)
+                            method = targetType.GetMethodInfo(method.Name, method.GetParameters().Select(r => r.ParameterType).ToArray()) ?? method; // fixes wrong method when targetType inherits from method.DeclaringType and method.DeclaringType is generic
+
                         if (!method.GetParameters().Any())
                         {
                             var methodTarget = method.IsStatic ? null : target;
@@ -1021,6 +1026,8 @@ namespace VInspector
                             button.parameterInfos = method.GetParameters().ToList();
 
                         }
+
+                    }
 
 
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System;
 using UnityEngine;
-
+// using static VTools.VDebug;
 #if UNITY_EDITOR
 using static VInspector.Libs.VUtils;
 #endif
@@ -135,5 +135,9 @@ namespace VInspector
     }
 
 
+
+
+    public class TagAttribute : PropertyAttribute { }
+    public class LayerAttribute : PropertyAttribute { }
 
 }

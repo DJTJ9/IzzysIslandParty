@@ -12,7 +12,7 @@ using Type = System.Type;
 using static VInspector.VInspectorState;
 using static VInspector.Libs.VUtils;
 using static VInspector.Libs.VGUI;
-
+// using static VTools.VDebug;
 
 
 namespace VInspector
@@ -94,7 +94,8 @@ namespace VInspector
 
             void scriptOrSO()
             {
-                if (!typeof(MonoBehaviour).IsAssignableFrom(targetType) && typeof(ScriptableObject).IsAssignableFrom(targetType)) return;
+                if (!typeof(MonoBehaviour).IsAssignableFrom(targetType)
+                 && !typeof(ScriptableObject).IsAssignableFrom(targetType)) return;
 
                 targetWithDefaultValues = System.Activator.CreateInstance(targetType);
 
