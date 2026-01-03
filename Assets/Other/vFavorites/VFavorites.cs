@@ -475,6 +475,10 @@ namespace VFavorites
                         if (curEvent.isRepaint && skipNextRepaint) { skipNextRepaint = false; return; }
 
 
+                        if (curEvent.holdingShift && curEvent.isScroll)
+                            curEvent.e.delta = new Vector2(0, curEvent.e.delta.x + curEvent.e.delta.y);
+
+
                         GUILayout.BeginArea(pageRect);
                         page.scrollPos = EditorGUILayout.BeginScrollView(new Vector2(0, page.scrollPos), GUIStyle.none, GUIStyle.none).y;
 
@@ -1003,12 +1007,20 @@ namespace VFavorites
                 var folderAsset = AssetDatabase.LoadAssetAtPath<Object>(path);
 
                 if (browser.GetFieldValue<int>("m_ViewMode") == 1)
+#if UNITY_6000_3_OR_NEWER
+                    browser.InvokeMethod("SetFolderSelection", new[] { (EntityId)folderAsset.GetInstanceID() }, false);
+#else
                     browser.InvokeMethod("SetFolderSelection", new[] { folderAsset.GetInstanceID() }, false);
+#endif
                 else
                 {
                     Selection.activeObject = folderAsset;
 
+#if UNITY_6000_3_OR_NEWER
+                    browser.GetMemberValue("m_AssetTree")?.GetPropertyValue("data")?.InvokeMethod("SetExpanded", (EntityId)folderAsset.GetInstanceID(), true);
+#else
                     browser.GetMemberValue("m_AssetTree")?.GetPropertyValue("data")?.InvokeMethod("SetExpanded", folderAsset.GetInstanceID(), true);
+#endif
 
                 }
 
@@ -1096,6 +1108,7 @@ namespace VFavorites
             void openScene()
             {
                 if (item.type != typeof(SceneAsset)) return;
+                if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return; // if clicked cancel
 
                 EditorSceneManager.SaveOpenScenes();
                 EditorSceneManager.OpenScene(item.assetPath);
@@ -1357,7 +1370,7 @@ namespace VFavorites
 
         static float currentOpacity;
         static float currentOpacityDerivative;
-        static float targetOpacity => curEvent.holdingAlt || renamingPage || draggingItemFromPageToOutside || isWrappedBrowserLocked ? 1 : 0; // holdingAlt instead of shortcutPressed to prevent unwrapping due to incorrect event modifiers on key down on mac
+        static float targetOpacity => isAltPressed || renamingPage || draggingItemFromPageToOutside || isWrappedBrowserLocked ? 1 : 0; // holdingAlt instead of shortcutPressed to prevent unwrapping due to incorrect event modifiers on key down on mac
         static bool animatingOpacity => currentOpacity.DistanceTo(targetOpacity) > .01f;
 
 
@@ -1545,7 +1558,7 @@ namespace VFavorites
             mousePressed = false;
 
 
-            if (!draggingItemFromPage) { draggedItem = null; return; }
+            if (!draggingItemFromPage) { draggedItem = null; EditorGUIUtility.hotControl = 0; return; }
 
             data.curPage.items.AddAt(draggedItem, draggingItemFromPageAtIndex);
 
@@ -1612,6 +1625,9 @@ namespace VFavorites
 
                 t_BrowserWindow.SetFieldValue("s_LastInteractedProjectBrowser", wrappedBrowser); // so vTabs can copy its layout setting
 
+
+                wrappedBrowserWasLockedBeforeWrapping = wrappedBrowser.GetMemberValue<bool>("isLocked");
+
             }
             void unwrap()
             {
@@ -1656,12 +1672,14 @@ namespace VFavorites
         static EditorWindow wrappedBrowser;
         static System.Delegate origBrowserOnGUIDelegate;
 
+        static bool wrappedBrowserWasLockedBeforeWrapping;
+
         static bool shortcutPressed
         {
             get
             {
                 if (VFavoritesMenu.activeOnAltEnabled)
-                    return curEvent.holdingAlt;
+                    return isAltPressed;
 
                 if (VFavoritesMenu.activeOnAltShiftEnabled)
                     return curEvent.modifiers == (EventModifiers.Alt | EventModifiers.Shift);
@@ -1672,9 +1690,40 @@ namespace VFavorites
                     else
                         return curEvent.modifiers == (EventModifiers.Control | EventModifiers.Alt);
 
+
                 return false;
+
             }
         }
+
+
+
+
+        static bool isAltPressed
+        {
+            get
+            {
+#if !UNITY_EDITOR_LINUX
+                return curEvent.holdingAlt;
+#else
+
+                if (curEvent.holdingAlt)
+                    _isAltPressed_cachedForLinux = true;
+
+                else if (curEvent.keyCode == KeyCode.LeftAlt)
+                    if (curEvent.isKeyDown)
+                        _isAltPressed_cachedForLinux = true;
+
+                    else if (curEvent.isKeyUp)
+                        _isAltPressed_cachedForLinux = false;
+
+
+                return _isAltPressed_cachedForLinux;
+
+#endif
+            }
+        }
+        static bool _isAltPressed_cachedForLinux;
 
 
 
@@ -1712,12 +1761,25 @@ namespace VFavorites
                 lockedBrowser.minSize = Vector2.one * 100;
 
             }
+            void setTitle()
+            {
+
+                if (!lockedBrowser) return;
+                if (lockedBrowser.GetFieldValue<int>("m_ViewMode") != 0) return; // one column)
+                if (lockedBrowser.titleContent.text == "vFavorites") return;
+
+                var icon = EditorIcons.GetIcon("Favorite");
+
+                lockedBrowser.titleContent = new GUIContent("vFavorites", icon);
+
+            }
 
             void lock_()
             {
                 if (lockedBrowser) return;
                 if (!wrappedBrowser) return;
                 if (!wrappedBrowser.GetMemberValue<bool>("isLocked")) return;
+                if (wrappedBrowserWasLockedBeforeWrapping) return;
 
                 lockedBrowser = wrappedBrowser;
 
@@ -1732,6 +1794,8 @@ namespace VFavorites
                 if (!lockedBrowser) return;
                 if (lockedBrowser.GetMemberValue<bool>("isLocked")) return;
 
+
+                lockedBrowser.titleContent = lockedBrowser.InvokeMethod<GUIContent>("GetLocalizedTitleContent");
 
                 lockedBrowser = null;
 
@@ -1759,6 +1823,7 @@ namespace VFavorites
             unsetWrappedBrowser();
             markLockedBrowser();
             setMinWidthOnLockedBrowser();
+            setTitle();
 
             lock_();
             unlock();
@@ -1779,7 +1844,7 @@ namespace VFavorites
 
 
 
-                var window = Resources.InstanceIDToObject(lockedBrowserInstanceId) as EditorWindow;
+                var window = _EditorUtility_InstanceIDToObject(lockedBrowserInstanceId) as EditorWindow;
 
                 if (window && window.GetType() == t_BrowserWindow) // prevents iid collisions
                     _lockedBrowser = window;
@@ -1969,7 +2034,7 @@ namespace VFavorites
 
 
 
-        const string version = "2.0.10";
+        const string version = "2.0.14";
 
     }
 }
