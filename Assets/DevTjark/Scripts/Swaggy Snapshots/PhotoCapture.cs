@@ -19,7 +19,7 @@ public class PhotoCapture : MonoBehaviour
     [SerializeField] private float fadeInSpeed = 1f;
     
     private Texture2D m_screenCapture;
-    private bool m_viewingPhoto;
+    private bool m_photoTaken;
     
     private readonly int m_fadeInAnimationHash = Animator.StringToHash("PhotoFadeIn");
     
@@ -33,7 +33,9 @@ public class PhotoCapture : MonoBehaviour
     
     private IEnumerator CaptureScreenshot()
     {
-        m_viewingPhoto = true;
+        if (m_photoTaken) yield break;
+        
+        m_photoTaken = true;
         StartCoroutine(FlashLightEffect());
         
         yield return new WaitForEndOfFrame();
@@ -64,7 +66,7 @@ public class PhotoCapture : MonoBehaviour
     [Button]
     private void HideScreenshot()
     {
-        m_viewingPhoto = false;
+        m_photoTaken = false;
         photoFrame.SetActive(false);
     } 
 }
