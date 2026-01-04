@@ -15,6 +15,8 @@ namespace JetskiGame
 
         private Vector2 moveInput = Vector2.zero;
         private bool driving = false;
+        
+        [SerializeField] private AnimationCurve accelerationCurve;
 
         private void Awake()
         {
@@ -64,5 +66,7 @@ namespace JetskiGame
             //     If particleSystem
             // not playing, play
         }
+        
+        
     }
 }

@@ -10,27 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21b03310998a7dd4baa01c1e4bafa7f9, type: 3}
-  m_Name: Kaldera_Nature_Category
+  m_Name: Kaldera_RacetrackPalette
   m_EditorClassIdentifier: 
   ShortKey: 0
   Groups:
-  - GroupName: Vegetation
+  - GroupName: 
     Items:
-    - Name: Vulcan_Grass_01_P
+    - Name: Pf_Gate
       GameObjectVariants:
-      - {fileID: 1322736902358156035, guid: 25cb196489c530c4f8e728a62ff5b121, type: 3}
-      - {fileID: 4162084431252096770, guid: 15acd2be67c35bd41ae294115f62318c, type: 3}
-      - {fileID: 4162084431252096770, guid: 15acd2be67c35bd41ae294115f62318c, type: 3}
-      - {fileID: 7203628677436185490, guid: 3f3aaba2ce70acc4cbdfc4d1b26c4421, type: 3}
+      - {fileID: 6500574086962568663, guid: 6a36d1da1567dd746a2a683a8eb1ac05, type: 3}
       Rotation:
         Constant: {x: 0, y: 0, z: 0}
-        Min: {x: 0, y: 150, z: 0}
-        Max: {x: 0, y: 210, z: 0}
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 360, z: 0}
         Mode: 1
       Scale:
         Mode: 3
-        MinScale: {x: 1.5, y: 1.5, z: 1.5}
-        MaxScale: {x: 2, y: 2, z: 1.2}
+        MinScale: {x: 1, y: 1, z: 1}
+        MaxScale: {x: 1, y: 1, z: 1}
         UnitformScaling: 1
       AdvancedOptions:
         AllowPlacementCollisions: 0
@@ -38,7 +35,7 @@ MonoBehaviour:
         UsePrefabRotation: 0
         UsePrefabHeight: 1
         UseIndividualGroundHeight: 1
-        AllowCollision: 1
+        AllowCollision: 0
         SpacingFactor: 1
         RotationOffset: {x: 0, y: 0, z: 0}
         NameType: 0
@@ -46,49 +43,18 @@ MonoBehaviour:
       IsVariantsOpen: 0
       VariantsScroll: {x: 0, y: 0}
       IsOpenInEditor: 1
-    - Name: Vulcan_Tree_01_P
+    - Name: Pf_FinishLine
       GameObjectVariants:
-      - {fileID: 1505252073103894037, guid: a22d36cc36d908d4daf9d1ed293d379f, type: 3}
-      - {fileID: 6091321752311795661, guid: 22204eda43c652d4ba799fa1ca9899d5, type: 3}
+      - {fileID: 6966963601895908853, guid: e097a13e807f5044f8a48a92474fe048, type: 3}
       Rotation:
         Constant: {x: 0, y: 0, z: 0}
-        Min: {x: -6, y: 0, z: -6}
-        Max: {x: 6, y: 360, z: 6}
-        Mode: 1
-      Scale:
-        Mode: 3
-        MinScale: {x: 1.5, y: 1.5, z: 1.5}
-        MaxScale: {x: 2.5, y: 3.5, z: 2.5}
-        UnitformScaling: 1
-      AdvancedOptions:
-        AllowPlacementCollisions: 0
-        MultiplyPrefabScale: 1
-        UsePrefabRotation: 0
-        UsePrefabHeight: 1
-        UseIndividualGroundHeight: 1
-        AllowCollision: 0
-        SpacingFactor: 1
-        RotationOffset: {x: 0, y: 0, z: 0}
-        NameType: 0
-      IsAdvancesOptionsOpenInEditor: 1
-      IsVariantsOpen: 1
-      VariantsScroll: {x: 0, y: 0}
-      IsOpenInEditor: 1
-    - Name: Cactus_01
-      GameObjectVariants:
-      - {fileID: 4173051518832591224, guid: c69ca92ddc9601c4195cbd31361a58f7, type: 3}
-      - {fileID: 3685603496423227362, guid: bc717af0102ff964897d903f019c13df, type: 3}
-      - {fileID: 1578860749034582291, guid: 890df0207bc333c40ab80b130c8bf0db, type: 3}
-      - {fileID: 4718669119981818394, guid: 8b414a825500dc544b0cb3d6f2496825, type: 3}
-      Rotation:
-        Constant: {x: 0, y: 0, z: 0}
-        Min: {x: -20, y: 0, z: -20}
-        Max: {x: 20, y: 360, z: 20}
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 360, z: 0}
         Mode: 1
       Scale:
         Mode: 3
         MinScale: {x: 1, y: 1, z: 1}
-        MaxScale: {x: 1.5, y: 1.5, z: 1.5}
+        MaxScale: {x: 1, y: 1, z: 1}
         UnitformScaling: 1
       AdvancedOptions:
         AllowPlacementCollisions: 0
@@ -100,22 +66,22 @@ MonoBehaviour:
         SpacingFactor: 1
         RotationOffset: {x: 0, y: 0, z: 0}
         NameType: 0
-      IsAdvancesOptionsOpenInEditor: 1
+      IsAdvancesOptionsOpenInEditor: 0
       IsVariantsOpen: 0
       VariantsScroll: {x: 0, y: 0}
       IsOpenInEditor: 1
-    - Name: Cactus_04
+    - Name: SM_LargeIsland
       GameObjectVariants:
-      - {fileID: 4718669119981818394, guid: 8b414a825500dc544b0cb3d6f2496825, type: 3}
+      - {fileID: 2348909342588696560, guid: 2431df326c2da2c4e8964fd43f252a00, type: 3}
       Rotation:
         Constant: {x: 0, y: 0, z: 0}
-        Min: {x: -20, y: -20, z: -20}
-        Max: {x: 20, y: 360, z: 20}
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 360, z: 0}
         Mode: 1
       Scale:
         Mode: 3
-        MinScale: {x: 0.6, y: 0.6, z: 0.6}
-        MaxScale: {x: 2, y: 2, z: 2}
+        MinScale: {x: 1, y: 1, z: 1}
+        MaxScale: {x: 1, y: 1, z: 1}
         UnitformScaling: 1
       AdvancedOptions:
         AllowPlacementCollisions: 0
@@ -127,7 +93,331 @@ MonoBehaviour:
         SpacingFactor: 1
         RotationOffset: {x: 0, y: 0, z: 0}
         NameType: 0
-      IsAdvancesOptionsOpenInEditor: 1
+      IsAdvancesOptionsOpenInEditor: 0
+      IsVariantsOpen: 0
+      VariantsScroll: {x: 0, y: 0}
+      IsOpenInEditor: 1
+    - Name: SM_Rocks_01
+      GameObjectVariants:
+      - {fileID: 4843524868254211946, guid: 0b7c39db641be5044ab85ba9f56a629a, type: 3}
+      Rotation:
+        Constant: {x: 0, y: 0, z: 0}
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 360, z: 0}
+        Mode: 1
+      Scale:
+        Mode: 3
+        MinScale: {x: 1, y: 1, z: 1}
+        MaxScale: {x: 1, y: 1, z: 1}
+        UnitformScaling: 1
+      AdvancedOptions:
+        AllowPlacementCollisions: 0
+        MultiplyPrefabScale: 1
+        UsePrefabRotation: 0
+        UsePrefabHeight: 1
+        UseIndividualGroundHeight: 1
+        AllowCollision: 0
+        SpacingFactor: 1
+        RotationOffset: {x: 0, y: 0, z: 0}
+        NameType: 0
+      IsAdvancesOptionsOpenInEditor: 0
+      IsVariantsOpen: 0
+      VariantsScroll: {x: 0, y: 0}
+      IsOpenInEditor: 1
+    - Name: SM_Rocks_02
+      GameObjectVariants:
+      - {fileID: 7105557981267009923, guid: 8b2f7789077f69f458e3919626d6ea22, type: 3}
+      Rotation:
+        Constant: {x: 0, y: 0, z: 0}
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 360, z: 0}
+        Mode: 1
+      Scale:
+        Mode: 3
+        MinScale: {x: 1, y: 1, z: 1}
+        MaxScale: {x: 1, y: 1, z: 1}
+        UnitformScaling: 1
+      AdvancedOptions:
+        AllowPlacementCollisions: 0
+        MultiplyPrefabScale: 1
+        UsePrefabRotation: 0
+        UsePrefabHeight: 1
+        UseIndividualGroundHeight: 1
+        AllowCollision: 0
+        SpacingFactor: 1
+        RotationOffset: {x: 0, y: 0, z: 0}
+        NameType: 0
+      IsAdvancesOptionsOpenInEditor: 0
+      IsVariantsOpen: 0
+      VariantsScroll: {x: 0, y: 0}
+      IsOpenInEditor: 1
+    - Name: SM_Rocks_06
+      GameObjectVariants:
+      - {fileID: 5514129879276577408, guid: b2981534d2ac4244fafb153e0cb4c9c2, type: 3}
+      Rotation:
+        Constant: {x: 0, y: 0, z: 0}
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 360, z: 0}
+        Mode: 1
+      Scale:
+        Mode: 3
+        MinScale: {x: 1, y: 1, z: 1}
+        MaxScale: {x: 1, y: 1, z: 1}
+        UnitformScaling: 1
+      AdvancedOptions:
+        AllowPlacementCollisions: 0
+        MultiplyPrefabScale: 1
+        UsePrefabRotation: 0
+        UsePrefabHeight: 1
+        UseIndividualGroundHeight: 1
+        AllowCollision: 0
+        SpacingFactor: 1
+        RotationOffset: {x: 0, y: 0, z: 0}
+        NameType: 0
+      IsAdvancesOptionsOpenInEditor: 0
+      IsVariantsOpen: 0
+      VariantsScroll: {x: 0, y: 0}
+      IsOpenInEditor: 1
+    - Name: SM_Rocks_09
+      GameObjectVariants:
+      - {fileID: 5389395240314065769, guid: 967b6a4dedfb5424f8c3a056595dab0e, type: 3}
+      Rotation:
+        Constant: {x: 0, y: 0, z: 0}
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 360, z: 0}
+        Mode: 1
+      Scale:
+        Mode: 3
+        MinScale: {x: 1, y: 1, z: 1}
+        MaxScale: {x: 1, y: 1, z: 1}
+        UnitformScaling: 1
+      AdvancedOptions:
+        AllowPlacementCollisions: 0
+        MultiplyPrefabScale: 1
+        UsePrefabRotation: 0
+        UsePrefabHeight: 1
+        UseIndividualGroundHeight: 1
+        AllowCollision: 0
+        SpacingFactor: 1
+        RotationOffset: {x: 0, y: 0, z: 0}
+        NameType: 0
+      IsAdvancesOptionsOpenInEditor: 0
+      IsVariantsOpen: 0
+      VariantsScroll: {x: 0, y: 0}
+      IsOpenInEditor: 1
+    - Name: NF_Prop_Rock_07
+      GameObjectVariants:
+      - {fileID: 1966408112123107847, guid: 6408a12bddf201547b82f46cd4e0eda1, type: 3}
+      Rotation:
+        Constant: {x: 0, y: 0, z: 0}
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 360, z: 0}
+        Mode: 1
+      Scale:
+        Mode: 3
+        MinScale: {x: 1, y: 1, z: 1}
+        MaxScale: {x: 1, y: 1, z: 1}
+        UnitformScaling: 1
+      AdvancedOptions:
+        AllowPlacementCollisions: 0
+        MultiplyPrefabScale: 1
+        UsePrefabRotation: 0
+        UsePrefabHeight: 1
+        UseIndividualGroundHeight: 1
+        AllowCollision: 0
+        SpacingFactor: 1
+        RotationOffset: {x: 0, y: 0, z: 0}
+        NameType: 0
+      IsAdvancesOptionsOpenInEditor: 0
+      IsVariantsOpen: 0
+      VariantsScroll: {x: 0, y: 0}
+      IsOpenInEditor: 1
+    - Name: NF_Prop_Rock_06
+      GameObjectVariants:
+      - {fileID: 103533695531684043, guid: b7725d3b8ade2944a85fb564d380ce22, type: 3}
+      Rotation:
+        Constant: {x: 0, y: 0, z: 0}
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 360, z: 0}
+        Mode: 1
+      Scale:
+        Mode: 3
+        MinScale: {x: 1, y: 1, z: 1}
+        MaxScale: {x: 1, y: 1, z: 1}
+        UnitformScaling: 1
+      AdvancedOptions:
+        AllowPlacementCollisions: 0
+        MultiplyPrefabScale: 1
+        UsePrefabRotation: 0
+        UsePrefabHeight: 1
+        UseIndividualGroundHeight: 1
+        AllowCollision: 0
+        SpacingFactor: 1
+        RotationOffset: {x: 0, y: 0, z: 0}
+        NameType: 0
+      IsAdvancesOptionsOpenInEditor: 0
+      IsVariantsOpen: 0
+      VariantsScroll: {x: 0, y: 0}
+      IsOpenInEditor: 1
+    - Name: NF_Prop_Rock_05
+      GameObjectVariants:
+      - {fileID: 5734805618339350737, guid: 69189b9c87cf03541a4e0524fbaeebef, type: 3}
+      Rotation:
+        Constant: {x: 0, y: 0, z: 0}
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 360, z: 0}
+        Mode: 1
+      Scale:
+        Mode: 3
+        MinScale: {x: 1, y: 1, z: 1}
+        MaxScale: {x: 1, y: 1, z: 1}
+        UnitformScaling: 1
+      AdvancedOptions:
+        AllowPlacementCollisions: 0
+        MultiplyPrefabScale: 1
+        UsePrefabRotation: 0
+        UsePrefabHeight: 1
+        UseIndividualGroundHeight: 1
+        AllowCollision: 0
+        SpacingFactor: 1
+        RotationOffset: {x: 0, y: 0, z: 0}
+        NameType: 0
+      IsAdvancesOptionsOpenInEditor: 0
+      IsVariantsOpen: 0
+      VariantsScroll: {x: 0, y: 0}
+      IsOpenInEditor: 1
+    - Name: NF_Prop_Rock_22
+      GameObjectVariants:
+      - {fileID: 5175699959687164127, guid: 05b16bfa55f1dbd4e8d41f3cf56a4b25, type: 3}
+      Rotation:
+        Constant: {x: 0, y: 0, z: 0}
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 360, z: 0}
+        Mode: 1
+      Scale:
+        Mode: 3
+        MinScale: {x: 1, y: 1, z: 1}
+        MaxScale: {x: 1, y: 1, z: 1}
+        UnitformScaling: 1
+      AdvancedOptions:
+        AllowPlacementCollisions: 0
+        MultiplyPrefabScale: 1
+        UsePrefabRotation: 0
+        UsePrefabHeight: 1
+        UseIndividualGroundHeight: 1
+        AllowCollision: 0
+        SpacingFactor: 1
+        RotationOffset: {x: 0, y: 0, z: 0}
+        NameType: 0
+      IsAdvancesOptionsOpenInEditor: 0
+      IsVariantsOpen: 0
+      VariantsScroll: {x: 0, y: 0}
+      IsOpenInEditor: 1
+    - Name: NF_Prop_Rock_23
+      GameObjectVariants:
+      - {fileID: 3753222240343228596, guid: 07658cc252b20f648a02bf401993c32c, type: 3}
+      Rotation:
+        Constant: {x: 0, y: 0, z: 0}
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 360, z: 0}
+        Mode: 1
+      Scale:
+        Mode: 3
+        MinScale: {x: 1, y: 1, z: 1}
+        MaxScale: {x: 1, y: 1, z: 1}
+        UnitformScaling: 1
+      AdvancedOptions:
+        AllowPlacementCollisions: 0
+        MultiplyPrefabScale: 1
+        UsePrefabRotation: 0
+        UsePrefabHeight: 1
+        UseIndividualGroundHeight: 1
+        AllowCollision: 0
+        SpacingFactor: 1
+        RotationOffset: {x: 0, y: 0, z: 0}
+        NameType: 0
+      IsAdvancesOptionsOpenInEditor: 0
+      IsVariantsOpen: 0
+      VariantsScroll: {x: 0, y: 0}
+      IsOpenInEditor: 1
+    - Name: NF_Prop_Rock_24
+      GameObjectVariants:
+      - {fileID: 1201425923661988064, guid: 7f5a84c9d4b327942a7e29d4f08abbd5, type: 3}
+      Rotation:
+        Constant: {x: 0, y: 0, z: 0}
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 360, z: 0}
+        Mode: 1
+      Scale:
+        Mode: 3
+        MinScale: {x: 1, y: 1, z: 1}
+        MaxScale: {x: 1, y: 1, z: 1}
+        UnitformScaling: 1
+      AdvancedOptions:
+        AllowPlacementCollisions: 0
+        MultiplyPrefabScale: 1
+        UsePrefabRotation: 0
+        UsePrefabHeight: 1
+        UseIndividualGroundHeight: 1
+        AllowCollision: 0
+        SpacingFactor: 1
+        RotationOffset: {x: 0, y: 0, z: 0}
+        NameType: 0
+      IsAdvancesOptionsOpenInEditor: 0
+      IsVariantsOpen: 0
+      VariantsScroll: {x: 0, y: 0}
+      IsOpenInEditor: 1
+    - Name: NF_Prop_Rock_09
+      GameObjectVariants:
+      - {fileID: 8819707754012225631, guid: f0fc41d480bbd1e478997955a4714acd, type: 3}
+      Rotation:
+        Constant: {x: 0, y: 0, z: 0}
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 360, z: 0}
+        Mode: 1
+      Scale:
+        Mode: 3
+        MinScale: {x: 1, y: 1, z: 1}
+        MaxScale: {x: 1, y: 1, z: 1}
+        UnitformScaling: 1
+      AdvancedOptions:
+        AllowPlacementCollisions: 0
+        MultiplyPrefabScale: 1
+        UsePrefabRotation: 0
+        UsePrefabHeight: 1
+        UseIndividualGroundHeight: 1
+        AllowCollision: 0
+        SpacingFactor: 1
+        RotationOffset: {x: 0, y: 0, z: 0}
+        NameType: 0
+      IsAdvancesOptionsOpenInEditor: 0
+      IsVariantsOpen: 0
+      VariantsScroll: {x: 0, y: 0}
+      IsOpenInEditor: 1
+    - Name: Sign_free_obs
+      GameObjectVariants:
+      - {fileID: 6156632962304447296, guid: fca05fc86b15f0d4da25ed7793db4384, type: 3}
+      Rotation:
+        Constant: {x: 0, y: 0, z: 0}
+        Min: {x: 0, y: 0, z: 0}
+        Max: {x: 0, y: 360, z: 0}
+        Mode: 1
+      Scale:
+        Mode: 3
+        MinScale: {x: 1, y: 1, z: 1}
+        MaxScale: {x: 1, y: 1, z: 1}
+        UnitformScaling: 1
+      AdvancedOptions:
+        AllowPlacementCollisions: 0
+        MultiplyPrefabScale: 1
+        UsePrefabRotation: 0
+        UsePrefabHeight: 1
+        UseIndividualGroundHeight: 1
+        AllowCollision: 0
+        SpacingFactor: 1
+        RotationOffset: {x: 0, y: 0, z: 0}
+        NameType: 0
+      IsAdvancesOptionsOpenInEditor: 0
       IsVariantsOpen: 0
       VariantsScroll: {x: 0, y: 0}
       IsOpenInEditor: 1
@@ -151,354 +441,7 @@ MonoBehaviour:
         UsePrefabRotation: 0
         UsePrefabHeight: 1
         UseIndividualGroundHeight: 1
-        AllowCollision: 1
-        SpacingFactor: 1
-        RotationOffset: {x: 0, y: 0, z: 0}
-        NameType: 0
-      IsAdvancesOptionsOpenInEditor: 0
-      IsVariantsOpen: 0
-      VariantsScroll: {x: 0, y: 0}
-      IsOpenInEditor: 0
-    IsOpenInEditor: 1
-  - GroupName: Bones
-    Items:
-    - Name: Vulcan_AlienSkull_P
-      GameObjectVariants:
-      - {fileID: 2354591587623556606, guid: 2de64a9fc2bc5df4a82d092f73950ddb, type: 3}
-      Rotation:
-        Constant: {x: 0, y: 0, z: 0}
-        Min: {x: 0, y: 0, z: 0}
-        Max: {x: 0, y: 360, z: 0}
-        Mode: 1
-      Scale:
-        Mode: 3
-        MinScale: {x: 1, y: 1, z: 1}
-        MaxScale: {x: 1, y: 1, z: 1}
-        UnitformScaling: 1
-      AdvancedOptions:
-        AllowPlacementCollisions: 0
-        MultiplyPrefabScale: 1
-        UsePrefabRotation: 0
-        UsePrefabHeight: 1
-        UseIndividualGroundHeight: 1
         AllowCollision: 0
-        SpacingFactor: 1
-        RotationOffset: {x: 0, y: 0, z: 0}
-        NameType: 0
-      IsAdvancesOptionsOpenInEditor: 1
-      IsVariantsOpen: 0
-      VariantsScroll: {x: 0, y: 0}
-      IsOpenInEditor: 1
-    - Name: Vulcan_Skull_P
-      GameObjectVariants:
-      - {fileID: 4173051518832591224, guid: c69ca92ddc9601c4195cbd31361a58f7, type: 3}
-      Rotation:
-        Constant: {x: 0, y: 0, z: 0}
-        Min: {x: 0, y: 0, z: 0}
-        Max: {x: 0, y: 360, z: 0}
-        Mode: 1
-      Scale:
-        Mode: 3
-        MinScale: {x: 1, y: 1, z: 1}
-        MaxScale: {x: 1, y: 1, z: 1}
-        UnitformScaling: 1
-      AdvancedOptions:
-        AllowPlacementCollisions: 0
-        MultiplyPrefabScale: 1
-        UsePrefabRotation: 0
-        UsePrefabHeight: 1
-        UseIndividualGroundHeight: 1
-        AllowCollision: 0
-        SpacingFactor: 1
-        RotationOffset: {x: 0, y: 0, z: 0}
-        NameType: 0
-      IsAdvancesOptionsOpenInEditor: 1
-      IsVariantsOpen: 0
-      VariantsScroll: {x: 0, y: 0}
-      IsOpenInEditor: 1
-    - Name: Vulcan_Bone_01_P
-      GameObjectVariants:
-      - {fileID: 1337291327405095616, guid: ff6bab6b9b0e7dc40a04193ae6243b82, type: 3}
-      - {fileID: 669909359399780622, guid: d80a0160683bde84ab8fc4438e696d77, type: 3}
-      - {fileID: 6516104926044138313, guid: 2bf905c99b0d7bb47a9ca5590ed0b4de, type: 3}
-      Rotation:
-        Constant: {x: 0, y: 0, z: 0}
-        Min: {x: 0, y: 0, z: 0}
-        Max: {x: 0, y: 360, z: 0}
-        Mode: 1
-      Scale:
-        Mode: 3
-        MinScale: {x: 1, y: 1, z: 1}
-        MaxScale: {x: 1, y: 1, z: 1}
-        UnitformScaling: 1
-      AdvancedOptions:
-        AllowPlacementCollisions: 0
-        MultiplyPrefabScale: 1
-        UsePrefabRotation: 0
-        UsePrefabHeight: 1
-        UseIndividualGroundHeight: 1
-        AllowCollision: 0
-        SpacingFactor: 1
-        RotationOffset: {x: 0, y: 0, z: 0}
-        NameType: 0
-      IsAdvancesOptionsOpenInEditor: 1
-      IsVariantsOpen: 0
-      VariantsScroll: {x: 0, y: 0}
-      IsOpenInEditor: 1
-    - Name: Creature_Skeleton_01
-      GameObjectVariants:
-      - {fileID: 2885259927781878285, guid: 36cd8911c458b364f84f8eded47976af, type: 3}
-      - {fileID: 5059527632868533532, guid: 3500d52c4ce2a9e49b05f1a8a174378b, type: 3}
-      Rotation:
-        Constant: {x: 0, y: 0, z: 0}
-        Min: {x: 0, y: 0, z: 0}
-        Max: {x: 0, y: 360, z: 0}
-        Mode: 1
-      Scale:
-        Mode: 3
-        MinScale: {x: 1, y: 1, z: 1}
-        MaxScale: {x: 1, y: 1, z: 1}
-        UnitformScaling: 1
-      AdvancedOptions:
-        AllowPlacementCollisions: 0
-        MultiplyPrefabScale: 1
-        UsePrefabRotation: 0
-        UsePrefabHeight: 1
-        UseIndividualGroundHeight: 1
-        AllowCollision: 0
-        SpacingFactor: 1
-        RotationOffset: {x: 0, y: 0, z: 0}
-        NameType: 0
-      IsAdvancesOptionsOpenInEditor: 1
-      IsVariantsOpen: 1
-      VariantsScroll: {x: 0, y: 0}
-      IsOpenInEditor: 1
-    - Name: SkullPile_01
-      GameObjectVariants:
-      - {fileID: 1524961773819802080, guid: 0baec3617ae927f44bfebfdd39fb03ec, type: 3}
-      - {fileID: 4112408194487807731, guid: 6752080c4b7b827408b68a2203128650, type: 3}
-      Rotation:
-        Constant: {x: 0, y: 0, z: 0}
-        Min: {x: 0, y: 0, z: 0}
-        Max: {x: 0, y: 360, z: 0}
-        Mode: 1
-      Scale:
-        Mode: 3
-        MinScale: {x: 1, y: 1, z: 1}
-        MaxScale: {x: 1, y: 1, z: 1}
-        UnitformScaling: 1
-      AdvancedOptions:
-        AllowPlacementCollisions: 0
-        MultiplyPrefabScale: 1
-        UsePrefabRotation: 0
-        UsePrefabHeight: 1
-        UseIndividualGroundHeight: 1
-        AllowCollision: 0
-        SpacingFactor: 1
-        RotationOffset: {x: 0, y: 0, z: 0}
-        NameType: 0
-      IsAdvancesOptionsOpenInEditor: 1
-      IsVariantsOpen: 1
-      VariantsScroll: {x: 0, y: 0}
-      IsOpenInEditor: 1
-    NewGroupItem:
-      Name: 
-      GameObjectVariants:
-      - {fileID: 0}
-      Rotation:
-        Constant: {x: 0, y: 0, z: 0}
-        Min: {x: 0, y: 0, z: 0}
-        Max: {x: 0, y: 360, z: 0}
-        Mode: 1
-      Scale:
-        Mode: 3
-        MinScale: {x: 1, y: 1, z: 1}
-        MaxScale: {x: 1, y: 1, z: 1}
-        UnitformScaling: 1
-      AdvancedOptions:
-        AllowPlacementCollisions: 0
-        MultiplyPrefabScale: 1
-        UsePrefabRotation: 0
-        UsePrefabHeight: 1
-        UseIndividualGroundHeight: 1
-        AllowCollision: 1
-        SpacingFactor: 1
-        RotationOffset: {x: 0, y: 0, z: 0}
-        NameType: 0
-      IsAdvancesOptionsOpenInEditor: 0
-      IsVariantsOpen: 0
-      VariantsScroll: {x: 0, y: 0}
-      IsOpenInEditor: 0
-    IsOpenInEditor: 1
-  - GroupName: Rocks
-    Items:
-    - Name: Vulcan_Rock_Large_01_P
-      GameObjectVariants:
-      - {fileID: 8548264986721517933, guid: 261ab86ae17ee0a4fbffa9d4f18d15cf, type: 3}
-      - {fileID: 5214232268617234808, guid: 6982bd80b0c6ad44c84763288b05dd98, type: 3}
-      - {fileID: 3629420169586021361, guid: f97a874d6bb95d24cbfb6d634c3be7af, type: 3}
-      Rotation:
-        Constant: {x: 0, y: 0, z: 0}
-        Min: {x: 0, y: 0, z: 0}
-        Max: {x: 0, y: 360, z: 0}
-        Mode: 1
-      Scale:
-        Mode: 3
-        MinScale: {x: 2, y: 2, z: 2}
-        MaxScale: {x: 3, y: 3, z: 3}
-        UnitformScaling: 1
-      AdvancedOptions:
-        AllowPlacementCollisions: 0
-        MultiplyPrefabScale: 1
-        UsePrefabRotation: 0
-        UsePrefabHeight: 1
-        UseIndividualGroundHeight: 1
-        AllowCollision: 0
-        SpacingFactor: 1
-        RotationOffset: {x: 0, y: 0, z: 0}
-        NameType: 0
-      IsAdvancesOptionsOpenInEditor: 1
-      IsVariantsOpen: 0
-      VariantsScroll: {x: 0, y: 0}
-      IsOpenInEditor: 1
-    - Name: Vulcan_Rock_Medium_01_P
-      GameObjectVariants:
-      - {fileID: 3322708226227701727, guid: 199a3ea5e55f19e4c998326bfe0756e3, type: 3}
-      - {fileID: 6655351701421850038, guid: 8d1a92d00522b3448b497aa823eab289, type: 3}
-      - {fileID: 8685139342749240177, guid: 6e1b0ba1b20708e439934968515979fd, type: 3}
-      Rotation:
-        Constant: {x: 0, y: 0, z: 0}
-        Min: {x: 0, y: 0, z: 0}
-        Max: {x: 0, y: 360, z: 0}
-        Mode: 1
-      Scale:
-        Mode: 3
-        MinScale: {x: 1, y: 1, z: 1}
-        MaxScale: {x: 2, y: 2, z: 2}
-        UnitformScaling: 1
-      AdvancedOptions:
-        AllowPlacementCollisions: 0
-        MultiplyPrefabScale: 1
-        UsePrefabRotation: 0
-        UsePrefabHeight: 1
-        UseIndividualGroundHeight: 1
-        AllowCollision: 0
-        SpacingFactor: 1
-        RotationOffset: {x: 0, y: 0, z: 0}
-        NameType: 0
-      IsAdvancesOptionsOpenInEditor: 1
-      IsVariantsOpen: 0
-      VariantsScroll: {x: 0, y: 0}
-      IsOpenInEditor: 1
-    - Name: Vulcan_Rock_Small_01_P
-      GameObjectVariants:
-      - {fileID: 9012544045197714814, guid: 0803d35d9724eb84fb9ff100d4fa82ec, type: 3}
-      - {fileID: 7957110295866218556, guid: c36f6155a28840d458da2ad2a186551c, type: 3}
-      - {fileID: 9109195643241215349, guid: 248fbd1268074ac4783b0a7efeb023e7, type: 3}
-      - {fileID: 3179222946691644897, guid: 6326e829f578c67479eab63b201e689e, type: 3}
-      Rotation:
-        Constant: {x: 0, y: 0, z: 0}
-        Min: {x: 0, y: 0, z: 0}
-        Max: {x: 0, y: 360, z: 0}
-        Mode: 1
-      Scale:
-        Mode: 3
-        MinScale: {x: 1, y: 1, z: 1}
-        MaxScale: {x: 2, y: 2, z: 2}
-        UnitformScaling: 1
-      AdvancedOptions:
-        AllowPlacementCollisions: 0
-        MultiplyPrefabScale: 1
-        UsePrefabRotation: 0
-        UsePrefabHeight: 1
-        UseIndividualGroundHeight: 1
-        AllowCollision: 0
-        SpacingFactor: 1
-        RotationOffset: {x: 0, y: 0, z: 0}
-        NameType: 0
-      IsAdvancesOptionsOpenInEditor: 1
-      IsVariantsOpen: 0
-      VariantsScroll: {x: 0, y: 0}
-      IsOpenInEditor: 1
-    NewGroupItem:
-      Name: 
-      GameObjectVariants:
-      - {fileID: 0}
-      Rotation:
-        Constant: {x: 0, y: 0, z: 0}
-        Min: {x: 0, y: 0, z: 0}
-        Max: {x: 0, y: 360, z: 0}
-        Mode: 1
-      Scale:
-        Mode: 3
-        MinScale: {x: 1, y: 1, z: 1}
-        MaxScale: {x: 1, y: 1, z: 1}
-        UnitformScaling: 1
-      AdvancedOptions:
-        AllowPlacementCollisions: 0
-        MultiplyPrefabScale: 1
-        UsePrefabRotation: 0
-        UsePrefabHeight: 1
-        UseIndividualGroundHeight: 1
-        AllowCollision: 1
-        SpacingFactor: 1
-        RotationOffset: {x: 0, y: 0, z: 0}
-        NameType: 0
-      IsAdvancesOptionsOpenInEditor: 0
-      IsVariantsOpen: 0
-      VariantsScroll: {x: 0, y: 0}
-      IsOpenInEditor: 0
-    IsOpenInEditor: 1
-  - GroupName: VFX
-    Items:
-    - Name: Dust_VFX_P
-      GameObjectVariants:
-      - {fileID: 4669878282078832272, guid: e7090718773c27a4d84f80d2353bb272, type: 3}
-      Rotation:
-        Constant: {x: 0, y: 0, z: 0}
-        Min: {x: 0, y: 0, z: 0}
-        Max: {x: 0, y: 360, z: 0}
-        Mode: 1
-      Scale:
-        Mode: 3
-        MinScale: {x: 1, y: 1, z: 1}
-        MaxScale: {x: 1, y: 1, z: 1}
-        UnitformScaling: 1
-      AdvancedOptions:
-        AllowPlacementCollisions: 0
-        MultiplyPrefabScale: 1
-        UsePrefabRotation: 0
-        UsePrefabHeight: 1
-        UseIndividualGroundHeight: 1
-        AllowCollision: 0
-        SpacingFactor: 1
-        RotationOffset: {x: 0, y: 0, z: 0}
-        NameType: 0
-      IsAdvancesOptionsOpenInEditor: 1
-      IsVariantsOpen: 1
-      VariantsScroll: {x: 0, y: 0}
-      IsOpenInEditor: 1
-    NewGroupItem:
-      Name: 
-      GameObjectVariants:
-      - {fileID: 0}
-      Rotation:
-        Constant: {x: 0, y: 0, z: 0}
-        Min: {x: 0, y: 0, z: 0}
-        Max: {x: 0, y: 360, z: 0}
-        Mode: 1
-      Scale:
-        Mode: 3
-        MinScale: {x: 1, y: 1, z: 1}
-        MaxScale: {x: 1, y: 1, z: 1}
-        UnitformScaling: 1
-      AdvancedOptions:
-        AllowPlacementCollisions: 0
-        MultiplyPrefabScale: 1
-        UsePrefabRotation: 0
-        UsePrefabHeight: 1
-        UseIndividualGroundHeight: 1
-        AllowCollision: 1
         SpacingFactor: 1
         RotationOffset: {x: 0, y: 0, z: 0}
         NameType: 0

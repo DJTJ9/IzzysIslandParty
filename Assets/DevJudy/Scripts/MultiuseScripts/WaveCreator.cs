@@ -11,9 +11,7 @@ public class WaveCreator : MonoBehaviour
     [SerializeField] private float uvScale = 2f;
     [SerializeField] private Octave[] octaves;
 
-    // --Player--
-    //[SerializeField] private Transform playerTransform;
-    private Vector3 previousPlayerPosition;
+     private Vector3 previousPlayerPosition;
     [SerializeField] private float updateThreshold;
 
     //Mesh

@@ -1,4 +1,5 @@
 using System.Collections;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Pathfinding
@@ -41,7 +42,6 @@ namespace Pathfinding
         
         private void OnPathFound(Vector3[] _wayPoints, bool _foundPath)
         {
-            
             if (_foundPath)
             {
                 path = new SmoothPath(_wayPoints, transform.position, turnDistance, stoppingDistance);
@@ -57,6 +57,7 @@ namespace Pathfinding
             }
         }
 
+        [Button]
         private IEnumerator UpdatePath()
         {
             if (Time.timeSinceLevelLoad < 0.3f)

@@ -68,7 +68,7 @@ namespace Pathfinding
                 {
                     Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeSize) +
                                          Vector3.forward * (y * nodeDiameter + nodeSize);
-                    
+
                     bool pointIsWalkable = !Physics.CheckSphere(worldPoint, nodeDiameter, untreadableLayer);
 
                     int movementPenalty = 0;
@@ -82,6 +82,8 @@ namespace Pathfinding
                         {
                             walkableRegionsDictionary.TryGetValue(hit.collider.gameObject.layer, out movementPenalty);
                         }
+                        else
+                            movementPenalty += obstacleProximityPenalty;
                     }
                     else
                         movementPenalty += obstacleProximityPenalty;
@@ -156,7 +158,6 @@ namespace Pathfinding
                         penaltyMin = blurredPenalty;
                 }
             }
-
         }
 
         public List<PathfindingNode> GetNeighbours(PathfindingNode _pathfindingNode)
