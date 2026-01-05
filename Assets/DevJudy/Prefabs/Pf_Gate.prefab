@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3231487808701866809}
   - component: {fileID: 7152793261256073337}
+  - component: {fileID: 3944861720362104649}
   m_Layer: 12
   m_Name: RightCollider
   m_TagString: Untagged
@@ -53,6 +54,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 60, y: 3.5, z: 0.2}
   m_Center: {x: 32, y: 1.3, z: 0}
+--- !u!114 &3944861720362104649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3213139783192260101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd75fea5241fecc49b69fc0412bdf4e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &5537935672674760516
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,6 +187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8164453531254161509}
   - component: {fileID: 1485746039154999791}
+  - component: {fileID: 6063276713710990018}
   m_Layer: 12
   m_Name: LeftCollider
   m_TagString: Untagged
@@ -214,6 +231,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 60, y: 3.5, z: 0.2}
   m_Center: {x: -32, y: 1.3, z: 0}
+--- !u!114 &6063276713710990018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5564927701146765066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd75fea5241fecc49b69fc0412bdf4e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &6500574086962568663
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,8 +255,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7898641189273035567}
-  - component: {fileID: 8743482963496894582}
-  - component: {fileID: 3105203800950968881}
+  - component: {fileID: 728747392201616624}
+  - component: {fileID: 7615030993205101761}
+  - component: {fileID: 8454545060776656198}
   m_Layer: 11
   m_Name: Pf_Gate
   m_TagString: Untagged
@@ -242,7 +275,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -17.19, y: -0.5, z: 40.65}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1.2}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1581222833997371615}
@@ -251,7 +284,7 @@ Transform:
   - {fileID: 4093502474709781117}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8743482963496894582
+--- !u!65 &728747392201616624
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -261,18 +294,18 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 7927
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.8, y: 7, z: 0.2}
-  m_Center: {x: 1.5, y: 3.5, z: 1.09}
---- !u!114 &3105203800950968881
+  m_Size: {x: 3, y: 7.5, z: 0.2}
+  m_Center: {x: 1.54, y: 3.2, z: 1.5}
+--- !u!114 &7615030993205101761
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -287,6 +320,27 @@ MonoBehaviour:
   collisionLayer:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &8454545060776656198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6500574086962568663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 400cfd736ab8abb4098c7274f6ac644a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiTimer: {fileID: 0}
+  middleCollider: {fileID: 7615030993205101761}
+  leftCollider: {fileID: 6063276713710990018}
+  rightCollider: {fileID: 3944861720362104649}
+  timeDeduction:
+    UseConstant: 0
+    ConstantValue: 0.5
+    Variable: {fileID: 11400000, guid: 33ded404c8453a540b1ff08db845a140, type: 2}
+  clearedGate: 0
 --- !u!1 &7443761771682286411
 GameObject:
   m_ObjectHideFlags: 0

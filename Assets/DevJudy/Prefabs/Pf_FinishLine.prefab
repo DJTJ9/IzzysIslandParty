@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4693906137463263359}
   - component: {fileID: 2531061774420443977}
+  - component: {fileID: 8316314288494755625}
   m_Layer: 11
   m_Name: TriggerCollider
   m_TagString: Untagged
@@ -51,8 +52,23 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 11.3, y: 6, z: 2}
+  m_Size: {x: 16.56, y: 6, z: 2}
   m_Center: {x: 0, y: 1.62, z: 0.65}
+--- !u!114 &8316314288494755625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185860251641702135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd75fea5241fecc49b69fc0412bdf4e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionLayer:
+    serializedVersion: 2
+    m_Bits: 384
 --- !u!1 &5723411664910404544
 GameObject:
   m_ObjectHideFlags: 0
@@ -82,7 +98,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -6.97, z: 0}
-  m_LocalScale: {x: 2.6, y: 3, z: 1.8}
+  m_LocalScale: {x: 3.5, y: 3, z: 1.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5704474965065886413}
@@ -171,13 +187,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5704474965065886413}
+  - component: {fileID: 8346465286866406622}
   m_Layer: 12
   m_Name: Pf_FinishLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5704474965065886413
 Transform:
   m_ObjectHideFlags: 0
@@ -195,3 +212,21 @@ Transform:
   - {fileID: 4693906137463263359}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8346465286866406622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6966963601895908853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a43a5a55f55b2f4ea24054dceff3d5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finishLineTrigger: {fileID: 8316314288494755625}
+  levelService: {fileID: 0}
+  secondsToEndLevel: 3
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 256

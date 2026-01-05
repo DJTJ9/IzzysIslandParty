@@ -1,5 +1,4 @@
 using System.Collections;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Pathfinding
@@ -14,15 +13,17 @@ namespace Pathfinding
 
         [SerializeField] private Transform target;
 
-        [SerializeField] private float speed = 5f;
-        [SerializeField] private float turnSpeed = 3f;
-        [SerializeField] private float turnDistance = 5f;
-        [SerializeField] private float stoppingDistance = 10f;
+        [SerializeField] private float speed = 20f;
+        [SerializeField] private float turnSpeed = 2.5f;
+        [SerializeField] private float turnDistance = 10f;
+        [SerializeField] private float stoppingDistance = 2f;
 
         private SmoothPath path;
         int pathIndex = 0;
 
         private Coroutine followPathRoutine;
+
+        private bool canFollowPath = false;
 
         private void Start()
         {
@@ -31,6 +32,11 @@ namespace Pathfinding
             StartCoroutine(UpdatePath());
         }
 
+        public void CanFollowPath()
+        {
+            canFollowPath = true;
+        }
+        
         private void FixedUpdate()
         {
           if (followPathRoutine != null)
@@ -56,8 +62,7 @@ namespace Pathfinding
                     followPathRoutine = StartCoroutine(FollowPath());
             }
         }
-
-        [Button]
+        
         private IEnumerator UpdatePath()
         {
             if (Time.timeSinceLevelLoad < 0.3f)
@@ -85,6 +90,9 @@ namespace Pathfinding
             pathIndex = 0;
 
             float speedPercent = 1f;
+
+            while (!canFollowPath)
+                yield return new WaitForFixedUpdate();
             
             while (followingPath)
             {

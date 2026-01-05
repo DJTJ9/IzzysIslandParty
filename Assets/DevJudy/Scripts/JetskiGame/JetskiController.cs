@@ -7,6 +7,7 @@ namespace JetskiGame
     public class JetskiController : MonoBehaviour
     {
         [SerializeField] private Transform motor;
+        private PlayerInput playerInput;
         private Rigidbody rb;
 
         [SerializeField] private float power = 5f;
@@ -21,9 +22,23 @@ namespace JetskiGame
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
+            playerInput = GetComponent<PlayerInput>();
+            
+            DisablePlayerInput();
         }
 
 
+        public void EnablePlayerInput()
+        {
+            playerInput.enabled = true;
+        }
+
+        public void DisablePlayerInput()
+        {
+            // ?? Doesn't this also disable the ability to pause?
+            playerInput.enabled = false;
+        }
+        
         public void OnMove(InputAction.CallbackContext _context)
         {
             if (_context.performed)

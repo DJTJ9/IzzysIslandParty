@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FinishLine : MonoBehaviour
+public class FinishLineScripts : MonoBehaviour
 {
     [SerializeField] private GameOverManager gameOverManager;
     [SerializeField] private bool checkWinners;

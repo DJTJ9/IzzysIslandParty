@@ -1,10 +1,11 @@
+using UIScripts;
 using UnityEngine;
 
 using UnityEngine;
 
 public class GateBehaviour : MonoBehaviour
 {
-    //[SerializeField] private UpdateUITimer uiTimer;
+    [SerializeField] private UITextManager uiTimer;
     
     [SerializeField] private CustomTriggerBehaviour middleCollider;
     [SerializeField] private CustomTriggerBehaviour leftCollider;
@@ -12,9 +13,9 @@ public class GateBehaviour : MonoBehaviour
 
     [SerializeField] private FloatReference timeDeduction;
     
-    private bool clearedGate = false;
+    [SerializeField] private bool clearedGate = false;
     
-    private void Awake()
+    private void Start()
     {
         middleCollider.EnteredTriggerAction += OnMiddleGateEnter;
         
@@ -27,7 +28,6 @@ public class GateBehaviour : MonoBehaviour
         if (!clearedGate)
         {
             clearedGate = true;
-            
             // Give visual feedback
         }
     }
@@ -37,9 +37,10 @@ public class GateBehaviour : MonoBehaviour
         if (!clearedGate)
         {
             clearedGate = true;
-            
+          
             // Give visual feedback
-            //uiTimer?.DeduceTime(timeDeduction.Value);
+            
+            uiTimer?.DeduceTime(timeDeduction.Value);
         }
     }
 }
