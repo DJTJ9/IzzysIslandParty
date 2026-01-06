@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace MultiuseScripts
 {
-    public abstract class FinishLineBehaviour : MonoBehaviour
+    public class FinishLineBehaviour : MonoBehaviour
     {
         [Header("Dependencies: ")]
         [SerializeField] private CustomTriggerBehaviour finishLineTrigger;
@@ -20,7 +20,6 @@ namespace MultiuseScripts
         [SerializeField] private bool checkWinners;
 
         // Temp!!
-        private const int maxPlayers = 5;
         private GameObject[] placementList = { null, null, null, null, null };
 
         private void Start()
