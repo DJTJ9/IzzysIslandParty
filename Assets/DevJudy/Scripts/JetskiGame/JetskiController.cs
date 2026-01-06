@@ -15,7 +15,7 @@ namespace JetskiGame
         [SerializeField] private float maxSpeed = 10f;
 
         private Vector2 moveInput = Vector2.zero;
-        private bool driving = false;
+        //private bool driving = false;
         
         [SerializeField] private AnimationCurve accelerationCurve;
 
@@ -45,14 +45,14 @@ namespace JetskiGame
             {
                 moveInput = _context.ReadValue<Vector2>();
 
-                if (moveInput.y != 0)
-                    driving = true;
+               // if (moveInput.y != 0)
+               //     driving = true;
             }
 
             if (_context.canceled)
             {
-                moveInput = Vector2.zero;
-                driving = false;
+               // moveInput = Vector2.zero;
+               // driving = false;
             }
         }
 

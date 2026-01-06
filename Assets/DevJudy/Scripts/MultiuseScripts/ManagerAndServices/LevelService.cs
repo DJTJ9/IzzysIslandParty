@@ -18,6 +18,7 @@ public class LevelService : MonoBehaviour
 
     [Header("Level start/end: ")]
     [SerializeField] private TextMeshProUGUI levelCountdownText;
+
     [SerializeField] private int secondsToStartLevel;
 
     [SerializeField] private UnityEvent onLevelStart;
@@ -26,49 +27,55 @@ public class LevelService : MonoBehaviour
     [Header("Level running: ")]
     // !! This is kinda only for the racing-games...
     [SerializeField] private Transform goalTransform;
+
     [SerializeField] private GameObject[] placementOrder;
 
-    private bool levelStarted = false;
+    [SerializeField] private bool checkPlacements;
+    private bool levelStarted;
 
     private Coroutine levelCountdownCoroutine = null;
 
+    [Header("Temp ")]
+    [SerializeField] private TextMeshProUGUI placementText;
+
     private void Awake()
     {
-        if (goalTransform == null)
-            Debug.LogWarning("Goal transform not set");
-        
         if (placementOrder.Length > maxNumberOfPlayers)
         {
             Debug.LogWarning($"PlacementOrder array is more than maximum number of players ({maxNumberOfPlayers}), resizing array");
             placementOrder = ArrayHelper.ResizeArray(placementOrder, maxNumberOfPlayers);
         }
     }
-    
+
     private void Start()
     {
+        if (goalTransform == null)
+        {
+            Debug.LogWarning("Goal transform not set");
+            checkPlacements = false;
+        }
+
         StartLevel();
     }
 
     private void StartLevel()
     {
-        if (levelCountdownText != null && levelCountdownCoroutine == null)
-            levelCountdownCoroutine = StartCoroutine(CountdownToLevelStart());
-
-        if (levelCountdownCoroutine == null)
-        {
-            Debug.Log("Invoking correctly");
-            onLevelStart.Invoke();
-            levelStarted = true;
-        }
+        levelCountdownCoroutine = StartCoroutine(CountdownToLevelStart());
     }
 
     private void OnCoroutineOver()
     {
         StopCoroutine(CountdownToLevelStart());
+
+        onLevelStart.Invoke();
+        levelStarted = true;
     }
 
     private IEnumerator CountdownToLevelStart()
     {
+        if (levelCountdownText == null)
+            OnCoroutineOver();
+
         levelCountdownText.enabled = true;
 
         for (int i = secondsToStartLevel; i > 0; i--)
@@ -91,31 +98,17 @@ public class LevelService : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (levelStarted)
+        if (levelStarted && checkPlacements)
             CheckPlacements();
     }
 
     private void CheckPlacements()
     {
-        //int n = arr.Length;
-        // for (int i = 1; i < n; ++i) {
-        //     int key = arr[i];
-        // int j = i - 1;
-
-        /* Move elements of arr[0..i-1], that are
-           greater than key, to one position ahead
-           of their current position */
-        //  while (j >= 0 && arr[j] > key) {
-        //      arr[j + 1] = arr[j];
-        //      j = j - 1;
-        //  }
-        //  arr[j + 1] = key;
-        
         for (int i = 1; i < placementOrder.Length; i++)
         {
             float currentDistanceToCompare = GetDistanceToGoal(placementOrder[i].transform.position);
             GameObject currentGameObjectBeingCompared = placementOrder[i];
-            
+
             int leftNeighbour = i - 1; // 0, 1
 
             // While the leftNeighbour is not out of bounds, and the ln distance is more than the currentDistance
@@ -126,28 +119,26 @@ public class LevelService : MonoBehaviour
                 // Then go further down the array and look at the next ln
                 leftNeighbour = leftNeighbour - 1;
             }
+
             // If the distance is less, or all left neighbours have been checked, make sure to give the key value to the current index (ln + 1)
             placementOrder[leftNeighbour + 1] = currentGameObjectBeingCompared;
         }
+
+        var placement = GetPlayer() + 1;
+
+        placementText.text = (placement.ToString() + "/" + placementOrder.Length);
     }
-    // [Mario, Sonic, Peach, Amy, Daisy]
-    // 9, 7, 4, 5, 4
-    
-    // -- first pass = currDistance = 7; gm = sonic; lN = 0;
-    // distance of [ln (0) aka mario] (9) > currDi (7) 
-    // -> arr[ln + 1 (1), aka Sonic] = arr[ln (0) aka Mario] == [Mario, Mario, Peach, Amy, Daisy]
-    // -> ln (0) = ln - 1 (-1)
-    // ! ln >= 0
-    // arr[ln + 1 (0) aka Mario] = gm (sonic) == [Sonic, Mario, Peach, Amy, Daisy]
-    
-    
-    // -- second pass = key = 4; ln = 1;
-    // arr[ln (1)] (int 7) > key (int 4)
-    // -> arr[ln +1 (2)] (int 4) = arr[ln (1)] (int 7);   // [1, 7, 7, 2, 5]
-    // -> ln = ln - 1 (0);
-    // arr[ln (0)] (int 1) !> key (int 4)
-    // arr[ln + 1 (1)] (int = key (int 4)   // [1, 4, 7, 2, 5]
-    
+
+    private int GetPlayer()
+    {
+        for (int i = 0; i < placementOrder.Length; i++)
+        {
+            if (placementOrder[i].CompareTag("Player"))
+                return i;
+        }
+
+        return -1;
+    }
 
     private float GetDistanceToGoal(Vector3 _gameObjectPos)
     {

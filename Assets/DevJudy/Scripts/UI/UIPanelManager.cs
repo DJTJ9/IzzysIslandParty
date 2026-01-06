@@ -25,7 +25,7 @@ namespace UIScripts
         private float seconds;
         private float milliSeconds;
 
-        private bool gameOver = false;
+        //private bool gameOver = false;
 
         // TBA!!
         public void PauseGame()
@@ -50,7 +50,7 @@ namespace UIScripts
         
         public void SetGameOver()
         {
-            gameOver = true;
+            //gameOver = true;
 
             if (uiTextManager != null)
                 minutes = uiTextManager.EndTimerAndGetFinishTime(out seconds, out milliSeconds);

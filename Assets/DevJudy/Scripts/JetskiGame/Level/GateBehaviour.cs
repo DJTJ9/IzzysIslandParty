@@ -1,46 +1,47 @@
 using UIScripts;
 using UnityEngine;
 
-using UnityEngine;
-
-public class GateBehaviour : MonoBehaviour
+namespace JetskiGame
 {
-    [SerializeField] private UITextManager uiTimer;
-    
-    [SerializeField] private CustomTriggerBehaviour middleCollider;
-    [SerializeField] private CustomTriggerBehaviour leftCollider;
-    [SerializeField] private CustomTriggerBehaviour rightCollider;
+    public class GateBehaviour : MonoBehaviour
+    {
+        [SerializeField] private UITextManager uiTimer;
 
-    [SerializeField] private FloatReference timeDeduction;
-    
-    [SerializeField] private bool clearedGate = false;
-    
-    private void Start()
-    {
-        middleCollider.EnteredTriggerAction += OnMiddleGateEnter;
-        
-        leftCollider.EnteredTriggerAction += OnSideGatesEnter;
-        rightCollider.EnteredTriggerAction += OnSideGatesEnter;
-    }
-    
-    private void OnMiddleGateEnter(Collider _other)
-    {
-        if (!clearedGate)
+        [SerializeField] private CustomTriggerBehaviour middleCollider;
+        [SerializeField] private CustomTriggerBehaviour leftCollider;
+        [SerializeField] private CustomTriggerBehaviour rightCollider;
+
+        [SerializeField] private FloatReference timeDeduction;
+
+        [SerializeField] private bool clearedGate;
+
+        private void Start()
         {
-            clearedGate = true;
-            // Give visual feedback
+            middleCollider.EnteredTriggerAction += OnMiddleGateEnter;
+
+            leftCollider.EnteredTriggerAction += OnSideGatesEnter;
+            rightCollider.EnteredTriggerAction += OnSideGatesEnter;
         }
-    }
 
-    private void OnSideGatesEnter(Collider _other)
-    {
-        if (!clearedGate)
+        private void OnMiddleGateEnter(Collider _other)
         {
-            clearedGate = true;
-          
-            // Give visual feedback
-            
-            uiTimer?.DeduceTime(timeDeduction.Value);
+            if (!clearedGate)
+            {
+                clearedGate = true;
+                // Give visual feedback
+            }
+        }
+
+        private void OnSideGatesEnter(Collider _other)
+        {
+            if (!clearedGate)
+            {
+                clearedGate = true;
+
+                // Give visual feedback
+
+                uiTimer?.DeduceTime(timeDeduction.Value);
+            }
         }
     }
 }

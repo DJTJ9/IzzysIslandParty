@@ -79,9 +79,6 @@ public class PathFollow : MonoBehaviour
 
             yield return null;
         }
-
-        Debug.Log("Target reached");
-        targetReached = true;
     }
 
     public void OnDrawGizmos()
