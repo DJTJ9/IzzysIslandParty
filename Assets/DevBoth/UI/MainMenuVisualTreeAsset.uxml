@@ -1,7 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/DevBoth/UI/PlayerHubStyle.uss?fileID=7433441132597879392&amp;guid=185d7323de5cef446995f46ef11fa6c4&amp;type=3#PlayerHubStyle" />
     <Style src="project://database/Assets/DevBoth/UI/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=1f48fc2225c4d6748a3d12140f2529a0&amp;type=3#MainMenuStyle" />
-    <ui:VisualElement name="menu-background__container" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Suriyun/Yippy%20Kawaii/UI/bearbg.png?fileID=21300000&amp;guid=3d29693681072574aa13f942091f8d4e&amp;type=3#bearbg&quot;);">
+    <ui:VisualElement name="menu-background__container" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Suriyun/Yippy%20Kawaii/UI/bearbg.png?fileID=21300000&amp;guid=3d29693681072574aa13f942091f8d4e&amp;type=3#bearbg&quot;); display: none;">
         <ui:VisualElement name="main-menu__container" style="flex-grow: 1; display: none;">
             <ui:Label text="MAIN MENU" name="main-menu-header__label" class="header" style="width: 50%; height: 20%;" />
             <ui:Button text="PLAY" name="main-menu-play__button" class="button" />
@@ -32,11 +32,12 @@
             <ui:Label text="SETTINGS" name="settings-header__label" class="header" />
             <ui:Button text="BACK" name="settings-menu-back__button" class="button" style="justify-content: flex-start; display: flex;" />
         </ui:VisualElement>
-        <ui:VisualElement name="pause-menu__container" style="flex-grow: 1; display: flex;">
-            <ui:Label text="PAUSE MENU" name="pause-menu-header__label" class="header" style="width: 50%; height: 20%;" />
-            <ui:Button text="RESTART" name="pause-menu-restart__button" class="button" />
-            <ui:Button text="CHANGE LEVEL" name="pause-menu-change-level__button" parse-escape-sequences="true" class="button" />
-            <ui:Button text="QUIT" name="pause-menu-quit__button" class="button" />
-        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="pause-menu__container" style="flex-grow: 1; display: none;">
+        <ui:Label text="PAUSE MENU" name="pause-menu-header__label" class="header" style="width: 50%; height: 20%;" />
+        <ui:Button text="RESUME" name="pause-menu-resume__button" class="button" />
+        <ui:Button text="RESTART" name="pause-menu-restart__button" class="button" />
+        <ui:Button text="CHANGE LEVEL" name="pause-menu-change-level__button" parse-escape-sequences="true" class="button" />
+        <ui:Button text="QUIT" name="pause-menu-quit__button" class="button" />
     </ui:VisualElement>
 </ui:UXML>

@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using Sirenix.OdinInspector;
+using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerControllerMinigolfMayhem : MonoBehaviour {
@@ -11,17 +14,28 @@ public class PlayerControllerMinigolfMayhem : MonoBehaviour {
 
     // [Header("Settings")]
     // [SerializeField] private float lookSensitivity = 2;
+    
+    [FoldoutGroup("Events", expanded: true)]
+    [SerializeField] private UnityEvent OnPause;
+    [SerializeField] private UnityEvent OnUnpause;
 
     private InputAction moveInputAction;
     private InputAction jumpInputAction;
     private InputAction lookInputAction;
     private InputAction shootInputAction;
+    private InputAction pauseInputAction;
+    private InputAction unpauseInputAction;
 
     private void Awake() {
         rigidbodyMovement = GetComponent<RigidbodyMovement>();
         playerInput = GetComponent<PlayerInput>();
         
         MapInputActions();
+    }
+
+    private void Start()
+    {
+        
     }
 
     /// <summary>
@@ -76,6 +90,34 @@ public class PlayerControllerMinigolfMayhem : MonoBehaviour {
 
         shootInputAction = playerInput.actions["LeftMouse"];
         shootInputAction.started += OnShootInput;
+
+        pauseInputAction = playerInput.actions["Pause"];
+        pauseInputAction.started += OnPauseInput;
+        
+        unpauseInputAction = playerInput.actions["Unpause"];
+        unpauseInputAction.started += OnUnpauseInput;
+    }
+
+    private void SwitchToPlayerInputMap()
+    {
+        playerInput.SwitchCurrentActionMap("Player");
+    }
+    
+    private void SwitchToUIInputMap()
+    {
+        playerInput.SwitchCurrentActionMap("UI");
+    }
+
+    private void OnPauseInput(InputAction.CallbackContext _obj)
+    {
+        OnPause.Invoke();
+        SwitchToUIInputMap();
+    }
+
+    private void OnUnpauseInput(InputAction.CallbackContext _obj)
+    {
+        OnUnpause.Invoke();
+        SwitchToPlayerInputMap();
     }
 
     private void OnMoveInput(InputAction.CallbackContext _context)
