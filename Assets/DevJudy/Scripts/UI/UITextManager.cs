@@ -14,15 +14,21 @@ namespace UIScripts
         public void UpdatePointsText(int _addedPoints)
         {
             currentScore += _addedPoints;
-            pointsText.text = "Points: " + currentScore.ToString();
+
+            if (pointsText != null)
+                pointsText.text = "Points: " + currentScore.ToString();
+            else
+                Debug.LogWarning("No points text set");
         }
 
         // --- UpdateTimer
 
+        // !!Should be its own logic
+
         [Header("GameObjects: ")]
         [SerializeField] private TextMeshProUGUI timerText;
 
-        [SerializeField] private GameOverManager gameOverManager;
+        [SerializeField] private UIPanelManager uiPanelManager;
 
         [Header("Variables: ")]
         private float time;
@@ -112,7 +118,7 @@ namespace UIScripts
             if (time <= 0.001f)
             {
                 timerFinished = true;
-                gameOverManager.SetGameOver();
+                uiPanelManager.SetGameOver();
             }
         }
 
