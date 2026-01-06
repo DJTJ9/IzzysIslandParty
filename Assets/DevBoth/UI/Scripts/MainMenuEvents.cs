@@ -15,15 +15,22 @@ public class MainMenuEvents : MonoBehaviour
     [Header("Menus")]
     private VisualElement mainMenu;
     private VisualElement settingsMenu;
+    private VisualElement pauseMenu;
     private VisualElement playerHub;
 
     [Header("Main Menu Buttons")]
     private Button startGameButton;
     private Button settingsButton;
-    private Button quitButton;
+    private Button mainMenuQuitButton;
     
     [Header("Settings Menu Buttons")]
     private Button settingsBackButton;
+    
+    [Header("Pause Menu Buttons")]
+    private Button resumeButton;
+    private Button restartButton;
+    private Button changeLevelButton;
+    private Button pauseMenuBackButton;
     
     [Header("Player HUB Buttons")]
     private Button bowlingBattleButton;
@@ -31,7 +38,7 @@ public class MainMenuEvents : MonoBehaviour
     private Button jetskiJoyrideButton;
     private Button minigolfMayhemButton;
     private Button swaggySnapshotsButton;
-    private Button backButton;
+    private Button playerHUBBackButton;
     
     #region Example Variables
     // private Button button;
@@ -88,6 +95,7 @@ public class MainMenuEvents : MonoBehaviour
     {
         mainMenu = document.rootVisualElement.Q("main-menu__container");
         settingsMenu = document.rootVisualElement.Q("settings-menu__container");
+        pauseMenu = document.rootVisualElement.Q("pause-menu__container");
         playerHub = document.rootVisualElement.Q("player-hub__container");
     }
     
@@ -96,10 +104,16 @@ public class MainMenuEvents : MonoBehaviour
         // Main menu buttons
         startGameButton = document.rootVisualElement.Q("main-menu-play__button") as Button;
         settingsButton = document.rootVisualElement.Q("main-menu-settings__button") as Button;
-        quitButton = document.rootVisualElement.Q("main-menu-quit__button") as Button;
+        mainMenuQuitButton = document.rootVisualElement.Q("main-menu-quit__button") as Button;
         
         // Settings menu buttons
         settingsBackButton = document.rootVisualElement.Q("settings-menu-back__button") as Button;
+        
+        // Pause menu buttons
+        resumeButton = document.rootVisualElement.Q("pause-menu-resume__button") as Button;
+        restartButton = document.rootVisualElement.Q("pause-menu-restart__button") as Button;
+        changeLevelButton = document.rootVisualElement.Q("pause-menu-change-level__button") as Button;
+        pauseMenuBackButton = document.rootVisualElement.Q("pause-menu-back__button") as Button;
         
         //Player HUB buttons
         bowlingBattleButton = document.rootVisualElement.Q("play-bowling-battle__button") as Button;
@@ -107,7 +121,7 @@ public class MainMenuEvents : MonoBehaviour
         jetskiJoyrideButton = document.rootVisualElement.Q("play-jetski-joyride__button") as Button;
         minigolfMayhemButton = document.rootVisualElement.Q("play-minigolf-mayhem__button") as Button;
         swaggySnapshotsButton = document.rootVisualElement.Q("play-swaggy-snapshots__button") as Button;
-        backButton = document.rootVisualElement.Q("player-hub-back__button") as Button;
+        playerHUBBackButton = document.rootVisualElement.Q("player-hub-back__button") as Button;
     }
 
     private void RegisterButtonCallbacks()
@@ -115,10 +129,16 @@ public class MainMenuEvents : MonoBehaviour
         // Main menu buttons
         startGameButton?.RegisterCallback<ClickEvent>(OnPlayGameClick);
         settingsButton?.RegisterCallback<ClickEvent>(OnSettingsButtonClick);
-        quitButton?.RegisterCallback<ClickEvent>(OnQuitClick);
+        mainMenuQuitButton?.RegisterCallback<ClickEvent>(OnQuitClick);
         
         // Settings menu buttons
         settingsBackButton?.RegisterCallback<ClickEvent>(OnSettingsBackButtonClick);
+        
+        // Pause menu buttons
+        resumeButton?.RegisterCallback<ClickEvent>(OnResumeGameClick);
+        restartButton?.RegisterCallback<ClickEvent>(OnPlayGameClick);
+        changeLevelButton?.RegisterCallback<ClickEvent>(OnPlayGameClick);
+        pauseMenuBackButton?.RegisterCallback<ClickEvent>(OnPlayerHubBack);
         
         //Player HUB buttons
         bowlingBattleButton?.RegisterCallback<ClickEvent>(OnLoadBowlingBattle);
@@ -126,7 +146,7 @@ public class MainMenuEvents : MonoBehaviour
         jetskiJoyrideButton?.RegisterCallback<ClickEvent>(OnLoadJetskiJoyride);
         minigolfMayhemButton?.RegisterCallback<ClickEvent>(OnLoadMinigolfMayhem);
         swaggySnapshotsButton?.RegisterCallback<ClickEvent>(OnLoadSwaggySnapshots);
-        backButton?.RegisterCallback<ClickEvent>(OnPlayerHubBack);
+        playerHUBBackButton?.RegisterCallback<ClickEvent>(OnPlayerHubBack);
     }
 
     private void UnregisterButtonCallbacks()
@@ -134,10 +154,16 @@ public class MainMenuEvents : MonoBehaviour
         // Main menu buttons
         startGameButton?.UnregisterCallback<ClickEvent>(OnPlayGameClick);
         settingsButton?.UnregisterCallback<ClickEvent>(OnSettingsButtonClick);
-        quitButton?.UnregisterCallback<ClickEvent>(OnQuitClick);
+        mainMenuQuitButton?.UnregisterCallback<ClickEvent>(OnQuitClick);
         
         // Settings menu buttons
         settingsBackButton?.UnregisterCallback<ClickEvent>(OnSettingsBackButtonClick);
+        
+        // Pause menu buttons
+        resumeButton?.UnregisterCallback<ClickEvent>(OnResumeGameClick);
+        restartButton?.UnregisterCallback<ClickEvent>(OnPlayGameClick);
+        changeLevelButton?.UnregisterCallback<ClickEvent>(OnPlayGameClick);
+        pauseMenuBackButton?.UnregisterCallback<ClickEvent>(OnPlayerHubBack);
 
         //Player HUB buttons
         bowlingBattleButton?.UnregisterCallback<ClickEvent>(OnLoadBowlingBattle);
@@ -145,7 +171,19 @@ public class MainMenuEvents : MonoBehaviour
         jetskiJoyrideButton?.UnregisterCallback<ClickEvent>(OnLoadJetskiJoyride);
         minigolfMayhemButton?.UnregisterCallback<ClickEvent>(OnLoadMinigolfMayhem);
         swaggySnapshotsButton?.UnregisterCallback<ClickEvent>(OnLoadSwaggySnapshots);
-        backButton?.UnregisterCallback<ClickEvent>(OnPlayerHubBack);
+        playerHUBBackButton?.UnregisterCallback<ClickEvent>(OnPlayerHubBack);
+    }
+
+    private void OnResumeGameClick(ClickEvent _evt)
+    {
+        pauseMenu.style.display = DisplayStyle.None;
+        Time.timeScale = 1f;
+    }
+
+    public void ShowPauseMenu()
+    {
+        pauseMenu.style.display = DisplayStyle.Flex;
+        Time.timeScale = 0f;
     }
 
     private void OnPlayGameClick(ClickEvent _evt)
