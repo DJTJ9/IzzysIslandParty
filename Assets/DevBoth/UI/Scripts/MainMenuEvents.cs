@@ -135,7 +135,7 @@ public class MainMenuEvents : MonoBehaviour
         settingsBackButton?.RegisterCallback<ClickEvent>(OnSettingsBackButtonClick);
         
         // Pause menu buttons
-        resumeButton?.RegisterCallback<ClickEvent>(OnResumeGameClick);
+        resumeButton?.RegisterCallback<ClickEvent>(OnUnpauseGameClick);
         restartButton?.RegisterCallback<ClickEvent>(OnPlayGameClick);
         changeLevelButton?.RegisterCallback<ClickEvent>(OnPlayGameClick);
         pauseMenuBackButton?.RegisterCallback<ClickEvent>(OnPlayerHubBack);
@@ -160,7 +160,7 @@ public class MainMenuEvents : MonoBehaviour
         settingsBackButton?.UnregisterCallback<ClickEvent>(OnSettingsBackButtonClick);
         
         // Pause menu buttons
-        resumeButton?.UnregisterCallback<ClickEvent>(OnResumeGameClick);
+        resumeButton?.UnregisterCallback<ClickEvent>(OnUnpauseGameClick);
         restartButton?.UnregisterCallback<ClickEvent>(OnPlayGameClick);
         changeLevelButton?.UnregisterCallback<ClickEvent>(OnPlayGameClick);
         pauseMenuBackButton?.UnregisterCallback<ClickEvent>(OnPlayerHubBack);
@@ -174,16 +174,22 @@ public class MainMenuEvents : MonoBehaviour
         playerHUBBackButton?.UnregisterCallback<ClickEvent>(OnPlayerHubBack);
     }
 
-    private void OnResumeGameClick(ClickEvent _evt)
+    private void OnUnpauseGameClick(ClickEvent _evt)
     {
         pauseMenu.style.display = DisplayStyle.None;
         Time.timeScale = 1f;
     }
 
-    public void ShowPauseMenu()
+    public void OnPauseGame()
     {
         pauseMenu.style.display = DisplayStyle.Flex;
         Time.timeScale = 0f;
+    }
+    
+    public void OnUnpauseGame()
+    {
+        pauseMenu.style.display = DisplayStyle.None;
+        Time.timeScale = 1f;
     }
 
     private void OnPlayGameClick(ClickEvent _evt)
