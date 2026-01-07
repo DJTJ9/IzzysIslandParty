@@ -34,7 +34,6 @@ namespace MultiuseScripts
 
         private void OnFinishLineEntered(Collider _triggeringObj)
         {
-            Debug.Log("FinishLineEntered");
             // Keep track of ppl crossing (1, 2, 3- place)
             // maybe levelService.winnerList
             // or maybe not and use whatever will keep track of the placements during the race
