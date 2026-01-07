@@ -2826,7 +2826,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6eb16233ecc777541a46353dd5aa43f7, type: 2}
+  - {fileID: 2100000, guid: c2ed0959d5c1c7442a6928d06a823082, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2908,9 +2908,9 @@ MonoBehaviour:
   OnPause:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: aae68b50ad4d9bb4a8ad2400eb1ff47e, type: 2}
+      - m_Target: {fileID: 1339723693}
         m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2992,7 +2992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: aae68b50ad4d9bb4a8ad2400eb1ff47e, type: 2}
+  Event: {fileID: 0}
   Response:
     m_PersistentCalls:
       m_Calls:
