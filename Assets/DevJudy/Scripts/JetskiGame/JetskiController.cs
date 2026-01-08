@@ -105,8 +105,7 @@ namespace JetskiGame
             if (speedText != null)
                 speedText.text = "Speed: " + Mathf.Round(new Vector3(0f, 0f, rb.linearVelocity.z).magnitude);
         }
-
-        // !! Changing the jump height doesnt work
+        
         public void OnJump(InputAction.CallbackContext _context)
         {
             if (_context.performed)
