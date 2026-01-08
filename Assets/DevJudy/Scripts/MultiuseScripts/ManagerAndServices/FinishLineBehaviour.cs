@@ -1,6 +1,7 @@
 using System.Collections;
 using HelperScripts;
 using ImprovedTimers;
+using Service;
 using UnityEngine;
 
 namespace MultiuseScripts
@@ -35,13 +36,12 @@ namespace MultiuseScripts
 
         private void OnFinishLineEntered(Collider _triggeringObj)
         {
-            levelService.OnFinishLineCrossed();
             //!! Visual feedback!!
-            
+
             // Keep track of ppl crossing (1, 2, 3- place)
             // maybe levelService.winnerList
             // or maybe not and use whatever will keep track of the placements during the race
-            
+
             if (checkWinners)
             {
                 // ?? Is this obsolete?
@@ -51,8 +51,10 @@ namespace MultiuseScripts
 
             if (((1 << _triggeringObj.gameObject.layer) & playerLayerMask) != 0)
             {
+                levelService.OnFinishLineCrossed();
+
                 StartCoroutine(StartLevelCountdownTimer());
-                // Disable controls already
+                // !! Disable controls already
             }
         }
 
@@ -72,8 +74,6 @@ namespace MultiuseScripts
 
         private void EndLevel()
         {
-            Debug.Log("End of level");
-
             levelService.EndLevel();
         }
     }
