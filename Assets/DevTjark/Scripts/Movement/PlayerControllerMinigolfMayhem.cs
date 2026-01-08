@@ -98,12 +98,12 @@ public class PlayerControllerMinigolfMayhem : MonoBehaviour {
         unpauseInputAction.started += OnUnpauseInput;
     }
 
-    private void SwitchToPlayerInputMap()
+    public void SwitchToPlayerInputMap()
     {
         playerInput.SwitchCurrentActionMap("Player");
     }
     
-    private void SwitchToUIInputMap()
+    public void SwitchToUIInputMap()
     {
         playerInput.SwitchCurrentActionMap("UI");
     }
@@ -111,13 +111,11 @@ public class PlayerControllerMinigolfMayhem : MonoBehaviour {
     private void OnPauseInput(InputAction.CallbackContext _obj)
     {
         OnPause.Invoke();
-        SwitchToUIInputMap();
     }
 
     private void OnUnpauseInput(InputAction.CallbackContext _obj)
     {
         OnUnpause.Invoke();
-        SwitchToPlayerInputMap();
     }
 
     private void OnMoveInput(InputAction.CallbackContext _context)
