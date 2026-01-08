@@ -18,8 +18,10 @@ namespace JetskiGame
         //private bool driving = false;
         
         [Header("Jump settings: ")]
-        [SerializeField] private float regJumpHeight = 50f;
-        [SerializeField] private float cancelledJumpHeight = 25f;
+        [SerializeField] private float regJumpHeight = 10f;
+        [SerializeField] private float cancelledJumpHeight = 2f;
+        private float prevUpwardVelocity;
+        
         private float jumpHeight;
         
         private bool jumpPressedLastFrame;
@@ -31,10 +33,6 @@ namespace JetskiGame
 
         //private Vector3 groundCheckPosition = Vector3.zero;
         [SerializeField] private bool isGrounded;
-
-        [Header("Physics settings:")]
-        [SerializeField] private float additionalGravity = 0.2f;
-        private float prevUpwardVelocity;
         
         [Header("Temp: ")]
         [SerializeField] private ForceMode forceMode;
@@ -144,7 +142,7 @@ namespace JetskiGame
                 jumpPressedLastFrame = false;
             
             // Make sure to apply gravity and counteract floating
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y - (prevUpwardVelocity + additionalGravity), rb.linearVelocity.z);
+            // rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y - (prevUpwardVelocity), rb.linearVelocity.z);
 
             // First do the steering
             if (steerWithAddForceAtPos)

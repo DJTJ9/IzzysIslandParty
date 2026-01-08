@@ -11,7 +11,7 @@ namespace MultiuseScripts
         [Header("Dependencies: ")]
         [SerializeField] private CustomTriggerBehaviour finishLineTrigger;
 
-        [SerializeField] private LevelService levelService;
+        [SerializeField] private JetskiGameLevelService jetskiGameLevelService;
         private CountdownTimer endLevelTimer;
 
         [Header("Variables: ")]
@@ -51,7 +51,7 @@ namespace MultiuseScripts
 
             if (((1 << _triggeringObj.gameObject.layer) & playerLayerMask) != 0)
             {
-                levelService.OnFinishLineCrossed();
+                jetskiGameLevelService?.OnFinishLineCrossed();
 
                 StartCoroutine(StartLevelCountdownTimer());
                 // !! Disable controls already
@@ -74,7 +74,7 @@ namespace MultiuseScripts
 
         private void EndLevel()
         {
-            levelService.EndLevel();
+            jetskiGameLevelService.EndLevel();
         }
     }
 }

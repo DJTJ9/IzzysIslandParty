@@ -1,12 +1,13 @@
 using System.Collections;
 using HelperScripts;
+using Pathfinding;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Service
 {
-    public class LevelService : MonoBehaviour
+    public class JetskiGameLevelService : MonoBehaviour
     {
         #region consts
 
@@ -66,9 +67,20 @@ namespace Service
             levelCountdownCoroutine = StartCoroutine(CountdownToLevelStart());
         }
 
+        private void LetNPCsStart()
+        {
+            foreach (GameObject obj in placementOrder)
+            {
+                if (obj.TryGetComponent(out PathfindingUnit pathfindingUnit))
+                    pathfindingUnit.CanFollowPath();
+            }
+        }
+
         private void OnCoroutineOver()
         {
             StopCoroutine(CountdownToLevelStart());
+
+            LetNPCsStart();
 
             onLevelStart.Invoke();
             levelStarted = true;
@@ -127,12 +139,12 @@ namespace Service
                 placementOrder[leftNeighbour + 1] = currentGameObjectBeingCompared;
             }
 
-            var placement = GetPlayer() + 1;
+            var placement = GetPlayerNumber() + 1;
 
             placementText.text = (placement.ToString() + "/" + placementOrder.Length);
         }
 
-        private int GetPlayer()
+        private int GetPlayerNumber()
         {
             for (int i = 0; i < placementOrder.Length; i++)
             {
@@ -150,8 +162,8 @@ namespace Service
 
         public void OnFinishLineCrossed()
         {
-            onFinishLineCrossedText?.gameObject.SetActive(true);
-
+            if (onFinishLineCrossedText != null)
+                onFinishLineCrossedText.gameObject.SetActive(true);
         }
 
         public void EndLevel()
