@@ -10,7 +10,7 @@ namespace UIScripts
         [SerializeField] private GameObject raceOverPanel;
 
         [SerializeField] private GameObject scoresPanel;
-        [SerializeField] private TextMeshProUGUI scoreText;
+        [SerializeField] private TextMeshProUGUI playerTimesText;
         [SerializeField] private GameObject endGameMenu;
 
         [Header("Dependencies:")]
@@ -75,8 +75,8 @@ namespace UIScripts
 
             // Maybe do switch case display for different game modes
 
-            if (scoreText != null)
-                scoreText.text = $"{minutes:00}:{seconds:00}:{milliSeconds:00}";
+            if (playerTimesText != null)
+                playerTimesText.text = $"{minutes:00}:{seconds:00}:{milliSeconds:00}";
             
             scoresPanel?.SetActive(true);
         }

@@ -37,6 +37,7 @@ public class LevelService : MonoBehaviour
 
     [Header("Temp ")]
     [SerializeField] private TextMeshProUGUI placementText;
+    [SerializeField] private TextMeshProUGUI onFinishLineCrossedText;
 
     private void Awake()
     {
@@ -145,8 +146,15 @@ public class LevelService : MonoBehaviour
         return Vector2.Distance(new Vector2(_gameObjectPos.x, _gameObjectPos.z), new Vector2(goalTransform.position.x, goalTransform.position.z));
     }
 
+    public void OnFinishLineCrossed()
+    {
+        onFinishLineCrossedText?.gameObject.SetActive(true);
+        
+    }
+    
     public void EndLevel()
     {
+        onFinishLineCrossedText?.gameObject.SetActive(false);
         onLevelEnd.Invoke();
     }
 }

@@ -20,6 +20,7 @@ namespace MultiuseScripts
         [SerializeField] private bool checkWinners;
 
         // Temp!!
+        // Maybe this should be a dictionary? To save the obj, placement AND time?
         private GameObject[] placementList = { null, null, null, null, null };
 
         private void Start()
@@ -34,23 +35,28 @@ namespace MultiuseScripts
 
         private void OnFinishLineEntered(Collider _triggeringObj)
         {
-            Debug.Log("FinishLineEntered");
+            levelService.OnFinishLineCrossed();
+            //!! Visual feedback!!
+            
             // Keep track of ppl crossing (1, 2, 3- place)
             // maybe levelService.winnerList
             // or maybe not and use whatever will keep track of the placements during the race
+            
             if (checkWinners)
             {
+                // ?? Is this obsolete?
                 ArrayHelper.AddToArray(placementList, _triggeringObj.gameObject);
-                Debug.Log(_triggeringObj.name + " has finished " + placementList + "/" + placementList.Length);
+                // send winner to levelService
             }
 
             if (((1 << _triggeringObj.gameObject.layer) & playerLayerMask) != 0)
             {
-                StartCoroutine(EndLevelTimer());
+                StartCoroutine(StartLevelCountdownTimer());
+                // Disable controls already
             }
         }
 
-        private IEnumerator EndLevelTimer()
+        private IEnumerator StartLevelCountdownTimer()
         {
             endLevelTimer.Start();
 
