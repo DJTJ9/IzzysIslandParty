@@ -2,6 +2,7 @@
 
 public enum SceneNames
 {
+    MainMenu,
     BowlingBattle,
     FishingFrenzy,
     JetskiJoyride,

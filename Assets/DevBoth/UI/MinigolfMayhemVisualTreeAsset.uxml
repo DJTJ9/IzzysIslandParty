@@ -1,0 +1,31 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/DevBoth/UI/PlayerHubStyle.uss?fileID=7433441132597879392&amp;guid=520cb84fd4065e54db377802fbec6137&amp;type=3#PlayerHubStyle" />
+    <Style src="project://database/Assets/DevBoth/UI/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=25d8977cbaec736409b2c76d050db212&amp;type=3#MainMenuStyle" />
+    <ui:VisualElement name="pause-menu__container" style="flex-grow: 1; display: none;">
+        <ui:Label text="PAUSE MENU" name="pause-menu-header__label" class="header" style="width: 50%; height: 20%;" />
+        <ui:Button text="RESUME" name="pause-menu-resume__button" class="button" />
+        <ui:Button text="RESTART" name="pause-menu-restart__button" class="button" />
+        <ui:Button text="CHANGE LEVEL" name="pause-menu-change-level__button" parse-escape-sequences="true" class="button" />
+        <ui:Button text="QUIT" name="pause-menu-quit__button" class="button" />
+    </ui:VisualElement>
+    <ui:VisualElement name="player-hub__container" style="flex-grow: 1; flex-direction: column; display: none; visibility: visible;">
+        <ui:VisualElement name="player-hub-top__container" style="flex-grow: 1;">
+            <ui:Label text="SELECT LEVEL" name="player-hub-header__label" class="header" />
+        </ui:VisualElement>
+        <ui:VisualElement name="player-hub-middle__container" style="flex-grow: 1; height: 70%;">
+            <ui:VisualElement name="player-hub-middle-first-row__container" class="gameSelectorContainer" style="width: 90%; justify-content: center;">
+                <ui:Button text="Bowling Battle" name="play-bowling-battle__button" class="levelButton" />
+                <ui:Button text="Fishing Frenzy" name="play-fishing-frenzy__button" class="levelButton" />
+                <ui:Button text="Jetski Joyride" name="play-jetski-joyride__button" class="levelButton" />
+            </ui:VisualElement>
+            <ui:VisualElement name="player-hub-middle-second-row__container" class="gameSelectorContainer" style="width: 90%;">
+                <ui:Button text="Minigolf Mayhem" name="play-minigolf-mayhem__button" class="levelButton" style="overflow: visible;" />
+                <ui:Button text="Swaggy Snapshots" name="play-swaggy-snapshots__button" class="levelButton" />
+                <ui:Button text="To be added..." class="levelButton" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="player-hub-bottom__container" style="flex-grow: 1; align-items: center; display: flex; visibility: visible;">
+            <ui:Button text="BACK" name="player-hub-back__button" class="levelButton" style="background-image: none;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

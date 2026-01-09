@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 625792396}
   - component: {fileID: 625792395}
   - component: {fileID: 625792398}
+  - component: {fileID: 625792399}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -301,6 +302,50 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!114 &625792399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625792394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &684241072
 GameObject:
   m_ObjectHideFlags: 0
@@ -2743,6 +2788,7 @@ GameObject:
   - component: {fileID: 1339723692}
   - component: {fileID: 1339723691}
   - component: {fileID: 1339723696}
+  - component: {fileID: 1339723697}
   - component: {fileID: 1339723690}
   - component: {fileID: 1339723689}
   - component: {fileID: 1339723688}
@@ -2908,9 +2954,9 @@ MonoBehaviour:
   OnPause:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1339723693}
-        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
-        m_MethodName: SwitchToUIInputMap
+      - m_Target: {fileID: 11400000, guid: b4c1de7ad322b894b8ed236533a23468, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2923,9 +2969,9 @@ MonoBehaviour:
   OnUnpause:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1339723693}
-        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
-        m_MethodName: SwitchToPlayerInputMap
+      - m_Target: {fileID: 11400000, guid: cb8390d9fabb07843b5f42bf6275d672, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2992,13 +3038,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: aae68b50ad4d9bb4a8ad2400eb1ff47e, type: 2}
+  Event: {fileID: 11400000, guid: b4c1de7ad322b894b8ed236533a23468, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1339723693}
         m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
         m_MethodName: SwitchToUIInputMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1339723697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339723686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: cb8390d9fabb07843b5f42bf6275d672, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1339723693}
+        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
+        m_MethodName: SwitchToPlayerInputMap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3063,8 +3137,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1485897608}
-  - component: {fileID: 1485897607}
+  - component: {fileID: 1485897610}
   - component: {fileID: 1485897606}
+  - component: {fileID: 1485897609}
   - component: {fileID: 1485897605}
   m_Layer: 5
   m_Name: Menus
@@ -3085,9 +3160,9 @@ MonoBehaviour:
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: 81dfe5274fa5c614d84f39fa8d888aa4, type: 2}
+  m_PanelSettings: {fileID: 11400000, guid: f80ea9de16d74154c96bf0b95ca6c4d6, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 9d8548e1fd16b324db5b2b581dc9f372, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 2c4f643d833b8954588d15e591d7b356, type: 3}
   m_SortingOrder: 0
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
@@ -3104,12 +3179,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: aae68b50ad4d9bb4a8ad2400eb1ff47e, type: 2}
+  Event: {fileID: 11400000, guid: b4c1de7ad322b894b8ed236533a23468, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1485897607}
-        m_TargetAssemblyTypeName: MainMenuEvents, Assembly-CSharp
+      - m_Target: {fileID: 1485897610}
+        m_TargetAssemblyTypeName: PauseMenuEvents, Assembly-CSharp
         m_MethodName: ShowPauseMenu
         m_Mode: 1
         m_Arguments:
@@ -3120,18 +3195,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1485897607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1485897604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a430f2c5b2f87704791308be3db81a59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1485897608
 Transform:
   m_ObjectHideFlags: 0
@@ -3147,6 +3210,62 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1485897609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485897604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: cb8390d9fabb07843b5f42bf6275d672, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1485897610}
+        m_TargetAssemblyTypeName: PauseMenuEvents, Assembly-CSharp
+        m_MethodName: HidePauseMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1485897610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485897604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 424d2ca1ec44454289227c131c2564d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneCollection: {fileID: 11400000, guid: 6fd8971a4dff91645b76a391153753d8, type: 2}
+  OnUnpause:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: cb8390d9fabb07843b5f42bf6275d672, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1519051938
 PrefabInstance:
   m_ObjectHideFlags: 0
