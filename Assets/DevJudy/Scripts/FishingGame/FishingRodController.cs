@@ -1,3 +1,5 @@
+using enums;
+using Juice;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,7 +7,6 @@ namespace FishingGame
 {
     public class FishingRodController : MonoBehaviour
     {
-        // !! These don't exist
         private static readonly int cast = Animator.StringToHash("IsCast");
         private static readonly int fishBiting = Animator.StringToHash("FishBiting");
 
@@ -43,16 +44,19 @@ namespace FishingGame
                 {
                     isCast = true;
                     animator.SetBool(cast, isCast);
+                    
+                    Debug.Log("-- Casting rod");
 
-                    FishingSystem.GetInstance().StartFishing();
+                    FishingSystem.Instance.StartFishing();
 
                     return;
                 }
 
-                if (FishingSystem.GetInstance().FishHooked)
+                if (FishingSystem.Instance.FishHooked)
                 {
-                    FishingSystem.GetInstance().PressedCatch = true;
-
+                    FishingSystem.Instance.PressedCatch = true;
+                    IconHandler.Instance.DisplayIcon(EEmotion.Happy);
+                    
                     return;
                 }
 
@@ -62,20 +66,26 @@ namespace FishingGame
 
         public void PullBackFishingRod()
         {
-            FishingSystem.GetInstance().StopFishing();
+            FishingSystem.Instance.StopFishing();
 
             isCast = false;
 
             animator.SetBool(cast, isCast);
+            
+            Debug.Log("-- Stopped fishing");
         }
-
+        
         public void PlayFishBitingAnimation()
-        { 
+        {
+            Debug.Log("Fish  bitingggggg");
+            
+            IconHandler.Instance.DisplayIcon(EEmotion.Alert);
             animator.SetBool(fishBiting, true);
         }
 
         public void StopFishBitingAnimation()
         {
+            Debug.Log("Stopped fish bitingggggg");
             animator.SetBool(fishBiting, false);
         }
 
