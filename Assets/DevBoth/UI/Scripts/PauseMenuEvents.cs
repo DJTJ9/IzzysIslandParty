@@ -35,7 +35,12 @@ public class PauseMenuEvents : MonoBehaviour
         
         BindVisualElements();
         BindButtons();
+    }
+
+    private void OnEnable()
+    {
         RegisterButtonCallbacks();
+
     }
 
     private void OnDisable()
@@ -137,31 +142,43 @@ public class PauseMenuEvents : MonoBehaviour
 
     private void OnQuitClick(ClickEvent _evt)
     {
-        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(SceneNames.MainMenu, out var sceneName) ? sceneName : throw new KeyNotFoundException());
+        Time.timeScale = 1f;
+        LoadSingleScene(SceneNames.MainMenu);
     }
     
     private void OnLoadBowlingBattle(ClickEvent _evt)
     {
-        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(SceneNames.BowlingBattle, out var sceneName) ? sceneName : throw new KeyNotFoundException());
+        LoadSceneWithLevel(SceneNames.BowlingBattleGame, SceneNames.BowlingBattleLevel);
     }
 
     private void OnLoadFishingFrenzy(ClickEvent _evt)
     {
-        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(SceneNames.FishingFrenzy, out var sceneName) ? sceneName : throw new KeyNotFoundException());
+        LoadSingleScene(SceneNames.FishingFrenzy);
     }
 
     private void OnLoadJetskiJoyride(ClickEvent _evt)
     {
-        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(SceneNames.JetskiJoyride, out var sceneName) ? sceneName : throw new KeyNotFoundException());
+        LoadSingleScene(SceneNames.JetskiJoyride);
     }
 
     private void OnLoadMinigolfMayhem(ClickEvent _evt)
     {
-        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(SceneNames.MinigolfMayhem, out var sceneName) ? sceneName : throw new KeyNotFoundException());
+        LoadSceneWithLevel(SceneNames.MinigolfMayhemGame, SceneNames.MinigolfMayhemLevel1);
     }
 
     private void OnLoadSwaggySnapshots(ClickEvent _evt)
     {
-        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(SceneNames.SwaggySnapshots, out var sceneName) ? sceneName : throw new KeyNotFoundException());
+        LoadSceneWithLevel(SceneNames.SwaggySnapshotsGame, SceneNames.SwaggySnapshotsLevel);
+    }
+
+    private void LoadSingleScene(SceneNames sceneName)
+    {
+        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(sceneName, out var sceneNameFromCollection) ? sceneNameFromCollection : throw new KeyNotFoundException());
+    }
+
+    private void LoadSceneWithLevel(SceneNames gameScene, SceneNames levelScene)
+    {
+        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(gameScene, out var gameSceneName) ? gameSceneName : throw new KeyNotFoundException());
+        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(levelScene, out var levelSceneName) ? levelSceneName : throw new KeyNotFoundException(), LoadSceneMode.Additive);
     }
 }
