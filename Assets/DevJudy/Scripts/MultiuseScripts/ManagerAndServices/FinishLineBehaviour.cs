@@ -1,6 +1,7 @@
 using System.Collections;
 using HelperScripts;
 using ImprovedTimers;
+using Service;
 using UnityEngine;
 
 namespace MultiuseScripts
@@ -10,7 +11,7 @@ namespace MultiuseScripts
         [Header("Dependencies: ")]
         [SerializeField] private CustomTriggerBehaviour finishLineTrigger;
 
-        [SerializeField] private LevelService levelService;
+        [SerializeField] private JetskiGameLevelService jetskiGameLevelService;
         private CountdownTimer endLevelTimer;
 
         [Header("Variables: ")]
@@ -35,13 +36,12 @@ namespace MultiuseScripts
 
         private void OnFinishLineEntered(Collider _triggeringObj)
         {
-            levelService.OnFinishLineCrossed();
             //!! Visual feedback!!
-            
+
             // Keep track of ppl crossing (1, 2, 3- place)
             // maybe levelService.winnerList
             // or maybe not and use whatever will keep track of the placements during the race
-            
+
             if (checkWinners)
             {
                 // ?? Is this obsolete?
@@ -51,8 +51,10 @@ namespace MultiuseScripts
 
             if (((1 << _triggeringObj.gameObject.layer) & playerLayerMask) != 0)
             {
+                jetskiGameLevelService?.OnFinishLineCrossed();
+
                 StartCoroutine(StartLevelCountdownTimer());
-                // Disable controls already
+                // !! Disable controls already
             }
         }
 
@@ -72,9 +74,7 @@ namespace MultiuseScripts
 
         private void EndLevel()
         {
-            Debug.Log("End of level");
-
-            levelService.EndLevel();
+            jetskiGameLevelService.EndLevel();
         }
     }
 }

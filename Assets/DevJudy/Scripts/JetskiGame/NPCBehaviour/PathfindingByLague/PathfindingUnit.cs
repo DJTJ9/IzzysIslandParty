@@ -29,11 +29,14 @@ namespace Pathfinding
         {
             rb = GetComponent<Rigidbody>();
             
+            // Register Unit
+            
             StartCoroutine(UpdatePath());
         }
 
         public void CanFollowPath()
         {
+            Debug.Log( this.gameObject.name + " can Follow Path now");
             canFollowPath = true;
         }
         
