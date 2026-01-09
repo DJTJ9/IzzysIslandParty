@@ -1,3 +1,5 @@
+using enums;
+using Juice;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,15 +12,21 @@ namespace FishingGame
 
         private Animator animator;
         private LineRenderer lineRenderer;
+
         [SerializeField] private Transform[] rodLineRendererPositions;
 
         private bool isCast = false;
 
         private void Awake()
         {
-            animator = GetComponent<Animator>();
-            lineRenderer = GetComponent<LineRenderer>();
+            animator = GetComponentInChildren<Animator>();
+            if (animator == null)
+                Debug.LogWarning("No animator attached to children of " + gameObject.name);
 
+            lineRenderer = GetComponent<LineRenderer>();
+            if (lineRenderer == null)
+                Debug.LogWarning("No lineRenderer attached to " + gameObject.name);
+            
             lineRenderer.enabled = true;
             lineRenderer.useWorldSpace = true;
             lineRenderer.startWidth = lineRenderer.endWidth = 0.02f;
@@ -36,16 +44,19 @@ namespace FishingGame
                 {
                     isCast = true;
                     animator.SetBool(cast, isCast);
+                    
+                    Debug.Log("-- Casting rod");
 
-                    FishingSystem.GetInstance().StartFishing();
+                    FishingSystem.Instance.StartFishing();
 
                     return;
                 }
 
-                if (FishingSystem.GetInstance().FishHooked)
+                if (FishingSystem.Instance.FishHooked)
                 {
-                    FishingSystem.GetInstance().PressedCatch = true;
-
+                    FishingSystem.Instance.PressedCatch = true;
+                    IconHandler.Instance.DisplayIcon(EEmotion.Happy);
+                    
                     return;
                 }
 
@@ -55,20 +66,26 @@ namespace FishingGame
 
         public void PullBackFishingRod()
         {
-            FishingSystem.GetInstance().StopFishing();
+            FishingSystem.Instance.StopFishing();
 
             isCast = false;
 
             animator.SetBool(cast, isCast);
+            
+            Debug.Log("-- Stopped fishing");
         }
-
+        
         public void PlayFishBitingAnimation()
         {
+            Debug.Log("Fish  bitingggggg");
+            
+            IconHandler.Instance.DisplayIcon(EEmotion.Alert);
             animator.SetBool(fishBiting, true);
         }
 
         public void StopFishBitingAnimation()
         {
+            Debug.Log("Stopped fish bitingggggg");
             animator.SetBool(fishBiting, false);
         }
 

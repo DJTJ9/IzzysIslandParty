@@ -12,7 +12,7 @@ namespace enums
     {
         Timing,
         ButtonMash,
-        Scale,
+        Bar,
         None,
     }
 
@@ -24,5 +24,15 @@ namespace enums
         Flounder,
         RainbowTrout,
         Sturgeon,
+    }
+
+    public enum EEmotion
+    {
+        Happy, //star
+        Love, //heart
+        Sad, //broken heart
+        Angry, //veins (red thing)
+        Embarrassed, //drop
+        Alert, //exclamation mark
     }
 }

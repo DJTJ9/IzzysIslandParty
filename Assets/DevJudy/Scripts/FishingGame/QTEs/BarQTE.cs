@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -6,11 +7,10 @@ using Random = UnityEngine.Random;
 
 namespace FishingGame.QuickTimeEvent
 {
-    public class BarQTE : MonoBehaviour
+    public class BarQTE : MonoBehaviour, IQuickTimeEvent
     {
         [Header("Components: ")]
         [SerializeField] private GameObject barQTEHolder;
-
         [SerializeField] private GameObject target;
         [SerializeField] private GameObject catcher;
         private RectTransform targetRT;
@@ -44,8 +44,13 @@ namespace FishingGame.QuickTimeEvent
         private float successCounter = 0f;
 
         private bool rtsOverlapping;
-        public bool BarQTESuccessful { get; private set; }
-        public bool BarQTERunning { get; private set; }
+        
+        private bool qteRunning;
+        private bool qteFinishedSuccessfully;
+
+        public bool QTERunning => qteRunning;
+
+        public bool QTEFinishedSuccessfully => qteFinishedSuccessfully;
 
         // TODO add enumerator so the event only lasts around 7-8 seconds max
 
@@ -59,25 +64,31 @@ namespace FishingGame.QuickTimeEvent
                 Debug.LogError("Catcher is null");
 
             catcherImage = catcher.GetComponent<RawImage>();
-
+            catcherRT = catcher.GetComponent<RectTransform>();
+            
+            targetRT = target.GetComponent<RectTransform>();
+            
             if (successSlider == null)
                 Debug.LogError("SuccessSlider is null");
+            
+            barQTEHolder.SetActive(false);
+            
+            SetUpBarQTE();
+        }
 
+        private void SetUpBarQTE()
+        {
             successSlider.maxValue = successThreshold;
             successSlider.minValue = failThreshold;
 
             successCounter = successThreshold + failThreshold;
             successSlider.value = successCounter;
-
-            targetRT = target.GetComponent<RectTransform>();
-            catcherRT = catcher.GetComponent<RectTransform>();
         }
         
-        public void StartBarQTE()
+        public void StartQTE()
         {
-            Debug.Log("Started bar qte");
-            BarQTERunning = true;
-            BarQTESuccessful = false;
+            qteRunning = true;
+            qteFinishedSuccessfully = false;
 
             barQTEHolder.SetActive(true);
 
@@ -94,13 +105,16 @@ namespace FishingGame.QuickTimeEvent
 
         private void FixedUpdate()
         {
-            MoveTarget();
+            if (qteRunning)
+            {
+                MoveTarget();
 
-            MoveCatcher();
+                MoveCatcher();
 
-            rtsOverlapping = CheckIfRTsOverlapping(targetRT, catcherRT);
+                rtsOverlapping = CheckIfRTsOverlapping(targetRT, catcherRT);
 
-            OverlappingCalculation();
+                OverlappingCalculation();
+            }
         }
 
         private void MoveTarget()
@@ -111,8 +125,7 @@ namespace FishingGame.QuickTimeEvent
 
             if (Mathf.Approximately(target.transform.localPosition.x, targetDestination))
                 ChangeTargetDestination();
-
-            // TODO This doesnt work bc even at tcf 0 it still changes destination
+            
             float rnd = Random.value;
 
             if (rnd < targetChangeFrequency)
@@ -134,6 +147,7 @@ namespace FishingGame.QuickTimeEvent
             catcher.transform.localPosition = newPosition;
         }
 
+        [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]
         private void ChangeTargetDestination()
         {
             // Can be a direct comparison bc it's always set to either of these values exactly
@@ -189,7 +203,7 @@ namespace FishingGame.QuickTimeEvent
 
             if (successCounter >= successThreshold)
             {
-                BarQTESuccessful = true;
+                qteFinishedSuccessfully = true;
                 StopBarQTE();
             }
             else if (successCounter <= failThreshold)
@@ -203,7 +217,7 @@ namespace FishingGame.QuickTimeEvent
             successCounter = 0;
             successSlider.value = successCounter;
 
-            BarQTERunning = false;
+            qteRunning = false;
 
             // Disable the gameObjects
             barQTEHolder.SetActive(false);

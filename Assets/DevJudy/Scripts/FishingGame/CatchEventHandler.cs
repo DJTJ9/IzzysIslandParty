@@ -8,32 +8,32 @@ namespace FishingGame
     public class CatchEventHandler : MonoBehaviour
     {
         // For debug:
-        [SerializeField] private BarQTE barQTE;
+        private TimingQTE timingQTE;
+        private ButtonMashQTE buttonMashQTE;
+        private BarQTE barQTE;
         
-        // For all:
-        [SerializeField] private FishingRodController fishingController;
-        private Coroutine flounderEventCoroutine;
-        private Coroutine mackerelEventCoroutine;
-        private Coroutine welsEventCoroutine;
-        private Coroutine timingQTECoroutine;
-        private Coroutine buttonMashCoroutine;
-        private Coroutine barQTECoroutine;
-
-        // Do I really need all these bools??
-        private bool caughtFish = false;
-        private bool failedEncounter = false;
+        private Coroutine catchEventsCoroutine;
+        private Coroutine qteCoroutine;
+        
+        private int quickTimeEventCounter;
+        private int numberOfEventsToPerform = 3; // (to be got from fish
+        
+        private bool failedEncounter;
         public bool CatchEventSuccess { get; private set; }
         public bool CatchEventFinished { get; private set; }
-
-        // For flounder: 
-
-        [SerializeField] private QTEHandler qteHandler;
-
-        private int quickTimeEventCounter = 0;
         
-        private int numberOfEventsToPerform = 3; // (to be got from flounder)
 
-        public void StartFishEvent(EFish _fishToCatch)
+        // !! Eigentliche idee geht so nicht, also maybe liste von unityEvents/IQuickTimeEvents
+
+        private void Start()
+        {
+            barQTE = GetComponent<BarQTE>();
+            buttonMashQTE = GetComponent<ButtonMashQTE>();
+            timingQTE = GetComponent<TimingQTE>();
+        }
+
+        // Currently qtes are endless
+        public void StartFishEvent(So_Fish _fishToCatch)
         {
             CatchEventFinished = false;
             CatchEventSuccess = false;
@@ -41,205 +41,77 @@ namespace FishingGame
 
             quickTimeEventCounter = 0;
 
-            int random = Random.Range(0, 3);
+            // int random = Random.Range(0, 3);
 
-            Debug.Log("ChoseRandomEvent: " + random);
+            Debug.Log("Invoking event for : " + _fishToCatch);
 
-            switch (_fishToCatch)
+            switch (_fishToCatch.FishType)
             {
-                case EFish.Wels:
-                case EFish.Salmon:
-                    WelsEvent();
-                    break;
-                
                 case EFish.RainbowTrout:
                 case EFish.Flounder:
-                    FlounderEvent();
+                    InvokeEvents(timingQTE);
                     break;
-                
+
+                case EFish.Wels:
+                case EFish.Salmon:
+                    InvokeEvents(buttonMashQTE);
+                    break;
+
                 case EFish.Mackerel:
                 case EFish.Sturgeon:
-                    MackerelEvent();
+                    InvokeEvents(barQTE);
                     break;
             }
-            
-           if (random == 0)
-               FlounderEvent();
-           else if (random == 1)
-               MackerelEvent();
-           else
-                WelsEvent();
         }
 
-        public void FlounderEvent()
+        private void InvokeEvents(IQuickTimeEvent _qteToInvoke)
         {
-            if (flounderEventCoroutine == null)
-                flounderEventCoroutine = StartCoroutine(FlounderCoroutine());
+            if (catchEventsCoroutine == null)
+                catchEventsCoroutine = StartCoroutine(CatchEventsCoroutine(_qteToInvoke));
         }
 
-        private IEnumerator FlounderCoroutine()
+        // Blueprint
+        // !! Should prolly have a list of the unityEvents/IQuickTimeEvents then
+        private IEnumerator CatchEventsCoroutine(IQuickTimeEvent _quickTimeEvent)
         {
+            CatchEventSuccess = false;
+
             while (quickTimeEventCounter < numberOfEventsToPerform && !failedEncounter)
             {
-                if (timingQTECoroutine == null)
+                // Go through list of unityEvents and invoke those instead of repeating the same one
+                if (qteCoroutine == null)
                 {
-                    timingQTECoroutine = StartCoroutine(TimingQTE());
-                    quickTimeEventCounter++;
+                    qteCoroutine = StartCoroutine(QTECoroutine(_quickTimeEvent)); // list[i].Invoke
+                    quickTimeEventCounter = ReferenceEquals(_quickTimeEvent, barQTE) ? numberOfEventsToPerform : quickTimeEventCounter + 1;
                 }
 
                 yield return new WaitForEndOfFrame();
             }
 
-            yield return new WaitUntil(() => timingQTECoroutine == null);
+            yield return new WaitUntil(() => qteCoroutine == null);
 
             if (!failedEncounter)
                 CatchEventSuccess = true;
 
             CatchEventFinished = true;
 
-            flounderEventCoroutine = null;
+            catchEventsCoroutine = null;
             yield return null;
         }
 
-        // Do i need both the caughtFish and the failedEncounter
-        private IEnumerator TimingQTE()
+        private IEnumerator QTECoroutine(IQuickTimeEvent _quickTimeEvent)
         {
-            qteHandler.StartShrinkingRingQTE();
+            _quickTimeEvent.StartQTE();
 
-            while (qteHandler.TimingEventRunning)
+            while (_quickTimeEvent.QTERunning)
             {
                 yield return new WaitForEndOfFrame();
             }
 
-            if (qteHandler.TimingEventSuccessful)
-            {
-                // Keep going until amountOfQuickTimeEvents is finished
-                if (quickTimeEventCounter >= numberOfEventsToPerform)
-                    caughtFish = true;
-            }
-            else
-            {
+            if (!_quickTimeEvent.QTEFinishedSuccessfully)
                 failedEncounter = true;
-                caughtFish = false;
-            }
 
-            timingQTECoroutine = null;
-            yield return null;
-        }
-
-        // ---- These are super similar, can I just use reuse them and give them vars? ----
-        public void MackerelEvent()
-        {
-            if (mackerelEventCoroutine == null)
-                mackerelEventCoroutine = StartCoroutine(MackerelCoroutine());
-        }
-
-        private IEnumerator MackerelCoroutine()
-        {
-            while (quickTimeEventCounter < numberOfEventsToPerform && !failedEncounter)
-            {
-                if (buttonMashCoroutine == null)
-                {
-                    buttonMashCoroutine = StartCoroutine(ButtonMashQTE());
-                    quickTimeEventCounter++;
-                }
-
-                yield return new WaitForEndOfFrame();
-            }
-
-            yield return new WaitUntil(() => buttonMashCoroutine == null);
-
-            if (!failedEncounter)
-                CatchEventSuccess = true;
-
-            CatchEventFinished = true;
-
-            mackerelEventCoroutine = null;
-            yield return null;
-        }
-
-        // Do i need both the caughtFish and the failedEncounter
-        private IEnumerator ButtonMashQTE()
-        {
-            qteHandler.StartButtonMashQTE();
-
-            while (qteHandler.ButtonMashEventRunning)
-            {
-                yield return new WaitForEndOfFrame();
-            }
-
-            if (qteHandler.ButtonMashEventSuccessful)
-            {
-                // Keep going until amountOfQuickTimeEvents is finished
-                if (quickTimeEventCounter >= numberOfEventsToPerform)
-                    caughtFish = true;
-            }
-            else
-            {
-                failedEncounter = true;
-                caughtFish = false;
-            }
-
-            buttonMashCoroutine = null;
-            yield return null;
-        }
-        
-        // ----- bar ----
-        
-        public void WelsEvent()
-        {
-            if (welsEventCoroutine == null)
-                welsEventCoroutine = StartCoroutine(WelsCoroutine());
-        }
-
-        private IEnumerator WelsCoroutine()
-        {
-            while (!failedEncounter && !caughtFish)
-            {
-                if (barQTECoroutine == null)
-                {
-                    barQTECoroutine = StartCoroutine(BarQTE());
-                }
-
-                yield return new WaitForEndOfFrame();
-            }
-
-            yield return new WaitUntil(() => barQTECoroutine == null);
-
-            if (!failedEncounter)
-                CatchEventSuccess = true;
-
-            Debug.Log("WelsEvent over ");
-            CatchEventFinished = true;
-
-            welsEventCoroutine = null;
-            yield return null;
-        }
-
-        private IEnumerator BarQTE()
-        {
-            Debug.Log("Started coroutine");
-           barQTE.StartBarQTE();
-
-            while (barQTE.BarQTERunning)
-            {
-                yield return new WaitForEndOfFrame();
-            }
-
-            if (barQTE.BarQTESuccessful)
-            {
-                Debug.Log("BarQTE successful");
-                    caughtFish = true;
-            }
-            else
-            {
-                Debug.Log("BarQTE not successful");
-
-                failedEncounter = true;
-                caughtFish = false;
-            }
-
-            barQTECoroutine = null;
+            qteCoroutine = null;
             yield return null;
         }
     }

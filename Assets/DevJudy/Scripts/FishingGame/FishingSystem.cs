@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using enums;
+using Juice;
 using UIScripts;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace FishingGame{
+namespace FishingGame
+{
     public class FishingSystem : MonoBehaviour
     {
         [Header("Dependencies: ")]
@@ -13,8 +16,7 @@ namespace FishingGame{
 
         [Header("Variables: ")]
         private static FishingSystem instance;
-
-        [SerializeField] private UnityEvent onFishCaughtEvent;
+        public static FishingSystem Instance => instance;
 
         [SerializeField] private List<So_Fish> fishList;
         [SerializeField] private Vector2 secondsUntilFishBiteRange;
@@ -22,13 +24,13 @@ namespace FishingGame{
         [SerializeField] private FloatReference coyoteTime;
 
         // Bools
-        public bool PressedCatch { get; set; }
         private bool fishing;
+        public bool PressedCatch { get; set; }
         public bool FishHooked { get; private set; }
 
         private Coroutine fishingRoutine;
 
-        // To be deleted, only for test!!!
+        [Header("Temp")]
         [SerializeField] private CatchEventHandler catchEventHandler;
 
         private FishingSystem()
@@ -36,24 +38,15 @@ namespace FishingGame{
             instance = this;
         }
 
-        public static FishingSystem GetInstance()
+        private void Start()
         {
-            if (instance != null)
-                return instance;
-
-            Debug.LogError("FishingSystem instance is null");
-            return null;
+            if (fishList == null || fishList.Count <= 0)
+                Debug.LogError("FishingSystem fishList is null");
         }
         
         public void StartFishing()
         {
             fishing = true;
-
-            if (fishList == null || fishList.Count <= 0)
-            {
-                Debug.LogError("FishingSystem fishList is null");
-                return;
-            }
 
             if (fishingRoutine == null)
                 fishingRoutine = StartCoroutine(FishingCoroutine());
@@ -93,7 +86,7 @@ namespace FishingGame{
                     return fish;
             }
 
-            Debug.LogError("Cumulative probability doesn't match");
+            Debug.LogError("ERROR: Cumulative probability doesn't match");
             return null;
         }
 
@@ -122,20 +115,18 @@ namespace FishingGame{
 
                 if (PressedCatch)
                 {
-                    Debug.Log("Pressed Catch");
-                    
                     fishing = false;
 
-                    // onFishCaughtEvent.Invoke();
-                   catchEventHandler.StartFishEvent(caughtFish.FishType); 
-
+                    Debug.Log("Caugh: " + caughtFish);
+                    
+                    catchEventHandler.StartFishEvent(caughtFish);
                     yield return new WaitUntil(() => catchEventHandler.CatchEventFinished);
 
                     caughtAFish = catchEventHandler.CatchEventSuccess;
                 }
                 else
                 {
-                    Debug.Log("FS says Catch event over");
+                    IconHandler.Instance.DisplayIcon(EEmotion.Sad);
                 }
 
                 PressedCatch = false;
@@ -144,12 +135,18 @@ namespace FishingGame{
 
             if (caughtAFish)
             {
+                IconHandler.Instance.DisplayIcon(EEmotion.Love);
+                
                 // Show caught fish (via Text and/or Picture)!!
 
                 textManager.UpdatePointsText(caughtFish.Points);
                 Debug.Log("Congrats!! You caught a " + caughtFish.FishName);
 
                 fishingRodController.PullBackFishingRod();
+            }
+            else
+            {
+                IconHandler.Instance.DisplayIcon(EEmotion.Sad);
             }
 
             StopFishing();
