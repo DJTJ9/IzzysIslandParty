@@ -15,7 +15,6 @@ public class MainMenuEvents : MonoBehaviour
     [Header("Menus")]
     private VisualElement mainMenu;
     private VisualElement settingsMenu;
-    private VisualElement pauseMenu;
     private VisualElement playerHub;
 
     [Header("Main Menu Buttons")]
@@ -25,12 +24,6 @@ public class MainMenuEvents : MonoBehaviour
     
     [Header("Settings Menu Buttons")]
     private Button settingsBackButton;
-    
-    [Header("Pause Menu Buttons")]
-    private Button resumeButton;
-    private Button restartButton;
-    private Button changeLevelButton;
-    private Button pauseMenuBackButton;
     
     [Header("Player HUB Buttons")]
     private Button bowlingBattleButton;
@@ -95,7 +88,6 @@ public class MainMenuEvents : MonoBehaviour
     {
         mainMenu = document.rootVisualElement.Q("main-menu__container");
         settingsMenu = document.rootVisualElement.Q("settings-menu__container");
-        pauseMenu = document.rootVisualElement.Q("pause-menu__container");
         playerHub = document.rootVisualElement.Q("player-hub__container");
     }
     
@@ -108,12 +100,6 @@ public class MainMenuEvents : MonoBehaviour
         
         // Settings menu buttons
         settingsBackButton = document.rootVisualElement.Q("settings-menu-back__button") as Button;
-        
-        // Pause menu buttons
-        resumeButton = document.rootVisualElement.Q("pause-menu-resume__button") as Button;
-        restartButton = document.rootVisualElement.Q("pause-menu-restart__button") as Button;
-        changeLevelButton = document.rootVisualElement.Q("pause-menu-change-level__button") as Button;
-        pauseMenuBackButton = document.rootVisualElement.Q("pause-menu-back__button") as Button;
         
         //Player HUB buttons
         bowlingBattleButton = document.rootVisualElement.Q("play-bowling-battle__button") as Button;
@@ -134,12 +120,6 @@ public class MainMenuEvents : MonoBehaviour
         // Settings menu buttons
         settingsBackButton?.RegisterCallback<ClickEvent>(OnSettingsBackButtonClick);
         
-        // Pause menu buttons
-        resumeButton?.RegisterCallback<ClickEvent>(OnUnpauseGameClick);
-        restartButton?.RegisterCallback<ClickEvent>(OnPlayGameClick);
-        changeLevelButton?.RegisterCallback<ClickEvent>(OnPlayGameClick);
-        pauseMenuBackButton?.RegisterCallback<ClickEvent>(OnPlayerHubBack);
-        
         //Player HUB buttons
         bowlingBattleButton?.RegisterCallback<ClickEvent>(OnLoadBowlingBattle);
         fishingFrenzyButton?.RegisterCallback<ClickEvent>(OnLoadFishingFrenzy);
@@ -158,12 +138,6 @@ public class MainMenuEvents : MonoBehaviour
         
         // Settings menu buttons
         settingsBackButton?.UnregisterCallback<ClickEvent>(OnSettingsBackButtonClick);
-        
-        // Pause menu buttons
-        resumeButton?.UnregisterCallback<ClickEvent>(OnUnpauseGameClick);
-        restartButton?.UnregisterCallback<ClickEvent>(OnPlayGameClick);
-        changeLevelButton?.UnregisterCallback<ClickEvent>(OnPlayGameClick);
-        pauseMenuBackButton?.UnregisterCallback<ClickEvent>(OnPlayerHubBack);
 
         //Player HUB buttons
         bowlingBattleButton?.UnregisterCallback<ClickEvent>(OnLoadBowlingBattle);
@@ -174,30 +148,12 @@ public class MainMenuEvents : MonoBehaviour
         playerHUBBackButton?.UnregisterCallback<ClickEvent>(OnPlayerHubBack);
     }
 
-
-    public void OnPauseGame()
-    {
-        pauseMenu.style.display = DisplayStyle.Flex;
-        Time.timeScale = 0f;
-    }
-    
-    public void OnUnpauseGame()
-    {
-        pauseMenu.style.display = DisplayStyle.None;
-        Time.timeScale = 1f;
-    }
-
     private void OnPlayGameClick(ClickEvent _evt)
     {
         mainMenu.style.display = DisplayStyle.None;
         playerHub.style.display = DisplayStyle.Flex;
     }
     
-    private void OnUnpauseGameClick(ClickEvent _evt)
-    {
-        pauseMenu.style.display = DisplayStyle.None;
-        Time.timeScale = 1f;
-    }
 
     private void OnSettingsButtonClick(ClickEvent _evt)
     {
@@ -213,8 +169,8 @@ public class MainMenuEvents : MonoBehaviour
     
     private void OnPlayerHubBack(ClickEvent _evt)
     {
-        mainMenu.style.display = DisplayStyle.Flex;
         playerHub.style.display = DisplayStyle.None;
+        mainMenu.style.display = DisplayStyle.Flex;
     }
 
     private void OnQuitClick(ClickEvent _evt)
@@ -227,35 +183,35 @@ public class MainMenuEvents : MonoBehaviour
     
     private void OnLoadBowlingBattle(ClickEvent _evt)
     {
-        LoadSceneWithLevel(SceneNames.BowlingBattleGame, SceneNames.BowlingBattleLevel);
+        LoadGameSceneWithLevel(SceneNames.BowlingBattleGame, SceneNames.BowlingBattleLevel);
     }
 
     private void OnLoadFishingFrenzy(ClickEvent _evt)
     {
-        LoadSingleScene(SceneNames.FishingFrenzy);
+        LoadGameScene(SceneNames.FishingFrenzy);
     }
 
     private void OnLoadJetskiJoyride(ClickEvent _evt)
     {
-        LoadSingleScene(SceneNames.JetskiJoyride);
+        LoadGameScene(SceneNames.JetskiJoyride);
     }
 
     private void OnLoadMinigolfMayhem(ClickEvent _evt)
     {
-        LoadSceneWithLevel(SceneNames.MinigolfMayhemGame, SceneNames.MinigolfMayhemLevel1);
+        LoadGameSceneWithLevel(SceneNames.MinigolfMayhemGame, SceneNames.MinigolfMayhemLevel1);
     }
 
     private void OnLoadSwaggySnapshots(ClickEvent _evt)
     {
-        LoadSceneWithLevel(SceneNames.SwaggySnapshotsGame, SceneNames.SwaggySnapshotsLevel);
+        LoadGameSceneWithLevel(SceneNames.SwaggySnapshotsGame, SceneNames.SwaggySnapshotsLevel);
     }
 
-    private void LoadSingleScene(SceneNames sceneName)
+    private void LoadGameScene(SceneNames sceneName)
     {
         SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(sceneName, out var sceneNameFromCollection) ? sceneNameFromCollection : throw new KeyNotFoundException());
     }
 
-    private void LoadSceneWithLevel(SceneNames gameScene, SceneNames levelScene)
+    private void LoadGameSceneWithLevel(SceneNames gameScene, SceneNames levelScene)
     {
         SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(gameScene, out var gameSceneName) ? gameSceneName : throw new KeyNotFoundException());
         SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(levelScene, out var levelSceneName) ? levelSceneName : throw new KeyNotFoundException(), LoadSceneMode.Additive);
