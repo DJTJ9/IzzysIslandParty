@@ -18,9 +18,6 @@ public class WaveCreator : MonoBehaviour
     private MeshFilter meshFilter;
     private Mesh mesh;
 
-
-    [SerializeField] private bool showMesh;
-
     private int Index(int _x, int _z)
     {
         return _x * (dimension + 1) + _z;
