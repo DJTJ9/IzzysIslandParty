@@ -7,7 +7,7 @@ public class PinReseter : MonoBehaviour
     
     private Rigidbody rb;
 
-    private void Start()
+    private void Awake()
     {
         startPosition = transform.position;
         

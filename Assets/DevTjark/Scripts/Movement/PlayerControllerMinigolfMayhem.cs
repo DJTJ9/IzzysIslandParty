@@ -45,7 +45,7 @@ public class PlayerControllerMinigolfMayhem : MonoBehaviour {
     /// </summary>
     private void Update() {
         if (Mouse.current.rightButton.wasPressedThisFrame) Cursor.lockState = CursorLockMode.Locked;
-        if (Keyboard.current.escapeKey.wasPressedThisFrame) Cursor.lockState = CursorLockMode.None;
+        if (Mouse.current.rightButton.wasPressedThisFrame) Cursor.lockState = CursorLockMode.None;
 
         // var moveDirection = GetMoveDirectionFromInput();
         // RigidbodyMovement.Move(moveDirection);

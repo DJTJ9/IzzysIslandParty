@@ -17,6 +17,8 @@ public class PlayerUIEvents : MonoBehaviour
     private Button baseBallButton;
     private Button footBallButton;
     
+    private VisualElement scrollView;
+    
     [Inject] private BallSpawner ballSpawner;
 
     private void Awake()
@@ -38,6 +40,7 @@ public class PlayerUIEvents : MonoBehaviour
         middlePlayerUI = document.rootVisualElement.Q("player-ui-middle__container");
         rightPlayerUI = document.rootVisualElement.Q("player-ui-right__container");
         endScreenUI = document.rootVisualElement.Q("end-screen-menu__container");
+        scrollView = document.rootVisualElement.Q("scrollView");
     }
 
     private void BindButtonsWithEvents()
@@ -45,12 +48,17 @@ public class PlayerUIEvents : MonoBehaviour
         baseBallButton = document.rootVisualElement.Q("ball-selector-baseball__button") as Button;
         baseBallButton?.RegisterCallback<ClickEvent>
             (_evt => SpawnBall(ballCollectionSO.BowlingBalls[BallType.Baseball]));
+        // scrollView.contentContainer.Add(baseBallButton);
+        
         basketBallButton = document.rootVisualElement.Q("ball-selector-basketball__button") as Button;
         basketBallButton?.RegisterCallback<ClickEvent>
             (_evt => SpawnBall(ballCollectionSO.BowlingBalls[BallType.Basketball]));
+        // scrollView.contentContainer.Add(basketBallButton);
+        
         footBallButton = document.rootVisualElement.Q("ball-selector-football__button") as Button;
         footBallButton?.RegisterCallback<ClickEvent>
             (_evt => SpawnBall(ballCollectionSO.BowlingBalls[BallType.Football]));
+        // scrollView.contentContainer.Add(footBallButton);
     }
 
     private void SpawnBall(BowlingBallSO _ballSO)
