@@ -124,7 +124,7 @@ namespace FishingGame
                 }
                 else
                 {
-                    IconHandler.Instance.DisplayIcon(EEmotion.Sad);
+                    IconHandler.Instance.DisplayIcon(EEmotion.Embarrassed);
                 }
 
                 PressedCatch = false;

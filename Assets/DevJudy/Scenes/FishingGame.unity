@@ -218,7 +218,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 239378781582670930, guid: b4dee6ae1a035694c81f000916558562, type: 3}
+  - {fileID: 2100002, guid: c41bbabcaf18af547ac247632ddc4fc7, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1290,7 +1290,7 @@ Transform:
   m_GameObject: {fileID: 202235281}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.2, y: 1.15, z: 0.3}
+  m_LocalPosition: {x: 28.2, y: -6.59, z: 0.15}
   m_LocalScale: {x: 0.3, y: 0.15, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1518,39 +1518,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8989529067803825723, guid: f2cfc7cd690e6fe4f9678427228e5322, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.056
+      value: 12.964
       objectReference: {fileID: 0}
     - target: {fileID: 8989529067803825723, guid: f2cfc7cd690e6fe4f9678427228e5322, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.984
+      value: -1.602
       objectReference: {fileID: 0}
     - target: {fileID: 8989529067803825723, guid: f2cfc7cd690e6fe4f9678427228e5322, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.262
+      value: 3.293
       objectReference: {fileID: 0}
     - target: {fileID: 8989529067803825723, guid: f2cfc7cd690e6fe4f9678427228e5322, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.655618
+      value: 0.70665425
       objectReference: {fileID: 0}
     - target: {fileID: 8989529067803825723, guid: f2cfc7cd690e6fe4f9678427228e5322, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.70667607
+      value: -0.69887716
       objectReference: {fileID: 0}
     - target: {fileID: 8989529067803825723, guid: f2cfc7cd690e6fe4f9678427228e5322, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.2648869
+      value: -0.025294425
       objectReference: {fileID: 0}
     - target: {fileID: 8989529067803825723, guid: f2cfc7cd690e6fe4f9678427228e5322, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.024677696
+      value: 0.10756735
       objectReference: {fileID: 0}
     - target: {fileID: 8989529067803825723, guid: f2cfc7cd690e6fe4f9678427228e5322, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -66
+      value: -100.8
       objectReference: {fileID: 0}
     - target: {fileID: 8989529067803825723, guid: f2cfc7cd690e6fe4f9678427228e5322, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 110
+      value: 96.7
       objectReference: {fileID: 0}
     - target: {fileID: 8989529067803825723, guid: f2cfc7cd690e6fe4f9678427228e5322, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -4203,7 +4203,7 @@ Transform:
   m_GameObject: {fileID: 1927987129}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.22, y: 0, z: 0}
+  m_LocalPosition: {x: 28.25, y: -6.57, z: 0.17}
   m_LocalScale: {x: 0.3, y: 0.15, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4588,7 +4588,7 @@ MonoBehaviour:
   pointsText: {fileID: 707943203}
   timerText: {fileID: 1848791106}
   uiPanelManager: {fileID: 2014647218}
-  durationInMinutes: 5
+  durationInMinutes: 2
   deductionFeedbackDuration: 2
   timerRunningDown: 1
   startTimerOnLevelStart: 1
@@ -5011,7 +5011,7 @@ Transform:
   m_GameObject: {fileID: 2101010463}
   serializedVersion: 2
   m_LocalRotation: {x: -0.064357266, y: -0.69167143, z: 0.059009995, w: 0.71691465}
-  m_LocalPosition: {x: 0.3, y: -1.5, z: 0.46}
+  m_LocalPosition: {x: 1.1268, y: 0.1869, z: -4.3363}
   m_LocalScale: {x: 0.32666665, y: 0.32666665, z: 0.32666668}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9162,6 +9162,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 549ddb5fb440e7c40a6810d3e5d66009, type: 2}
   - {fileID: 11400000, guid: d32f8e53cc707a34699b29f1d89f8235, type: 2}
   - {fileID: 11400000, guid: 9260cce645484a047941a4d7f97c049c, type: 2}
+  - {fileID: 11400000, guid: 1db5741a95bb1ef41ad9f1f2a00ee7de, type: 2}
+  - {fileID: 11400000, guid: f354e1cd74e0df84485dab533d894556, type: 2}
+  - {fileID: 11400000, guid: 16df746755f4c214aac0797064586155, type: 2}
   displayIconSeconds: 3
 --- !u!1001 &9053926230498217152
 PrefabInstance:

@@ -28,11 +28,12 @@ namespace enums
 
     public enum EEmotion
     {
-        Happy, //star
-        Love, //heart
-        Sad, //broken heart
-        Angry, //veins (red thing)
-        Embarrassed, //drop
-        Alert, //exclamation mark
+        Happy,
+        Love,
+        Sad,
+        Angry,
+        Embarrassed,
+        Alert,
+        Cheeky,
     }
 }
