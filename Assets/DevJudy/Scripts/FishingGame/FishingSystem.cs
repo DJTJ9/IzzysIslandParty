@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using enums;
 using Juice;
+using ScriptableObjects;
 using UIScripts;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace FishingGame
 {
@@ -18,7 +18,7 @@ namespace FishingGame
         private static FishingSystem instance;
         public static FishingSystem Instance => instance;
 
-        [SerializeField] private List<So_Fish> fishList;
+        [SerializeField] private List<SO_Fish> fishList;
         [SerializeField] private Vector2 secondsUntilFishBiteRange;
         [SerializeField] private Vector2 buttonPressTimerRange;
         [SerializeField] private FloatReference coyoteTime;
@@ -66,11 +66,11 @@ namespace FishingGame
             FishHooked = false;
         }
 
-        private So_Fish CalculateFishProbability()
+        private SO_Fish CalculateFishProbability()
         {
             int totalProbability = 0;
 
-            foreach (So_Fish fish in fishList)
+            foreach (SO_Fish fish in fishList)
             {
                 totalProbability += fish.Probability;
             }
@@ -78,7 +78,7 @@ namespace FishingGame
             int randomProbability = Random.Range(0, Mathf.FloorToInt(totalProbability) + 1);
             int cumulativeProbability = 0;
 
-            foreach (So_Fish fish in fishList)
+            foreach (SO_Fish fish in fishList)
             {
                 cumulativeProbability += fish.Probability;
 
@@ -93,7 +93,7 @@ namespace FishingGame
         private IEnumerator FishingCoroutine()
         {
             bool caughtAFish = false;
-            So_Fish caughtFish = null;
+            SO_Fish caughtFish = null;
 
             // Make it so this repeats if no fish was caught!!
             while (fishing)
@@ -116,8 +116,6 @@ namespace FishingGame
                 if (PressedCatch)
                 {
                     fishing = false;
-
-                    Debug.Log("Caugh: " + caughtFish);
                     
                     catchEventHandler.StartFishEvent(caughtFish);
                     yield return new WaitUntil(() => catchEventHandler.CatchEventFinished);

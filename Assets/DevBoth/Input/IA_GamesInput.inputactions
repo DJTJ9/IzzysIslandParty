@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "name": "IA_JudyGamesInput",
+    "name": "IA_GamesInput",
     "maps": [
         {
             "name": "FishingGame",
@@ -55,6 +55,15 @@
                     "name": "LeftRightQTE",
                     "type": "Button",
                     "id": "645fff6a-fa79-4f4d-86f8-19c46ad9a955",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "5bdcf41b-252b-4f3a-b0c1-7418f789a24e",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -226,6 +235,28 @@
                     "action": "LeftRightQTE",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "99d1faa6-8dd9-49ac-9e04-cea7cfb6bead",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardControlScheme",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "585ea38d-908b-4501-9cd9-795215103e04",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";ControllerControlScheme",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -408,6 +439,34 @@
                     "processors": "",
                     "groups": ";ControllerControlScheme",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "New action map",
+            "id": "1d07fb46-a971-491a-9161-88c1942d62ba",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "f60f81e8-8952-4e5f-9c65-96b348c0117f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4cbd0c92-c47e-45fa-bcbd-651baa7a31cb",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

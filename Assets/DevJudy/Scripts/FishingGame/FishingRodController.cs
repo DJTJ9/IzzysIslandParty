@@ -1,6 +1,7 @@
 using enums;
 using Juice;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace FishingGame
@@ -17,6 +18,12 @@ namespace FishingGame
 
         private bool isCast = false;
 
+        // TEMP
+        [SerializeField] private UnityEvent OnPauseGame;
+        [SerializeField] private UnityEvent OnUnpauseGame;
+
+        bool isPaused = false;
+
         private void Awake()
         {
             animator = GetComponentInChildren<Animator>();
@@ -26,7 +33,7 @@ namespace FishingGame
             lineRenderer = GetComponent<LineRenderer>();
             if (lineRenderer == null)
                 Debug.LogWarning("No lineRenderer attached to " + gameObject.name);
-            
+
             lineRenderer.enabled = true;
             lineRenderer.useWorldSpace = true;
             lineRenderer.startWidth = lineRenderer.endWidth = 0.02f;
@@ -34,6 +41,24 @@ namespace FishingGame
 
             lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
             lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
+        }
+
+        // !! MOVE
+        public void OnPause(InputAction.CallbackContext _context)
+        {
+            if (_context.performed)
+            {
+                if (!isPaused)
+                {
+                    isPaused = true;
+                    OnPauseGame?.Invoke();
+                }
+                else
+                {
+                    isPaused = false;
+                    OnUnpauseGame?.Invoke();
+                }
+            }
         }
 
         public void OnCast(InputAction.CallbackContext _context)
@@ -44,8 +69,8 @@ namespace FishingGame
                 {
                     isCast = true;
                     animator.SetBool(cast, isCast);
-                    
-                    Debug.Log("-- Casting rod");
+
+                    ConsoleProDebug.LogToFilter("--started fishing", "Test");
 
                     FishingSystem.Instance.StartFishing();
 
@@ -56,7 +81,7 @@ namespace FishingGame
                 {
                     FishingSystem.Instance.PressedCatch = true;
                     IconHandler.Instance.DisplayIcon(EEmotion.Happy);
-                    
+
                     return;
                 }
 
@@ -71,14 +96,14 @@ namespace FishingGame
             isCast = false;
 
             animator.SetBool(cast, isCast);
-            
-            Debug.Log("-- Stopped fishing");
+
+            ConsoleProDebug.LogToFilter("--stopped fishing", "Test");
         }
-        
+
         public void PlayFishBitingAnimation()
         {
             Debug.Log("Fish  bitingggggg");
-            
+
             IconHandler.Instance.DisplayIcon(EEmotion.Alert);
             animator.SetBool(fishBiting, true);
         }

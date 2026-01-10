@@ -1,88 +1,69 @@
 using System.Collections;
+using System.Collections.Generic;
 using enums;
-using FishingGame.QuickTimeEvent;
+using FishingGame.QuickTimeEvents;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace FishingGame
 {
     public class CatchEventHandler : MonoBehaviour
     {
-        // For debug:
         private TimingQTE timingQTE;
         private ButtonMashQTE buttonMashQTE;
         private BarQTE barQTE;
-        
-        private Coroutine catchEventsCoroutine;
+
         private Coroutine qteCoroutine;
-        
+
         private int quickTimeEventCounter;
-        private int numberOfEventsToPerform = 3; // (to be got from fish
-        
         private bool failedEncounter;
+
         public bool CatchEventSuccess { get; private set; }
         public bool CatchEventFinished { get; private set; }
-        
 
-        // !! Eigentliche idee geht so nicht, also maybe liste von unityEvents/IQuickTimeEvents
 
         private void Start()
         {
             barQTE = GetComponent<BarQTE>();
+            if (barQTE == null)
+                Debug.LogWarning("No BarQTE script attached to " + gameObject.name);
+
             buttonMashQTE = GetComponent<ButtonMashQTE>();
+            if (buttonMashQTE == null)
+                Debug.LogWarning("No ButtonMashQTE script attached to " + gameObject.name);
+
             timingQTE = GetComponent<TimingQTE>();
+            if (timingQTE == null)
+                Debug.LogWarning("No TimingQTE script attached to " + gameObject.name);
+        }
+        
+        public void StartFishEvent(SO_Fish _fishToCatch)
+        {
+            ResetCatchEventVariables();
+            
+            StartCoroutine(CatchEventCoroutine(_fishToCatch.CatchEvents));
         }
 
-        // Currently qtes are endless
-        public void StartFishEvent(So_Fish _fishToCatch)
+        private void ResetCatchEventVariables()
         {
             CatchEventFinished = false;
             CatchEventSuccess = false;
             failedEncounter = false;
 
             quickTimeEventCounter = 0;
-
-            // int random = Random.Range(0, 3);
-
-            Debug.Log("Invoking event for : " + _fishToCatch);
-
-            switch (_fishToCatch.FishType)
-            {
-                case EFish.RainbowTrout:
-                case EFish.Flounder:
-                    InvokeEvents(timingQTE);
-                    break;
-
-                case EFish.Wels:
-                case EFish.Salmon:
-                    InvokeEvents(buttonMashQTE);
-                    break;
-
-                case EFish.Mackerel:
-                case EFish.Sturgeon:
-                    InvokeEvents(barQTE);
-                    break;
-            }
         }
-
-        private void InvokeEvents(IQuickTimeEvent _qteToInvoke)
-        {
-            if (catchEventsCoroutine == null)
-                catchEventsCoroutine = StartCoroutine(CatchEventsCoroutine(_qteToInvoke));
-        }
-
-        // Blueprint
-        // !! Should prolly have a list of the unityEvents/IQuickTimeEvents then
-        private IEnumerator CatchEventsCoroutine(IQuickTimeEvent _quickTimeEvent)
+        
+        private IEnumerator CatchEventCoroutine(List<EQuickTimeEvent> _quickTimeEvent)
         {
             CatchEventSuccess = false;
 
-            while (quickTimeEventCounter < numberOfEventsToPerform && !failedEncounter)
+            while (quickTimeEventCounter < _quickTimeEvent.Count && !failedEncounter)
             {
                 // Go through list of unityEvents and invoke those instead of repeating the same one
                 if (qteCoroutine == null)
                 {
-                    qteCoroutine = StartCoroutine(QTECoroutine(_quickTimeEvent)); // list[i].Invoke
-                    quickTimeEventCounter = ReferenceEquals(_quickTimeEvent, barQTE) ? numberOfEventsToPerform : quickTimeEventCounter + 1;
+                    qteCoroutine = StartCoroutine(QTECoroutine(GetQuickTimeEvent(_quickTimeEvent[quickTimeEventCounter])));
+                    quickTimeEventCounter++;
                 }
 
                 yield return new WaitForEndOfFrame();
@@ -95,11 +76,25 @@ namespace FishingGame
 
             CatchEventFinished = true;
 
-            catchEventsCoroutine = null;
             yield return null;
         }
 
-        private IEnumerator QTECoroutine(IQuickTimeEvent _quickTimeEvent)
+        private QuickTimeEvent GetQuickTimeEvent(EQuickTimeEvent _quickTimeEvent)
+        {
+            switch (_quickTimeEvent)
+            {
+                case EQuickTimeEvent.Timing:
+                    return timingQTE;
+                case EQuickTimeEvent.ButtonMash:
+                    return buttonMashQTE;
+                case EQuickTimeEvent.Bar:
+                    return barQTE;
+                default:
+                    return null;
+            }
+        }
+
+        private IEnumerator QTECoroutine(QuickTimeEvent _quickTimeEvent)
         {
             _quickTimeEvent.StartQTE();
 
