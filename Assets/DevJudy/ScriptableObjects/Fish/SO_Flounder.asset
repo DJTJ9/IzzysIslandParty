@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: SO_Flounder
   m_EditorClassIdentifier: 
   <FishName>k__BackingField: Flounder
+  <FishType>k__BackingField: 3
   <Probability>k__BackingField: 15
   <Points>k__BackingField: 8
-  CatchTimeEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  CatchEvents:
+  - {fileID: 1107817316152746685, guid: de67aeb876693494caf5d8cd422e9eb7, type: 3}
+  - {fileID: 1107817316152746685, guid: de67aeb876693494caf5d8cd422e9eb7, type: 3}
+  - {fileID: 1107817316152746685, guid: de67aeb876693494caf5d8cd422e9eb7, type: 3}

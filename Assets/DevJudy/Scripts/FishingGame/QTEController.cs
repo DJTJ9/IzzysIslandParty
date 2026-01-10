@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using enums;
-using FishingGame.QuickTimeEvent;
+using FishingGame.QuickTimeEvents;
 
 public class QTEController : MonoBehaviour
 {

@@ -25,7 +25,7 @@ namespace Juice
         private void Awake()
         {
             if (targetObject == null)
-                Debug.LogError("targetObject or target is null");
+                Debug.LogError("No target set, please add 'CharacterIconPrefab' and set meshRenderer");
 
             iconTimer = new CountdownTimer(displayIconSeconds);
             iconTimer.OnTimerStop += () => { targetObject?.SetActive(false); };
