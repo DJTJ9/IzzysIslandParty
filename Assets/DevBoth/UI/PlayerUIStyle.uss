@@ -1,0 +1,25 @@
+.player-ui-main-container {
+    flex-direction: row;
+}
+
+.player-ui-left {
+    width: 15%;
+    flex-direction: row;
+}
+
+.player-ui-right {
+    flex-grow: 1;
+    width: 15%;
+}
+
+.player-ui-middle {
+    width: 70%;
+}
+
+.score-label {
+    margin-top: 2%;
+    margin-left: 2%;
+    font-size: 30px;
+    color: rgb(0, 173, 10);
+    -unity-font-definition: url("project://database/Assets/DevJudy/ByOthers/Fonts/DroidSansMono.ttf?fileID=12800000&guid=7a413d89f872f244c8122cfd40c3c0c0&type=3#DroidSansMono");
+}

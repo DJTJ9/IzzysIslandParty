@@ -12,6 +12,7 @@ public class BowlingBattleGameManager : MonoBehaviour
     [SerializeField] private UnityEvent onRoundEnd;
     [SerializeField] private UnityEvent onGameEnd;
 
+    [FoldoutGroup("Round Settings", expanded: true)]
     [SerializeField] private float preparationPhaseDuration = 10f;
     [SerializeField] private float roundDuration = 15f;
     [SerializeField] private int maxRounds = 3;
@@ -21,7 +22,6 @@ public class BowlingBattleGameManager : MonoBehaviour
     private CountdownTimer preparationPhaseTimer;
     private CountdownTimer roundTimer;
 
-    [FoldoutGroup("Round Settings", expanded: true)]
 
 private void Start()
     {

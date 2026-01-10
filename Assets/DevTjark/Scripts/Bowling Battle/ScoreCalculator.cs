@@ -8,7 +8,7 @@ public class ScoreCalculator : MonoBehaviour
     
     [Inject] private BallSpawner ballSpawner;
 
-    public void ScoreChecker() 
+    public void CheckScore() 
     {
         var dotProduct = Vector3.Dot(transform.up, Vector3.up);
         var isFallen = dotProduct < isFallenDotProductThreshold;

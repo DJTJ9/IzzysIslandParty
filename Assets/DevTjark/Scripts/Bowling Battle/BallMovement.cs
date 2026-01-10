@@ -1,25 +1,27 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 [RequireComponent (typeof(CharacterController), typeof(PlayerInput), typeof(Rigidbody))]
 public class BallMovement : MonoBehaviour
 {
     [Header("Input")]
-    private Vector2 moveInput;
-    private bool jumpInput;
+    private Vector2 m_moveInput;
+    private bool m_jumpInput;
 
+    [FormerlySerializedAs("moveSpeed")]
     [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float m_moveSpeed = 5f;
     
-    private InputAction moveInputAction;
-    private InputAction jumpInputAction;
+    private InputAction m_moveInputAction;
+    private InputAction m_jumpInputAction;
 
     [Header("References")]
     private CharacterController controller;
     private PlayerInput playerInput;
     private Rigidbody rb;
     
-    private Transform startPosition;
+    private Transform m_startPosition;
     
     private void Awake()
     {
@@ -28,7 +30,7 @@ public class BallMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerInput.enabled = true;
         
-        startPosition = transform;
+        m_startPosition = transform;
     }
 
     private void OnEnable()
@@ -61,16 +63,16 @@ public class BallMovement : MonoBehaviour
     private void StartPositionMovement()
     {
         GetMoveDirection();
-        Vector3 move = new Vector3(moveInput.x, moveInput.y, 0);
+        Vector3 move = new Vector3(m_moveInput.x, m_moveInput.y, 0);
 
-        move *= moveSpeed;
+        move *= m_moveSpeed;
         
         controller.Move(move * Time.deltaTime);
     }
 
     private void GetMoveDirection()
     {
-        moveInput = moveInputAction.ReadValue<Vector2>();
+        m_moveInput = m_moveInputAction.ReadValue<Vector2>();
     }
 
     public void OnJump(InputAction.CallbackContext _context)
@@ -81,7 +83,7 @@ public class BallMovement : MonoBehaviour
             controller.enabled = false;
             rb.freezeRotation = false;
             rb.useGravity = true;
-            moveInput = Vector2.zero;
+            m_moveInput = Vector2.zero;
             rb.linearVelocity = Vector3.zero;
         }
     }
@@ -92,21 +94,21 @@ public class BallMovement : MonoBehaviour
             controller.enabled = false;
             rb.freezeRotation = false;
             rb.useGravity = true;
-            moveInput = Vector2.zero;
+            m_moveInput = Vector2.zero;
             rb.linearVelocity = Vector3.zero;
     }
     
     private void MapInputActions() 
     {
-        moveInputAction = playerInput.actions["Move"];
+        m_moveInputAction = playerInput.actions["Move"];
 
-        jumpInputAction = playerInput.actions["Jump"];
-        jumpInputAction.started += OnJump;
+        m_jumpInputAction = playerInput.actions["Jump"];
+        m_jumpInputAction.started += OnJump;
     }
 
     private void UnmapInputActions()
     {
-        moveInputAction.started -= OnJump;
+        m_moveInputAction.started -= OnJump;
     }
 
     public void ResetComponents()
@@ -115,7 +117,7 @@ public class BallMovement : MonoBehaviour
         playerInput.enabled = true;
         rb.freezeRotation = true;
         rb.useGravity = false;
-        transform.position = startPosition.position;
+        transform.position = m_startPosition.position;
     }
     
     private void SetCameraForPlayerInput()
