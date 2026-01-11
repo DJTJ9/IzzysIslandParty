@@ -82,15 +82,12 @@ public class BallMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext _context)
     {
-        if (_context.phase == InputActionPhase.Started)
-        {
             if (controller == null) return;
             controller.enabled = false;
             rb.freezeRotation = false;
             rb.useGravity = true;
             m_moveInput = Vector2.zero;
             rb.linearVelocity = Vector3.zero;
-        }
     }
     
     public void OnReleaseBall()
@@ -117,12 +114,12 @@ public class BallMovement : MonoBehaviour
         m_unpauseInputAction.started += OnUnpause;
     }
     
-    private void OnPause(InputAction.CallbackContext _obj)
+    private void OnPause(InputAction.CallbackContext _context)
     {
         onPause.Invoke();
     }
     
-    private void OnUnpause(InputAction.CallbackContext _obj)
+    private void OnUnpause(InputAction.CallbackContext _context)
     {
         onUnpause.Invoke();
     }
