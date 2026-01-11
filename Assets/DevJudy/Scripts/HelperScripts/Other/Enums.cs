@@ -18,12 +18,12 @@ namespace enums
 
     public enum EFish
     {
-        Wels,
-        Salmon,
-        Mackerel,
-        Flounder,
-        RainbowTrout,
-        Sturgeon,
+        YellowTang,
+        MoorishIdol,
+        FireGoby,
+        PygmyGoby,
+        Clownfish,
+        BluefinTuna,
     }
 
     public enum EEmotion

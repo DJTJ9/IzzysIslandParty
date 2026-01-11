@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using enums;
-using FishingGame.QuickTimeEvents;
 using UnityEngine;
 
 namespace ScriptableObjects
@@ -17,5 +16,9 @@ namespace ScriptableObjects
         [field: SerializeField] public int Points { get; private set; }
 
         [SerializeField] public List<EQuickTimeEvent> CatchEvents;
+
+        [SerializeField] public GameObject Prefab;
+        
+       [HideInInspector] public GameObject PrefabReference;
     }
 }

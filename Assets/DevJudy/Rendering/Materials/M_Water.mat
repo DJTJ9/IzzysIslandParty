@@ -55,6 +55,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Alpha: 0.9
     - _Fade: 2.8
     - _FresnelStrength: 10
     - _Offset: 0
@@ -62,9 +63,9 @@ Material:
     - _QueueOffset: 0
     - _Reflection: 45
     m_Colors:
-    - _DeepWaterColor: {r: 0.02745098, g: 0.08627445, b: 0.32549012, a: 1}
-    - _FresnelColor: {r: 0.01176471, g: 0.08627445, b: 0.17647052, a: 1}
-    - _ShallowWaterColor: {r: 0.022368478, g: 0.31068525, b: 0.5471698, a: 1}
+    - _DeepWaterColor: {r: 0, g: 0.08813293, b: 0.44654083, a: 1}
+    - _FresnelColor: {r: 0.006051936, g: 0.100049645, b: 0.21383637, a: 1}
+    - _ShallowWaterColor: {r: 0.0688856, g: 0.47334662, b: 0.8113208, a: 1}
     - _WaveSpeed: {r: 0.05, g: 0.05, b: 0, a: 0}
     - _WaveSpeed2: {r: -0.03, g: 0.04, b: 0, a: 0}
     - _WaveSpeed3: {r: 0.03, g: -0.02, b: 0, a: 0}
