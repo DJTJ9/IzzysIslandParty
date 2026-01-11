@@ -3,22 +3,25 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
+
 public class PauseMenuEvents : MonoBehaviour
 {
     [SerializeField] private SceneCollectionSO sceneCollection;
     
-    [SerializeField] private UnityEvent OnUnpause;
+    [SerializeField] private UnityEvent onUnpause;
     
     private UIDocument document;
     
     [Header("Menus")]
     private VisualElement pauseMenu;
     private VisualElement playerHub;
+    private VisualElement endScreenUI;
     
     [Header("Pause Menu Buttons")]
-    private Button resumeButton;
-    private Button restartButton;
-    private Button changeLevelButton;
+    private Button pauseMenuResumeButton;
+    private Button pauseMenuRestartButton;
+    private Button pauseMenuChangeLevelButton;
     private Button pauseMenuQuitButton;
     
     [Header("Player HUB Buttons")]
@@ -28,6 +31,11 @@ public class PauseMenuEvents : MonoBehaviour
     private Button minigolfMayhemButton;
     private Button swaggySnapshotsButton;
     private Button playerHUBBackButton;
+    
+    [Header("End Screen Buttons")]
+    private Button endScreenRestartButton;
+    private Button endScreenChangeLevelButton;
+    private Button endScreenQuitButton;
     
     private void Awake()
     {
@@ -52,14 +60,15 @@ public class PauseMenuEvents : MonoBehaviour
     {
         pauseMenu = document.rootVisualElement.Q("pause-menu__container");
         playerHub = document.rootVisualElement.Q("player-hub__container");
+        endScreenUI = document.rootVisualElement.Q("end-screen-menu__container");
     }
     
     private void BindButtons()
     {
         // Pause menu buttons
-        resumeButton = document.rootVisualElement.Q("pause-menu-resume__button") as Button;
-        restartButton = document.rootVisualElement.Q("pause-menu-restart__button") as Button;
-        changeLevelButton = document.rootVisualElement.Q("pause-menu-change-level__button") as Button;
+        pauseMenuResumeButton = document.rootVisualElement.Q("pause-menu-resume__button") as Button;
+        pauseMenuRestartButton = document.rootVisualElement.Q("pause-menu-restart__button") as Button;
+        pauseMenuChangeLevelButton = document.rootVisualElement.Q("pause-menu-change-level__button") as Button;
         pauseMenuQuitButton = document.rootVisualElement.Q("pause-menu-quit__button") as Button;
         
         //Player HUB buttons
@@ -69,14 +78,19 @@ public class PauseMenuEvents : MonoBehaviour
         minigolfMayhemButton = document.rootVisualElement.Q("play-minigolf-mayhem__button") as Button;
         swaggySnapshotsButton = document.rootVisualElement.Q("play-swaggy-snapshots__button") as Button;
         playerHUBBackButton = document.rootVisualElement.Q("player-hub-back__button") as Button;
+        
+        //End screen buttons
+        endScreenRestartButton = document.rootVisualElement.Q("end-screen-menu-restart__button") as Button;
+        endScreenChangeLevelButton = document.rootVisualElement.Q("end-screen-menu-change-level__button") as Button;
+        endScreenQuitButton = document.rootVisualElement.Q("end-screen-menu-quit__button") as Button;
     }
 
     private void RegisterButtonCallbacks()
     {        
         // Pause menu buttons
-        resumeButton?.RegisterCallback<ClickEvent>(OnResumeGameClick);
-        restartButton?.RegisterCallback<ClickEvent>(OnRestartGameClick);
-        changeLevelButton?.RegisterCallback<ClickEvent>(OnChangeLevelClick);
+        pauseMenuResumeButton?.RegisterCallback<ClickEvent>(OnResumeGameClick);
+        pauseMenuRestartButton?.RegisterCallback<ClickEvent>(OnRestartGameClick);
+        pauseMenuChangeLevelButton?.RegisterCallback<ClickEvent>(OnChangeLevelClick);
         pauseMenuQuitButton?.RegisterCallback<ClickEvent>(OnQuitClick);
         
         //Player HUB buttons
@@ -86,14 +100,19 @@ public class PauseMenuEvents : MonoBehaviour
         minigolfMayhemButton?.RegisterCallback<ClickEvent>(OnLoadMinigolfMayhem);
         swaggySnapshotsButton?.RegisterCallback<ClickEvent>(OnLoadSwaggySnapshots);
         playerHUBBackButton?.RegisterCallback<ClickEvent>(OnPlayerHubBack);
+        
+        //End screen buttons
+        endScreenRestartButton?.RegisterCallback<ClickEvent>(OnRestartGameClick);
+        endScreenChangeLevelButton?.RegisterCallback<ClickEvent>(OnChangeLevelClick);
+        endScreenQuitButton?.RegisterCallback<ClickEvent>(OnQuitClick);
     }
 
     private void UnregisterButtonCallbacks()
     {
         // Pause menu buttons
-        resumeButton?.UnregisterCallback<ClickEvent>(OnResumeGameClick);
-        restartButton?.UnregisterCallback<ClickEvent>(OnRestartGameClick);
-        changeLevelButton?.UnregisterCallback<ClickEvent>(OnChangeLevelClick);
+        pauseMenuResumeButton?.UnregisterCallback<ClickEvent>(OnResumeGameClick);
+        pauseMenuRestartButton?.UnregisterCallback<ClickEvent>(OnRestartGameClick);
+        pauseMenuChangeLevelButton?.UnregisterCallback<ClickEvent>(OnChangeLevelClick);
         pauseMenuQuitButton?.UnregisterCallback<ClickEvent>(OnQuitClick);
 
         //Player HUB buttons
@@ -103,6 +122,11 @@ public class PauseMenuEvents : MonoBehaviour
         minigolfMayhemButton?.UnregisterCallback<ClickEvent>(OnLoadMinigolfMayhem);
         swaggySnapshotsButton?.UnregisterCallback<ClickEvent>(OnLoadSwaggySnapshots);
         playerHUBBackButton?.UnregisterCallback<ClickEvent>(OnPlayerHubBack);
+        
+        //End screen buttons
+        endScreenRestartButton?.UnregisterCallback<ClickEvent>(OnRestartGameClick);
+        endScreenChangeLevelButton?.UnregisterCallback<ClickEvent>(OnChangeLevelClick);
+        endScreenQuitButton?.UnregisterCallback<ClickEvent>(OnQuitClick);
     }
 
     public void ShowPauseMenu()
@@ -117,6 +141,16 @@ public class PauseMenuEvents : MonoBehaviour
         Time.timeScale = 1f;
     }
     
+    public void ShowEndscreenUI()
+    {
+        endScreenUI.style.display = DisplayStyle.Flex;
+    }
+    
+    public void HideEndscreenUI()
+    {
+        endScreenUI.style.display = DisplayStyle.None;
+    }
+    
     private void OnRestartGameClick(ClickEvent _evt)
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -125,7 +159,7 @@ public class PauseMenuEvents : MonoBehaviour
 
     private void OnResumeGameClick(ClickEvent _evt)
     {
-        OnUnpause.Invoke();
+        onUnpause.Invoke();
     }
 
     private void OnChangeLevelClick(ClickEvent _evt)

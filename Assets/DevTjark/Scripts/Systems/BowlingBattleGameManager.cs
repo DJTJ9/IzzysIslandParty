@@ -3,6 +3,7 @@ using UnityEngine;
 using ImprovedTimers;
 using Sirenix.OdinInspector;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class BowlingBattleGameManager : MonoBehaviour
 {
@@ -12,60 +13,77 @@ public class BowlingBattleGameManager : MonoBehaviour
     [SerializeField] private UnityEvent onRoundEnd;
     [SerializeField] private UnityEvent onGameEnd;
 
+    [FormerlySerializedAs("m_preparationPhaseDuration")]
     [FoldoutGroup("Round Settings", expanded: true)]
     [SerializeField] private float preparationPhaseDuration = 10f;
     [SerializeField] private float roundDuration = 15f;
     [SerializeField] private int maxRounds = 3;
 
-    private int roundIndex = 1;
+    private int m_roundIndex = 1;
 
-    private CountdownTimer preparationPhaseTimer;
-    private CountdownTimer roundTimer;
+    private CountdownTimer m_preparationPhaseTimer;
+    private CountdownTimer m_roundTimer;
 
 
 private void Start()
     {
         ResetRoundIndex();
         
-        preparationPhaseTimer = new CountdownTimer(preparationPhaseDuration);
-        preparationPhaseTimer.OnTimerStop += ReleaseBall;
-        
-        roundTimer = new CountdownTimer(roundDuration);
-        roundTimer.OnTimerStop += EndRound;
+        InstantiateCountdownTimers();
+        SubscribeToCountdownTimersActions();
         
         onGameStart.Invoke();
     }
 
     private void OnDisable()
     {
-        preparationPhaseTimer.OnTimerStop -= ReleaseBall;
-        roundTimer.OnTimerStop -= EndRound;
+        UnsubscribeFromCountdownTimersActions();
     }
 
     public void StartPreparationPhase()
     {
         onPreparationPhaseStart.Invoke();
-        preparationPhaseTimer.Reset();
-        preparationPhaseTimer.Start();
+        m_preparationPhaseTimer.Reset();
+        m_preparationPhaseTimer.Start();
+    }
+
+    private void InstantiateCountdownTimers()
+    {
+        m_preparationPhaseTimer = new CountdownTimer(preparationPhaseDuration);
+        m_roundTimer = new CountdownTimer(roundDuration);
+    }
+
+    private void SubscribeToCountdownTimersActions()
+    {
+        m_preparationPhaseTimer.OnTimerStop += ReleaseBall;
+        
+        m_roundTimer.OnTimerStop += EndRound;
+    }
+
+    private void UnsubscribeFromCountdownTimersActions()
+    {
+        m_preparationPhaseTimer.OnTimerStop -= ReleaseBall;
+        
+        m_roundTimer.OnTimerStop -= EndRound;
     }
 
     private void EndRound()
     {
         HandleRoundEnd();
         
-        ++roundIndex;
+        ++m_roundIndex;
     } 
 
     private void ReleaseBall()
     {
         onReleaseBall.Invoke();
-        roundTimer.Reset();
-        roundTimer.Start();
+        m_roundTimer.Reset();
+        m_roundTimer.Start();
     }
 
     private void HandleRoundEnd()
     {
-        if (roundIndex == maxRounds)
+        if (m_roundIndex == maxRounds)
         {
             onRoundEnd.Invoke();
             onGameEnd.Invoke();
@@ -76,5 +94,5 @@ private void Start()
         StartPreparationPhase();
     }
     
-    private void ResetRoundIndex() => roundIndex = 1;
+    private void ResetRoundIndex() => m_roundIndex = 1;
 }

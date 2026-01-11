@@ -1,6 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/DevBoth/UI/PlayerHubStyle.uss?fileID=7433441132597879392&amp;guid=520cb84fd4065e54db377802fbec6137&amp;type=3#PlayerHubStyle" />
     <Style src="project://database/Assets/DevBoth/UI/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=25d8977cbaec736409b2c76d050db212&amp;type=3#MainMenuStyle" />
+    <Style src="project://database/Assets/DevBoth/UI/PlayerUIStyle.uss?fileID=7433441132597879392&amp;guid=fe566f1f50f552b49b1c1b82b11f38fa&amp;type=3#PlayerUIStyle" />
     <ui:VisualElement name="pause-menu__container" style="flex-grow: 1; display: none;">
         <ui:Label text="PAUSE MENU" name="pause-menu-header__label" class="header" style="width: 50%; height: 20%;" />
         <ui:Button text="RESUME" name="pause-menu-resume__button" class="button" />
@@ -27,5 +28,34 @@
         <ui:VisualElement name="player-hub-bottom__container" style="flex-grow: 1; align-items: center; display: flex; visibility: visible;">
             <ui:Button text="BACK" name="player-hub-back__button" class="levelButton" style="background-image: none;" />
         </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="player-ui__container" class="player-ui-main-container" style="flex-grow: 1; display: none;">
+        <ui:VisualElement name="player-ui-left__container" class="player-ui-left" style="flex-grow: 1;">
+            <ui:Label text="SCORE:" name="player-ui-score__label" class="score-label" />
+            <ui:Label text="0" name="player-ui-score-number__label" data-source="project://database/Assets/DevTjark/Scriptable%20Objects/Bowling%20Battle%20Score.asset?fileID=11400000&amp;guid=9ff12d17af2c8f24589bf553520703f2&amp;type=2#Bowling Battle Score" class="score-label">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="Value" binding-mode="ToTarget" />
+                </Bindings>
+            </ui:Label>
+        </ui:VisualElement>
+        <ui:VisualElement name="player-ui-middle__container" style="flex-grow: 1;">
+            <ui:Label text="SELECT YOUR BALL" name="ball-selector-header__label" class="header" style="height: 20%;" />
+            <ui:Button text="BASKETBALL (1x)" name="ball-selector-basketball__button" class="button" style="display: flex;" />
+            <ui:Button text="BASEBALL (3x)" name="ball-selector-baseball__button" class="button" style="display: flex;" />
+            <ui:Button text="FOOTBALL (5x)" name="ball-selector-football__button" class="button" style="display: flex;" />
+            <ui:ScrollView name="ScrollView" class="unity-content-and-vertical-scroll-container" style="flex-direction: row; display: none;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="player-ui-right__container" class="player-ui-right" style="flex-grow: 1;" />
+    </ui:VisualElement>
+    <ui:VisualElement name="end-screen-menu__container" style="flex-grow: 1; display: flex;">
+        <ui:Label text="END SCORE:" name="end-screen-header__label" class="header" style="height: 5%; width: 35%;" />
+        <ui:Label text="Label" name="end-screen-score__label" data-source="project://database/Assets/DevTjark/Scriptable%20Objects/Bowling%20Battle%20Score.asset?fileID=11400000&amp;guid=9ff12d17af2c8f24589bf553520703f2&amp;type=2#Bowling Battle Score" class="header" style="height: 10%;">
+            <Bindings>
+                <ui:DataBinding property="text" data-source-path="Value" binding-mode="ToTarget" />
+            </Bindings>
+        </ui:Label>
+        <ui:Button text="RESTART" name="end-screen-menu-restart__button" class="button" />
+        <ui:Button text="CHANGE LEVEL" name="end-screen-menu-change-level__button" parse-escape-sequences="true" class="button" />
+        <ui:Button text="QUIT" name="end-screen-menu-quit__button" class="button" />
     </ui:VisualElement>
 </ui:UXML>

@@ -2,7 +2,7 @@
     font-size: 40px;
     -unity-text-align: upper-center;
     color: rgb(255, 255, 255);
-    -unity-font-definition: url("project://database/Assets/DevJudy/ByOthers/Fonts/DroidSansMono.ttf?fileID=12800000&guid=08a7d2fa259a5174fb39c30cd0780b12&type=3#DroidSansMono");
+    -unity-font-definition: url("project://database/Assets/DevJudy/ByOthers/Fonts/DroidSansMono.ttf?fileID=12800000&guid=7a413d89f872f244c8122cfd40c3c0c0&type=3#DroidSansMono");
     -unity-font-style: bold;
     margin-top: 3%;
     align-items: center;
@@ -49,4 +49,9 @@
 }
 
 .button {
+    width: auto;
+}
+
+.unity-content-and-vertical-scroll-container > #unity-content-viewport > #unity-content-container {
+    flex-direction: row;
 }

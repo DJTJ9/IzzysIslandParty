@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
@@ -9,17 +10,21 @@ public class BallMovement : MonoBehaviour
     private Vector2 m_moveInput;
     private bool m_jumpInput;
 
-    [FormerlySerializedAs("moveSpeed")]
     [Header("Movement Settings")]
     [SerializeField] private float m_moveSpeed = 5f;
     
     private InputAction m_moveInputAction;
     private InputAction m_jumpInputAction;
+    private InputAction m_pauseInputAction;
+    private InputAction m_unpauseInputAction;
 
     [Header("References")]
     private CharacterController controller;
     private PlayerInput playerInput;
     private Rigidbody rb;
+
+    [SerializeField] private UnityEvent onPause;
+    [SerializeField] private UnityEvent onUnpause;
     
     private Transform m_startPosition;
     
@@ -104,11 +109,29 @@ public class BallMovement : MonoBehaviour
 
         m_jumpInputAction = playerInput.actions["Jump"];
         m_jumpInputAction.started += OnJump;
+
+        m_pauseInputAction = playerInput.actions["Pause"];
+        m_pauseInputAction.started += OnPause;
+
+        m_unpauseInputAction = playerInput.actions["Unpause"];
+        m_unpauseInputAction.started += OnUnpause;
+    }
+    
+    private void OnPause(InputAction.CallbackContext _obj)
+    {
+        onPause.Invoke();
+    }
+    
+    private void OnUnpause(InputAction.CallbackContext _obj)
+    {
+        onUnpause.Invoke();
     }
 
     private void UnmapInputActions()
     {
-        m_moveInputAction.started -= OnJump;
+        m_jumpInputAction.started -= OnJump;
+        m_pauseInputAction.started -= OnPause;
+        m_unpauseInputAction.started -= OnUnpause;
     }
 
     public void ResetComponents()
@@ -118,6 +141,16 @@ public class BallMovement : MonoBehaviour
         rb.freezeRotation = true;
         rb.useGravity = false;
         transform.position = m_startPosition.position;
+    }
+
+    public void SwitchToPlayerInputMap()
+    {
+        playerInput.SwitchCurrentActionMap("Player");
+    }
+    
+    public void SwitchToUIInputMap()
+    {
+        playerInput.SwitchCurrentActionMap("UI");
     }
     
     private void SetCameraForPlayerInput()
