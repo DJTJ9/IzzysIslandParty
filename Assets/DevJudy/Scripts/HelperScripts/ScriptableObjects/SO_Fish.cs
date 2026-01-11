@@ -17,5 +17,7 @@ namespace ScriptableObjects
         [field: SerializeField] public int Points { get; private set; }
 
         [SerializeField] public List<EQuickTimeEvent> CatchEvents;
+
+        [SerializeField] public GameObject Prefab;
     }
 }
