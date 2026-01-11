@@ -11,11 +11,14 @@ namespace FishingGame
     public class FishingSystem : MonoBehaviour
     {
         [Header("Dependencies: ")]
-        [SerializeField] private UITextManager textManager;
         [SerializeField] private FishingRodController fishingRodController;
+        [SerializeField] private CatchEventHandler catchEventHandler;
+        [SerializeField] private UITextManager textManager;
+        [SerializeField] private FishDisplay fishDisplay;
 
         [Header("Variables: ")]
         private static FishingSystem instance;
+
         public static FishingSystem Instance => instance;
 
         [SerializeField] private List<SO_Fish> fishList;
@@ -29,10 +32,7 @@ namespace FishingGame
         public bool FishHooked { get; private set; }
 
         private Coroutine fishingRoutine;
-
-        [Header("Temp")]
-        [SerializeField] private CatchEventHandler catchEventHandler;
-
+        
         private FishingSystem()
         {
             instance = this;
@@ -40,10 +40,30 @@ namespace FishingGame
 
         private void Start()
         {
+            if (fishingRodController == null)
+                Debug.LogError("No FishingRodController assigned");
+            
+            if (catchEventHandler == null)
+                Debug.LogError("No catchEventHandler assigned");
+            
             if (fishList == null || fishList.Count <= 0)
                 Debug.LogError("FishingSystem fishList is null");
+            else
+            {
+                if (fishDisplay != null)
+                    SpawnInFishDisplayObjects();
+            }
         }
-        
+
+        private void SpawnInFishDisplayObjects()
+        {
+            for (int i = 0; i < fishList.Count; i++)
+            {
+                var fish = fishList[i];
+                fish.PrefabReference = fishDisplay?.SpawnInFishPrefabs(fish);
+            }
+        }
+
         public void StartFishing()
         {
             fishing = true;
@@ -70,16 +90,18 @@ namespace FishingGame
         {
             int totalProbability = 0;
 
-            foreach (SO_Fish fish in fishList)
+            for (int i = 0; i < fishList.Count; i++)
             {
+                var fish = fishList[i];
                 totalProbability += fish.Probability;
             }
 
             int randomProbability = Random.Range(0, Mathf.FloorToInt(totalProbability) + 1);
             int cumulativeProbability = 0;
 
-            foreach (SO_Fish fish in fishList)
+            for (int j = 0; j < fishList.Count; j++)
             {
+                var fish = fishList[j];
                 cumulativeProbability += fish.Probability;
 
                 if (randomProbability <= cumulativeProbability)
@@ -116,16 +138,14 @@ namespace FishingGame
                 if (PressedCatch)
                 {
                     fishing = false;
-                    
+
                     catchEventHandler.StartFishEvent(caughtFish);
                     yield return new WaitUntil(() => catchEventHandler.CatchEventFinished);
 
                     caughtAFish = catchEventHandler.CatchEventSuccess;
                 }
                 else
-                {
                     IconHandler.Instance.DisplayIcon(EEmotion.Embarrassed);
-                }
 
                 PressedCatch = false;
                 FishHooked = false;
@@ -135,17 +155,17 @@ namespace FishingGame
             {
                 IconHandler.Instance.DisplayIcon(EEmotion.Love);
                 
-                // Show caught fish (via Text and/or Picture)!!
+                fishDisplay?.DisplayFish(caughtFish);
+                textManager?.UpdatePointsText(caughtFish.Points);
 
-                textManager.UpdatePointsText(caughtFish.Points);
-                Debug.Log("Congrats!! You caught a " + caughtFish.FishName);
-
+                // TBD and replaced with a button to exit the display!!
+                yield return new WaitForSeconds(3f);
+                fishDisplay?.StopDisplayFish();
+                
                 fishingRodController.PullBackFishingRod();
             }
             else
-            {
                 IconHandler.Instance.DisplayIcon(EEmotion.Sad);
-            }
 
             StopFishing();
 
