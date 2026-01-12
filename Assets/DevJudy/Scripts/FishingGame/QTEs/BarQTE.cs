@@ -10,6 +10,7 @@ namespace FishingGame.QuickTimeEvents
     {
         [Header("Components: ")]
         [SerializeField] private GameObject barQTEHolder;
+
         [SerializeField] private GameObject target;
         [SerializeField] private GameObject catcher;
         private RectTransform targetRT;
@@ -20,6 +21,7 @@ namespace FishingGame.QuickTimeEvents
 
         [Header("Target variables: ")]
         [SerializeField] private float targetMaxMovementLeft = -250f;
+
         [SerializeField] private float targetMaxMovementRight = 250f;
         [SerializeField] private float targetMoveSpeed = 250f;
         [SerializeField] private float targetChangeFrequency = 0.01f;
@@ -29,10 +31,11 @@ namespace FishingGame.QuickTimeEvents
 
         [Header("Catcher variables: ")]
         [SerializeField] private float catcherMaxMovementLeft = -250f;
+
         [SerializeField] private float catcherMaxMovementRight = 250f;
         [SerializeField] private float catcherMoveSpeed = 250f;
         private float moveInput = 0f;
-        
+
         [Header("General variables: ")]
         [SerializeField] private float successIncrement = 15f;
 
@@ -42,7 +45,7 @@ namespace FishingGame.QuickTimeEvents
         private float successCounter = 0f;
 
         private bool rtsOverlapping;
-        
+
         private void Start()
         {
             if (target == null)
@@ -52,14 +55,14 @@ namespace FishingGame.QuickTimeEvents
 
             catcherImage = catcher.GetComponent<RawImage>();
             catcherRT = catcher.GetComponent<RectTransform>();
-            
+
             targetRT = target.GetComponent<RectTransform>();
-            
+
             if (successSlider == null)
                 Debug.LogError("SuccessSlider is null");
-            
+
             barQTEHolder.SetActive(false);
-            
+
             SetUpBarQTE();
         }
 
@@ -71,7 +74,7 @@ namespace FishingGame.QuickTimeEvents
             successCounter = successThreshold + failThreshold;
             successSlider.value = successCounter;
         }
-        
+
         public override void StartQTE()
         {
             QTERunning = true;
@@ -86,9 +89,19 @@ namespace FishingGame.QuickTimeEvents
         {
             if (!QTERunning)
                 return;
-            
+
             if (_context.started)
+            {
                 moveInput = _context.ReadValue<float>();
+
+                if (moveInput > 0.02f)
+                    moveInput = 1f;
+                else if (moveInput < -0.02f)
+                    moveInput = -1f;
+                else
+                    moveInput = 0f;
+            }
+
             if (_context.canceled)
                 moveInput = 0f;
         }
@@ -115,7 +128,7 @@ namespace FishingGame.QuickTimeEvents
 
             if (Mathf.Approximately(target.transform.localPosition.x, targetDestination))
                 ChangeTargetDestination();
-            
+
             float rnd = Random.value;
 
             if (rnd < targetChangeFrequency)

@@ -2,6 +2,7 @@ using ScriptableObjects;
 using TMPro;
 using UnityEngine;
 
+
 public class FishDisplay : MonoBehaviour
 {
     [Header("UI")]
@@ -13,17 +14,21 @@ public class FishDisplay : MonoBehaviour
 
     [SerializeField] private GameObject fishDisplayPanel;
 
+
+    private void Awake()
+    {
+        if (fishUIRenderer == null)
+            Debug.LogError("FishUIRenderer is null");
+        else
+            ClearDisplayParentObject();
+    }
+
     private void Start()
     {
         if (fishDisplayPanel == null)
             Debug.LogError("No FishDisplayPanel found");
         else
             fishDisplayPanel.SetActive(false);
-
-        if (fishUIRenderer == null)
-            Debug.LogError("FishUIRenderer is null");
-
-        ClearDisplayParentObject();
     }
 
     public GameObject SpawnInFishPrefabs(SO_Fish _fish)
