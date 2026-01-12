@@ -70,8 +70,6 @@ namespace FishingGame
                     isCast = true;
                     animator.SetBool(cast, isCast);
 
-                    ConsoleProDebug.LogToFilter("--started fishing", "Blue");
-
                     FishingSystem.Instance.StartFishing();
 
                     return;
@@ -96,21 +94,16 @@ namespace FishingGame
             isCast = false;
 
             animator.SetBool(cast, isCast);
-
-            ConsoleProDebug.LogToFilter("--stopped fishing", "Blue");
         }
 
         public void PlayFishBitingAnimation()
         {
-            Debug.Log("Fish  bitingggggg");
-
             IconHandler.Instance.DisplayIcon(EEmotion.Alert);
             animator.SetBool(fishBiting, true);
         }
 
         public void StopFishBitingAnimation()
         {
-            Debug.Log("Stopped fish bitingggggg");
             animator.SetBool(fishBiting, false);
         }
 
