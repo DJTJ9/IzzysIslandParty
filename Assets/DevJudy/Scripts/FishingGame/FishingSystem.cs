@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace FishingGame
 {
+    [DefaultExecutionOrder(-100)]
     public class FishingSystem : MonoBehaviour
     {
         [Header("Dependencies: ")]
