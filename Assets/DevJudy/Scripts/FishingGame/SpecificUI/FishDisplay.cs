@@ -2,6 +2,7 @@ using ScriptableObjects;
 using TMPro;
 using UnityEngine;
 
+[DefaultExecutionOrder(-200)]
 public class FishDisplay : MonoBehaviour
 {
     [Header("UI")]
@@ -12,7 +13,7 @@ public class FishDisplay : MonoBehaviour
     [SerializeField] private TextMeshProUGUI fishWeightText;
 
     [SerializeField] private GameObject fishDisplayPanel;
-
+    
     private void Start()
     {
         if (fishDisplayPanel == null)
@@ -59,7 +60,8 @@ public class FishDisplay : MonoBehaviour
         fishDisplayPanel.SetActive(false);
     }
 
-    private void ClearDisplayParentObject()
+    [ContextMenu("Clear Display Parent")]
+    public void ClearDisplayParentObject()
     {
         int childCount = fishUIRenderer.transform.childCount;
 
