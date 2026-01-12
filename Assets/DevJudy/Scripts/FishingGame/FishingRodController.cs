@@ -14,11 +14,12 @@ namespace FishingGame
         private Animator animator;
         private LineRenderer lineRenderer;
 
+        // !! Not working yet
         [SerializeField] private Transform[] rodLineRendererPositions;
 
         private bool isCast = false;
-
-        // TEMP
+        
+        [Header("Pausing: ")]
         [SerializeField] private UnityEvent OnPauseGame;
         [SerializeField] private UnityEvent OnUnpauseGame;
 
@@ -42,8 +43,7 @@ namespace FishingGame
             lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
             lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
         }
-
-        // !! MOVE
+        
         public void OnPause(InputAction.CallbackContext _context)
         {
             if (_context.performed)
