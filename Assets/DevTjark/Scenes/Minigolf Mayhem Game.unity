@@ -136,7 +136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &29254029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,9 +150,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 0
-  m_MaxPlayerCount: -1
+  m_MaxPlayerCount: 3
   m_AllowJoining: 1
-  m_JoinBehavior: 0
+  m_JoinBehavior: 2
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -208,12 +208,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 178e1589141c44a8a901da2595c5802d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnPoint1: {fileID: 305848106}
-  Spawnpoint2: {fileID: 866219176}
-  Spawnpoint3: {fileID: 77753262}
-  Player1: {fileID: 569612370539826198, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-  Player2: {fileID: 569612370539826198, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-  Player3: {fileID: 569612370539826198, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
+  SpawnPoints:
+  - {fileID: 305848106}
+  - {fileID: 866219176}
+  - {fileID: 77753262}
+  Players:
+  - {fileID: 569612370539826198, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
+  - {fileID: 569612370539826198, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
+  - {fileID: 569612370539826198, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
 --- !u!1 &77753261
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +348,7 @@ MonoBehaviour:
   m_MoveAction: {fileID: -3195872999619985952, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
   m_SubmitAction: {fileID: -5325928245141277107, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
   m_CancelAction: {fileID: 8005386989882421331, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_LeftClickAction: {fileID: 8528252495183198013, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+  m_LeftClickAction: {fileID: 8056856818456041789, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
   m_MiddleClickAction: {fileID: -6205933517842620933, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
   m_RightClickAction: {fileID: 8014849119153581344, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
   m_ScrollWheelAction: {fileID: 6906336766368160287, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
@@ -395,10 +397,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1485897608}
+  - component: {fileID: 1485897605}
   - component: {fileID: 1485897610}
   - component: {fileID: 1485897606}
   - component: {fileID: 1485897609}
-  - component: {fileID: 1485897605}
+  - component: {fileID: 1485897611}
   m_Layer: 5
   m_Name: Menus
   m_TagString: Untagged
@@ -511,7 +514,62 @@ MonoBehaviour:
   sceneCollection: {fileID: 11400000, guid: 6fd8971a4dff91645b76a391153753d8, type: 2}
   onUnpause:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: cb8390d9fabb07843b5f42bf6275d672, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onRestart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: d9ada080521e16b4682bc5df10c7b166, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1485897611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485897604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: d9ada080521e16b4682bc5df10c7b166, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1485897610}
+        m_TargetAssemblyTypeName: PauseMenuEvents, Assembly-CSharp
+        m_MethodName: LoadMinigolfMayhemLevel1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &9163260682940875036
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -526,7 +584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 569612370539826198, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8196362803946966465, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
       propertyPath: m_LocalPosition.x

@@ -214,11 +214,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7433456397412011071}
-  - component: {fileID: 8809287357707157129}
   - component: {fileID: 1788921434184243773}
   - component: {fileID: 6315098519535762074}
   - component: {fileID: 1037475381809191455}
   - component: {fileID: 2449911264480491807}
+  - component: {fileID: 8809287357707157129}
   - component: {fileID: 4179876104423682454}
   m_Layer: 0
   m_Name: FreeLook Camera
@@ -242,19 +242,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8196362803946966465}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8809287357707157129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7205134141381534054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a31289e0fcc040a5a0d3b9a13d461a7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Brain: {fileID: 6897273262104259003}
 --- !u!114 &1788921434184243773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,6 +394,19 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &8809287357707157129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7205134141381534054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a31289e0fcc040a5a0d3b9a13d461a7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Brain: {fileID: 6897273262104259003}
 --- !u!114 &4179876104423682454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,7 +747,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8754331490394771550}
-  m_Material: {fileID: 13400000, guid: 0953f0e38a79e3141ad6ba49a60438dd, type: 2}
+  m_Material: {fileID: 13400000, guid: 78185ee16eaea1d41897c908fab3070b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

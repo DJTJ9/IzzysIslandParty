@@ -10,6 +10,7 @@ public class PauseMenuEvents : MonoBehaviour
     [SerializeField] private SceneCollectionSO sceneCollection;
     
     [SerializeField] private UnityEvent onUnpause;
+    [SerializeField] private UnityEvent onRestart;
     
     private UIDocument document;
     
@@ -153,7 +154,8 @@ public class PauseMenuEvents : MonoBehaviour
     
     private void OnRestartGameClick(ClickEvent _evt)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        onRestart.Invoke();
         Time.timeScale = 1f;
     }
 
@@ -179,7 +181,22 @@ public class PauseMenuEvents : MonoBehaviour
         Time.timeScale = 1f;
         LoadSingleScene(SceneNames.MainMenu);
     }
+
+    public void LoadBowlingBattle()
+    {
+        LoadSceneWithLevel(SceneNames.BowlingBattleGame, SceneNames.BowlingBattleLevel);
+    }
+
+    public void LoadMinigolfMayhemLevel1()
+    {
+        LoadSceneWithLevel(SceneNames.MinigolfMayhemGame, SceneNames.MinigolfMayhemLevel1);
+    }
     
+    public void LoadSwaggySnapshots()
+    {
+        LoadSceneWithLevel(SceneNames.SwaggySnapshotsGame, SceneNames.SwaggySnapshotsLevel);
+    }
+
     private void OnLoadBowlingBattle(ClickEvent _evt)
     {
         LoadSceneWithLevel(SceneNames.BowlingBattleGame, SceneNames.BowlingBattleLevel);
