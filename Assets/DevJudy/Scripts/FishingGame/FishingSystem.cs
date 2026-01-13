@@ -51,17 +51,19 @@ namespace FishingGame
                 Debug.LogError("FishingSystem fishList is null");
             else
             {
+                Debug.Log("FishingSystem instance created");
+                
                 if (fishDisplay != null)
                     SpawnInFishDisplayObjects();
             }
         }
 
+        [ContextMenu("SpawnInFishDisplayObjects")]
         private void SpawnInFishDisplayObjects()
         {
             for (int i = 0; i < fishList.Count; i++)
             {
-                var fish = fishList[i];
-                fish.PrefabReference = fishDisplay?.SpawnInFishPrefabs(fish);
+                fishList[i].PrefabReference = fishDisplay?.SpawnInFishPrefabs(fishList[i]);
             }
         }
 

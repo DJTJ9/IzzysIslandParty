@@ -8,10 +8,10 @@ public class PlayerUIEvents : MonoBehaviour
     
     private UIDocument document;
     
+    private VisualElement playerUI;
     private VisualElement leftPlayerUI;
     private VisualElement middlePlayerUI;
     private VisualElement rightPlayerUI;
-    private VisualElement endScreenUI;
     
     private Button basketBallButton;
     private Button baseBallButton;
@@ -34,10 +34,10 @@ public class PlayerUIEvents : MonoBehaviour
 
     private void BindVisualElements()
     {
+        playerUI = document.rootVisualElement.Q("player-ui__container");
         leftPlayerUI = document.rootVisualElement.Q("player-ui-left__container");
         middlePlayerUI = document.rootVisualElement.Q("player-ui-middle__container");
         rightPlayerUI = document.rootVisualElement.Q("player-ui-right__container");
-        endScreenUI = document.rootVisualElement.Q("end-screen-menu__container");
     }
 
     private void BindButtonsWithEvents()
@@ -45,21 +45,29 @@ public class PlayerUIEvents : MonoBehaviour
         baseBallButton = document.rootVisualElement.Q("ball-selector-baseball__button") as Button;
         baseBallButton?.RegisterCallback<ClickEvent>
             (_evt => SpawnBall(ballCollectionSO.BowlingBalls[BallType.Baseball]));
+        
         basketBallButton = document.rootVisualElement.Q("ball-selector-basketball__button") as Button;
         basketBallButton?.RegisterCallback<ClickEvent>
             (_evt => SpawnBall(ballCollectionSO.BowlingBalls[BallType.Basketball]));
+        
         footBallButton = document.rootVisualElement.Q("ball-selector-football__button") as Button;
         footBallButton?.RegisterCallback<ClickEvent>
             (_evt => SpawnBall(ballCollectionSO.BowlingBalls[BallType.Football]));
     }
 
-    private void SpawnBall(BowlingBallSO _ballSO)
+    public void ShowPlayerUI()
     {
-        ballSpawner.SpawnBall(_ballSO);
+        playerUI.style.display = DisplayStyle.Flex;
+    }
+    
+    public void HidePlayerUI()
+    {
+        playerUI.style.display = DisplayStyle.None;
     }
     
     public void ShowLeftPlayerUI()
     {
+        playerUI.style.display = DisplayStyle.Flex;
         leftPlayerUI.style.display = DisplayStyle.Flex;
     }
     
@@ -70,6 +78,7 @@ public class PlayerUIEvents : MonoBehaviour
     
     public void ShowMiddlePlayerUI()
     {
+        playerUI.style.display = DisplayStyle.Flex;
         middlePlayerUI.style.display = DisplayStyle.Flex;
     }
     
@@ -80,6 +89,7 @@ public class PlayerUIEvents : MonoBehaviour
     
     public void ShowRightPlayerUI()
     {
+        playerUI.style.display = DisplayStyle.Flex;
         rightPlayerUI.style.display = DisplayStyle.Flex;
     }
     
@@ -87,14 +97,9 @@ public class PlayerUIEvents : MonoBehaviour
     {
         rightPlayerUI.style.display = DisplayStyle.None;
     }
-    
-    public void ShowEndscreenUI()
+
+    private void SpawnBall(BowlingBallSO _ballSO)
     {
-        endScreenUI.style.display = DisplayStyle.Flex;
-    }
-    
-    public void HideEndscreenUI()
-    {
-        endScreenUI.style.display = DisplayStyle.None;
+        ballSpawner.SpawnBall(_ballSO);
     }
 }
