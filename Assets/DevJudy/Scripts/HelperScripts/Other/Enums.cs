@@ -8,6 +8,13 @@ namespace enums
         WestButton,
     }
 
+    public enum EAudioType
+    {
+        Main,
+        Music,
+        SFX,
+    }
+
     public enum EQuickTimeEvent
     {
         Timing,
