@@ -588,13 +588,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 590841273}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 1, z: 1.5}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 1.507, y: 1, z: -0.042}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &590841277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -789,20 +789,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3769476287999843007, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 590841275}
     - target: {fileID: 3801854629442733855, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
       propertyPath: m_Name
       value: Dance Bunny (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801854629442733855, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
---- !u!137 &777687429 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7398630618334704471, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
-  m_PrefabInstance: {fileID: 8354979603246287938}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &778674373
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,11 +897,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 778674373}
   m_CullTransparentMesh: 1
---- !u!95 &879506608 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 3690112078750080850, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
-  m_PrefabInstance: {fileID: 8354979603246287938}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1007614471
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,17 +992,17 @@ MonoBehaviour:
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+  m_PointAction: {fileID: -4300584928347552941, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+  m_MoveAction: {fileID: -3195872999619985952, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+  m_SubmitAction: {fileID: -5325928245141277107, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+  m_CancelAction: {fileID: -1967631576421560919, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+  m_LeftClickAction: {fileID: 8056856818456041789, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+  m_MiddleClickAction: {fileID: -6205933517842620933, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+  m_RightClickAction: {fileID: 3837173908680883260, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+  m_ScrollWheelAction: {fileID: 4502412055082496612, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 3424711213814145635, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 732800746274198705, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
@@ -1021,7 +1019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 621330104}
+  m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1239769168
@@ -1087,9 +1085,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3769476287999843007, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 590841275}
     - target: {fileID: 3801854629442733855, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
       propertyPath: m_Name
       value: Dance Bunny (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801854629442733855, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1133,7 +1139,19 @@ MonoBehaviour:
   fadeInSpeed: 1
   onPhotoTaken:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: bf384125dce74794292e08119c0ed727, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &1907025564
 Transform:
   m_ObjectHideFlags: 0
@@ -1220,60 +1238,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1991599085 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3153338899834395852, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
-  m_PrefabInstance: {fileID: 8354979603246287938}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1991599087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1991599085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: bf384125dce74794292e08119c0ed727, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1991599088}
-        m_TargetAssemblyTypeName: PointCalculator, Assembly-CSharp
-        m_MethodName: CalculatePoints
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1991599088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1991599085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2c66e4071074e8494fd698175ec6f93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_faceForwardPointValue: 1
-  m_lookAwayAngleTreshold: 45
-  m_happyFacePointValue: 1
-  faceMeshRenderer: {fileID: 777687429}
-  m_danceMovePointValue: 1
-  animator: {fileID: 879506608}
-  scoreSO: {fileID: 11400000, guid: a176daedc58e07c409b775393071ef06, type: 2}
-  faceSwapSO: {fileID: 11400000, guid: 81a820629255773488a08ac37764e04f, type: 2}
-  danceMovesSO: {fileID: 11400000, guid: 15d8be9fbb7c5844e89f80fbe24e2baf, type: 2}
 --- !u!1001 &8354979603246287938
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1322,48 +1286,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3769476287999843007, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 590841275}
     - target: {fileID: 3801854629442733855, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
       propertyPath: m_Name
       value: Dance Bunny
       objectReference: {fileID: 0}
     - target: {fileID: 4185008212866109269, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.4612436
+      value: 0.65229696
       objectReference: {fileID: 0}
     - target: {fileID: 4185008212866109269, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.53596115
-      objectReference: {fileID: 0}
-    - target: {fileID: 4185008212866109269, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.4612436
-      objectReference: {fileID: 0}
-    - target: {fileID: 4185008212866109269, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.53596115
-      objectReference: {fileID: 0}
-    - target: {fileID: 4185008212866109269, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4185008212866109269, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
+      propertyPath: m_LocalRotation.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4185008212866109269, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -98.57
+      propertyPath: m_LocalRotation.z
+      value: -0.75796354
       objectReference: {fileID: 0}
+    - target: {fileID: 4185008212866109269, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7398630618334704471, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b1a12e62935138f4d87c197e21d38d64, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3153338899834395852, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1991599088}
-    - targetCorrespondingSourceObject: {fileID: 3153338899834395852, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1991599087}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2fe8690f46be7b419112333f4a4e2ae, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
