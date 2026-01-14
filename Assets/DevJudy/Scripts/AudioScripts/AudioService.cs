@@ -248,6 +248,36 @@ public class AudioService : MonoBehaviour
 
         StopSoundImmediately(audioSource);
     }
+
+    /// <summary>
+    /// Waits until the sound is done playing to delete it
+    /// </summary>
+    /// <param name="_audioSource"></param>
+    public void StopSoundWhenFinished(AudioSource _audioSource)
+    {
+        float clipLength = _audioSource.clip.length;
+
+        Destroy(_audioSource.gameObject, clipLength);
+    }
+
+    /// <summary>
+    /// Deletes the sound immediately
+    /// </summary>
+    /// <param name="_audioSource"></param>
+    public void StopSoundImmediately(AudioSource _audioSource)
+    {
+        Destroy(_audioSource.gameObject);
+    }
+    
+    /// <summary>
+    /// Fades the sound out by 0.1f multiplied by the given fadeOutSpeed over each fixedUpdate, then deletes it
+    /// </summary>
+    /// <param name="_audioSource"></param>
+    /// <param name="_fadeOutSpeed"></param>
+    public void StopSoundFadeOut(AudioSource _audioSource, float _fadeOutSpeed)
+    {
+        StartCoroutine(FadeOutSound(_audioSource, _fadeOutSpeed));
+    }
     
     /// <summary>
     /// Fades the sound out by 0.1f multiplied by the given fadeOutSpeed over each fixedUpdate, then deletes it
@@ -264,25 +294,5 @@ public class AudioService : MonoBehaviour
         }
 
         StopSoundImmediately(_audioSource);
-    }
-
-    /// <summary>
-    /// Waits until the sound is done playing to delete it
-    /// </summary>
-    /// <param name="_audioSource"></param>
-    private void StopSoundWhenFinished(AudioSource _audioSource)
-    {
-        float clipLength = _audioSource.clip.length;
-
-        Destroy(_audioSource.gameObject, clipLength);
-    }
-
-    /// <summary>
-    /// Deletes the sound immediately
-    /// </summary>
-    /// <param name="_audioSource"></param>
-    private void StopSoundImmediately(AudioSource _audioSource)
-    {
-        Destroy(_audioSource.gameObject);
     }
 }
