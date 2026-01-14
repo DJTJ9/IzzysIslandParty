@@ -13,7 +13,7 @@ namespace FishingGame
 
         private Animator animator;
         private LineRenderer lineRenderer;
-
+        [SerializeField] public IconHandler IconHandler;
         // !! Not working yet
         [SerializeField] private Transform[] rodLineRendererPositions;
 
@@ -23,7 +23,7 @@ namespace FishingGame
         [SerializeField] private UnityEvent OnPauseGame;
         [SerializeField] private UnityEvent OnUnpauseGame;
 
-        bool isPaused = false;
+        private bool isPaused;
 
         private void Awake()
         {
@@ -78,7 +78,7 @@ namespace FishingGame
                 if (FishingSystem.Instance.FishHooked)
                 {
                     FishingSystem.Instance.PressedCatch = true;
-                    IconHandler.Instance.DisplayIcon(EEmotion.Happy);
+                    IconHandler.DisplayIcon(EEmotion.Happy);
 
                     return;
                 }
@@ -98,7 +98,7 @@ namespace FishingGame
 
         public void PlayFishBitingAnimation()
         {
-            IconHandler.Instance.DisplayIcon(EEmotion.Alert);
+            IconHandler.DisplayIcon(EEmotion.Alert);
             animator.SetBool(fishBiting, true);
         }
 
