@@ -50,11 +50,11 @@ public class RigidbodyMovement : MonoBehaviour
         jumpCooldownTimer.OnTimerStop += EnableJumping;
     }
     
-    // private void FixedUpdate()
-    // {
-    //     // UpdateHorizontalMovement();
-    //     // UpdateVerticalMovement();
-    // }
+    private void FixedUpdate()
+    {
+        // UpdateHorizontalMovement();
+        // UpdateVerticalMovement();
+    }
 
     /// <summary>
     /// Recieves a move direction
@@ -151,13 +151,13 @@ public class RigidbodyMovement : MonoBehaviour
     // /// Recieves the current rotation
     // /// Sets the rotation to a target rotation
     // /// </summary>
-    // public void RotateHorizontal(float _rotation)
-    // {
-    //     var currentRotation = rigidbody.rotation.eulerAngles;
-    //     var targetRotation = currentRotation + new Vector3(0f, _rotation, 0f);
-    //     rigidbody.rotation = Quaternion.Euler(targetRotation);
-    // }
-    //
+    public void RotateHorizontal(float _rotation)
+    {
+        var currentRotation = rigidbody.rotation.eulerAngles;
+        var targetRotation = currentRotation + new Vector3(0f, _rotation, 0f);
+        rigidbody.rotation = Quaternion.Euler(targetRotation);
+    }
+    
     // /// <summary>
     // /// Modifies jump and fall speed
     // /// </summary>
