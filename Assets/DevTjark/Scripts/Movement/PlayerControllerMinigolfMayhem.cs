@@ -4,7 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class PlayerControllerMinigolfMayhem : MonoBehaviour {
+public class PlayerControllerMinigolfMayhem : MonoBehaviour 
+{
+    public int PlayerIndex { get; private set; }
+    
     [Header("Movement")]
     private RigidbodyMovement rigidbodyMovement;
     // public CameraRotator CameraRotator;
@@ -26,11 +29,12 @@ public class PlayerControllerMinigolfMayhem : MonoBehaviour {
     private InputAction pauseInputAction;
     private InputAction unpauseInputAction;
 
-    private void Awake() {
+    private void Awake() 
+    {
         rigidbodyMovement = GetComponent<RigidbodyMovement>();
         playerInput = GetComponent<PlayerInput>();
         
-        MapInputActions();
+        // MapInputActions();
     }
 
     private void Start()
@@ -43,7 +47,8 @@ public class PlayerControllerMinigolfMayhem : MonoBehaviour {
     /// Gets move direction from input and moves rigidbody into this direction.
     /// Rotates the rigidbody horizontally if cursor lock mode is locked.
     /// </summary>
-    private void Update() {
+    private void Update() 
+    {
         if (Mouse.current.rightButton.wasPressedThisFrame) Cursor.lockState = CursorLockMode.Locked;
         if (Mouse.current.rightButton.wasPressedThisFrame) Cursor.lockState = CursorLockMode.None;
 
@@ -70,33 +75,40 @@ public class PlayerControllerMinigolfMayhem : MonoBehaviour {
     /// Gets rotation from input
     /// Rotates camera in the direction of the rotation input
     /// </summary>
-    private void UpdateCamera() {
+    private void UpdateCamera() 
+    {
         // var rotation = GetRotationFromInput();
         // CameraRotator.Rotate(rotation.y);
+    }
+
+    public void Initialize(int playerIndex)
+    {
+        PlayerIndex = playerIndex;
     }
 
     /// <summary>
     /// Maps the input actions
     /// Subcribes methods to their matching input actions
     /// </summary>
-    private void MapInputActions() {
-        moveInputAction = playerInput.actions["Move"];
-        moveInputAction.started += OnMoveInput;
-
-        jumpInputAction = playerInput.actions["Jump"];
-        jumpInputAction.started += OnJumpInput;
-
-        lookInputAction = playerInput.actions["Look"];
-
-        shootInputAction = playerInput.actions["LeftMouse"];
-        shootInputAction.started += OnShootInput;
-
-        pauseInputAction = playerInput.actions["Pause"];
-        pauseInputAction.started += OnPauseInput;
-        
-        unpauseInputAction = playerInput.actions["Unpause"];
-        unpauseInputAction.started += OnUnpauseInput;
-    }
+    // private void MapInputActions() 
+    // {
+    //     moveInputAction = playerInput.actions["Move"];
+    //     moveInputAction.started += OnMoveInput;
+    //
+    //     jumpInputAction = playerInput.actions["Jump"];
+    //     jumpInputAction.started += OnJumpInput;
+    //
+    //     lookInputAction = playerInput.actions["Look"];
+    //
+    //     shootInputAction = playerInput.actions["LeftMouse"];
+    //     shootInputAction.started += OnShootInput;
+    //
+    //     pauseInputAction = playerInput.actions["Pause"];
+    //     pauseInputAction.started += OnPauseInput;
+    //     
+    //     unpauseInputAction = playerInput.actions["Unpause"];
+    //     unpauseInputAction.started += OnUnpauseInput;
+    // }
 
     public void SwitchToPlayerInputMap()
     {
@@ -108,38 +120,37 @@ public class PlayerControllerMinigolfMayhem : MonoBehaviour {
         playerInput.SwitchCurrentActionMap("UI");
     }
 
-    private void OnPauseInput(InputAction.CallbackContext _obj)
+    public void OnPauseInput(InputAction.CallbackContext _context)
     {
         OnPause.Invoke();
     }
 
-    private void OnUnpauseInput(InputAction.CallbackContext _obj)
+    public void OnUnpauseInput(InputAction.CallbackContext _context)
     {
         OnUnpause.Invoke();
     }
 
-    private void OnMoveInput(InputAction.CallbackContext _context)
+    public void OnMoveInput(InputAction.CallbackContext _context)
     {
-        if (_context.phase == InputActionPhase.Started)
-            rigidbodyMovement.Move(GetMoveDirectionFromInput());
+        rigidbodyMovement.Move(_context.ReadValue<Vector2>());
     }
     
-    private void OnShootInput(InputAction.CallbackContext _context)
-    {
-        if (_context.phase == InputActionPhase.Started)
-            rigidbodyMovement.Shoot();
+    public void OnShootInput(InputAction.CallbackContext _context)
+    { 
+        rigidbodyMovement.Shoot();
     }
 
-    private void OnJumpInput(InputAction.CallbackContext _context) {
-        if (_context.phase == InputActionPhase.Started)
-            rigidbodyMovement.Jump();
+    public void OnJumpInput(InputAction.CallbackContext _context) 
+    {
+        rigidbodyMovement.Jump();
     }
 
     /// <summary>
     /// Gets the horizontal move direction from the input
     /// Converts this input into a 3D vector and returns it
     /// </summary>
-    private Vector3 GetMoveDirectionFromInput() {
+    public Vector3 GetMoveDirectionFromInput() 
+    {
         var moveInput = moveInputAction.ReadValue<Vector2>();
         return new Vector3(moveInput.x, 0f, moveInput.y);
 
@@ -148,7 +159,8 @@ public class PlayerControllerMinigolfMayhem : MonoBehaviour {
     /// <summary>
     /// Gets the rotation input and returns it
     /// </summary>
-    private Vector2 GetRotationFromInput() {
+    public Vector2 GetRotationFromInput() 
+    {
         return lookInputAction.ReadValue<Vector2>();
     }
 }
