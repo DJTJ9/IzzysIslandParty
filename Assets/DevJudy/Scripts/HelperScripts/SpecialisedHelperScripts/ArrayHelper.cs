@@ -26,20 +26,25 @@ namespace HelperScripts
         public static T[] RemoveFromArray<T>(T[] _arrayToRemoveFrom, T _objectToRemove)
         {
             bool success = false;
-
+            T[] newArray = new T[_arrayToRemoveFrom.Length - 1];
+            int j = 0;
+            
             for (int i = 0; i < _arrayToRemoveFrom.Length; i++)
             {
                 if (_arrayToRemoveFrom[i].Equals(_objectToRemove))
                 {
                     success = true;
-                    _arrayToRemoveFrom[i] = default(T);
+                    continue;
                 }
+                
+                newArray[j] = _arrayToRemoveFrom[i];
+                j++;
             }
             
             if (!success)
                 Debug.LogError("Could not remove " + _objectToRemove + " from " + _arrayToRemoveFrom);
             
-            return _arrayToRemoveFrom;
+            return newArray;
         }
 
         public static T[] ResizeArray<T>(T[] _arrayToResize, int _neededSize)

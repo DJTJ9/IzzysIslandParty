@@ -3,6 +3,7 @@ using System.Collections;
 using enums;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 public class AudioService : MonoBehaviour
@@ -17,7 +18,7 @@ public class AudioService : MonoBehaviour
 
     // !!TBA object pooling
     // private AudioSource[] pool;
-    
+
     private AudioService()
     {
         instance = this;
@@ -27,24 +28,23 @@ public class AudioService : MonoBehaviour
     {
         StopAllCoroutines();
     }
-    
+
     /// <summary>
     /// Create and return an audioSource from an audioClip
     /// </summary>
     /// <param name="_clip"></param>
-    /// <param name="_spawnTransform"></param>
     /// <param name="_audioType"></param>
     /// <param name="_volume"></param>
     /// <param name="_pitch"></param>
     /// <returns></returns>
-    public AudioSource CreateSound(AudioClip _clip, Transform _spawnTransform, EAudioType _audioType, float _volume = 1f, float _pitch = 1f)
+    public AudioSource CreateSound(AudioClip _clip, EAudioType _audioType, float _volume = 1f, float _pitch = 1f)
     {
-        AudioSource audioSource = Instantiate(audioObject, _spawnTransform);
+        AudioSource audioSource = Instantiate(audioObject, parent: this.transform);
 
         audioSource.clip = _clip;
-        
+
         audioSource.outputAudioMixerGroup = GetAudioMixerGroup(_audioType);
-        
+
         audioSource.volume = _volume;
         audioSource.pitch = _pitch;
 
@@ -55,21 +55,20 @@ public class AudioService : MonoBehaviour
     /// Create and return a random audioSource from an array of audioClips
     /// </summary>
     /// <param name="_clips"></param>
-    /// <param name="_spawnTransform"></param>
     /// <param name="_audioType"></param>
     /// <param name="_volume"></param>
     /// <param name="_pitch"></param>
     /// <returns></returns>
-    public AudioSource CreateRandomSound(AudioClip[] _clips, Transform _spawnTransform, EAudioType _audioType, float _volume = 1f, float _pitch = 1f)
+    public AudioSource CreateRandomSound(AudioClip[] _clips, EAudioType _audioType, float _volume = 1f, float _pitch = 1f)
     {
         var random = Random.Range(0, _clips.Length);
         AudioClip clip = _clips[random];
-        
-        AudioSource audioSource = CreateSound(clip, _spawnTransform, _audioType, _volume, _pitch);
+
+        AudioSource audioSource = CreateSound(clip, _audioType, _volume, _pitch);
 
         return audioSource;
     }
-    
+
     private AudioMixerGroup GetAudioMixerGroup(EAudioType _audioType)
     {
         switch (_audioType)
@@ -105,12 +104,11 @@ public class AudioService : MonoBehaviour
     /// Use for audios with variety like noises from characters
     /// </summary>
     /// <param name="_clips"></param>
-    /// <param name="_spawnTransform"></param>
     /// <param name="_audioType"></param>
     /// <param name="_volume"></param>
-    public void PlayRandomSound(AudioClip[] _clips, Transform _spawnTransform, EAudioType _audioType, float _volume = 1f)
+    public void PlayRandomSound(AudioClip[] _clips, EAudioType _audioType, float _volume = 1f)
     {
-        AudioSource source = CreateRandomSound(_clips, _spawnTransform, _audioType, _volume);
+        AudioSource source = CreateRandomSound(_clips, _audioType, _volume);
 
         PlaySound(source);
     }
@@ -122,57 +120,67 @@ public class AudioService : MonoBehaviour
     /// Use only when no reference to the source is needed.
     /// </summary>
     /// <param name="_clip"></param>
-    /// <param name="_spawnTransform"></param>
     /// <param name="_audioType"></param>
     /// <param name="_volumeRange"></param>
     /// <param name="_pitchRange"></param>
-    public void PlaySoundWithRandomPitch(AudioClip _clip, Transform _spawnTransform, EAudioType _audioType, Vector2 _volumeRange, Vector2 _pitchRange)
+    public void PlaySoundWithRandomPitch(AudioClip _clip, EAudioType _audioType, Vector2 _volumeRange, Vector2 _pitchRange)
     {
         var randomVolume = Random.Range(_volumeRange.x, _volumeRange.y);
         var randomPitch = Random.Range(_pitchRange.x, _pitchRange.y);
-        
-        AudioSource source = CreateSound(_clip, _spawnTransform, _audioType, randomVolume, randomPitch);
-        
+
+        AudioSource source = CreateSound(_clip, _audioType, randomVolume, randomPitch);
+
         PlaySound(source);
     }
-    
+
     /// <summary>
     /// Create a random audioSource from the given array in the given volumeRange and pitchRange, play it once and then delete it.
     /// Use for audios like footsteps
     /// Use only when no reference to the source is needed.
     /// </summary>
     /// <param name="_clips"></param>
-    /// <param name="_spawnTransform"></param>
     /// <param name="_audioType"></param>
     /// <param name="_volumeRange"></param>
     /// <param name="_pitchRange"></param>
-    public void PlayRandomSoundWithRandomPitch(AudioClip[] _clips, Transform _spawnTransform, EAudioType _audioType, Vector2 _volumeRange, Vector2 _pitchRange)
+    public void PlayRandomSoundWithRandomPitch(AudioClip[] _clips, EAudioType _audioType, Vector2 _volumeRange, Vector2 _pitchRange)
     {
         var randomVolume = Random.Range(_volumeRange.x, _volumeRange.y);
         var randomPitch = Random.Range(_pitchRange.x, _pitchRange.y);
-        
-        AudioSource source = CreateRandomSound(_clips, _spawnTransform, _audioType, randomVolume, randomPitch);
-        
+
+        AudioSource source = CreateRandomSound(_clips, _audioType, randomVolume, randomPitch);
+
         PlaySound(source);
     }
 
     /// <summary>
-    /// Play a sound until the given condition is met, then fade it out or delete it immediately
+    /// Play a sound while the given condition is met, then fade it out or delete it immediately
     /// Use for audios like background music
     /// </summary>
     /// <param name="_condition"></param>
     /// <param name="_clip"></param>
-    /// <param name="_spawnTransform"></param>
+    /// <param name="_audioType"></param>
+    /// <param name="_volume"></param>
+    public void PlaySoundWhile(Func<bool> _condition, AudioClip _clip, EAudioType _audioType, float _volume = 1f)
+    {
+        StartCoroutine(PlaySoundContinuously(_condition, _clip, _audioType, _volume, false));
+    }
+
+    /// <summary>
+    /// Play a sound while the given condition is met, then fade it out or delete it immediately
+    /// Use for audios like background music
+    /// </summary>
+    /// <param name="_condition"></param>
+    /// <param name="_clip"></param>
     /// <param name="_audioType"></param>
     /// <param name="_volume"></param>
     /// <param name="_fadeOut"></param>
     /// <param name="_fadeOutSpeed"></param>
-    public void PlaySoundUntil(Func<bool> _condition, AudioClip _clip, Transform _spawnTransform, EAudioType _audioType, float _volume = 1f,
-    bool _fadeOut = true, float _fadeOutSpeed = 1f)
+    public void PlaySoundWhile(Func<bool> _condition, AudioClip _clip, EAudioType _audioType,
+        bool _fadeOut, float _fadeOutSpeed = 0.2f, float _volume = 1f)
     {
-        StartCoroutine(PlaySoundContinuously(_condition, _clip, _spawnTransform, _audioType, _volume,  _fadeOut, _fadeOutSpeed));
+        StartCoroutine(PlaySoundContinuously(_condition, _clip, _audioType, _volume, _fadeOut, _fadeOutSpeed));
     }
-    
+
     /// <summary>
     /// Play a sound until the given condition is met, then fade it out or delete it immediately.
     /// Use for audios like background music
@@ -180,25 +188,27 @@ public class AudioService : MonoBehaviour
     /// <param name="_condition"></param>
     /// <param name="_audioClip"></param>
     /// <param name="_audioType"></param>
-    /// <param name="_spawnTransform"></param>
     /// <param name="_volume"></param>
     /// <param name="_fadeOut"></param>
     /// <param name="_fadeOutSpeed"></param>
     /// <returns></returns>
-    private IEnumerator PlaySoundContinuously(Func<bool> _condition, AudioClip _audioClip, Transform _spawnTransform, EAudioType _audioType,  float _volume,
-        bool _fadeOut = true, float _fadeOutSpeed = 1f)
+    private IEnumerator PlaySoundContinuously(Func<bool> _condition, AudioClip _audioClip, EAudioType _audioType, float _volume,
+        bool _fadeOut, float _fadeOutSpeed = 0.2f)
     {
-        AudioSource audioSource = CreateSound(_audioClip, _spawnTransform, _audioType, _volume);
+        AudioSource audioSource = CreateSound(_audioClip, _audioType, _volume);
 
-        while (!_condition())
+        while (_condition())
         {
-            PlaySound(audioSource, !_fadeOut);
+            if (!audioSource.isPlaying)
+                PlaySound(audioSource, false);
 
-            yield return new WaitForSeconds(_audioClip.length);
+            yield return new WaitForFixedUpdate();
         }
 
         if (_fadeOut)
             StartCoroutine(FadeOutSound(audioSource, _fadeOutSpeed));
+        else
+            StopSoundImmediately(audioSource);
 
         yield return new WaitUntil(() => audioSource == null);
     }
@@ -210,15 +220,13 @@ public class AudioService : MonoBehaviour
     /// <param name="_condition"></param>
     /// <param name="_audioType"></param>
     /// <param name="_clips"></param>
-    /// <param name="_spawnTransform"></param>
     /// <param name="_volumeRange"></param>
     /// <param name="_pitchRange"></param>
     /// <returns></returns>
-    public void PlayRandomSoundUntil(Func<bool> _condition, AudioClip[] _clips, Transform _spawnTransform, EAudioType _audioType, 
-        Vector2 _volumeRange,  Vector2 _pitchRange)
+    public void PlayRandomSoundUntil(Func<bool> _condition, AudioClip[] _clips, EAudioType _audioType,
+        Vector2 _volumeRange, Vector2 _pitchRange)
     {
-
-        StartCoroutine(PlayRandomSoundContinuously(_condition, _clips, _spawnTransform, _audioType, _volumeRange, _pitchRange));
+        StartCoroutine(PlayRandomSoundContinuously(_condition, _clips, _audioType, _volumeRange, _pitchRange));
     }
 
     /// <summary>
@@ -228,22 +236,24 @@ public class AudioService : MonoBehaviour
     /// <param name="_condition"></param>
     /// <param name="_clips"></param>
     /// <param name="_audioType"></param>
-    /// <param name="_spawnTransform"></param>
     /// <param name="_volumeRange"></param>
     /// <param name="_pitchRange"></param>
     /// <returns></returns>
-    private IEnumerator PlayRandomSoundContinuously(Func<bool> _condition, AudioClip[] _clips, Transform _spawnTransform, EAudioType _audioType, 
+    private IEnumerator PlayRandomSoundContinuously(Func<bool> _condition, AudioClip[] _clips, EAudioType _audioType,
         Vector2 _volumeRange, Vector2 _pitchRange)
     {
         AudioSource audioSource = null;
 
-        while (!_condition())
+        while (_condition())
         {
-            audioSource = CreateRandomSound(_clips, _spawnTransform, _audioType);
-            
-            PlaySoundWithRandomPitch(audioSource.clip, _spawnTransform, _audioType, _volumeRange, _pitchRange);
+            if (audioSource == null || !audioSource.isPlaying)
+            {
+                audioSource = CreateRandomSound(_clips, _audioType);
 
-            yield return new WaitForSeconds(audioSource.clip.length);
+                PlaySoundWithRandomPitch(audioSource.clip, _audioType, _volumeRange, _pitchRange);
+            }
+
+            yield return new WaitForFixedUpdate();
         }
 
         StopSoundImmediately(audioSource);
@@ -268,7 +278,7 @@ public class AudioService : MonoBehaviour
     {
         Destroy(_audioSource.gameObject);
     }
-    
+
     /// <summary>
     /// Fades the sound out by 0.1f multiplied by the given fadeOutSpeed over each fixedUpdate, then deletes it
     /// </summary>
@@ -278,7 +288,7 @@ public class AudioService : MonoBehaviour
     {
         StartCoroutine(FadeOutSound(_audioSource, _fadeOutSpeed));
     }
-    
+
     /// <summary>
     /// Fades the sound out by 0.1f multiplied by the given fadeOutSpeed over each fixedUpdate, then deletes it
     /// </summary>
@@ -290,6 +300,7 @@ public class AudioService : MonoBehaviour
         while (_audioSource.volume > 0.02f)
         {
             _audioSource.volume -= (0.1f * _fadeOutSpeed);
+
             yield return new WaitForFixedUpdate();
         }
 
