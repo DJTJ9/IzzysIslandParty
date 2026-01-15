@@ -148,7 +148,7 @@ namespace FishingGame
                     caughtAFish = catchEventHandler.CatchEventSuccess;
                 }
                 else
-                    IconHandler.Instance.DisplayIcon(EEmotion.Embarrassed);
+                    fishingRodController.IconHandler?.DisplayIcon(EEmotion.Embarrassed);
 
                 PressedCatch = false;
                 FishHooked = false;
@@ -156,7 +156,7 @@ namespace FishingGame
 
             if (caughtAFish)
             {
-                IconHandler.Instance.DisplayIcon(EEmotion.Love);
+                fishingRodController.IconHandler?.DisplayIcon(EEmotion.Love);
                 
                 fishDisplay?.DisplayFish(caughtFish);
                 textManager?.UpdatePointsText(caughtFish.Points);
@@ -168,7 +168,7 @@ namespace FishingGame
                 fishingRodController.PullBackFishingRod();
             }
             else
-                IconHandler.Instance.DisplayIcon(EEmotion.Sad);
+                fishingRodController.IconHandler?.DisplayIcon(EEmotion.Sad);
 
             StopFishing();
 

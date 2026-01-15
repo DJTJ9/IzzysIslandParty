@@ -1,3 +1,4 @@
+using enums;
 using ScriptableObjects;
 using TMPro;
 using UnityEngine;
@@ -47,16 +48,31 @@ public class FishDisplay : MonoBehaviour
 
     public void DisplayFish(SO_Fish _fish)
     {
-        // Change input map and set delta time to zero
+        // Change input map and set delta time to zero !!
 
         _fish.PrefabReference.SetActive(true);
         fishDisplayPanel.SetActive(true);
 
         fishNameText.text = _fish.FishName;
 
-        // Die random ranges hier als consts haben oder den fishen mitgeben?
-        fishSizeText.text = $"Size: {10}cm "; // + randomSize according to fish species
-        fishWeightText.text = $"Weight: {0.2}kg"; // + randomWeight according to fish species
+        fishSizeText.text = $"Size: {_fish.GetRandomFromRange(_fish.SizeRange)} {GeSizeMeasureUnit(_fish.FishType)}";
+        fishWeightText.text = $"Weight: {_fish.GetRandomFromRange(_fish.WeightRange)} {GeWeightMeasureUnit(_fish.FishType)}";
+    }
+
+    private string GeSizeMeasureUnit(EFish _fishType)
+    {
+        if (_fishType == EFish.BluefinTuna)
+            return "m";
+
+        return "cm";
+    }
+
+    private string GeWeightMeasureUnit(EFish _fishType)
+    {
+        if (_fishType == EFish.BluefinTuna)
+            return "kg";
+        
+        return "g";
     }
 
     public void StopDisplayFish()

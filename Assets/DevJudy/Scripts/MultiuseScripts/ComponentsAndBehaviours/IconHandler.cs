@@ -7,29 +7,33 @@ namespace Juice
 {
     public class IconHandler : MonoBehaviour
     {
-        private static IconHandler instance;
-        public static IconHandler Instance => instance;
-
         [SerializeField] private MeshRenderer target;
         private GameObject targetObject => target.gameObject;
+        
         [SerializeField] private SO_Emotion[] emotions;
         [SerializeField] private float displayIconSeconds = 3f;
 
         private CountdownTimer iconTimer;
-
-        private IconHandler()
-        {
-            instance = this;
-        }
 
         private void Awake()
         {
             if (targetObject == null)
                 Debug.LogError("No target set, please add 'CharacterIconPrefab' and set meshRenderer");
 
+            SetTargetRotation();
+            
             iconTimer = new CountdownTimer(displayIconSeconds);
             iconTimer.OnTimerStop += () => { targetObject?.SetActive(false); };
             iconTimer.OnTimerStart += () => { targetObject?.SetActive(true); };
+        }
+
+        [ContextMenu("Test")]
+        public void SetTargetRotation()
+        {
+            Camera mainCamera = Camera.main;
+            targetObject.transform.rotation = Quaternion.LookRotation(-mainCamera.transform.up, -mainCamera.transform.forward);
+            
+            // !! Make target tilt towards character slightly
         }
         
         public void DisplayIcon(EEmotion _emotion)

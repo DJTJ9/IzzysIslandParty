@@ -44,10 +44,24 @@ namespace Service
 
         private void Awake()
         {
+            CheckPlacementList();
+        }
+
+        private void CheckPlacementList()
+        {
             if (placementOrder.Length > maxNumberOfPlayers)
             {
                 Debug.LogWarning($"PlacementOrder array is more than maximum number of players ({maxNumberOfPlayers}), resizing array");
                 placementOrder = ArrayHelper.ResizeArray(placementOrder, maxNumberOfPlayers);
+            }
+            
+            for (int i = placementOrder.Length - 1; i > 0; i--)
+            {
+                if (placementOrder[i] == null)
+                {
+                    Debug.LogWarning($"PlacementOrder[{i}] is empty, resizing array");
+                    ArrayHelper.RemoveFromArray(placementOrder, placementOrder[i]);
+                }
             }
         }
 
