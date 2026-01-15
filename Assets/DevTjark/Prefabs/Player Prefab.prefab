@@ -429,9 +429,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         InputAction: {fileID: -473410492741152614, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-        Gain: 1
-        LegacyInput: 
-        LegacyGain: 1
+        Gain: 5
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -443,8 +441,6 @@ MonoBehaviour:
       Input:
         InputAction: {fileID: -473410492741152614, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
         Gain: -1
-        LegacyInput: 
-        LegacyGain: 1
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -456,8 +452,6 @@ MonoBehaviour:
       Input:
         InputAction: {fileID: -423771258819551211, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
         Gain: -1
-        LegacyInput: 
-        LegacyGain: 1
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -612,6 +606,7 @@ MonoBehaviour:
   shootCooldown: 0.1
   jumpPower: 5
   jumpCooldown: 0.1
+  cam: {fileID: 7057679653509791993}
 --- !u!114 &9201151259296887277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1001,7 +996,7 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d8db3f96-6d5c-4180-b583-ebc634144dea
     m_ActionName: 'UI/Unpause[/Keyboard/escape,/XInputControllerWindows/start]'
-  m_NeverAutoSwitchControlSchemes: 1
+  m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1

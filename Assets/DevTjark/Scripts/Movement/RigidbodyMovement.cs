@@ -19,10 +19,10 @@ public class RigidbodyMovement : MonoBehaviour
     // [SerializeField] private float jumpSpeedModifier = 1;
     // [SerializeField] private float fallSpeedModifier = 1;
 
+    [SerializeField] private Camera cam;
     private new Transform transform;
     private new Rigidbody rigidbody;
     private GroundChecker groundChecker;
-    private Camera cam;
 
     private Vector3 moveDirection;
     private bool canMove = true;
@@ -39,7 +39,6 @@ public class RigidbodyMovement : MonoBehaviour
         transform = GetComponent<Transform>();
         rigidbody = GetComponent<Rigidbody>();
         groundChecker = GetComponent<GroundChecker>();
-        cam = Camera.main;
         
         pushCooldownTimer = new CountdownTimer(pushCooldown);
         pushCooldownTimer.OnTimerStop += EnableMovement;
