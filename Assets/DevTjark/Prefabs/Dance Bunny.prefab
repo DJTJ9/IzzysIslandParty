@@ -1416,6 +1416,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4185008212866109269}
+  - component: {fileID: 3769476287999843007}
+  - component: {fileID: 8918133386215926332}
   m_Layer: 0
   m_Name: Root_M
   m_TagString: Untagged
@@ -1431,7 +1433,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3153338899834395852}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.53596264, y: 0.46124184, z: 0.53596264, w: -0.46124184}
+  m_LocalRotation: {x: 0.53596115, y: -0.4612436, z: -0.53596115, w: 0.4612436}
   m_LocalPosition: {x: 1.8846837e-18, y: 0.0982851, z: -0.0017717207}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1441,7 +1443,56 @@ Transform:
   - {fileID: 1479565728352751652}
   - {fileID: 8699357872163653194}
   m_Father: {fileID: 1639696655244002029}
-  m_LocalEulerAnglesHint: {x: -9.467882, y: 8.990729, z: -15.848353}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -98.57}
+--- !u!114 &3769476287999843007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3153338899834395852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c66e4071074e8494fd698175ec6f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_faceForwardPointValue: 1
+  m_lookAwayAngleTreshold: 45
+  m_happyFacePointValue: 1
+  faceMeshRenderer: {fileID: 7398630618334704471}
+  m_danceMovePointValue: 1
+  animator: {fileID: 3690112078750080850}
+  scoreSO: {fileID: 11400000, guid: a176daedc58e07c409b775393071ef06, type: 2}
+  faceSwapSO: {fileID: 11400000, guid: 81a820629255773488a08ac37764e04f, type: 2}
+  danceMovesSO: {fileID: 11400000, guid: 15d8be9fbb7c5844e89f80fbe24e2baf, type: 2}
+--- !u!114 &8918133386215926332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3153338899834395852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: bf384125dce74794292e08119c0ed727, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3769476287999843007}
+        m_TargetAssemblyTypeName: PointCalculator, Assembly-CSharp
+        m_MethodName: CalculatePoints
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3246693587793420151
 GameObject:
   m_ObjectHideFlags: 0

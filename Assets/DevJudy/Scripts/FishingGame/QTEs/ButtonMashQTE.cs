@@ -20,12 +20,12 @@ namespace FishingGame.QuickTimeEvents
 
         [Header("MashEvent needed components: ")]
         [SerializeField] private Color normalButtonColor;
-
         [SerializeField] private Color buttonPressedColor;
+        [SerializeField] private Color wrongButtonColor;
         [SerializeField] private int buttonMashAmount;
         [SerializeField] private float buttonMashTime;
-        private int buttonMashCounter = 0;
-        private int falseButtonCounter = 0;
+        private int buttonMashCounter;
+        private int falseButtonCounter;
         private int maxFalseButtonPresses = 3;
 
         private Vector3 normalButtonScale;
@@ -38,6 +38,11 @@ namespace FishingGame.QuickTimeEvents
             ButtonMashEventSetup();
         }
 
+        private void OnDisable()
+        {
+            StopAllCoroutines();
+        }
+        
         private void ButtonMashEventSetup()
         {
             mashButtonTransform = mashButtonImage.transform;
@@ -100,6 +105,8 @@ namespace FishingGame.QuickTimeEvents
 
             if (buttonTransform != 0)
                 buttonTransform = (buttonTransform / 400) + 0.025f;
+            
+            StartCoroutine(ChangeButtonColor(wrongButtonColor));
 
             mashButtonTransform.localScale = new Vector3(buttonTransform, buttonTransform, normalButtonScale.z);
         }
@@ -114,6 +121,8 @@ namespace FishingGame.QuickTimeEvents
 
             if (buttonTransform != 0)
                 buttonTransform = (buttonTransform / 400) + 0.025f;
+            
+            StartCoroutine(ChangeButtonColor(buttonPressedColor));
 
             mashButtonTransform.localScale = new Vector3(buttonTransform, buttonTransform, normalButtonScale.z);
         }
@@ -128,17 +137,9 @@ namespace FishingGame.QuickTimeEvents
                 buttonMashCoroutine = null;
             }
 
-            if (QTEFinishedSuccessfully)
-                Debug.Log("Bm succeeded :)");
-            else
-                Debug.Log("Bm failed :(");
-
-            // maybe also show failed color for 0.5 seconds...
-
             mashEventHolder.gameObject.SetActive(false);
 
             qteController.CurrentQuickTimeEvent = EQuickTimeEvent.None;
-            Debug.Log("Its over!");
         }
 
         private IEnumerator MashButtonsTimerCoroutine()
@@ -152,6 +153,17 @@ namespace FishingGame.QuickTimeEvents
 
             StopButtonMashEvent();
 
+            yield return null;
+        }
+
+        private IEnumerator ChangeButtonColor(Color _color)
+        {
+            mashButtonImage.color = _color;
+            
+            yield return new WaitForSeconds(0.1f);
+            
+            mashButtonImage.color = normalButtonColor;
+            
             yield return null;
         }
     }

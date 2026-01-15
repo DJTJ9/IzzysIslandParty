@@ -2,6 +2,7 @@
 using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PhotoCapture : MonoBehaviour
@@ -17,6 +18,8 @@ public class PhotoCapture : MonoBehaviour
     [FoldoutGroup("Photo Fade Effect", expanded: true)]
     [SerializeField] private Animator fadingAnimator;
     [SerializeField] private float fadeInSpeed = 1f;
+    
+    [SerializeField] private UnityEvent onPhotoTaken;
     
     private Texture2D m_screenCapture;
     private bool m_photoTaken;
@@ -34,13 +37,14 @@ public class PhotoCapture : MonoBehaviour
     private IEnumerator CaptureScreenshot()
     {
         if (m_photoTaken) yield break;
-        
         m_photoTaken = true;
+        
+        onPhotoTaken.Invoke();
         StartCoroutine(FlashLightEffect());
         
         yield return new WaitForEndOfFrame();
         
-        Rect rect = new Rect(0, 0, Screen.width, Screen.height);
+        var rect = new Rect(0, 0, Screen.width, Screen.height);
         m_screenCapture.ReadPixels(rect, 0, 0, false);
         m_screenCapture.Apply();
         ShowScreenshot();

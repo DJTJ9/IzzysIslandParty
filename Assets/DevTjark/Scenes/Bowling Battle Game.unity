@@ -548,6 +548,7 @@ GameObject:
   m_Component:
   - component: {fileID: 803669596}
   - component: {fileID: 803669595}
+  - component: {fileID: 803669602}
   - component: {fileID: 803669601}
   - component: {fileID: 803669600}
   - component: {fileID: 803669599}
@@ -662,8 +663,8 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 803669601}
-        m_TargetAssemblyTypeName: PlayerUIEvents, Assembly-CSharp
+      - m_Target: {fileID: 803669602}
+        m_TargetAssemblyTypeName: PauseMenuEvents, Assembly-CSharp
         m_MethodName: ShowEndscreenUI
         m_Mode: 1
         m_Arguments:
@@ -779,6 +780,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballCollectionSO: {fileID: 11400000, guid: 7b028a6df6b06d84cb847643fca043cb, type: 2}
+--- !u!114 &803669602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803669594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 424d2ca1ec44454289227c131c2564d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneCollection: {fileID: 11400000, guid: 6fd8971a4dff91645b76a391153753d8, type: 2}
+  onUnpause:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: cb8390d9fabb07843b5f42bf6275d672, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1013592936
 PrefabInstance:
   m_ObjectHideFlags: 0

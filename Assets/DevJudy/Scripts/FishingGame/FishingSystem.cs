@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace FishingGame
 {
+    [DefaultExecutionOrder(-100)]
     public class FishingSystem : MonoBehaviour
     {
         [Header("Dependencies: ")]
@@ -50,17 +51,19 @@ namespace FishingGame
                 Debug.LogError("FishingSystem fishList is null");
             else
             {
+                Debug.Log("FishingSystem instance created");
+                
                 if (fishDisplay != null)
                     SpawnInFishDisplayObjects();
             }
         }
 
+        [ContextMenu("SpawnInFishDisplayObjects")]
         private void SpawnInFishDisplayObjects()
         {
             for (int i = 0; i < fishList.Count; i++)
             {
-                var fish = fishList[i];
-                fish.PrefabReference = fishDisplay?.SpawnInFishPrefabs(fish);
+                fishList[i].PrefabReference = fishDisplay?.SpawnInFishPrefabs(fishList[i]);
             }
         }
 
@@ -145,7 +148,7 @@ namespace FishingGame
                     caughtAFish = catchEventHandler.CatchEventSuccess;
                 }
                 else
-                    IconHandler.Instance.DisplayIcon(EEmotion.Embarrassed);
+                    fishingRodController.IconHandler?.DisplayIcon(EEmotion.Embarrassed);
 
                 PressedCatch = false;
                 FishHooked = false;
@@ -153,7 +156,7 @@ namespace FishingGame
 
             if (caughtAFish)
             {
-                IconHandler.Instance.DisplayIcon(EEmotion.Love);
+                fishingRodController.IconHandler?.DisplayIcon(EEmotion.Love);
                 
                 fishDisplay?.DisplayFish(caughtFish);
                 textManager?.UpdatePointsText(caughtFish.Points);
@@ -165,7 +168,7 @@ namespace FishingGame
                 fishingRodController.PullBackFishingRod();
             }
             else
-                IconHandler.Instance.DisplayIcon(EEmotion.Sad);
+                fishingRodController.IconHandler?.DisplayIcon(EEmotion.Sad);
 
             StopFishing();
 
