@@ -17,7 +17,13 @@ namespace FishingGame.QuickTimeEvents
         private RectTransform catcherRT;
         private RawImage catcherImage;
 
+        [Header("Slider: ")]
         [SerializeField] private Slider successSlider;
+
+        [SerializeField] private Image sliderFillImage;
+        [SerializeField] private Color normalColor;
+        [SerializeField] private Color catcherInFrameColor;
+        [SerializeField] private Color catcherOutFrameColor;
 
         [Header("Target variables: ")]
         [SerializeField] private float targetMaxMovementLeft = -250f;
@@ -50,16 +56,24 @@ namespace FishingGame.QuickTimeEvents
         {
             if (target == null)
                 Debug.LogError("Target is null");
+            else
+                targetRT = target.GetComponent<RectTransform>();
+
             if (catcher == null)
                 Debug.LogError("Catcher is null");
-
-            catcherImage = catcher.GetComponent<RawImage>();
-            catcherRT = catcher.GetComponent<RectTransform>();
-
-            targetRT = target.GetComponent<RectTransform>();
+            else
+            {
+                catcherImage = catcher.GetComponent<RawImage>();
+                catcherRT = catcher.GetComponent<RectTransform>();
+            }
 
             if (successSlider == null)
                 Debug.LogError("SuccessSlider is null");
+
+            if (sliderFillImage == null)
+                Debug.LogError("SliderFillImage is null");
+            else
+                sliderFillImage.color = normalColor;
 
             barQTEHolder.SetActive(false);
 
@@ -168,11 +182,9 @@ namespace FishingGame.QuickTimeEvents
             bool overlap = Overlaps(_rt1, _rt2);
 
             if (overlap)
-                catcherImage.color = Color.green;
+                sliderFillImage.color = catcherInFrameColor;
             else
-            {
-                catcherImage.color = Color.red;
-            }
+                sliderFillImage.color = catcherOutFrameColor;
 
             return overlap;
         }

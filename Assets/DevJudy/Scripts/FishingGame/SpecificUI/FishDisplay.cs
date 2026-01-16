@@ -78,6 +78,9 @@ public class FishDisplay : MonoBehaviour
     public void StopDisplayFish()
     {
         fishDisplayPanel.SetActive(false);
+
+        foreach (Transform child in fishUIRenderer.transform)
+            child.gameObject.SetActive(false);
     }
 
     private void ClearDisplayParentObject()

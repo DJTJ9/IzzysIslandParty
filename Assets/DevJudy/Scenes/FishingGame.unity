@@ -410,6 +410,10 @@ MonoBehaviour:
   target: {fileID: 189103444}
   catcher: {fileID: 1090718242}
   successSlider: {fileID: 613366436}
+  sliderFillImage: {fileID: 2013506910}
+  normalColor: {r: 0.28235295, g: 0.5803922, b: 0.68235296, a: 1}
+  catcherInFrameColor: {r: 0.28235292, g: 0.68235296, b: 0.5529799, a: 1}
+  catcherOutFrameColor: {r: 0.81761, g: 0.2545389, b: 0.28104883, a: 1}
   targetMaxMovementLeft: -360
   targetMaxMovementRight: 360
   targetMoveSpeed: 230
@@ -440,9 +444,9 @@ MonoBehaviour:
   timingEventHolder: {fileID: 1869810408}
   allowedTimingOffset: 0.02
   shrinkSpeed: 0.45
-  ringSuccessColor: {r: 0.21176471, g: 1, b: 0.4, a: 1}
-  ringFailureColor: {r: 1, g: 0.1764706, b: 0.16862746, a: 1}
-  ringNormalColor: {r: 0.6745098, g: 1, b: 0.8509804, a: 1}
+  ringSuccessColor: {r: 0.18897584, g: 0.9245283, b: 0.3646302, a: 1}
+  ringFailureColor: {r: 0.9056604, g: 0.20320117, b: 0.19651109, a: 1}
+  ringNormalColor: {r: 0.67479527, g: 0.9622642, b: 0.8306519, a: 1}
 --- !u!114 &84485864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1042,7 +1046,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.29965174, g: 0.56228346, b: 0.8742138, a: 1}
+  m_Color: {r: 0.33321455, g: 0.5941253, b: 0.9056604, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1109,7 +1113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.2830189, g: 0, b: 0, a: 0.654902}
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.654902}
   m_EffectDistance: {x: 3, y: -1}
   m_UseGraphicAlpha: 0
 --- !u!114 &189103447
@@ -1125,14 +1129,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8867924, g: 0.22030364, b: 0.33161062, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 2800000, guid: eb6825f7f0487ba4aa17cc714253dc04, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -3949,7 +3953,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 1, g: 1, b: 1, a: 0.54901963}
-  m_EffectDistance: {x: 3, y: -1}
+  m_EffectDistance: {x: 2, y: 0}
   m_UseGraphicAlpha: 0
 --- !u!114 &1090718245
 MonoBehaviour:
@@ -3971,7 +3975,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 2800000, guid: 93ddd52e126726846a4dd6db139966a5, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -6534,7 +6538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.33024788, g: 0.7377421, b: 0.8679245, a: 1}
+  m_Color: {r: 0.28235295, g: 0.5803922, b: 0.68235296, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

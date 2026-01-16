@@ -57,8 +57,7 @@ namespace FishingGame
                     SpawnInFishDisplayObjects();
             }
         }
-
-        [ContextMenu("SpawnInFishDisplayObjects")]
+        
         private void SpawnInFishDisplayObjects()
         {
             for (int i = 0; i < fishList.Count; i++)
