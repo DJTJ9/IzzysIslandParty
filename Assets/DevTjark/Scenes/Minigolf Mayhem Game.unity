@@ -182,85 +182,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Prefab
       objectReference: {fileID: 0}
-    - target: {fileID: 569612370539826198, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2926994867532943103, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: CameraRotator
-      value: 
-      objectReference: {fileID: 968959072}
-    - target: {fileID: 3489097703413319059, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3489097703413319059, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3489097703413319059, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 968959071}
-    - target: {fileID: 3489097703413319059, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3489097703413319059, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: UnlockMouseCursor
-      objectReference: {fileID: 0}
-    - target: {fileID: 3489097703413319059, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: PlayerControllerMinigolfMayhem, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3489097703413319059, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4179876104423682454, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ControllerManager.Controllers.Array.data[0].Input.Gain
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4179876104423682454, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ControllerManager.Controllers.Array.data[1].Input.Gain
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayerControllerMinigolfMayhem, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6897273262104259003, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7205134141381534054, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8196362803946966465, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
       propertyPath: m_LocalPosition.x
@@ -302,47 +226,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8764384815406241613, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8764384815406241613, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8764384815406241613, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 968959071}
-    - target: {fileID: 8764384815406241613, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8764384815406241613, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: LockMouseCursor
-      objectReference: {fileID: 0}
-    - target: {fileID: 8764384815406241613, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: PlayerControllerMinigolfMayhem, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8764384815406241613, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8754331490394771550, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      insertIndex: 3
-      addedObject: {fileID: 968959072}
-    - targetCorrespondingSourceObject: {fileID: 8754331490394771550, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      insertIndex: 7
-      addedObject: {fileID: 968959073}
-    - targetCorrespondingSourceObject: {fileID: 6784404951212928872, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1665910548}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
 --- !u!1 &595279373
 GameObject:
@@ -482,67 +369,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &968959060 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8754331490394771550, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-  m_PrefabInstance: {fileID: 526890203}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &968959071 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2926994867532943103, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-  m_PrefabInstance: {fileID: 526890203}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 968959060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c13f386af314c4681a4dc804d9b4c40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &968959072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 968959060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57e295aeaaa4eb5438b170a27ca9bfb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CameraTransform: {fileID: 1665910547}
-  LookSensitivity: 0.3
-  AngleSettings:
-    Min: -30
-    Max: 20
---- !u!114 &968959073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 968959060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 968959071}
-        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
-        m_MethodName: LockMouseCursor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1041197076
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,29 +494,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1665910542 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6784404951212928872, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-  m_PrefabInstance: {fileID: 526890203}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1665910547 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3737830617443887909, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-  m_PrefabInstance: {fileID: 526890203}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1665910548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1665910542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43e287c6a9b016e4c938969107563942, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {x: 0, y: 3, z: -3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

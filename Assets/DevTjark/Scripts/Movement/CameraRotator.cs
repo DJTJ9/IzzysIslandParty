@@ -3,6 +3,7 @@ using UnityEngine;
 public class CameraRotator : MonoBehaviour {
     [Header("Settings")]
     public Transform CameraTransform;
+    public Transform PlayerTransform;
     public float LookSensitivity = 0.3f;
     public Angles AngleSettings;
 
@@ -19,7 +20,7 @@ public class CameraRotator : MonoBehaviour {
     public void Rotate(float _rotation) {
         cameraRotationY += -_rotation * LookSensitivity;
         cameraRotationY = Mathf.Clamp(cameraRotationY, AngleSettings.Min, AngleSettings.Max);
-        CameraTransform.eulerAngles = new Vector3(cameraRotationY, CameraTransform.eulerAngles.y, CameraTransform.eulerAngles.z);
+        CameraTransform.eulerAngles = new Vector3(cameraRotationY, PlayerTransform.eulerAngles.y, CameraTransform.eulerAngles.z);
 
     }
 

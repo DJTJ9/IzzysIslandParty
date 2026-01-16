@@ -32,8 +32,55 @@ Transform:
   - {fileID: 2409164695570728623}
   - {fileID: 6449617261299778141}
   - {fileID: 7433456397412011071}
+  - {fileID: 3737830617443887909}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6215874565374681436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 822293108717185880}
+  - component: {fileID: 7569812790544342208}
+  m_Layer: 0
+  m_Name: Follow Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &822293108717185880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6215874565374681436}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2409164695570728623}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7569812790544342208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6215874565374681436}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 832d671c0d914247a25b2745007352cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 2409164695570728623}
+  offset: {x: 0, y: 0.5, z: -2.5}
 --- !u!1 &6784404951212928872
 GameObject:
   m_ObjectHideFlags: 0
@@ -47,6 +94,7 @@ GameObject:
   - component: {fileID: 2732007334656427753}
   - component: {fileID: 6897273262104259003}
   - component: {fileID: 7442209671337855565}
+  - component: {fileID: 972072952357720027}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -63,11 +111,11 @@ Transform:
   m_GameObject: {fileID: 6784404951212928872}
   serializedVersion: 2
   m_LocalRotation: {x: -0.081625916, y: 0.000000041429676, z: 0.0000000033930578, w: 0.99666303}
-  m_LocalPosition: {x: 0, y: 0.4783736, z: -2.1632004}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0, y: 1.5, z: -5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2409164695570728623}
+  m_Father: {fileID: 8196362803946966465}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &7057679653509791993
 Camera:
@@ -135,7 +183,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6784404951212928872}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
   m_Name: 
@@ -204,6 +252,19 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &972072952357720027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6784404951212928872}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43e287c6a9b016e4c938969107563942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 3, z: -3}
 --- !u!1 &7205134141381534054
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +286,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7433456397412011071
 Transform:
   m_ObjectHideFlags: 0
@@ -428,7 +489,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         InputAction: {fileID: -473410492741152614, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-        Gain: 5
+        Gain: 10
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -439,7 +500,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         InputAction: {fileID: -473410492741152614, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-        Gain: -1
+        Gain: -10
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -515,9 +576,11 @@ GameObject:
   - component: {fileID: 2409164695570728623}
   - component: {fileID: 2926994867532943103}
   - component: {fileID: 2527513405859033214}
+  - component: {fileID: 8951549986535246071}
   - component: {fileID: 9201151259296887277}
   - component: {fileID: 3489097703413319059}
   - component: {fileID: 8764384815406241613}
+  - component: {fileID: 8845138418296100879}
   - component: {fileID: 2524120037625186723}
   - component: {fileID: 8540537644126442398}
   - component: {fileID: 5572027934908210362}
@@ -543,7 +606,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3737830617443887909}
+  - {fileID: 822293108717185880}
   m_Father: {fileID: 8196362803946966465}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2926994867532943103
@@ -558,7 +621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c13f386af314c4681a4dc804d9b4c40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraRotator: {fileID: 0}
+  CameraRotator: {fileID: 8951549986535246071}
   lookSensitivity: 2
   OnPause:
     m_PersistentCalls:
@@ -609,6 +672,24 @@ MonoBehaviour:
   jumpPower: 5
   jumpCooldown: 0.1
   cam: {fileID: 7057679653509791993}
+--- !u!114 &8951549986535246071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8754331490394771550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e295aeaaa4eb5438b170a27ca9bfb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraTransform: {fileID: 3737830617443887909}
+  PlayerTransform: {fileID: 2409164695570728623}
+  LookSensitivity: 0.3
+  AngleSettings:
+    Min: -30
+    Max: 20
 --- !u!114 &9201151259296887277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -656,6 +737,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2926994867532943103}
+        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
+        m_MethodName: UnlockMouseCursor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8764384815406241613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,6 +768,46 @@ MonoBehaviour:
       - m_Target: {fileID: 2926994867532943103}
         m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
         m_MethodName: SwitchToPlayerInputMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2926994867532943103}
+        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
+        m_MethodName: LockMouseCursor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8845138418296100879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8754331490394771550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2926994867532943103}
+        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
+        m_MethodName: LockMouseCursor
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

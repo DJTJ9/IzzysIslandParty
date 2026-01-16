@@ -1,7 +1,7 @@
 using DependencyInjection;
 using UnityEngine;
 
-public class BallCamera : MonoBehaviour
+public class BowlingBallCamera : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private Vector3 offset;
