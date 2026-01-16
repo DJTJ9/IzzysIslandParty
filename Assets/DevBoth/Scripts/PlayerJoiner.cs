@@ -9,6 +9,7 @@ public class PlayerJoiner : MonoBehaviour
     private void Awake()
     {
         SpawnPlayer(0);
+        SpawnPlayer(1);
         // Instantiate(Player2, Spawnpoint2.position, Spawnpoint2.rotation);
         // Instantiate(Player3, Spawnpoint3.position, Spawnpoint3.rotation);
     }

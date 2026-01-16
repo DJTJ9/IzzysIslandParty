@@ -1,12 +1,11 @@
-﻿using DependencyInjection;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ScoreCalculator : MonoBehaviour
 {
     [SerializeField] private float isFallenDotProductThreshold = 0.7f;
+    [SerializeField] private BowlingBallSwapper ballSwapper;
     [SerializeField] private GameScoreSO scoreSO;
-    
-    [Inject] private BallSpawner ballSpawner;
+    [SerializeField] private SO_BowlingBallPointMultipliers pointMultiplierSO;
 
     public void CheckScore() 
     {
@@ -15,7 +14,7 @@ public class ScoreCalculator : MonoBehaviour
         
         if (isFallen)
         {
-            scoreSO.Value += ballSpawner.CurrentBallSO.pointMultiplier;
+            scoreSO.Value += pointMultiplierSO.BallPointMultipliers[ballSwapper.GetCurrentBallType()];
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 using UnityEngine.Serialization;
 
 [RequireComponent (typeof(CharacterController), typeof(PlayerInput), typeof(Rigidbody))]
@@ -26,7 +28,7 @@ public class BallMovement : MonoBehaviour
     [SerializeField] private UnityEvent onPause;
     [SerializeField] private UnityEvent onUnpause;
     
-    private Transform m_startPosition;
+    [SerializeField] private Transform m_startPosition;
     
     private void Awake()
     {
@@ -34,8 +36,6 @@ public class BallMovement : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
         playerInput.enabled = true;
-        
-        m_startPosition = transform;
     }
 
     private void OnEnable()
@@ -82,15 +82,12 @@ public class BallMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext _context)
     {
-        if (_context.phase == InputActionPhase.Started)
-        {
             if (controller == null) return;
             controller.enabled = false;
             rb.freezeRotation = false;
             rb.useGravity = true;
             m_moveInput = Vector2.zero;
             rb.linearVelocity = Vector3.zero;
-        }
     }
     
     public void OnReleaseBall()
@@ -117,12 +114,12 @@ public class BallMovement : MonoBehaviour
         m_unpauseInputAction.started += OnUnpause;
     }
     
-    private void OnPause(InputAction.CallbackContext _obj)
+    private void OnPause(InputAction.CallbackContext _context)
     {
         onPause.Invoke();
     }
     
-    private void OnUnpause(InputAction.CallbackContext _obj)
+    private void OnUnpause(InputAction.CallbackContext _context)
     {
         onUnpause.Invoke();
     }
@@ -136,11 +133,17 @@ public class BallMovement : MonoBehaviour
 
     public void ResetComponents()
     {
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        
+        transform.position = m_startPosition.position;
+        transform.rotation = m_startPosition.rotation;
+
+
         controller.enabled = true;
         playerInput.enabled = true;
         rb.freezeRotation = true;
         rb.useGravity = false;
-        transform.position = m_startPosition.position;
     }
 
     public void SwitchToPlayerInputMap()

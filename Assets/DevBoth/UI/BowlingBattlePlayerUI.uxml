@@ -29,7 +29,7 @@
             <ui:Button text="BACK" name="player-hub-back__button" class="levelButton" style="background-image: none;" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="player-ui__container" class="player-ui-main-container" style="flex-grow: 1; display: none;">
+    <ui:VisualElement name="player-ui__container" class="player-ui-main-container" style="flex-grow: 1; display: flex;">
         <ui:VisualElement name="player-ui-left__container" class="player-ui-left" style="flex-grow: 1;">
             <ui:Label text="SCORE:" name="player-ui-score__label" class="score-label" />
             <ui:Label text="0" name="player-ui-score-number__label" data-source="project://database/Assets/DevTjark/Scriptable%20Objects/Bowling%20Battle%20Score.asset?fileID=11400000&amp;guid=9ff12d17af2c8f24589bf553520703f2&amp;type=2#Bowling Battle Score" class="score-label">
@@ -47,7 +47,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="player-ui-right__container" class="player-ui-right" style="flex-grow: 1;" />
     </ui:VisualElement>
-    <ui:VisualElement name="end-screen-menu__container" style="flex-grow: 1; display: flex;">
+    <ui:VisualElement name="end-screen-menu__container" style="flex-grow: 1; display: none;">
         <ui:Label text="END SCORE:" name="end-screen-header__label" class="header" style="height: 5%; width: 35%;" />
         <ui:Label text="Label" name="end-screen-score__label" data-source="project://database/Assets/DevTjark/Scriptable%20Objects/Bowling%20Battle%20Score.asset?fileID=11400000&amp;guid=9ff12d17af2c8f24589bf553520703f2&amp;type=2#Bowling Battle Score" class="header" style="height: 10%;">
             <Bindings>
