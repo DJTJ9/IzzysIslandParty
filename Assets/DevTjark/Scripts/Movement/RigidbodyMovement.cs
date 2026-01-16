@@ -59,7 +59,7 @@ public class RigidbodyMovement : MonoBehaviour
     /// <summary>
     /// Recieves a move direction
     /// </summary>
-    public void Move(Vector2 _direction)
+    public void Move(Vector3 _direction)
     {
         if (!canMove) return;
         
@@ -69,7 +69,7 @@ public class RigidbodyMovement : MonoBehaviour
         camFwd.y = 0f; camRight.y = 0f;
         camFwd.Normalize(); camRight.Normalize();
 
-        var worldDir = camRight * _direction.x + camFwd * _direction.y;
+        var worldDir = camRight * _direction.x + camFwd * _direction.z;
         
         rigidbody.AddForce(worldDir.normalized * pushForce, ForceMode.Impulse);
         
