@@ -2,6 +2,9 @@ using enums;
 using ScriptableObjects;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 
 public class FishDisplay : MonoBehaviour
@@ -12,16 +15,28 @@ public class FishDisplay : MonoBehaviour
     [SerializeField] private TextMeshProUGUI fishNameText;
     [SerializeField] private TextMeshProUGUI fishSizeText;
     [SerializeField] private TextMeshProUGUI fishWeightText;
-
     [SerializeField] private GameObject fishDisplayPanel;
-
-
+    [SerializeField] private GameObject stopFishDisplayButton;
+    
+    [Header("Input")]
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private EventSystem eventSystem;
+    
+    private string fishingActionMap = "FishingGame";
+    private string uiActionMap = "UI";
+    
     private void Awake()
     {
         if (fishUIRenderer == null)
             Debug.LogError("FishUIRenderer is null");
         else
             ClearDisplayParentObject();
+         
+        if (playerInput == null)
+            Debug.LogError("inputActionAsset is null");
+        
+        if  (eventSystem == null)
+            Debug.LogError("eventSystem is null");
     }
 
     private void Start()
@@ -48,8 +63,14 @@ public class FishDisplay : MonoBehaviour
 
     public void DisplayFish(SO_Fish _fish)
     {
-        // Change input map and set delta time to zero !!
-
+        // !! This isnt working
+        playerInput.SwitchCurrentActionMap(uiActionMap);
+        eventSystem.SetSelectedGameObject(stopFishDisplayButton);
+        Debug.Log("Selected: " + eventSystem.currentSelectedGameObject.name);
+        
+        // Change delta time to zero !!
+        // Time.timeScale = 0f;
+        
         _fish.PrefabReference.SetActive(true);
         fishDisplayPanel.SetActive(true);
 
@@ -77,7 +98,11 @@ public class FishDisplay : MonoBehaviour
 
     public void StopDisplayFish()
     {
+        playerInput.SwitchCurrentActionMap(fishingActionMap);
+        
         fishDisplayPanel.SetActive(false);
+        
+        Time.timeScale = 1f;
 
         foreach (Transform child in fishUIRenderer.transform)
             child.gameObject.SetActive(false);

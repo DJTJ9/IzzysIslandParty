@@ -12,7 +12,7 @@ namespace FishingGame
         private static readonly int fishBiting = Animator.StringToHash("FishBiting");
 
         private Animator animator;
-        private LineRenderer lineRenderer;
+        //private LineRenderer lineRenderer;
         [SerializeField] public IconHandler IconHandler;
         // !! Not working yet
         [SerializeField] private Transform[] rodLineRendererPositions;
@@ -31,17 +31,17 @@ namespace FishingGame
             if (animator == null)
                 Debug.LogWarning("No animator attached to children of " + gameObject.name);
 
-            lineRenderer = GetComponent<LineRenderer>();
-            if (lineRenderer == null)
-                Debug.LogWarning("No lineRenderer attached to " + gameObject.name);
-
-            lineRenderer.enabled = true;
-            lineRenderer.useWorldSpace = true;
-            lineRenderer.startWidth = lineRenderer.endWidth = 0.02f;
-            lineRenderer.positionCount = 2;
-
-            lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
-            lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
+           // lineRenderer = GetComponent<LineRenderer>();
+           // if (lineRenderer == null)
+           //     Debug.LogWarning("No lineRenderer attached to " + gameObject.name);
+//
+           // lineRenderer.enabled = true;
+           // lineRenderer.useWorldSpace = true;
+           // lineRenderer.startWidth = lineRenderer.endWidth = 0.02f;
+           // lineRenderer.positionCount = 2;
+//
+           // lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
+           // lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
         }
         
         public void OnPause(InputAction.CallbackContext _context)
@@ -107,10 +107,10 @@ namespace FishingGame
             animator.SetBool(fishBiting, false);
         }
 
-        private void LateUpdate()
-        {
-            lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
-            lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
-        }
+     //  private void LateUpdate()
+     //  {
+     //      lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
+     //      lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
+     //  }
     }
 }

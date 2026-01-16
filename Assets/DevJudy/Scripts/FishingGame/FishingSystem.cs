@@ -13,6 +13,7 @@ namespace FishingGame
     {
         [Header("Dependencies: ")]
         [SerializeField] private FishingRodController fishingRodController;
+
         [SerializeField] private CatchEventHandler catchEventHandler;
         [SerializeField] private UITextManager textManager;
         [SerializeField] private FishDisplay fishDisplay;
@@ -29,11 +30,12 @@ namespace FishingGame
 
         // Bools
         private bool fishing;
+        private bool fishDisplayActive;
         public bool PressedCatch { get; set; }
         public bool FishHooked { get; private set; }
 
         private Coroutine fishingRoutine;
-        
+
         private FishingSystem()
         {
             instance = this;
@@ -43,21 +45,21 @@ namespace FishingGame
         {
             if (fishingRodController == null)
                 Debug.LogError("No FishingRodController assigned");
-            
+
             if (catchEventHandler == null)
                 Debug.LogError("No catchEventHandler assigned");
-            
+
             if (fishList == null || fishList.Count <= 0)
                 Debug.LogError("FishingSystem fishList is null");
             else
             {
                 Debug.Log("FishingSystem instance created");
-                
+
                 if (fishDisplay != null)
                     SpawnInFishDisplayObjects();
             }
         }
-        
+
         private void SpawnInFishDisplayObjects()
         {
             for (int i = 0; i < fishList.Count; i++)
@@ -156,14 +158,16 @@ namespace FishingGame
             if (caughtAFish)
             {
                 fishingRodController.IconHandler?.DisplayIcon(EEmotion.Love);
-                
+
                 fishDisplay?.DisplayFish(caughtFish);
+                fishDisplayActive = true;
+
                 textManager?.UpdatePointsText(caughtFish.Points);
 
-                // TBD and replaced with a button to exit the display!!
                 yield return new WaitForSeconds(3f);
-                fishDisplay?.StopDisplayFish();
                 
+                StopFishDisplay();
+
                 fishingRodController.PullBackFishingRod();
             }
             else
@@ -172,6 +176,16 @@ namespace FishingGame
             StopFishing();
 
             yield return null;
+        }
+
+        public void StopFishDisplay()
+        {
+            if (!fishDisplayActive)
+                return;
+            
+            fishDisplay?.StopDisplayFish();
+            
+            fishDisplayActive = false;
         }
     }
 }
