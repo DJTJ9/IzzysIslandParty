@@ -12,7 +12,7 @@ public class BowlingBallSwapper : MonoBehaviour
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
     
-    private BallType CurrentBallType = BallType.Baseball;
+    private BallType m_currentBallType = BallType.Baseball;
     private Collider m_currentCollider;
     
     private void Start()
@@ -26,7 +26,7 @@ public class BowlingBallSwapper : MonoBehaviour
     public void SwapToBasketball() => SwapBall(BallType.Basketball, basketBallCollider);
     public void SwapToFootball()   => SwapBall(BallType.Football, footballCollider);
     
-    public BallType GetCurrentBallType() => CurrentBallType;
+    public BallType GetCurrentBallType() => m_currentBallType;
     
     private void SwapBall(BallType _type, Collider _collider)
     {
@@ -37,6 +37,6 @@ public class BowlingBallSwapper : MonoBehaviour
         m_currentCollider = _collider;
         _collider.enabled = true;
         
-        CurrentBallType = _type;
+        m_currentBallType = _type;
     }
 }
