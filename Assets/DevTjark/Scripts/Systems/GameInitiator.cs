@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 public class GameInitiator : MonoBehaviour
@@ -17,7 +18,7 @@ public class GameInitiator : MonoBehaviour
     [FoldoutGroup("Game Logic", expanded: true)]
     [SerializeField] private Injector injector;
     [SerializeField] private BallSpawner ballSpawner;
-    [SerializeField] private BallMovement ballMovement;
+    [FormerlySerializedAs("bowlingBattlePlayerController")] [FormerlySerializedAs("ballMovement")] [SerializeField] private PlayerControllerBowlingBattle playerControllerBowlingBattle;
     [SerializeField] private UIDocument playerUI;
     [SerializeField] private GameObject bowlingPins;
     [SerializeField] private GameObject gameManager;

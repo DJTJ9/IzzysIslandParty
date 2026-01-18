@@ -1,10 +1,11 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerJoiner : MonoBehaviour
 {
     public Transform[] SpawnPoints;
-    public GameObject[] Players;
+    public SO_BowlingBattlePlayer PlayersSO;
 
     private void Awake()
     {
@@ -17,6 +18,6 @@ public class PlayerJoiner : MonoBehaviour
     [Button]
     public void SpawnPlayer(int playerIndex)
     {
-        Instantiate(Players[playerIndex], SpawnPoints[playerIndex].position, SpawnPoints[playerIndex].rotation);
+        Instantiate(PlayersSO.Players[playerIndex].PlayerPrefab, SpawnPoints[playerIndex].position, SpawnPoints[playerIndex].rotation);
     }
 }

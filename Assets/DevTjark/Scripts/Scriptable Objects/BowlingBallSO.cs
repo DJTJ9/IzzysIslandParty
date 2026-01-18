@@ -8,4 +8,5 @@ public class BowlingBallSO : SerializedScriptableObject
     public GameObject PlayerPrefab;
     public BallType CurrentBallType;
     public GameScoreSO PlayerScore;
+    public Vector3 SpawnPoint;
 }

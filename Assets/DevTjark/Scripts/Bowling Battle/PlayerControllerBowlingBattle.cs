@@ -6,7 +6,7 @@ using DG.Tweening;
 using UnityEngine.Serialization;
 
 [RequireComponent (typeof(CharacterController), typeof(PlayerInput), typeof(Rigidbody))]
-public class BallMovement : MonoBehaviour
+public class PlayerControllerBowlingBattle : MonoBehaviour
 {
     [Header("Input")]
     private Vector2 m_moveInput;
@@ -28,7 +28,7 @@ public class BallMovement : MonoBehaviour
     [SerializeField] private UnityEvent onPause;
     [SerializeField] private UnityEvent onUnpause;
     
-    [SerializeField] private Transform m_startPosition;
+    [SerializeField] private BowlingBallSO bowlingBallSO;
     
     private void Awake()
     {
@@ -48,7 +48,7 @@ public class BallMovement : MonoBehaviour
         UnmapInputActions();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (controller.enabled) Movement();
     }
@@ -68,7 +68,7 @@ public class BallMovement : MonoBehaviour
     private void StartPositionMovement()
     {
         GetMoveDirection();
-        Vector3 move = new Vector3(m_moveInput.x, m_moveInput.y, 0);
+        var move = new Vector3(m_moveInput.x, m_moveInput.y, 0);
 
         move *= m_moveSpeed;
         
@@ -136,8 +136,8 @@ public class BallMovement : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         
-        transform.position = m_startPosition.position;
-        transform.rotation = m_startPosition.rotation;
+        transform.position = bowlingBallSO.SpawnPoint;
+        transform.rotation = Quaternion.identity;
 
 
         controller.enabled = true;

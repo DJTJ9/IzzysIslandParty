@@ -21,12 +21,13 @@ public class BowlingBallSwapper : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         m_currentCollider = baseBallCollider;
     }
+    
+    public BallType GetCurrentBallType() => m_currentBallType;
 
     public void SwapToBaseball()   => SwapBall(BallType.Baseball, baseBallCollider);
     public void SwapToBasketball() => SwapBall(BallType.Basketball, basketBallCollider);
     public void SwapToFootball()   => SwapBall(BallType.Football, footballCollider);
     
-    public BallType GetCurrentBallType() => m_currentBallType;
     
     private void SwapBall(BallType _type, Collider _collider)
     {

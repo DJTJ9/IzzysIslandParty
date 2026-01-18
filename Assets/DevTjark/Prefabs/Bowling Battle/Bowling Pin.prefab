@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 277503184758822462}
   - component: {fileID: 3109511429298146264}
   - component: {fileID: 295255544833310227}
+  - component: {fileID: 5111911040418264657}
   - component: {fileID: 5682450593139216764}
   - component: {fileID: 1688124043612628536}
   - component: {fileID: 7120173112538488075}
   - component: {fileID: 8371212222233479860}
-  - component: {fileID: 4651387836562361608}
   - component: {fileID: 2265647874211253717}
+  - component: {fileID: 5067208653087376029}
   m_Layer: 0
   m_Name: Bowling Pin
   m_TagString: Untagged
@@ -52,8 +53,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFallenDotProductThreshold: 0.7
-  ballSwapper: {fileID: 0}
   scoreSO: {fileID: 11400000, guid: 9ff12d17af2c8f24589bf553520703f2, type: 2}
+  ballTypeChecker: {fileID: 0}
   pointMultiplierSO: {fileID: 11400000, guid: 8f7cd6b7dad8108469893885f5217ba3, type: 2}
 --- !u!114 &295255544833310227
 MonoBehaviour:
@@ -67,6 +68,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0285bb8eb7754f1a8270fc3f9de3c3a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5111911040418264657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7193320534443702133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3109511429298146264}
+        m_TargetAssemblyTypeName: ScoreCalculator, Assembly-CSharp
+        m_MethodName: ResetScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5682450593139216764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,27 +205,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4651387836562361608
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7193320534443702133}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.12700069, y: 0.38063115, z: 0.12700067}
-  m_Center: {x: 0.0000000037252903, y: 0.19013554, z: -0.000000007450581}
 --- !u!54 &2265647874211253717
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -224,3 +232,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!64 &5067208653087376029
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7193320534443702133}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: -1
+  m_Mesh: {fileID: 4300000, guid: fb31bf3524f7aa445b62a36cc726dc9f, type: 2}
