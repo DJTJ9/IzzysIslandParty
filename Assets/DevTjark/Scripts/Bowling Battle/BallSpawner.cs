@@ -19,7 +19,7 @@ public class BallSpawner : MonoBehaviour, IDependencyProvider
 
     private void CreateAndSetFirstBallInstance()
     {
-        CurrentBallInstance = Instantiate(ballCollectionSO.BowlingBalls[BallType.Basketball].ball,
+        CurrentBallInstance = Instantiate(ballCollectionSO.BowlingBalls[BallType.Basketball].PlayerPrefab,
             transform.position, transform.rotation);
 
         CurrentBallSO = ballCollectionSO.BowlingBalls[BallType.Basketball];
@@ -30,7 +30,7 @@ public class BallSpawner : MonoBehaviour, IDependencyProvider
         if (CurrentBallInstance != null)
             Destroy(CurrentBallInstance);
         
-        CurrentBallInstance = Instantiate(_ballSO.ball, transform.position, transform.rotation);
+        CurrentBallInstance = Instantiate(_ballSO.PlayerPrefab, transform.position, transform.rotation);
         CurrentBallSO = _ballSO;
     }
     

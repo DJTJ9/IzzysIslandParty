@@ -4,10 +4,9 @@ using UnityEngine;
 public class BallCamera : MonoBehaviour
 {
     [Header("Settings")]
+    [SerializeField] private Transform target;
     [SerializeField] private Vector3 offset;
     
-    [Inject] private BallSpawner ballSpawner;
-
     private void Update()
     {
         SetCameraPosition();
@@ -15,7 +14,7 @@ public class BallCamera : MonoBehaviour
     
     private void SetCameraPosition()
     {
-        if (ballSpawner.CurrentBallInstance == null) return;
-        transform.position = ballSpawner.CurrentBallInstance.transform.position + offset;
+        if (target == null) return;
+        transform.position = target.transform.position + offset;
     }
 }

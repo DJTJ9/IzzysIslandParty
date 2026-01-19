@@ -142,21 +142,21 @@ public class PauseMenuEvents : MonoBehaviour
         Time.timeScale = 1f;
     }
     
-    public void ShowEndscreenUI()
+    public void ShowEndScreenUI()
     {
         endScreenUI.style.display = DisplayStyle.Flex;
     }
     
-    public void HideEndscreenUI()
+    public void HideEndScreenUI()
     {
         endScreenUI.style.display = DisplayStyle.None;
     }
     
     private void OnRestartGameClick(ClickEvent _evt)
     {
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         onRestart.Invoke();
         Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void OnResumeGameClick(ClickEvent _evt)
