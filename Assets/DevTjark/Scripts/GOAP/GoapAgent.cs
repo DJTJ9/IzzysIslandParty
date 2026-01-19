@@ -7,23 +7,22 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class GoapAgent : MonoBehaviour {
+    [Header("Settings")]
+    [SerializeField] float cooldownTimerDuration = 5f;
+    
     [Header("Sensors")] 
     [SerializeField] Sensor chaseSensor;
     [SerializeField] Sensor attackSensor;
     
     [Header("Known Locations")] 
+    [SerializeField] Transform playerTransform;
     // [SerializeField] Transform restingPosition;
     // [SerializeField] Transform foodShack;
     // [SerializeField] Transform doorOnePosition;
     // [SerializeField] Transform doorTwoPosition;
     
-    NavMeshAgent navMeshAgent;
     Rigidbody rb;
     GoapRigidbodyMovement rigidbodyMovement;
-    
-    [Header("Stats")] 
-    public float health = 100;
-    public float stamina = 100;
     
     CountdownTimer statsTimer;
     CountdownTimer moveCooldownTimer;
@@ -45,7 +44,6 @@ public class GoapAgent : MonoBehaviour {
     IGoapPlanner gPlanner;
     
     void Awake() {
-        navMeshAgent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         rigidbodyMovement = GetComponent<GoapRigidbodyMovement>();
@@ -65,9 +63,7 @@ public class GoapAgent : MonoBehaviour {
         BeliefFactory factory = new BeliefFactory(this, beliefs);
         
         factory.AddBelief("Nothing", () => false);
-        
-        factory.AddBelief("AgentIdle", () => !navMeshAgent.hasPath);
-        factory.AddBelief("AgentMoving", () => navMeshAgent.hasPath);
+
         // factory.AddBelief("AgentHealthLow", () => health < 30);
         // factory.AddBelief("AgentIsHealthy", () => health >= 50);
         // factory.AddBelief("AgentStaminaLow", () => stamina < 10);
@@ -80,6 +76,8 @@ public class GoapAgent : MonoBehaviour {
         // factory.AddLocationBelief("AgentAtDoorTwo", 3f, doorTwoPosition);
         // factory.AddLocationBelief("AgentAtRestingPosition", 3f, restingPosition);
         // factory.AddLocationBelief("AgentAtFoodShack", 3f, foodShack);
+
+        factory.AddLocationBelief("Player", 2f, playerTransform);
         
         factory.AddSensorBelief("PlayerInChaseRange", chaseSensor);
         factory.AddSensorBelief("PlayerInAttackRange", attackSensor);
@@ -100,7 +98,7 @@ public class GoapAgent : MonoBehaviour {
             .Build());
 
         actions.Add(new AgentAction.Builder("MoveToNextPosition")
-            .WithStrategy(new AimForNextPositionStrategy(navMeshAgent, rigidbodyMovement))
+            .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, cooldownTimerDuration))
             .AddEffect(beliefs["FindNextDestination"])
             .Build());
         
@@ -110,13 +108,13 @@ public class GoapAgent : MonoBehaviour {
         //     .Build());
 
         actions.Add(new AgentAction.Builder("ChasePlayer")
-            .WithStrategy(new MoveStrategy(navMeshAgent, () => beliefs["PlayerInChaseRange"].Location))
+            .WithStrategy(new MoveStrategy(rigidbodyMovement ,() => playerTransform.position, cooldownTimerDuration))
             .AddPrecondition(beliefs["PlayerInChaseRange"])
-            .AddEffect(beliefs["PlayerInAttackRange"])
+            .AddEffect(beliefs["AttackingPlayer"])
             .Build());
 
         actions.Add(new AgentAction.Builder("AttackPlayer")
-            .WithStrategy(new AttackStrategy())
+            .WithStrategy(new AttackStrategy(rigidbodyMovement ,() => playerTransform.position, cooldownTimerDuration))
             .AddPrecondition(beliefs["PlayerInAttackRange"])
             .AddEffect(beliefs["AttackingPlayer"])
             .Build());
@@ -210,8 +208,8 @@ public class GoapAgent : MonoBehaviour {
     void UpdateStats() {
         // stamina += InRangeOf(restingPosition.position, 3f) ? 20 : -10;
         // health += InRangeOf(foodShack.position, 3f) ? 20 : -5;
-        stamina = Mathf.Clamp(stamina, 0, 100);
-        health = Mathf.Clamp(health, 0, 100);
+        // stamina = Mathf.Clamp(stamina, 0, 100);
+        // health = Mathf.Clamp(health, 0, 100);
     }
     
     bool InRangeOf(Vector3 pos, float range) => Vector3.Distance(transform.position, pos) < range;

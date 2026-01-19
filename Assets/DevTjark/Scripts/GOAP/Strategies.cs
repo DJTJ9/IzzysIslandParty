@@ -28,39 +28,64 @@ public interface IActionStrategy
 
 public class AttackStrategy : IActionStrategy
 {
+    readonly GoapRigidbodyMovement rigidbodyMovement;
+    private CountdownTimer shootCooldownTimer;
+    private readonly float shootCooldownTimerDuration;
+    readonly Func<Vector3> destination;
+    
     public bool CanPerform => true; // Agent can always attack
     public bool Complete   { get; private set; }
 
-    readonly CountdownTimer timer;
 
-    public AttackStrategy()
+    public AttackStrategy(GoapRigidbodyMovement _rigidbodyMovement, Func<Vector3> _destination, float _shootCooldownTimerDuration)
     {
+        rigidbodyMovement = _rigidbodyMovement;
+        destination = _destination;
+        shootCooldownTimerDuration = _shootCooldownTimerDuration;
     }
 
     public void Start()
     {
-        timer.Start();
+        shootCooldownTimer = new CountdownTimer(shootCooldownTimerDuration);
+        shootCooldownTimer.OnTimerStart += () => Complete = false;
+        shootCooldownTimer.OnTimerStop += () => Complete = true;
+        
+        rigidbodyMovement.Shoot(destination() + new Vector3(0, 1f, 0));
+        shootCooldownTimer.Start();
     }
-
-    public void Update(float _deltaTime) => timer.Tick(_deltaTime);
 }
 
 public class MoveStrategy : IActionStrategy
 {
-    readonly NavMeshAgent agent;
+    readonly GoapRigidbodyMovement rigidbodyMovement;
+    private CountdownTimer shootCooldownTimer;
+    private readonly float shootCooldownTimerDuration;
     readonly Func<Vector3> destination;
 
     public bool CanPerform => !Complete;
-    public bool Complete   => agent.remainingDistance <= 2f && !agent.pathPending;
+    public bool Complete   { get; private set; }
 
-    public MoveStrategy(NavMeshAgent agent, Func<Vector3> destination)
+    public MoveStrategy(GoapRigidbodyMovement _rigidbodyMovement, Func<Vector3> _destination, float _shootCooldownTimerDuration)
     {
-        this.agent = agent;
-        this.destination = destination;
+        rigidbodyMovement = _rigidbodyMovement;
+        destination = _destination;
+        shootCooldownTimerDuration = _shootCooldownTimerDuration;
     }
 
-    public void Start() => agent.SetDestination(destination());
-    public void Stop()  => agent.ResetPath();
+    public void Start()
+    {
+        shootCooldownTimer = new CountdownTimer(shootCooldownTimerDuration);
+        shootCooldownTimer.OnTimerStart += () => Complete = false;
+        shootCooldownTimer.OnTimerStop += () => Complete = true;
+        
+        rigidbodyMovement.Shoot(destination());
+        shootCooldownTimer.Start();
+    }
+
+    public void Stop()
+    {
+        
+    }
 }
 
 public class AimForNextPositionStrategy : IActionStrategy
@@ -68,30 +93,28 @@ public class AimForNextPositionStrategy : IActionStrategy
     private readonly NavMeshAgent agent;
     private readonly GoapRigidbodyMovement rigidbodyMovement;
     private CountdownTimer shootCooldownTimer;
+    private readonly float shootCooldownTimerDuration;
     private readonly float shootRange = 15f;
 
     public bool CanPerform => !Complete;
     public bool Complete   { get; private set; }
 
-    public AimForNextPositionStrategy(NavMeshAgent _agent, GoapRigidbodyMovement _rigidbodyMovement)
+    public AimForNextPositionStrategy(GoapRigidbodyMovement _rigidbodyMovement, float _shootCooldownTimerDuration)
     {
-        agent = _agent;
         rigidbodyMovement = _rigidbodyMovement;
+        shootCooldownTimerDuration = _shootCooldownTimerDuration;
     }
 
     public void Start()
     {
-        shootCooldownTimer = new CountdownTimer(5f);
-        shootCooldownTimer.OnTimerStart += () =>
-        {
-            Complete = false;
-        };
+        shootCooldownTimer = new CountdownTimer(shootCooldownTimerDuration);
+        shootCooldownTimer.OnTimerStart += () => Complete = false;
         shootCooldownTimer.OnTimerStop += () => Complete = true;
         
         Vector3 randomDirection = (UnityEngine.Random.insideUnitSphere * shootRange);
         randomDirection.y = 0;
 
-        rigidbodyMovement.Shoot(randomDirection + new Vector3(0, 3f, 0));
+        rigidbodyMovement.Shoot(randomDirection + new Vector3(0, 1f, 0));
         shootCooldownTimer.Start();
         // if (NavMesh.SamplePosition(agent.transform.position + randomDirection, out var hit, shootRange, 1)) {
         // }
