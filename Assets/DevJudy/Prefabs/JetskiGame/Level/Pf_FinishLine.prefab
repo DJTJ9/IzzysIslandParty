@@ -175,7 +175,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8799704334434963231, guid: ee05a77639c729f448c842f5462f0b4b, type: 3}
 --- !u!1 &6966963601895908853
@@ -208,8 +208,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5446611846602543392}
   - {fileID: 4693906137463263359}
+  - {fileID: 5446611846602543392}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8346465286866406622
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finishLineTrigger: {fileID: 8316314288494755625}
-  jetskiGameLevelService: {fileID: 0}
+  levelService: {fileID: 0}
   secondsToEndLevel: 3
   playerLayerMask:
     serializedVersion: 2

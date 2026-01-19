@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using ImprovedTimers;
 using UnityEngine;
@@ -8,17 +9,20 @@ namespace HurdleGame
     {
         [Header("Level variables: ")]
         [SerializeField] private float levelDurationInSeconds;
+
         private CountdownTimer timerUntilGoalSpawns;
 
         [Header("Movement variables: ")]
         [SerializeField] private Vector3 moveDir;
+
         private Vector3 colliderMoveDir;
 
         [SerializeField] private float spawnPositionX;
 
         [Header("Objects: ")]
-        [SerializeField] private List<GameObject> objectsToMove;
-        [SerializeField] private GameObject finishLine;
+        [SerializeField] private List<Rigidbody> objectsToMove;
+
+        [SerializeField] private Rigidbody finishLine;
 
         private void Start()
         {
@@ -32,11 +36,15 @@ namespace HurdleGame
         {
             _obj.transform.position = new Vector3(spawnPositionX, _obj.transform.position.y, _obj.transform.position.z);
         }
-
+        
         private void FixedUpdate()
         {
-            foreach (GameObject lane in objectsToMove)
-                lane.transform.position += moveDir * Time.fixedDeltaTime;
+            for (var index = 0; index < objectsToMove.Count; index++)
+            {
+                var rb = objectsToMove[index];
+                
+                rb.linearVelocity = moveDir * (100 * Time.fixedDeltaTime);
+            }
         }
 
         private void SpawnInFinishLine()
