@@ -1,5 +1,6 @@
 using System.Collections;
 using HelperScripts;
+using Interfaces;
 using Pathfinding;
 using TMPro;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.Events;
 
 namespace Service
 {
-    public class JetskiGameLevelService : MonoBehaviour
+    public class JetskiGameLevelService : MonoBehaviour, ILevelService
     {
         #region consts
 
@@ -20,18 +21,14 @@ namespace Service
 
         [Header("Level start/end: ")]
         [SerializeField] private TextMeshProUGUI levelCountdownText;
-
         [SerializeField] private int secondsToStartLevel;
-
         [SerializeField] private UnityEvent onLevelStart;
         [SerializeField] private UnityEvent onLevelEnd;
 
         [Header("Level running: ")]
         // !! This is kinda only for the racing-games...
         [SerializeField] private Transform goalTransform;
-
         [SerializeField] private GameObject[] placementOrder;
-
         [SerializeField] private bool checkPlacements;
         private bool levelStarted;
 
@@ -76,7 +73,7 @@ namespace Service
             StartLevel();
         }
 
-        private void StartLevel()
+        public void StartLevel()
         {
             levelCountdownCoroutine = StartCoroutine(CountdownToLevelStart());
         }
