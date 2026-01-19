@@ -16,8 +16,8 @@ public class PlayerJoiner : MonoBehaviour
     private void Awake()
     {
         // playerInputManager = FindFirstObjectByType<PlayerInputManager>();
-        SpawnPlayer(0);
-        SpawnPlayer(1);
+        SpawnPlayer(playerIndex);
+        SpawnPlayer(playerIndex);
         // Instantiate(Player2, Spawnpoint2.position, Spawnpoint2.rotation);
         // Instantiate(Player3, Spawnpoint3.position, Spawnpoint3.rotation);
     }
@@ -30,6 +30,7 @@ public class PlayerJoiner : MonoBehaviour
     private void AddPlayer(PlayerInput _playerInput)
     {
         players.Add(_playerInput);
+        ++playerIndex;
         
        // _playerInput.transform.position = SpawnPoints[playerIndex].transform.position;
        //  playerIndex++;
