@@ -1,12 +1,18 @@
-﻿using DependencyInjection;
+﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ScoreCalculator : MonoBehaviour
 {
     [SerializeField] private float isFallenDotProductThreshold = 0.7f;
     [SerializeField] private GameScoreSO scoreSO;
-    
-    [Inject] private BallSpawner ballSpawner;
+    [SerializeField] private BallTypeChecker ballTypeChecker;
+    [SerializeField] private SO_BowlingBallPointMultipliers pointMultiplierSO;
+
+    private void OnEnable()
+    {
+        scoreSO.Value = 0f;
+    }
 
     public void CheckScore() 
     {
@@ -15,7 +21,9 @@ public class ScoreCalculator : MonoBehaviour
         
         if (isFallen)
         {
-            scoreSO.Value += ballSpawner.CurrentBallSO.pointMultiplier;
+            scoreSO.Value += pointMultiplierSO.BallPointMultipliers[ballTypeChecker.GetCurrentBallType()];
         }
     }
+    
+    public void ResetScore() => scoreSO.Value = 0f;
 }
