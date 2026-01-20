@@ -4,31 +4,31 @@ using UnityEngine;
 
 public class BeliefFactory {
     readonly GoapAgent agent;
-    readonly Dictionary<string, AgentBelief> beliefs;
+    readonly Dictionary<Beliefs, AgentBelief> beliefs;
     
-    public BeliefFactory(GoapAgent agent, Dictionary<string, AgentBelief> beliefs) {
+    public BeliefFactory(GoapAgent agent, Dictionary<Beliefs, AgentBelief> beliefs) {
         this.agent = agent;
         this.beliefs = beliefs;
     }
     
-    public void AddBelief(string key, Func<bool> condition) {
+    public void AddBelief(Beliefs key, Func<bool> condition) {
         beliefs.Add(key, new AgentBelief.Builder(key)
             .WithCondition(condition)
             .Build());
     }
     
-    public void AddSensorBelief(string key, Sensor sensor) {
+    public void AddSensorBelief(Beliefs key, Sensor sensor) {
         beliefs.Add(key, new AgentBelief.Builder(key)
             .WithCondition(() => sensor.IsTargetInRange)
             .WithLocation(() => sensor.TargetPosition)
             .Build());
     }
     
-    public void AddLocationBelief(string key, float distance, Transform locationCondition) {
+    public void AddLocationBelief(Beliefs key, float distance, Transform locationCondition) {
         AddLocationBelief(key, distance, locationCondition.position);
     }
     
-    public void AddLocationBelief(string key, float distance, Vector3 locationCondition) {
+    public void AddLocationBelief(Beliefs key, float distance, Vector3 locationCondition) {
         beliefs.Add(key, new AgentBelief.Builder(key)
             .WithCondition(() => InRangeOf(locationCondition, distance))
             .WithLocation(() => locationCondition)
@@ -39,14 +39,14 @@ public class BeliefFactory {
 }
 
 public class AgentBelief {
-    public string Name { get; }
+    public Beliefs Name { get; }
     
     Func<bool> condition = () => false;
     Func<Vector3> observedLocation = () => Vector3.zero;
     
     public Vector3 Location => observedLocation();
     
-    AgentBelief(string name) {
+    AgentBelief(Beliefs name) {
         Name = name;
     }
     
@@ -55,7 +55,7 @@ public class AgentBelief {
     public class Builder {
         readonly AgentBelief belief;
         
-        public Builder(string name) {
+        public Builder(Beliefs name) {
             belief = new AgentBelief(name);
         }
         

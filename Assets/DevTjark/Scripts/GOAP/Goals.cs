@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 
 public class AgentGoal {
-    public string               Name           { get; }
+    public Goals               Name           { get; }
     public float                Priority       { get; private set; }
     public HashSet<AgentBelief> DesiredEffects { get; } = new();
     
-    AgentGoal(string name) {
+    AgentGoal(Goals name) {
         Name = name;
     }
     
     public class Builder {
         readonly AgentGoal goal;
 
-        public Builder(string name) {
+        public Builder(Goals name) {
             goal = new AgentGoal(name);
         }
         
