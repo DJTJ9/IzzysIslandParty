@@ -90,8 +90,8 @@ public class GoapAgent : MonoBehaviour {
         factory.AddLocationBelief("PlayerClose", 15f, playerTransform);
         factory.AddLocationBelief("PlayerChasable", 30f, playerTransform);
         
-        factory.AddSensorBelief("PlayerInChaseRange", chaseSensor);
-        factory.AddSensorBelief("PlayerInAttackRange", attackSensor);
+        // factory.AddSensorBelief("PlayerInChaseRange", chaseSensor);
+        // factory.AddSensorBelief("PlayerInAttackRange", attackSensor);
         factory.AddBelief("AttackingPlayer", () => false); // Player can always be attacked, this will never become true
     }
 
@@ -215,7 +215,7 @@ public class GoapAgent : MonoBehaviour {
             .WithDesiredEffect(beliefs["FindNextDestination"])
             .Build());
         
-        goals.Add(new AgentGoal.Builder("SeekAndDestroy")
+        goals.Add(new AgentGoal.Builder("AttackPlayer")
             .WithPriority(250)
             .WithDesiredEffect(beliefs["AttackingPlayer"])
             .Build());
