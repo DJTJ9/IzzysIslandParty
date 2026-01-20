@@ -67,7 +67,7 @@ public class RigidbodyMovement : MonoBehaviour
         camFwd.y = 0f; camRight.y = 0f;
         camFwd.Normalize(); camRight.Normalize();
 
-        var worldDir = camRight * _direction.x + camFwd * _direction.z;
+        var worldDir = camRight * _direction.x + camFwd * _direction.y;
         
         rigidbody.AddForce(worldDir.normalized * pushForce, ForceMode.Impulse);
         

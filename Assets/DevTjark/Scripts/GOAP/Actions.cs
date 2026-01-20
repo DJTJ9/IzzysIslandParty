@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 public class AgentAction {
-    public string Name { get; }
+    public Actions Name { get; }
     public float  Cost { get; private set; }
     
     public HashSet<AgentBelief> Preconditions { get; } = new();
@@ -10,7 +10,7 @@ public class AgentAction {
     IActionStrategy strategy;
     public bool Complete => strategy.Complete;
     
-    AgentAction(string name) {
+    AgentAction(Actions name) {
         Name = name;
     }
     
@@ -36,7 +36,7 @@ public class AgentAction {
     public class Builder {
         readonly AgentAction action;
         
-        public Builder(string name) {
+        public Builder(Actions name) {
             action = new AgentAction(name) {
                 Cost = 1
             };

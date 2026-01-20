@@ -37,7 +37,7 @@ public class AttackStrategy : IActionStrategy
     public bool Complete   { get; private set; }
 
 
-    public AttackStrategy(GoapRigidbodyMovement _rigidbodyMovement, Func<Vector3> _destination, float _shootCooldownTimerDuration)
+    public AttackStrategy(GoapRigidbodyMovement _rigidbodyMovement, Func<Vector3> _destination, float _shootCooldownTimerDuration = 5f)
     {
         rigidbodyMovement = _rigidbodyMovement;
         destination = _destination;
@@ -52,6 +52,11 @@ public class AttackStrategy : IActionStrategy
         
         rigidbodyMovement.Shoot(destination() + new Vector3(0, 1f, 0));
         shootCooldownTimer.Start();
+    }
+    
+    public void Stop()
+    {
+        shootCooldownTimer.Dispose();
     }
 }
 
@@ -84,7 +89,7 @@ public class MoveStrategy : IActionStrategy
 
     public void Stop()
     {
-        
+        shootCooldownTimer.Dispose();
     }
 }
 
@@ -92,6 +97,7 @@ public class AimForNextPositionStrategy : IActionStrategy
 {
     private readonly NavMeshAgent agent;
     private readonly GoapRigidbodyMovement rigidbodyMovement;
+    readonly Func<Vector3> finish;
     private CountdownTimer shootCooldownTimer;
     private readonly float shootCooldownTimerDuration;
     private readonly float shootRange = 15f;
@@ -99,9 +105,10 @@ public class AimForNextPositionStrategy : IActionStrategy
     public bool CanPerform => !Complete;
     public bool Complete   { get; private set; }
 
-    public AimForNextPositionStrategy(GoapRigidbodyMovement _rigidbodyMovement, float _shootCooldownTimerDuration)
+    public AimForNextPositionStrategy(GoapRigidbodyMovement _rigidbodyMovement, Func<Vector3> _finish, float _shootCooldownTimerDuration)
     {
         rigidbodyMovement = _rigidbodyMovement;
+        finish = _finish;
         shootCooldownTimerDuration = _shootCooldownTimerDuration;
     }
 
@@ -111,19 +118,36 @@ public class AimForNextPositionStrategy : IActionStrategy
         shootCooldownTimer.OnTimerStart += () => Complete = false;
         shootCooldownTimer.OnTimerStop += () => Complete = true;
         
-        Vector3 randomDirection = (UnityEngine.Random.insideUnitSphere * shootRange);
-        randomDirection.y = 0;
-
-        rigidbodyMovement.Shoot(randomDirection + new Vector3(0, 1f, 0));
+        Vector3 currentPosition = rigidbodyMovement.transform.position;
+        Vector3 finishPosition = finish();
+        float currentDistanceToFinish = Vector3.Distance(currentPosition, finishPosition);
+        
+        Vector3 randomDirection = (finishPosition - currentPosition).normalized + new Vector3(0f, 1f, 0);
+        // float newDistanceToFinish;
+        //
+        // do
+        // {
+        //     randomDirection = (UnityEngine.Random.insideUnitSphere * shootRange);
+        //     
+        //     Vector3 potentialNewPosition = currentPosition + randomDirection;
+        //     newDistanceToFinish = Vector3.Distance(potentialNewPosition, finishPosition);
+        // } 
+        // while (newDistanceToFinish >= currentDistanceToFinish);
+        //
+        // randomDirection.y = 1.5f;
+        rigidbodyMovement.Shoot(finish());
         shootCooldownTimer.Start();
-        // if (NavMesh.SamplePosition(agent.transform.position + randomDirection, out var hit, shootRange, 1)) {
-        // }
     }
 
     // public void Update(float _deltaTime)
     // {
     //     shootCooldownTimer.Tick(_deltaTime);
     // }
+    
+    public void Stop()
+    {
+        shootCooldownTimer.Dispose();
+    }
 }
 
 public class WanderStrategy : IActionStrategy
