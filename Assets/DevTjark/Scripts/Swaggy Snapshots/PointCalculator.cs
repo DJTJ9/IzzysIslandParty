@@ -7,10 +7,10 @@ public class PointCalculator : MonoBehaviour
 {
     [FoldoutGroup("Face Point Settings", expanded: true)]
     [SerializeField] private float m_faceForwardPointValue = 1f;
-    [SerializeField] private float m_lookAwayAngleTreshold = 45f;
-    [SerializeField] private float minRotationAngle = -45f;
-    [SerializeField] private float maxRotationAngle = -135f;
-    [SerializeField] private Camera mainCamera;
+    // [SerializeField] private float m_lookAwayAngleTreshold = 45f;
+    // [SerializeField] private float minRotationAngle = -45f;
+    // [SerializeField] private float maxRotationAngle = -135f;
+    // [SerializeField] private Camera mainCamera;
     
     [FoldoutGroup("Face Expression Settings", expanded: true)]
     [SerializeField] private float m_happyFacePointValue = 1f;
@@ -30,18 +30,18 @@ public class PointCalculator : MonoBehaviour
     private Vector3 m_cameraDirection;
     private bool m_turnedAwayFromCamera;
 
-    private void Awake()
-    {
-        m_faceDirection = transform.forward;
-        m_cameraDirection = (mainCamera.transform.position - transform.position).normalized;
-    }
+    // private void Awake()
+    // {
+    //     m_faceDirection = transform.forward;
+    //     m_cameraDirection = (mainCamera.transform.position - transform.position).normalized;
+    // }
     
-    private void Update()
-    {
-        m_faceDirection = transform.forward;
-        m_cameraDirection = (mainCamera.transform.position - transform.position).normalized;
-        // m_currentYRotation = transform.eulerAngles.y;
-    }
+    // private void Update()
+    // {
+    //     m_faceDirection = transform.forward;
+    //     m_cameraDirection = (mainCamera.transform.position - transform.position).normalized;
+    //     // m_currentYRotation = transform.eulerAngles.y;
+    // }
 
     public void CalculatePoints()
     {
@@ -52,8 +52,8 @@ public class PointCalculator : MonoBehaviour
 
     private void CalculatePointsForFaceDirection()
     {
-        var dotProduct = Vector3.Dot(m_faceDirection, m_cameraDirection);
-        m_turnedAwayFromCamera = dotProduct < Mathf.Cos(Mathf.Deg2Rad * m_lookAwayAngleTreshold);
+        // var dotProduct = Vector3.Dot(m_faceDirection, m_cameraDirection);
+        // m_turnedAwayFromCamera = dotProduct < Mathf.Cos(Mathf.Deg2Rad * m_lookAwayAngleTreshold);
         
         if (m_turnedAwayFromCamera) return;
         
@@ -63,7 +63,7 @@ public class PointCalculator : MonoBehaviour
 
     private void CalculatePointsForFaceExpression()
     {
-        var currentFaceMaterial = faceMeshRenderer.materials[0];
+        var currentFaceMaterial = faceMeshRenderer.sharedMaterial;
         var isHappyFace = faceSwapSO.IsHappyFace(currentFaceMaterial);
 
         if (!isHappyFace) return;
@@ -81,9 +81,12 @@ public class PointCalculator : MonoBehaviour
         scoreSO.Value += m_danceMovePointValue;
         Debug.Log("Points added for cool dance move!");
     }
+    
+    public void SetTurnedAwayFromCameraToTrue() => m_turnedAwayFromCamera = true;
+    public void SetTurnedAwayFromCameraToFalse() => m_turnedAwayFromCamera = false;
 
-    private bool isFacingCamera()
-    {
-        return m_currentYRotation >= maxRotationAngle && m_currentYRotation <= minRotationAngle;
-    }
+    // private bool isFacingCamera()
+    // {
+    //     return m_currentYRotation >= maxRotationAngle && m_currentYRotation <= minRotationAngle;
+    // }
 }
