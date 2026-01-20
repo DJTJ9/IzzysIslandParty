@@ -4,9 +4,9 @@ public class GroundChecker : MonoBehaviour {
     public bool isActive = true;
 
     [Header("Settings")]
-    [SerializeField] private LayerMask groundCheckLayerMask;
-    [SerializeField] private Vector3 groundCheckPosition;
-    [SerializeField] private Vector3 groundCheckSize;
+    public LayerMask groundCheckLayerMask;
+    public Vector3 groundCheckPosition;
+    public Vector3 groundCheckSize;
 
     [field: SerializeField]
     public bool IsGrounded { get; private set; }
