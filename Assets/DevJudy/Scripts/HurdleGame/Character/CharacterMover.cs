@@ -9,6 +9,7 @@ namespace HurdleGame
 
         [Header("Movement variables: ")]
         [SerializeField] private FloatReference moveSpeed;
+        [SerializeField] private FloatReference velocity;
         private float moveDirMultiplier = 100f;
         private Vector3 colliderMoveDir;
 
@@ -25,7 +26,11 @@ namespace HurdleGame
 
         private void FixedUpdate()
         {
-            rb.linearVelocity = new Vector3((moveDirMultiplier * moveSpeed.Value) * Time.deltaTime, rb.linearVelocity.y, 0f);
+            // !! This shit keeps bopping up and down
+            rb.linearVelocity = new Vector3((moveDirMultiplier * moveSpeed.Value) * Time.deltaTime, 0f, rb.linearVelocity.z);
+            
+            
+            //Ditzelgames.PhysicsHelper.ApplyForceToReachVelocity(rb, new Vector3(velocity.Value, 0f, 0f), (moveSpeed.Value * moveDirMultiplier) * Time.deltaTime);
             
             prevYVelocity = rb.linearVelocity.y;
         }
