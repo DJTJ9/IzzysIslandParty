@@ -16,6 +16,7 @@ public class GoapAgent : MonoBehaviour {
     
     [Header("Known Locations")] 
     [SerializeField] Transform playerTransform;
+    [SerializeField] Transform finishTransform;
     // [SerializeField] Transform restingPosition;
     // [SerializeField] Transform foodShack;
     // [SerializeField] Transform doorOnePosition;
@@ -45,7 +46,7 @@ public class GoapAgent : MonoBehaviour {
     
     void Awake() {
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
+        // rb.freezeRotation = true;
         rigidbodyMovement = GetComponent<GoapRigidbodyMovement>();
         
         gPlanner = new GoapPlanner();
@@ -77,7 +78,9 @@ public class GoapAgent : MonoBehaviour {
         // factory.AddLocationBelief("AgentAtRestingPosition", 3f, restingPosition);
         // factory.AddLocationBelief("AgentAtFoodShack", 3f, foodShack);
 
-        factory.AddLocationBelief("Player", 2f, playerTransform);
+        factory.AddLocationBelief("FinishInReach", 15f, finishTransform);
+        factory.AddLocationBelief("PlayerClose", 15f, playerTransform);
+        factory.AddLocationBelief("PlayerChasable", 30f, playerTransform);
         
         factory.AddSensorBelief("PlayerInChaseRange", chaseSensor);
         factory.AddSensorBelief("PlayerInAttackRange", attackSensor);
@@ -98,7 +101,7 @@ public class GoapAgent : MonoBehaviour {
             .Build());
 
         actions.Add(new AgentAction.Builder("MoveToNextPosition")
-            .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, cooldownTimerDuration))
+            .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => finishTransform.position, cooldownTimerDuration))
             .AddEffect(beliefs["FindNextDestination"])
             .Build());
         
@@ -109,13 +112,13 @@ public class GoapAgent : MonoBehaviour {
 
         actions.Add(new AgentAction.Builder("ChasePlayer")
             .WithStrategy(new MoveStrategy(rigidbodyMovement ,() => playerTransform.position, cooldownTimerDuration))
-            .AddPrecondition(beliefs["PlayerInChaseRange"])
+            .AddPrecondition(beliefs["PlayerChasable"])
             .AddEffect(beliefs["AttackingPlayer"])
             .Build());
 
         actions.Add(new AgentAction.Builder("AttackPlayer")
             .WithStrategy(new AttackStrategy(rigidbodyMovement ,() => playerTransform.position, cooldownTimerDuration))
-            .AddPrecondition(beliefs["PlayerInAttackRange"])
+            .AddPrecondition(beliefs["PlayerClose"])
             .AddEffect(beliefs["AttackingPlayer"])
             .Build());
         
@@ -195,6 +198,9 @@ public class GoapAgent : MonoBehaviour {
         statsTimer = new CountdownTimer(2f);
         statsTimer.OnTimerStop += () => {
             UpdateStats();
+            SetupBeliefs();
+            SetupActions();
+            SetupGoals();
             statsTimer.Start();
         };
         statsTimer.Start();
@@ -214,15 +220,15 @@ public class GoapAgent : MonoBehaviour {
     
     bool InRangeOf(Vector3 pos, float range) => Vector3.Distance(transform.position, pos) < range;
     
-    void OnEnable() => chaseSensor.OnTargetChanged += HandleTargetChanged;
-    void OnDisable() => chaseSensor.OnTargetChanged -= HandleTargetChanged;
-    
-    void HandleTargetChanged() {
-        Debug.Log("Target changed, clearing current action and goal");
-        // Force the planner to re-evaluate the plan
-        currentAction = null;
-        currentGoal = null;
-    }
+    // void OnEnable() => chaseSensor.OnTargetChanged += HandleTargetChanged;
+    // void OnDisable() => chaseSensor.OnTargetChanged -= HandleTargetChanged;
+    //
+    // void HandleTargetChanged() {
+    //     Debug.Log("Target changed, clearing current action and goal");
+    //     // Force the planner to re-evaluate the plan
+    //     currentAction = null;
+    //     currentGoal = null;
+    // }
 
     void Update() {
         statsTimer.Tick(Time.deltaTime);
