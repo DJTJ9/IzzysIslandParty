@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class PlayerUIEvents : MonoBehaviour
+public class PlayerUIBowlingBattle : MonoBehaviour
 {
     [SerializeField] private BowlingBallCollectionSO ballCollectionSO;
 
