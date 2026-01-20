@@ -17,9 +17,9 @@ public class GoapAgent : MonoBehaviour {
     [Header("Known Locations")] 
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform finishTransform;
-    // [SerializeField] Transform restingPosition;
-    // [SerializeField] Transform foodShack;
-    // [SerializeField] Transform doorOnePosition;
+    [SerializeField] Transform checkPoint1;
+    [SerializeField] Transform checkPoint2;
+    [SerializeField] Transform checkPoint3;
     // [SerializeField] Transform doorTwoPosition;
     
     Rigidbody rb;
@@ -71,6 +71,10 @@ public class GoapAgent : MonoBehaviour {
         // factory.AddBelief("AgentIsRested", () => stamina >= 50);
         
         factory.AddBelief("FindNextDestination", () => false);
+        factory.AddBelief("ReachCheckPoint1", () => false);
+        factory.AddBelief("ReachCheckPoint2", () => false);
+        factory.AddBelief("ReachCheckPoint3", () => false);
+        factory.AddBelief("WinGame", () => false);
         factory.AddBelief("CooldownComplete", () => !m_isOnCooldown);
         
         // factory.AddLocationBelief("AgentAtDoorOne", 3f, doorOnePosition);
@@ -78,7 +82,11 @@ public class GoapAgent : MonoBehaviour {
         // factory.AddLocationBelief("AgentAtRestingPosition", 3f, restingPosition);
         // factory.AddLocationBelief("AgentAtFoodShack", 3f, foodShack);
 
-        factory.AddLocationBelief("FinishInReach", 15f, finishTransform);
+        factory.AddLocationBelief("FinishInReach", 30f, finishTransform);
+        factory.AddLocationBelief("CheckPoint1InReach", 30f, checkPoint1);
+        factory.AddLocationBelief("CheckPoint2InReach", 30f, checkPoint2);
+        factory.AddLocationBelief("CheckPoint3InReach", 30f, checkPoint3);
+        
         factory.AddLocationBelief("PlayerClose", 15f, playerTransform);
         factory.AddLocationBelief("PlayerChasable", 30f, playerTransform);
         
@@ -103,6 +111,30 @@ public class GoapAgent : MonoBehaviour {
         actions.Add(new AgentAction.Builder("MoveToNextPosition")
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => finishTransform.position, cooldownTimerDuration))
             .AddEffect(beliefs["FindNextDestination"])
+            .Build());
+        
+        actions.Add(new AgentAction.Builder("GoForCheckPoint1")
+            .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint1.position, cooldownTimerDuration))
+            .AddPrecondition(beliefs["CheckPoint1InReach"])
+            .AddEffect(beliefs["ReachCheckPoint1"])
+            .Build());
+        
+        actions.Add(new AgentAction.Builder("GoForCheckPoint2")
+            .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint2.position, cooldownTimerDuration))
+            .AddPrecondition(beliefs["CheckPoint2InReach"])
+            .AddEffect(beliefs["ReachCheckPoint2"])
+            .Build());
+        
+        actions.Add(new AgentAction.Builder("GoForCheckPoint3")
+            .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint3.position, cooldownTimerDuration))
+            .AddPrecondition(beliefs["CheckPoint3InReach"])
+            .AddEffect(beliefs["ReachCheckPoint3"])
+            .Build());
+        
+        actions.Add(new AgentAction.Builder("GoForFinish")
+            .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => finishTransform.position, cooldownTimerDuration))
+            .AddPrecondition(beliefs["FinishInReach"])
+            .AddEffect(beliefs["WinGame"])
             .Build());
         
         // actions.Add(new AgentAction.Builder("Wander Around")
@@ -184,13 +216,33 @@ public class GoapAgent : MonoBehaviour {
             .Build());
         
         goals.Add(new AgentGoal.Builder("SeekAndDestroy")
-            .WithPriority(50)
+            .WithPriority(250)
             .WithDesiredEffect(beliefs["AttackingPlayer"])
             .Build());
 
         goals.Add(new AgentGoal.Builder("WaitForCooldown")
             .WithPriority(100)
             .WithDesiredEffect(beliefs["CooldownComplete"])
+            .Build());
+
+        goals.Add(new AgentGoal.Builder("GoForCheckPoint1")
+            .WithPriority(100)
+            .WithDesiredEffect(beliefs["ReachCheckPoint1"])
+            .Build());
+        
+        goals.Add(new AgentGoal.Builder("GoForCheckPoint2")
+            .WithPriority(200)
+            .WithDesiredEffect(beliefs["ReachCheckPoint2"])
+            .Build());
+        
+        goals.Add(new AgentGoal.Builder("GoForCheckPoint3")
+            .WithPriority(300)
+            .WithDesiredEffect(beliefs["ReachCheckPoint3"])
+            .Build());
+        
+        goals.Add(new AgentGoal.Builder("GoForFinish")
+            .WithPriority(1000)
+            .WithDesiredEffect(beliefs["WinGame"])
             .Build());
     }
 
