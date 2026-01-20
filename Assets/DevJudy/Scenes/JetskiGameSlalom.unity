@@ -15101,9 +15101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2fc93dc3c65844478803ea9d9d0d71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelCountdownText: {fileID: 1707071722}
-  secondsToStartLevel: 0
-  onLevelStart:
+  OnLevelStart:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 345387529}
@@ -15130,11 +15128,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onLevelEnd:
+  OnLevelEnd:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 345387528}
-        m_TargetAssemblyTypeName: GameOverManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: UIScripts.UIPanelManager, Assembly-CSharp
         m_MethodName: SetGameOver
         m_Mode: 1
         m_Arguments:
@@ -15157,10 +15155,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  levelCountdownText: {fileID: 1707071722}
+  secondsToStartLevel: 0
+  onLevelStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onLevelEnd:
+    m_PersistentCalls:
+      m_Calls: []
   goalTransform: {fileID: 1412829236}
   placementOrder:
   - {fileID: 415596256}
-  checkPlacements: 1
+  checkPlacements: 0
   placementText: {fileID: 394836195}
   onFinishLineCrossedText: {fileID: 2053893515}
 --- !u!4 &2001284366
