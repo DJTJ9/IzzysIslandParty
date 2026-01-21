@@ -2208,7 +2208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1283878165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6137,6 +6137,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8488605015854594107, guid: e6feb88b3c5738b4da86a05bbb189204, type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
     - target: {fileID: 8896167442070573846, guid: e6feb88b3c5738b4da86a05bbb189204, type: 3}
       propertyPath: m_Name
       value: Player Prefab Bowling

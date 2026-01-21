@@ -9,7 +9,7 @@
         <ui:Button text="CHANGE LEVEL" name="pause-menu-change-level__button" parse-escape-sequences="true" class="button" />
         <ui:Button text="QUIT" name="pause-menu-quit__button" class="button" />
     </ui:VisualElement>
-    <ui:VisualElement name="player-hub__container" style="flex-grow: 1; flex-direction: column; display: none; visibility: visible;">
+    <ui:VisualElement name="player-hub__container" style="flex-grow: 1; flex-direction: column; display: flex; visibility: visible;">
         <ui:VisualElement name="player-hub-top__container" style="flex-grow: 1;">
             <ui:Label text="SELECT LEVEL" name="player-hub-header__label" class="header" />
         </ui:VisualElement>
@@ -29,10 +29,10 @@
             <ui:Button text="BACK" name="player-hub-back__button" class="levelButton" style="background-image: none;" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="player-ui__container" class="player-ui-main-container" style="flex-grow: 1; display: flex;">
+    <ui:VisualElement name="player-ui__container" class="player-ui-main-container" style="flex-grow: 1; display: none;">
         <ui:VisualElement name="player-ui-left__container" class="player-ui-left" style="flex-grow: 1;">
             <ui:Label text="SCORE:" name="player-ui-score__label" class="score-label" />
-            <ui:Label name="player-ui-score-number__label" data-source="project://database/Assets/DevTjark/Scriptable%20Objects/Swaggy%20Snapshots%20Score.asset?fileID=11400000&amp;guid=a176daedc58e07c409b775393071ef06&amp;type=2#Swaggy Snapshots Score" class="score-label">
+            <ui:Label name="player-ui-score-number__label" data-source="project://database/Assets/DevTjark/Scriptable%20Objects/Swaggy%20Snapshots/Swaggy%20Snapshots%20Score.asset?fileID=11400000&amp;guid=a176daedc58e07c409b775393071ef06&amp;type=2#Swaggy Snapshots Score" class="score-label">
                 <Bindings>
                     <ui:DataBinding property="text" data-source-path="Value" binding-mode="ToTarget" />
                 </Bindings>
@@ -49,7 +49,7 @@
     </ui:VisualElement>
     <ui:VisualElement name="end-screen-menu__container" style="flex-grow: 1; display: none;">
         <ui:Label text="END SCORE:" name="end-screen-header__label" class="header" style="height: 5%; width: 35%;" />
-        <ui:Label text="Label" name="end-screen-score__label" data-source="project://database/Assets/DevTjark/Scriptable%20Objects/Swaggy%20Snapshots%20Score.asset?fileID=11400000&amp;guid=a176daedc58e07c409b775393071ef06&amp;type=2#Swaggy Snapshots Score" class="header" style="height: 10%;">
+        <ui:Label text="Label" name="end-screen-score__label" data-source="project://database/Assets/DevTjark/Scriptable%20Objects/Swaggy%20Snapshots/Swaggy%20Snapshots%20Score.asset?fileID=11400000&amp;guid=a176daedc58e07c409b775393071ef06&amp;type=2#Swaggy Snapshots Score" class="header" style="height: 10%;">
             <Bindings>
                 <ui:DataBinding property="text" data-source-path="Value" binding-mode="ToTarget" />
             </Bindings>
