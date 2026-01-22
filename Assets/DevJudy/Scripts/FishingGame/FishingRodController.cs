@@ -6,15 +6,22 @@ using UnityEngine.InputSystem;
 
 namespace FishingGame
 {
+    [RequireComponent(typeof(PlayerInput))]
     public class FishingRodController : MonoBehaviour
     {
         private static readonly int cast = Animator.StringToHash("IsCast");
         private static readonly int fishBiting = Animator.StringToHash("FishBiting");
 
         private Animator animator;
-        //private LineRenderer lineRenderer;
         [SerializeField] public IconHandler IconHandler;
+        
+        // PlayerInput
+        private PlayerInput playerInput;
+        private InputAction playerInputActionCast;
+        private InputAction playerInputActionPause;
+        
         // !! Not working yet
+        //private LineRenderer lineRenderer;
         [SerializeField] private Transform[] rodLineRendererPositions;
 
         private bool isCast = false;
@@ -30,6 +37,8 @@ namespace FishingGame
             animator = GetComponentInChildren<Animator>();
             if (animator == null)
                 Debug.LogWarning("No animator attached to children of " + gameObject.name);
+            
+            playerInput = GetComponent<PlayerInput>();
 
            // lineRenderer = GetComponent<LineRenderer>();
            // if (lineRenderer == null)
@@ -46,9 +55,19 @@ namespace FishingGame
 
         private void OnEnable()
         {
-            // Make player input here
-            // playerInputActionJump = playerInput.actions["Jump"];
-            // playerInputActionJump.started += OnJump();
+            Debug.Log("OnEnable");
+            
+            playerInputActionCast = playerInput.actions["Cast"];
+            playerInputActionCast.performed += OnCast;
+            
+            playerInputActionPause = playerInput.actions["Pause"];
+            playerInputActionPause.performed += OnPause;
+        }
+
+        private void OnDisable()
+        {
+            playerInputActionCast.performed -= OnCast;
+            playerInputActionPause.performed -= OnPause;
         }
         
         public void OnPause(InputAction.CallbackContext _context)
