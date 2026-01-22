@@ -10,13 +10,10 @@ namespace HurdleGame
     {
         [Header("Level variables: ")]
         [SerializeField] private float levelDurationInSeconds;
-
         private CountdownTimer timerUntilGoalSpawns;
 
         [Header("Movement variables: ")]
         [SerializeField] private Vector3 moveDir;
-
-        private Vector3 colliderMoveDir;
         [SerializeField] private float spawnFinishLineAddition;
         [SerializeField] private float spawnLaneAddition;
 

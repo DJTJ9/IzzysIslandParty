@@ -1,7 +1,9 @@
 using System.Collections;
 using HelperScripts;
+using JetskiGame.Audio;
 using MultiuseScripts;
 using Pathfinding;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 
@@ -20,18 +22,25 @@ namespace JetskiGame
 
         [Header("Level start/end: ")]
         [SerializeField] private TextMeshProUGUI levelCountdownText;
+
         [SerializeField] private int secondsToStartLevel;
 
         [Header("Level running: ")]
         [SerializeField] private Transform goalTransform;
-        [SerializeField] private GameObject[] placementOrder;
+
         [SerializeField] private bool checkPlacements;
-        private bool levelStarted;
+
+        [ShowIf("checkPlacements")]
+        [SerializeField] private GameObject[] placementOrder;
+
+        private bool raceStarted = false;
+        private bool raceEnded = false;
 
         [Header("Temp ")]
         // !! The text belongs in another class
         [SerializeField] private TextMeshProUGUI placementText;
         [SerializeField] private TextMeshProUGUI onFinishLineCrossedText;
+        [SerializeField] private JetskiGameAudioManager audioManager;
 
         private void Awake()
         {
@@ -58,6 +67,9 @@ namespace JetskiGame
 
         private void Start()
         {
+            if (audioManager != null)
+                audioManager.StartBackgroundMusic(() => !raceEnded);
+
             if (goalTransform == null)
             {
                 Debug.LogWarning("Goal transform not set");
@@ -88,7 +100,7 @@ namespace JetskiGame
             LetNPCsStart();
 
             OnLevelStart.Invoke();
-            levelStarted = true;
+            raceStarted = true;
         }
 
         private IEnumerator CountdownToLevelStart()
@@ -118,7 +130,7 @@ namespace JetskiGame
 
         private void FixedUpdate()
         {
-            if (levelStarted && checkPlacements)
+            if (raceStarted && checkPlacements)
                 CheckPlacements();
         }
 
@@ -174,6 +186,7 @@ namespace JetskiGame
         public override void EndLevel()
         {
             onFinishLineCrossedText?.gameObject.SetActive(false);
+            raceStarted = true;
             OnLevelEnd.Invoke();
         }
     }
