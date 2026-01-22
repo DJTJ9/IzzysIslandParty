@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using ImprovedTimers;
 using UnityEngine;
 
 namespace HurdleGame
 {
-    public class FloorMover : MonoBehaviour
+    public class EndlessFloorSpawner : MonoBehaviour
     {
         [Header("Level variables: ")]
         [SerializeField] private float levelDurationInSeconds;
@@ -16,14 +17,18 @@ namespace HurdleGame
         [SerializeField] private Vector3 moveDir;
 
         private Vector3 colliderMoveDir;
-
-        [SerializeField] private float spawnPositionX;
+        [SerializeField] private float spawnFinishLineAddition;
+        [SerializeField] private float spawnLaneAddition;
 
         [Header("Objects: ")]
-        [SerializeField] private List<Rigidbody> objectsToMove; // !! Find better way to move finishLine
-        [SerializeField] private List<GameObject> lanes; 
-        private List<List<GameObject>> laneFloors; // Game objects: List<lanes[1]>: children, lane 2, lane 3, lane 4
         [SerializeField] private Rigidbody finishLine;
+
+        [SerializeField] private List<GameObject> lanes;
+        private List<List<GameObject>> laneFloors;
+        // !! Move/spawn in obstacles
+
+        private bool spawnedInFinishLine;
+
 
         private void Awake()
         {
@@ -41,11 +46,12 @@ namespace HurdleGame
                     {
                         laneFloor.Add(child.gameObject);
                     }
+
                     laneFloors.Add(laneFloor);
                 }
             }
         }
-        
+
         private void Start()
         {
             timerUntilGoalSpawns = new CountdownTimer(levelDurationInSeconds);
@@ -54,30 +60,30 @@ namespace HurdleGame
             timerUntilGoalSpawns.Start();
         }
 
-        private void OnTriggerExit(Collider _obj)
+        private void OnPassThroughCollider(Collider _collider)
         {
-            // Whenever the last (aka all four) character passes through a floorCollider, place the last collider at the front
-            // and make the current one the last one
-            // Or check each lane separately and only move that lane with custom trigger behaviour...
-            
-            _obj.transform.position = new Vector3(spawnPositionX, _obj.transform.position.y, _obj.transform.position.z);
+            int lane = -1;
+            bool foundLane = false;
+
+
+            //!! Maybe make queue
+            for (int i = 0; i < laneFloors.Count; i++)
+            {
+                laneFloors[i].Contains(_collider.gameObject);
+            }
+          
+            // Get the lane that the collider is on
+            // Get whatever floor is the last in that lane
+            // thatLane.transform.position += new Vector3(spawnLaneAddition, thatLane.transform.position.y, thatLane.transform.position.z);
         }
-        
-      //  private void FixedUpdate()
-      //  {
-      //      for (var index = 0; index < objectsToMove.Count; index++)
-      //      {
-      //          var rb = objectsToMove[index];
-      //          
-      //          rb.linearVelocity = moveDir * (100 * Time.fixedDeltaTime);
-      //      }
-      //  }
-//
+
         private void SpawnInFinishLine()
         {
             Debug.Log("Adding finish line");
-            finishLine.transform.position = new Vector3(spawnPositionX, finishLine.transform.position.y, finishLine.transform.position.z);
-            objectsToMove.Add(finishLine);
+            // Vector3.x = furthest line forward + spawnFinishLineAddition
+            finishLine.transform.position = new Vector3(spawnFinishLineAddition, finishLine.transform.position.y, finishLine.transform.position.z);
+
+            spawnedInFinishLine = true;
         }
     }
 }

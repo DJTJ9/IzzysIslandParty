@@ -1612,7 +1612,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3863613955359846569}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 49f10d89ddfdd594f9ed88fa79351b6c, type: 3}
   m_Controller: {fileID: 9100000, guid: 02d5ec93278ea5c4cae238841be11363, type: 2}
   m_CullingMode: 1
@@ -1648,10 +1648,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 122
+  m_Interpolate: 1
+  m_Constraints: 112
   m_CollisionDetection: 2
 --- !u!136 &4120982456651254234
 CapsuleCollider:
@@ -1886,6 +1886,10 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: 3
     Variable: {fileID: 11400000, guid: 521306ef3d86e624397817d16824f5c4, type: 2}
+  velocity:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: a9dc3674f40d357498ca74101c90ab34, type: 2}
 --- !u!114 &4666054703659299495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1908,7 +1912,13 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1024
+  groundCheckOffset: -0.05
+  groundCheckRadius: 0.3
+  isGrounded: 0
   isFalling: 0
+  testGravity: 0
+  testAddWeight: 0
+  testPrevVelocity: 0
 --- !u!1 &3922584334617141707
 GameObject:
   m_ObjectHideFlags: 0

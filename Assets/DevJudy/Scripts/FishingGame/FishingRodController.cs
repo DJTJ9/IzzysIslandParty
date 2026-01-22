@@ -43,6 +43,13 @@ namespace FishingGame
            // lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
            // lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
         }
+
+        private void OnEnable()
+        {
+            // Make player input here
+            // playerInputActionJump = playerInput.actions["Jump"];
+            // playerInputActionJump.started += OnJump();
+        }
         
         public void OnPause(InputAction.CallbackContext _context)
         {
