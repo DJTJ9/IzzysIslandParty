@@ -162,7 +162,7 @@ public class AudioService : MonoBehaviour
     /// <param name="_volume"></param>
     public void PlaySoundWhile(Func<bool> _condition, AudioClip _clip, EAudioType _audioType, float _volume = 1f)
     {
-        StartCoroutine(PlaySoundContinuously(_condition, _clip, _audioType, _volume, false));
+        StartCoroutine(PlaySoundContinuously(_condition, _clip, _audioType, _volume, false, false));
     }
 
     /// <summary>
@@ -176,9 +176,26 @@ public class AudioService : MonoBehaviour
     /// <param name="_fadeOut"></param>
     /// <param name="_fadeOutSpeed"></param>
     public void PlaySoundWhile(Func<bool> _condition, AudioClip _clip, EAudioType _audioType,
-        bool _fadeOut, float _fadeOutSpeed = 0.2f, float _volume = 1f)
+        bool _fadeOut, float _fadeOutSpeed = 0.5f, float _volume = 1f)
     {
-        StartCoroutine(PlaySoundContinuously(_condition, _clip, _audioType, _volume, _fadeOut, _fadeOutSpeed));
+        StartCoroutine(PlaySoundContinuously(_condition, _clip, _audioType, _volume, _fadeOut, false, _fadeOutSpeed));
+    }
+
+    /// <summary>
+    /// Play a sound while the given condition is met, then fade it out or delete it immediately
+    /// Use for audios like background music
+    /// </summary>
+    /// <param name="_condition"></param>
+    /// <param name="_clip"></param>
+    /// <param name="_audioType"></param>
+    /// <param name="_goalVolume"></param>
+    /// <param name="_fadeOut"></param>
+    /// <param name="_fadeIn"></param>
+    /// <param name="_fadeSpeed"></param>
+    public void PlaySoundWhile(Func<bool> _condition, AudioClip _clip, EAudioType _audioType,
+        bool _fadeOut, bool _fadeIn, float _fadeSpeed = 0.5f, float _goalVolume = 1f)
+    {
+        StartCoroutine(PlaySoundContinuously(_condition, _clip, _audioType, _goalVolume, _fadeOut, _fadeIn, _fadeSpeed));
     }
 
     /// <summary>
@@ -188,15 +205,19 @@ public class AudioService : MonoBehaviour
     /// <param name="_condition"></param>
     /// <param name="_audioClip"></param>
     /// <param name="_audioType"></param>
-    /// <param name="_volume"></param>
+    /// <param name="_goalVolume"></param>
     /// <param name="_fadeOut"></param>
-    /// <param name="_fadeOutSpeed"></param>
+    /// <param name="_fadeIn"></param>
+    /// <param name="_fadeSpeed"></param>
     /// <returns></returns>
-    private IEnumerator PlaySoundContinuously(Func<bool> _condition, AudioClip _audioClip, EAudioType _audioType, float _volume,
-        bool _fadeOut, float _fadeOutSpeed = 0.2f)
+    private IEnumerator PlaySoundContinuously(Func<bool> _condition, AudioClip _audioClip, EAudioType _audioType, float _goalVolume,
+        bool _fadeOut, bool _fadeIn, float _fadeSpeed = 0.2f)
     {
-        AudioSource audioSource = CreateSound(_audioClip, _audioType, _volume);
+        AudioSource audioSource = CreateSound(_audioClip, _audioType, _goalVolume);
 
+        if (_fadeIn)
+            StartCoroutine(FadeInSound(audioSource, _fadeSpeed, _goalVolume));
+        
         while (_condition())
         {
             if (!audioSource.isPlaying)
@@ -206,7 +227,7 @@ public class AudioService : MonoBehaviour
         }
 
         if (_fadeOut)
-            StartCoroutine(FadeOutSound(audioSource, _fadeOutSpeed));
+            StartCoroutine(FadeOutSound(audioSource, _fadeSpeed));
         else
             StopSoundImmediately(audioSource);
 
@@ -214,7 +235,7 @@ public class AudioService : MonoBehaviour
     }
 
     /// <summary>
-    /// Play a random sound with a random volume and pitch until the given condition is met, then delete it immediately.
+    /// Play a random sound with a random volume and pitch while the given condition is met, then delete it immediately.
     /// Use for audios like footsteps while walking
     /// </summary>
     /// <param name="_condition"></param>
@@ -223,7 +244,7 @@ public class AudioService : MonoBehaviour
     /// <param name="_volumeRange"></param>
     /// <param name="_pitchRange"></param>
     /// <returns></returns>
-    public void PlayRandomSoundUntil(Func<bool> _condition, AudioClip[] _clips, EAudioType _audioType,
+    public void PlayRandomSoundWhile(Func<bool> _condition, AudioClip[] _clips, EAudioType _audioType,
         Vector2 _volumeRange, Vector2 _pitchRange)
     {
         StartCoroutine(PlayRandomSoundContinuously(_condition, _clips, _audioType, _volumeRange, _pitchRange));
@@ -257,6 +278,21 @@ public class AudioService : MonoBehaviour
         }
 
         StopSoundImmediately(audioSource);
+    }
+    
+    private IEnumerator FadeInSound(AudioSource _audioSource, float _fadeInSpeed, float _goalVolume)
+    {
+        _audioSource.volume = 0f;
+        PlaySound(_audioSource, true);
+        
+        while (_audioSource.volume < (_goalVolume - 0.1f))
+        {
+            _audioSource.volume += (0.2f * _fadeInSpeed);
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        yield return null;
     }
 
     /// <summary>
