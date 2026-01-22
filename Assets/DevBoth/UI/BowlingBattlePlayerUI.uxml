@@ -26,13 +26,13 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="player-hub-bottom__container" style="flex-grow: 1; align-items: center; display: flex; visibility: visible;">
-            <ui:Button text="BACK" name="player-hub-back__button" class="levelButton" style="background-image: none;" />
+            <ui:Button text="BACK" name="player-hub-back__button" style="background-image: url(&quot;project://database/Assets/DevBoth/Art/FREE%20KAWAII%20GUI%20PACK/PNG/Pannel-Button.png?fileID=-2033803903&amp;guid=bf4c5e583cfa0f14dbdf1dbbf52c7fa2&amp;type=3#Pannel-Button_10&quot;); height: 58px; width: 184px; -unity-font-style: bold; -unity-font-definition: url(&quot;project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&amp;guid=9edcdbbb09ae8aa46b3612271126dd6b&amp;type=3#DraftingMono-Bold&quot;);" />
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="player-ui__container" class="player-ui-main-container" style="flex-grow: 1; display: flex;">
         <ui:VisualElement name="player-ui-left__container" class="player-ui-left" style="flex-grow: 1;">
             <ui:Label text="SCORE:" name="player-ui-score__label" class="score-label" />
-            <ui:Label text="0" name="player-ui-score-number__label" data-source="project://database/Assets/DevTjark/Scriptable%20Objects/Bowling%20Battle%20Score.asset?fileID=11400000&amp;guid=9ff12d17af2c8f24589bf553520703f2&amp;type=2#Bowling Battle Score" class="score-label">
+            <ui:Label text="0" name="player-ui-score-number__label" data-source="project://database/Assets/DevTjark/Scriptable%20Objects/Bowling%20Battle/Bowling%20Battle%20Score%201.asset?fileID=11400000&amp;guid=9ff12d17af2c8f24589bf553520703f2&amp;type=2#Bowling Battle Score 1" class="score-label">
                 <Bindings>
                     <ui:DataBinding property="text" data-source-path="Value" binding-mode="ToTarget" />
                 </Bindings>
@@ -49,7 +49,7 @@
     </ui:VisualElement>
     <ui:VisualElement name="end-screen-menu__container" style="flex-grow: 1; display: none;">
         <ui:Label text="END SCORE:" name="end-screen-header__label" class="header" style="height: 5%; width: 35%;" />
-        <ui:Label text="Label" name="end-screen-score__label" data-source="project://database/Assets/DevTjark/Scriptable%20Objects/Bowling%20Battle%20Score.asset?fileID=11400000&amp;guid=9ff12d17af2c8f24589bf553520703f2&amp;type=2#Bowling Battle Score" class="header" style="height: 10%;">
+        <ui:Label text="Label" name="end-screen-score__label" data-source="project://database/Assets/DevTjark/Scriptable%20Objects/Bowling%20Battle/Bowling%20Battle%20Score%201.asset?fileID=11400000&amp;guid=9ff12d17af2c8f24589bf553520703f2&amp;type=2#Bowling Battle Score 1" class="header" style="height: 10%;">
             <Bindings>
                 <ui:DataBinding property="text" data-source-path="Value" binding-mode="ToTarget" />
             </Bindings>

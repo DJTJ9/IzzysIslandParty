@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerJoiner : MonoBehaviour
+public class PlayerSpawner : MonoBehaviour
 {
     public Transform[] SpawnPoints;
     public SO_BowlingBattlePlayer PlayersSO;
@@ -16,26 +15,32 @@ public class PlayerJoiner : MonoBehaviour
 
     private void Awake()
     {
-        playerInputManager = FindFirstObjectByType<PlayerInputManager>();
+        foreach (var input in playerInputs.PlayerInputs)
+        {
+            SpawnPlayer(playerIndex);
+            ++playerIndex;
+        }
+        
+        // playerInputManager = FindFirstObjectByType<PlayerInputManager>();
         // SpawnPlayer(playerIndex);
         // SpawnPlayer(playerIndex);
         // Instantiate(Player2, Spawnpoint2.position, Spawnpoint2.rotation);
         // Instantiate(Player3, Spawnpoint3.position, Spawnpoint3.rotation);
     }
 
-    public void OnPlayerJoined(PlayerInput _playerInput)
-    {
-        AddPlayer(_playerInput);
-    }
-
-    private void AddPlayer(PlayerInput _playerInput)
-    {
-        playerInputs.PlayerInputs.Add(_playerInput);
-        ++playerIndex;
-        
-       // _playerInput.transform.position = SpawnPoints[playerIndex].transform.position;
-       //  playerIndex++;
-    }
+    // public void OnPlayerJoined(PlayerInput _playerInput)
+    // {
+    //     AddPlayer(_playerInput);
+    // }
+    //
+    // private void AddPlayer(PlayerInput _playerInput)
+    // {
+    //     playerInputs.PlayerInputs.Add(_playerInput);
+    //     ++playerIndex;
+    //     
+    //     // _playerInput.transform.position = SpawnPoints[playerIndex].transform.position;
+    //     //  playerIndex++;
+    // }
     
     [Button]
     public void SpawnPlayer(int _playerIndex)

@@ -8,6 +8,8 @@ using UnityEngine.Serialization;
 [RequireComponent (typeof(CharacterController), typeof(PlayerInput), typeof(Rigidbody))]
 public class PlayerControllerBowlingBattle : MonoBehaviour
 {
+    public int PlayerIndex { get; private set; }
+    
     [Header("Input")]
     private Vector2 m_moveInput;
     private bool m_jumpInput;
@@ -29,11 +31,12 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
     [SerializeField] private UnityEvent onUnpause;
     
     [SerializeField] private BowlingBallSO bowlingBallSO;
+    [SerializeField] private SO_PlayerInputs playerInputsSO;
     
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
-        playerInput = GetComponent<PlayerInput>();
+        playerInput = playerInputsSO.PlayerInputs[PlayerIndex];
         rb = GetComponent<Rigidbody>();
         playerInput.enabled = true;
     }

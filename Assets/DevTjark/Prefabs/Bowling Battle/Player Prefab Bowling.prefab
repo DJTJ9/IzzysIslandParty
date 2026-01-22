@@ -47,6 +47,72 @@ MonoBehaviour:
   nameOverride: Football Collider (Mesh Collider)
   tooltipOverride: 
   target: {fileID: 7444571927850324351}
+--- !u!1 &2646738007034379580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 411897246533984483}
+  - component: {fileID: 8865433393384766515}
+  - component: {fileID: 9173660702611889532}
+  m_Layer: 0
+  m_Name: GUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &411897246533984483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2646738007034379580}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6815579173914192029}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8865433393384766515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2646738007034379580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: f80ea9de16d74154c96bf0b95ca6c4d6, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: e0351e01a6f4dc044b12e28568c6f0f5, type: 3}
+  m_SortingOrder: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+--- !u!114 &9173660702611889532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2646738007034379580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b42fcd62084745bd6ebe01c36884b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballCollectionSO: {fileID: 11400000, guid: 7b028a6df6b06d84cb847643fca043cb, type: 2}
+  ballSwapper: {fileID: 6683859445276928591}
 --- !u!1 &3960674172075794913
 GameObject:
   m_ObjectHideFlags: 1
@@ -123,8 +189,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4752641349216938370}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18910757, y: 0.000000023492888, z: -0.000000004524318, w: 0.9819564}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 3, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -137,7 +203,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4752641349216938370}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43e287c6a9b016e4c938969107563942, type: 3}
   m_Name: 
@@ -202,7 +268,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4752641349216938370}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &1253951882922505284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,16 +355,16 @@ GameObject:
   m_Component:
   - component: {fileID: 576742734341067461}
   - component: {fileID: 8950750187414092627}
-  - component: {fileID: 5949611176170691258}
   - component: {fileID: 7257318274972752419}
   - component: {fileID: 8170914254447420261}
+  - component: {fileID: 4080376188918320784}
   m_Layer: 0
   m_Name: CM Follow Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &576742734341067461
 Transform:
   m_ObjectHideFlags: 0
@@ -307,13 +373,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4951404001815078167}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18910754, y: 0.000000023492886, z: -0.0000000045243156, w: 0.9819564}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: 0, y: -0.06213744, z: 0, w: 0.9980676}
+  m_LocalPosition: {x: 0.5, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6815579173914192029}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
 --- !u!114 &8950750187414092627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,25 +423,6 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
---- !u!114 &5949611176170691258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4951404001815078167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b617507da6d07e749b7efdb34e1173e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TrackerSettings:
-    BindingMode: 5
-    PositionDamping: {x: 1, y: 1, z: 1}
-    AngularDampingMode: 0
-    RotationDamping: {x: 1, y: 1, z: 1}
-    QuaternionDamping: 1
-  FollowOffset: {x: 0, y: 0, z: -10}
 --- !u!114 &7257318274972752419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,7 +445,7 @@ MonoBehaviour:
       Size: {x: 0.8, y: 0.8}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
-  TargetOffset: {x: 0, y: -4, z: 0}
+  TargetOffset: {x: 0, y: 0, z: 2}
   Damping: {x: 0.5, y: 0.5}
   Lookahead:
     Enabled: 0
@@ -418,6 +465,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Brain: {fileID: 4558093860948910809}
+--- !u!114 &4080376188918320784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4951404001815078167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 625c14eee3ad46c99df7c7c891ef668a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damping: {x: 0.1, y: 0.5, z: 0.3}
+  ShoulderOffset: {x: 0.5, y: -0.4, z: 0}
+  VerticalArmLength: 0.4
+  CameraSide: 1
+  CameraDistance: 2
+  AvoidObstacles:
+    Enabled: 0
+    CollisionFilter:
+      serializedVersion: 2
+      m_Bits: 1
+    IgnoreTag: 
+    CameraRadius: 0.2
+    DampingIntoCollision: 0
+    DampingFromCollision: 0.5
 --- !u!1 &5636049391177118120
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,7 +513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5737304636939876488
 Transform:
   m_ObjectHideFlags: 0
@@ -737,6 +810,7 @@ Transform:
   - {fileID: 5322734474281415555}
   - {fileID: 576742734341067461}
   - {fileID: 5737304636939876488}
+  - {fileID: 411897246533984483}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5867769231808117312
@@ -759,10 +833,30 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 6607725431701992283}
+    - target: {fileID: 2639976134451593851, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+    - target: {fileID: 2639976134451593851, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2639976134451593851, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2639976134451593851, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: KeyboardControlScheme
+      objectReference: {fileID: 0}
     - target: {fileID: 3761523586504917549, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: bowlingBallSO
       value: 
       objectReference: {fileID: 11400000, guid: ba77c3e7aa5b8ea47bc44097c5c35728, type: 2}
+    - target: {fileID: 3761523586504917549, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
+      propertyPath: playerInputsSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 2abbe52883f175347954cd0b2ca2f704, type: 2}
     - target: {fileID: 5032360713405179094, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

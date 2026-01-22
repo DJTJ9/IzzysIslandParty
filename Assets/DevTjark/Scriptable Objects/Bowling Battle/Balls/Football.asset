@@ -12,6 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661e4a2fdd0f403b88cffcfa717d3d26, type: 3}
   m_Name: Football
   m_EditorClassIdentifier: 
-  ball: {fileID: 199810145539029836, guid: 8d20514efafcd5947b38b4df15026d44, type: 3}
-  weight: 5
-  pointMultiplier: 5
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  PlayerPrefab: {fileID: 199810145539029836, guid: 8d20514efafcd5947b38b4df15026d44, type: 3}
+  PlayerInput: {fileID: 0}
+  CurrentBallType: 0
+  PlayerScore: {fileID: 11400000, guid: 9ff12d17af2c8f24589bf553520703f2, type: 2}
+  SpawnPoint: {x: 0, y: 0, z: 0}

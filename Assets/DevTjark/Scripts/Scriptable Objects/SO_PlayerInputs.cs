@@ -3,8 +3,10 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[CreateAssetMenu(fileName = "PlayerInputs", menuName = "Scriptable Objects/Player Inputs")]
+[CreateAssetMenu(fileName = "Player Inputs", menuName = "Scriptable Objects/Player Inputs")]
 public class SO_PlayerInputs : SerializedScriptableObject
 {
-    public List<PlayerInput> PlayerInputs;
+    public List<PlayerInput> PlayerInputs = new List<PlayerInput>();
+    
+    void OnDisable() => PlayerInputs.Clear();
 }
