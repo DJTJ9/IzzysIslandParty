@@ -1,6 +1,6 @@
 using System.Collections;
 using HelperScripts;
-using JetskiGame.Audio;
+using Audio;
 using MultiuseScripts;
 using Pathfinding;
 using Sirenix.OdinInspector;
@@ -40,7 +40,7 @@ namespace JetskiGame
         // !! The text belongs in another class
         [SerializeField] private TextMeshProUGUI placementText;
         [SerializeField] private TextMeshProUGUI onFinishLineCrossedText;
-        [SerializeField] private JetskiGameAudioManager audioManager;
+        [SerializeField] private GameAudioManager audioManager;
 
         private void Awake()
         {

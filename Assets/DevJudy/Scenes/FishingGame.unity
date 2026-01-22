@@ -366,6 +366,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 10310659}
+  - component: {fileID: 10310660}
   m_Layer: 0
   m_Name: AudioHandling
   m_TagString: Untagged
@@ -389,6 +390,27 @@ Transform:
   - {fileID: 193718967}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &10310660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10310658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9839782ab0be94a9d3541b29b4022c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmVolume:
+    UseConstant: 1
+    ConstantValue: 1
+    Variable: {fileID: 11400000, guid: 8e5a8db1c5e26d34eb09831085622d78, type: 2}
+  bgmFadeInSpeed:
+    UseConstant: 1
+    ConstantValue: 0.1
+    Variable: {fileID: 11400000, guid: 8f895c611d0bdcc4eb1e28d4a7867cbe, type: 2}
+  levelBackgroundMusic: FishingGameMusic
 --- !u!1 &84485859
 GameObject:
   m_ObjectHideFlags: 0
@@ -5255,6 +5277,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1500256527}
+  - component: {fileID: 1500256528}
+  - component: {fileID: 1500256529}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5279,6 +5303,56 @@ Transform:
   - {fileID: 84485860}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1500256528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500256526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b0e0d6037d13b41aff2e1316602224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnLevelStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1500256529}
+        m_TargetAssemblyTypeName: MultiuseScripts.LevelTimer, Assembly-CSharp
+        m_MethodName: StartTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnLevelEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  gameAudioManager: {fileID: 10310660}
+  levelTimer: {fileID: 1500256529}
+--- !u!114 &1500256529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500256526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bce12737ce32a64ca8776d25f07b301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textManager: {fileID: 2014647217}
+  uiPanelManager: {fileID: 2014647218}
+  durationInMinutes: 3
+  deductionFeedbackDuration: 2
+  timerRunningDown: 1
+  startTimerOnLevelStart: 0
 --- !u!1 &1574044111
 GameObject:
   m_ObjectHideFlags: 0
@@ -6929,11 +7003,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointsText: {fileID: 707943203}
   timerText: {fileID: 1848791106}
-  uiPanelManager: {fileID: 2014647218}
-  durationInMinutes: 2
-  deductionFeedbackDuration: 2
-  timerRunningDown: 1
-  startTimerOnLevelStart: 1
 --- !u!114 &2014647218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6951,7 +7020,7 @@ MonoBehaviour:
   playerTimesText: {fileID: 0}
   endGameMenu: {fileID: 1310258136}
   levelPanel: {fileID: 2053784900}
-  uiTextManager: {fileID: 2014647217}
+  levelTimer: {fileID: 1500256529}
   waitTimeAfterGameOver: 3
 --- !u!114 &2014647219
 MonoBehaviour:
@@ -7616,6 +7685,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1864394626685966443, guid: 45ed1282608e84b40954217baa81b167, type: 3}
+      propertyPath: levelSoundsDictionary
+      value: 
+      objectReference: {fileID: 11400000, guid: 78b13e74e04152549b02dacb518e13d8, type: 2}
     - target: {fileID: 7513126953005598583, guid: 45ed1282608e84b40954217baa81b167, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -7635,7 +7708,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
       propertyPath: m_NotificationBehavior
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
       propertyPath: m_ActionEvents.Array.size
@@ -7705,6 +7778,10 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[16].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1741299663787530852, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: playerInputActionPause
+      value: 
+      objectReference: {fileID: 331496698748105745, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
     - target: {fileID: 2741305163418993827, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
       propertyPath: m_IsActive
       value: 0

@@ -1,5 +1,6 @@
 using enums;
 using Juice;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -15,17 +16,11 @@ namespace FishingGame
         private Animator animator;
         [SerializeField] public IconHandler IconHandler;
         
-        // PlayerInput
-        private PlayerInput playerInput;
-        private InputAction playerInputActionCast;
-        private InputAction playerInputActionPause;
-        
         // !! Not working yet
         //private LineRenderer lineRenderer;
         [SerializeField] private Transform[] rodLineRendererPositions;
 
         private bool isCast = false;
-        
         [Header("Pausing: ")]
         [SerializeField] private UnityEvent OnPauseGame;
         [SerializeField] private UnityEvent OnUnpauseGame;
@@ -37,8 +32,6 @@ namespace FishingGame
             animator = GetComponentInChildren<Animator>();
             if (animator == null)
                 Debug.LogWarning("No animator attached to children of " + gameObject.name);
-            
-            playerInput = GetComponent<PlayerInput>();
 
            // lineRenderer = GetComponent<LineRenderer>();
            // if (lineRenderer == null)
@@ -51,23 +44,6 @@ namespace FishingGame
 //
            // lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
            // lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
-        }
-
-        private void OnEnable()
-        {
-            Debug.Log("OnEnable");
-            
-            playerInputActionCast = playerInput.actions["Cast"];
-            playerInputActionCast.performed += OnCast;
-            
-            playerInputActionPause = playerInput.actions["Pause"];
-            playerInputActionPause.performed += OnPause;
-        }
-
-        private void OnDisable()
-        {
-            playerInputActionCast.performed -= OnCast;
-            playerInputActionPause.performed -= OnPause;
         }
         
         public void OnPause(InputAction.CallbackContext _context)
@@ -86,7 +62,7 @@ namespace FishingGame
                 }
             }
         }
-
+        
         public void OnCast(InputAction.CallbackContext _context)
         {
             if (_context.performed)

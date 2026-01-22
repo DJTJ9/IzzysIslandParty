@@ -285,12 +285,14 @@ public class AudioService : MonoBehaviour
         _audioSource.volume = 0f;
         PlaySound(_audioSource, true);
         
-        while (_audioSource.volume < _goalVolume)
+        while (_audioSource.volume < (_goalVolume - 0.1f))
         {
-            _audioSource.volume += (0.1f * _fadeInSpeed);
+            _audioSource.volume += (0.2f * _fadeInSpeed);
 
             yield return new WaitForFixedUpdate();
         }
+
+        yield return null;
     }
 
     /// <summary>
