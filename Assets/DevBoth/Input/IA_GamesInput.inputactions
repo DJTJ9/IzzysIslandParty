@@ -472,6 +472,17 @@
                 },
                 {
                     "name": "",
+                    "id": "eb9249b8-f9ee-4448-887d-74320a01ffc8",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardControlScheme",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "78c93ef7-a46f-4f03-80ee-aba73e3f6250",
                     "path": "<Mouse>/scroll",
                     "interactions": "",
@@ -1500,6 +1511,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Slide",
+                    "type": "Button",
+                    "id": "40ca9c30-5f39-43a4-bf92-d909781d54bf",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1516,12 +1536,45 @@
                 },
                 {
                     "name": "",
+                    "id": "d7ede200-fc85-4db0-9994-f2ed3ba3c1f0",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardControlScheme;ControllerControlScheme",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ecfb03c1-a8b4-479a-bab7-2937e34043f9",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": ";ControllerControlScheme",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6edb1099-42db-4cb2-ad42-d97fd9c473b8",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardControlScheme;ControllerControlScheme",
+                    "action": "Slide",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7431ee38-c35c-4218-890a-bfe821df9f18",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";ControllerControlScheme",
+                    "action": "Slide",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

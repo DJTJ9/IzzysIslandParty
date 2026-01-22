@@ -27,7 +27,6 @@ namespace UIScripts
 
         [Header("GameObjects: ")]
         [SerializeField] private TextMeshProUGUI timerText;
-
         [SerializeField] private UIPanelManager uiPanelManager;
 
         [Header("Variables: ")]

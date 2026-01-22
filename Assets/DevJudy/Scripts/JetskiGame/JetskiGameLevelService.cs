@@ -1,13 +1,13 @@
 using System.Collections;
 using HelperScripts;
+using MultiuseScripts;
 using Pathfinding;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 
-namespace Service
+namespace JetskiGame
 {
-    public class JetskiGameLevelService : MonoBehaviour
+    public class JetskiGameLevelService : RacingGameLevelService
     {
         #region consts
 
@@ -20,26 +20,17 @@ namespace Service
 
         [Header("Level start/end: ")]
         [SerializeField] private TextMeshProUGUI levelCountdownText;
-
         [SerializeField] private int secondsToStartLevel;
 
-        [SerializeField] private UnityEvent onLevelStart;
-        [SerializeField] private UnityEvent onLevelEnd;
-
         [Header("Level running: ")]
-        // !! This is kinda only for the racing-games...
         [SerializeField] private Transform goalTransform;
-
         [SerializeField] private GameObject[] placementOrder;
-
         [SerializeField] private bool checkPlacements;
         private bool levelStarted;
 
-        private Coroutine levelCountdownCoroutine = null;
-
         [Header("Temp ")]
+        // !! The text belongs in another class
         [SerializeField] private TextMeshProUGUI placementText;
-
         [SerializeField] private TextMeshProUGUI onFinishLineCrossedText;
 
         private void Awake()
@@ -54,7 +45,7 @@ namespace Service
                 Debug.LogWarning($"PlacementOrder array is more than maximum number of players ({maxNumberOfPlayers}), resizing array");
                 placementOrder = ArrayHelper.ResizeArray(placementOrder, maxNumberOfPlayers);
             }
-            
+
             for (int i = placementOrder.Length - 1; i > 0; i--)
             {
                 if (placementOrder[i] == null)
@@ -76,9 +67,9 @@ namespace Service
             StartLevel();
         }
 
-        private void StartLevel()
+        public override void StartLevel()
         {
-            levelCountdownCoroutine = StartCoroutine(CountdownToLevelStart());
+            StartCoroutine(CountdownToLevelStart());
         }
 
         private void LetNPCsStart()
@@ -96,7 +87,7 @@ namespace Service
 
             LetNPCsStart();
 
-            onLevelStart.Invoke();
+            OnLevelStart.Invoke();
             levelStarted = true;
         }
 
@@ -174,16 +165,16 @@ namespace Service
             return Vector2.Distance(new Vector2(_gameObjectPos.x, _gameObjectPos.z), new Vector2(goalTransform.position.x, goalTransform.position.z));
         }
 
-        public void OnFinishLineCrossed()
+        public override void OnFinishLineCrossed()
         {
             if (onFinishLineCrossedText != null)
                 onFinishLineCrossedText.gameObject.SetActive(true);
         }
 
-        public void EndLevel()
+        public override void EndLevel()
         {
             onFinishLineCrossedText?.gameObject.SetActive(false);
-            onLevelEnd.Invoke();
+            OnLevelEnd.Invoke();
         }
     }
 }
