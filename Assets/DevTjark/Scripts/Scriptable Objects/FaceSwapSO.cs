@@ -21,5 +21,5 @@ public class FaceSwapSO : SerializedScriptableObject
         return possibleMaterials[randomIndex];
     }
     
-    public bool IsHappyFace(Material _material) => HappyFaces.Contains(_material);
+    public bool IsHappyFace(Material _material) => HappyFaces.Any(_m => _m.name == _material.name);
 }
