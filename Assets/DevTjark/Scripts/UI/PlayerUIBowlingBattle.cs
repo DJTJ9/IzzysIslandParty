@@ -95,9 +95,9 @@ public class PlayerUIBowlingBattle : MonoBehaviour
         rightPlayerUI.style.display = DisplayStyle.None;
     }
 
-    // private void SpawnBall(BowlingBallSO _ballSO)
+    // private void SpawnBall(SO_PlayerBowlingBattle _battle)
     // {
-    //     ballSpawner.SpawnBall(_ballSO);
+    //     ballSpawner.SpawnBall(_battle);
     // }
 
     private void SwapToBaseball() => ballSwapper.SwapToBaseball();

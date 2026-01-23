@@ -1,45 +1,55 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerJoiner : MonoBehaviour
 {
     public Transform[] SpawnPoints;
-    public SO_BowlingBattlePlayer PlayersSO;
+    public SO_PlayersBowlingBattle soPlayers;
 
     [SerializeField] private SO_PlayerInputs playerInputs;
     // private List<PlayerInput> players = new List<PlayerInput>();
     
     private PlayerInputManager playerInputManager;
-    private int playerIndex = 0;
+    private int m_playerIndex = 0;
 
     private void Awake()
     {
-        playerInputManager = FindFirstObjectByType<PlayerInputManager>();
-        // SpawnPlayer(playerIndex);
-        // SpawnPlayer(playerIndex);
+        // playerInputManager = FindFirstObjectByType<PlayerInputManager>();
+        // playerInputManager.onPlayerJoined += PlayerJoined;
+        SpawnPlayer(0);
+        // SpawnPlayer(1);
         // Instantiate(Player2, Spawnpoint2.position, Spawnpoint2.rotation);
         // Instantiate(Player3, Spawnpoint3.position, Spawnpoint3.rotation);
     }
 
-    public void OnPlayerJoined(PlayerInput _playerInput)
+    private void Start()
     {
-        AddPlayer(_playerInput);
+        SpawnPlayer(1);
+    }
+
+    public void PlayerJoined(PlayerInput _playerInput)
+    {
+        _playerInput.gameObject.transform.position = soPlayers.Players[m_playerIndex].SpawnPoint;
+        ++m_playerIndex;
+        // AddPlayer(_playerInput);
     }
 
     private void AddPlayer(PlayerInput _playerInput)
     {
         playerInputs.PlayerInputs.Add(_playerInput);
-        ++playerIndex;
+        ++m_playerIndex;
         
-       // _playerInput.transform.position = SpawnPoints[playerIndex].transform.position;
-       //  playerIndex++;
+       // _playerInput.transform.position = SpawnPoints[m_playerIndex].transform.position;
+       //  m_playerIndex++;
     }
     
     [Button]
     public void SpawnPlayer(int _playerIndex)
     {
-        Instantiate(PlayersSO.Players[_playerIndex].PlayerPrefab, PlayersSO.Players[_playerIndex].SpawnPoint, Quaternion.identity);
+        Instantiate(soPlayers.Players[_playerIndex].PlayerPrefab, soPlayers.Players[_playerIndex].SpawnPoint, Quaternion.identity);
     }
 }

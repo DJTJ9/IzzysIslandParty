@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 [RequireComponent (typeof(CharacterController), typeof(PlayerInput), typeof(Rigidbody))]
 public class PlayerControllerBowlingBattle : MonoBehaviour
 {
-    public int PlayerIndex { get; private set; }
+    public int PlayerIndex;
     
     [Header("Input")]
     private Vector2 m_moveInput;
@@ -30,7 +30,7 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
     [SerializeField] private UnityEvent onPause;
     [SerializeField] private UnityEvent onUnpause;
     
-    [SerializeField] private BowlingBallSO bowlingBallSO;
+    [SerializeField] private SO_PlayersBowlingBattle playersBowlingBattleSoPlayers;
     [SerializeField] private SO_PlayerInputs playerInputsSO;
     
     private void Awake()
@@ -140,7 +140,7 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         
-        transform.position = bowlingBallSO.SpawnPoint;
+        transform.position = playersBowlingBattleSoPlayers.Players[PlayerIndex].SpawnPoint;
         transform.rotation = Quaternion.identity;
 
 

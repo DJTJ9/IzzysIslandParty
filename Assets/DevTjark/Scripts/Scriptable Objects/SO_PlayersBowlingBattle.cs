@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Bowling Battle Player", menuName = "Scriptable Objects/Bowling Battle Player", order = 1)]
-public class SO_BowlingBattlePlayer : SerializedScriptableObject
+public class SO_PlayersBowlingBattle : SerializedScriptableObject
 {
-    public BowlingBallSO[] Players = new BowlingBallSO[4];
+    public SO_PlayerBowlingBattle[] Players = new SO_PlayerBowlingBattle[4];
 }
