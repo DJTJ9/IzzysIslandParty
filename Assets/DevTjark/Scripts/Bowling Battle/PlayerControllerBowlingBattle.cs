@@ -36,7 +36,8 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
-        playerInput = playerInputsSO.PlayerInputs[PlayerIndex];
+        playerInput = GetComponent<PlayerInput>();
+        // playerInput = playerInputsSO.PlayerInputs[PlayerIndex];
         rb = GetComponent<Rigidbody>();
         playerInput.enabled = true;
     }
