@@ -22,10 +22,6 @@ namespace HurdleGame
 
         [SerializeField] private List<GameObject> lanes;
         private List<List<GameObject>> laneFloors;
-        // !! Move/spawn in obstacles
-
-        private bool spawnedInFinishLine;
-
 
         private void Awake()
         {
@@ -59,8 +55,8 @@ namespace HurdleGame
 
         private void OnPassThroughCollider(Collider _collider)
         {
-            int lane = -1;
-            bool foundLane = false;
+           // int lane = -1;
+           // bool foundLane = false;
 
 
             //!! Maybe make queue
@@ -79,8 +75,6 @@ namespace HurdleGame
             Debug.Log("Adding finish line");
             // Vector3.x = furthest line forward + spawnFinishLineAddition
             finishLine.transform.position = new Vector3(spawnFinishLineAddition, finishLine.transform.position.y, finishLine.transform.position.z);
-
-            spawnedInFinishLine = true;
         }
     }
 }

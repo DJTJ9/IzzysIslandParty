@@ -1,15 +1,13 @@
 using System.Collections;
 using HelperScripts;
-using Audio;
-using MultiuseScripts;
 using Pathfinding;
-using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
-namespace JetskiGame
+namespace Service
 {
-    public class JetskiGameLevelService : RacingGameLevelService
+    public class JetskiGameLevelService : MonoBehaviour
     {
         #region consts
 
@@ -22,25 +20,32 @@ namespace JetskiGame
 
         [Header("Level start/end: ")]
         [SerializeField] private TextMeshProUGUI levelCountdownText;
-
         [SerializeField] private int secondsToStartLevel;
 
-        [Header("Level running: ")]
-        [SerializeField] private Transform goalTransform;
+        [SerializeField] private UnityEvent onLevelStart;
+        [SerializeField] private UnityEvent onLevelEnd;
 
+        [Header("Level running: ")]
+        // !! This is kinda only for the racing-games...
+        [SerializeField] private Transform goalTransform;
+<<<<<<< Updated upstream:Assets/DevJudy/Scripts/MultiuseScripts/ManagerAndServices/JetskiGameLevelService.cs
+
+=======
         [SerializeField] private bool checkPlacements;
 
         [ShowIf("checkPlacements")]
+>>>>>>> Stashed changes:Assets/DevJudy/Scripts/JetskiGame/JetskiGameLevelService.cs
         [SerializeField] private GameObject[] placementOrder;
 
-        private bool raceStarted = false;
-        private bool raceEnded = false;
+        [SerializeField] private bool checkPlacements;
+        private bool levelStarted;
+
+        private Coroutine levelCountdownCoroutine = null;
 
         [Header("Temp ")]
-        // !! The text belongs in another class
         [SerializeField] private TextMeshProUGUI placementText;
+
         [SerializeField] private TextMeshProUGUI onFinishLineCrossedText;
-        [SerializeField] private GameAudioManager audioManager;
 
         private void Awake()
         {
@@ -54,7 +59,7 @@ namespace JetskiGame
                 Debug.LogWarning($"PlacementOrder array is more than maximum number of players ({maxNumberOfPlayers}), resizing array");
                 placementOrder = ArrayHelper.ResizeArray(placementOrder, maxNumberOfPlayers);
             }
-
+            
             for (int i = placementOrder.Length - 1; i > 0; i--)
             {
                 if (placementOrder[i] == null)
@@ -67,9 +72,6 @@ namespace JetskiGame
 
         private void Start()
         {
-            if (audioManager != null)
-                audioManager.StartBackgroundMusic(() => !raceEnded);
-
             if (goalTransform == null)
             {
                 Debug.LogWarning("Goal transform not set");
@@ -79,9 +81,9 @@ namespace JetskiGame
             StartLevel();
         }
 
-        public override void StartLevel()
+        private void StartLevel()
         {
-            StartCoroutine(CountdownToLevelStart());
+            levelCountdownCoroutine = StartCoroutine(CountdownToLevelStart());
         }
 
         private void LetNPCsStart()
@@ -99,8 +101,8 @@ namespace JetskiGame
 
             LetNPCsStart();
 
-            OnLevelStart.Invoke();
-            raceStarted = true;
+            onLevelStart.Invoke();
+            levelStarted = true;
         }
 
         private IEnumerator CountdownToLevelStart()
@@ -130,7 +132,7 @@ namespace JetskiGame
 
         private void FixedUpdate()
         {
-            if (raceStarted && checkPlacements)
+            if (levelStarted && checkPlacements)
                 CheckPlacements();
         }
 
@@ -177,17 +179,16 @@ namespace JetskiGame
             return Vector2.Distance(new Vector2(_gameObjectPos.x, _gameObjectPos.z), new Vector2(goalTransform.position.x, goalTransform.position.z));
         }
 
-        public override void OnFinishLineCrossed()
+        public void OnFinishLineCrossed()
         {
             if (onFinishLineCrossedText != null)
                 onFinishLineCrossedText.gameObject.SetActive(true);
         }
 
-        public override void EndLevel()
+        public void EndLevel()
         {
             onFinishLineCrossedText?.gameObject.SetActive(false);
-            raceStarted = true;
-            OnLevelEnd.Invoke();
+            onLevelEnd.Invoke();
         }
     }
 }
