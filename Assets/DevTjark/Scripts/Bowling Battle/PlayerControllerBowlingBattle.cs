@@ -30,7 +30,7 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
     [SerializeField] private UnityEvent onPause;
     [SerializeField] private UnityEvent onUnpause;
     
-    [SerializeField] private SO_PlayersBowlingBattle playersBowlingBattleSoPlayers;
+    [SerializeField] private SO_PlayerCollectionBowlingBattle playerCollectionBowlingBattleSO;
     [SerializeField] private SO_PlayerInputs playerInputsSO;
     
     private void Awake()
@@ -61,7 +61,7 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
     {
         MapInputActions();
         ResetComponents();
-        SetCameraForPlayerInput();
+        // SetCameraForPlayerInput();
     }
     
     private void Movement()
@@ -109,7 +109,7 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
         m_moveInputAction = playerInput.actions["Move"];
 
         m_jumpInputAction = playerInput.actions["Jump"];
-        m_jumpInputAction.started += OnJump;
+        // m_jumpInputAction.started += OnJump;
 
         m_pauseInputAction = playerInput.actions["Pause"];
         m_pauseInputAction.started += OnPause;
@@ -140,7 +140,7 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         
-        transform.position = playersBowlingBattleSoPlayers.Players[PlayerIndex].SpawnPoint;
+        transform.position = playerCollectionBowlingBattleSO.Players[PlayerIndex].SpawnPoint;
         transform.rotation = Quaternion.identity;
 
 
@@ -160,8 +160,8 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
         playerInput.SwitchCurrentActionMap("UI");
     }
     
-    private void SetCameraForPlayerInput()
-    {
-        playerInput.camera = Camera.main;
-    }
+    // private void SetCameraForPlayerInput()
+    // {
+    //     playerInput.camera = Camera.main;
+    // }
 }

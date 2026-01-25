@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 public class PlayerJoiner : MonoBehaviour
 {
     public Transform[] SpawnPoints;
-    public SO_PlayersBowlingBattle soPlayers;
+    [FormerlySerializedAs("soPlayers")] public SO_PlayerCollectionBowlingBattle soPlayerCollection;
 
     [SerializeField] private SO_PlayerInputs playerInputs;
     // private List<PlayerInput> players = new List<PlayerInput>();
@@ -33,7 +33,7 @@ public class PlayerJoiner : MonoBehaviour
 
     public void PlayerJoined(PlayerInput _playerInput)
     {
-        _playerInput.gameObject.transform.position = soPlayers.Players[m_playerIndex].SpawnPoint;
+        _playerInput.gameObject.transform.position = soPlayerCollection.Players[m_playerIndex].SpawnPoint;
         ++m_playerIndex;
         // AddPlayer(_playerInput);
     }
@@ -50,6 +50,6 @@ public class PlayerJoiner : MonoBehaviour
     [Button]
     public void SpawnPlayer(int _playerIndex)
     {
-        Instantiate(soPlayers.Players[_playerIndex].PlayerPrefab, soPlayers.Players[_playerIndex].SpawnPoint, Quaternion.identity);
+        Instantiate(soPlayerCollection.Players[_playerIndex].PlayerPrefab, soPlayerCollection.Players[_playerIndex].SpawnPoint, Quaternion.identity);
     }
 }

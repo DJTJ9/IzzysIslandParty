@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class SO_PlayerBowlingBattle : SerializedScriptableObject
 {
     public GameObject PlayerPrefab;
-    public PlayerInput PlayerInput;
+    // public PlayerInput PlayerInput;
     public BallType CurrentBallType;
     public GameScoreSO PlayerScore;
     public Vector3 SpawnPoint;

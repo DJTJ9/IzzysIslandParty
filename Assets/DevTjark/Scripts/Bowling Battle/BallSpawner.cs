@@ -12,18 +12,18 @@ public class BallSpawner : MonoBehaviour, IDependencyProvider
 
     [Provide] BallSpawner ProvideBallSpawner() => this;
     
-    private void Awake()
-    {
-        CreateAndSetFirstBallInstance();
-    }
+    // private void Awake()
+    // {
+    //     CreateAndSetFirstBallInstance();
+    // }
 
-    private void CreateAndSetFirstBallInstance()
-    {
-        CurrentBallInstance = Instantiate(ballCollectionSO.BowlingBalls[BallType.Basketball].PlayerPrefab,
-            transform.position, transform.rotation);
-
-        CurrentBattle = ballCollectionSO.BowlingBalls[BallType.Basketball];
-    }
+    // private void CreateAndSetFirstBallInstance()
+    // {
+    //     CurrentBallInstance = Instantiate(ballCollectionSO.BowlingBalls[BallType.Basketball].PlayerPrefab,
+    //         transform.position, transform.rotation);
+    //
+    //     CurrentBattle = ballCollectionSO.BowlingBalls[BallType.Basketball];
+    // }
 
     public void SpawnBall(SO_PlayerBowlingBattle _battle)
     {

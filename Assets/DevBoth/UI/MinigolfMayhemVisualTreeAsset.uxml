@@ -29,7 +29,7 @@
             <ui:Button text="BACK" name="player-hub-back__button" class="levelButton" style="background-image: none;" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="player-ui__container" class="player-ui-main-container" style="flex-grow: 1; display: flex;">
+    <ui:VisualElement name="player-ui__container" class="player-ui-main-container" style="flex-grow: 1; display: none;">
         <ui:VisualElement name="player-ui-left__container" class="player-ui-left" style="flex-grow: 1;">
             <ui:Label text="SCORE:" name="player-ui-score__label" class="score-label" />
             <ui:Label name="player-ui-score-number__label" data-source="project://database/Assets/DevTjark/Scriptable%20Objects/Swaggy%20Snapshots/Swaggy%20Snapshots%20Score.asset?fileID=11400000&amp;guid=a176daedc58e07c409b775393071ef06&amp;type=2#Swaggy Snapshots Score" class="score-label">

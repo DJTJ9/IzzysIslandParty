@@ -21,7 +21,8 @@ public class PointCalculator : MonoBehaviour
     [SerializeField] private Animator animator;
     
     [FoldoutGroup("Scriptable Objects", expanded: true)]
-    [SerializeField] private GameScoreSO scoreSO;
+    [SerializeField] private SO_PlayerCollectionSwaggySnapshots playerCollectionSO;
+    // [SerializeField] private GameScoreSO scoreSO;
     [SerializeField] private FaceSwapSO faceSwapSO;
     [SerializeField] private DanceMovesSO danceMovesSO;
     
@@ -43,42 +44,42 @@ public class PointCalculator : MonoBehaviour
     //     // m_currentYRotation = transform.eulerAngles.y;
     // }
 
-    public void CalculatePoints()
+    public void CalculatePoints(int _playerIndex)
     {
-        CalculatePointsForFaceDirection();
-        CalculatePointsForFaceExpression();
-        CalculatePointsForDanceMove();
+        CalculatePointsForFaceDirection(_playerIndex);
+        CalculatePointsForFaceExpression(_playerIndex);
+        CalculatePointsForDanceMove(_playerIndex);
     }
 
-    private void CalculatePointsForFaceDirection()
+    private void CalculatePointsForFaceDirection(int _playerIndex)
     {
         // var dotProduct = Vector3.Dot(m_faceDirection, m_cameraDirection);
         // m_turnedAwayFromCamera = dotProduct < Mathf.Cos(Mathf.Deg2Rad * m_lookAwayAngleTreshold);
         
         if (m_turnedAwayFromCamera) return;
         
-        scoreSO.Value += m_faceForwardPointValue;
+        playerCollectionSO.Players[_playerIndex].PlayerScore.Value += m_faceForwardPointValue;
         Debug.Log("Points added for facing the camera!");
     }
 
-    private void CalculatePointsForFaceExpression()
+    private void CalculatePointsForFaceExpression(int _playerIndex)
     {
         var currentFaceMaterial = faceMeshRenderer.sharedMaterial;
         var isHappyFace = faceSwapSO.IsHappyFace(currentFaceMaterial);
 
         if (!isHappyFace) return;
         
-        scoreSO.Value += m_happyFacePointValue;
+        playerCollectionSO.Players[_playerIndex].PlayerScore.Value += m_happyFacePointValue;
         Debug.Log("Points added for happy face!");
     }
 
-    private void CalculatePointsForDanceMove()
+    private void CalculatePointsForDanceMove(int _playerIndex)
     {
         var currentClip = animator.GetCurrentAnimatorClipInfo(0)[0].clip;
         
         if (!danceMovesSO.IsCoolDanceMove(currentClip)) return;
         
-        scoreSO.Value += m_danceMovePointValue;
+        playerCollectionSO.Players[_playerIndex].PlayerScore.Value += m_danceMovePointValue;
         Debug.Log("Points added for cool dance move!");
     }
     

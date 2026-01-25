@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 public class PlayerSpawner : MonoBehaviour
 {
     public Transform[] SpawnPoints;
-    [FormerlySerializedAs("PlayersSO")] public SO_PlayersBowlingBattle soPlayers;
+    [FormerlySerializedAs("soPlayers")] [FormerlySerializedAs("PlayersSO")] public SO_PlayerCollectionBowlingBattle soPlayerCollection;
 
     [SerializeField] private SO_PlayerInputs playerInputs;
     // private List<PlayerInput> players = new List<PlayerInput>();
@@ -46,6 +46,6 @@ public class PlayerSpawner : MonoBehaviour
     [Button]
     public void SpawnPlayer(int _playerIndex)
     {
-        Instantiate(soPlayers.Players[_playerIndex].PlayerPrefab, soPlayers.Players[_playerIndex].SpawnPoint, Quaternion.identity);
+        Instantiate(soPlayerCollection.Players[_playerIndex].PlayerPrefab, soPlayerCollection.Players[_playerIndex].SpawnPoint, Quaternion.identity);
     }
 }

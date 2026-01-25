@@ -336,7 +336,7 @@ Transform:
   m_GameObject: {fileID: 3528918245668914084}
   serializedVersion: 2
   m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 15, y: 7.5, z: -16}
+  m_LocalPosition: {x: 0, y: 3.5, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -954,6 +954,7 @@ GameObject:
   - component: {fileID: 5355027593347932886}
   - component: {fileID: 7759284169844879523}
   - component: {fileID: 4863343813051905605}
+  - component: {fileID: 1842094917209065892}
   m_Layer: 0
   m_Name: MultiplayerEventSystem
   m_TagString: Untagged
@@ -1008,21 +1009,35 @@ MonoBehaviour:
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_PointAction: {fileID: -4300584928347552941, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_MoveAction: {fileID: -3195872999619985952, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_SubmitAction: {fileID: -5325928245141277107, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_CancelAction: {fileID: -1967631576421560919, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_LeftClickAction: {fileID: 8056856818456041789, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_MiddleClickAction: {fileID: -6205933517842620933, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_RightClickAction: {fileID: 3837173908680883260, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_ScrollWheelAction: {fileID: 4502412055082496612, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 3424711213814145635, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 732800746274198705, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_PointAction: {fileID: -4300584928347552941, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_MoveAction: {fileID: 5033152444777877700, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_SubmitAction: {fileID: -5325928245141277107, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_CancelAction: {fileID: 8005386989882421331, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_LeftClickAction: {fileID: 1440298474034912300, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_MiddleClickAction: {fileID: -6205933517842620933, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_RightClickAction: {fileID: 8014849119153581344, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_ScrollWheelAction: {fileID: 6906336766368160287, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 3424711213814145635, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 732800746274198705, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
   m_ScrollDeltaPerTick: 6
+--- !u!114 &1842094917209065892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6767822473315467214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91adc26cdae9419782bd056c2d0041a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiModule: {fileID: 4863343813051905605}
+  uiActions: {fileID: -944628639613478452, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
 --- !u!1 &7385388679790133635
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,6 +1318,7 @@ GameObject:
   - component: {fileID: 8350216875467824921}
   - component: {fileID: 4264715745284823085}
   - component: {fileID: 421914480713147593}
+  - component: {fileID: 3329447928926112624}
   m_Layer: 0
   m_Name: Game Event Listeners
   m_TagString: Untagged
@@ -1372,6 +1388,34 @@ MonoBehaviour:
       - m_Target: {fileID: 8534772836236119018}
         m_TargetAssemblyTypeName: GUIBowlingBattle, Assembly-CSharp
         m_MethodName: HideUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3329447928926112624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7904569183658218770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 37642f5192746c4428aeb5d0668ef72f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1842094917209065892}
+        m_TargetAssemblyTypeName: UIInputRebinder, Assembly-CSharp
+        m_MethodName: RebindUIInput
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1537,7 +1581,7 @@ PrefabInstance:
     - target: {fileID: 2639976134451593851, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: m_Actions
       value: 
-      objectReference: {fileID: -944628639613478452, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+      objectReference: {fileID: -944628639613478452, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
     - target: {fileID: 2639976134451593851, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: m_Enabled
       value: 1
