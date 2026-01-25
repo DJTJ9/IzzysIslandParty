@@ -59,9 +59,7 @@ namespace HurdleGame
             }
         }
 
-#pragma warning disable CS0414 // Field is assigned but its value is never used
         [SerializeField] private bool isFalling;
-#pragma warning restore CS0414 // Field is assigned but its value is never used
 
         [SerializeField] private bool testGravity;
         [SerializeField] private bool testAddWeight;

@@ -1,13 +1,15 @@
 using System.Collections;
 using HelperScripts;
+using Audio;
+using MultiuseScripts;
 using Pathfinding;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 
-namespace Service
+namespace JetskiGame
 {
-    public class JetskiGameLevelService : MonoBehaviour
+    public class JetskiGameLevelService : RacingGameLevelService
     {
         #region consts
 
@@ -20,32 +22,25 @@ namespace Service
 
         [Header("Level start/end: ")]
         [SerializeField] private TextMeshProUGUI levelCountdownText;
+
         [SerializeField] private int secondsToStartLevel;
 
-        [SerializeField] private UnityEvent onLevelStart;
-        [SerializeField] private UnityEvent onLevelEnd;
-
         [Header("Level running: ")]
-        // !! This is kinda only for the racing-games...
         [SerializeField] private Transform goalTransform;
-<<<<<<< Updated upstream:Assets/DevJudy/Scripts/MultiuseScripts/ManagerAndServices/JetskiGameLevelService.cs
 
-=======
         [SerializeField] private bool checkPlacements;
 
         [ShowIf("checkPlacements")]
->>>>>>> Stashed changes:Assets/DevJudy/Scripts/JetskiGame/JetskiGameLevelService.cs
         [SerializeField] private GameObject[] placementOrder;
 
-        [SerializeField] private bool checkPlacements;
-        private bool levelStarted;
-
-        private Coroutine levelCountdownCoroutine = null;
+        private bool raceStarted = false;
+        private bool raceEnded = false;
 
         [Header("Temp ")]
+        // !! The text belongs in another class
         [SerializeField] private TextMeshProUGUI placementText;
-
         [SerializeField] private TextMeshProUGUI onFinishLineCrossedText;
+        [SerializeField] private GameAudioManager audioManager;
 
         private void Awake()
         {
@@ -59,7 +54,7 @@ namespace Service
                 Debug.LogWarning($"PlacementOrder array is more than maximum number of players ({maxNumberOfPlayers}), resizing array");
                 placementOrder = ArrayHelper.ResizeArray(placementOrder, maxNumberOfPlayers);
             }
-            
+
             for (int i = placementOrder.Length - 1; i > 0; i--)
             {
                 if (placementOrder[i] == null)
@@ -72,6 +67,9 @@ namespace Service
 
         private void Start()
         {
+            if (audioManager != null)
+                audioManager.StartBackgroundMusic(() => !raceEnded);
+
             if (goalTransform == null)
             {
                 Debug.LogWarning("Goal transform not set");
@@ -81,9 +79,9 @@ namespace Service
             StartLevel();
         }
 
-        private void StartLevel()
+        public override void StartLevel()
         {
-            levelCountdownCoroutine = StartCoroutine(CountdownToLevelStart());
+            StartCoroutine(CountdownToLevelStart());
         }
 
         private void LetNPCsStart()
@@ -101,8 +99,8 @@ namespace Service
 
             LetNPCsStart();
 
-            onLevelStart.Invoke();
-            levelStarted = true;
+            OnLevelStart.Invoke();
+            raceStarted = true;
         }
 
         private IEnumerator CountdownToLevelStart()
@@ -132,7 +130,7 @@ namespace Service
 
         private void FixedUpdate()
         {
-            if (levelStarted && checkPlacements)
+            if (raceStarted && checkPlacements)
                 CheckPlacements();
         }
 
@@ -179,16 +177,17 @@ namespace Service
             return Vector2.Distance(new Vector2(_gameObjectPos.x, _gameObjectPos.z), new Vector2(goalTransform.position.x, goalTransform.position.z));
         }
 
-        public void OnFinishLineCrossed()
+        public override void OnFinishLineCrossed()
         {
             if (onFinishLineCrossedText != null)
                 onFinishLineCrossedText.gameObject.SetActive(true);
         }
 
-        public void EndLevel()
+        public override void EndLevel()
         {
             onFinishLineCrossedText?.gameObject.SetActive(false);
-            onLevelEnd.Invoke();
+            raceStarted = true;
+            OnLevelEnd.Invoke();
         }
     }
 }
