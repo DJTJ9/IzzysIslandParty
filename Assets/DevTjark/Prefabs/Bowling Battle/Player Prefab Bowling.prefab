@@ -1088,7 +1088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b16c6f78230fa4964a222622d8aae332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 7918252022635215877}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
   m_PlayerRoot: {fileID: 7519859979830495920}
@@ -1109,16 +1109,16 @@ MonoBehaviour:
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_PointAction: {fileID: -4300584928347552941, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_MoveAction: {fileID: -3195872999619985952, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_SubmitAction: {fileID: -5325928245141277107, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_CancelAction: {fileID: -1967631576421560919, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_LeftClickAction: {fileID: 8056856818456041789, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_MiddleClickAction: {fileID: -6205933517842620933, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_RightClickAction: {fileID: 3837173908680883260, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_ScrollWheelAction: {fileID: 4502412055082496612, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 3424711213814145635, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 732800746274198705, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+  m_PointAction: {fileID: 0}
+  m_MoveAction: {fileID: 0}
+  m_SubmitAction: {fileID: 0}
+  m_CancelAction: {fileID: 0}
+  m_LeftClickAction: {fileID: 0}
+  m_MiddleClickAction: {fileID: 0}
+  m_RightClickAction: {fileID: 0}
+  m_ScrollWheelAction: {fileID: 0}
+  m_TrackedDevicePositionAction: {fileID: 0}
+  m_TrackedDeviceOrientationAction: {fileID: 0}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
@@ -1608,6 +1608,10 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 2abbe52883f175347954cd0b2ca2f704, type: 2}
     - target: {fileID: 3761523586504917549, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: playersBowlingBattleSoPlayers
+      value: 
+      objectReference: {fileID: 11400000, guid: b311deb974e253d4a87e88e50d801712, type: 2}
+    - target: {fileID: 3761523586504917549, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
+      propertyPath: playerCollectionBowlingBattleSO
       value: 
       objectReference: {fileID: 11400000, guid: b311deb974e253d4a87e88e50d801712, type: 2}
     - target: {fileID: 5032360713405179094, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}

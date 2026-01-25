@@ -1729,7 +1729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnPoints: []
-  soPlayers: {fileID: 11400000, guid: b311deb974e253d4a87e88e50d801712, type: 2}
+  soPlayerCollection: {fileID: 11400000, guid: b311deb974e253d4a87e88e50d801712, type: 2}
   playerInputs: {fileID: 11400000, guid: 2abbe52883f175347954cd0b2ca2f704, type: 2}
 --- !u!4 &671399374
 Transform:
@@ -3503,7 +3503,7 @@ MonoBehaviour:
   SpawnPoints:
   - {fileID: 990370744}
   - {fileID: 1928521482}
-  soPlayers: {fileID: 11400000, guid: b311deb974e253d4a87e88e50d801712, type: 2}
+  soPlayerCollection: {fileID: 11400000, guid: b311deb974e253d4a87e88e50d801712, type: 2}
   playerInputs: {fileID: 11400000, guid: 2abbe52883f175347954cd0b2ca2f704, type: 2}
 --- !u!114 &1774122974
 MonoBehaviour:
@@ -6363,6 +6363,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -7
       objectReference: {fileID: 0}
+    - target: {fileID: 7390804864838790058, guid: 397750ead82fdff4fb28b1fe98c8b1bb, type: 3}
+      propertyPath: playerCollectionBowlingBattleSO
+      value: 
+      objectReference: {fileID: 11400000, guid: b311deb974e253d4a87e88e50d801712, type: 2}
     - target: {fileID: 7518551674272639152, guid: 397750ead82fdff4fb28b1fe98c8b1bb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15
@@ -6985,18 +6989,6 @@ PrefabInstance:
       propertyPath: m_TrackedDeviceOrientationAction
       value: 
       objectReference: {fileID: 1854474252}
-    - target: {fileID: 5322734474281415555, guid: e6feb88b3c5738b4da86a05bbb189204, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -15
-      objectReference: {fileID: 0}
-    - target: {fileID: 5322734474281415555, guid: e6feb88b3c5738b4da86a05bbb189204, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5322734474281415555, guid: e6feb88b3c5738b4da86a05bbb189204, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6815579173914192029, guid: e6feb88b3c5738b4da86a05bbb189204, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7040,10 +7032,6 @@ PrefabInstance:
     - target: {fileID: 8896167442070573846, guid: e6feb88b3c5738b4da86a05bbb189204, type: 3}
       propertyPath: m_Name
       value: Player Prefab Bowling
-      objectReference: {fileID: 0}
-    - target: {fileID: 8896167442070573846, guid: e6feb88b3c5738b4da86a05bbb189204, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
