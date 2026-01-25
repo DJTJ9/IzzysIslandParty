@@ -20,7 +20,6 @@ namespace Service
 
         [Header("Level start/end: ")]
         [SerializeField] private TextMeshProUGUI levelCountdownText;
-
         [SerializeField] private int secondsToStartLevel;
 
         [SerializeField] private UnityEvent onLevelStart;
@@ -29,7 +28,13 @@ namespace Service
         [Header("Level running: ")]
         // !! This is kinda only for the racing-games...
         [SerializeField] private Transform goalTransform;
+<<<<<<< Updated upstream:Assets/DevJudy/Scripts/MultiuseScripts/ManagerAndServices/JetskiGameLevelService.cs
 
+=======
+        [SerializeField] private bool checkPlacements;
+
+        [ShowIf("checkPlacements")]
+>>>>>>> Stashed changes:Assets/DevJudy/Scripts/JetskiGame/JetskiGameLevelService.cs
         [SerializeField] private GameObject[] placementOrder;
 
         [SerializeField] private bool checkPlacements;

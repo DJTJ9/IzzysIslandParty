@@ -3,10 +3,11 @@ using UnityEngine;
 
 namespace Pathfinding
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class PathfindingUnit : MonoBehaviour
     {
         private Rigidbody rb;
-        
+
         private const float minPathUpdateTime = 0.2f;
         private const float pathUpdateThreshold = 0.5f;
         private const float squareMoveThreshold = pathUpdateThreshold * pathUpdateThreshold;
@@ -28,33 +29,30 @@ namespace Pathfinding
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
-            
-            // Register Unit
-            
+
             StartCoroutine(UpdatePath());
         }
 
         public void CanFollowPath()
         {
-            Debug.Log( this.gameObject.name + " can Follow Path now");
             canFollowPath = true;
         }
-        
+
         private void FixedUpdate()
         {
-          if (followPathRoutine != null)
-          {
-              Quaternion targetRotation = Quaternion.LookRotation(path.LookPoints[pathIndex] - transform.position);
-              transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
-          }
+            if (followPathRoutine != null)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(path.LookPoints[pathIndex] - transform.position);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+            }
         }
-        
+
         private void OnPathFound(Vector3[] _wayPoints, bool _foundPath)
         {
             if (_foundPath)
             {
                 path = new SmoothPath(_wayPoints, transform.position, turnDistance, stoppingDistance);
-                
+
                 if (followPathRoutine != null)
                 {
                     StopCoroutine(followPathRoutine);
@@ -65,7 +63,7 @@ namespace Pathfinding
                     followPathRoutine = StartCoroutine(FollowPath());
             }
         }
-        
+
         private IEnumerator UpdatePath()
         {
             if (Time.timeSinceLevelLoad < 0.3f)
@@ -96,7 +94,7 @@ namespace Pathfinding
 
             while (!canFollowPath)
                 yield return new WaitForFixedUpdate();
-            
+
             while (followingPath)
             {
                 Vector2 pos2D = new Vector2(transform.position.x, transform.position.z);
@@ -112,6 +110,7 @@ namespace Pathfinding
                     pathIndex++;
                 }
 
+                // Checking again in case the above while-loop has crossed the last boundary
                 if (followingPath)
                 {
                     if (pathIndex >= path.SlowDownIndex && stoppingDistance > 0)
@@ -121,7 +120,7 @@ namespace Pathfinding
                         if (speedPercent < 0.01f)
                             followingPath = false;
                     }
-                  
+
                     rb.AddForce((speed * speedPercent) * transform.forward, ForceMode.Force);
                 }
 

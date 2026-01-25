@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.AI;
 using Debug = UnityEngine.Debug;
 
 namespace Pathfinding
 {
+    [RequireComponent(typeof(PathGrid))]
+    [RequireComponent(typeof(PathRequestManager))]
     public class Pathfinding : MonoBehaviour
     {
         private PathGrid pathGrid;
@@ -20,12 +23,8 @@ namespace Pathfinding
         private void Awake()
         {
             pathGrid = GetComponent<PathGrid>();
-            if (pathGrid == null)
-                Debug.LogError("Grid not found");
 
             pathRequestManager = GetComponent<PathRequestManager>();
-            if (pathRequestManager == null)
-                Debug.LogError("PathRequestManager not found");
         }
         
         public void StartFindPath(Vector3 _startPos, Vector3 _targetPos)
