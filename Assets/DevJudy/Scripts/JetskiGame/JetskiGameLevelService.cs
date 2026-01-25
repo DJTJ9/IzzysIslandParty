@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using HelperScripts;
 using Audio;
+using ImprovedTimers;
 using MultiuseScripts;
 using Pathfinding;
-using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 
@@ -15,26 +17,22 @@ namespace JetskiGame
 
         private const string levelStartText = "START";
         private const string dotsText = "...";
+        private const string unfinishedRaceText = "--:--:--";
 
         private const int maxNumberOfPlayers = 5;
 
         #endregion
 
         [Header("Level start/end: ")]
-        [SerializeField] private TextMeshProUGUI levelCountdownText;
-
         [SerializeField] private int secondsToStartLevel;
-
-        [Header("Level running: ")]
         [SerializeField] private Transform goalTransform;
-
-        [SerializeField] private bool checkPlacements;
-
-        [ShowIf("checkPlacements")]
-        [SerializeField] private GameObject[] placementOrder;
-
-        private bool raceStarted = false;
-        private bool raceEnded = false;
+        [SerializeField] private TextMeshProUGUI levelCountdownText;
+        [SerializeField] private int secondsToEndLevel = 10;
+        private CountdownTimer endLevelTimer;
+        
+        private bool raceStarted;
+        private bool raceEnded;
+       
 
         [Header("Temp ")]
         // !! The text belongs in another class
@@ -44,6 +42,9 @@ namespace JetskiGame
 
         private void Awake()
         {
+            WinnerPlacementOrder =  new Dictionary<int, Tuple<GameObject, string>>();
+            endLevelTimer = new CountdownTimer(secondsToEndLevel);
+            
             CheckPlacementList();
         }
 
@@ -131,10 +132,10 @@ namespace JetskiGame
         private void FixedUpdate()
         {
             if (raceStarted && checkPlacements)
-                CheckPlacements();
+                CheckRacerPlacements();
         }
 
-        private void CheckPlacements()
+        private void CheckRacerPlacements()
         {
             for (int i = 1; i < placementOrder.Length; i++)
             {
@@ -177,17 +178,62 @@ namespace JetskiGame
             return Vector2.Distance(new Vector2(_gameObjectPos.x, _gameObjectPos.z), new Vector2(goalTransform.position.x, goalTransform.position.z));
         }
 
-        public override void OnFinishLineCrossed()
+        public override void OnFinishLineCrossed(GameObject _triggeringObj)
+        {
+            int placement = WinnerPlacementOrder.Count + 1;
+            var currentObj = new Tuple<GameObject, string>(_triggeringObj, LevelTimer.Instance.GetTimeAsString());
+            WinnerPlacementOrder.Add(placement, currentObj);
+            
+            if (((1 << _triggeringObj.layer) & playerLayerMask) != 0)
+            {
+                OnPlayerCrossedFinishLine();
+                
+                StartCoroutine(StartLevelCountdownTimer());
+            }
+        }
+
+        private void OnPlayerCrossedFinishLine()
         {
             if (onFinishLineCrossedText != null)
                 onFinishLineCrossedText.gameObject.SetActive(true);
         }
 
+        private IEnumerator StartLevelCountdownTimer()
+        {
+            endLevelTimer.Start();
+            
+            while (endLevelTimer.IsRunning)
+            {
+                yield return new WaitForFixedUpdate();
+            }
+
+            CheckWinnerPlacementList();
+            
+            raceEnded = true;
+            EndLevel();
+
+            yield return null;
+        }
+
+        private void CheckWinnerPlacementList()
+        {
+            if (WinnerPlacementOrder.Count < maxNumberOfPlayers)
+            {
+                for (int i = WinnerPlacementOrder.Count; i < maxNumberOfPlayers; i++)
+                {
+                    WinnerPlacementOrder.Add(WinnerPlacementOrder.Count + 1, new Tuple<GameObject, string>(placementOrder[i], unfinishedRaceText));
+                }
+            }
+        }
+
         public override void EndLevel()
         {
-            onFinishLineCrossedText?.gameObject.SetActive(false);
-            raceStarted = true;
-            OnLevelEnd.Invoke();
+            LevelTimer.Instance.EndTimerAndDisplayFinishTime();
+            
+            onFinishLineCrossedText?.gameObject.SetActive(true);
+            raceStarted = false;
+            
+            OnLevelEnd?.Invoke();
         }
     }
 }

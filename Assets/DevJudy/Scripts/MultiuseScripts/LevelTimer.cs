@@ -1,4 +1,3 @@
-using System.Collections;
 using UIScripts;
 using UnityEngine;
 
@@ -6,6 +5,9 @@ namespace MultiuseScripts
 {
     public class LevelTimer : MonoBehaviour
     {
+        private static LevelTimer instance;
+        public static LevelTimer Instance => instance;
+        
         [Header("Dependencies: ")]
         [SerializeField] private UITextManager textManager;
         [SerializeField] private UIPanelManager uiPanelManager;
@@ -42,6 +44,11 @@ namespace MultiuseScripts
             }
         }
 
+        private LevelTimer()
+        {
+            instance = this;
+        }
+        
         private void Start()
         {
             if (startTimerOnLevelStart)
@@ -50,7 +57,6 @@ namespace MultiuseScripts
         
         public void StartTimer()
         {
-            Debug.Log("StartTimer");
             if (timerRunningDown)
                 time = durationInMinutes * 60;
             else
@@ -110,13 +116,16 @@ namespace MultiuseScripts
             textManager.UpdateTimerText($"Time: {minutes:00}:{seconds:00}:{milliseconds:00}");
         }
 
-        public float EndTimerAndGetFinishTime(out float _seconds, out float _milliseconds)
+        public string GetTimeAsString()
+        {
+            return $"{minutes:00}:{seconds:00}:{milliseconds:00}";
+        }
+        
+        public void EndTimerAndDisplayFinishTime()
         {
             UpdateTimer = false;
 
-            _seconds = seconds;
-            _milliseconds = milliseconds;
-            return minutes;
+            textManager.UpdateTimerText($"Time: {minutes:00}:{seconds:00}:{milliseconds:00}");
         }
     }
 }

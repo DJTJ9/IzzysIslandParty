@@ -7,15 +7,19 @@ namespace UIScripts
 {
     public class UIPanelManager : MonoBehaviour
     {
-        [Header("GameOver UI:")]
+        [Header("Panel: ")]
         [SerializeField] private GameObject raceOverPanel;
         [SerializeField] private GameObject scoresPanel;
-        [SerializeField] private TextMeshProUGUI playerTimesText; // Only for racing games..
-        [SerializeField] private GameObject endGameMenu;
+        [SerializeField] private GameObject levelPanel;
+
+        [Header("Text: ")]
+        [SerializeField] private TextMeshProUGUI playerPlacementsText;
+        [SerializeField] private TextMeshProUGUI playerNamesText;
+        [SerializeField] private TextMeshProUGUI playerTimesText;
 
         [Header("Dependencies:")]
-        [SerializeField] private GameObject levelPanel;
-        [SerializeField] private LevelTimer levelTimer;
+        [SerializeField] private RacingGameLevelService racingGameLevelService;
+        [SerializeField] private GameObject endGameMenu;
 
         [Header("Variables:")]
         [SerializeField] private float waitTimeAfterGameOver = 5f;
@@ -24,38 +28,15 @@ namespace UIScripts
         private float seconds;
         private float milliSeconds;
 
-        //private bool gameOver = false;
-
-        // TBA!!
-        public void PauseGame()
+        private void Start()
         {
-            
-        }
-        
-        private void ShowPauseMenu()
-        {
-            
-        }
-
-        public void UnpauseGame()
-        {
-            
-        }
-
-        private void HidePauseMenu()
-        {
-            
+            raceOverPanel?.SetActive(false);
+            scoresPanel?.SetActive(false);
+            endGameMenu?.SetActive(false);
         }
         
         public void SetGameOver()
         {
-            //gameOver = true;
-
-            if (levelTimer != null)
-                minutes = levelTimer.EndTimerAndGetFinishTime(out seconds, out milliSeconds);
-
-            Debug.Log("-----------------Game Over------------------");
-
             ShowRaceOverScreen();
         }
 
@@ -68,16 +49,35 @@ namespace UIScripts
             StartCoroutine(WaitForGameOver());
         }
 
+        private void SetRankingTexts()
+        {
+            ClearPlacementTextFields();
+            
+            for (int i = 1; i < racingGameLevelService.WinnerPlacementOrder.Count + 1; i++)
+            {
+                playerPlacementsText.text += $"{(i)}. \n";
+                playerNamesText.text += racingGameLevelService.WinnerPlacementOrder[i].Item1.name + "\n";
+                playerTimesText.text += racingGameLevelService.WinnerPlacementOrder[i].Item2 + "\n";
+            }
+        }
+
+        private void ClearPlacementTextFields()
+        {
+            playerPlacementsText.text = "";
+            playerNamesText.text = "";
+            playerTimesText.text = "";
+        }
+
         private void ShowScores()
         {
             raceOverPanel?.SetActive(false);
 
             // Maybe do switch case display for different game modes
-
-            if (playerTimesText != null)
-                playerTimesText.text = $"{minutes:00}:{seconds:00}:{milliSeconds:00}";
-            
-            scoresPanel?.SetActive(true);
+            if (racingGameLevelService.CheckPlacements)
+            {
+                SetRankingTexts();
+                scoresPanel?.SetActive(true);
+            }
         }
 
         private void ShowEndGameMenu()
@@ -96,7 +96,7 @@ namespace UIScripts
                 ShowScores();
                 // TBA Wait for input from player
 
-                yield return new WaitForSeconds(waitTimeAfterGameOver);
+                yield return new WaitForSeconds(waitTimeAfterGameOver * 2);
 
                 showStuff = false;
             }
