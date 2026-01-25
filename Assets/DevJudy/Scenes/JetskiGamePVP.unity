@@ -718,7 +718,7 @@ GameObject:
   m_Component:
   - component: {fileID: 86226313}
   m_Layer: 0
-  m_Name: Level
+  m_Name: LevelObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2784,7 +2784,7 @@ MonoBehaviour:
   playerTimesText: {fileID: 1914189322}
   endGameMenu: {fileID: 300351577}
   levelPanel: {fileID: 667080403}
-  uiTextManager: {fileID: 345387529}
+  levelTimer: {fileID: 2001284367}
   waitTimeAfterGameOver: 3
 --- !u!114 &345387529
 MonoBehaviour:
@@ -2800,11 +2800,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointsText: {fileID: 0}
   timerText: {fileID: 1825615321}
-  uiPanelManager: {fileID: 345387528}
-  durationInMinutes: 5
-  deductionFeedbackDuration: 2
-  timerRunningDown: 0
-  startTimerOnLevelStart: 0
 --- !u!1001 &346704015
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4484,6 +4479,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6790040258192755194, guid: fca05fc86b15f0d4da25ed7793db4384, type: 3}
   m_PrefabInstance: {fileID: 1580132364}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &477864848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 477864849}
+  m_Layer: 0
+  m_Name: --ACL--
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &477864849
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477864848}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 408.22995, y: -0.20004845, z: 716.7514}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &501439992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5107,6 +5133,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da9839782ab0be94a9d3541b29b4022c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgmVolume:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 8e5a8db1c5e26d34eb09831085622d78, type: 2}
+  bgmFadeInSpeed:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 11400000, guid: 8f895c611d0bdcc4eb1e28d4a7867cbe, type: 2}
+  levelBackgroundMusic: JetskiGameMusic
 --- !u!4 &575595444 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6790040258192755194, guid: fca05fc86b15f0d4da25ed7793db4384, type: 3}
@@ -12125,6 +12160,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fca05fc86b15f0d4da25ed7793db4384, type: 3}
+--- !u!1 &1629631373
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1629631374}
+  m_Layer: 0
+  m_Name: --Level--
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1629631374
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629631373}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 408.22995, y: -0.20004845, z: 716.7514}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1639706112 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6790040258192755194, guid: fca05fc86b15f0d4da25ed7793db4384, type: 3}
@@ -15170,6 +15236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2001284366}
   - component: {fileID: 2001284365}
+  - component: {fileID: 2001284367}
   m_Layer: 0
   m_Name: LevelService
   m_TagString: Untagged
@@ -15192,8 +15259,8 @@ MonoBehaviour:
   OnLevelStart:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 345387529}
-        m_TargetAssemblyTypeName: UIScripts.UITextManager, Assembly-CSharp
+      - m_Target: {fileID: 2001284367}
+        m_TargetAssemblyTypeName: MultiuseScripts.LevelTimer, Assembly-CSharp
         m_MethodName: StartTimer
         m_Mode: 1
         m_Arguments:
@@ -15272,6 +15339,24 @@ Transform:
   - {fileID: 1877530853}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2001284367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001284364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bce12737ce32a64ca8776d25f07b301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textManager: {fileID: 345387529}
+  uiPanelManager: {fileID: 345387528}
+  durationInMinutes: 5
+  deductionFeedbackDuration: 2
+  timerRunningDown: 0
+  startTimerOnLevelStart: 0
 --- !u!1001 &2008507982
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16211,6 +16296,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 86226313}
     m_Modifications:
+    - target: {fileID: 165169142013276342, guid: e097a13e807f5044f8a48a92474fe048, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5704474965065886413, guid: e097a13e807f5044f8a48a92474fe048, type: 3}
       propertyPath: m_LocalPosition.x
       value: 402.87
@@ -16624,9 +16713,11 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 477864849}
   - {fileID: 570239157}
   - {fileID: 1366105714}
   - {fileID: 1666142606}
+  - {fileID: 1629631374}
   - {fileID: 86226313}
   - {fileID: 415596257}
   - {fileID: 803091910}

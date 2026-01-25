@@ -36,7 +36,6 @@ namespace Pathfinding
 
         public void CanFollowPath()
         {
-            Debug.Log( this.gameObject.name + " can Follow Path now");
             canFollowPath = true;
         }
         
