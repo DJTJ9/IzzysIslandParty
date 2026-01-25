@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ScriptableObjects
 {
-    [CreateAssetMenu(menuName = "Fishing/Create Fish")]
+    [CreateAssetMenu(menuName = "Scriptable Objects/FishingFrenzy/Fish")]
     public class SO_Fish : ScriptableObject
     {
         [Header("Display variables: ")]

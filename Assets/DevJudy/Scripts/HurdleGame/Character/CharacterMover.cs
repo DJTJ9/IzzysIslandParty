@@ -11,10 +11,16 @@ namespace HurdleGame
         [SerializeField] private FloatReference moveSpeed;
 
         private float moveDirMultiplier = 100f;
-        // [SerializeField private AnimationCurve speedThroughLevelCurve; // curve that multiplies the speed based on how well the character is doing
 
-        [SerializeField] private bool canMove = false;
+        private float individualMultiplier = 1f;
+        public float IndividualMultiplier
+        {
+            get => individualMultiplier;
+            set => individualMultiplier = value;
+        }
         
+        [SerializeField] private bool canMove = false;
+
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
@@ -32,10 +38,22 @@ namespace HurdleGame
             rb.linearVelocity = Vector3.zero;
         }
 
+        public void HitObstacle()
+        {
+            // Play animation
+            // Show Icon
+            
+            transform.position += new Vector3(-1, 0f, 0f);
+            individualMultiplier -= 0.01f;
+        }
+
         private void FixedUpdate()
         {
             if (canMove)
-                rb.linearVelocity = new Vector3((moveDirMultiplier * moveSpeed.Value) * Time.deltaTime, rb.linearVelocity.y, rb.linearVelocity.z);
+                rb.linearVelocity = new Vector3((moveDirMultiplier * moveSpeed.Value) * (Time.deltaTime * individualMultiplier), rb.linearVelocity.y,
+                    rb.linearVelocity.z);
+
+            individualMultiplier += 0.001f;
         }
     }
 }
