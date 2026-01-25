@@ -1,0 +1,8 @@
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "Swaggy Snapshots Player Collection", menuName = "Scriptable Objects/Swaggy Snapshots/Player Collection", order = 1)]
+public class SO_PlayerCollectionSwaggySnapshots : SerializedScriptableObject
+{
+    public SO_PlayerSwaggySnapshots[] Players = new SO_PlayerSwaggySnapshots[4];
+}

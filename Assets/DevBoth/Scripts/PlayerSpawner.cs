@@ -1,11 +1,12 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerSpawner : MonoBehaviour
 {
     public Transform[] SpawnPoints;
-    public SO_BowlingBattlePlayer PlayersSO;
+    [FormerlySerializedAs("soPlayers")] [FormerlySerializedAs("PlayersSO")] public SO_PlayerCollectionBowlingBattle soPlayerCollection;
 
     [SerializeField] private SO_PlayerInputs playerInputs;
     // private List<PlayerInput> players = new List<PlayerInput>();
@@ -28,7 +29,7 @@ public class PlayerSpawner : MonoBehaviour
         // Instantiate(Player3, Spawnpoint3.position, Spawnpoint3.rotation);
     }
 
-    // public void OnPlayerJoined(PlayerInput _playerInput)
+    // public void PlayerJoined(PlayerInput _playerInput)
     // {
     //     AddPlayer(_playerInput);
     // }
@@ -45,6 +46,6 @@ public class PlayerSpawner : MonoBehaviour
     [Button]
     public void SpawnPlayer(int _playerIndex)
     {
-        Instantiate(PlayersSO.Players[_playerIndex].PlayerPrefab, PlayersSO.Players[_playerIndex].SpawnPoint, Quaternion.identity);
+        Instantiate(soPlayerCollection.Players[_playerIndex].PlayerPrefab, soPlayerCollection.Players[_playerIndex].SpawnPoint, Quaternion.identity);
     }
 }

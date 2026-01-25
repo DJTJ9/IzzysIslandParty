@@ -2,13 +2,13 @@
     <Style src="project://database/Assets/DevBoth/UI/PlayerHubStyle.uss?fileID=7433441132597879392&amp;guid=520cb84fd4065e54db377802fbec6137&amp;type=3#PlayerHubStyle" />
     <Style src="project://database/Assets/DevBoth/UI/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=25d8977cbaec736409b2c76d050db212&amp;type=3#MainMenuStyle" />
     <ui:VisualElement name="menu-background__container" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Suriyun/Yippy%20Kawaii/UI/bearbg.png?fileID=21300000&amp;guid=3d29693681072574aa13f942091f8d4e&amp;type=3#bearbg&quot;); display: flex;">
-        <ui:VisualElement name="main-menu__container" style="flex-grow: 1; display: none;">
+        <ui:VisualElement name="main-menu__container" style="flex-grow: 1; display: flex;">
             <ui:Label text="MAIN MENU" name="main-menu-header__label" class="header" style="width: 50%; height: 20%;" />
             <ui:Button text="PLAY" name="main-menu-play__button" class="button" />
             <ui:Button text="SETTINGS" name="main-menu-settings__button" class="button" />
             <ui:Button text="QUIT" name="main-menu-quit__button" class="button" />
         </ui:VisualElement>
-        <ui:VisualElement name="player-hub__container" style="flex-grow: 1; flex-direction: column; display: flex; visibility: visible;">
+        <ui:VisualElement name="player-hub__container" style="flex-grow: 1; flex-direction: column; display: none; visibility: visible;">
             <ui:VisualElement name="player-hub-top__container" style="flex-grow: 1;">
                 <ui:Label text="SELECT LEVEL" name="player-hub-header__label" class="header" />
             </ui:VisualElement>
