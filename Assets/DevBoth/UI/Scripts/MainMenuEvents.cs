@@ -13,6 +13,7 @@ public class MainMenuEvents : MonoBehaviour
     private UIDocument document;
     
     [Header("Menus")]
+    private VisualElement menusContainer;
     private VisualElement mainMenu;
     private VisualElement settingsMenu;
     private VisualElement playerHub;
@@ -86,6 +87,7 @@ public class MainMenuEvents : MonoBehaviour
 
     private void BindVisualElements()
     {
+        menusContainer = document.rootVisualElement.Q("menu-background__container");
         mainMenu = document.rootVisualElement.Q("main-menu__container");
         settingsMenu = document.rootVisualElement.Q("settings-menu__container");
         playerHub = document.rootVisualElement.Q("player-hub__container");
@@ -183,7 +185,10 @@ public class MainMenuEvents : MonoBehaviour
     
     private void OnLoadBowlingBattle(ClickEvent _evt)
     {
-        LoadGameSceneWithLevel(SceneNames.BowlingBattleGame, SceneNames.BowlingBattleLevel);
+        // LoadGameSceneWithLevel(SceneNames.BowlingBattleGame, SceneNames.BowlingBattleLevel);
+        this.gameObject.SetActive(false);
+        // menusContainer.style.display = DisplayStyle.None;
+        LoadSceneAdditive(SceneNames.BowlingBattleGame);
     }
 
     private void OnLoadFishingFrenzy(ClickEvent _evt)
@@ -206,14 +211,19 @@ public class MainMenuEvents : MonoBehaviour
         LoadGameSceneWithLevel(SceneNames.SwaggySnapshotsGame, SceneNames.SwaggySnapshotsLevel);
     }
 
-    private void LoadGameScene(SceneNames sceneName)
+    private void LoadGameScene(SceneNames _sceneName)
     {
-        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(sceneName, out var sceneNameFromCollection) ? sceneNameFromCollection : throw new KeyNotFoundException());
+        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(_sceneName, out var sceneNameFromCollection) ? sceneNameFromCollection : throw new KeyNotFoundException());
     }
 
-    private void LoadGameSceneWithLevel(SceneNames gameScene, SceneNames levelScene)
+    private void LoadGameSceneWithLevel(SceneNames _gameScene, SceneNames _levelScene)
     {
-        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(gameScene, out var gameSceneName) ? gameSceneName : throw new KeyNotFoundException());
-        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(levelScene, out var levelSceneName) ? levelSceneName : throw new KeyNotFoundException(), LoadSceneMode.Additive);
+        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(_gameScene, out var gameSceneName) ? gameSceneName : throw new KeyNotFoundException());
+        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(_levelScene, out var levelSceneName) ? levelSceneName : throw new KeyNotFoundException(), LoadSceneMode.Additive);
+    }
+
+    private void LoadSceneAdditive(SceneNames _sceneName)
+    {
+        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(_sceneName, out var sceneNameFromCollection) ? sceneNameFromCollection : throw new KeyNotFoundException(), LoadSceneMode.Additive);
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using MultiuseScripts;
 using TMPro;
 using UnityEngine;
 
@@ -8,15 +9,13 @@ namespace UIScripts
     {
         [Header("GameOver UI:")]
         [SerializeField] private GameObject raceOverPanel;
-
         [SerializeField] private GameObject scoresPanel;
-        [SerializeField] private TextMeshProUGUI playerTimesText;
+        [SerializeField] private TextMeshProUGUI playerTimesText; // Only for racing games..
         [SerializeField] private GameObject endGameMenu;
 
         [Header("Dependencies:")]
         [SerializeField] private GameObject levelPanel;
-
-        [SerializeField] private UITextManager uiTextManager;
+        [SerializeField] private LevelTimer levelTimer;
 
         [Header("Variables:")]
         [SerializeField] private float waitTimeAfterGameOver = 5f;
@@ -52,8 +51,8 @@ namespace UIScripts
         {
             //gameOver = true;
 
-            if (uiTextManager != null)
-                minutes = uiTextManager.EndTimerAndGetFinishTime(out seconds, out milliSeconds);
+            if (levelTimer != null)
+                minutes = levelTimer.EndTimerAndGetFinishTime(out seconds, out milliSeconds);
 
             Debug.Log("-----------------Game Over------------------");
 

@@ -20,7 +20,6 @@ public class RigidbodyMovement : MonoBehaviour
     // [SerializeField] private float fallSpeedModifier = 1;
 
     [SerializeField] private Camera cam;
-    private new Transform transform;
     private new Rigidbody rigidbody;
     private GroundChecker groundChecker;
 
@@ -36,7 +35,6 @@ public class RigidbodyMovement : MonoBehaviour
 
     private void Awake()
     {
-        transform = GetComponent<Transform>();
         rigidbody = GetComponent<Rigidbody>();
         groundChecker = GetComponent<GroundChecker>();
         
@@ -69,7 +67,7 @@ public class RigidbodyMovement : MonoBehaviour
         camFwd.y = 0f; camRight.y = 0f;
         camFwd.Normalize(); camRight.Normalize();
 
-        var worldDir = camRight * _direction.x + camFwd * _direction.z;
+        var worldDir = camRight * _direction.x + camFwd * _direction.y;
         
         rigidbody.AddForce(worldDir.normalized * pushForce, ForceMode.Impulse);
         

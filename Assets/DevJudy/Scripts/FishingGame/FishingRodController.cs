@@ -1,24 +1,26 @@
 using enums;
 using Juice;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace FishingGame
 {
+    [RequireComponent(typeof(PlayerInput))]
     public class FishingRodController : MonoBehaviour
     {
         private static readonly int cast = Animator.StringToHash("IsCast");
         private static readonly int fishBiting = Animator.StringToHash("FishBiting");
 
         private Animator animator;
-        //private LineRenderer lineRenderer;
         [SerializeField] public IconHandler IconHandler;
+        
         // !! Not working yet
+        //private LineRenderer lineRenderer;
         [SerializeField] private Transform[] rodLineRendererPositions;
 
         private bool isCast = false;
-        
         [Header("Pausing: ")]
         [SerializeField] private UnityEvent OnPauseGame;
         [SerializeField] private UnityEvent OnUnpauseGame;
@@ -60,7 +62,7 @@ namespace FishingGame
                 }
             }
         }
-
+        
         public void OnCast(InputAction.CallbackContext _context)
         {
             if (_context.performed)

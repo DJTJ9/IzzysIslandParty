@@ -53,8 +53,6 @@ namespace FishingGame
                 Debug.LogError("FishingSystem fishList is null");
             else
             {
-                Debug.Log("FishingSystem instance created");
-
                 if (fishDisplay != null)
                     SpawnInFishDisplayObjects();
             }
