@@ -1,49 +1,46 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using HelperScripts;
 using Audio;
-using ImprovedTimers;
+using HelperScripts;
 using MultiuseScripts;
-using Pathfinding;
 using TMPro;
 using UnityEngine;
 
-namespace JetskiGame
+namespace HurdleGame
 {
-    public class JetskiGameLevelService : RacingGameLevelService
+    public class HurdleGameLevelService : RacingGameLevelService
     {
         #region consts
 
         private const string levelStartText = "START";
         private const string dotsText = "...";
-        private const string unfinishedRaceText = "--:--:--";
 
-        private const int maxNumberOfPlayers = 5;
+        private const int maxNumberOfPlayers = 4;
 
         #endregion
 
         [Header("Level start/end: ")]
         [SerializeField] private int secondsToStartLevel;
+
         [SerializeField] private Transform goalTransform;
         [SerializeField] private TextMeshProUGUI levelCountdownText;
-        [SerializeField] private int secondsToEndLevel = 10;
-        private CountdownTimer endLevelTimer;
-        
-        private bool raceStarted;
-        private bool raceEnded;
+
+        private bool raceStarted = false;
+        private bool raceEnded = false;
 
         [Header("Temp ")]
         // !! The text belongs in another class
         [SerializeField] private TextMeshProUGUI placementText;
+
         [SerializeField] private TextMeshProUGUI onFinishLineCrossedText;
         [SerializeField] private GameAudioManager audioManager;
+        [SerializeField] private bool checkXOnly;
 
         private void Awake()
         {
-            WinnerPlacementOrder =  new Dictionary<int, Tuple<GameObject, string>>();
-            endLevelTimer = new CountdownTimer(secondsToEndLevel);
-            
+            WinnerPlacementOrder = new Dictionary<int, Tuple<GameObject, string>>();
+
             CheckPlacementList();
         }
 
@@ -84,20 +81,9 @@ namespace JetskiGame
             StartCoroutine(CountdownToLevelStart());
         }
 
-        private void LetNPCsStart()
-        {
-            foreach (GameObject obj in placementOrder)
-            {
-                if (obj.TryGetComponent(out PathfindingUnit pathfindingUnit))
-                    pathfindingUnit.CanFollowPath();
-            }
-        }
-
         private void OnCoroutineOver()
         {
             StopCoroutine(CountdownToLevelStart());
-
-            LetNPCsStart();
 
             OnLevelStart.Invoke();
             raceStarted = true;
@@ -130,7 +116,7 @@ namespace JetskiGame
 
         private void FixedUpdate()
         {
-            if (raceStarted && checkPlacements)
+            if (raceStarted)
                 CheckRacerPlacements();
         }
 
@@ -141,7 +127,7 @@ namespace JetskiGame
                 float currentDistanceToCompare = GetDistanceToGoal(placementOrder[i].transform.position);
                 GameObject currentGameObjectBeingCompared = placementOrder[i];
 
-                int leftNeighbour = i - 1; // 0, 1
+                int leftNeighbour = i - 1;
 
                 // While the leftNeighbour is not out of bounds, and the ln distance is more than the currentDistance
                 while (leftNeighbour >= 0 && GetDistanceToGoal(placementOrder[leftNeighbour].transform.position) > currentDistanceToCompare)
@@ -174,44 +160,32 @@ namespace JetskiGame
 
         private float GetDistanceToGoal(Vector3 _gameObjectPos)
         {
-            return Vector2.Distance(new Vector2(_gameObjectPos.x, _gameObjectPos.z), new Vector2(goalTransform.position.x, goalTransform.position.z));
+            var goalPos = new Vector2(goalTransform.position.x, checkXOnly ? _gameObjectPos.z : goalTransform.position.z);
+
+            return Vector2.Distance(new Vector2(_gameObjectPos.x, _gameObjectPos.z), goalPos);
         }
 
         public override void OnFinishLineCrossed(GameObject _triggeringObj)
         {
             int placement = WinnerPlacementOrder.Count + 1;
-            var currentObj = new Tuple<GameObject, string>(_triggeringObj, LevelTimer.Instance.GetTimeAsString());
+
+            var currentObj = new Tuple<GameObject, string>(_triggeringObj, null);
             WinnerPlacementOrder.Add(placement, currentObj);
-            
+
             if (((1 << _triggeringObj.layer) & playerLayerMask) != 0)
             {
                 OnPlayerCrossedFinishLine();
-                
-                StartCoroutine(StartLevelCountdownTimer());
             }
+
+            if (WinnerPlacementOrder.Count >= maxNumberOfPlayers)
+                EndLevel();
         }
+
 
         private void OnPlayerCrossedFinishLine()
         {
             if (onFinishLineCrossedText != null)
                 onFinishLineCrossedText.gameObject.SetActive(true);
-        }
-
-        private IEnumerator StartLevelCountdownTimer()
-        {
-            endLevelTimer.Start();
-            
-            while (endLevelTimer.IsRunning)
-            {
-                yield return new WaitForFixedUpdate();
-            }
-
-            CheckWinnerPlacementList();
-            
-            raceEnded = true;
-            EndLevel();
-
-            yield return null;
         }
 
         private void CheckWinnerPlacementList()
@@ -220,18 +194,20 @@ namespace JetskiGame
             {
                 for (int i = WinnerPlacementOrder.Count; i < maxNumberOfPlayers; i++)
                 {
-                    WinnerPlacementOrder.Add(WinnerPlacementOrder.Count + 1, new Tuple<GameObject, string>(placementOrder[i], unfinishedRaceText));
+                    WinnerPlacementOrder.Add(WinnerPlacementOrder.Count + 1, new Tuple<GameObject, string>(placementOrder[i], null));
                 }
             }
         }
 
         public override void EndLevel()
         {
-            LevelTimer.Instance.EndTimerAndDisplayFinishTime();
-            
+            CheckWinnerPlacementList();
+
+            raceEnded = true;
+
             onFinishLineCrossedText?.gameObject.SetActive(true);
             raceStarted = false;
-            
+
             OnLevelEnd?.Invoke();
         }
     }

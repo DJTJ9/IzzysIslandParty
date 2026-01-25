@@ -13,23 +13,17 @@ namespace HurdleGame
 
         [Header("Jump variables: ")]
         [SerializeField] private float jumpForce = 7f;
-
         [SerializeField] private float hopMultiplier = 0.5f;
-        [SerializeField] private float additionalFallWeight = 0.3f;
         private Vector2 bigJumpHeight;
         private Vector2 smallJumpHeight;
-        private float prevUpVelocity;
-        private float gravity = 9.8f;
 
         [Header("Slide variables: ")]
         [SerializeField] private float longSlideSeconds = 2f;
-
         [SerializeField] private float shortSlideMultiplier = 0.5f;
         private float shortSlideSeconds;
 
         [Header("Slide collider: ")]
         [SerializeField] private Vector2 slideColliderSize = new Vector2(0.2f, 0.3f);
-
         [SerializeField] private Vector3 slideColliderCenter = new Vector3(0f, 0.2f, 0f);
 
         private Vector2 regColliderSize = new Vector2(0.2f, 0.61f);
@@ -37,33 +31,22 @@ namespace HurdleGame
 
         // [Header("Movement variables: ")]
         // private float allowedPosOffset = 2f;
-        private Vector3 ogRunningPos;
+        // private Vector3 ogRunningPos;
 
         [Header("GroundCheck variables: ")]
         [SerializeField] private LayerMask groundLayer;
-
         [SerializeField] private float groundCheckOffset = 1f;
         [SerializeField] private float groundCheckRadius = 0.3f;
 
-        [SerializeField] private bool isGrounded;
-
         private bool IsGrounded
         {
-            get => isGrounded;
-            set
-            {
-                isGrounded = value;
-
-                if (value)
-                    isFalling = false;
-            }
+            get;
+            set;
+            // if (value)
+            //     isFalling = false;
         }
 
-        [SerializeField] private bool isFalling;
-
-        [SerializeField] private bool testGravity;
-        [SerializeField] private bool testAddWeight;
-        [SerializeField] private bool testPrevVelocity;
+        //[SerializeField] private bool isFalling;
 
         private void Awake()
         {
@@ -80,7 +63,7 @@ namespace HurdleGame
 
             shortSlideSeconds = longSlideSeconds * shortSlideMultiplier;
 
-            ogRunningPos = transform.position;
+            //ogRunningPos = transform.position;
         }
 
         public void OnJump(InputAction.CallbackContext _context)
@@ -169,24 +152,6 @@ namespace HurdleGame
 
             GroundCheck();
 
-            if (!IsGrounded)
-            {
-                if (testPrevVelocity)
-                {
-                    rb.linearVelocity -= new Vector3(0, prevUpVelocity, 0f);
-                    prevUpVelocity = rb.linearVelocity.y;
-                }
-                else if (testAddWeight)
-                {
-                    rb.linearVelocity -= new Vector3(0, additionalFallWeight, 0f);
-                }
-                else if (testGravity)
-                {
-                    rb.linearVelocity -= new Vector3(0, gravity, 0f);
-                }
-            }
-
-
             // if (transform.position.x + ogRunningPos.x > allowedPosOffset || transform.position.x - ogRunningPos.x < -allowedPosOffset)
             // {
             //     rb.transform.position = ogRunningPos;
@@ -200,8 +165,8 @@ namespace HurdleGame
 
             IsGrounded = Physics.OverlapSphere(groundCheckPos, groundCheckRadius, groundLayer).Length > 0;
 
-            if (!IsGrounded && rb.linearVelocity.y < 0.01f)
-                isFalling = true;
+            //if (!IsGrounded && rb.linearVelocity.y < 0.01f)
+            // isFalling = true;
         }
 
         public void OnDrawGizmos()

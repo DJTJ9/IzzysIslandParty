@@ -16,7 +16,7 @@ namespace HurdleGame
         [SerializeField] private float spawnLaneAddition;
 
         [Header("Objects: ")]
-        [SerializeField] private Rigidbody finishLine;
+        [SerializeField] private GameObject finishLine;
 
         [SerializeField] private List<GameObject> lanes;
         private List<List<GameObject>> laneFloors;
@@ -70,7 +70,11 @@ namespace HurdleGame
 
         private void SpawnInFinishLine()
         {
+            if (finishLine == null)
+                return;
+            
             Debug.Log("Adding finish line");
+            finishLine.SetActive(true);
             // Vector3.x = furthest line forward + spawnFinishLineAddition
             finishLine.transform.position = new Vector3(spawnFinishLineAddition, finishLine.transform.position.y, finishLine.transform.position.z);
         }

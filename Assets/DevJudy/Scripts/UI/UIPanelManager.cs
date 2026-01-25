@@ -1,5 +1,6 @@
 using System.Collections;
 using MultiuseScripts;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 
@@ -8,17 +9,23 @@ namespace UIScripts
     public class UIPanelManager : MonoBehaviour
     {
         [Header("Panel: ")]
-        [SerializeField] private GameObject raceOverPanel;
+        [SerializeField] private GameObject raceOverPanel = null;
+
         [SerializeField] private GameObject scoresPanel;
         [SerializeField] private GameObject levelPanel;
 
         [Header("Text: ")]
+        [SerializeField] private bool showTimer;
+
         [SerializeField] private TextMeshProUGUI playerPlacementsText;
         [SerializeField] private TextMeshProUGUI playerNamesText;
+
+        [ShowIf("showTimer")]
         [SerializeField] private TextMeshProUGUI playerTimesText;
 
         [Header("Dependencies:")]
         [SerializeField] private RacingGameLevelService racingGameLevelService;
+
         [SerializeField] private GameObject endGameMenu;
 
         [Header("Variables:")]
@@ -30,11 +37,18 @@ namespace UIScripts
 
         private void Start()
         {
-            raceOverPanel?.SetActive(false);
-            scoresPanel?.SetActive(false);
-            endGameMenu?.SetActive(false);
+            if (raceOverPanel != null)
+                raceOverPanel.SetActive(false);
+            else
+                raceOverPanel = null;
+            
+            if (scoresPanel != null)
+                scoresPanel?.SetActive(false);
+
+            if (levelPanel != null)
+                endGameMenu?.SetActive(false);
         }
-        
+
         public void SetGameOver()
         {
             ShowRaceOverScreen();
@@ -43,29 +57,38 @@ namespace UIScripts
         private void ShowRaceOverScreen()
         {
             levelPanel?.SetActive(false);
-            raceOverPanel?.SetActive(true);
 
-            // Stop registering jetski-input
+            if (raceOverPanel != null)
+                raceOverPanel.SetActive(true);
+
+            // Stop registering input
             StartCoroutine(WaitForGameOver());
         }
 
         private void SetRankingTexts()
         {
             ClearPlacementTextFields();
-            
+
             for (int i = 1; i < racingGameLevelService.WinnerPlacementOrder.Count + 1; i++)
             {
                 playerPlacementsText.text += $"{(i)}. \n";
                 playerNamesText.text += racingGameLevelService.WinnerPlacementOrder[i].Item1.name + "\n";
-                playerTimesText.text += racingGameLevelService.WinnerPlacementOrder[i].Item2 + "\n";
+
+                if (showTimer)
+                    playerTimesText.text += racingGameLevelService.WinnerPlacementOrder[i].Item2 + "\n";
             }
         }
 
         private void ClearPlacementTextFields()
         {
-            playerPlacementsText.text = "";
-            playerNamesText.text = "";
-            playerTimesText.text = "";
+            if (playerPlacementsText != null)
+                playerPlacementsText.text = "";
+
+            if (playerNamesText != null)
+                playerNamesText.text = "";
+
+            if (playerTimesText != null)
+                playerTimesText.text = "";
         }
 
         private void ShowScores()
