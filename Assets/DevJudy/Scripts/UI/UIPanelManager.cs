@@ -10,13 +10,11 @@ namespace UIScripts
     {
         [Header("Panel: ")]
         [SerializeField] private GameObject raceOverPanel = null;
-
         [SerializeField] private GameObject scoresPanel;
         [SerializeField] private GameObject levelPanel;
 
         [Header("Text: ")]
         [SerializeField] private bool showTimer;
-
         [SerializeField] private TextMeshProUGUI playerPlacementsText;
         [SerializeField] private TextMeshProUGUI playerNamesText;
 
@@ -25,7 +23,6 @@ namespace UIScripts
 
         [Header("Dependencies:")]
         [SerializeField] private RacingGameLevelService racingGameLevelService;
-
         [SerializeField] private GameObject endGameMenu;
 
         [Header("Variables:")]

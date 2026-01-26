@@ -1457,12 +1457,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_faceForwardPointValue: 1
-  m_lookAwayAngleTreshold: 45
   m_happyFacePointValue: 1
   faceMeshRenderer: {fileID: 7398630618334704471}
   m_danceMovePointValue: 1
   animator: {fileID: 3690112078750080850}
-  scoreSO: {fileID: 11400000, guid: a176daedc58e07c409b775393071ef06, type: 2}
+  playerCollectionSO: {fileID: 0}
   faceSwapSO: {fileID: 11400000, guid: 81a820629255773488a08ac37764e04f, type: 2}
   danceMovesSO: {fileID: 11400000, guid: 15d8be9fbb7c5844e89f80fbe24e2baf, type: 2}
 --- !u!114 &8918133386215926332
@@ -1480,19 +1479,7 @@ MonoBehaviour:
   Event: {fileID: 11400000, guid: bf384125dce74794292e08119c0ed727, type: 2}
   Response:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3769476287999843007}
-        m_TargetAssemblyTypeName: PointCalculator, Assembly-CSharp
-        m_MethodName: CalculatePoints
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &3246693587793420151
 GameObject:
   m_ObjectHideFlags: 0
