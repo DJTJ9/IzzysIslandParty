@@ -31,6 +31,7 @@ namespace FishingGame
             if (animator == null)
                 Debug.LogWarning("No animator attached to children of " + gameObject.name);
 
+<<<<<<< Updated upstream
             lineRenderer = GetComponent<LineRenderer>();
             if (lineRenderer == null)
                 Debug.LogWarning("No lineRenderer attached to " + gameObject.name);
@@ -42,6 +43,19 @@ namespace FishingGame
 
             lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
             lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
+=======
+            // lineRenderer = GetComponent<LineRenderer>();
+            // if (lineRenderer == null)
+            //     Debug.LogWarning("No lineRenderer attached to " + gameObject.name);
+//
+            // lineRenderer.enabled = true;
+            // lineRenderer.useWorldSpace = true;
+            // lineRenderer.startWidth = lineRenderer.endWidth = 0.02f;
+            // lineRenderer.positionCount = 2;
+//
+            // lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
+            // lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
+>>>>>>> Stashed changes
         }
         
         public void OnPause(InputAction.CallbackContext _context)
@@ -107,10 +121,21 @@ namespace FishingGame
             animator.SetBool(fishBiting, false);
         }
 
+<<<<<<< Updated upstream
         private void LateUpdate()
         {
             lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
             lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
         }
+=======
+     //private void LateUpdate()
+     //{
+     //    if (Keyboard.current.cKey.wasPressedThisFrame)
+     //        Debug.Log("C pressed");
+     //    
+     //    //lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
+     //    //lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
+     //}
+>>>>>>> Stashed changes
     }
 }
