@@ -30,7 +30,7 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
     [SerializeField] private UnityEvent onPause;
     [SerializeField] private UnityEvent onUnpause;
     
-    [SerializeField] private SO_PlayerCollectionBowlingBattle playerCollectionBowlingBattleSO;
+    [FormerlySerializedAs("playerCollectionBowlingBattleSO")] [SerializeField] private SO_PlayerCollection playerCollectionSo;
     [SerializeField] private SO_PlayerInputs playerInputsSO;
     
     private void Awake()
@@ -140,7 +140,7 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         
-        transform.position = playerCollectionBowlingBattleSO.Players[PlayerIndex].SpawnPoint;
+        transform.position = playerCollectionSo.Players[PlayerIndex].SpawnPoint;
         transform.rotation = Quaternion.identity;
 
 

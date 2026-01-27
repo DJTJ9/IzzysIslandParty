@@ -3,11 +3,15 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using System.Linq;
 using UnityEngine.Serialization;
 
-public class PauseMenuEvents : MonoBehaviour
+public class GameMenuEvents : MonoBehaviour
 {
     [SerializeField] private SceneCollectionSO sceneCollection;
+    [SerializeField] private SO_PlayerCollection playerCollection;
+    
+    [SerializeField] private VisualTreeAsset rowTemplate;
     
     [SerializeField] private UnityEvent onUnpause;
     [SerializeField] private UnityEvent onRestart;
@@ -18,6 +22,8 @@ public class PauseMenuEvents : MonoBehaviour
     private VisualElement pauseMenu;
     private VisualElement playerHub;
     private VisualElement endScreenUI;
+    private VisualElement resultsScreen;
+    private VisualElement resultsModal;
     
     [Header("Pause Menu Buttons")]
     private Button pauseMenuResumeButton;
@@ -62,6 +68,8 @@ public class PauseMenuEvents : MonoBehaviour
         pauseMenu = document.rootVisualElement.Q("pause-menu__container");
         playerHub = document.rootVisualElement.Q("player-hub__container");
         endScreenUI = document.rootVisualElement.Q("end-screen-menu__container");
+        resultsScreen = document.rootVisualElement.Q("results-screen-and-buttons__container");
+        resultsModal = document.rootVisualElement.Q("results-screen__container");
     }
     
     private void BindButtons()
@@ -231,5 +239,41 @@ public class PauseMenuEvents : MonoBehaviour
     {
         SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(gameScene, out var gameSceneName) ? gameSceneName : throw new KeyNotFoundException());
         SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(levelScene, out var levelSceneName) ? levelSceneName : throw new KeyNotFoundException(), LoadSceneMode.Additive);
+    }
+
+    public void ShowResultsScreen()
+    {
+        ShowResults(playerCollection.Players);
+        resultsScreen.style.display = DisplayStyle.Flex;
+    }
+    
+    private void ShowResults(List<SO_Player> _results)
+    {
+        var root = GetComponent<UIDocument>().rootVisualElement;
+        var container = resultsModal;
+
+        container.Clear();
+
+        var ordered = _results
+            .OrderByDescending(_r => _r.PlayerScore.Value)
+            .ToList();
+
+        for (int i = 0; i < ordered.Count; i++)
+        {
+            var data = ordered[i];
+            var row = rowTemplate.CloneTree();
+
+            row.Q<Label>("RankLabel").text = (i + 1).ToString();
+            row.Q<Label>("NameLabel").text = data.Name;
+            row.Q<Label>("ScoreLabel").text = data.PlayerScore.Value.ToString();
+
+            // if (i == 0)
+            //     row.AddToClassList("winner");
+            //
+            // if (data.IsNPC)
+            //     row.AddToClassList("npc");
+
+            container.Add(row);
+        }
     }
 }

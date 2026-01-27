@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 public class PlayerJoiner : MonoBehaviour
 {
     public Transform[] SpawnPoints;
-    [FormerlySerializedAs("soPlayers")] public SO_PlayerCollectionBowlingBattle soPlayerCollection;
+    [FormerlySerializedAs("soPlayers")] public SO_PlayerCollection soPlayerCollection;
 
     [SerializeField] private SO_PlayerInputs playerInputs;
     // private List<PlayerInput> players = new List<PlayerInput>();

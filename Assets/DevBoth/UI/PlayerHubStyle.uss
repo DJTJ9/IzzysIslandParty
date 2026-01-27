@@ -1,7 +1,7 @@
 .header {
     font-size: 40px;
     -unity-text-align: upper-center;
-    color: rgb(255, 255, 255);
+    color: rgb(254, 202, 129);
     -unity-font-definition: url("project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&guid=9edcdbbb09ae8aa46b3612271126dd6b&type=3#DraftingMono-Bold");
     -unity-font-style: bold;
     margin-top: 3%;
@@ -59,4 +59,7 @@
 
 .unity-content-and-vertical-scroll-container > #unity-content-viewport > #unity-content-container {
     flex-direction: row;
+}
+
+.result-screen-container {
 }
