@@ -19,6 +19,8 @@ public class BowlingBattleGameManager : MonoBehaviour
     [SerializeField] private float roundDuration = 15f;
     [SerializeField] private int maxRounds = 3;
 
+    [HideInInspector] public static float PreparationPhaseTimer;
+    
     private int m_roundIndex = 1;
 
     private CountdownTimer m_preparationPhaseTimer;
@@ -44,6 +46,8 @@ private void Start()
     {
         m_preparationPhaseTimer.Tick(Time.deltaTime);
         m_roundTimer.Tick(Time.deltaTime);
+
+        PreparationPhaseTimer = m_preparationPhaseTimer.CurrentTime;
     }
 
     public void StartPreparationPhase()

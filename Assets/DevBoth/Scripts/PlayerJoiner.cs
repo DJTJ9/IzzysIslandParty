@@ -29,6 +29,8 @@ public class PlayerJoiner : MonoBehaviour
     private void Start()
     {
         SpawnPlayer(1);
+        SpawnPlayer(2);
+        SpawnPlayer(3);
     }
 
     public void PlayerJoined(PlayerInput _playerInput)
