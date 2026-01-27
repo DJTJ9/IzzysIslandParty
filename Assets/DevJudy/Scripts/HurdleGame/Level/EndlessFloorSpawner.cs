@@ -7,21 +7,31 @@ namespace HurdleGame
     public class EndlessFloorSpawner : MonoBehaviour
     {
         [Header("Level variables: ")]
-        [SerializeField] private float levelDurationInSeconds;
+        [SerializeField] private float levelDurationInSeconds = 120;
+
         private CountdownTimer timerUntilGoalSpawns;
 
         [Header("Movement variables: ")]
         [SerializeField] private Vector3 moveDir;
+
         [SerializeField] private float spawnFinishLineAddition;
         [SerializeField] private float spawnLaneAddition;
 
         [Header("Objects: ")]
-        [SerializeField] private GameObject finishLine;
+        [SerializeField] private ObstacleSpawner obstacleSpawner;
 
+        [SerializeField] private GameObject finishLine;
         [SerializeField] private List<GameObject> lanes;
         private List<List<GameObject>> laneFloors;
 
+        [SerializeField] private List<CustomTriggerBehaviour> triggerBehaviours;
+
         private void Awake()
+        {
+            SetUpLaneFloors();
+        }
+
+        private void SetUpLaneFloors()
         {
             if (lanes == null || lanes.Count < 1)
                 Debug.LogError("No Lanes Found");
@@ -43,26 +53,35 @@ namespace HurdleGame
             }
         }
 
-        private void Start()
+        private void SetUpTriggerBehaviours()
         {
-            timerUntilGoalSpawns = new CountdownTimer(levelDurationInSeconds);
-            timerUntilGoalSpawns.OnTimerStop += SpawnInFinishLine;
-
-            timerUntilGoalSpawns.Start();
+            if (triggerBehaviours == null || triggerBehaviours.Count < 1)
+                Debug.LogError("No TriggerBehaviours Found");
+            else
+            {
+                foreach (CustomTriggerBehaviour triggerBehaviour in triggerBehaviours)
+                {
+                    //triggerBehaviour.EnteredTriggerAction += obstacleSpawner.OnPassedCollider;
+                    triggerBehaviour.EnteredTriggerAction += OnPassThroughCollider;
+                }
+            }
         }
 
+        private void Start()
+        {
+            SetUpTriggerBehaviours();
+
+            //timerUntilGoalSpawns = new CountdownTimer(levelDurationInSeconds);
+            //timerUntilGoalSpawns.OnTimerStop += SpawnInFinishLine;
+
+            //timerUntilGoalSpawns.Start();
+        }
+
+        // !! Dont make it lane base, just update all lanes simultaneously
         private void OnPassThroughCollider(Collider _collider)
         {
-           // int lane = -1;
-           // bool foundLane = false;
-
-
             //!! Maybe make queue
-            for (int i = 0; i < laneFloors.Count; i++)
-            {
-                laneFloors[i].Contains(_collider.gameObject);
-            }
-          
+
             // Get the lane that the collider is on
             // Get whatever floor is the last in that lane
             // thatLane.transform.position += new Vector3(spawnLaneAddition, thatLane.transform.position.y, thatLane.transform.position.z);
@@ -72,7 +91,7 @@ namespace HurdleGame
         {
             if (finishLine == null)
                 return;
-            
+
             Debug.Log("Adding finish line");
             finishLine.SetActive(true);
             // Vector3.x = furthest line forward + spawnFinishLineAddition

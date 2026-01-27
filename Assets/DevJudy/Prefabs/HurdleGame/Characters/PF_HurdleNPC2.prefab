@@ -2365,6 +2365,7 @@ GameObject:
   - component: {fileID: 1055661606073116003}
   - component: {fileID: 8629100656245362641}
   - component: {fileID: 5707798297618985591}
+  - component: {fileID: 2252976469996088417}
   m_Layer: 7
   m_Name: PF_HurdleNPC2
   m_TagString: Untagged
@@ -2399,8 +2400,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5402956959211804641}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: c3d861774f7c51047a8eee3ef22edfeb, type: 3}
-  m_Controller: {fileID: 9100000, guid: 02d5ec93278ea5c4cae238841be11363, type: 2}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 403a86ce805163a4381d247632f13daa, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2478,10 +2479,32 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: 3
     Variable: {fileID: 11400000, guid: 521306ef3d86e624397817d16824f5c4, type: 2}
-  velocity:
-    UseConstant: 0
-    ConstantValue: 20
-    Variable: {fileID: 11400000, guid: a9dc3674f40d357498ca74101c90ab34, type: 2}
+  canMove: 0
+--- !u!114 &2252976469996088417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5402956959211804641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb66c1d320d0784eb0dfba274348a21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleCheckSize: 0.6
+  obstacleCheckPosition: {x: 1, y: 0, z: 0}
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 16384
+  jumpChancePercent: 0.5
+  jumpForce: 7
+  hopMultiplier: 0.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  groundCheckOffset: -0.05
+  groundCheckRadius: 0.3
 --- !u!1 &5579323751881904979
 GameObject:
   m_ObjectHideFlags: 0

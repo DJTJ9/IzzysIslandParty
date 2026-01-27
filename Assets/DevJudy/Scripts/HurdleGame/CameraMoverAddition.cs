@@ -8,6 +8,7 @@ namespace HurdleGame.Camera
         private CharacterMover cameraMover;
         
         [SerializeField] private CharacterMover orientationCharacter;
+        [SerializeField] private float individualMultiplierDeduction = 0.04f;
 
         private void Awake()
         {
@@ -15,7 +16,7 @@ namespace HurdleGame.Camera
         }
         private void FixedUpdate()
         {
-            cameraMover.IndividualMultiplier = (orientationCharacter.IndividualMultiplier) - 0.02f;
+            cameraMover.IndividualMultiplier = (orientationCharacter.IndividualMultiplier) - individualMultiplierDeduction;
         }
     }
 }

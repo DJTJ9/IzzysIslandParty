@@ -151,12 +151,6 @@ namespace HurdleGame
             }
 
             GroundCheck();
-
-            // if (transform.position.x + ogRunningPos.x > allowedPosOffset || transform.position.x - ogRunningPos.x < -allowedPosOffset)
-            // {
-            //     rb.transform.position = ogRunningPos;
-            //     rb.linearVelocity = Vector3.zero;
-            // }
         }
 
         private void GroundCheck()
