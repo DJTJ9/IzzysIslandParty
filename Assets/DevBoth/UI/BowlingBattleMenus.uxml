@@ -47,24 +47,19 @@
         </ui:VisualElement>
         <ui:VisualElement name="player-ui-right__container" class="player-ui-right" style="flex-grow: 1;" />
     </ui:VisualElement>
-    <ui:VisualElement name="end-screen-menu__container" style="flex-grow: 1; display: none;">
-        <ui:Label text="END SCORE:" name="end-screen-header__label" class="header" style="height: 5%; width: 35%;" />
-        <ui:Label text="Label" name="end-screen-score__label" data-source="project://database/Assets/DevTjark/Scriptable%20Objects/Bowling%20Battle/Bowling%20Battle%20Score%201.asset?fileID=11400000&amp;guid=9ff12d17af2c8f24589bf553520703f2&amp;type=2#Bowling Battle Score 1" class="header" style="height: 10%;">
-            <Bindings>
-                <ui:DataBinding property="text" data-source-path="Value" binding-mode="ToTarget" />
-            </Bindings>
-        </ui:Label>
-        <ui:Button text="RESTART" name="end-screen-menu-restart__button" class="button" />
-        <ui:Button text="CHANGE LEVEL" name="end-screen-menu-change-level__button" parse-escape-sequences="true" class="button" />
-        <ui:Button text="QUIT" name="end-screen-menu-quit__button" class="button" />
-    </ui:VisualElement>
     <ui:VisualElement name="results-screen-and-buttons__container" class="result-screen-container" style="flex-grow: 1; flex-direction: column; display: none; justify-content: center; align-items: center; width: auto;">
         <ui:VisualElement name="results-header__container" style="flex-grow: 1; width: 100%; align-items: center; justify-content: center;">
             <ui:Label text="END RESULTS" name="results-header__label" class="header" style="color: rgb(254, 202, 129); -unity-text-outline-width: 4px; -unity-text-outline-color: rgb(0, 0, 0);" />
         </ui:VisualElement>
         <ui:VisualElement name="results-screen__container" class="result-screen-container" style="flex-grow: 1; width: 60%; height: 70%; align-items: center; justify-content: center; background-color: rgba(93, 197, 72, 0); background-size: 100% 90%; background-image: url(&quot;project://database/Assets/Minigolf%20Graphics%20Pack/Textures/Backgrounds/Background02_Green.png?fileID=2800000&amp;guid=702fac7ccdd300745a113e7ab023857e&amp;type=3#Background02_Green&quot;);" />
-        <ui:VisualElement name="result-button__container" style="flex-grow: 1;">
-            <ui:Button text="CONTINUE" name="result-screen-continue__button" class="button" style="height: 70px; width: 300px;" />
+        <ui:VisualElement name="results-button__container" style="flex-grow: 1;">
+            <ui:Button text="CONTINUE" name="results-screen-continue__button" class="button" style="height: 70px; width: 300px;" />
         </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="end-screen-menu__container" style="flex-grow: 1; display: none;">
+        <ui:Label text="WHAT&apos;S NEXT?" name="end-screen-header__label" class="header" style="height: 20%; width: 35%; color: rgb(254, 202, 129); -unity-text-outline-width: 4px; -unity-text-outline-color: rgb(0, 0, 0); padding-top: 4px; margin-top: 5%; margin-left: 4px; margin-bottom: 4%;" />
+        <ui:Button text="RESTART" name="end-screen-menu-restart__button" class="button" />
+        <ui:Button text="CHANGE LEVEL" name="end-screen-menu-change-level__button" parse-escape-sequences="true" class="button" />
+        <ui:Button text="QUIT" name="end-screen-menu-quit__button" class="button" />
     </ui:VisualElement>
 </ui:UXML>

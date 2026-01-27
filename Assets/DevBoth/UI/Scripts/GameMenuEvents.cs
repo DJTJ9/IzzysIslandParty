@@ -21,9 +21,9 @@ public class GameMenuEvents : MonoBehaviour
     [Header("Menus")]
     private VisualElement pauseMenu;
     private VisualElement playerHub;
-    private VisualElement endScreenUI;
     private VisualElement resultsScreen;
     private VisualElement resultsModal;
+    private VisualElement endScreenUI;
     
     [Header("Pause Menu Buttons")]
     private Button pauseMenuResumeButton;
@@ -40,6 +40,7 @@ public class GameMenuEvents : MonoBehaviour
     private Button playerHUBBackButton;
     
     [Header("End Screen Buttons")]
+    private Button resultScreenContinueButton;
     private Button endScreenRestartButton;
     private Button endScreenChangeLevelButton;
     private Button endScreenQuitButton;
@@ -67,9 +68,9 @@ public class GameMenuEvents : MonoBehaviour
     {
         pauseMenu = document.rootVisualElement.Q("pause-menu__container");
         playerHub = document.rootVisualElement.Q("player-hub__container");
-        endScreenUI = document.rootVisualElement.Q("end-screen-menu__container");
         resultsScreen = document.rootVisualElement.Q("results-screen-and-buttons__container");
         resultsModal = document.rootVisualElement.Q("results-screen__container");
+        endScreenUI = document.rootVisualElement.Q("end-screen-menu__container");
     }
     
     private void BindButtons()
@@ -89,6 +90,7 @@ public class GameMenuEvents : MonoBehaviour
         playerHUBBackButton = document.rootVisualElement.Q("player-hub-back__button") as Button;
         
         //End screen buttons
+        resultScreenContinueButton = document.rootVisualElement.Q("results-screen-continue__button") as Button;
         endScreenRestartButton = document.rootVisualElement.Q("end-screen-menu-restart__button") as Button;
         endScreenChangeLevelButton = document.rootVisualElement.Q("end-screen-menu-change-level__button") as Button;
         endScreenQuitButton = document.rootVisualElement.Q("end-screen-menu-quit__button") as Button;
@@ -111,6 +113,7 @@ public class GameMenuEvents : MonoBehaviour
         playerHUBBackButton?.RegisterCallback<ClickEvent>(OnPlayerHubBack);
         
         //End screen buttons
+        resultScreenContinueButton?.RegisterCallback<ClickEvent>(OnResultScreenContinue);
         endScreenRestartButton?.RegisterCallback<ClickEvent>(OnRestartGameClick);
         endScreenChangeLevelButton?.RegisterCallback<ClickEvent>(OnChangeLevelClick);
         endScreenQuitButton?.RegisterCallback<ClickEvent>(OnQuitClick);
@@ -133,6 +136,7 @@ public class GameMenuEvents : MonoBehaviour
         playerHUBBackButton?.UnregisterCallback<ClickEvent>(OnPlayerHubBack);
         
         //End screen buttons
+        resultScreenContinueButton?.UnregisterCallback<ClickEvent>(OnResultScreenContinue);
         endScreenRestartButton?.UnregisterCallback<ClickEvent>(OnRestartGameClick);
         endScreenChangeLevelButton?.UnregisterCallback<ClickEvent>(OnChangeLevelClick);
         endScreenQuitButton?.UnregisterCallback<ClickEvent>(OnQuitClick);
@@ -152,11 +156,12 @@ public class GameMenuEvents : MonoBehaviour
     
     public void ShowEndScreenUI()
     {
-        endScreenUI.style.display = DisplayStyle.Flex;
+        resultsScreen.style.display = DisplayStyle.Flex;
     }
     
     public void HideEndScreenUI()
     {
+        resultsScreen.style.display = DisplayStyle.None;
         endScreenUI.style.display = DisplayStyle.None;
     }
     
@@ -175,6 +180,7 @@ public class GameMenuEvents : MonoBehaviour
     private void OnChangeLevelClick(ClickEvent _evt)
     {
         pauseMenu.style.display = DisplayStyle.None;
+        endScreenUI.style.display = DisplayStyle.None;
         playerHub.style.display = DisplayStyle.Flex;
     }
     
@@ -188,6 +194,12 @@ public class GameMenuEvents : MonoBehaviour
     {
         Time.timeScale = 1f;
         LoadSingleScene(SceneNames.MainMenu);
+    }
+
+    private void OnResultScreenContinue(ClickEvent _evt)
+    {
+        resultsScreen.style.display = DisplayStyle.None;
+        endScreenUI.style.display = DisplayStyle.Flex;
     }
 
     public void LoadBowlingBattle()

@@ -40,6 +40,12 @@ private void Start()
         UnsubscribeFromCountdownTimersActions();
     }
 
+    private void Update()
+    {
+        m_preparationPhaseTimer.Tick(Time.deltaTime);
+        m_roundTimer.Tick(Time.deltaTime);
+    }
+
     public void StartPreparationPhase()
     {
         onPreparationPhaseStart.Invoke();
