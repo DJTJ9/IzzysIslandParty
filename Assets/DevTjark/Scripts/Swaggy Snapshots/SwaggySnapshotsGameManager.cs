@@ -18,7 +18,7 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
     private CountdownTimer m_startMoveTimer;
     private CountdownTimer m_danceMoveSwitchTimer;
     
-    public static float StartMoveDuration = 15f;
+    public static float StartMoveDuration = 5f;
     public static float RoundTime = 15f;
     
     [SerializeField] private UnityEvent onRoundEnd;

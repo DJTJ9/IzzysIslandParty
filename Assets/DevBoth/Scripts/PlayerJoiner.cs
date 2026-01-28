@@ -7,13 +7,11 @@ using UnityEngine.Serialization;
 
 public class PlayerJoiner : MonoBehaviour
 {
-    public Transform[] SpawnPoints;
-    [FormerlySerializedAs("soPlayers")] public SO_PlayerCollection soPlayerCollection;
+    public SO_PlayerCollection soPlayerCollection;
 
     [SerializeField] private SO_PlayerInputs playerInputs;
     // private List<PlayerInput> players = new List<PlayerInput>();
     
-    private PlayerInputManager playerInputManager;
     private int m_playerIndex = 0;
 
     // private void Awake()
@@ -26,12 +24,12 @@ public class PlayerJoiner : MonoBehaviour
     //     // Instantiate(Player3, Spawnpoint3.position, Spawnpoint3.rotation);
     // }
     //
-    // private void Start()
-    // {
-    //     SpawnPlayer(1);
-    //     SpawnPlayer(2);
-    //     SpawnPlayer(3);
-    // }
+    private void Start()
+    {
+        // SpawnPlayer(1);
+        // SpawnPlayer(2);
+        // SpawnPlayer(3);
+    }
 
     public void PlayerJoined(PlayerInput _playerInput)
     {
