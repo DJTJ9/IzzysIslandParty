@@ -318,7 +318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 23317218}
   m_Layer: 8
-  m_Name: Character
+  m_Name: Animal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1012,7 +1012,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 94.00003, y: 150}
+  m_AnchoredPosition: {x: 94.00006, y: 150}
   m_SizeDelta: {x: 58.00007, y: -960}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &129693602
@@ -2740,9 +2740,9 @@ Canvas:
   m_GameObject: {fileID: 345387523}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 24276967}
+  m_PlaneDistance: 0.36
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -2770,7 +2770,7 @@ RectTransform:
   - {fileID: 821698138}
   - {fileID: 358163568}
   - {fileID: 300351578}
-  m_Father: {fileID: 415596257}
+  m_Father: {fileID: 628455135}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3305,7 +3305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 164.00003, y: 150}
+  m_AnchoredPosition: {x: 164.00006, y: 150}
   m_SizeDelta: {x: -81.99993, y: -960}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &375149766
@@ -3674,7 +3674,7 @@ GameObject:
   - component: {fileID: 415596259}
   - component: {fileID: 415596258}
   m_Layer: 8
-  m_Name: PCJetski
+  m_Name: Character
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3689,16 +3689,15 @@ Transform:
   m_GameObject: {fileID: 415596256}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 2, z: -800}
+  m_LocalPosition: {x: -1.5999999, y: -0.40999985, z: -799.26}
   m_LocalScale: {x: 1, y: 1, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 23317218}
   - {fileID: 1129275306}
   - {fileID: 1366105714}
-  - {fileID: 345387527}
   - {fileID: 1673019551}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 628455135}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &415596258
 MonoBehaviour:
@@ -3937,8 +3936,52 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f60f81e8-8952-4e5f-9c65-96b348c0117f
     m_ActionName: New action map/New action
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 69d7f3d9-adeb-4507-890a-9e36c4d97d7d
+    m_ActionName: 'SwaggySnapshot/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e1b45550-7f77-4b49-9acb-4f34e60b5905
+    m_ActionName: 'SwaggySnapshot/Look[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 843650a0-88fe-416e-ba52-b237b068d7cf
+    m_ActionName: 'SwaggySnapshot/LeftMouse[/Mouse/leftButton,/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 38441365-2d9f-4f4b-9df1-a7449976d000
+    m_ActionName: 'SwaggySnapshot/Interact[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ec7fe11c-2120-4980-afdd-04f3bffe5944
+    m_ActionName: 'SwaggySnapshot/Crouch[/Keyboard/c]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d55016e2-e176-438c-83b1-c33d69ba1282
+    m_ActionName: 'SwaggySnapshot/TakePhoto[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 64702ccb-202c-485c-8137-f360aeb30f45
+    m_ActionName: 'SwaggySnapshot/Previous[/Keyboard/1]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 81508bff-bbeb-41a2-ad38-240542f535ee
+    m_ActionName: 'SwaggySnapshot/Next[/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c22c5a95-896a-44b9-be7a-3658f6b35850
+    m_ActionName: 'SwaggySnapshot/Sprint[/Keyboard/leftShift]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: acbeef20-41a0-462b-a91f-7767227eccfa
+    m_ActionName: 'SwaggySnapshot/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 37716735-96ef-4e92-b7e0-1dfcff3bb28b
+    m_ActionName: 'SwaggySnapshot/Join[/Keyboard/anyKey]'
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: KeyboardControlScheme
   m_DefaultActionMap: JetskiGame
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -5543,6 +5586,39 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6790040258192755194, guid: fca05fc86b15f0d4da25ed7793db4384, type: 3}
   m_PrefabInstance: {fileID: 1916027104}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &628455134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 628455135}
+  m_Layer: 0
+  m_Name: PCJetski
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &628455135
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628455134}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5999999, y: 2.4099998, z: -0.74}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 345387527}
+  - {fileID: 415596257}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &629823344
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9353,7 +9429,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 195, y: -1023}
+  m_AnchoredPosition: {x: 195.00006, y: -1023}
   m_SizeDelta: {x: 926.2, y: 59}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1157640934
@@ -13825,7 +13901,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 195, y: -50.5}
+  m_AnchoredPosition: {x: 195.00006, y: -50.5}
   m_SizeDelta: {x: 926.2, y: 59}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1825615321
@@ -17028,7 +17104,7 @@ SceneRoots:
   - {fileID: 1666142606}
   - {fileID: 1629631374}
   - {fileID: 86226313}
-  - {fileID: 415596257}
   - {fileID: 803091910}
   - {fileID: 1672912891}
   - {fileID: 2001284366}
+  - {fileID: 628455135}
