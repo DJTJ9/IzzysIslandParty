@@ -5,7 +5,6 @@ using ImprovedTimers; // https://github.com/adammyhre/Unity-Dependency-Injection
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
 public class GoapAgent : MonoBehaviour {
     [Header("Settings")]
     [SerializeField] float cooldownTimerDuration = 5f;
