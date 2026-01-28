@@ -41,6 +41,12 @@ public class PlayerJoiner : MonoBehaviour
         // AddPlayer(_playerInput);
     }
 
+    public void PlayerJoinedJJ(PlayerInput _playerInput)
+    {
+        _playerInput.gameObject.transform.position = soPlayerCollection.Players[m_playerIndex].SpawnPoint;
+        ++m_playerIndex;
+    }
+    
     private void AddPlayer(PlayerInput _playerInput)
     {
         playerInputs.PlayerInputs.Add(_playerInput);

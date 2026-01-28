@@ -605,16 +605,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fca05fc86b15f0d4da25ed7793db4384, type: 3}
---- !u!1 &99065095 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2877345010806901709, guid: 336283f45d30bec42b6622e77fafdc0c, type: 3}
-  m_PrefabInstance: {fileID: 3204245158865359812}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &99065103 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8329702372319265000, guid: 336283f45d30bec42b6622e77fafdc0c, type: 3}
-  m_PrefabInstance: {fileID: 3204245158865359812}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &99909871 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6790040258192755194, guid: fca05fc86b15f0d4da25ed7793db4384, type: 3}
@@ -2958,13 +2948,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPCJetskiGreen
       objectReference: {fileID: 0}
+    - target: {fileID: 2877345010806901709, guid: 1b3ecc443d56ea34fbe0b867dd9501c1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3418707877744614544, guid: 1b3ecc443d56ea34fbe0b867dd9501c1, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1412829236}
     - target: {fileID: 8329702372319265000, guid: 1b3ecc443d56ea34fbe0b867dd9501c1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8329702372319265000, guid: 1b3ecc443d56ea34fbe0b867dd9501c1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3982,6 +3976,10 @@ PrefabInstance:
     - target: {fileID: 2877345010806901709, guid: 9bd9fcfe5881b0840b46624573f2fdef, type: 3}
       propertyPath: m_Name
       value: NPCJetskiPink
+      objectReference: {fileID: 0}
+    - target: {fileID: 2877345010806901709, guid: 9bd9fcfe5881b0840b46624573f2fdef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3418707877744614544, guid: 9bd9fcfe5881b0840b46624573f2fdef, type: 3}
       propertyPath: target
@@ -5472,7 +5470,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 99065103}
   - {fileID: 501439993}
   - {fileID: 1945078771}
   - {fileID: 636822257}
@@ -11589,13 +11586,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPCJetskiYellow
       objectReference: {fileID: 0}
+    - target: {fileID: 2877345010806901709, guid: 6bc0bd3fdea85e142bb6f4b5efce0813, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3418707877744614544, guid: 6bc0bd3fdea85e142bb6f4b5efce0813, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1412829236}
     - target: {fileID: 8329702372319265000, guid: 6bc0bd3fdea85e142bb6f4b5efce0813, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 8329702372319265000, guid: 6bc0bd3fdea85e142bb6f4b5efce0813, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12206,7 +12207,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001284364}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2fc93dc3c65844478803ea9d9d0d71f, type: 3}
   m_Name: 
@@ -12244,7 +12245,7 @@ MonoBehaviour:
   checkPlacements: 1
   placementOrder:
   - {fileID: 7028758066852631910}
-  - {fileID: 99065095}
+  - {fileID: 0}
   - {fileID: 1262906813}
   - {fileID: 544210467}
   - {fileID: 2040537404}
@@ -12924,6 +12925,110 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6790040258192755194, guid: fca05fc86b15f0d4da25ed7793db4384, type: 3}
   m_PrefabInstance: {fileID: 427885662}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2145170140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2145170143}
+  - component: {fileID: 2145170142}
+  - component: {fileID: 2145170141}
+  m_Layer: 0
+  m_Name: PlayerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2145170141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145170140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 178e1589141c44a8a901da2595c5802d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnPoints: []
+  soPlayerCollection: {fileID: 11400000, guid: 36c9948eae0befe4dbcf74c78b92759e, type: 2}
+  playerInputs: {fileID: 0}
+--- !u!114 &2145170142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145170140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NotificationBehavior: 2
+  m_MaxPlayerCount: -1
+  m_AllowJoining: 1
+  m_JoinBehavior: 1
+  m_PlayerJoinedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2145170141}
+        m_TargetAssemblyTypeName: PlayerJoiner, Assembly-CSharp
+        m_MethodName: PlayerJoinedJJ
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_PlayerLeftEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_JoinAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Join
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: d0dce420-da87-4498-8ef9-0c7916554dfa
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -4675742942015640628, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_PlayerPrefab: {fileID: 1353377157112977573, guid: 16c19efb55ee62849b803a3d670d18dc, type: 3}
+  m_SplitScreen: 1
+  m_MaintainAspectRatioInSplitScreen: 0
+  m_FixedNumberOfSplitScreens: -1
+  m_SplitScreenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!4 &2145170143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145170140}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &391811939167420269 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4760289691232595605, guid: 16c19efb55ee62849b803a3d670d18dc, type: 3}
@@ -12947,9 +13052,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: JetskiPC 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7938444387761096450, guid: 16c19efb55ee62849b803a3d670d18dc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 8243889330399340193, guid: 16c19efb55ee62849b803a3d670d18dc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.354
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8243889330399340193, guid: 16c19efb55ee62849b803a3d670d18dc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13100,75 +13209,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bc4fe1424ab2ad47bedc95b17c1eefa, type: 3}
---- !u!1001 &3204245158865359812
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 803091910}
-    m_Modifications:
-    - target: {fileID: 2877345010806901709, guid: 336283f45d30bec42b6622e77fafdc0c, type: 3}
-      propertyPath: m_Name
-      value: NPCJetskiBlue
-      objectReference: {fileID: 0}
-    - target: {fileID: 2877345010806901709, guid: 336283f45d30bec42b6622e77fafdc0c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3418707877744614544, guid: 336283f45d30bec42b6622e77fafdc0c, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 1412829236}
-    - target: {fileID: 8329702372319265000, guid: 336283f45d30bec42b6622e77fafdc0c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8329702372319265000, guid: 336283f45d30bec42b6622e77fafdc0c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8329702372319265000, guid: 336283f45d30bec42b6622e77fafdc0c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8329702372319265000, guid: 336283f45d30bec42b6622e77fafdc0c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -800
-      objectReference: {fileID: 0}
-    - target: {fileID: 8329702372319265000, guid: 336283f45d30bec42b6622e77fafdc0c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8329702372319265000, guid: 336283f45d30bec42b6622e77fafdc0c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8329702372319265000, guid: 336283f45d30bec42b6622e77fafdc0c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8329702372319265000, guid: 336283f45d30bec42b6622e77fafdc0c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8329702372319265000, guid: 336283f45d30bec42b6622e77fafdc0c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8329702372319265000, guid: 336283f45d30bec42b6622e77fafdc0c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8329702372319265000, guid: 336283f45d30bec42b6622e77fafdc0c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 336283f45d30bec42b6622e77fafdc0c, type: 3}
 --- !u!1001 &3408046888531178940
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13619,3 +13659,4 @@ SceneRoots:
   - {fileID: 803091910}
   - {fileID: 1672912891}
   - {fileID: 2001284366}
+  - {fileID: 2145170143}

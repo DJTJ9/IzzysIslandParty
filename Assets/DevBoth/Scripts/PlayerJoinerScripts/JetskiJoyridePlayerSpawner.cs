@@ -25,7 +25,7 @@ namespace JetskiJoyride.Player.Multiplayer
 
         public void PlayerJoined(PlayerInput _playerInput)
         {
-            _playerInput.gameObject.transform.position = soJetskiJoyridePlayerCollection.Players[playerIndex].SpawnPosition;
+            _playerInput.gameObject.transform.position = soJetskiJoyridePlayerCollection.Players[playerIndex].SpawnPoint;
             ++playerIndex;
         }
 
@@ -39,7 +39,7 @@ namespace JetskiJoyride.Player.Multiplayer
         public void SpawnPlayer(int _playerIndex)
         {
             var player = Instantiate(soJetskiJoyridePlayerCollection.Players[_playerIndex].PlayerPrefab,
-                soJetskiJoyridePlayerCollection.Players[_playerIndex].SpawnPosition, Quaternion.identity);
+                soJetskiJoyridePlayerCollection.Players[_playerIndex].SpawnPoint, Quaternion.identity);
 
             if (player.TryGetComponent(out PlayerInput input))
                 input.enabled = true;
