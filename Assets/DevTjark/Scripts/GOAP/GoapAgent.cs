@@ -28,7 +28,7 @@ public class GoapAgent : MonoBehaviour {
     CountdownTimer statsTimer;
     CountdownTimer moveCooldownTimer;
     
-    private bool m_isOnCooldown;
+    // private bool m_isOnCooldown;
     
     GameObject target;
     Vector3 destination;
@@ -257,9 +257,9 @@ public class GoapAgent : MonoBehaviour {
         };
         statsTimer.Start();
         
-        moveCooldownTimer = new CountdownTimer(3f);
-        moveCooldownTimer.OnTimerStart += () => m_isOnCooldown = true;
-        moveCooldownTimer.OnTimerStop += () => m_isOnCooldown = false;
+        // moveCooldownTimer = new CountdownTimer(3f);
+        // moveCooldownTimer.OnTimerStart += () => m_isOnCooldown = true;
+        // moveCooldownTimer.OnTimerStop += () => m_isOnCooldown = false;
     }
 
     // TODO move to stats system

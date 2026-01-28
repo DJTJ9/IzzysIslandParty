@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class SwaggySnapshotsGameManager : MonoBehaviour
 {
     [FoldoutGroup("Settings", expanded: true)]
-    [SerializeField] private float startMoveDuration = 5f;
+    public static float StartMoveDuration = 5f;
     [SerializeField] private float danceMoveDuration = 3f;
     
     [SerializeField]
@@ -15,11 +15,26 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
     
     private CountdownTimer m_startMoveTimer;
     private CountdownTimer m_danceMoveSwitchTimer;
+    
+    public static float RoundTime = 15;
+    
+    [SerializeField] private UnityEvent onRoundEnd;
+    
+    private CountdownTimer roundTimer;
+    
+    private void OnRoundEnd()
+    {
+        onRoundEnd.Invoke();
+    }
 
     private void Awake()
     {
-        m_startMoveTimer = new CountdownTimer(startMoveDuration);
-        m_startMoveTimer.OnTimerStop += () => m_danceMoveSwitchTimer.Start();
+        m_startMoveTimer = new CountdownTimer(StartMoveDuration);
+        m_startMoveTimer.OnTimerStop += () =>
+        {
+            m_danceMoveSwitchTimer.Start();
+            roundTimer.Start();
+        };
         
         m_danceMoveSwitchTimer = new CountdownTimer(danceMoveDuration);
         m_danceMoveSwitchTimer.OnTimerStart += () => onDanceMoveChanged.Invoke();
@@ -28,6 +43,9 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
             m_danceMoveSwitchTimer.Reset();
             m_danceMoveSwitchTimer.Start();
         };
+        
+        roundTimer = new CountdownTimer(RoundTime);
+        roundTimer.OnTimerStop += OnRoundEnd;
     }
 
     private void Start()

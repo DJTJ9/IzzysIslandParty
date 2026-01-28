@@ -4,17 +4,10 @@ using UnityEngine.InputSystem;
 public class NPC_BowlingBattle : MonoBehaviour
 {
     public int PlayerIndex;
-    
-    [Header("Input")]
 
     [Header("Movement Settings")]
     [SerializeField] private float m_moveSpeed = 5f;
     [SerializeField] private float directionChangeInterval = 2f;
-    
-    private InputAction m_moveInputAction;
-    private InputAction m_jumpInputAction;
-    private InputAction m_pauseInputAction;
-    private InputAction m_unpauseInputAction;
 
     [Header("References")]
     [SerializeField] private SO_PlayerCollection playerCollectionSo;
@@ -23,7 +16,7 @@ public class NPC_BowlingBattle : MonoBehaviour
     private Rigidbody rb;
     private BowlingBallSwapper bowlingBallSwapper;
     
-    private float changeDirectionTimer = 0f;
+    private float m_changeDirectionTimer = 0f;
     private Vector2 m_moveInput;
     
     private void Awake()
@@ -65,14 +58,14 @@ public class NPC_BowlingBattle : MonoBehaviour
 
     private void GetMoveDirection()
     {
-        changeDirectionTimer += Time.deltaTime;
+        m_changeDirectionTimer += Time.deltaTime;
         
-        if (changeDirectionTimer >= directionChangeInterval)
+        if (m_changeDirectionTimer >= directionChangeInterval)
         {
             var randomX = Random.Range(-1f, 1f);
             var randomY = Random.Range(-1f, 1f);
             m_moveInput = new Vector2(randomX, randomY).normalized;
-            changeDirectionTimer = 0f;
+            m_changeDirectionTimer = 0f;
         }
     }
 
@@ -82,8 +75,6 @@ public class NPC_BowlingBattle : MonoBehaviour
         var randomIndex = Random.Range(0, ballTypes.Length);
         var randomBallType = ballTypes[randomIndex];
         
-        Debug.Log($"Random ball type: {randomBallType}");
-
         switch (randomBallType)
         {
             case BallType.Baseball:
