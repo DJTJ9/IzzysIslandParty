@@ -1267,7 +1267,6 @@ GameObject:
   - component: {fileID: 71123305419404376}
   - component: {fileID: 8432014504086223268}
   - component: {fileID: 3236733872608044351}
-  - component: {fileID: 2930317379146570938}
   m_Layer: 0
   m_Name: MultiplayerEventSystem
   m_TagString: Untagged
@@ -1322,35 +1321,21 @@ MonoBehaviour:
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_PointAction: {fileID: 0}
-  m_MoveAction: {fileID: 0}
-  m_SubmitAction: {fileID: 0}
-  m_CancelAction: {fileID: 0}
-  m_LeftClickAction: {fileID: 0}
-  m_MiddleClickAction: {fileID: 0}
-  m_RightClickAction: {fileID: 0}
-  m_ScrollWheelAction: {fileID: 0}
-  m_TrackedDevicePositionAction: {fileID: 0}
-  m_TrackedDeviceOrientationAction: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_PointAction: {fileID: -4300584928347552941, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_MoveAction: {fileID: 5033152444777877700, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_SubmitAction: {fileID: -5325928245141277107, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_CancelAction: {fileID: 8005386989882421331, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_LeftClickAction: {fileID: 8056856818456041789, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_MiddleClickAction: {fileID: -6205933517842620933, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_RightClickAction: {fileID: 8014849119153581344, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_ScrollWheelAction: {fileID: 6906336766368160287, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 3424711213814145635, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 732800746274198705, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
   m_ScrollDeltaPerTick: 6
---- !u!114 &2930317379146570938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7547186532877123335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91adc26cdae9419782bd056c2d0041a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiModule: {fileID: 3236733872608044351}
-  uiActions: {fileID: -944628639613478452, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
 --- !u!1 &7752360268276460776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,9 +1442,9 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2930317379146570938}
-        m_TargetAssemblyTypeName: UIInputRebinder, Assembly-CSharp
-        m_MethodName: RebindUIInput
+      - m_Target: {fileID: 7304025793670330477}
+        m_TargetAssemblyTypeName: PlayerControllerBowlingBattle, Assembly-CSharp
+        m_MethodName: ResetComponents
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1799,7 +1784,7 @@ PrefabInstance:
     - target: {fileID: 2639976134451593851, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: m_Actions
       value: 
-      objectReference: {fileID: -944628639613478452, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+      objectReference: {fileID: -944628639613478452, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
     - target: {fileID: 2639976134451593851, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1814,7 +1799,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2639976134451593851, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: m_DefaultControlScheme
-      value: Keyboard&Mouse
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2639976134451593851, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
+      propertyPath: m_NeverAutoSwitchControlSchemes
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3761523586504917549, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: bowlingBallSO
@@ -1878,6 +1867,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5671811041191512022, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138582312252457916, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
