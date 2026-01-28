@@ -7,10 +7,10 @@ public class PointCalculator : MonoBehaviour
 {
     [FoldoutGroup("Face Point Settings", expanded: true)]
     [SerializeField] private float m_faceForwardPointValue = 1f;
-    [SerializeField] private float m_lookAwayAngleTreshold = 45f;
-    [SerializeField] private float minRotationAngle = -45f;
-    [SerializeField] private float maxRotationAngle = -135f;
-    [SerializeField] private Camera mainCamera;
+    // [SerializeField] private float m_lookAwayAngleTreshold = 45f;
+    // [SerializeField] private float minRotationAngle = -45f;
+    // [SerializeField] private float maxRotationAngle = -135f;
+    // [SerializeField] private Camera mainCamera;
     
     [FoldoutGroup("Face Expression Settings", expanded: true)]
     [SerializeField] private float m_happyFacePointValue = 1f;
@@ -21,7 +21,8 @@ public class PointCalculator : MonoBehaviour
     [SerializeField] private Animator animator;
     
     [FoldoutGroup("Scriptable Objects", expanded: true)]
-    [SerializeField] private GameScoreSO scoreSO;
+    [SerializeField] private SO_PlayerCollectionSwaggySnapshots playerCollectionSO;
+    // [SerializeField] private GameScoreSO scoreSO;
     [SerializeField] private FaceSwapSO faceSwapSO;
     [SerializeField] private DanceMovesSO danceMovesSO;
     
@@ -30,60 +31,63 @@ public class PointCalculator : MonoBehaviour
     private Vector3 m_cameraDirection;
     private bool m_turnedAwayFromCamera;
 
-    private void Awake()
-    {
-        m_faceDirection = transform.forward;
-        m_cameraDirection = (mainCamera.transform.position - transform.position).normalized;
-    }
+    // private void Awake()
+    // {
+    //     m_faceDirection = transform.forward;
+    //     m_cameraDirection = (mainCamera.transform.position - transform.position).normalized;
+    // }
     
-    private void Update()
+    // private void Update()
+    // {
+    //     m_faceDirection = transform.forward;
+    //     m_cameraDirection = (mainCamera.transform.position - transform.position).normalized;
+    //     // m_currentYRotation = transform.eulerAngles.y;
+    // }
+
+    public void CalculatePoints(int _playerIndex)
     {
-        m_faceDirection = transform.forward;
-        m_cameraDirection = (mainCamera.transform.position - transform.position).normalized;
-        // m_currentYRotation = transform.eulerAngles.y;
+        CalculatePointsForFaceDirection(_playerIndex);
+        CalculatePointsForFaceExpression(_playerIndex);
+        CalculatePointsForDanceMove(_playerIndex);
     }
 
-    public void CalculatePoints()
+    private void CalculatePointsForFaceDirection(int _playerIndex)
     {
-        CalculatePointsForFaceDirection();
-        CalculatePointsForFaceExpression();
-        CalculatePointsForDanceMove();
-    }
-
-    private void CalculatePointsForFaceDirection()
-    {
-        var dotProduct = Vector3.Dot(m_faceDirection, m_cameraDirection);
-        m_turnedAwayFromCamera = dotProduct < Mathf.Cos(Mathf.Deg2Rad * m_lookAwayAngleTreshold);
+        // var dotProduct = Vector3.Dot(m_faceDirection, m_cameraDirection);
+        // m_turnedAwayFromCamera = dotProduct < Mathf.Cos(Mathf.Deg2Rad * m_lookAwayAngleTreshold);
         
         if (m_turnedAwayFromCamera) return;
         
-        scoreSO.Value += m_faceForwardPointValue;
-        Debug.Log("Points added for facing the camera!");
+        playerCollectionSO.Players[_playerIndex].PlayerScore.Value += m_faceForwardPointValue;
+        Debug.Log($"Points added from {gameObject.name} for facing the camera!");
     }
 
-    private void CalculatePointsForFaceExpression()
+    private void CalculatePointsForFaceExpression(int _playerIndex)
     {
-        var currentFaceMaterial = faceMeshRenderer.materials[0];
+        var currentFaceMaterial = faceMeshRenderer.sharedMaterial;
         var isHappyFace = faceSwapSO.IsHappyFace(currentFaceMaterial);
 
         if (!isHappyFace) return;
         
-        scoreSO.Value += m_happyFacePointValue;
-        Debug.Log("Points added for happy face!");
+        playerCollectionSO.Players[_playerIndex].PlayerScore.Value += m_happyFacePointValue;
+        Debug.Log($"Points added {gameObject.name} for happy face!");
     }
 
-    private void CalculatePointsForDanceMove()
+    private void CalculatePointsForDanceMove(int _playerIndex)
     {
         var currentClip = animator.GetCurrentAnimatorClipInfo(0)[0].clip;
         
         if (!danceMovesSO.IsCoolDanceMove(currentClip)) return;
         
-        scoreSO.Value += m_danceMovePointValue;
-        Debug.Log("Points added for cool dance move!");
+        playerCollectionSO.Players[_playerIndex].PlayerScore.Value += m_danceMovePointValue;
+        Debug.Log($"Points added {gameObject.name} for cool dance move!");
     }
+    
+    public void SetTurnedAwayFromCameraToTrue() => m_turnedAwayFromCamera = true;
+    public void SetTurnedAwayFromCameraToFalse() => m_turnedAwayFromCamera = false;
 
-    private bool isFacingCamera()
-    {
-        return m_currentYRotation >= maxRotationAngle && m_currentYRotation <= minRotationAngle;
-    }
+    // private bool isFacingCamera()
+    // {
+    //     return m_currentYRotation >= maxRotationAngle && m_currentYRotation <= minRotationAngle;
+    // }
 }

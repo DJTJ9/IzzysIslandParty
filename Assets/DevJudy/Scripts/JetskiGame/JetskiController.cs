@@ -1,4 +1,4 @@
-using System;
+using Audio;
 using enums;
 using TMPro;
 using UnityEngine;
@@ -31,9 +31,6 @@ namespace JetskiGame
         [SerializeField] private LayerMask waterLayerMask;
 
         [SerializeField] private float groundCheckRadius = 0.2f;
-        // [SerializeField] private float groundCheckOffset = 0.2f;
-
-        //private Vector3 groundCheckPosition = Vector3.zero;
         [SerializeField] private bool isGrounded;
 
         [Header("Temp: ")]
@@ -50,13 +47,14 @@ namespace JetskiGame
             rb = GetComponent<Rigidbody>();
             playerInput = GetComponent<PlayerInput>();
 
-            DisablePlayerInput();
+            //DisablePlayerInput();
         }
 
 
         public void EnablePlayerInput()
         {
-            playerInput.enabled = true;
+            if (playerInput != null)
+                playerInput.enabled = true;
         }
 
         public void DisablePlayerInput()
@@ -74,10 +72,10 @@ namespace JetskiGame
                 if (!driving)
                 {
                     driving = true;
-                    
+
                     AudioService.Instance.PlaySoundWhile(() => driving,
-                        AudioCollection.Instance.levelSoundsDictionary.LevelAudios["JetskiEngineSound"], 
-                        EAudioType.SFX, true, 0.2f, 0.5f);
+                        AudioCollection.Instance.levelSoundsDictionary.LevelAudios["JetskiEngineSound"],
+                        EAudioType.SFX, true, 0.3f, 0.25f);
                 }
             }
 
@@ -153,7 +151,7 @@ namespace JetskiGame
                 Jump(jumpHeight);
             else if (!isGrounded && jumpPressedLastFrame)
                 jumpPressedLastFrame = false;
-            
+
 
             // First do the steering
             if (steerWithAddForceAtPos)

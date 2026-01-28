@@ -6,33 +6,33 @@ using UnityEngine.Serialization;
 public class BallSpawner : MonoBehaviour, IDependencyProvider
 {
     public GameObject    CurrentBallInstance { get; private set; }
-    public BowlingBallSO CurrentBallSO       { get; private set; }
+    public SO_PlayerBowlingBattle CurrentBattle       { get; private set; }
     
     [SerializeField] private BowlingBallCollectionSO ballCollectionSO;
 
     [Provide] BallSpawner ProvideBallSpawner() => this;
     
-    private void Awake()
-    {
-        CreateAndSetFirstBallInstance();
-    }
+    // private void Awake()
+    // {
+    //     CreateAndSetFirstBallInstance();
+    // }
 
-    private void CreateAndSetFirstBallInstance()
-    {
-        CurrentBallInstance = Instantiate(ballCollectionSO.BowlingBalls[BallType.Basketball].ball,
-            transform.position, transform.rotation);
+    // private void CreateAndSetFirstBallInstance()
+    // {
+    //     CurrentBallInstance = Instantiate(ballCollectionSO.BowlingBalls[BallType.Basketball].PlayerPrefab,
+    //         transform.position, transform.rotation);
+    //
+    //     CurrentBattle = ballCollectionSO.BowlingBalls[BallType.Basketball];
+    // }
 
-        CurrentBallSO = ballCollectionSO.BowlingBalls[BallType.Basketball];
-    }
-
-    public void SpawnBall(BowlingBallSO _ballSO)
+    public void SpawnBall(SO_PlayerBowlingBattle _battle)
     {
         if (CurrentBallInstance != null)
             Destroy(CurrentBallInstance);
         
-        CurrentBallInstance = Instantiate(_ballSO.ball, transform.position, transform.rotation);
-        CurrentBallSO = _ballSO;
+        CurrentBallInstance = Instantiate(_battle.PlayerPrefab, transform.position, transform.rotation);
+        CurrentBattle = _battle;
     }
     
-    public void RespawnBall() => SpawnBall(CurrentBallSO);
+    public void RespawnBall() => SpawnBall(CurrentBattle);
 }

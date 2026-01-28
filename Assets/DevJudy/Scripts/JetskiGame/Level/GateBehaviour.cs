@@ -1,11 +1,11 @@
-using UIScripts;
+using MultiuseScripts;
 using UnityEngine;
 
 namespace JetskiGame
 {
     public class GateBehaviour : MonoBehaviour
     {
-        [SerializeField] private UITextManager uiTimer;
+        [SerializeField] private LevelTimer timer;
 
         [SerializeField] private CustomTriggerBehaviour middleCollider;
         [SerializeField] private CustomTriggerBehaviour leftCollider;
@@ -28,7 +28,7 @@ namespace JetskiGame
             if (!clearedGate)
             {
                 clearedGate = true;
-                // Give visual feedback
+                //!! Give visual feedback via icons
             }
         }
 
@@ -38,9 +38,9 @@ namespace JetskiGame
             {
                 clearedGate = true;
 
-                // Give visual feedback
+                // !! Give visual feedback via icons
 
-                uiTimer?.DeduceTime(timeDeduction.Value);
+                timer?.DeduceTime(timeDeduction.Value);
             }
         }
     }

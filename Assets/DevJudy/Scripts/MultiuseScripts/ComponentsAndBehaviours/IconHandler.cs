@@ -25,15 +25,14 @@ namespace Juice
             iconTimer = new CountdownTimer(displayIconSeconds);
             iconTimer.OnTimerStop += () => { targetObject?.SetActive(false); };
             iconTimer.OnTimerStart += () => { targetObject?.SetActive(true); };
+            
+            targetObject.SetActive(false);
         }
-
-        [ContextMenu("Test")]
-        public void SetTargetRotation()
+        
+        private void SetTargetRotation()
         {
             Camera mainCamera = Camera.main;
             targetObject.transform.rotation = Quaternion.LookRotation(-mainCamera.transform.up, -mainCamera.transform.forward);
-            
-            // !! Make target tilt towards character slightly
         }
         
         public void DisplayIcon(EEmotion _emotion)

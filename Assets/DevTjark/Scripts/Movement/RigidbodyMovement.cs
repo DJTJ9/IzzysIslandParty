@@ -19,10 +19,9 @@ public class RigidbodyMovement : MonoBehaviour
     // [SerializeField] private float jumpSpeedModifier = 1;
     // [SerializeField] private float fallSpeedModifier = 1;
 
-    private new Transform transform;
+    [SerializeField] private Camera cam;
     private new Rigidbody rigidbody;
     private GroundChecker groundChecker;
-    private Camera cam;
 
     private Vector3 moveDirection;
     private bool canMove = true;
@@ -36,10 +35,8 @@ public class RigidbodyMovement : MonoBehaviour
 
     private void Awake()
     {
-        transform = GetComponent<Transform>();
         rigidbody = GetComponent<Rigidbody>();
         groundChecker = GetComponent<GroundChecker>();
-        cam = Camera.main;
         
         pushCooldownTimer = new CountdownTimer(pushCooldown);
         pushCooldownTimer.OnTimerStop += EnableMovement;
@@ -51,11 +48,11 @@ public class RigidbodyMovement : MonoBehaviour
         jumpCooldownTimer.OnTimerStop += EnableJumping;
     }
     
-    // private void FixedUpdate()
-    // {
-    //     // UpdateHorizontalMovement();
-    //     // UpdateVerticalMovement();
-    // }
+    private void FixedUpdate()
+    {
+        // UpdateHorizontalMovement();
+        // UpdateVerticalMovement();
+    }
 
     /// <summary>
     /// Recieves a move direction
@@ -70,7 +67,7 @@ public class RigidbodyMovement : MonoBehaviour
         camFwd.y = 0f; camRight.y = 0f;
         camFwd.Normalize(); camRight.Normalize();
 
-        var worldDir = camRight * _direction.x + camFwd * _direction.z;
+        var worldDir = camRight * _direction.x + camFwd * _direction.y;
         
         rigidbody.AddForce(worldDir.normalized * pushForce, ForceMode.Impulse);
         
@@ -152,13 +149,13 @@ public class RigidbodyMovement : MonoBehaviour
     // /// Recieves the current rotation
     // /// Sets the rotation to a target rotation
     // /// </summary>
-    // public void RotateHorizontal(float _rotation)
-    // {
-    //     var currentRotation = rigidbody.rotation.eulerAngles;
-    //     var targetRotation = currentRotation + new Vector3(0f, _rotation, 0f);
-    //     rigidbody.rotation = Quaternion.Euler(targetRotation);
-    // }
-    //
+    public void RotateHorizontal(float _rotation)
+    {
+        var currentRotation = rigidbody.rotation.eulerAngles;
+        var targetRotation = currentRotation + new Vector3(0f, _rotation, 0f);
+        rigidbody.rotation = Quaternion.Euler(targetRotation);
+    }
+    
     // /// <summary>
     // /// Modifies jump and fall speed
     // /// </summary>

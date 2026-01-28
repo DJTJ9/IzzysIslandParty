@@ -16,7 +16,7 @@ public class CameraFocus : MonoBehaviour
         int layer = 1;
         int priority = 1;
         float weight = 1f;
-        float bleindTime = 1f;
-        Brain.SetCameraOverride(layer, priority, CamA, CamB, weight, bleindTime);
+        float blendTime = 1f;
+        Brain.SetCameraOverride(layer, priority, CamA, CamB, weight, blendTime);
     }
 }
