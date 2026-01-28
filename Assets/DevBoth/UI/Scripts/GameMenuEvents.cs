@@ -259,6 +259,12 @@ public class GameMenuEvents : MonoBehaviour
         resultsScreen.style.display = DisplayStyle.Flex;
     }
     
+    public void ShowRaceResultsScreen()
+    {
+        ShowRaceResults(playerCollection.Players);
+        resultsScreen.style.display = DisplayStyle.Flex;
+    }
+    
     private void ShowResults(List<SO_Player> _results)
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
@@ -287,5 +293,39 @@ public class GameMenuEvents : MonoBehaviour
 
             container.Add(row);
         }
+        
+        
+    }
+    
+    private void ShowRaceResults(List<SO_Player> _results)
+    {
+        var root = GetComponent<UIDocument>().rootVisualElement;
+        var container = resultsModal;
+
+        container.Clear();
+
+        // var ordered = _results
+        //     .OrderByDescending(_r => _r.PlayerScore.Value)
+        //     .ToList();
+
+        for (int i = 0; i < _results.Count; i++)
+        {
+            var data = _results[i];
+            var row = rowTemplate.CloneTree();
+
+            row.Q<Label>("RankLabel").text = (i + 1).ToString();
+            row.Q<Label>("NameLabel").text = data.Name;
+            row.Q<Label>("ScoreLabel").text = data.PlayerScore.Value.ToString(); // <---- Hier Zeit eintragen
+
+            // if (i == 0)
+            //     row.AddToClassList("winner");
+            //
+            // if (data.IsNPC)
+            //     row.AddToClassList("npc");
+
+            container.Add(row);
+        }
+        
+        
     }
 }
