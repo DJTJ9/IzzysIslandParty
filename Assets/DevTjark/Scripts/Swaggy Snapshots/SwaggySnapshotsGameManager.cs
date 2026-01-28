@@ -7,8 +7,10 @@ using UnityEngine.Events;
 public class SwaggySnapshotsGameManager : MonoBehaviour
 {
     [FoldoutGroup("Settings", expanded: true)]
-    public static float StartMoveDuration = 5f;
+    [SerializeField] private float startMoveDuration = 15f;
+    [SerializeField] private float roundTime = 15f;
     [SerializeField] private float danceMoveDuration = 3f;
+    [SerializeField] private float photoShowDuration = 10f;
     
     [SerializeField]
     private UnityEvent onDanceMoveChanged;
@@ -16,24 +18,25 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
     private CountdownTimer m_startMoveTimer;
     private CountdownTimer m_danceMoveSwitchTimer;
     
-    public static float RoundTime = 15;
+    public static float StartMoveDuration = 15f;
+    public static float RoundTime = 15f;
     
     [SerializeField] private UnityEvent onRoundEnd;
+    [SerializeField] private UnityEvent onGameEnd;
     
-    private CountdownTimer roundTimer;
-    
-    private void OnRoundEnd()
-    {
-        onRoundEnd.Invoke();
-    }
+    private CountdownTimer m_roundTimer;
+    private CountdownTimer m_photoShowTimer;
 
     private void Awake()
     {
+        StartMoveDuration = startMoveDuration;
+        RoundTime = roundTime;
+        
         m_startMoveTimer = new CountdownTimer(StartMoveDuration);
         m_startMoveTimer.OnTimerStop += () =>
         {
             m_danceMoveSwitchTimer.Start();
-            roundTimer.Start();
+            m_roundTimer.Start();
         };
         
         m_danceMoveSwitchTimer = new CountdownTimer(danceMoveDuration);
@@ -44,12 +47,22 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
             m_danceMoveSwitchTimer.Start();
         };
         
-        roundTimer = new CountdownTimer(RoundTime);
-        roundTimer.OnTimerStop += OnRoundEnd;
+        m_roundTimer = new CountdownTimer(RoundTime);
+        m_roundTimer.OnTimerStop += OnRoundEnd;
+        
+        m_photoShowTimer = new CountdownTimer(photoShowDuration);
+        m_photoShowTimer.OnTimerStop += () => onGameEnd.Invoke();
     }
 
     private void Start()
     {
         m_startMoveTimer.Start();
+    }
+    
+    
+    private void OnRoundEnd()
+    {
+        onRoundEnd.Invoke();
+        m_photoShowTimer.Start();
     }
 }

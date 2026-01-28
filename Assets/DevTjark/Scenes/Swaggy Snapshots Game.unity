@@ -926,7 +926,7 @@ Transform:
   m_GameObject: {fileID: 329332865}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.879, z: 1.26}
+  m_LocalPosition: {x: 0.567, y: 1.2, z: -0.141}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3169,7 +3169,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1007614473}
   - component: {fileID: 1007614474}
-  - component: {fileID: 1007614475}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -3204,7 +3203,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b6423836b7bb1468128ee17b76f9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startMoveDuration: 15
+  roundTime: 10
   danceMoveDuration: 3
+  photoShowDuration: 10
   onDanceMoveChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3222,24 +3224,23 @@ MonoBehaviour:
         m_CallState: 2
   onRoundEnd:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1007614475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1007614471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9dd728c6eb846a5b58bac83ab79b458, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roundTime: 15
-  onRoundEnd:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 962fed5a49a00164fb466d8a2070cd10, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onGameEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: d85f1a13d5f3749468676f87ec48c10f, type: 2}
         m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 1
@@ -4042,6 +4043,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1316801354}
   m_CullTransparentMesh: 1
+--- !u!1 &1340340584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1340340585}
+  - component: {fileID: 1340340586}
+  m_Layer: 0
+  m_Name: Game Event Listeners
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1340340585
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340340584}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1912335235}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1340340586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340340584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: d85f1a13d5f3749468676f87ec48c10f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1912335234}
+        m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
+        m_MethodName: ShowResultsScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1372374611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5334,7 +5395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneCollection: {fileID: 11400000, guid: 6fd8971a4dff91645b76a391153753d8, type: 2}
-  playerCollection: {fileID: 11400000, guid: b311deb974e253d4a87e88e50d801712, type: 2}
+  playerCollection: {fileID: 11400000, guid: 26f48470c4b0a41468ee3160cc731019, type: 2}
   rowTemplate: {fileID: 9197481963319205126, guid: a5da0a2b314073b4f97b6ae48036cd3c, type: 3}
   onUnpause:
     m_PersistentCalls:
@@ -5378,7 +5439,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1340340585}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1931532647
@@ -5978,7 +6040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3910904789933049449, guid: c1e4bfa3c434d0f449fe60a528176865, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3910904789933049449, guid: c1e4bfa3c434d0f449fe60a528176865, type: 3}
       propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Mode

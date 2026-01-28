@@ -15,7 +15,7 @@ public class NPC_SwaggySnapshots : MonoBehaviour
 
     private void Awake()
     {
-        m_photoTimer = new CountdownTimer(Random.Range(SwaggySnapshotsGameManager.StartMoveDuration, SwaggySnapshotsGameManager.RoundTime));
+        m_photoTimer = new CountdownTimer(Random.Range(SwaggySnapshotsGameManager.StartMoveDuration, SwaggySnapshotsGameManager.StartMoveDuration + SwaggySnapshotsGameManager.RoundTime));
         m_photoTimer.OnTimerStop += TakePhoto;
     }
 
