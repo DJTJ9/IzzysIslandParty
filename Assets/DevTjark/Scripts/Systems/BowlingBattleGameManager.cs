@@ -29,6 +29,7 @@ public class BowlingBattleGameManager : MonoBehaviour
 
 private void Start()
     {
+        
         ResetRoundIndex();
         
         InstantiateCountdownTimers();

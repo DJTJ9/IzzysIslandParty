@@ -6257,7 +6257,7 @@ MonoBehaviour:
   m_NotificationBehavior: 2
   m_MaxPlayerCount: -1
   m_AllowJoining: 1
-  m_JoinBehavior: 2
+  m_JoinBehavior: 1
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls:
@@ -6288,7 +6288,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -975019053593515004, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
-  m_PlayerPrefab: {fileID: 0}
+  m_PlayerPrefab: {fileID: 8896167442070573846, guid: e6feb88b3c5738b4da86a05bbb189204, type: 3}
   m_SplitScreen: 1
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -7571,7 +7571,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  preparationPhaseDuration: 10
+  preparationPhaseDuration: 30
   roundDuration: 30
   maxRounds: 3
 --- !u!4 &2146626108

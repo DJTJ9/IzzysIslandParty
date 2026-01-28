@@ -9,4 +9,9 @@ public class SO_Player : SerializedScriptableObject
     public GameScoreSO PlayerScore;
     public Vector3 SpawnPoint;
     public bool IsNPC;
+
+    public virtual void InitializePlayer(GameObject _player, SO_Player _playerSO, int _playerIndex)
+    {
+        
+    }
 }
