@@ -185,10 +185,7 @@ public class MainMenuEvents : MonoBehaviour
     
     private void OnLoadBowlingBattle(ClickEvent _evt)
     {
-        // LoadGameSceneWithLevel(SceneNames.BowlingBattleGame, SceneNames.BowlingBattleLevel);
-        this.gameObject.SetActive(false);
-        // menusContainer.style.display = DisplayStyle.None;
-        LoadSceneAdditive(SceneNames.BowlingBattleGame);
+        LoadGameScene(SceneNames.BowlingBattleGame);
     }
 
     private void OnLoadFishingFrenzy(ClickEvent _evt)

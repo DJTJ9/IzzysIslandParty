@@ -8,8 +8,6 @@ using UnityEngine.Serialization;
 [RequireComponent (typeof(CharacterController), typeof(PlayerInput), typeof(Rigidbody))]
 public class PlayerControllerBowlingBattle : MonoBehaviour
 {
-    public int PlayerIndex;
-    
     [Header("Input")]
     private Vector2 m_moveInput;
     private bool m_jumpInput;
@@ -30,7 +28,7 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
     [SerializeField] private UnityEvent onPause;
     [SerializeField] private UnityEvent onUnpause;
     
-    [SerializeField] private SO_PlayerCollectionBowlingBattle playerCollectionBowlingBattleSO;
+    [SerializeField] private SO_Player playerSO;
     [SerializeField] private SO_PlayerInputs playerInputsSO;
     
     private void Awake()
@@ -137,12 +135,16 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
 
     public void ResetComponents()
     {
+        if (rb == null) rb = GetComponent<Rigidbody>();
+        if (controller == null) controller = GetComponent<CharacterController>();
+        if (playerInput == null) playerInput = GetComponent<PlayerInput>();
+        
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         
-        transform.position = playerCollectionBowlingBattleSO.Players[PlayerIndex].SpawnPoint;
+        controller.enabled = false;
+        transform.position = playerSO.SpawnPoint;
         transform.rotation = Quaternion.identity;
-
 
         controller.enabled = true;
         playerInput.enabled = true;
@@ -158,6 +160,12 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
     public void SwitchToUIInputMap()
     {
         playerInput.SwitchCurrentActionMap("UI");
+    }
+
+    public void BindPlayerSO(SO_Player _playerSO)
+    {
+        playerSO = _playerSO;
+        transform.position = playerSO.SpawnPoint;
     }
     
     // private void SetCameraForPlayerInput()

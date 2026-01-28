@@ -100,7 +100,7 @@ public class AimForNextPositionStrategy : IActionStrategy
     readonly Func<Vector3> finish;
     private CountdownTimer shootCooldownTimer;
     private readonly float shootCooldownTimerDuration;
-    private readonly float shootRange = 15f;
+    // private readonly float shootRange = 15f;
 
     public bool CanPerform => !Complete;
     public bool Complete   { get; private set; }

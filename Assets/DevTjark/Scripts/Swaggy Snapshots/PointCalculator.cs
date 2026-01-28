@@ -59,7 +59,7 @@ public class PointCalculator : MonoBehaviour
         if (m_turnedAwayFromCamera) return;
         
         playerCollectionSO.Players[_playerIndex].PlayerScore.Value += m_faceForwardPointValue;
-        Debug.Log("Points added for facing the camera!");
+        Debug.Log($"Points added from {gameObject.name} for facing the camera!");
     }
 
     private void CalculatePointsForFaceExpression(int _playerIndex)
@@ -70,7 +70,7 @@ public class PointCalculator : MonoBehaviour
         if (!isHappyFace) return;
         
         playerCollectionSO.Players[_playerIndex].PlayerScore.Value += m_happyFacePointValue;
-        Debug.Log("Points added for happy face!");
+        Debug.Log($"Points added {gameObject.name} for happy face!");
     }
 
     private void CalculatePointsForDanceMove(int _playerIndex)
@@ -80,7 +80,7 @@ public class PointCalculator : MonoBehaviour
         if (!danceMovesSO.IsCoolDanceMove(currentClip)) return;
         
         playerCollectionSO.Players[_playerIndex].PlayerScore.Value += m_danceMovePointValue;
-        Debug.Log("Points added for cool dance move!");
+        Debug.Log($"Points added {gameObject.name} for cool dance move!");
     }
     
     public void SetTurnedAwayFromCameraToTrue() => m_turnedAwayFromCamera = true;

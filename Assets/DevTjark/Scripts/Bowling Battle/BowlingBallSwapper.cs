@@ -33,11 +33,10 @@ public class BowlingBallSwapper : MonoBehaviour
     {
         meshFilter.mesh = bowlingBallMeshes.BallMeshes[_type];
         meshRenderer.material = bowlingBallMaterials.BallMaterials[_type];
-        
         m_currentCollider.enabled = false;
-        m_currentCollider = _collider;
-        _collider.enabled = true;
         
+        m_currentCollider = _collider;
+        m_currentCollider.enabled = true;
         m_currentBallType = _type;
     }
 }
