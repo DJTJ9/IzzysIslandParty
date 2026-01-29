@@ -47,7 +47,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="player-ui-right__container" class="player-ui-right" style="flex-grow: 1;" />
     </ui:VisualElement>
-    <ui:VisualElement name="results-screen-and-buttons__container" class="result-screen-container" style="flex-grow: 1; flex-direction: column; display: flex; justify-content: center; align-items: center; width: auto;">
+    <ui:VisualElement name="results-screen-and-buttons__container" class="result-screen-container" style="flex-grow: 1; flex-direction: column; display: none; justify-content: center; align-items: center; width: auto;">
         <ui:VisualElement name="results-header__container" style="flex-grow: 1; width: 100%; align-items: center; justify-content: center;">
             <ui:Label text="END RESULTS" name="results-header__label" class="header" style="color: rgb(254, 202, 129); -unity-text-outline-width: 4px; -unity-text-outline-color: rgb(0, 0, 0);" />
         </ui:VisualElement>
