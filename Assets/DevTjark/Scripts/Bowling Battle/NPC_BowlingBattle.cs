@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class NPC_BowlingBattle : MonoBehaviour
 {
-    public int PlayerIndex;
+    public int NPCIndex;
 
     [Header("Movement Settings")]
     [SerializeField] private float m_moveSpeed = 5f;
     [SerializeField] private float directionChangeInterval = 2f;
 
     [Header("References")]
-    [SerializeField] private SO_Player playerSO;
-    [SerializeField] private SO_PlayerCollection playerCollectionSo;
+    [SerializeField] private SO_Player npcSO;
+    [SerializeField] private SO_PlayerCollection npcCollectionSO;
     
     private CharacterController controller;
     private Rigidbody rb;
@@ -37,9 +38,16 @@ public class NPC_BowlingBattle : MonoBehaviour
         if (controller.enabled) Movement();
     }
 
-    public void GameStartConfiguration()
+    private void GameStartConfiguration()
     {
-        ResetComponents();
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        
+        transform.position = npcCollectionSO.Players[NPCIndex].SpawnPoint;
+        transform.rotation = Quaternion.identity;
+
+        rb.freezeRotation = true;
+        rb.useGravity = false;
     }
     
     private void Movement()
@@ -108,14 +116,15 @@ public class NPC_BowlingBattle : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         
-        transform.position = playerCollectionSo.Players[PlayerIndex].SpawnPoint;
+        transform.position = npcCollectionSO.Players[NPCIndex].SpawnPoint;
         transform.rotation = Quaternion.identity;
-
 
         controller.enabled = true;
         rb.freezeRotation = true;
         rb.useGravity = false;
     }
     
-    public SO_Player GetPlayerSO => playerSO;
+    public void EnableCharacterController() => controller.enabled = true;
+    
+    public SO_Player GetNpcSo => npcSO;
 }

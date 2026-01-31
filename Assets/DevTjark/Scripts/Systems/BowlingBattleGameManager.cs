@@ -12,9 +12,10 @@ public class BowlingBattleGameManager : MonoBehaviour
     [SerializeField] private UnityEvent onReleaseBall;
     [SerializeField] private UnityEvent onRoundEnd;
     [SerializeField] private UnityEvent onGameEnd;
+    [SerializeField] private UnityEvent onStartSplitScreen;
 
     [FoldoutGroup("Round Settings", expanded: true)]
-    [SerializeField] private float joinPhaseDuration = 30f;
+    [SerializeField] private float joinPhaseDuration = 4f;
     [SerializeField] private float preparationPhaseDuration = 10f;
     [SerializeField] private float roundDuration = 15f;
     [SerializeField] private int maxRounds = 3;
@@ -71,6 +72,7 @@ private void Start()
     private void SubscribeToCountdownTimersActions()
     {
         m_joinPhaseTimer.OnTimerStop += StartGame;
+        m_joinPhaseTimer.OnTimerStop += onStartSplitScreen.Invoke;
         
         m_preparationPhaseTimer.OnTimerStop += ReleaseBall;
         
