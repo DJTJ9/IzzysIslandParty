@@ -29,7 +29,7 @@ public class PlayerSpawner : MonoBehaviour
         // Instantiate(Player3, Spawnpoint3.position, Spawnpoint3.rotation);
     }
 
-    // public void PlayerJoined(PlayerInput _playerInput)
+    // public void PlayerJoinedBB(PlayerInput _playerInput)
     // {
     //     AddPlayer(_playerInput);
     // }

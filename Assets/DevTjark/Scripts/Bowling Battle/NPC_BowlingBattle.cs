@@ -10,6 +10,7 @@ public class NPC_BowlingBattle : MonoBehaviour
     [SerializeField] private float directionChangeInterval = 2f;
 
     [Header("References")]
+    [SerializeField] private SO_Player playerSO;
     [SerializeField] private SO_PlayerCollection playerCollectionSo;
     
     private CharacterController controller;
@@ -115,4 +116,6 @@ public class NPC_BowlingBattle : MonoBehaviour
         rb.freezeRotation = true;
         rb.useGravity = false;
     }
+    
+    public SO_Player GetPlayerSO => playerSO;
 }

@@ -331,7 +331,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1041197078}
   - component: {fileID: 1041197077}
-  - component: {fileID: 1041197079}
   - component: {fileID: 1041197080}
   m_Layer: 0
   m_Name: Player Input Manager
@@ -399,21 +398,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1041197079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1041197076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 178e1589141c44a8a901da2595c5802d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnPoints: []
-  PlayersSO: {fileID: 11400000, guid: b311deb974e253d4a87e88e50d801712, type: 2}
-  playerInputs: {fileID: 11400000, guid: 2abbe52883f175347954cd0b2ca2f704, type: 2}
 --- !u!114 &1041197080
 MonoBehaviour:
   m_ObjectHideFlags: 0
