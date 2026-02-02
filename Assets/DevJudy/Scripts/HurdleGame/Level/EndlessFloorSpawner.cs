@@ -7,7 +7,7 @@ namespace HurdleGame
     public class EndlessFloorSpawner : MonoBehaviour
     {
         [Header("Level variables: ")]
-        [SerializeField] private float levelDurationInSeconds = 120;
+       // [SerializeField] private float levelDurationInSeconds = 120;
 
         private CountdownTimer timerUntilGoalSpawns;
 
