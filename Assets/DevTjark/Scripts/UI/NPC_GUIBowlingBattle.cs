@@ -1,8 +1,9 @@
 ﻿using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class GUIBowlingBattle : MonoBehaviour
+public class NPC_GUIBowlingBattle : MonoBehaviour
 {
     [FoldoutGroup("Canvas Elements", expanded: false)]
     [SerializeField] private GameObject bowlingBattleUI;
@@ -11,14 +12,14 @@ public class GUIBowlingBattle : MonoBehaviour
     [SerializeField] private GameObject score;
     [SerializeField] private TMP_Text timerLabel;
     [SerializeField] private TMP_Text scoreLabel;
-    [SerializeField] private SO_PlayerCollection playerSO;
+    [SerializeField] private SO_PlayerCollection npcSO;
     
-    [SerializeField] private PlayerControllerBowlingBattle playerController;
+    [SerializeField] private NPC_BowlingBattle npcController;
 
     private void Update()
     {
         timerLabel.text = BowlingBattleGameManager.PreparationPhaseTimer.ToString("00");
-        scoreLabel.text = playerSO.Players[playerController.GetPlayerIndex()].PlayerScore.Value.ToString("00");
+        scoreLabel.text = npcSO.Players[npcController.NPCIndex].PlayerScore.Value.ToString("00");
     }
 
     public void ShowUI()

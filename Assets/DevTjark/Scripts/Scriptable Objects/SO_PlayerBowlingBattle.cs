@@ -8,6 +8,7 @@ public class SO_PlayerBowlingBattle : SO_Player
     public override void InitializePlayer(GameObject _player, SO_Player _playerSO, int _playerIndex)
     {
         var playerController = _player.GetComponent<PlayerControllerBowlingBattle>();
+        playerController.SetPlayerIndex(_playerIndex);
         playerController.BindPlayerSO(_playerSO);
         playerController.ResetComponents();
     }
