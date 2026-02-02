@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 public class PlayerJoiner : MonoBehaviour
 {
-    [FormerlySerializedAs("playerCollectionSO")]
+    [FormerlySerializedAs("PlayerCollectionSO")]
     [FoldoutGroup("Bowling Battle")]
     public SO_PlayerCollection playerCollectionBB;
     [SerializeField] private SO_PlayerCollection npcCollectionBB;
@@ -38,8 +38,6 @@ public class PlayerJoiner : MonoBehaviour
 
     public void PlayerJoinedBB(PlayerInput _playerInput)
     {
-        // _playerInput.gameObject.GetComponent<PlayerControllerBowlingBattle>().BindPlayerSO(playerCollectionBB.Players[m_playerIndex]);
-
         if (_playerInput.gameObject.TryGetComponent(out NPC_BowlingBattle npc))
         {
             _playerInput.gameObject.transform.position = npcCollectionBB.Players[m_npcIndex].SpawnPoint;
@@ -50,7 +48,7 @@ public class PlayerJoiner : MonoBehaviour
         _playerInput.gameObject.transform.position = playerCollectionBB.Players[m_playerIndex].SpawnPoint;
         playerCollectionBB.Players[m_playerIndex].InitializePlayer(_playerInput.gameObject, playerCollectionBB.Players[m_playerIndex], m_playerIndex);
         ++m_playerIndex;
-        // AddPlayer(_playerInput);
+        AddPlayer(_playerInput);
     }
 
     public void JoinNPCsBB()
@@ -70,10 +68,6 @@ public class PlayerJoiner : MonoBehaviour
     private void AddPlayer(PlayerInput _playerInput)
     {
         playerInputs.PlayerInputs.Add(_playerInput);
-        ++m_playerIndex;
-        
-       // _playerInput.transform.position = SpawnPoints[m_playerIndex].transform.position;
-       //  m_playerIndex++;
     }
     
     [Button]

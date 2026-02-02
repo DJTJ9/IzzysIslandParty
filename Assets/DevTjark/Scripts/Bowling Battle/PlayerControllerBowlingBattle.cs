@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using DG.Tweening;
 using UnityEngine.Serialization;
 
-[RequireComponent (typeof(CharacterController), typeof(PlayerInput), typeof(Rigidbody))]
+[RequireComponent (typeof(CharacterController), typeof(Rigidbody))]
 public class PlayerControllerBowlingBattle : MonoBehaviour
 {
     [Header("Input")]
@@ -16,7 +16,6 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
     [SerializeField] private float m_moveSpeed = 5f;
     
     private InputAction m_moveInputAction;
-    private InputAction m_jumpInputAction;
     private InputAction m_pauseInputAction;
     private InputAction m_unpauseInputAction;
 
@@ -31,18 +30,17 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
     [SerializeField] private SO_Player playerSO;
     [SerializeField] private SO_PlayerInputs playerInputsSO;
     
-    private void Awake()
+    private void Start()
     {
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
-        // playerInput = playerInputsSO.PlayerInputs[PlayerIndex];
+        // playerInput = playerInputsSO.PlayerInputs[NPCIndex];
         rb = GetComponent<Rigidbody>();
-        playerInput.enabled = true;
+        GameStartConfiguration();
     }
 
     private void OnEnable()
     {
-        GameStartConfiguration();
     }
     
     private void OnDisable()
@@ -59,7 +57,6 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
     {
         MapInputActions();
         ResetComponents();
-        // SetCameraForPlayerInput();
     }
     
     private void Movement()
@@ -77,7 +74,7 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
         controller.Move(move * Time.deltaTime);
     }
 
-    private void GetMoveDirection()
+    public void GetMoveDirection()
     {
         m_moveInput = m_moveInputAction.ReadValue<Vector2>();
     }
@@ -106,9 +103,6 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
     {
         m_moveInputAction = playerInput.actions["Move"];
 
-        m_jumpInputAction = playerInput.actions["Jump"];
-        // m_jumpInputAction.started += OnJump;
-
         m_pauseInputAction = playerInput.actions["Pause"];
         m_pauseInputAction.started += OnPause;
 
@@ -116,19 +110,18 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
         m_unpauseInputAction.started += OnUnpause;
     }
     
-    private void OnPause(InputAction.CallbackContext _context)
+    public void OnPause(InputAction.CallbackContext _context)
     {
         onPause.Invoke();
     }
     
-    private void OnUnpause(InputAction.CallbackContext _context)
+    public void OnUnpause(InputAction.CallbackContext _context)
     {
         onUnpause.Invoke();
     }
 
     private void UnmapInputActions()
     {
-        m_jumpInputAction.started -= OnJump;
         m_pauseInputAction.started -= OnPause;
         m_unpauseInputAction.started -= OnUnpause;
     }
@@ -137,7 +130,6 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
     {
         if (rb == null) rb = GetComponent<Rigidbody>();
         if (controller == null) controller = GetComponent<CharacterController>();
-        if (playerInput == null) playerInput = GetComponent<PlayerInput>();
         
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
@@ -147,9 +139,11 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
         transform.rotation = Quaternion.identity;
 
         controller.enabled = true;
-        playerInput.enabled = true;
         rb.freezeRotation = true;
         rb.useGravity = false;
+        
+        if (playerInput == null) return;
+        playerInput.enabled = true;
     }
 
     public void SwitchToPlayerInputMap()
@@ -168,8 +162,24 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
         transform.position = playerSO.SpawnPoint;
     }
     
-    // private void SetCameraForPlayerInput()
-    // {
-    //     playerInput.camera = Camera.main;
-    // }
+    public void BindAndEnablePlayerInput(PlayerInput _playerInput)
+    {
+        playerInput = _playerInput;
+        playerInput.enabled = true;
+        playerInput.SwitchCurrentActionMap("Player");
+        MapInputActions();
+    }
+
+    public void BindAndEnablePlayerInput()
+    {
+        playerInput = GetComponentInParent<PlayerInput>();
+        playerInput.enabled = true;
+        SwitchToPlayerInputMap();
+        MapInputActions();
+    }
+
+    public void SetCameraForPlayerInput()
+    {
+        playerInput.camera = transform.parent.GetComponentInChildren<Camera>();
+    }
 }

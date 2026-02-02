@@ -1856,7 +1856,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2639976134451593851, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: m_DefaultControlScheme
-      value: Gamepad
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2639976134451593851, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
+      propertyPath: m_NeverAutoSwitchControlSchemes
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3761523586504917549, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: PlayerIndex

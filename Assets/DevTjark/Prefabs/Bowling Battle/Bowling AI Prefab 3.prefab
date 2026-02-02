@@ -8,9 +8,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 409205313358188855, guid: 0b48224d5cfe3c643b188b3f365a4262, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 409205313358188855, guid: 0b48224d5cfe3c643b188b3f365a4262, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5540694002719801326, guid: 0b48224d5cfe3c643b188b3f365a4262, type: 3}
+      propertyPath: npcSO
+      value: 
+      objectReference: {fileID: 11400000, guid: df25a4ab1f307bc478ef2b5a095d8aed, type: 2}
+    - target: {fileID: 5540694002719801326, guid: 0b48224d5cfe3c643b188b3f365a4262, type: 3}
+      propertyPath: NPCIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5540694002719801326, guid: 0b48224d5cfe3c643b188b3f365a4262, type: 3}
       propertyPath: PlayerIndex
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6289414504943295327, guid: 0b48224d5cfe3c643b188b3f365a4262, type: 3}
       propertyPath: m_LocalPosition.x
@@ -56,8 +72,79 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bowling AI Prefab 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7866605670695966570, guid: 0b48224d5cfe3c643b188b3f365a4262, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7523731668904748367, guid: 0b48224d5cfe3c643b188b3f365a4262, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8572975179649974871}
+    - targetCorrespondingSourceObject: {fileID: 1333888498389960446, guid: 0b48224d5cfe3c643b188b3f365a4262, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6387515431426278109}
   m_SourcePrefab: {fileID: 100100000, guid: 0b48224d5cfe3c643b188b3f365a4262, type: 3}
+--- !u!1 &2842339382430748392 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1333888498389960446, guid: 0b48224d5cfe3c643b188b3f365a4262, type: 3}
+  m_PrefabInstance: {fileID: 3886861695047436310}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6387515431426278109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2842339382430748392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8724765266344425464}
+        m_TargetAssemblyTypeName: NPC_BowlingBattle, Assembly-CSharp
+        m_MethodName: EnableCharacterController
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &6744494525098274137 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7523731668904748367, guid: 0b48224d5cfe3c643b188b3f365a4262, type: 3}
+  m_PrefabInstance: {fileID: 3886861695047436310}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8572975179649974871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6744494525098274137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc1394a5840a491995e54e79f551eda9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8724765266344425464 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5540694002719801326, guid: 0b48224d5cfe3c643b188b3f365a4262, type: 3}
+  m_PrefabInstance: {fileID: 3886861695047436310}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6017bb82433849ceac1751ff4f094301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
