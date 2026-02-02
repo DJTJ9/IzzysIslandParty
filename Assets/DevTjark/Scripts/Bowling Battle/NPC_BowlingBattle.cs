@@ -2,7 +2,7 @@
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
-public class NPC_BowlingBattle : MonoBehaviour
+public class NPC_BowlingBattle : Controller
 {
     public int NPCIndex;
 

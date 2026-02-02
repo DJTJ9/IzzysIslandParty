@@ -9,7 +9,7 @@ using UnityEngine.Serialization;
 public class GameMenuEvents : MonoBehaviour
 {
     [SerializeField] private SceneCollectionSO sceneCollection;
-    [SerializeField] private SO_PlayerCollection playerCollection;
+    [FormerlySerializedAs("playerCollection")] [SerializeField] private SO_PlayerCollection currentPlayers;
     
     [SerializeField] private VisualTreeAsset rowTemplate;
     
@@ -255,13 +255,13 @@ public class GameMenuEvents : MonoBehaviour
 
     public void ShowResultsScreen()
     {
-        ShowResults(playerCollection.Players);
+        ShowResults(currentPlayers.Players);
         resultsScreen.style.display = DisplayStyle.Flex;
     }
     
     public void ShowRaceResultsScreen()
     {
-        ShowRaceResults(playerCollection.Players);
+        ShowRaceResults(currentPlayers.Players);
         resultsScreen.style.display = DisplayStyle.Flex;
     }
     
