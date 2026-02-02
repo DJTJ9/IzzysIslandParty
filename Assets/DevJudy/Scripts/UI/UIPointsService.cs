@@ -8,6 +8,7 @@ namespace UIScripts
         [Header("Points: ")]
         [SerializeField] private TextMeshProUGUI pointsText;
 
+        // !! This can be updated in the playerScore directly instead of only in UIPointsService
         public int CurrentScore {get; private set;}
         
         public void UpdatePointsText(int _addedPoints)

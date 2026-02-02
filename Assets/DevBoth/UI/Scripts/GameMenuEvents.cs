@@ -293,8 +293,6 @@ public class GameMenuEvents : MonoBehaviour
 
             container.Add(row);
         }
-        
-        
     }
     
     private void ShowRaceResults(List<SO_Player> _results)

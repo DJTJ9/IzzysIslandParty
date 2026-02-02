@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Audio;
 using MultiuseScripts;
+using Player.Collections;
 using UIScripts;
 using UnityEngine;
 
@@ -11,15 +12,12 @@ namespace FishingGame
         [SerializeField] private GameAudioManager gameAudioManager;
         [SerializeField] private LevelTimer levelTimer;
 
+        [SerializeField] private SO_PlayerCollectionFishingGame playerCollection;
+        
         [Header("Temp: ")]
-        [SerializeField] private UIPointsService points;
-        [SerializeField] private UIPanelManager uiPanelManager;
+        [SerializeField] private UIPointsService playerPoints;
         [SerializeField] private List<string> playerNames;
         [SerializeField] private Vector2 npcPointRange;
-        private int numberOfPlayers = 1;
-        private int maxNumberOfPlayers = 4;
-
-        private List<int> npcScores = new List<int>();
         
         private void Start()
         {
@@ -38,15 +36,16 @@ namespace FishingGame
 
         public void GetNPCScores()
         {
-            npcScores.Add(points.CurrentScore);
+            playerCollection.Players[0].PlayerScore.Value = playerPoints.CurrentScore;
             
-            for (int i = numberOfPlayers; i < maxNumberOfPlayers; i++)
+            for (int i = 1; i < playerCollection.Players.Count; i++)
             {
                 float randomScore = Random.Range(npcPointRange.x, npcPointRange.y + 1);
-                npcScores.Add((int)randomScore);
+                
+                playerCollection.Players[i].PlayerScore.Value = (int)randomScore;
+
+                playerCollection.Players[i].Name = playerNames[i - 1];
             }
-            
-            uiPanelManager.SetPointsAndRankingsTexts(playerNames, npcScores);
         }
 
         public override void EndLevel()

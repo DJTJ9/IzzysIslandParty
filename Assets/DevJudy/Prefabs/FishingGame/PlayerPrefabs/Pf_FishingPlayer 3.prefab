@@ -855,7 +855,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5317911460612665810}
   m_Layer: 0
-  m_Name: FishingPlayer1
+  m_Name: Pf_FishingPlayer 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1105,6 +1105,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1998160130196588529}
+  - {fileID: 5193499141436544951}
   m_Father: {fileID: 5317911460612665810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2673,7 +2674,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6874915457515779923
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2748,7 +2749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bce4d31701622740abe455f781ef810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishUIRenderer: {fileID: 0}
+  fishUIRenderer: {fileID: 4814107827916803382}
   fishNameText: {fileID: 1551601134319379790}
   fishSizeText: {fileID: 857414873519580884}
   fishWeightText: {fileID: 7778267699284339845}
@@ -2864,6 +2865,85 @@ Transform:
   - {fileID: 2891171709907646934}
   m_Father: {fileID: 5317911460612665810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &328054300648881971
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 941673894390526880}
+    m_Modifications:
+    - target: {fileID: 172931620695268931, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+      propertyPath: m_Name
+      value: Pf_RenderFish
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.8235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.8235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.8235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -960
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -540
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+--- !u!1 &4814107827916803382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5062712516205851141, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+  m_PrefabInstance: {fileID: 328054300648881971}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5193499141436544951 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+  m_PrefabInstance: {fileID: 328054300648881971}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6498483857878816341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3072,6 +3152,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1046438996721386519, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300002, guid: 49f10d89ddfdd594f9ed88fa79351b6c, type: 3}
+    - target: {fileID: 1046438996721386519, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 20c0f650cbd7be3439478b735fb08947, type: 2}
     - target: {fileID: 1741299663787530852, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
       propertyPath: playerInputActionPause
       value: 
@@ -3079,6 +3167,10 @@ PrefabInstance:
     - target: {fileID: 2741305163418993827, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2984942461924725637, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: m_Name
+      value: Bunny
       objectReference: {fileID: 0}
     - target: {fileID: 4239609682233630430, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
       propertyPath: m_Enabled

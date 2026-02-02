@@ -14,7 +14,6 @@ namespace MultiuseScripts
 
         [Header("Variables: ")]
         [SerializeField] private float durationInMinutes;
-
         [SerializeField] private float deductionFeedbackDuration = 2f;
         [SerializeField] private bool timerRunningDown;
         [SerializeField] private bool startTimerOnLevelStart;
@@ -98,14 +97,14 @@ namespace MultiuseScripts
 
         private void DisplayRunningDownTimer()
         {
-            time -= Time.fixedDeltaTime;
-
+            time = Mathf.Max(time - Time.fixedDeltaTime, 0f);
             TimeToTimerTextFormat(time);
 
             if (time <= 0.001f)
             {
-                timerFinished = true;
+                TimerFinished = true;
                 time = 0.00f;
+                
                 levelService?.EndLevel();
             }
         }
