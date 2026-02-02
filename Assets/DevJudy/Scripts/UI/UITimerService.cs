@@ -4,27 +4,10 @@ using TMPro;
 
 namespace UIScripts
 {
-    public class UITextManager : MonoBehaviour
+    public class UITimerManager : MonoBehaviour
     {
-        // --- Update Text
-
-        [Header("Points: ")]
-        [SerializeField] private TextMeshProUGUI pointsText;
-
-        private int currentScore = 0;
-
         [Header("Timer: ")]
         [SerializeField] private TextMeshProUGUI timerText;
-
-        public void UpdatePointsText(int _addedPoints)
-        {
-            currentScore += _addedPoints;
-
-            if (pointsText != null)
-                pointsText.text = "Points: " + currentScore.ToString();
-            else
-                Debug.LogWarning("No points text set");
-        }
         
         public void UpdateTimerText(string _timerText)
         {

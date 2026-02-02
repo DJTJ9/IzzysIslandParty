@@ -35,23 +35,23 @@ namespace FishingGame
             if (lineRenderer == null)
                 Debug.LogWarning("No lineRenderer attached to " + gameObject.name);
 
-            lineRenderer.enabled = true;
-            lineRenderer.useWorldSpace = true;
-            lineRenderer.startWidth = lineRenderer.endWidth = 0.02f;
-            lineRenderer.positionCount = 2;
+           //lineRenderer.enabled = true;
+           //lineRenderer.useWorldSpace = true;
+           //lineRenderer.startWidth = lineRenderer.endWidth = 0.02f;
+           //lineRenderer.positionCount = 2;
 
-            lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
-            lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
+           //lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
+           //lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
 
             // lineRenderer = GetComponent<LineRenderer>();
             // if (lineRenderer == null)
             //     Debug.LogWarning("No lineRenderer attached to " + gameObject.name);
-//
+
             // lineRenderer.enabled = true;
             // lineRenderer.useWorldSpace = true;
             // lineRenderer.startWidth = lineRenderer.endWidth = 0.02f;
             // lineRenderer.positionCount = 2;
-//
+
             // lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
             // lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
         }
@@ -121,8 +121,8 @@ namespace FishingGame
         
         private void LateUpdate()
         {
-            lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
-            lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
+           //lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
+           //lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
         }
 
      //private void LateUpdate()

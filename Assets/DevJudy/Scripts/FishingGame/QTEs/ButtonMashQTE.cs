@@ -8,6 +8,7 @@ namespace FishingGame.QuickTimeEvents
 {
     public class ButtonMashQTE : QuickTimeEvent
     {
+        [SerializeField] private QTEDisplayService qteDisplayService;
         [SerializeField] private QTEController qteController;
 
         [Header("MashEvent needed components: ")]
@@ -26,7 +27,7 @@ namespace FishingGame.QuickTimeEvents
         [SerializeField] private float buttonMashTime;
         private int buttonMashCounter;
         private int falseButtonCounter;
-        private int maxFalseButtonPresses = 3;
+        private readonly int maxFalseButtonPresses = 3;
 
         private Vector3 normalButtonScale;
 
@@ -60,9 +61,10 @@ namespace FishingGame.QuickTimeEvents
 
             QTEFinishedSuccessfully = false;
             buttonMashCounter = 0;
+            falseButtonCounter = 0;
 
             currentButtonToPress = (EButton)Random.Range(0, 4);
-            mashButtonText.text = qteController.DisplayButtonToPress(currentButtonToPress);
+            mashButtonText.text = qteDisplayService.DisplayButtonToPress(currentButtonToPress);
 
             qteController.CurrentQuickTimeEvent = EQuickTimeEvent.ButtonMash;
 
@@ -165,6 +167,11 @@ namespace FishingGame.QuickTimeEvents
             mashButtonImage.color = normalButtonColor;
             
             yield return null;
+        }
+
+        public override void StopQTE()
+        {
+            StopButtonMashEvent();
         }
     }
 }

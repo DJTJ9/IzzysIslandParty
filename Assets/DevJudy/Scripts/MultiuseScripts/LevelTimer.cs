@@ -9,8 +9,8 @@ namespace MultiuseScripts
         public static LevelTimer Instance => instance;
         
         [Header("Dependencies: ")]
-        [SerializeField] private UITextManager textManager;
-        [SerializeField] private UIPanelManager uiPanelManager;
+        [SerializeField] private UITimerManager timerManager;
+        [SerializeField] private LevelServiceParent levelService;
 
         [Header("Variables: ")]
         [SerializeField] private float durationInMinutes;
@@ -78,12 +78,15 @@ namespace MultiuseScripts
 
         public void DeduceTime(float _timeDeduction)
         {
+            if (timerFinished)
+                return;
+            
             if (timerRunningDown)
                 time -= _timeDeduction;
             else
                 time += _timeDeduction;
 
-            StartCoroutine(textManager.TimeDeductionFeedback(deductionFeedbackDuration));
+            StartCoroutine(timerManager.TimeDeductionFeedback(deductionFeedbackDuration));
         }
 
         private void DisplayRunningTimer()
@@ -102,7 +105,8 @@ namespace MultiuseScripts
             if (time <= 0.001f)
             {
                 timerFinished = true;
-                uiPanelManager.SetGameOver();
+                time = 0.00f;
+                levelService?.EndLevel();
             }
         }
 
@@ -113,7 +117,7 @@ namespace MultiuseScripts
             milliseconds = Mathf.Round((_time % 1) * 1000);
             milliseconds = Mathf.RoundToInt((milliseconds) / 10);
 
-            textManager.UpdateTimerText($"Time: {minutes:00}:{seconds:00}:{milliseconds:00}");
+            timerManager.UpdateTimerText($"Time: {minutes:00}:{seconds:00}:{milliseconds:00}");
         }
 
         public string GetTimeAsString()
@@ -125,7 +129,7 @@ namespace MultiuseScripts
         {
             UpdateTimer = false;
 
-            textManager.UpdateTimerText($"Time: {minutes:00}:{seconds:00}:{milliseconds:00}");
+            timerManager.UpdateTimerText($"Time: {minutes:00}:{seconds:00}:{milliseconds:00}");
         }
     }
 }

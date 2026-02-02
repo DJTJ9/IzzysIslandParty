@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using MultiuseScripts;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -14,14 +15,14 @@ namespace UIScripts
         [SerializeField] private GameObject levelPanel;
 
         [Header("Text: ")]
-        [SerializeField] private bool showTimer;
         [SerializeField] private TextMeshProUGUI playerPlacementsText;
         [SerializeField] private TextMeshProUGUI playerNamesText;
-
-        [ShowIf("showTimer")]
-        [SerializeField] private TextMeshProUGUI playerTimesText;
-
+        [SerializeField] private TextMeshProUGUI playerPointsText;
+        
         [Header("Dependencies:")]
+        [SerializeField] private bool racingGame;
+        
+        [ShowIf("racingGame")]
         [SerializeField] private RacingGameLevelService racingGameLevelService;
         [SerializeField] private GameObject endGameMenu;
 
@@ -38,7 +39,7 @@ namespace UIScripts
                 raceOverPanel.SetActive(false);
             else
                 raceOverPanel = null;
-            
+
             if (scoresPanel != null)
                 scoresPanel?.SetActive(false);
 
@@ -71,11 +72,25 @@ namespace UIScripts
                 playerPlacementsText.text += $"{(i)}. \n";
                 playerNamesText.text += racingGameLevelService.WinnerPlacementOrder[i].Item1.name + "\n";
 
-                if (showTimer)
-                    playerTimesText.text += racingGameLevelService.WinnerPlacementOrder[i].Item2 + "\n";
+                if (racingGame)
+                    playerPointsText.text += racingGameLevelService.WinnerPlacementOrder[i].Item2 + "\n";
             }
         }
+        
+        public void SetPointsAndRankingsTexts(List<string> _playerNames, List<int> _playerPoints)
+        {
+            ClearPlacementTextFields();
+            
+            for (int i = 1; i < _playerNames.Count + 1; i++)
+            {
+                playerPlacementsText.text += $"{(i)}. \n";
+                playerNamesText.text += _playerNames[i] + "\n";
 
+                if (racingGame)
+                    playerPointsText.text += _playerPoints[i] + "\n";
+            }
+        }
+        
         private void ClearPlacementTextFields()
         {
             if (playerPlacementsText != null)
@@ -84,8 +99,8 @@ namespace UIScripts
             if (playerNamesText != null)
                 playerNamesText.text = "";
 
-            if (playerTimesText != null)
-                playerTimesText.text = "";
+            if (playerPointsText != null)
+                playerPointsText.text = "";
         }
 
         private void ShowScores()
@@ -93,7 +108,7 @@ namespace UIScripts
             raceOverPanel?.SetActive(false);
 
             // Maybe do switch case display for different game modes
-            if (racingGameLevelService.CheckPlacements)
+            if (racingGameLevelService !=null && racingGameLevelService.CheckPlacements)
             {
                 SetRankingTexts();
                 scoresPanel?.SetActive(true);

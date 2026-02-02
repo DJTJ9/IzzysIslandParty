@@ -284,7 +284,7 @@ namespace Audio
         private IEnumerator FadeInSound(AudioSource _audioSource, float _fadeInSpeed, float _goalVolume)
         {
             _audioSource.volume = 0f;
-            PlaySound(_audioSource, true);
+            PlaySound(_audioSource, false);
 
             while (_audioSource.volume < (_goalVolume - 0.1f))
             {

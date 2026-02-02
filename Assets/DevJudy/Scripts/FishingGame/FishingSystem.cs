@@ -15,7 +15,7 @@ namespace FishingGame
         [SerializeField] private FishingRodController fishingRodController;
 
         [SerializeField] private CatchEventHandler catchEventHandler;
-        [SerializeField] private UITextManager textManager;
+        [SerializeField] private UIPointsService uiPointsService;
         [SerializeField] private FishDisplay fishDisplay;
 
         [Header("Variables: ")]
@@ -56,6 +56,8 @@ namespace FishingGame
                 if (fishDisplay != null)
                     SpawnInFishDisplayObjects();
             }
+            
+            StopFishDisplay();
         }
 
         private void SpawnInFishDisplayObjects()
@@ -159,19 +161,17 @@ namespace FishingGame
 
                 fishDisplay?.DisplayFish(caughtFish);
                 fishDisplayActive = true;
-
-                textManager?.UpdatePointsText(caughtFish.Points);
+                
+                uiPointsService?.UpdatePointsText(caughtFish.Points);
 
                 yield return new WaitForSeconds(3f);
                 
                 StopFishDisplay();
-
-                fishingRodController.PullBackFishingRod();
             }
             else
                 fishingRodController.IconHandler?.DisplayIcon(EEmotion.Sad);
-
-            StopFishing();
+            
+            //fishingRodController.PullBackFishingRod();
 
             yield return null;
         }
