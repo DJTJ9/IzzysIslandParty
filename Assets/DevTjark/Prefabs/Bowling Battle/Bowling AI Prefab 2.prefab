@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 869789400504488837, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 869789400504488837, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4997774164150631772, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
       propertyPath: npcSO
       value: 
@@ -27,6 +35,34 @@ PrefabInstance:
     - target: {fileID: 4997774164150631772, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
       propertyPath: PlayerIndex
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266970495347411390, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266970495347411390, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266970495347411390, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 5540694002719801326}
+    - target: {fileID: 6266970495347411390, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266970495347411390, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: EnableCharacterController
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266970495347411390, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: NPC_BowlingBattle, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6266970495347411390, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6843127149936187885, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -76,8 +112,79 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7247447267529627096, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7049959562555566077, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5643631894826006392}
+    - targetCorrespondingSourceObject: {fileID: 1962789111434691660, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4724615618293184864}
   m_SourcePrefab: {fileID: 100100000, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
+--- !u!1 &1333888498389960446 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1962789111434691660, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
+  m_PrefabInstance: {fileID: 702516227961160370}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4724615618293184864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333888498389960446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5540694002719801326}
+        m_TargetAssemblyTypeName: NPC_BowlingBattle, Assembly-CSharp
+        m_MethodName: EnableCharacterController
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5540694002719801326 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4997774164150631772, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
+  m_PrefabInstance: {fileID: 702516227961160370}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6017bb82433849ceac1751ff4f094301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &7523731668904748367 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7049959562555566077, guid: c0d7238a8d2a7ba4484fd8ec5a5161ac, type: 3}
+  m_PrefabInstance: {fileID: 702516227961160370}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5643631894826006392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7523731668904748367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc1394a5840a491995e54e79f551eda9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,4 +1,4 @@
-using JetskiGame.Player;
+using Player.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using VInspector;
@@ -7,8 +7,7 @@ namespace JetskiJoyride.Player.Multiplayer
 {
     public class JetskiJoyridePlayerSpawner : MonoBehaviour
     {
-        public SO_JetskiJoyridePlayerCollection soJetskiJoyridePlayerCollection;
-        //[SerializeField] private SO_PlayerInputs playerInputs;
+        public SO_PlayerCollectionRacingGames playerCollection;
 
         private PlayerInputManager playerInputManager;
         private int playerIndex = 0;
@@ -25,21 +24,15 @@ namespace JetskiJoyride.Player.Multiplayer
 
         public void PlayerJoined(PlayerInput _playerInput)
         {
-            _playerInput.gameObject.transform.position = soJetskiJoyridePlayerCollection.Players[playerIndex].SpawnPoint;
+            _playerInput.gameObject.transform.position = playerCollection.Players[playerIndex].SpawnPoint;
             ++playerIndex;
         }
-
-        //  private void AddPlayer(PlayerInput _playerInput)
-        //  {
-        //      //playerInputs.PlayerInputs.Add(_playerInput);
-        //      ++playerIndex;
-        //  }
-
+        
         [Button]
         public void SpawnPlayer(int _playerIndex)
         {
-            var player = Instantiate(soJetskiJoyridePlayerCollection.Players[_playerIndex].PlayerPrefab,
-                soJetskiJoyridePlayerCollection.Players[_playerIndex].SpawnPoint, Quaternion.identity);
+            var player = Instantiate(playerCollection.Players[_playerIndex].PlayerPrefab,
+                playerCollection.Players[_playerIndex].SpawnPoint, Quaternion.identity);
 
             if (player.TryGetComponent(out PlayerInput input))
                 input.enabled = true;

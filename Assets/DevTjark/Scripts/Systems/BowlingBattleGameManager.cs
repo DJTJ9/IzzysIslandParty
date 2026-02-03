@@ -58,7 +58,6 @@ private void Start()
     public void StartPreparationPhase()
     {
         onPreparationPhaseStart.Invoke();
-        m_preparationPhaseTimer.Reset();
         m_preparationPhaseTimer.Start();
     }
 
@@ -72,7 +71,7 @@ private void Start()
     private void SubscribeToCountdownTimersActions()
     {
         m_joinPhaseTimer.OnTimerStop += StartGame;
-        m_joinPhaseTimer.OnTimerStop += onStartSplitScreen.Invoke;
+        // m_joinPhaseTimer.OnTimerStop += onStartSplitScreen.Invoke;
         
         m_preparationPhaseTimer.OnTimerStop += ReleaseBall;
         
@@ -98,7 +97,6 @@ private void Start()
     private void ReleaseBall()
     {
         onReleaseBall.Invoke();
-        m_roundTimer.Reset();
         m_roundTimer.Start();
     }
 

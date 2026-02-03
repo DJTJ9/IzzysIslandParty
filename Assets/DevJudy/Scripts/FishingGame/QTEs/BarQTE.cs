@@ -99,25 +99,9 @@ namespace FishingGame.QuickTimeEvents
             ChangeTargetDestination();
         }
 
-        public void OnLeftRightInput(InputAction.CallbackContext _context)
+        public void SetLeftRightInput(float _moveInput)
         {
-            if (!QTERunning)
-                return;
-
-            if (_context.started)
-            {
-                moveInput = _context.ReadValue<float>();
-
-                if (moveInput > 0.02f)
-                    moveInput = 1f;
-                else if (moveInput < -0.02f)
-                    moveInput = -1f;
-                else
-                    moveInput = 0f;
-            }
-
-            if (_context.canceled)
-                moveInput = 0f;
+            moveInput = _moveInput;
         }
 
         private void FixedUpdate()
@@ -233,9 +217,13 @@ namespace FishingGame.QuickTimeEvents
             successSlider.value = successCounter;
 
             QTERunning = false;
-
-            // Disable the gameObjects
+            
             barQTEHolder.SetActive(false);
+        }
+
+        public override void StopQTE()
+        {
+            StopBarQTE();
         }
     }
 }

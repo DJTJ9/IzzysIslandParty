@@ -4,6 +4,7 @@ using UnityEditor;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,7 @@ public class MainMenuEvents : MonoBehaviour
     [SerializeField] private PlayerInputManager playerInputManager;
     [SerializeField] private PlayerJoiner playerJoiner;
     [SerializeField] private SceneCollectionSO sceneCollection;
+    [SerializeField] private UnityEvent onLoadBowlingBattle;
     
     private UIDocument document;
     
@@ -203,7 +205,7 @@ public class MainMenuEvents : MonoBehaviour
     {
         controllerSelectionMenu.style.display = DisplayStyle.None;
         playerHub.style.display = DisplayStyle.Flex;
-        playerJoiner.JoinNPCsBB();
+        // playerJoiner.JoinNPCsBB();
     }
     
     private void OnControllerSelectionBackButtonClick(ClickEvent _evt)
@@ -240,6 +242,7 @@ public class MainMenuEvents : MonoBehaviour
     
     private void OnLoadBowlingBattle(ClickEvent _evt)
     {
+        onLoadBowlingBattle.Invoke();
         HandleOnDisableBeforeSwitchingScene();
         LoadGameScene(SceneNames.BowlingBattleGame);
     }

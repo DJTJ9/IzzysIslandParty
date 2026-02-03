@@ -6,20 +6,19 @@ using UnityEngine.InputSystem;
 
 namespace FishingGame
 {
-    [RequireComponent(typeof(PlayerInput))]
     public class FishingRodController : MonoBehaviour
     {
         private static readonly int cast = Animator.StringToHash("IsCast");
         private static readonly int fishBiting = Animator.StringToHash("FishBiting");
 
         private Animator animator;
+        private LineRenderer lineRenderer;
         [SerializeField] public IconHandler IconHandler;
-        
         // !! Not working yet
-        //private LineRenderer lineRenderer;
         [SerializeField] private Transform[] rodLineRendererPositions;
 
         private bool isCast = false;
+        
         [Header("Pausing: ")]
         [SerializeField] private UnityEvent OnPauseGame;
         [SerializeField] private UnityEvent OnUnpauseGame;
@@ -31,18 +30,30 @@ namespace FishingGame
             animator = GetComponentInChildren<Animator>();
             if (animator == null)
                 Debug.LogWarning("No animator attached to children of " + gameObject.name);
+            
+            lineRenderer = GetComponent<LineRenderer>();
+            if (lineRenderer == null)
+                Debug.LogWarning("No lineRenderer attached to " + gameObject.name);
 
-           // lineRenderer = GetComponent<LineRenderer>();
-           // if (lineRenderer == null)
-           //     Debug.LogWarning("No lineRenderer attached to " + gameObject.name);
-//
-           // lineRenderer.enabled = true;
-           // lineRenderer.useWorldSpace = true;
-           // lineRenderer.startWidth = lineRenderer.endWidth = 0.02f;
-           // lineRenderer.positionCount = 2;
-//
-           // lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
-           // lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
+           //lineRenderer.enabled = true;
+           //lineRenderer.useWorldSpace = true;
+           //lineRenderer.startWidth = lineRenderer.endWidth = 0.02f;
+           //lineRenderer.positionCount = 2;
+
+           //lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
+           //lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
+
+            // lineRenderer = GetComponent<LineRenderer>();
+            // if (lineRenderer == null)
+            //     Debug.LogWarning("No lineRenderer attached to " + gameObject.name);
+
+            // lineRenderer.enabled = true;
+            // lineRenderer.useWorldSpace = true;
+            // lineRenderer.startWidth = lineRenderer.endWidth = 0.02f;
+            // lineRenderer.positionCount = 2;
+
+            // lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
+            // lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
         }
         
         public void OnPause(InputAction.CallbackContext _context)
@@ -61,7 +72,7 @@ namespace FishingGame
                 }
             }
         }
-        
+
         public void OnCast(InputAction.CallbackContext _context)
         {
             if (_context.performed)
@@ -107,11 +118,20 @@ namespace FishingGame
         {
             animator.SetBool(fishBiting, false);
         }
+        
+        private void LateUpdate()
+        {
+           //lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
+           //lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
+        }
 
-     //  private void LateUpdate()
-     //  {
-     //      lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
-     //      lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
-     //  }
+     //private void LateUpdate()
+     //{
+     //    if (Keyboard.current.cKey.wasPressedThisFrame)
+     //        Debug.Log("C pressed");
+     //    
+     //    //lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
+     //    //lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
+     //}
     }
 }

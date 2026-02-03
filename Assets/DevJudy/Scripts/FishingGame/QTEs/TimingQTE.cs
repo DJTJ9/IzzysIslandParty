@@ -8,6 +8,8 @@ namespace FishingGame.QuickTimeEvents
 {
     public class TimingQTE : QuickTimeEvent
     {
+        // !! Both of these can maybe be set when qte is started, maybe start it from a mediator to give each player
+        [SerializeField] private QTEDisplayService qteDisplayService;
         [SerializeField] private QTEController qteController;
 
         [Header("TimingEvent needed components: ")]
@@ -18,9 +20,8 @@ namespace FishingGame.QuickTimeEvents
         [SerializeField] private GameObject timingEventHolder;
 
         [Header("TimingEvent variables: ")]
-        [SerializeField] private float allowedTimingOffset;
-
-        [SerializeField] private float shrinkSpeed;
+        [SerializeField] private float allowedTimingOffset = 0.04f;
+        [SerializeField] private float shrinkSpeed = 0.5f;
         private float ringTargetScale;
         private Vector3 ringStartScale;
 
@@ -32,8 +33,6 @@ namespace FishingGame.QuickTimeEvents
 
         private void Start()
         {
-            qteController = GetComponent<QTEController>();
-
             TimingEventSetup();
         }
 
@@ -63,7 +62,7 @@ namespace FishingGame.QuickTimeEvents
             targetRing.color = ringNormalColor;
 
             currentButtonToPress = (EButton)Random.Range(0, 4);
-            qteButtonText.text = qteController.DisplayButtonToPress(currentButtonToPress);
+            qteButtonText.text = qteDisplayService.DisplayButtonToPress(currentButtonToPress);
 
             qteController.CurrentQuickTimeEvent = EQuickTimeEvent.Timing;
 
@@ -98,6 +97,13 @@ namespace FishingGame.QuickTimeEvents
             {
                 targetRing.color = ringFailureColor;
             }
+        }
+
+        public override void StopQTE()
+        {
+            StopShrinkingRing();
+            
+            qteController.CurrentQuickTimeEvent = EQuickTimeEvent.None;
         }
     }
 }

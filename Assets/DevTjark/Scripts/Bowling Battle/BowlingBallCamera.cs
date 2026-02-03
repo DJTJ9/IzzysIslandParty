@@ -11,6 +11,11 @@ public class BallCamera : MonoBehaviour
     {
         SetCameraPosition();
     }
+
+    public void SetTarget(Transform _target)
+    {
+        target = _target;
+    }
     
     private void SetCameraPosition()
     {

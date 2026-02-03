@@ -3,11 +3,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.Serialization;
 
 [RequireComponent (typeof(CharacterController), typeof(Rigidbody))]
-public class PlayerControllerBowlingBattle : MonoBehaviour
+public class PlayerControllerBowlingBattle : Controller
 {
+    private int m_playerIndex;
+    
     [Header("Input")]
     private Vector2 m_moveInput;
     private bool m_jumpInput;
@@ -20,6 +23,8 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
     private InputAction m_unpauseInputAction;
 
     [Header("References")]
+    [SerializeField] private Camera playerCamera;
+    [SerializeField] private InputSystemUIInputModule inputModule;
     private CharacterController controller;
     private PlayerInput playerInput;
     private Rigidbody rb;
@@ -28,10 +33,13 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
     [SerializeField] private UnityEvent onUnpause;
     
     [SerializeField] private SO_Player playerSO;
+    [SerializeField] private SO_PlayerCollection playerCollectionBB;
     [SerializeField] private SO_PlayerInputs playerInputsSO;
     
     private void Start()
     {
+        // playerCollectionBB.Players[m_playerIndex].InitializePlayer(gameObject, playerCollectionBB.Players[m_playerIndex], m_playerIndex);
+        // BindAndEnablePlayerInput();
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         // playerInput = playerInputsSO.PlayerInputs[NPCIndex];
@@ -172,7 +180,7 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
 
     public void BindAndEnablePlayerInput()
     {
-        playerInput = GetComponentInParent<PlayerInput>();
+        playerInput = playerInputsSO.PlayerInputs[m_playerIndex];
         playerInput.enabled = true;
         SwitchToPlayerInputMap();
         MapInputActions();
@@ -182,4 +190,7 @@ public class PlayerControllerBowlingBattle : MonoBehaviour
     {
         playerInput.camera = transform.parent.GetComponentInChildren<Camera>();
     }
+    
+    public int GetPlayerIndex() => m_playerIndex;
+    public void SetPlayerIndex(int _playerIndex) => m_playerIndex = _playerIndex;
 }
