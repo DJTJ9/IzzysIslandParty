@@ -36,7 +36,7 @@ private void Start()
         InstantiateCountdownTimers();
         SubscribeToCountdownTimersActions();
         
-        m_joinPhaseTimer.Start();
+        FreezeTimeScale();
     }
 
     private void OnDisable()
@@ -46,14 +46,18 @@ private void Start()
 
     private void Update()
     {
-        m_joinPhaseTimer.Tick(Time.deltaTime);
-        m_preparationPhaseTimer.Tick(Time.deltaTime);
-        m_roundTimer.Tick(Time.deltaTime);
+        // m_joinPhaseTimer.Tick(Time.deltaTime);
+        // m_preparationPhaseTimer.Tick(Time.deltaTime);
+        // m_roundTimer.Tick(Time.deltaTime);
 
         PreparationPhaseTimer = m_preparationPhaseTimer.CurrentTime;
     }
 
-    private void StartGame() => onGameStart.Invoke();
+    public void StartGame()
+    {
+        UnfreezeTimeScale();
+        onGameStart.Invoke();
+    }
     
     public void StartPreparationPhase()
     {
@@ -71,7 +75,6 @@ private void Start()
     private void SubscribeToCountdownTimersActions()
     {
         m_joinPhaseTimer.OnTimerStop += StartGame;
-        // m_joinPhaseTimer.OnTimerStop += onStartSplitScreen.Invoke;
         
         m_preparationPhaseTimer.OnTimerStop += ReleaseBall;
         
@@ -114,4 +117,8 @@ private void Start()
     }
     
     private void ResetRoundIndex() => m_roundIndex = 1;
+    
+    private void FreezeTimeScale()   => Time.timeScale = 0f;
+    
+    private void UnfreezeTimeScale() => Time.timeScale = 1f;
 }
