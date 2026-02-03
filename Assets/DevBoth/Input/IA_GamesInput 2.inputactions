@@ -564,7 +564,7 @@
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";ControllerControlScheme",
+                    "groups": ";ControllerControlScheme;Gamepad",
                     "action": "Unpause",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -604,7 +604,7 @@
                 },
                 {
                     "name": "LeftMouse",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "5386e432-5750-4aab-81b7-b2396830b2a6",
                     "expectedControlType": "",
                     "processors": "",
@@ -633,7 +633,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "82323fc8-0748-48f7-bf75-860a5499e6b3",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -1249,7 +1249,7 @@
                 {
                     "name": "",
                     "id": "1fee7a53-88e4-479f-80c9-05d763534d18",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad;ControllerControlScheme",
@@ -1351,7 +1351,7 @@
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";ControllerControlScheme",
+                    "groups": ";ControllerControlScheme;Gamepad",
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false

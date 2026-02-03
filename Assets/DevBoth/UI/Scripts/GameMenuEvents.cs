@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
 public class GameMenuEvents : MonoBehaviour
@@ -145,6 +147,11 @@ public class GameMenuEvents : MonoBehaviour
     public void ShowPauseMenu()
     {
         pauseMenu.style.display = DisplayStyle.Flex;
+        pauseMenu.schedule.Execute(() => pauseMenuResumeButton.Focus()).StartingIn(0);
+        pauseMenu.schedule.Execute(() => pauseMenuResumeButton.Focus()).StartingIn(50);
+        pauseMenu.schedule.Execute(() => pauseMenuResumeButton.Focus()).StartingIn(100);
+
+        StartCoroutine(FocusButton(pauseMenuResumeButton));
         Time.timeScale = 0f;
     }
     
@@ -168,6 +175,7 @@ public class GameMenuEvents : MonoBehaviour
     private void OnRestartGameClick(ClickEvent _evt)
     {
         onRestart.Invoke();
+        HideEndScreenUI();
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -325,7 +333,12 @@ public class GameMenuEvents : MonoBehaviour
 
             container.Add(row);
         }
-        
-        
     }
+    
+    private IEnumerator FocusButton(Button _button)
+    {
+        yield return null;
+        _button.Focus();
+    }
+
 }
