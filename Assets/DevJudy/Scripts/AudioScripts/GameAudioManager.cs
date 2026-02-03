@@ -13,6 +13,8 @@ namespace Audio
         // !! TEMP, to be changed to an enum/SO
         [Header("TEMP: ")]
         [SerializeField] private string levelBackgroundMusic;
+
+        private bool isFinished;
         
         private void Awake()
         {
@@ -21,6 +23,11 @@ namespace Audio
                 Debug.LogError("AudioCollection is null");
         }
 
+        public void StartMusic()
+        {
+            StartBackgroundMusic(() => !isFinished);
+        }
+        
         public void StartBackgroundMusic(Func<bool> _condition)
         {
             AudioService.Instance.PlaySoundWhile(_condition, levelAudioCollection.levelSoundsDictionary.LevelAudios[levelBackgroundMusic],
