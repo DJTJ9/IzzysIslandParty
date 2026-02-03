@@ -12,8 +12,8 @@ namespace FishingGame
     public class FishingSystem : MonoBehaviour
     {
         [Header("Dependencies: ")]
+        // !! Can't have only one controller for multiplayer
         [SerializeField] private FishingRodController fishingRodController;
-
         [SerializeField] private CatchEventHandler catchEventHandler;
         [SerializeField] private UIPointsService uiPointsService;
         [SerializeField] private FishDisplay fishDisplay;
@@ -33,8 +33,6 @@ namespace FishingGame
         private bool fishDisplayActive;
         public bool PressedCatch { get; set; }
         public bool FishHooked { get; private set; }
-
-        private Coroutine fishingRoutine;
 
         private FishingSystem()
         {
@@ -56,8 +54,13 @@ namespace FishingGame
                 if (fishDisplay != null)
                     SpawnInFishDisplayObjects();
             }
-            
+
             StopFishDisplay();
+        }
+
+        private void OnDisable()
+        {
+            StopAllCoroutines();
         }
 
         private void SpawnInFishDisplayObjects()
@@ -72,18 +75,18 @@ namespace FishingGame
         {
             fishing = true;
 
-            if (fishingRoutine == null)
-                fishingRoutine = StartCoroutine(FishingCoroutine());
+            // !! Cant do the usual coroutine stuff bc this is a singleton...
+            fishingRodController.FishingRoutine = StartCoroutine(FishingCoroutine());
         }
 
         public void StopFishing()
         {
-            if (fishingRoutine != null)
+            if (fishingRodController.FishingRoutine != null)
             {
                 fishingRodController.StopFishBitingAnimation();
 
-                StopCoroutine(fishingRoutine);
-                fishingRoutine = null;
+                StopCoroutine(fishingRodController.FishingRoutine);
+                fishingRodController.FishingRoutine = null;
             }
 
             fishing = false;
@@ -130,17 +133,21 @@ namespace FishingGame
                 caughtFish = CalculateFishProbability();
 
                 FishHooked = true;
-                fishingRodController.PlayFishBitingAnimation();
+                fishingRodController.PlayFishBitingAnimation(true);
 
                 float randomSecondsToPressCatch = Random.Range(buttonPressTimerRange.x, buttonPressTimerRange.y);
                 yield return new WaitForSeconds(randomSecondsToPressCatch);
 
                 // Stop the animation a few milliseconds before checking input for coyote time
-                fishingRodController.StopFishBitingAnimation();
+
+                if (!PressedCatch)
+                    fishingRodController.StopFishBitingAnimation();
+
                 yield return new WaitForSeconds(coyoteTime.Value);
 
                 if (PressedCatch)
                 {
+                    fishingRodController.PlayFishBitingAnimation(false);
                     fishing = false;
 
                     catchEventHandler.StartFishEvent(caughtFish);
@@ -161,17 +168,17 @@ namespace FishingGame
 
                 fishDisplay?.DisplayFish(caughtFish);
                 fishDisplayActive = true;
-                
+
                 uiPointsService?.UpdatePointsText(caughtFish.Points);
 
                 yield return new WaitForSeconds(3f);
-                
+
                 StopFishDisplay();
             }
             else
                 fishingRodController.IconHandler?.DisplayIcon(EEmotion.Sad);
-            
-            //fishingRodController.PullBackFishingRod();
+
+            fishingRodController.PullBackFishingRod();
 
             yield return null;
         }
@@ -180,9 +187,9 @@ namespace FishingGame
         {
             if (!fishDisplayActive)
                 return;
-            
+
             fishDisplay?.StopDisplayFish();
-            
+
             fishDisplayActive = false;
         }
     }
