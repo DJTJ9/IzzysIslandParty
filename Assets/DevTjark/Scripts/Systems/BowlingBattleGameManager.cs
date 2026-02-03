@@ -55,7 +55,6 @@ private void Start()
 
     public void StartGame()
     {
-        UnfreezeTimeScale();
         onGameStart.Invoke();
     }
     
@@ -118,7 +117,7 @@ private void Start()
     
     private void ResetRoundIndex() => m_roundIndex = 1;
     
-    private void FreezeTimeScale()   => Time.timeScale = 0f;
+    public void FreezeTimeScale()   => Time.timeScale = 0f;
     
-    private void UnfreezeTimeScale() => Time.timeScale = 1f;
+    public void UnfreezeTimeScale() => Time.timeScale = 1f;
 }

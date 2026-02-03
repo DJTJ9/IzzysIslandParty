@@ -13,13 +13,12 @@ using Button = UnityEngine.UIElements.Button;
 
 public class GameMenuEvents : MonoBehaviour
 {
-    [SerializeField] private BowlingBattleGameManager bowlingBattleGameManager;
-    
     [SerializeField] private SceneCollectionSO sceneCollection;
     [SerializeField] private SO_PlayerCollection currentPlayers;
     
     [SerializeField] private VisualTreeAsset rowTemplate;
-    
+
+    [SerializeField] private UnityEvent onGameStart;
     [SerializeField] private UnityEvent onUnpause;
     [SerializeField] private UnityEvent onRestart;
     
@@ -241,7 +240,7 @@ public class GameMenuEvents : MonoBehaviour
     public void OnControllerSelectionReadyButtonClick()
     {
         controllerSelectionMenu.style.display = DisplayStyle.None;
-        bowlingBattleGameManager.StartGame();
+        onGameStart.Invoke();
     }
     
     private void OnControllerSelectionBackButtonClick()

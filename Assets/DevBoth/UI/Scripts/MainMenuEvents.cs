@@ -12,8 +12,8 @@ using UnityEngine.Serialization;
 
 public class MainMenuEvents : MonoBehaviour
 {
-    [SerializeField] private PlayerInputManager playerInputManager;
-    [SerializeField] private PlayerJoiner playerJoiner;
+    // [SerializeField] private PlayerInputManager playerInputManager;
+    // [SerializeField] private PlayerJoiner playerJoiner;
     [SerializeField] private SceneCollectionSO sceneCollection;
     [SerializeField] private UnityEvent onLoadBowlingBattle;
     
@@ -152,7 +152,7 @@ public class MainMenuEvents : MonoBehaviour
     private void RegisterButtonCallbacks()
     {        
         // Main menu buttons
-        startGameButton?.RegisterCallback<ClickEvent>(OnStartButtonClick);
+        startGameButton.clicked += OnStartButtonClick;
         settingsButton?.RegisterCallback<ClickEvent>(OnSettingsButtonClick);
         mainMenuQuitButton?.RegisterCallback<ClickEvent>(OnQuitClick);
         
@@ -175,7 +175,7 @@ public class MainMenuEvents : MonoBehaviour
     private void UnregisterButtonCallbacks()
     {
         // Main menu buttons
-        startGameButton?.UnregisterCallback<ClickEvent>(OnStartButtonClick);
+        startGameButton.clicked -= OnStartButtonClick;
         settingsButton?.UnregisterCallback<ClickEvent>(OnSettingsButtonClick);
         mainMenuQuitButton?.UnregisterCallback<ClickEvent>(OnQuitClick);
         
@@ -195,7 +195,7 @@ public class MainMenuEvents : MonoBehaviour
         controllerSelectionBackButton?.UnregisterCallback<ClickEvent>(OnControllerSelectionBackButtonClick);
     }
 
-    private void OnStartButtonClick(ClickEvent _evt)
+    private void OnStartButtonClick()
     {
         mainMenu.style.display = DisplayStyle.None;
         controllerSelectionMenu.style.display = DisplayStyle.Flex;

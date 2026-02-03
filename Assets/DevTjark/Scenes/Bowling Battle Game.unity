@@ -2386,10 +2386,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424d2ca1ec44454289227c131c2564d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bowlingBattleGameManager: {fileID: 2146626107}
   sceneCollection: {fileID: 11400000, guid: 6fd8971a4dff91645b76a391153753d8, type: 2}
   currentPlayers: {fileID: 11400000, guid: 97ae6e8cdb921dd4d97057deb65c1858, type: 2}
   rowTemplate: {fileID: 9197481963319205126, guid: a5da0a2b314073b4f97b6ae48036cd3c, type: 3}
+  onGameStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onUnpause:
     m_PersistentCalls:
       m_Calls:
@@ -6741,6 +6755,7 @@ GameObject:
   - component: {fileID: 1983948719}
   - component: {fileID: 1983948718}
   - component: {fileID: 1983948720}
+  - component: {fileID: 1983948721}
   m_Layer: 0
   m_Name: Game Event Listeneres
   m_TagString: Untagged
@@ -6838,6 +6853,34 @@ MonoBehaviour:
       - m_Target: {fileID: 499485610}
         m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
         m_MethodName: ShowResultsScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1983948721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983948716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 499485610}
+        m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
+        m_MethodName: OnControllerSelectionReadyButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
