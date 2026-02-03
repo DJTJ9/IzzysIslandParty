@@ -19,7 +19,7 @@
                     "name": "Submit",
                     "type": "Button",
                     "id": "4b20b941-3d6b-4e87-abed-3645bf3d7f21",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -100,6 +100,15 @@
                     "name": "Unpause",
                     "type": "Button",
                     "id": "d8db3f96-6d5c-4180-b583-ebc634144dea",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "StartGame",
+                    "type": "Button",
+                    "id": "cde468ba-184e-4c5d-9ae8-96f5986c5dcf",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -330,7 +339,7 @@
                 {
                     "name": "left",
                     "id": "e89cda66-9dcb-429f-a5e2-b1f4d2ed7126",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse;KeyboardControlScheme",
@@ -352,7 +361,7 @@
                 {
                     "name": "right",
                     "id": "b212fd4b-a634-425e-b2b8-7338662e6ea3",
-                    "path": "<Keyboard>/d",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse;KeyboardControlScheme",
@@ -370,17 +379,6 @@
                     "action": "Navigate",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "3ac8672d-9dee-41e9-805c-d33d2e6e1db9",
-                    "path": "*/{Submit}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
-                    "action": "Submit",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
@@ -566,6 +564,50 @@
                     "processors": "",
                     "groups": ";ControllerControlScheme;Gamepad",
                     "action": "Unpause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e09f2622-7df5-4df1-a9a9-84e170482f6c",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c8c67110-04d5-47f8-8b86-11f3ff592a55",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ea7ab018-88e3-4596-8d6e-e6b186629afc",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "StartGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6e53df10-7a92-4ba3-9a79-8716313871e4",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "StartGame",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -1315,10 +1357,10 @@
                 {
                     "name": "",
                     "id": "399c2a72-5cc4-4a30-9365-341c5f217180",
-                    "path": "<Keyboard>/anyKey",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";KeyboardControlScheme",
+                    "groups": ";KeyboardControlScheme;Keyboard&Mouse",
                     "action": "Join",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1329,7 +1371,7 @@
                     "path": "<Gamepad>/select",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";ControllerControlScheme",
+                    "groups": ";ControllerControlScheme;Gamepad",
                     "action": "Join",
                     "isComposite": false,
                     "isPartOfComposite": false

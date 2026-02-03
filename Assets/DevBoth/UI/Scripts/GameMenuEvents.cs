@@ -8,16 +8,17 @@ using System.Linq;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
+using Button = UnityEngine.UIElements.Button;
 
 public class GameMenuEvents : MonoBehaviour
 {
-    [SerializeField] private BowlingBattleGameManager bowlingBattleGameManager;
-    
     [SerializeField] private SceneCollectionSO sceneCollection;
     [SerializeField] private SO_PlayerCollection currentPlayers;
     
     [SerializeField] private VisualTreeAsset rowTemplate;
-    
+
+    [SerializeField] private UnityEvent onGameStart;
     [SerializeField] private UnityEvent onUnpause;
     [SerializeField] private UnityEvent onRestart;
     
@@ -64,8 +65,7 @@ public class GameMenuEvents : MonoBehaviour
         BindVisualElements();
         BindButtons();
         InitializeSlotElements();
-        
-        controllerSelectionReadyButton.Focus();
+        FocusButton(controllerSelectionReadyButton);
     }
 
     private void OnEnable()
@@ -118,55 +118,55 @@ public class GameMenuEvents : MonoBehaviour
     private void RegisterButtonCallbacks()
     {        
         // Pause menu buttons
-        pauseMenuResumeButton?.RegisterCallback<ClickEvent>(OnResumeGameClick);
-        pauseMenuRestartButton?.RegisterCallback<ClickEvent>(OnRestartGameClick);
-        pauseMenuChangeLevelButton?.RegisterCallback<ClickEvent>(OnChangeLevelClick);
-        pauseMenuQuitButton?.RegisterCallback<ClickEvent>(OnQuitClick);
+        pauseMenuResumeButton.clicked += OnResumeGameClick;
+        pauseMenuRestartButton.clicked += OnRestartGameClick;
+        pauseMenuChangeLevelButton.clicked += OnChangeLevelClick;
+        pauseMenuQuitButton.clicked += OnQuitClick;
         
         //Player HUB buttons
-        bowlingBattleButton?.RegisterCallback<ClickEvent>(OnLoadBowlingBattle);
-        fishingFrenzyButton?.RegisterCallback<ClickEvent>(OnLoadFishingFrenzy);
-        jetskiJoyrideButton?.RegisterCallback<ClickEvent>(OnLoadJetskiJoyride);
-        minigolfMayhemButton?.RegisterCallback<ClickEvent>(OnLoadMinigolfMayhem);
-        swaggySnapshotsButton?.RegisterCallback<ClickEvent>(OnLoadSwaggySnapshots);
-        playerHUBBackButton?.RegisterCallback<ClickEvent>(OnPlayerHubBack);
+        bowlingBattleButton.clicked += OnLoadBowlingBattle;
+        fishingFrenzyButton.clicked += OnLoadFishingFrenzy;
+        jetskiJoyrideButton.clicked += OnLoadJetskiJoyride;
+        minigolfMayhemButton.clicked += OnLoadMinigolfMayhem;
+        swaggySnapshotsButton.clicked += OnLoadSwaggySnapshots;
+        playerHUBBackButton.clicked += OnPlayerHubBack;
         
         //End screen buttons
-        resultScreenContinueButton?.RegisterCallback<ClickEvent>(OnResultScreenContinue);
-        endScreenRestartButton?.RegisterCallback<ClickEvent>(OnRestartGameClick);
-        endScreenChangeLevelButton?.RegisterCallback<ClickEvent>(OnChangeLevelClick);
-        endScreenQuitButton?.RegisterCallback<ClickEvent>(OnQuitClick);
+        resultScreenContinueButton.clicked += OnResultScreenContinue;
+        endScreenRestartButton.clicked += OnRestartGameClick;
+        endScreenChangeLevelButton.clicked += OnChangeLevelClick;
+        endScreenQuitButton.clicked += OnQuitClick;
         
         // Controller selection buttons
-        controllerSelectionReadyButton?.RegisterCallback<ClickEvent>(OnControllerSelectionReadyButtonClick);
-        controllerSelectionBackButton?.RegisterCallback<ClickEvent>(OnControllerSelectionBackButtonClick);
+        controllerSelectionReadyButton.clicked += OnControllerSelectionReadyButtonClick;
+        controllerSelectionBackButton.clicked += OnControllerSelectionBackButtonClick;
     }
 
     private void UnregisterButtonCallbacks()
     {
         // Pause menu buttons
-        pauseMenuResumeButton?.UnregisterCallback<ClickEvent>(OnResumeGameClick);
-        pauseMenuRestartButton?.UnregisterCallback<ClickEvent>(OnRestartGameClick);
-        pauseMenuChangeLevelButton?.UnregisterCallback<ClickEvent>(OnChangeLevelClick);
-        pauseMenuQuitButton?.UnregisterCallback<ClickEvent>(OnQuitClick);
+        pauseMenuResumeButton.clicked -= OnResumeGameClick;
+        pauseMenuRestartButton.clicked -= OnRestartGameClick;
+        pauseMenuChangeLevelButton.clicked -= OnChangeLevelClick;
+        pauseMenuQuitButton.clicked -= OnQuitClick;
 
         //Player HUB buttons
-        bowlingBattleButton?.UnregisterCallback<ClickEvent>(OnLoadBowlingBattle);
-        fishingFrenzyButton?.UnregisterCallback<ClickEvent>(OnLoadFishingFrenzy);
-        jetskiJoyrideButton?.UnregisterCallback<ClickEvent>(OnLoadJetskiJoyride);
-        minigolfMayhemButton?.UnregisterCallback<ClickEvent>(OnLoadMinigolfMayhem);
-        swaggySnapshotsButton?.UnregisterCallback<ClickEvent>(OnLoadSwaggySnapshots);
-        playerHUBBackButton?.UnregisterCallback<ClickEvent>(OnPlayerHubBack);
+        bowlingBattleButton.clicked -= OnLoadBowlingBattle;
+        fishingFrenzyButton.clicked -= OnLoadFishingFrenzy;
+        jetskiJoyrideButton.clicked -= OnLoadJetskiJoyride;
+        minigolfMayhemButton.clicked -= OnLoadMinigolfMayhem;
+        swaggySnapshotsButton.clicked -= OnLoadSwaggySnapshots;
+        playerHUBBackButton.clicked -= OnPlayerHubBack;
         
         //End screen buttons
-        resultScreenContinueButton?.UnregisterCallback<ClickEvent>(OnResultScreenContinue);
-        endScreenRestartButton?.UnregisterCallback<ClickEvent>(OnRestartGameClick);
-        endScreenChangeLevelButton?.UnregisterCallback<ClickEvent>(OnChangeLevelClick);
-        endScreenQuitButton?.UnregisterCallback<ClickEvent>(OnQuitClick);
+        resultScreenContinueButton.clicked -= OnResultScreenContinue;
+        endScreenRestartButton.clicked -= OnRestartGameClick;
+        endScreenChangeLevelButton.clicked -= OnChangeLevelClick;
+        endScreenQuitButton.clicked -= OnQuitClick;
         
         // Controller selection buttons
-        controllerSelectionReadyButton?.UnregisterCallback<ClickEvent>(OnControllerSelectionReadyButtonClick);
-        controllerSelectionBackButton?.UnregisterCallback<ClickEvent>(OnControllerSelectionBackButtonClick);
+        controllerSelectionReadyButton.clicked -= OnControllerSelectionReadyButtonClick;
+        controllerSelectionBackButton.clicked -= OnControllerSelectionBackButtonClick;
     }
 
     public void ShowPauseMenu()
@@ -176,7 +176,7 @@ public class GameMenuEvents : MonoBehaviour
         pauseMenu.schedule.Execute(() => pauseMenuResumeButton.Focus()).StartingIn(50);
         pauseMenu.schedule.Execute(() => pauseMenuResumeButton.Focus()).StartingIn(100);
 
-        StartCoroutine(FocusButton(pauseMenuResumeButton));
+        FocusButton(pauseMenuResumeButton);
         Time.timeScale = 0f;
     }
     
@@ -189,6 +189,7 @@ public class GameMenuEvents : MonoBehaviour
     public void ShowEndScreenUI()
     {
         resultsScreen.style.display = DisplayStyle.Flex;
+        FocusButton(resultScreenContinueButton);
     }
     
     public void HideEndScreenUI()
@@ -197,7 +198,7 @@ public class GameMenuEvents : MonoBehaviour
         endScreenUI.style.display = DisplayStyle.None;
     }
     
-    private void OnRestartGameClick(ClickEvent _evt)
+    private void OnRestartGameClick()
     {
         onRestart.Invoke();
         HideEndScreenUI();
@@ -205,43 +206,44 @@ public class GameMenuEvents : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    private void OnResumeGameClick(ClickEvent _evt)
+    private void OnResumeGameClick()
     {
         onUnpause.Invoke();
     }
 
-    private void OnChangeLevelClick(ClickEvent _evt)
+    private void OnChangeLevelClick()
     {
         pauseMenu.style.display = DisplayStyle.None;
         endScreenUI.style.display = DisplayStyle.None;
         playerHub.style.display = DisplayStyle.Flex;
     }
     
-    private void OnPlayerHubBack(ClickEvent _evt)
+    private void OnPlayerHubBack()
     {
         pauseMenu.style.display = DisplayStyle.Flex;
         playerHub.style.display = DisplayStyle.None;
     }
 
-    private void OnQuitClick(ClickEvent _evt)
+    private void OnQuitClick()
     {
         Time.timeScale = 1f;
         LoadSingleScene(SceneNames.MainMenu);
     }
 
-    private void OnResultScreenContinue(ClickEvent _evt)
+    private void OnResultScreenContinue()
     {
         resultsScreen.style.display = DisplayStyle.None;
         endScreenUI.style.display = DisplayStyle.Flex;
+        FocusButton(endScreenRestartButton);
     }
     
-    private void OnControllerSelectionReadyButtonClick(ClickEvent _evt)
+    public void OnControllerSelectionReadyButtonClick()
     {
         controllerSelectionMenu.style.display = DisplayStyle.None;
-        bowlingBattleGameManager.StartGame();
+        onGameStart.Invoke();
     }
     
-    private void OnControllerSelectionBackButtonClick(ClickEvent _evt)
+    private void OnControllerSelectionBackButtonClick()
     {
         controllerSelectionMenu.style.display = DisplayStyle.None;
         LoadSingleScene(SceneNames.MainMenu);
@@ -262,27 +264,27 @@ public class GameMenuEvents : MonoBehaviour
         LoadSceneWithLevel(SceneNames.SwaggySnapshotsGame, SceneNames.SwaggySnapshotsLevel);
     }
 
-    private void OnLoadBowlingBattle(ClickEvent _evt)
+    private void OnLoadBowlingBattle()
     {
         LoadSceneWithLevel(SceneNames.BowlingBattleGame, SceneNames.BowlingBattleLevel);
     }
 
-    private void OnLoadFishingFrenzy(ClickEvent _evt)
+    private void OnLoadFishingFrenzy()
     {
         LoadSingleScene(SceneNames.FishingFrenzy);
     }
 
-    private void OnLoadJetskiJoyride(ClickEvent _evt)
+    private void OnLoadJetskiJoyride()
     {
         LoadSingleScene(SceneNames.JetskiJoyride);
     }
 
-    private void OnLoadMinigolfMayhem(ClickEvent _evt)
+    private void OnLoadMinigolfMayhem()
     {
         LoadSceneWithLevel(SceneNames.MinigolfMayhemGame, SceneNames.MinigolfMayhemLevel1);
     }
 
-    private void OnLoadSwaggySnapshots(ClickEvent _evt)
+    private void OnLoadSwaggySnapshots()
     {
         LoadSceneWithLevel(SceneNames.SwaggySnapshotsGame, SceneNames.SwaggySnapshotsLevel);
     }
@@ -405,10 +407,12 @@ public class GameMenuEvents : MonoBehaviour
         m_joinedPlayers--;
     }
     
-    private IEnumerator FocusButton(Button _button)
+    private void FocusButton(VisualElement _button) => StartCoroutine(FocusButtonCoroutine(_button));
+    
+    private IEnumerator FocusButtonCoroutine(VisualElement _button)
     {
+        yield return null;
         yield return null;
         _button.Focus();
     }
-
 }
