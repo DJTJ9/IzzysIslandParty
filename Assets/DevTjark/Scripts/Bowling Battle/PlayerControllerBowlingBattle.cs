@@ -21,7 +21,8 @@ public class PlayerControllerBowlingBattle : Controller
     private InputAction m_moveInputAction;
     private InputAction m_pauseInputAction;
     private InputAction m_unpauseInputAction;
-
+    private InputAction m_startInputAction;
+    
     [Header("References")]
     [SerializeField] private Camera playerCamera;
     [SerializeField] private InputSystemUIInputModule inputModule;
@@ -31,6 +32,7 @@ public class PlayerControllerBowlingBattle : Controller
 
     [SerializeField] private UnityEvent onPause;
     [SerializeField] private UnityEvent onUnpause;
+    [SerializeField] private UnityEvent onGameStart;
     
     [SerializeField] private SO_Player playerSO;
     [SerializeField] private SO_PlayerCollection playerCollectionBB;
@@ -116,8 +118,16 @@ public class PlayerControllerBowlingBattle : Controller
 
         m_unpauseInputAction = playerInput.actions["Unpause"];
         m_unpauseInputAction.started += OnUnpause;
+
+        m_startInputAction = playerInput.actions["StartGame"];
+        m_startInputAction.started += OnStartGame;
     }
-    
+
+    public void OnStartGame(InputAction.CallbackContext _context)
+    {
+        onGameStart.Invoke();
+    }
+
     public void OnPause(InputAction.CallbackContext _context)
     {
         onPause.Invoke();
@@ -189,6 +199,11 @@ public class PlayerControllerBowlingBattle : Controller
     public void SetCameraForPlayerInput()
     {
         playerInput.camera = transform.parent.GetComponentInChildren<Camera>();
+    }
+
+    public void SetUIInputModuleToMultiplayerEventSystem()
+    {
+        playerInput.uiInputModule = inputModule;
     }
     
     public int GetPlayerIndex() => m_playerIndex;

@@ -2,20 +2,25 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.Serialization;
 
 public class PlayerJoiner : MonoBehaviour
 {
-    [FormerlySerializedAs("PlayerCollectionSO")]
     [FoldoutGroup("Bowling Battle")]
+    [SerializeField] private EventSystem eventSystem;
     public SO_PlayerCollection playerCollectionBB;
     [SerializeField] private SO_PlayerCollection npcCollectionBB;
     [SerializeField] private SO_PlayerCollection currentPlayers;
 
     [Header("Player Inputs")]
     [SerializeField] private SO_PlayerInputs playerInputsSO;
+    [SerializeField] private InputActionAsset defaultAsset;
     // private List<PlayerInput> players = new List<PlayerInput>();
+
+    private PlayerInput player1;
     
     private int m_playerIndex = 0;
     private int m_npcIndex = 0;
@@ -46,12 +51,35 @@ public class PlayerJoiner : MonoBehaviour
             ++m_npcIndex;
             return;
         }
+
+        if (m_playerIndex == 0)
+        {
+            player1 = _playerInput;
+
+            SetPlayerInputModuleToGlobalEventSystem(_playerInput);
+        }
         
         _playerInput.gameObject.transform.position = playerCollectionBB.Players[m_playerIndex].SpawnPoint;
         playerCollectionBB.Players[m_playerIndex].InitializePlayer(_playerInput.gameObject, playerCollectionBB.Players[m_playerIndex], m_playerIndex);
         currentPlayers.Players.Add(playerCollectionBB.Players[m_playerIndex]);
         // AddPlayer(_playerInput);
         ++m_playerIndex;
+    }
+
+    private void SetPlayerInputModuleToGlobalEventSystem(PlayerInput _playerInput)
+    {
+        var uiModule = eventSystem.GetComponent<InputSystemUIInputModule>();
+        _playerInput.uiInputModule = uiModule;
+        uiModule.enabled = false;
+        _playerInput.actions.FindActionMap("UI").Enable();
+        // uiModule.actionsAsset = defaultAsset;
+        uiModule.actionsAsset = _playerInput.actions;
+        uiModule.enabled = true;
+    }
+    
+    public void SetPlayer1InputModuleToGlobalEventSystem()
+    {
+        SetPlayerInputModuleToGlobalEventSystem(player1);
     }
 
     public void SpawnPlayers()
