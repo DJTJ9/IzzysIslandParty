@@ -18,8 +18,8 @@ public class NPC_GUIBowlingBattle : MonoBehaviour
 
     private void Update()
     {
-        timerLabel.text = BowlingBattleGameManager.PreparationPhaseTimer.ToString("00");
-        scoreLabel.text = npcSO.Players[npcController.NPCIndex].PlayerScore.Value.ToString("00");
+        timerLabel.text = BowlingBattleGameManager.PreparationPhaseTimer.ToString("0");
+        scoreLabel.text = npcSO.Players[npcController.NPCIndex].PlayerScore.Value.ToString("0");
     }
 
     public void ShowUI()

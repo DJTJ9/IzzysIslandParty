@@ -6,12 +6,15 @@ using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 public class GameMenuEvents : MonoBehaviour
 {
+    [SerializeField] private BowlingBattleGameManager bowlingBattleGameManager;
+    
     [SerializeField] private SceneCollectionSO sceneCollection;
-    [FormerlySerializedAs("playerCollection")] [SerializeField] private SO_PlayerCollection currentPlayers;
+    [SerializeField] private SO_PlayerCollection currentPlayers;
     
     [SerializeField] private VisualTreeAsset rowTemplate;
     
@@ -26,6 +29,7 @@ public class GameMenuEvents : MonoBehaviour
     private VisualElement resultsScreen;
     private VisualElement resultsModal;
     private VisualElement endScreenUI;
+    private VisualElement controllerSelectionMenu;
     
     [Header("Pause Menu Buttons")]
     private Button pauseMenuResumeButton;
@@ -47,18 +51,26 @@ public class GameMenuEvents : MonoBehaviour
     private Button endScreenChangeLevelButton;
     private Button endScreenQuitButton;
     
+    [Header("Controller Selection")]
+    private Button controllerSelectionReadyButton;
+    private Button controllerSelectionBackButton;
+    private VisualElement[] m_slots;
+    private int m_joinedPlayers = 0;
+    
     private void Awake()
     {
         document = GetComponent<UIDocument>();
         
         BindVisualElements();
         BindButtons();
+        InitializeSlotElements();
+        
+        controllerSelectionReadyButton.Focus();
     }
 
     private void OnEnable()
     {
         RegisterButtonCallbacks();
-
     }
 
     private void OnDisable()
@@ -73,6 +85,7 @@ public class GameMenuEvents : MonoBehaviour
         resultsScreen = document.rootVisualElement.Q("results-screen-and-buttons__container");
         resultsModal = document.rootVisualElement.Q("results-screen__container");
         endScreenUI = document.rootVisualElement.Q("end-screen-menu__container");
+        controllerSelectionMenu = document.rootVisualElement.Q("controller-selection-menu__container");
     }
     
     private void BindButtons()
@@ -96,6 +109,10 @@ public class GameMenuEvents : MonoBehaviour
         endScreenRestartButton = document.rootVisualElement.Q("end-screen-menu-restart__button") as Button;
         endScreenChangeLevelButton = document.rootVisualElement.Q("end-screen-menu-change-level__button") as Button;
         endScreenQuitButton = document.rootVisualElement.Q("end-screen-menu-quit__button") as Button;
+        
+        //Controller selection menu buttons
+        controllerSelectionReadyButton = document.rootVisualElement.Q("controller-selection-ready__button") as Button;
+        controllerSelectionBackButton = document.rootVisualElement.Q("controller-selection-back__button") as Button;
     }
 
     private void RegisterButtonCallbacks()
@@ -119,6 +136,10 @@ public class GameMenuEvents : MonoBehaviour
         endScreenRestartButton?.RegisterCallback<ClickEvent>(OnRestartGameClick);
         endScreenChangeLevelButton?.RegisterCallback<ClickEvent>(OnChangeLevelClick);
         endScreenQuitButton?.RegisterCallback<ClickEvent>(OnQuitClick);
+        
+        // Controller selection buttons
+        controllerSelectionReadyButton?.RegisterCallback<ClickEvent>(OnControllerSelectionReadyButtonClick);
+        controllerSelectionBackButton?.RegisterCallback<ClickEvent>(OnControllerSelectionBackButtonClick);
     }
 
     private void UnregisterButtonCallbacks()
@@ -142,6 +163,10 @@ public class GameMenuEvents : MonoBehaviour
         endScreenRestartButton?.UnregisterCallback<ClickEvent>(OnRestartGameClick);
         endScreenChangeLevelButton?.UnregisterCallback<ClickEvent>(OnChangeLevelClick);
         endScreenQuitButton?.UnregisterCallback<ClickEvent>(OnQuitClick);
+        
+        // Controller selection buttons
+        controllerSelectionReadyButton?.UnregisterCallback<ClickEvent>(OnControllerSelectionReadyButtonClick);
+        controllerSelectionBackButton?.UnregisterCallback<ClickEvent>(OnControllerSelectionBackButtonClick);
     }
 
     public void ShowPauseMenu()
@@ -208,6 +233,18 @@ public class GameMenuEvents : MonoBehaviour
     {
         resultsScreen.style.display = DisplayStyle.None;
         endScreenUI.style.display = DisplayStyle.Flex;
+    }
+    
+    private void OnControllerSelectionReadyButtonClick(ClickEvent _evt)
+    {
+        controllerSelectionMenu.style.display = DisplayStyle.None;
+        bowlingBattleGameManager.StartGame();
+    }
+    
+    private void OnControllerSelectionBackButtonClick(ClickEvent _evt)
+    {
+        controllerSelectionMenu.style.display = DisplayStyle.None;
+        LoadSingleScene(SceneNames.MainMenu);
     }
 
     public void LoadBowlingBattle()
@@ -331,6 +368,41 @@ public class GameMenuEvents : MonoBehaviour
 
             container.Add(row);
         }
+    }
+    
+    private void InitializeSlotElements()
+    {
+        m_slots = new VisualElement[4];
+
+        for (int i = 0; i < m_slots.Length; i++)
+        {
+            m_slots[i] = document.rootVisualElement.Q($"slot{i}");
+        }
+    }
+    
+    public void OnPlayerJoined(PlayerInput _playerInput)
+    {
+        if (m_joinedPlayers >= m_slots.Length)
+            return;
+
+        var slot = m_slots[m_joinedPlayers];
+
+        slot.RemoveFromClassList("waiting");
+        slot.AddToClassList("ready");
+
+        m_joinedPlayers++;
+    }
+    
+    public void OnPlayerLeft(PlayerInput _playerInput)
+    {
+        if (m_joinedPlayers <= 0) return;
+        
+        var slot = m_slots[m_joinedPlayers - 1];
+        
+        slot.RemoveFromClassList("ready");
+        slot.AddToClassList("waiting");
+        
+        m_joinedPlayers--;
     }
     
     private IEnumerator FocusButton(Button _button)
