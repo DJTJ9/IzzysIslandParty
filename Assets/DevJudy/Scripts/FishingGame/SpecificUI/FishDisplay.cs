@@ -64,9 +64,9 @@ public class FishDisplay : MonoBehaviour
     public void DisplayFish(SO_Fish _fish)
     {
         // !! This isnt working
-        playerInput.SwitchCurrentActionMap(uiActionMap);
-        eventSystem.SetSelectedGameObject(stopFishDisplayButton);
-        Debug.Log("Selected: " + eventSystem.currentSelectedGameObject.name);
+        //playerInput.SwitchCurrentActionMap(uiActionMap);
+        //eventSystem.SetSelectedGameObject(stopFishDisplayButton);
+        //Debug.Log("Selected: " + eventSystem.currentSelectedGameObject.name);
         
         // Change delta time to zero !!
         // Time.timeScale = 0f;

@@ -77,6 +77,14 @@ namespace FishingGame
             }
         }
 
+        public void OnStopFishDisplay(InputAction.CallbackContext _context)
+        {
+            if (_context.performed)
+            {
+                FishingSystem.Instance.StopFishDisplay();
+            }
+        }
+
         public void OnCast(InputAction.CallbackContext _context)
         {
             if (_context.performed)
@@ -103,9 +111,10 @@ namespace FishingGame
             }
         }
 
-        public void PullBackFishingRod()
+        public void PullBackFishingRod(bool _stopFishingRoutine = true)
         {
-            FishingSystem.Instance.StopFishing();
+            if (_stopFishingRoutine)
+                FishingSystem.Instance.StopFishing();
 
             isCast = false;
 
@@ -116,7 +125,7 @@ namespace FishingGame
         {
             if (_withIcon)
                 IconHandler.DisplayIcon(EEmotion.Alert);
-            
+
             animator.SetBool(fishBiting, true);
         }
 

@@ -165,22 +165,36 @@ namespace FishingGame
             if (caughtAFish)
             {
                 fishingRodController.IconHandler?.DisplayIcon(EEmotion.Love);
-
+                
+                fishingRodController.PullBackFishingRod(false);
                 fishDisplay?.DisplayFish(caughtFish);
+             
                 fishDisplayActive = true;
+                yield return new WaitForSecondsRealtime(3f);
 
                 uiPointsService?.UpdatePointsText(caughtFish.Points);
-
-                yield return new WaitForSeconds(3f);
 
                 StopFishDisplay();
             }
             else
+            {
+                fishingRodController.PullBackFishingRod();
                 fishingRodController.IconHandler?.DisplayIcon(EEmotion.Sad);
+            }
 
-            fishingRodController.PullBackFishingRod();
-
+            EndCoroutine();
             yield return null;
+        }
+
+        private void EndCoroutine()
+        {
+            if (fishingRodController.FishingRoutine != null)
+            {
+                fishingRodController.StopFishBitingAnimation();
+
+                StopCoroutine(fishingRodController.FishingRoutine);
+                fishingRodController.FishingRoutine = null;
+            }
         }
 
         public void StopFishDisplay()

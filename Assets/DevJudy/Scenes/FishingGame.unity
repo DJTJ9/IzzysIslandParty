@@ -471,7 +471,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &317348923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,6 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424d2ca1ec44454289227c131c2564d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bowlingBattleGameManager: {fileID: 0}
   sceneCollection: {fileID: 11400000, guid: 6fd8971a4dff91645b76a391153753d8, type: 2}
   currentPlayers: {fileID: 11400000, guid: dd4935fb874cc9a49858d0e0e7b59c81, type: 2}
   rowTemplate: {fileID: 9197481963319205126, guid: a5da0a2b314073b4f97b6ae48036cd3c, type: 3}
@@ -1246,6 +1247,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SharedCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4778689148346280094, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1491,6 +1496,26 @@ PrefabInstance:
       propertyPath: sliderFillImage
       value: 
       objectReference: {fileID: 928707699}
+    - target: {fileID: 7494653830283895259, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
+      propertyPath: targetChangeFrequency
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494653830283895259, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
+      propertyPath: targetMaxMovementLeft
+      value: -350
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494653830283895259, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
+      propertyPath: catcherMaxMovementLeft
+      value: -350
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494653830283895259, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
+      propertyPath: targetMaxMovementRight
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494653830283895259, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
+      propertyPath: catcherMaxMovementRight
+      value: 350
+      objectReference: {fileID: 0}
     - target: {fileID: 7765344784415051621, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: qteController
       value: 
@@ -1726,9 +1751,37 @@ PrefabInstance:
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 302035495}
+    - target: {fileID: 1731387959685711117, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 29.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1731387959685711117, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -9.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1731387959685711117, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.9
+      objectReference: {fileID: 0}
     - target: {fileID: 2234337075584315550, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
       propertyPath: m_Name
       value: FishingPlayer1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3452812991684617422, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3603906875005821288, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 29.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3603906875005821288, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -9.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3603906875005821288, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.9
       objectReference: {fileID: 0}
     - target: {fileID: 5317911460612665810, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1782,6 +1835,66 @@ PrefabInstance:
       propertyPath: buttonMashQTE
       value: 
       objectReference: {fileID: 1987655802}
+    - target: {fileID: 6500719721459496473, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500719721459496473, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_ActionEvents.Array.data[35].m_ActionId
+      value: 8095b1f7-a3ec-4cf9-9fdc-c4bb7d52de8e
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500719721459496473, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_ActionEvents.Array.data[36].m_ActionId
+      value: 151f42cc-d059-4bbf-9169-f110e1d7c797
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500719721459496473, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_ActionEvents.Array.data[37].m_ActionId
+      value: c6c3145b-2ca9-4326-a4f3-a8606709a4dd
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500719721459496473, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_ActionEvents.Array.data[35].m_ActionName
+      value: 'JetskiGame/Join[/Keyboard/anyKey]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500719721459496473, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_ActionEvents.Array.data[36].m_ActionName
+      value: 'Player/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500719721459496473, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_ActionEvents.Array.data[37].m_ActionName
+      value: 'FishingGame/X[/Keyboard/x]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500719721459496473, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_ActionEvents.Array.data[37].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500719721459496473, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_ActionEvents.Array.data[37].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500719721459496473, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_ActionEvents.Array.data[37].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1338424643}
+    - target: {fileID: 6500719721459496473, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_ActionEvents.Array.data[37].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500719721459496473, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_ActionEvents.Array.data[37].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnStopFishDisplay
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500719721459496473, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_ActionEvents.Array.data[37].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FishingGame.FishingRodController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500719721459496473, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_ActionEvents.Array.data[37].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8945365086280782582, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
