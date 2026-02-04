@@ -1,31 +1,31 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.Serialization;
 
-[RequireComponent (typeof(CharacterController), typeof(Rigidbody))]
+[RequireComponent(typeof(CharacterController), typeof(Rigidbody))]
 public class PlayerControllerBowlingBattle : Controller
 {
     private int m_playerIndex;
-    
-    [Header("Input")]
-    private Vector2 m_moveInput;
+
+    [Header("Input")] private Vector2 m_moveInput;
     private bool m_jumpInput;
 
-    [Header("Movement Settings")]
-    [SerializeField] private float m_moveSpeed = 5f;
-    
+    [Header("Movement Settings")] [SerializeField] private float m_moveSpeed = 5f;
+
     private InputAction m_moveInputAction;
     private InputAction m_pauseInputAction;
     private InputAction m_unpauseInputAction;
     private InputAction m_startInputAction;
-    
-    [Header("References")]
-    [SerializeField] private Camera playerCamera;
-    [SerializeField] private InputSystemUIInputModule inputModule;
+
+    [Header("References")] [SerializeField] private Camera playerCamera;
+    [SerializeField] private InputSystemUIInputModule multiplayerInputModule;
+    [SerializeField] private InputSystemUIInputModule globalInputModule;
     private CharacterController controller;
     private PlayerInput playerInput;
     private Rigidbody rb;
@@ -33,12 +33,14 @@ public class PlayerControllerBowlingBattle : Controller
     [SerializeField] private UnityEvent onPause;
     [SerializeField] private UnityEvent onUnpause;
     [SerializeField] private UnityEvent onGameStart;
-    
+
     [SerializeField] private SO_Player playerSO;
     [SerializeField] private SO_PlayerCollection playerCollectionBB;
     [SerializeField] private SO_PlayerInputs playerInputsSO;
-    
-    private void Start()
+
+    [SerializeField] private InputActionReference globalPoint;
+
+private void Start()
     {
         // playerCollectionBB.Players[m_playerIndex].InitializePlayer(gameObject, playerCollectionBB.Players[m_playerIndex], m_playerIndex);
         // BindAndEnablePlayerInput();
@@ -47,6 +49,7 @@ public class PlayerControllerBowlingBattle : Controller
         // playerInput = playerInputsSO.PlayerInputs[NPCIndex];
         rb = GetComponent<Rigidbody>();
         GameStartConfiguration();
+        globalInputModule = GameObject.FindWithTag("GlobalInputModule").GetComponent<InputSystemUIInputModule>();
     }
 
     private void OnEnable()
@@ -203,7 +206,39 @@ public class PlayerControllerBowlingBattle : Controller
 
     public void SetUIInputModuleToMultiplayerEventSystem()
     {
-        playerInput.uiInputModule = inputModule;
+        playerInput.uiInputModule = multiplayerInputModule;
+        
+        StartCoroutine(ActuallySetMultiplayer());
+    }
+
+    private IEnumerator ActuallySetMultiplayer()
+    {
+        // yield return new WaitForSeconds(0.5f);
+        //
+        // playerInput.uiInputModule = null;
+        
+        yield return new WaitForSeconds(0.5f);
+
+        playerInput.uiInputModule = multiplayerInputModule;
+    }
+    
+    public void SetUIInputModuleToGlobalEventSystem()
+    {
+        playerInput.uiInputModule = globalInputModule;
+        
+        StartCoroutine(ActuallySetGlobal());
+    }
+
+    private IEnumerator ActuallySetGlobal()
+    {
+        // yield return new WaitForSeconds(0.5f);
+        //
+        // playerInput.uiInputModule = null;
+        
+        yield return new WaitForSeconds(0.5f);
+
+        playerInput.uiInputModule = globalInputModule;
+        globalInputModule.point = globalPoint;
     }
     
     public int GetPlayerIndex() => m_playerIndex;
