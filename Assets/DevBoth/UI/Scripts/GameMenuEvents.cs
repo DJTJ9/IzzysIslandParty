@@ -281,7 +281,7 @@ public class GameMenuEvents : MonoBehaviour
 
     private void OnLoadJetskiJoyride()
     {
-        LoadSingleScene(SceneNames.JetskiJoyride);
+        LoadSingleScene(SceneNames.JetskiJoyrideRace);
     }
 
     private void OnLoadMinigolfMayhem()
