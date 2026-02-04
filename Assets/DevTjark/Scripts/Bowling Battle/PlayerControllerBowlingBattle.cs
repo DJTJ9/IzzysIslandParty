@@ -76,7 +76,7 @@ public class PlayerControllerBowlingBattle : Controller
 
     private void StartPositionMovement()
     {
-        GetMoveDirection();
+        // GetMoveDirection();
         var move = new Vector3(m_moveInput.x, m_moveInput.y, 0);
 
         move *= m_moveSpeed;
@@ -84,7 +84,7 @@ public class PlayerControllerBowlingBattle : Controller
         controller.Move(move * Time.deltaTime);
     }
 
-    public void GetMoveDirection()
+    public void GetMoveDirection(InputAction.CallbackContext _context)
     {
         m_moveInput = m_moveInputAction.ReadValue<Vector2>();
     }

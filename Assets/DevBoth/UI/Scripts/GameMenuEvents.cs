@@ -172,9 +172,9 @@ public class GameMenuEvents : MonoBehaviour
     public void ShowPauseMenu()
     {
         pauseMenu.style.display = DisplayStyle.Flex;
-        pauseMenu.schedule.Execute(() => pauseMenuResumeButton.Focus()).StartingIn(0);
-        pauseMenu.schedule.Execute(() => pauseMenuResumeButton.Focus()).StartingIn(50);
-        pauseMenu.schedule.Execute(() => pauseMenuResumeButton.Focus()).StartingIn(100);
+        // pauseMenu.schedule.Execute(() => pauseMenuResumeButton.Focus()).StartingIn(0);
+        // pauseMenu.schedule.Execute(() => pauseMenuResumeButton.Focus()).StartingIn(50);
+        // pauseMenu.schedule.Execute(() => pauseMenuResumeButton.Focus()).StartingIn(100);
 
         FocusButton(pauseMenuResumeButton);
         Time.timeScale = 0f;
@@ -236,10 +236,15 @@ public class GameMenuEvents : MonoBehaviour
         endScreenUI.style.display = DisplayStyle.Flex;
         FocusButton(endScreenRestartButton);
     }
+
+    public void HideControllerSelectionScreen()
+    {
+        controllerSelectionMenu.style.display = DisplayStyle.None;
+    }
     
     public void OnControllerSelectionReadyButtonClick()
     {
-        controllerSelectionMenu.style.display = DisplayStyle.None;
+        HideControllerSelectionScreen();
         onGameStart.Invoke();
     }
     
