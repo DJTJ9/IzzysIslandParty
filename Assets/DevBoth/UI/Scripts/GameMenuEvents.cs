@@ -96,7 +96,7 @@ public class GameMenuEvents : MonoBehaviour
         pauseMenuChangeLevelButton = document.rootVisualElement.Q("pause-menu-change-level__button") as Button;
         pauseMenuQuitButton = document.rootVisualElement.Q("pause-menu-quit__button") as Button;
         
-        //Player HUB buttons
+        // Player HUB buttons
         bowlingBattleButton = document.rootVisualElement.Q("play-bowling-battle__button") as Button;
         fishingFrenzyButton = document.rootVisualElement.Q("play-fishing-frenzy__button") as Button;
         jetskiJoyrideButton = document.rootVisualElement.Q("play-jetski-joyride__button") as Button;
@@ -104,13 +104,13 @@ public class GameMenuEvents : MonoBehaviour
         swaggySnapshotsButton = document.rootVisualElement.Q("play-swaggy-snapshots__button") as Button;
         playerHUBBackButton = document.rootVisualElement.Q("player-hub-back__button") as Button;
         
-        //End screen buttons
+        // End screen buttons
         resultScreenContinueButton = document.rootVisualElement.Q("results-screen-continue__button") as Button;
         endScreenRestartButton = document.rootVisualElement.Q("end-screen-menu-restart__button") as Button;
         endScreenChangeLevelButton = document.rootVisualElement.Q("end-screen-menu-change-level__button") as Button;
         endScreenQuitButton = document.rootVisualElement.Q("end-screen-menu-quit__button") as Button;
         
-        //Controller selection menu buttons
+        // Controller selection menu buttons
         controllerSelectionReadyButton = document.rootVisualElement.Q("controller-selection-ready__button") as Button;
         controllerSelectionBackButton = document.rootVisualElement.Q("controller-selection-back__button") as Button;
     }
@@ -123,7 +123,7 @@ public class GameMenuEvents : MonoBehaviour
         pauseMenuChangeLevelButton.clicked += OnChangeLevelClick;
         pauseMenuQuitButton.clicked += OnQuitClick;
         
-        //Player HUB buttons
+        // Player HUB buttons
         bowlingBattleButton.clicked += OnLoadBowlingBattle;
         fishingFrenzyButton.clicked += OnLoadFishingFrenzy;
         jetskiJoyrideButton.clicked += OnLoadJetskiJoyride;
@@ -131,7 +131,7 @@ public class GameMenuEvents : MonoBehaviour
         swaggySnapshotsButton.clicked += OnLoadSwaggySnapshots;
         playerHUBBackButton.clicked += OnPlayerHubBack;
         
-        //End screen buttons
+        // End screen buttons
         resultScreenContinueButton.clicked += OnResultScreenContinue;
         endScreenRestartButton.clicked += OnRestartGameClick;
         endScreenChangeLevelButton.clicked += OnChangeLevelClick;
@@ -150,7 +150,7 @@ public class GameMenuEvents : MonoBehaviour
         pauseMenuChangeLevelButton.clicked -= OnChangeLevelClick;
         pauseMenuQuitButton.clicked -= OnQuitClick;
 
-        //Player HUB buttons
+        // Player HUB buttons
         bowlingBattleButton.clicked -= OnLoadBowlingBattle;
         fishingFrenzyButton.clicked -= OnLoadFishingFrenzy;
         jetskiJoyrideButton.clicked -= OnLoadJetskiJoyride;
@@ -158,7 +158,7 @@ public class GameMenuEvents : MonoBehaviour
         swaggySnapshotsButton.clicked -= OnLoadSwaggySnapshots;
         playerHUBBackButton.clicked -= OnPlayerHubBack;
         
-        //End screen buttons
+        // End screen buttons
         resultScreenContinueButton.clicked -= OnResultScreenContinue;
         endScreenRestartButton.clicked -= OnRestartGameClick;
         endScreenChangeLevelButton.clicked -= OnChangeLevelClick;
