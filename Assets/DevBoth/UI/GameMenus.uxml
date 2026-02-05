@@ -52,9 +52,9 @@
         <ui:VisualElement name="results-header__container" style="flex-grow: 1; width: 100%; align-items: center; justify-content: center;">
             <ui:Label text="END RESULTS" name="results-header__label" class="header" style="color: rgb(254, 202, 129); -unity-text-outline-width: 4px; -unity-text-outline-color: rgb(0, 0, 0);" />
         </ui:VisualElement>
-        <ui:VisualElement name="results-screen__container" class="result-screen-container" style="flex-grow: 1; width: 60%; height: 70%; align-items: center; justify-content: center; background-color: rgba(93, 197, 72, 0); background-size: 100% 90%; background-image: url(&quot;project://database/Assets/Minigolf%20Graphics%20Pack/Textures/Backgrounds/Background02_Green.png?fileID=2800000&amp;guid=702fac7ccdd300745a113e7ab023857e&amp;type=3#Background02_Green&quot;);" />
-        <ui:VisualElement name="results-button__container" style="flex-grow: 1;">
-            <ui:Button text="CONTINUE" name="results-screen-continue__button" class="button" style="height: 70px; width: 300px;" />
+        <ui:VisualElement name="results-screen__container" class="result-screen-container" style="flex-grow: 1; width: 60%; height: 70%; align-items: center; justify-content: center; background-color: rgba(93, 197, 72, 0); background-size: 100% 90%; background-image: url(&quot;project://database/Assets/Minigolf%20Graphics%20Pack/Textures/Backgrounds/Background02_Green.png?fileID=2800000&amp;guid=702fac7ccdd300745a113e7ab023857e&amp;type=3#Background02_Green&quot;); display: flex;" />
+        <ui:VisualElement name="results-button__container" style="flex-grow: 1; justify-content: center;">
+            <ui:Button text="CONTINUE" name="results-screen-continue__button" class="button" style="width: 300px; height: 70px;" />
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="end-screen-menu__container" style="flex-grow: 1; display: none;">

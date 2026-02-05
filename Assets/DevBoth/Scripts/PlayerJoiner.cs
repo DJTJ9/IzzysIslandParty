@@ -44,7 +44,7 @@ public class PlayerJoiner : MonoBehaviour
 
     public void PlayerJoinedBB(PlayerInput _playerInput)
     {
-        if (_playerInput.gameObject.TryGetComponent(out NPC_BowlingBattle npc))
+        if (_playerInput.gameObject.TryGetComponent(out NPC_BowlingBattleController npc))
         {
             _playerInput.gameObject.transform.position = npcCollectionBB.Players[m_npcIndex].SpawnPoint;
             currentPlayers.Players.Add(npcCollectionBB.Players[m_npcIndex]);
@@ -52,12 +52,12 @@ public class PlayerJoiner : MonoBehaviour
             return;
         }
 
-        if (m_playerIndex == 0)
-        {
-            player1 = _playerInput;
-
-            SetPlayerInputModuleToGlobalEventSystem(_playerInput);
-        }
+        // if (m_playerIndex == 0)
+        // {
+        //     player1 = _playerInput;
+        //
+        //     SetPlayerInputModuleToGlobalEventSystem(_playerInput);
+        // }
         
         _playerInput.gameObject.transform.position = playerCollectionBB.Players[m_playerIndex].SpawnPoint;
         playerCollectionBB.Players[m_playerIndex].InitializePlayer(_playerInput.gameObject, playerCollectionBB.Players[m_playerIndex], m_playerIndex);

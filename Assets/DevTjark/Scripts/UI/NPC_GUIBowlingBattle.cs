@@ -7,14 +7,14 @@ public class NPC_GUIBowlingBattle : MonoBehaviour
 {
     [FoldoutGroup("Canvas Elements", expanded: false)]
     [SerializeField] private GameObject bowlingBattleUI;
-    [SerializeField] private GameObject ballButtons;
+    // [SerializeField] private GameObject ballButtons;
     [SerializeField] private GameObject timer;
     [SerializeField] private GameObject score;
     [SerializeField] private TMP_Text timerLabel;
     [SerializeField] private TMP_Text scoreLabel;
     [SerializeField] private SO_PlayerCollection npcSO;
     
-    [SerializeField] private NPC_BowlingBattle npcController;
+    [SerializeField] private NPC_BowlingBattleController npcController;
 
     private void Update()
     {
@@ -25,13 +25,13 @@ public class NPC_GUIBowlingBattle : MonoBehaviour
     public void ShowUI()
     {
         bowlingBattleUI.SetActive(true);
-        ballButtons.SetActive(true);
+        // ballButtons.SetActive(true);
         timer.SetActive(true);
     }
 
     public void HideUI()
     {
-        ballButtons.SetActive(false);
+        // ballButtons.SetActive(false);
         timer.SetActive(false);
     } 
 }

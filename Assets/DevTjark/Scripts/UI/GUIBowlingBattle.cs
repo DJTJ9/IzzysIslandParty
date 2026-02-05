@@ -12,7 +12,7 @@ public class GUIBowlingBattle : MonoBehaviour
 {
     [FoldoutGroup("Canvas Elements", expanded: false)]
     [SerializeField] private GameObject bowlingBattleUI;
-    [SerializeField] private GameObject ballButtons;
+    // [SerializeField] private GameObject ballButtons;
     [SerializeField] private GameObject timer;
     [SerializeField] private GameObject score;
     [SerializeField] private TMP_Text timerLabel;
@@ -24,10 +24,10 @@ public class GUIBowlingBattle : MonoBehaviour
 
     private Button m_currentSelectedButton;
     
-    private void Start()
-    {
-        ConfigureButtonClickEvents();
-    }
+    // private void Start()
+    // {
+    //     ConfigureButtonClickEvents();
+    // }
 
     private void Update()
     {
@@ -37,34 +37,34 @@ public class GUIBowlingBattle : MonoBehaviour
     public void ShowUI()
     {
         bowlingBattleUI.SetActive(true);
-        ballButtons.SetActive(true);
+        // ballButtons.SetActive(true);
         timer.SetActive(true);
 
-        if (m_currentSelectedButton == null)
-        {
-            RefocusButton(ballButtons.GetComponentInChildren<Button>());
-            return;
-        }
-        RefocusButton(m_currentSelectedButton);
+        // if (m_currentSelectedButton == null)
+        // {
+        //     RefocusButton(ballButtons.GetComponentInChildren<Button>());
+        //     return;
+        // }
+        // RefocusButton(m_currentSelectedButton);
     }
 
     public void HideUI()
     {
-        ballButtons.SetActive(false);
+        // ballButtons.SetActive(false);
         timer.SetActive(false);
     } 
     
-    private void ConfigureButtonClickEvents()
-    {
-        var buttons = ballButtons.GetComponentsInChildren<Button>();
-
-        foreach (var button in buttons)
-        {
-            button.onClick.AddListener(() => RefocusButton(button));
-        }
-
-        m_currentSelectedButton = buttons.First();
-    }
+    // private void ConfigureButtonClickEvents()
+    // {
+    //     var buttons = ballButtons.GetComponentsInChildren<Button>();
+    //
+    //     foreach (var button in buttons)
+    //     {
+    //         button.onClick.AddListener(() => RefocusButton(button));
+    //     }
+    //
+    //     m_currentSelectedButton = buttons.First();
+    // }
     
     private void UpdateScoreAndTimerLabels()
     {
@@ -72,12 +72,12 @@ public class GUIBowlingBattle : MonoBehaviour
         scoreLabel.text = playersSO.Players[playerController.GetPlayerIndex()].PlayerScore.Value.ToString("0");
     }
     
-    private void RefocusButton(Button _button) => StartCoroutine(RefocusButtonAfterFrameCoroutine(_button));
-    
-    private IEnumerator RefocusButtonAfterFrameCoroutine(Button _button)
-    {
-        yield return null;
-        eventSystem.SetSelectedGameObject(_button.gameObject);
-        m_currentSelectedButton = _button;
-    }
+    // private void RefocusButton(Button _button) => StartCoroutine(RefocusButtonAfterFrameCoroutine(_button));
+    //
+    // private IEnumerator RefocusButtonAfterFrameCoroutine(Button _button)
+    // {
+    //     yield return null;
+    //     eventSystem.SetSelectedGameObject(_button.gameObject);
+    //     m_currentSelectedButton = _button;
+    // }
 }
