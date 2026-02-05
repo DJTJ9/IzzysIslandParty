@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
@@ -203,11 +204,14 @@ public class GameMenuEvents : MonoBehaviour
         onRestart.Invoke();
         HideEndScreenUI();
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        var sceneName = SceneManager.GetActiveScene().name;
+        SceneManager.UnloadSceneAsync(sceneName);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
     private void OnResumeGameClick()
     {
+        HidePauseMenu();
         onUnpause.Invoke();
     }
 
@@ -216,12 +220,14 @@ public class GameMenuEvents : MonoBehaviour
         pauseMenu.style.display = DisplayStyle.None;
         endScreenUI.style.display = DisplayStyle.None;
         playerHub.style.display = DisplayStyle.Flex;
+        FocusButton(bowlingBattleButton);
     }
     
     private void OnPlayerHubBack()
     {
         pauseMenu.style.display = DisplayStyle.Flex;
         playerHub.style.display = DisplayStyle.None;
+        FocusButton(pauseMenuResumeButton);
     }
 
     private void OnQuitClick()
@@ -242,7 +248,7 @@ public class GameMenuEvents : MonoBehaviour
         controllerSelectionMenu.style.display = DisplayStyle.None;
     }
     
-    public void OnControllerSelectionReadyButtonClick()
+    private void OnControllerSelectionReadyButtonClick()
     {
         HideControllerSelectionScreen();
         onGameStart.Invoke();
@@ -307,14 +313,17 @@ public class GameMenuEvents : MonoBehaviour
 
     public void ShowResultsScreen()
     {
+
         ShowResults(currentPlayers.Players);
         resultsScreen.style.display = DisplayStyle.Flex;
+        FocusButton(resultScreenContinueButton);
     }
     
     public void ShowRaceResultsScreen()
     {
         ShowRaceResults(currentPlayers.Players);
         resultsScreen.style.display = DisplayStyle.Flex;
+        FocusButton(resultScreenContinueButton);
     }
     
     private void ShowResults(List<SO_Player> _results)
@@ -328,7 +337,7 @@ public class GameMenuEvents : MonoBehaviour
             .OrderByDescending(_r => _r.PlayerScore.Value)
             .ToList();
 
-        for (int i = 0; i < ordered.Count; i++)
+        for (var i = 0; i < ordered.Count; i++)
         {
             var data = ordered[i];
             var row = rowTemplate.CloneTree();

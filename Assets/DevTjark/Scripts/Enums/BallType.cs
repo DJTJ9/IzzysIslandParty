@@ -1,6 +1,6 @@
 ﻿public enum BallType
 {
-    Baseball,
     Basketball,
+    Baseball,
     Football
 }

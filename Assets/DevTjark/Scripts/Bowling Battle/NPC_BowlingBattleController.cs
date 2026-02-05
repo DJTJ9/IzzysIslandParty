@@ -2,7 +2,7 @@
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
-public class NPC_BowlingBattle : Controller
+public class NPC_BowlingBattleController : Controller
 {
     public int NPCIndex;
 
@@ -82,23 +82,25 @@ public class NPC_BowlingBattle : Controller
     {
         var ballTypes = (BallType[])System.Enum.GetValues(typeof(BallType));
         var randomIndex = Random.Range(0, ballTypes.Length);
-        var randomBallType = ballTypes[randomIndex];
+        // var randomBallType = ballTypes[randomIndex];
         
-        switch (randomBallType)
-        {
-            case BallType.Baseball:
-                bowlingBallSwapper.SwapToBaseball();
-                break;
-            case BallType.Basketball:
-                bowlingBallSwapper.SwapToBasketball();
-                break;
-            case BallType.Football:
-                bowlingBallSwapper.SwapToFootball();
-                break;
-            default: 
-                bowlingBallSwapper.SwapToBasketball(); 
-                break;
-        }
+        bowlingBallSwapper.SwapToBall(randomIndex);
+        
+        // switch (randomBallType)
+        // {
+        //     case BallType.Baseball:
+        //         bowlingBallSwapper.SwapToBaseball();
+        //         break;
+        //     case BallType.Basketball:
+        //         bowlingBallSwapper.SwapToBasketball();
+        //         break;
+        //     case BallType.Football:
+        //         bowlingBallSwapper.SwapToFootball();
+        //         break;
+        //     default: 
+        //         bowlingBallSwapper.SwapToBasketball(); 
+        //         break;
+        // }
     }
     
     public void OnReleaseBall()
@@ -116,6 +118,7 @@ public class NPC_BowlingBattle : Controller
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         
+        controller.enabled = false;
         transform.position = npcCollectionSO.Players[NPCIndex].SpawnPoint;
         transform.rotation = Quaternion.identity;
 
@@ -126,5 +129,7 @@ public class NPC_BowlingBattle : Controller
     
     public void EnableCharacterController() => controller.enabled = true;
     
-    public SO_Player GetNpcSo => npcSO;
+    public void DisableCharacterController() => controller.enabled = false;
+    
+    public SO_Player GetNpcSO => npcSO;
 }
