@@ -1775,6 +1775,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7304025793670330477}
+        m_TargetAssemblyTypeName: PlayerControllerBowlingBattle, Assembly-CSharp
+        m_MethodName: SetUIInputModuleToGlobalEventSystem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8528101109628173890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2184,7 +2196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2639976134451593851, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 38
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: 2639976134451593851, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: m_NeverAutoSwitchControlSchemes
@@ -2344,7 +2356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2639976134451593851, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: m_ActionEvents.Array.data[38].m_ActionId
-      value: 38441365-2d9f-4f4b-9df1-a7449976d000
+      value: c6c3145b-2ca9-4326-a4f3-a8606709a4dd
       objectReference: {fileID: 0}
     - target: {fileID: 2639976134451593851, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: m_ActionEvents.Array.data[39].m_ActionId
@@ -2528,7 +2540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2639976134451593851, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: m_ActionEvents.Array.data[38].m_ActionName
-      value: 'SwaggySnapshot/Interact[/Keyboard/e,/XInputControllerWindows/buttonNorth,/XInputControllerWindows1/buttonNorth]'
+      value: 'FishingGame/X[/Keyboard/x,/XInputControllerWindows/rightStickPress]'
       objectReference: {fileID: 0}
     - target: {fileID: 2639976134451593851, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: m_ActionEvents.Array.data[39].m_ActionName
@@ -2675,6 +2687,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ba77c3e7aa5b8ea47bc44097c5c35728, type: 2}
     - target: {fileID: 3761523586504917549, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
+      propertyPath: globalPoint
+      value: 
+      objectReference: {fileID: -4300584928347552941, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+    - target: {fileID: 3761523586504917549, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: inputModule
       value: 
       objectReference: {fileID: 3236733872608044351}
@@ -2698,6 +2714,10 @@ PrefabInstance:
       propertyPath: playerCollectionSo
       value: 
       objectReference: {fileID: 11400000, guid: b311deb974e253d4a87e88e50d801712, type: 2}
+    - target: {fileID: 3761523586504917549, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
+      propertyPath: multiplayerInputModule
+      value: 
+      objectReference: {fileID: 3236733872608044351}
     - target: {fileID: 3761523586504917549, guid: 13bfbd6aef1f04343bc98d976871b599, type: 3}
       propertyPath: playersBowlingBattleSoPlayers
       value: 
