@@ -19,7 +19,7 @@ namespace HurdleGame
             if (_obj.TryGetComponent<CharacterMover>(out var character) && !hitObstacle)
             {
                 hitObstacle = true;
-                character.HitObstacle();
+                character.OnHitObstacle();
             }
         }
     }

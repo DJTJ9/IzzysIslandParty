@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using AnimationHandler;
 using Audio;
 using HelperScripts;
 using MultiuseScripts;
@@ -85,8 +86,22 @@ namespace HurdleGame
         {
             StopCoroutine(CountdownToLevelStart());
 
+            PlayerStart();
             OnLevelStart.Invoke();
+            
             raceStarted = true;
+        }
+        
+        private void PlayerStart()
+        {
+            foreach (GameObject obj in placementOrder)
+            {
+                if (obj.TryGetComponent(out CharacterMover characterMover))
+                    characterMover.CanMove();
+
+                if (obj.TryGetComponent(out HurdleAnimationHandler animationHandler))
+                    animationHandler.OnGameStart();
+            }
         }
 
         private IEnumerator CountdownToLevelStart()
@@ -199,6 +214,15 @@ namespace HurdleGame
             }
         }
 
+        private void PlayerEnd()
+        {
+            foreach (GameObject obj in placementOrder)
+            {
+                if (TryGetComponent(out CharacterMover characterMover))
+                    characterMover.CantMove();
+            }
+        }
+        
         public override void EndLevel()
         {
             CheckWinnerPlacementList();
@@ -209,6 +233,7 @@ namespace HurdleGame
             raceStarted = false;
 
             OnLevelEnd?.Invoke();
+            PlayerEnd();
         }
     }
 }

@@ -23,7 +23,7 @@ public class FishDisplay : MonoBehaviour
     [SerializeField] private EventSystem eventSystem;
     
     private string fishingActionMap = "FishingGame";
-    private string uiActionMap = "UI";
+    //private string uiActionMap = "UI";
     
     private void Awake()
     {

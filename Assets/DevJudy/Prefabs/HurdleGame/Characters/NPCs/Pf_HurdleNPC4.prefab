@@ -3681,6 +3681,7 @@ GameObject:
   - component: {fileID: 4063427058181862366}
   - component: {fileID: 7238174098871250608}
   - component: {fileID: 4070814261002953781}
+  - component: {fileID: 8686626367768808652}
   m_Layer: 7
   m_Name: Pf_HurdleNPC4
   m_TagString: Untagged
@@ -3790,11 +3791,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ca19d0d3aa62064aa82abce402dae44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnHitObstacleEvents:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8686626367768808652}
+        m_TargetAssemblyTypeName: AnimationHandler.HurdleAnimationHandler, Assembly-CSharp
+        m_MethodName: OnHitObstacle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   moveSpeed:
     UseConstant: 0
     ConstantValue: 3
     Variable: {fileID: 11400000, guid: 521306ef3d86e624397817d16824f5c4, type: 2}
-  canMove: 0
 --- !u!114 &4070814261002953781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3807,12 +3822,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb66c1d320d0784eb0dfba274348a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleCheckSize: 0.6
-  obstacleCheckPosition: {x: 1, y: 0, z: 0}
+  obstacleCheckSize: 1
+  obstacleCheckPosition: {x: 7, y: 0, z: 0}
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 16384
-  jumpChancePercent: 0.5
+  jumpChancePercent: 0.85
   jumpForce: 7
   hopMultiplier: 0.5
   groundLayer:
@@ -3820,6 +3835,20 @@ MonoBehaviour:
     m_Bits: 1024
   groundCheckOffset: -0.05
   groundCheckRadius: 0.3
+  <IsGrounded>k__BackingField: 0
+  canJump: 1
+--- !u!114 &8686626367768808652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8469120234974689258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4122ebf3775cc64449850d71c4f2d98e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8562996505300906339
 GameObject:
   m_ObjectHideFlags: 0

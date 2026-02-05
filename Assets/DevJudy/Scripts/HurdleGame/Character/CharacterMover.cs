@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace HurdleGame
 {
@@ -6,12 +7,10 @@ namespace HurdleGame
     public class CharacterMover : MonoBehaviour
     {
         private Rigidbody rb;
-
-        [Header("Movement variables: ")]
+        
+        [SerializeField] private UnityEvent OnHitObstacleEvents;
         [SerializeField] private FloatReference moveSpeed;
-
         private float moveDirMultiplier = 100f;
-
         private float individualMultiplier = 1f;
         public float IndividualMultiplier
         {
@@ -19,7 +18,7 @@ namespace HurdleGame
             set => individualMultiplier = value;
         }
         
-        [SerializeField] private bool canMove = false;
+        private bool canMove = false;
 
         private void Awake()
         {
@@ -38,13 +37,14 @@ namespace HurdleGame
             rb.linearVelocity = Vector3.zero;
         }
 
-        public void HitObstacle()
+        public void OnHitObstacle()
         {
-            // Play animation
-            // Show Icon
-            
             transform.position += new Vector3(-1, 0f, 0f);
             individualMultiplier -= 0.01f;
+            
+            // Play animation
+            // Show Icon
+            OnHitObstacleEvents.Invoke();
         }
 
         private void FixedUpdate()

@@ -42,11 +42,7 @@ namespace HurdleGame
         {
             get;
             set;
-            // if (value)
-            //     isFalling = false;
         }
-
-        //[SerializeField] private bool isFalling;
 
         private void Awake()
         {
@@ -111,8 +107,7 @@ namespace HurdleGame
                 slideTimer.Start();
 
                 ChangeCollider(true);
-
-                // play animation
+                
                 return;
             }
 

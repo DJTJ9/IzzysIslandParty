@@ -1,5 +1,7 @@
+using System;
 using ImprovedTimers;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace HurdleGame
 {
@@ -24,7 +26,7 @@ namespace HurdleGame
         private Timer jumpCooldownTimer;
         private float jumpCooldown = 1f;
         private Timer smallJumpTimer;
-        private float timeUntilSmallJump = 0.45f;
+        private float timeUntilSmallJump = 0.6f;
 
         [Header("GroundCheck variables: ")]
         [SerializeField] private LayerMask groundLayer;
@@ -32,8 +34,9 @@ namespace HurdleGame
         [SerializeField] private float groundCheckOffset = 1f;
         [SerializeField] private float groundCheckRadius = 0.3f;
 
-        public bool IsGrounded { get; private set; }
+        [field: SerializeField] public bool IsGrounded { get; private set; }
         [field: SerializeField] private bool canJump = true;
+        private bool jumping;
 
         private void OnValidate()
         {
@@ -57,7 +60,7 @@ namespace HurdleGame
         private void FixedUpdate()
         {
             GroundCheck();
-
+            
             if (Physics.OverlapSphere(transform.position + obstacleCheckPosition, obstacleCheckSize, obstacleLayerMask).Length > 0
                 && canJump)
                 CheckIfCharJumps();
@@ -84,11 +87,13 @@ namespace HurdleGame
 
         private void SmallJump()
         {
+            jumping = true;
             Jump(smallJumpHeight);
         }
 
         private void Jump(Vector2 _jumpHeight)
         {
+            jumping = true;
             rb.linearVelocity = _jumpHeight;
 
             jumpCooldownTimer.Start();
@@ -100,8 +105,11 @@ namespace HurdleGame
 
             IsGrounded = Physics.OverlapSphere(groundCheckPos, groundCheckRadius, groundLayer).Length > 0;
 
-            //if (!IsGrounded && rb.linearVelocity.y < 0.01f)
-            // isFalling = true;
+            if (IsGrounded && rb.linearVelocity.y < 0.1)
+            {
+                jumping = false;
+                canJump = true;
+            }
         }
 
         public void OnDrawGizmos()
