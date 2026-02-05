@@ -9,6 +9,9 @@ using UnityEngine.UIElements;
 
 public class FishDisplay : MonoBehaviour
 {
+    private const string fishingActionMap = "FishingGame";
+    private const string uiActionMap = "FishingGameUI";
+
     [Header("UI")]
     [SerializeField] private GameObject fishUIRenderer;
 
@@ -21,9 +24,6 @@ public class FishDisplay : MonoBehaviour
     [Header("Input")]
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private EventSystem eventSystem;
-    
-    private string fishingActionMap = "FishingGame";
-    //private string uiActionMap = "UI";
     
     private void Awake()
     {
@@ -63,13 +63,9 @@ public class FishDisplay : MonoBehaviour
 
     public void DisplayFish(SO_Fish _fish)
     {
-        // !! This isnt working
-        //playerInput.SwitchCurrentActionMap(uiActionMap);
-        //eventSystem.SetSelectedGameObject(stopFishDisplayButton);
-        //Debug.Log("Selected: " + eventSystem.currentSelectedGameObject.name);
+        playerInput.SwitchCurrentActionMap(uiActionMap);
         
-        // Change delta time to zero !!
-        // Time.timeScale = 0f;
+        Time.timeScale = 0f;
         
         _fish.PrefabReference.SetActive(true);
         fishDisplayPanel.SetActive(true);

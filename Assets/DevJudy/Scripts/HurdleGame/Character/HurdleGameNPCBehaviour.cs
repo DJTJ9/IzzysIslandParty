@@ -1,4 +1,3 @@
-using System;
 using ImprovedTimers;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -11,13 +10,11 @@ namespace HurdleGame
 
         [Header("Obstacle Check:")]
         [SerializeField] private float obstacleCheckSize;
-
         [SerializeField] private Vector3 obstacleCheckPosition;
         [SerializeField] private LayerMask obstacleLayerMask;
 
         [Header("Jump variables:")]
         [SerializeField] private float jumpChancePercent = 0.5f;
-
         [SerializeField] private float jumpForce = 7f;
         [SerializeField] private float hopMultiplier = 0.5f;
         private Vector2 bigJumpHeight;
@@ -30,13 +27,11 @@ namespace HurdleGame
 
         [Header("GroundCheck variables: ")]
         [SerializeField] private LayerMask groundLayer;
-
         [SerializeField] private float groundCheckOffset = 1f;
         [SerializeField] private float groundCheckRadius = 0.3f;
 
         [field: SerializeField] public bool IsGrounded { get; private set; }
         [field: SerializeField] private bool canJump = true;
-        private bool jumping;
 
         private void OnValidate()
         {
@@ -87,13 +82,11 @@ namespace HurdleGame
 
         private void SmallJump()
         {
-            jumping = true;
             Jump(smallJumpHeight);
         }
 
         private void Jump(Vector2 _jumpHeight)
         {
-            jumping = true;
             rb.linearVelocity = _jumpHeight;
 
             jumpCooldownTimer.Start();
@@ -106,10 +99,7 @@ namespace HurdleGame
             IsGrounded = Physics.OverlapSphere(groundCheckPos, groundCheckRadius, groundLayer).Length > 0;
 
             if (IsGrounded && rb.linearVelocity.y < 0.1)
-            {
-                jumping = false;
                 canJump = true;
-            }
         }
 
         public void OnDrawGizmos()

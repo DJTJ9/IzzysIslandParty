@@ -15,8 +15,6 @@ namespace FishingGame
         private LineRenderer lineRenderer;
 
         [SerializeField] public IconHandler IconHandler;
-
-        // !! Not working yet
         [SerializeField] private Transform[] rodLineRendererPositions;
 
         private bool isCast = false;
@@ -39,25 +37,13 @@ namespace FishingGame
             if (lineRenderer == null)
                 Debug.LogWarning("No lineRenderer attached to " + gameObject.name);
 
-            //lineRenderer.enabled = true;
-            //lineRenderer.useWorldSpace = true;
-            //lineRenderer.startWidth = lineRenderer.endWidth = 0.02f;
-            //lineRenderer.positionCount = 2;
+            lineRenderer.enabled = true;
+            lineRenderer.useWorldSpace = true;
+            lineRenderer.startWidth = lineRenderer.endWidth = 0.02f;
+            lineRenderer.positionCount = 2;
 
-            //lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
-            //lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
-
-            // lineRenderer = GetComponent<LineRenderer>();
-            // if (lineRenderer == null)
-            //     Debug.LogWarning("No lineRenderer attached to " + gameObject.name);
-
-            // lineRenderer.enabled = true;
-            // lineRenderer.useWorldSpace = true;
-            // lineRenderer.startWidth = lineRenderer.endWidth = 0.02f;
-            // lineRenderer.positionCount = 2;
-
-            // lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
-            // lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
+            lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
+            lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
         }
 
         public void OnPause(InputAction.CallbackContext _context)
@@ -80,9 +66,7 @@ namespace FishingGame
         public void OnStopFishDisplay(InputAction.CallbackContext _context)
         {
             if (_context.performed)
-            {
                 FishingSystem.Instance.StopFishDisplay();
-            }
         }
 
         public void OnCast(InputAction.CallbackContext _context)
@@ -136,17 +120,16 @@ namespace FishingGame
 
         private void LateUpdate()
         {
-            //lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
-            //lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
-        }
+            if (lineRenderer == null || rodLineRendererPositions == null || rodLineRendererPositions.Length < 1)
+                return;
 
-        //private void LateUpdate()
-        //{
-        //    if (Keyboard.current.cKey.wasPressedThisFrame)
-        //        Debug.Log("C pressed");
-        //    
-        //    //lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
-        //    //lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
-        //}
+            lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
+
+            // The second position is either the animationLure, or the physicsLure depending on what is currently active
+            if (rodLineRendererPositions[1].gameObject.activeInHierarchy)
+                lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
+            else if (rodLineRendererPositions[2].gameObject.activeInHierarchy)
+                lineRenderer.SetPosition(1, rodLineRendererPositions[2].position);
+        }
     }
 }

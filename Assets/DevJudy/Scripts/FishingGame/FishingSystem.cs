@@ -174,7 +174,7 @@ namespace FishingGame
 
                 uiPointsService?.UpdatePointsText(caughtFish.Points);
 
-                StopFishDisplay();
+                //StopFishDisplay();
             }
             else
             {
