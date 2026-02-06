@@ -2,5 +2,5 @@
 
 public class Controller : MonoBehaviour
 {
-    
+    public int PlayerIndex;
 }

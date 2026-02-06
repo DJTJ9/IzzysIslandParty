@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class PlayerControllerMinigolfMayhem : MonoBehaviour
+public class PlayerControllerMinigolfMayhem : Controller
 {
-    public int PlayerIndex { get; private set; }
+    // public int PlayerIndex { get; private set; }
 
     [Header("Movement")]
     private RigidbodyMovement rigidbodyMovement;

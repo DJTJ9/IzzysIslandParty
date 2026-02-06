@@ -14,7 +14,7 @@ using UnityEngine.Serialization;
 public class MainMenuEvents : MonoBehaviour
 {
     // [SerializeField] private PlayerInputManager playerInputManager;
-    // [SerializeField] private PlayerJoiner playerJoiner;
+    // [SerializeField] private JetskiJoyridePlayerJoiner playerJoiner;
     [SerializeField] private SceneCollectionSO sceneCollection;
     [SerializeField] private UnityEvent onLoadBowlingBattle;
     

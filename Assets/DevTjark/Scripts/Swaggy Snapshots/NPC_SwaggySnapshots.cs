@@ -5,11 +5,9 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
-public class NPC_SwaggySnapshots : MonoBehaviour
+public class NPC_SwaggySnapshots : Controller
 {
-    public int PlayerIndex;
-
-    [SerializeField] private UnityEvent onTakePhoto;
+    [SerializeField] private UnityEvent<int> onTakePhoto;
 
     private CountdownTimer m_photoTimer;
 
@@ -26,6 +24,6 @@ public class NPC_SwaggySnapshots : MonoBehaviour
 
     private void TakePhoto()
     {
-        onTakePhoto.Invoke();
+        onTakePhoto.Invoke(PlayerIndex);
     }
 }

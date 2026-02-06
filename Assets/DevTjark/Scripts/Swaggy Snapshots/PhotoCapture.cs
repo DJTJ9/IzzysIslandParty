@@ -11,11 +11,11 @@ public class PhotoCapture : MonoBehaviour
     [FoldoutGroup("Photo Objects", expanded: true)]
     [SerializeField] private Image photoDisplayArea;
     [SerializeField] private GameObject photoFrame;
+    private RectTransform photoFrameRectTransform;
     
     [FoldoutGroup("Score Label", expanded: true)]
     [SerializeField] private TMP_Text scoreLabel;
     [SerializeField] private TMP_Text scoreNumber;
-    [SerializeField] private GameScoreSO gameScoreSO;
 
     // [SerializeField] private Image photoDisplayArea2;
     // [SerializeField] private GameObject photoFrame2;
@@ -27,8 +27,9 @@ public class PhotoCapture : MonoBehaviour
     [FoldoutGroup("Photo Fade Effect", expanded: true)]
     [SerializeField] private Animator fadingAnimator;
     [SerializeField] private float fadeInSpeed = 1f;
-    
-    // [SerializeField] private UnityEvent onPhotoTaken;
+
+    [SerializeField] private SO_PlayerCollection playersSO;
+    private Controller playerController;
     
     private Texture2D m_screenCapture;
     private bool m_photoTaken;
@@ -37,12 +38,14 @@ public class PhotoCapture : MonoBehaviour
     
     private void Start()
     {
+        playerController = GetComponent<Controller>();
+        photoFrameRectTransform = photoFrame.GetComponent<RectTransform>();
         m_screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
     }
     
     private void Update()
     {
-        scoreNumber.text = gameScoreSO.Value.ToString("0");
+        scoreNumber.text = playersSO.Players[playerController.PlayerIndex].PlayerScore.Value.ToString("0");
     }
 
     [Button]
@@ -75,6 +78,7 @@ public class PhotoCapture : MonoBehaviour
     [Button]
     public void ShowScreenshot()
     {
+        photoFrameRectTransform.anchoredPosition = playersSO.Players[playerController.PlayerIndex].SpawnPoint;
         Sprite photoSprite = Sprite.Create(m_screenCapture, new Rect(0, 0, m_screenCapture.width, m_screenCapture.height), new Vector2(0.5f, 0.5f), 100f);
         photoDisplayArea.sprite = photoSprite;
         

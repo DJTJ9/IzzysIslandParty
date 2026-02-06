@@ -52,9 +52,11 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
         
         m_photoShowTimer = new CountdownTimer(photoShowDuration);
         m_photoShowTimer.OnTimerStop += () => onGameEnd.Invoke();
+        
+        FreezeTimeScale();
     }
 
-    private void Start()
+    public void StartGame()
     {
         m_startMoveTimer.Start();
     }
@@ -65,4 +67,7 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
         onRoundEnd.Invoke();
         m_photoShowTimer.Start();
     }
+    
+    public void FreezeTimeScale() => Time.timeScale = 0f;
+    public void UnfreezeTimeScale() => Time.timeScale = 1f;
 }

@@ -2,9 +2,9 @@
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class PlayerControllerSwaggySnapshots : MonoBehaviour
+public class PlayerControllerSwaggySnapshots : Controller
 {
-    public int PlayerIndex;
+    // public int PlayerIndex;
 
     private InputAction m_takePhotoInputAction;
     private InputAction m_pauseInputAction;
@@ -12,7 +12,7 @@ public class PlayerControllerSwaggySnapshots : MonoBehaviour
     
     private PlayerInput playerInput;
 
-    [SerializeField] private UnityEvent onTakePhoto;
+    [SerializeField] private GameEventInt onTakePhoto;
     [SerializeField] private UnityEvent onPause;
     [SerializeField] private UnityEvent onUnpause;
     
@@ -20,31 +20,32 @@ public class PlayerControllerSwaggySnapshots : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
     }
-    
-    private void MapInputActions() 
-    {
-        m_takePhotoInputAction = playerInput.actions["TakePhoto"];
-        // m_takePhotoInputAction.started += OnTakePhoto;
-
-        m_pauseInputAction = playerInput.actions["Pause"];
-        m_pauseInputAction.started += OnPause;
-
-        m_unpauseInputAction = playerInput.actions["Unpause"];
-        m_unpauseInputAction.started += OnUnpause;
-    }
 
     public void OnTakePhoto(InputAction.CallbackContext _obj)
     {
-        onTakePhoto.Invoke();
+        onTakePhoto.Raise(PlayerIndex);
     }
 
-    private void OnPause(InputAction.CallbackContext _obj)
+    public void OnPause(InputAction.CallbackContext _obj)
     {
         onPause.Invoke();
     }
 
-    private void OnUnpause(InputAction.CallbackContext _obj)
+    public void OnUnpause(InputAction.CallbackContext _obj)
     {
         onUnpause.Invoke();
     }
+    
+    public void SwitchToPlayerInputMap()
+    {
+        playerInput.SwitchCurrentActionMap("SwaggySnapshots");
+    }
+    
+    public void SwitchToUIInputMap()
+    {
+        playerInput.SwitchCurrentActionMap("UI");
+    }
+
+    public int GetPlayerIndex() => PlayerIndex;
+    public void SetPlayerIndex(int _playerIndex) => PlayerIndex = _playerIndex;
 }

@@ -1162,8 +1162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bce12737ce32a64ca8776d25f07b301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textManager: {fileID: 0}
-  uiPanelManager: {fileID: 0}
+  timerManager: {fileID: 0}
+  levelService: {fileID: 0}
   durationInMinutes: 5
   deductionFeedbackDuration: 2
   timerRunningDown: 0
@@ -1358,7 +1358,15 @@ PrefabInstance:
       value: PlayerManager
       objectReference: {fileID: 0}
     - target: {fileID: 4161216485883749430, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: currentPlayers
+      value: 
+      objectReference: {fileID: 11400000, guid: 97ae6e8cdb921dd4d97057deb65c1858, type: 2}
+    - target: {fileID: 4161216485883749430, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
       propertyPath: playerCollectionBB
+      value: 
+      objectReference: {fileID: 11400000, guid: 36c9948eae0befe4dbcf74c78b92759e, type: 2}
+    - target: {fileID: 4161216485883749430, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: playerCollectionJJ
       value: 
       objectReference: {fileID: 11400000, guid: 36c9948eae0befe4dbcf74c78b92759e, type: 2}
     - target: {fileID: 7028254439613952691, guid: 902499a3e5a580a459531fea9c50a394, type: 3}

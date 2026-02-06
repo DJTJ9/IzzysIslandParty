@@ -537,7 +537,7 @@ Transform:
   m_Children:
   - {fileID: 2413696930459926032}
   m_Father: {fileID: 6188706885337059703}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 3.348, y: -90.01, z: 0.015}
 --- !u!1 &1587038645320062801
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,7 +695,7 @@ Transform:
   m_Children:
   - {fileID: 6188706885337059703}
   m_Father: {fileID: 4185008212866109269}
-  m_LocalEulerAnglesHint: {x: 35.393307, y: 17.68172, z: -4.3974032}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 8.374}
 --- !u!1 &1911185096627359072
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,7 +1014,7 @@ Transform:
   m_Children:
   - {fileID: 7069561091974168056}
   m_Father: {fileID: 1291526527277160775}
-  m_LocalEulerAnglesHint: {x: -64.624176, y: -17.741833, z: 12.058533}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 9.432895}
 --- !u!1 &2289322918558608529
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,7 +1050,7 @@ Transform:
   - {fileID: 3464160278260584551}
   - {fileID: 5723485928073657132}
   m_Father: {fileID: 6393229049439697434}
-  m_LocalEulerAnglesHint: {x: -0.0000026960042, y: -0.00001767793, z: -8.400242}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2300982034572746274
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,7 +1214,7 @@ Transform:
   - {fileID: 9051749998510034336}
   - {fileID: 8170304901295341745}
   m_Father: {fileID: 8543048092088685317}
-  m_LocalEulerAnglesHint: {x: -14.399602, y: -12.741269, z: -9.271343}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2696694870989257096
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,7 +1310,7 @@ Transform:
   m_Children:
   - {fileID: 7257839188745781152}
   m_Father: {fileID: 2413696930459926032}
-  m_LocalEulerAnglesHint: {x: 25.010466, y: 13.491034, z: 37.276546}
+  m_LocalEulerAnglesHint: {x: -4.1225095, y: -8.245019, z: -20.612547}
 --- !u!1 &3020285968595905100
 GameObject:
   m_ObjectHideFlags: 0
@@ -1342,7 +1342,7 @@ Transform:
   m_Children:
   - {fileID: 679342869444535281}
   m_Father: {fileID: 396019475705604127}
-  m_LocalEulerAnglesHint: {x: 77.19144, y: -79.17458, z: -57.267975}
+  m_LocalEulerAnglesHint: {x: -1.549, y: -1.62, z: -4.248}
 --- !u!1 &3022769311504852180
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,7 +1433,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3153338899834395852}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.53596115, y: -0.4612436, z: -0.53596115, w: 0.4612436}
+  m_LocalRotation: {x: 0, y: 0, z: -0.75796354, w: 0.65229696}
   m_LocalPosition: {x: 1.8846837e-18, y: 0.0982851, z: -0.0017717207}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1451,7 +1451,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3153338899834395852}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2c66e4071074e8494fd698175ec6f93, type: 3}
   m_Name: 
@@ -1461,7 +1461,7 @@ MonoBehaviour:
   faceMeshRenderer: {fileID: 7398630618334704471}
   m_danceMovePointValue: 1
   animator: {fileID: 3690112078750080850}
-  playerCollectionSO: {fileID: 0}
+  currentPlayers: {fileID: 0}
   faceSwapSO: {fileID: 11400000, guid: 81a820629255773488a08ac37764e04f, type: 2}
   danceMovesSO: {fileID: 11400000, guid: 15d8be9fbb7c5844e89f80fbe24e2baf, type: 2}
 --- !u!114 &8918133386215926332
@@ -1471,7 +1471,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3153338899834395852}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
   m_Name: 
@@ -1609,7 +1609,7 @@ Transform:
   - {fileID: 4371017741848632239}
   - {fileID: 3990521704947039234}
   m_Father: {fileID: 1479565728352751652}
-  m_LocalEulerAnglesHint: {x: 0.22563028, y: 2.0833933, z: 0.9956425}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -3.145}
 --- !u!1 &3695756420939627781
 GameObject:
   m_ObjectHideFlags: 0
@@ -1716,7 +1716,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1639696655244002029}
   - component: {fileID: 27909907284868037}
-  - component: {fileID: 3552094379360440234}
+  - component: {fileID: 8364671312235059741}
   - component: {fileID: 3690112078750080850}
   m_Layer: 0
   m_Name: Dance Bunny
@@ -1741,6 +1741,7 @@ Transform:
   - {fileID: 3331434091957602173}
   - {fileID: 3432610776512593188}
   - {fileID: 4185008212866109269}
+  - {fileID: 6571696425768576902}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &27909907284868037
@@ -1758,7 +1759,7 @@ MonoBehaviour:
   skinnedMeshRenderer: {fileID: 7398630618334704471}
   danceMoveTriggersSO: {fileID: 11400000, guid: 027be34b5c9494044ac02a5e0e7d6378, type: 2}
   faceSwapSO: {fileID: 11400000, guid: 81a820629255773488a08ac37764e04f, type: 2}
---- !u!114 &3552094379360440234
+--- !u!114 &8364671312235059741
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1767,37 +1768,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 3801854629442733855}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Script: {fileID: 11500000, guid: b2c66e4071074e8494fd698175ec6f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: c01de496e4f598449bfc0d730028a08a, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 27909907284868037}
-        m_TargetAssemblyTypeName: DanceMoveManager, Assembly-CSharp
-        m_MethodName: ChangeDanceMove
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 27909907284868037}
-        m_TargetAssemblyTypeName: DanceMoveManager, Assembly-CSharp
-        m_MethodName: ChangeFace
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  m_faceForwardPointValue: 1
+  m_happyFacePointValue: 1
+  faceMeshRenderer: {fileID: 7398630618334704471}
+  m_danceMovePointValue: 1
+  animator: {fileID: 3690112078750080850}
+  currentPlayers: {fileID: 11400000, guid: 97ae6e8cdb921dd4d97057deb65c1858, type: 2}
+  faceSwapSO: {fileID: 11400000, guid: 81a820629255773488a08ac37764e04f, type: 2}
+  danceMovesSO: {fileID: 11400000, guid: 15d8be9fbb7c5844e89f80fbe24e2baf, type: 2}
 --- !u!95 &3690112078750080850
 Animator:
   serializedVersion: 7
@@ -1915,7 +1896,7 @@ Transform:
   m_Children:
   - {fileID: 396019475705604127}
   m_Father: {fileID: 4185008212866109269}
-  m_LocalEulerAnglesHint: {x: -27.603903, y: -42.136864, z: -146.34668}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: -54.121735}
 --- !u!1 &4095228834832309647
 GameObject:
   m_ObjectHideFlags: 0
@@ -2074,7 +2055,7 @@ Transform:
   m_Children:
   - {fileID: 7260228112551513815}
   m_Father: {fileID: 2930677167676479075}
-  m_LocalEulerAnglesHint: {x: -84.39675, y: -162.80763, z: 166.06386}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 76.222115}
 --- !u!1 &4383614742905401024
 GameObject:
   m_ObjectHideFlags: 0
@@ -2297,7 +2278,7 @@ Transform:
   m_Children:
   - {fileID: 5623658623451070140}
   m_Father: {fileID: 5758181337686397104}
-  m_LocalEulerAnglesHint: {x: 75.75555, y: 72.9462, z: 56.92278}
+  m_LocalEulerAnglesHint: {x: -1.2771537, y: -1.3356931, z: -3.5024846}
 --- !u!1 &5054497511093782069
 GameObject:
   m_ObjectHideFlags: 0
@@ -2353,7 +2334,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2fef9530fe457d04fa6f9101bc3814cb, type: 2}
+  - {fileID: 2100000, guid: 49563c5bb2b851741a535e408faef059, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2498,7 +2479,7 @@ Transform:
   m_Children:
   - {fileID: 9036907256682036068}
   m_Father: {fileID: 6188706885337059703}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -176.652, y: -89.98999, z: 0.01499939}
 --- !u!1 &5123821517650510846
 GameObject:
   m_ObjectHideFlags: 0
@@ -2592,7 +2573,7 @@ Transform:
   m_Children:
   - {fileID: 6393229049439697434}
   m_Father: {fileID: 4371017741848632239}
-  m_LocalEulerAnglesHint: {x: 80.34074, y: -35.082672, z: -92.36159}
+  m_LocalEulerAnglesHint: {x: 8.245019, y: -23.509962, z: -45.172108}
 --- !u!1 &5245373763411786582
 GameObject:
   m_ObjectHideFlags: 0
@@ -2655,7 +2636,7 @@ Transform:
   m_Children:
   - {fileID: 5702402782537226494}
   m_Father: {fileID: 6188706885337059703}
-  m_LocalEulerAnglesHint: {x: 1.0592985, y: 3.2782238, z: -0.5331931}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -3.191}
 --- !u!1 &5338655203125310998
 GameObject:
   m_ObjectHideFlags: 0
@@ -2974,7 +2955,7 @@ Transform:
   m_Children:
   - {fileID: 5758181337686397104}
   m_Father: {fileID: 4185008212866109269}
-  m_LocalEulerAnglesHint: {x: -15.778218, y: 14.556339, z: 163.55367}
+  m_LocalEulerAnglesHint: {x: -179.19199, y: -1.3208437, z: -4.824501}
 --- !u!1 &6548019459205565501
 GameObject:
   m_ObjectHideFlags: 0
@@ -3336,7 +3317,7 @@ Transform:
   m_Children:
   - {fileID: 4182894794595730070}
   m_Father: {fileID: 9036907256682036068}
-  m_LocalEulerAnglesHint: {x: -4.263059, y: -14.675706, z: -87.63908}
+  m_LocalEulerAnglesHint: {x: -4.1225095, y: -8.245019, z: -20.612547}
 --- !u!1 &7100076647098622775
 GameObject:
   m_ObjectHideFlags: 0
@@ -3495,6 +3476,107 @@ Transform:
   - {fileID: 1608320683832898028}
   m_Father: {fileID: 6573848008791389996}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7343489119303705839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6571696425768576902}
+  - component: {fileID: 1842840964645442571}
+  - component: {fileID: 2978463794827794555}
+  m_Layer: 0
+  m_Name: Game Event Listeners
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6571696425768576902
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7343489119303705839}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1639696655244002029}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1842840964645442571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7343489119303705839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: c01de496e4f598449bfc0d730028a08a, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 27909907284868037}
+        m_TargetAssemblyTypeName: DanceMoveManager, Assembly-CSharp
+        m_MethodName: ChangeDanceMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 27909907284868037}
+        m_TargetAssemblyTypeName: DanceMoveManager, Assembly-CSharp
+        m_MethodName: ChangeFace
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2978463794827794555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7343489119303705839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22c3b76e5d774f388f62735f420f9bf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 519eb58666e1f7443bf4b5bc5e5e95e9, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8364671312235059741}
+        m_TargetAssemblyTypeName: PointCalculator, Assembly-CSharp
+        m_MethodName: CalculatePoints
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7412050001795916376
 GameObject:
   m_ObjectHideFlags: 0
@@ -3558,7 +3640,7 @@ Transform:
   m_Children:
   - {fileID: 8543048092088685317}
   m_Father: {fileID: 3990521704947039234}
-  m_LocalEulerAnglesHint: {x: 76.45741, y: -160.4331, z: 132.7604}
+  m_LocalEulerAnglesHint: {x: 8.245019, y: -23.509962, z: -41.0496}
 --- !u!1 &7440365085504729246
 GameObject:
   m_ObjectHideFlags: 0
@@ -3975,7 +4057,7 @@ Transform:
   - {fileID: 7982603012546429291}
   - {fileID: 8366510633208927910}
   m_Father: {fileID: 1830503895401184007}
-  m_LocalEulerAnglesHint: {x: -11.546489, y: 12.093504, z: 5.7880297}
+  m_LocalEulerAnglesHint: {x: -2.632472, y: 0, z: 6.5263844}
 --- !u!1 &8855593263361390827
 GameObject:
   m_ObjectHideFlags: 0
