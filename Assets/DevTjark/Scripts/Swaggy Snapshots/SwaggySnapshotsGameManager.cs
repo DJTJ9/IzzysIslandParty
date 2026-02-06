@@ -12,8 +12,6 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
     [SerializeField] private float danceMoveDuration = 3f;
     [SerializeField] private float photoShowDuration = 10f;
     
-    [SerializeField]
-    private UnityEvent onDanceMoveChanged;
     
     private CountdownTimer m_startMoveTimer;
     private CountdownTimer m_danceMoveSwitchTimer;
@@ -21,6 +19,9 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
     public static float StartMoveDuration = 5f;
     public static float RoundTime = 15f;
     
+    [FoldoutGroup("Events", expanded: false)]
+    [SerializeField] private UnityEvent onDanceMoveChanged;
+    [SerializeField] private UnityEvent onGameStart;
     [SerializeField] private UnityEvent onRoundEnd;
     [SerializeField] private UnityEvent onGameEnd;
     

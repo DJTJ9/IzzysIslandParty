@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
@@ -12,7 +13,7 @@ public class PlayerControllerSwaggySnapshots : Controller
     
     private PlayerInput playerInput;
 
-    [SerializeField] private GameEventInt onTakePhoto;
+    public static event Action<int> onTakePhoto;
     [SerializeField] private UnityEvent onPause;
     [SerializeField] private UnityEvent onUnpause;
     
@@ -21,9 +22,16 @@ public class PlayerControllerSwaggySnapshots : Controller
         playerInput = GetComponent<PlayerInput>();
     }
 
+    public static void InvokePhotoTaken(int playerIndex)
+    {
+        onTakePhoto?.Invoke(playerIndex);
+    }
+
+    
     public void OnTakePhoto(InputAction.CallbackContext _obj)
     {
-        onTakePhoto.Raise(PlayerIndex);
+        Debug.Log($"OnTakePhoto wurde aufgerufen für Spieler {PlayerIndex}");
+        onTakePhoto?.Invoke(PlayerIndex);
     }
 
     public void OnPause(InputAction.CallbackContext _obj)

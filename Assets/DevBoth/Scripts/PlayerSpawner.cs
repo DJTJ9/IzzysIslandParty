@@ -34,7 +34,7 @@ public class PlayerSpawner : MonoBehaviour
             // ++m_playerIndex;
         }
         
-        // JoinNPCsBB();
+        // JoinNPCs();
         
         
         // foreach (var input in playerInputs.PlayerInputs)
@@ -58,7 +58,7 @@ public class PlayerSpawner : MonoBehaviour
         }
     }
 
-    // public void PlayerJoinedBB(PlayerInput _playerInput)
+    // public void PlayerJoined(PlayerInput _playerInput)
     // {
     //     AddPlayer(_playerInput);
     // }

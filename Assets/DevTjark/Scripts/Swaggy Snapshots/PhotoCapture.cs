@@ -48,9 +48,23 @@ public class PhotoCapture : MonoBehaviour
         scoreNumber.text = playersSO.Players[playerController.PlayerIndex].PlayerScore.Value.ToString("0");
     }
 
-    [Button]
-    public void TakePhoto() => StartCoroutine(CaptureScreenshot());
+    private void OnEnable()
+    {
+        PlayerControllerSwaggySnapshots.onTakePhoto += TakePhoto;
+    }
     
+    private void OnDisable()
+    {
+        PlayerControllerSwaggySnapshots.onTakePhoto -= TakePhoto;
+    }
+
+    [Button]
+    private void TakePhoto(int _playerIndex)
+    {
+        if (_playerIndex != playerController.PlayerIndex) return;
+        StartCoroutine(CaptureScreenshot());
+    }
+
     private IEnumerator CaptureScreenshot()
     {
         if (m_photoTaken) yield break;

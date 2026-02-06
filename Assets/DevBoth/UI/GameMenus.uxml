@@ -63,7 +63,7 @@
         <ui:Button text="CHANGE LEVEL" name="end-screen-menu-change-level__button" parse-escape-sequences="true" class="button" />
         <ui:Button text="QUIT" name="end-screen-menu-quit__button" class="button" />
     </ui:VisualElement>
-    <ui:VisualElement name="controller-selection-menu__container" style="flex-grow: 1; flex-direction: column; display: none; background-image: url(&quot;project://database/Assets/Minigolf%20Graphics%20Pack/Textures/Backgrounds/Background02_Green.png?fileID=2800000&amp;guid=702fac7ccdd300745a113e7ab023857e&amp;type=3#Background02_Green&quot;); background-size: 100% 100%;">
+    <ui:VisualElement name="controller-selection-menu__container" style="flex-grow: 1; flex-direction: column; display: flex; background-image: url(&quot;project://database/Assets/Minigolf%20Graphics%20Pack/Textures/Backgrounds/Background02_Green.png?fileID=2800000&amp;guid=702fac7ccdd300745a113e7ab023857e&amp;type=3#Background02_Green&quot;); background-size: 100% 100%;">
         <ui:VisualElement name="controller-slots__container" style="flex-grow: 1; flex-direction: row; height: 70%;">
             <ui:VisualElement name="slot0" class="selection-icon waiting" style="flex-grow: 1;" />
             <ui:VisualElement name="slot1" class="waiting selection-icon" style="flex-grow: 1;" />
