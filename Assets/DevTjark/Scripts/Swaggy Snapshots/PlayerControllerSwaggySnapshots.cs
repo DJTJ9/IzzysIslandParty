@@ -22,25 +22,31 @@ public class PlayerControllerSwaggySnapshots : Controller
         playerInput = GetComponent<PlayerInput>();
     }
 
-    public static void InvokePhotoTaken(int playerIndex)
+    public static void InvokePhotoTaken(int _playerIndex)
     {
-        onTakePhoto?.Invoke(playerIndex);
+        onTakePhoto?.Invoke(_playerIndex);
     }
 
     
-    public void OnTakePhoto(InputAction.CallbackContext _obj)
+    public void OnTakePhoto(InputAction.CallbackContext _context)
     {
+        if (!_context.started) return;
+        
         Debug.Log($"OnTakePhoto wurde aufgerufen für Spieler {PlayerIndex}");
         onTakePhoto?.Invoke(PlayerIndex);
     }
 
-    public void OnPause(InputAction.CallbackContext _obj)
+    public void OnPause(InputAction.CallbackContext _context)
     {
+        if (!_context.started) return;
+
         onPause.Invoke();
     }
 
-    public void OnUnpause(InputAction.CallbackContext _obj)
+    public void OnUnpause(InputAction.CallbackContext _context)
     {
+        if (!_context.started) return;
+
         onUnpause.Invoke();
     }
     
@@ -53,7 +59,4 @@ public class PlayerControllerSwaggySnapshots : Controller
     {
         playerInput.SwitchCurrentActionMap("UI");
     }
-
-    public int GetPlayerIndex() => PlayerIndex;
-    public void SetPlayerIndex(int _playerIndex) => PlayerIndex = _playerIndex;
 }

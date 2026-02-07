@@ -26,7 +26,7 @@ public class SwaggySnapshotsPlayerJoiner : MonoBehaviour
         if (_playerInput.gameObject.TryGetComponent(out NPC_SwaggySnapshots npc))
         {
             npc.SetPlayerIndex(m_playerIndex);
-            currentPlayers.Players.Add(npcCollectionSS.Players[m_npcIndex]);
+            currentPlayers.Players.Add(npcCollectionSS.Players[npc.GetPlayerIndex() - 1]);
             ++m_playerIndex;
             ++m_npcIndex;
             return;

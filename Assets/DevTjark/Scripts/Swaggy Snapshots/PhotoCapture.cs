@@ -28,24 +28,25 @@ public class PhotoCapture : MonoBehaviour
     [SerializeField] private Animator fadingAnimator;
     [SerializeField] private float fadeInSpeed = 1f;
 
-    [SerializeField] private SO_PlayerCollection playersSO;
-    private Controller playerController;
+    [SerializeField] private SO_PlayerCollection currentPlayersSO;
+    private Controller controller;
     
     private Texture2D m_screenCapture;
+    private bool m_canTakePhoto;
     private bool m_photoTaken;
     
     private readonly int m_fadeInAnimationHash = Animator.StringToHash("PhotoFadeIn");
     
     private void Start()
     {
-        playerController = GetComponent<Controller>();
+        controller = GetComponent<Controller>();
         photoFrameRectTransform = photoFrame.GetComponent<RectTransform>();
         m_screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
     }
     
     private void Update()
     {
-        scoreNumber.text = playersSO.Players[playerController.PlayerIndex].PlayerScore.Value.ToString("0");
+        scoreNumber.text = currentPlayersSO.Players[controller.PlayerIndex].PlayerScore.Value.ToString("0");
     }
 
     private void OnEnable()
@@ -58,16 +59,16 @@ public class PhotoCapture : MonoBehaviour
         PlayerControllerSwaggySnapshots.onTakePhoto -= TakePhoto;
     }
 
-    [Button]
     private void TakePhoto(int _playerIndex)
     {
-        if (_playerIndex != playerController.PlayerIndex) return;
+        if (_playerIndex != controller.GetPlayerIndex()) return;
+        Debug.Log($"Spieler {_playerIndex} hat ein Foto gemacht!");
         StartCoroutine(CaptureScreenshot());
     }
 
     private IEnumerator CaptureScreenshot()
     {
-        if (m_photoTaken) yield break;
+        if (m_photoTaken || !m_canTakePhoto) yield break;
         m_photoTaken = true;
         
         // onPhotoTaken.Invoke();
@@ -89,10 +90,9 @@ public class PhotoCapture : MonoBehaviour
         fadingAnimator.Play(m_fadeInAnimationHash);
     }
     
-    [Button]
     public void ShowScreenshot()
     {
-        photoFrameRectTransform.anchoredPosition = playersSO.Players[playerController.PlayerIndex].SpawnPoint;
+        photoFrameRectTransform.anchoredPosition = currentPlayersSO.Players[controller.PlayerIndex].SpawnPoint;
         Sprite photoSprite = Sprite.Create(m_screenCapture, new Rect(0, 0, m_screenCapture.width, m_screenCapture.height), new Vector2(0.5f, 0.5f), 100f);
         photoDisplayArea.sprite = photoSprite;
         
@@ -107,10 +107,11 @@ public class PhotoCapture : MonoBehaviour
         flashLight.SetActive(false);
     }
 
-    [Button]
     public void HideScreenshot()
     {
         m_photoTaken = false;
         photoFrame.SetActive(false);
     } 
+    
+    public void SetCanTakePhoto(bool _canTakePhoto) => m_canTakePhoto = _canTakePhoto;
 }

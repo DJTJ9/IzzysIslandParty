@@ -24,11 +24,7 @@ public class NPC_SwaggySnapshots : Controller
 
     private void TakePhoto()
     {
-        Debug.Log($"NPC {PlayerIndex} hat ein Foto gemacht!");
-        PlayerControllerSwaggySnapshots.InvokePhotoTaken(PlayerIndex);
+        Debug.Log($"NPC {GetPlayerIndex()} hat ein Foto gemacht!");
+        PlayerControllerSwaggySnapshots.InvokePhotoTaken(GetPlayerIndex());
     }
-
-    public int GetPlayerIndex() => PlayerIndex;
-
-    public void SetPlayerIndex(int _playerIndex) => PlayerIndex = _playerIndex;
 }
