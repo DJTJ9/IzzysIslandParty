@@ -46,12 +46,17 @@ namespace FishingGame.Display
 
         private void InstantiateFishUIRenderer()
         {
-            var test = Instantiate(new GameObject("FishUIRenderer").gameObject);
-            fishUIRenderer = test;
+            var emptyObj = new GameObject();
+            var instantiatedObj = Instantiate(emptyObj).gameObject;
+            fishUIRenderer = instantiatedObj;
+            
+            fishUIRenderer.name = "FishUIRendererObjects";
             fishUIRenderer.transform.SetParent(fishUIRendererParent.transform);
             fishUIRenderer.transform.localPosition = fishUIRendererPosition;
             fishUIRenderer.transform.rotation = new Quaternion(0f, 90f, 0f, 0f);
             fishUIRenderer.layer = fishUIRendererParent.layer;
+            
+            DestroyImmediate(emptyObj, true);
         }
 
         public GameObject SpawnInFishPrefabs(SO_Fish _fish)
@@ -75,8 +80,6 @@ namespace FishingGame.Display
             Time.timeScale = 0f;
 
             currentFishShown = _fish.PrefabReferences[_playerIndex].gameObject;
-
-            // _fish.PrefabReferences[_playerIndex].SetActive(true);
 
             currentFishShown.SetActive(true);
             fishDisplayPanel.SetActive(true);

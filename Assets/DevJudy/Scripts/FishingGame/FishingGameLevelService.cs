@@ -24,8 +24,6 @@ namespace FishingGame
                 Debug.LogWarning("GameAudioManager or levelTimer is null");
             else
                 gameAudioManager.StartBackgroundMusic(() => !levelTimer.TimerFinished);
-            
-            StartLevel();
         }
         
         public override void StartLevel()

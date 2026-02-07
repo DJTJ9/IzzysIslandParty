@@ -21,8 +21,9 @@ namespace FishingGame.Player.Multiplayer
         public void PlayerJoined(PlayerInput _playerInput)
         {
             currentPlayers.Players.Add(playerCollectionFF.Players[playerIndex]);
+            var parent = _playerInput.gameObject.transform.parent;
             
-            _playerInput.gameObject.transform.position = playerCollectionFF.Players[playerIndex].SpawnPoint;
+            parent.transform.position = playerCollectionFF.Players[playerIndex].SpawnPoint;
             ++playerIndex;
         }
     }

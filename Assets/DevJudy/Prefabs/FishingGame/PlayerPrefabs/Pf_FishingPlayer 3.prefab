@@ -869,8 +869,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2234337075584315550}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -328.7909, y: -401.29327, z: -313.9885}
+  m_LocalRotation: {x: 0.15957603, y: 0.659576, z: -0.14622447, w: 0.719801}
+  m_LocalPosition: {x: -2.44, y: 3.2, z: -0.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2748,14 +2748,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bce4d31701622740abe455f781ef810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishUIRenderer: {fileID: 4814107827916803382}
   fishNameText: {fileID: 1551601134319379790}
   fishSizeText: {fileID: 857414873519580884}
   fishWeightText: {fileID: 7778267699284339845}
   fishDisplayPanel: {fileID: 8859049937256378470}
   stopFishDisplayButton: {fileID: 6367206117768532341}
+  fishUIRendererPosition: {x: 0, y: -50, z: -42.6}
   playerInput: {fileID: 6500719721459496473}
-  eventSystem: {fileID: 0}
 --- !u!1 &8989522535335573195
 GameObject:
   m_ObjectHideFlags: 0
@@ -2933,11 +2932,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
---- !u!1 &4814107827916803382 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5062712516205851141, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
-  m_PrefabInstance: {fileID: 328054300648881971}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5193499141436544951 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
