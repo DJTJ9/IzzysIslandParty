@@ -48,7 +48,7 @@ namespace FishingGame
         public void OnPlayerJoined(SO_PlayerCollection _currentPlayers)
         {
             var fishingSystemManager = _currentPlayers.Players[^1].PlayerPrefab.GetComponentInChildren<FishingSystemManager>();
-            
+
             if (fishingSystemManager != null)
             {
                 fishingSystemManager.SetUpFishDisplay(fishList);
@@ -69,14 +69,8 @@ namespace FishingGame
 
         public void StopFishing(FishingSystemManager _fishingSystemManager)
         {
-            if (_fishingSystemManager.FishingRoutine != null)
-            {
-                _fishingSystemManager.StopFishBitingAnimation();
-
-                StopCoroutine(_fishingSystemManager.FishingRoutine);
-                _fishingSystemManager.FishingRoutine = null;
-            }
-
+            EndCoroutine(_fishingSystemManager);
+            
             fishing = false;
             _fishingSystemManager.FishHooked = false;
         }

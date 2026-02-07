@@ -23,7 +23,6 @@ namespace FishingGame
         [Header("Pausing: ")]
         [SerializeField] private UnityEvent OnPauseGame;
         [SerializeField] private UnityEvent OnUnpauseGame;
-
         private bool isPaused;
 
         private void Awake()
@@ -100,6 +99,8 @@ namespace FishingGame
         {
             isCast = false;
             animator.SetBool(cast, isCast);
+
+            fishingSystemManager.StopFishing();
         }
 
         public void PlayFishBitingAnimation()

@@ -12,43 +12,31 @@ namespace FishingGame.Display
         private const string fishingActionMap = "FishingGame";
         private const string uiActionMap = "FishingGameUI";
 
-        [Header("UI")]
+        [Header("UI: ")]
         [SerializeField] private TextMeshProUGUI fishNameText;
+
         [SerializeField] private TextMeshProUGUI fishSizeText;
         [SerializeField] private TextMeshProUGUI fishWeightText;
         [SerializeField] private GameObject fishDisplayPanel;
         [SerializeField] private GameObject stopFishDisplayButton;
-        [SerializeField] private GameObject fishUIRenderer;
 
-        [Header("Input")]
+        [Header("Rendering: ")]
+        private GameObject fishUIRenderer;
+
+        private GameObject fishUIRendererParent;
+        [SerializeField] private Vector3 fishUIRendererPosition = new Vector3(0f, -50f, -42.6f);
+        private GameObject currentFishShown;
+
+        [Header("Input: ")]
         [SerializeField] private PlayerInput playerInput;
-
-        private void OnEnable()
-        {
-            Debug.Log("FishDisplay OnEnable");
-        }
-
-        private void Awake()
-        {
-            Debug.Log("FihDisplay OnAwake");
-        }
-
-        private void Start()
-        {
-            Debug.Log("FishDisplay Start");
-        }
 
         public void SetupFishDisplay()
         {
-            Debug.Log("FishDisplay Setup");
-            
             if (playerInput == null)
                 Debug.LogError("inputActionAsset is null");
 
-            if (fishUIRenderer == null)
-                Debug.LogError("FishUIRenderer is null");
-            else
-                ClearDisplayParentObject();
+            fishUIRendererParent = GameObject.FindGameObjectWithTag("FishUIRenderer");
+            InstantiateFishUIRenderer();
 
             if (fishDisplayPanel == null)
                 Debug.LogError("No FishDisplayPanel found");
@@ -56,9 +44,19 @@ namespace FishingGame.Display
                 fishDisplayPanel.SetActive(false);
         }
 
+        private void InstantiateFishUIRenderer()
+        {
+            var test = Instantiate(new GameObject("FishUIRenderer").gameObject);
+            fishUIRenderer = test;
+            fishUIRenderer.transform.SetParent(fishUIRendererParent.transform);
+            fishUIRenderer.transform.localPosition = fishUIRendererPosition;
+            fishUIRenderer.transform.rotation = new Quaternion(0f, 90f, 0f, 0f);
+            fishUIRenderer.layer = fishUIRendererParent.layer;
+        }
+
         public GameObject SpawnInFishPrefabs(SO_Fish _fish)
         {
-            GameObject obj = Instantiate(_fish.Prefab); //fishUIRenderer.transform
+            GameObject obj = Instantiate(_fish.Prefab, fishUIRenderer.transform);
             obj.layer = fishUIRenderer.gameObject.layer;
             obj.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
 
@@ -76,7 +74,11 @@ namespace FishingGame.Display
 
             Time.timeScale = 0f;
 
-            _fish.PrefabReferences[_playerIndex].SetActive(true);
+            currentFishShown = _fish.PrefabReferences[_playerIndex].gameObject;
+
+            // _fish.PrefabReferences[_playerIndex].SetActive(true);
+
+            currentFishShown.SetActive(true);
             fishDisplayPanel.SetActive(true);
 
             fishNameText.text = _fish.FishName;
@@ -103,27 +105,15 @@ namespace FishingGame.Display
 
         public void StopDisplayFish()
         {
-            Debug.Log("Enabled: " + playerInput.enabled);
-            Debug.Log("Input: " + playerInput);
-            Debug.Log("InputMap: " + playerInput.currentActionMap);
-
             if (playerInput.enabled)
                 playerInput.SwitchCurrentActionMap(fishingActionMap);
 
             fishDisplayPanel.SetActive(false);
-
+            
             Time.timeScale = 1f;
-
-            foreach (Transform child in fishUIRenderer.transform)
-                child.gameObject.SetActive(false);
-        }
-
-        private void ClearDisplayParentObject()
-        {
-            int childCount = fishUIRenderer.transform.childCount;
-
-            for (int i = childCount; i > 0; i--)
-                DestroyImmediate(fishUIRenderer.transform.GetChild(i - 1).gameObject, true);
+            
+            currentFishShown.SetActive(false);
+            currentFishShown = null;
         }
     }
 }

@@ -58,6 +58,7 @@ namespace FishingGame
         {
             for (int i = 0; i < _fishList.Count; i++)
             {
+                _fishList[i].PrefabReferences.Clear();
                 _fishList[i].PrefabReferences.Add(fishDisplay.SpawnInFishPrefabs(_fishList[i]));
             }
         }
@@ -99,7 +100,7 @@ namespace FishingGame
             iconHandler?.DisplayIcon(EEmotion.Happy);
         }
 
-        private void StopFishing()
+        public void StopFishing()
         {
             FishingSystem.Instance.StopFishing(this);
         }
