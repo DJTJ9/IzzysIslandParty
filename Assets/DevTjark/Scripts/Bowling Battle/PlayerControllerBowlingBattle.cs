@@ -163,7 +163,4 @@ private void Start()
         playerSO = _playerSO;
         transform.position = playerSO.SpawnPoint;
     }
-    
-    public int GetPlayerIndex() => m_playerIndex;
-    public void SetPlayerIndex(int _playerIndex) => m_playerIndex = _playerIndex;
 }

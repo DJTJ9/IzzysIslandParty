@@ -12,7 +12,7 @@ public class GameScoreSO : ScriptableObject
         ResetScore();
     }
 
-    private void ResetScore()
+    public void ResetScore()
     {
         Value = 0f;
     }

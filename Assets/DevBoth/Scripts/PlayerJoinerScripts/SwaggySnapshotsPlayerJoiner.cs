@@ -26,7 +26,7 @@ public class SwaggySnapshotsPlayerJoiner : MonoBehaviour
         if (_playerInput.gameObject.TryGetComponent(out NPC_SwaggySnapshots npc))
         {
             npc.SetPlayerIndex(m_playerIndex);
-            currentPlayers.Players.Add(npcCollectionSS.Players[m_npcIndex]);
+            currentPlayers.Players.Add(npcCollectionSS.Players[npc.GetPlayerIndex() - 1]);
             ++m_playerIndex;
             ++m_npcIndex;
             return;
@@ -39,7 +39,8 @@ public class SwaggySnapshotsPlayerJoiner : MonoBehaviour
     
     public void JoinNPCs()
     {
-        for (var i = m_playerIndex - 1; i < npcCollectionSS.Players.Count; i++)
+        var nPCStartIndex = m_playerIndex - 1;
+        for (var i = nPCStartIndex; i < npcCollectionSS.Players.Count; i++)
         {
             Instantiate(npcCollectionSS.Players[i].PlayerPrefab, npcCollectionSS.Players[i].SpawnPoint, Quaternion.identity);
         }
