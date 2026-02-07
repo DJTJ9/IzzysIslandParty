@@ -870,7 +870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: f80ea9de16d74154c96bf0b95ca6c4d6, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 2c4f643d833b8954588d15e591d7b356, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 847f07b047b41004fae7983b1e2ce5f7, type: 3}
   m_SortingOrder: 0
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
@@ -1046,85 +1046,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Prefab
       objectReference: {fileID: 0}
-    - target: {fileID: 2685763810107397396, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3432790681948744660, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_UiScaleMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3432790681948744660, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 3432790681948744660, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 1080
-      objectReference: {fileID: 0}
-    - target: {fileID: 4179876104423682454, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ControllerManager.Controllers.Array.data[0].Input.InputAction
-      value: 
-      objectReference: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-    - target: {fileID: 4179876104423682454, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ControllerManager.Controllers.Array.data[1].Input.InputAction
-      value: 
-      objectReference: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     - target: {fileID: 4929991530307766194, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
       propertyPath: document
       value: 
       objectReference: {fileID: 476893795}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_Actions
-      value: 
-      objectReference: {fileID: -944628639613478452, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 39
-      objectReference: {fileID: 0}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ActionEvents.Array.data[34].m_ActionId
-      value: 40ca9c30-5f39-43a4-bf92-d909781d54bf
-      objectReference: {fileID: 0}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ActionEvents.Array.data[35].m_ActionId
-      value: cde468ba-184e-4c5d-9ae8-96f5986c5dcf
-      objectReference: {fileID: 0}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ActionEvents.Array.data[36].m_ActionId
-      value: 151f42cc-d059-4bbf-9169-f110e1d7c797
-      objectReference: {fileID: 0}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ActionEvents.Array.data[37].m_ActionId
-      value: c6c3145b-2ca9-4326-a4f3-a8606709a4dd
-      objectReference: {fileID: 0}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ActionEvents.Array.data[38].m_ActionId
-      value: 8095b1f7-a3ec-4cf9-9fdc-c4bb7d52de8e
-      objectReference: {fileID: 0}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ActionEvents.Array.data[34].m_ActionName
-      value: 'HurdleGame/Slide[/Keyboard/downArrow,/XInputControllerWindows/buttonWest,/XInputControllerWindows1/buttonWest]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ActionEvents.Array.data[35].m_ActionName
-      value: 'UI/StartGame[/Keyboard/space,/XInputControllerWindows/buttonNorth,/XInputControllerWindows1/buttonNorth]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ActionEvents.Array.data[36].m_ActionName
-      value: 'Player/Navigate[/XInputControllerWindows/rightStick/up,/XInputControllerWindows1/rightStick/up,/XInputControllerWindows/rightStick/down,/XInputControllerWindows1/rightStick/down,/XInputControllerWindows/rightStick/left,/XInputControllerWindows1/rightStick/left,/XInputControllerWindows/rightStick/right,/XInputControllerWindows1/rightStick/right,/XInputControllerWindows/dpad,/XInputControllerWindows1/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ActionEvents.Array.data[37].m_ActionName
-      value: 'FishingGame/X[/Keyboard/x,/XInputControllerWindows/rightStickPress,/XInputControllerWindows1/rightStickPress]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6519078515828607143, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_ActionEvents.Array.data[38].m_ActionName
-      value: 'JetskiGame/Join[/Keyboard/anyKey,/XInputControllerWindows/select,/XInputControllerWindows1/select]'
-      objectReference: {fileID: 0}
     - target: {fileID: 8196362803946966465, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -38.93
+      value: -70.84
       objectReference: {fileID: 0}
     - target: {fileID: 8196362803946966465, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1132,7 +1060,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8196362803946966465, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.72
+      value: 19.11
       objectReference: {fileID: 0}
     - target: {fileID: 8196362803946966465, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1161,14 +1089,6 @@ PrefabInstance:
     - target: {fileID: 8196362803946966465, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8754331490394771550, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 9201151259296887277, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: groundCheckPosition.y
-      value: -0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4600,6 +4520,14 @@ PrefabInstance:
     - target: {fileID: 103422, guid: 8f6de4a17416ebe4988cbe24db881522, type: 3}
       propertyPath: m_Name
       value: TrackRoyalHole_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 103422, guid: 8f6de4a17416ebe4988cbe24db881522, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 107314, guid: 8f6de4a17416ebe4988cbe24db881522, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 411354, guid: 8f6de4a17416ebe4988cbe24db881522, type: 3}
       propertyPath: m_LocalPosition.y

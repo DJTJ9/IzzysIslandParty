@@ -54,7 +54,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5831582463177545928
 RectTransform:
   m_ObjectHideFlags: 0
@@ -109,10 +109,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -582,7 +582,7 @@ MonoBehaviour:
       Owner: {fileID: 6315098519535762074}
       Enabled: 1
       Input:
-        InputAction: {fileID: -473410492741152614, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+        InputAction: {fileID: 3904446112849396073, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
         Gain: 10
         CancelDeltaTime: 0
       InputValue: 0
@@ -593,7 +593,7 @@ MonoBehaviour:
       Owner: {fileID: 6315098519535762074}
       Enabled: 1
       Input:
-        InputAction: {fileID: -473410492741152614, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+        InputAction: {fileID: 3904446112849396073, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
         Gain: -10
         CancelDeltaTime: 0
       InputValue: 0
@@ -675,7 +675,6 @@ GameObject:
   - component: {fileID: 4929991530307766194}
   - component: {fileID: 3489097703413319059}
   - component: {fileID: 8764384815406241613}
-  - component: {fileID: 8845138418296100879}
   - component: {fileID: 2370792931383878794}
   - component: {fileID: 2524120037625186723}
   - component: {fileID: 8540537644126442398}
@@ -684,7 +683,7 @@ GameObject:
   - component: {fileID: 6519078515828607143}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -717,7 +716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c13f386af314c4681a4dc804d9b4c40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraRotator: {fileID: 8951549986535246071}
+  PlayerIndex: 0
   lookSensitivity: 2
   OnPause:
     m_PersistentCalls:
@@ -802,7 +801,7 @@ MonoBehaviour:
   groundCheckLayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  groundCheckPosition: {x: 0, y: -1, z: 0}
+  groundCheckPosition: {x: 0, y: -0.5, z: 0}
   groundCheckSize: {x: 0.7, y: 0.1, z: 0.7}
   <IsGrounded>k__BackingField: 0
 --- !u!114 &4929991530307766194
@@ -846,18 +845,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2926994867532943103}
-        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
-        m_MethodName: UnlockMouseCursor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &8764384815406241613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -877,46 +864,6 @@ MonoBehaviour:
       - m_Target: {fileID: 2926994867532943103}
         m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
         m_MethodName: SwitchToPlayerInputMap
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2926994867532943103}
-        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
-        m_MethodName: LockMouseCursor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &8845138418296100879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8754331490394771550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2926994867532943103}
-        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
-        m_MethodName: LockMouseCursor
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1067,7 +1014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -1096,62 +1043,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3f5b2076-0f7b-4ab2-b441-2a9c84f323cb
     m_ActionName: 'Player/Move[/XInputControllerWindows/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c0acba80-ae38-4567-80bc-1a34a0d34f89
-    m_ActionName: 'Player/Look[/XInputControllerWindows/rightStick,/Mouse/delta]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2926994867532943103}
-        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
-        m_MethodName: OnShootInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 5386e432-5750-4aab-81b7-b2396830b2a6
-    m_ActionName: 'Player/LeftMouse[/XInputControllerWindows/buttonWest,/Mouse/leftButton,/Keyboard/enter]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b612b1bb-2f7f-4657-a2c0-f48c6e552617
-    m_ActionName: 'Player/Interact[/Keyboard/e,/XInputControllerWindows/buttonNorth]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 95d5b7cb-0875-4445-a78f-a205f3138d4e
-    m_ActionName: 'Player/Crouch[/XInputControllerWindows/buttonEast,/Keyboard/c]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2926994867532943103}
-        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
-        m_MethodName: OnJumpInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 82323fc8-0748-48f7-bf75-860a5499e6b3
-    m_ActionName: 'Player/Jump[/Keyboard/space,/XInputControllerWindows/buttonSouth]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ab9772d4-52b5-46af-b471-55773cc65d1e
-    m_ActionName: 'Player/Previous[/Keyboard/1,/XInputControllerWindows/dpad/left]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c376c783-6d05-4576-9ab5-2b837187bcd6
-    m_ActionName: 'Player/Next[/Keyboard/2,/XInputControllerWindows/dpad/right]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ce712994-46ce-4ee1-9444-b35bb73005c4
-    m_ActionName: 'Player/Sprint[/Keyboard/leftShift,/XInputControllerWindows/leftStickPress]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2926994867532943103}
@@ -1278,54 +1169,154 @@ MonoBehaviour:
     m_ActionName: New action map/New action
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 69d7f3d9-adeb-4507-890a-9e36c4d97d7d
-    m_ActionName: 'SwaggySnapshot/Move[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e1b45550-7f77-4b49-9acb-4f34e60b5905
-    m_ActionName: 'SwaggySnapshot/Look[/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick,/Mouse/delta]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 843650a0-88fe-416e-ba52-b237b068d7cf
-    m_ActionName: 'SwaggySnapshot/LeftMouse[/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast,/Mouse/leftButton,/Keyboard/enter]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 38441365-2d9f-4f4b-9df1-a7449976d000
-    m_ActionName: 'SwaggySnapshot/Interact[/Keyboard/e,/XInputControllerWindows/buttonNorth,/XInputControllerWindows1/buttonNorth]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ec7fe11c-2120-4980-afdd-04f3bffe5944
-    m_ActionName: 'SwaggySnapshot/Crouch[/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast,/Keyboard/c]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: d55016e2-e176-438c-83b1-c33d69ba1282
-    m_ActionName: 'SwaggySnapshot/TakePhoto[/Keyboard/space,/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 64702ccb-202c-485c-8137-f360aeb30f45
-    m_ActionName: 'SwaggySnapshot/Previous[/Keyboard/1,/XInputControllerWindows/dpad/left,/XInputControllerWindows1/dpad/left]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 81508bff-bbeb-41a2-ad38-240542f535ee
-    m_ActionName: 'SwaggySnapshot/Next[/Keyboard/2,/XInputControllerWindows/dpad/right,/XInputControllerWindows1/dpad/right]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c22c5a95-896a-44b9-be7a-3658f6b35850
-    m_ActionName: 'SwaggySnapshot/Sprint[/Keyboard/leftShift,/XInputControllerWindows/leftStickPress,/XInputControllerWindows1/leftStickPress]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: acbeef20-41a0-462b-a91f-7767227eccfa
-    m_ActionName: 'SwaggySnapshot/Pause[/Keyboard/escape,/XInputControllerWindows/start,/XInputControllerWindows1/start]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 37716735-96ef-4e92-b7e0-1dfcff3bb28b
-    m_ActionName: 'SwaggySnapshot/Join[/Keyboard/anyKey,/XInputControllerWindows/select,/XInputControllerWindows1/select]'
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 40ca9c30-5f39-43a4-bf92-d909781d54bf
     m_ActionName: 'HurdleGame/Slide[/Keyboard/downArrow,/XInputControllerWindows/buttonWest,/XInputControllerWindows1/buttonWest]'
-  m_NeverAutoSwitchControlSchemes: 0
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cde468ba-184e-4c5d-9ae8-96f5986c5dcf
+    m_ActionName: 'UI/StartGame[/Keyboard/space,/XInputControllerWindows/buttonNorth,/XInputControllerWindows1/buttonNorth]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8095b1f7-a3ec-4cf9-9fdc-c4bb7d52de8e
+    m_ActionName: 'JetskiGame/Join[/Keyboard/anyKey,/XInputControllerWindows/select,/XInputControllerWindows1/select]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0dd5b048-e1dd-4f7f-81ac-e00f7c81dffb
+    m_ActionName: 'SwaggySnapshots/Move[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3cfd0d2b-0fb9-408b-a598-2c4598220792
+    m_ActionName: 'SwaggySnapshots/Look[/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick,/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 135e9a8b-f52f-4596-8ece-ddca8a81eea8
+    m_ActionName: 'SwaggySnapshots/LeftMouse[/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast,/Mouse/leftButton,/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0f146e1d-5095-4489-ade0-79a8d261e544
+    m_ActionName: 'SwaggySnapshots/Interact[/Keyboard/e,/XInputControllerWindows/buttonNorth,/XInputControllerWindows1/buttonNorth]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e16901e0-9bad-4dc3-8742-01482cc388e1
+    m_ActionName: 'SwaggySnapshots/Crouch[/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast,/Keyboard/c]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d06de35d-67c7-49f6-9a25-c0481f048468
+    m_ActionName: 'SwaggySnapshots/TakePhoto[/Keyboard/space,/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 385ba492-6ea7-4c2f-b71a-c6036ef9b3bd
+    m_ActionName: 'SwaggySnapshots/Previous[/Keyboard/1,/XInputControllerWindows/dpad/left,/XInputControllerWindows1/dpad/left]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4a8eec9c-8cfd-4e38-9b12-47d03ad16a36
+    m_ActionName: 'SwaggySnapshots/Next[/Keyboard/2,/XInputControllerWindows/dpad/right,/XInputControllerWindows1/dpad/right]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d280e8c6-75cb-44a0-8452-15ea8253b03a
+    m_ActionName: 'SwaggySnapshots/Sprint[/Keyboard/leftShift,/XInputControllerWindows/leftStickPress,/XInputControllerWindows1/leftStickPress]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ddfc4905-84d1-48c9-a43a-f4eacc564abc
+    m_ActionName: 'SwaggySnapshots/Pause[/Keyboard/escape,/XInputControllerWindows/start,/XInputControllerWindows1/start]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ca07eafe-b771-40de-a6b8-43ebb7da6306
+    m_ActionName: 'SwaggySnapshots/Join[/Keyboard/anyKey,/XInputControllerWindows/select,/XInputControllerWindows1/select]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 68276f0f-d2f1-4528-874c-c770db9628e8
+    m_ActionName: 'Player/Look[/Mouse/delta,/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a2f17958-1ccd-4227-81b0-a6b21f6efab2
+    m_ActionName: 'Player/Previous Ball[/Keyboard/q,/XInputControllerWindows/leftTrigger,/XInputControllerWindows1/leftTrigger]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a7ad0efa-33ed-4405-a546-ac1c4d69a023
+    m_ActionName: 'Player/Next Ball[/Keyboard/e,/XInputControllerWindows/rightTrigger,/XInputControllerWindows1/rightTrigger]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2fcd0ea7-79bf-481a-8ad0-9fd00f618f61
+    m_ActionName: 'FishingGame/Join[/Keyboard/space,/XInputControllerWindows/select,/XInputControllerWindows1/select]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6d7cb911-4255-4d60-a577-159f56863289
+    m_ActionName: 'FishingGameUI/Submit[/Keyboard/enter,/Keyboard/x,/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2926994867532943103}
+        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
+        m_MethodName: OnMoveInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1adf136c-4b4a-4528-981e-ae2a2886385c
+    m_ActionName: 'Mingolf Mayhem/Move[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3b7c6bd0-e2bf-4021-b694-19075839718a
+    m_ActionName: 'Mingolf Mayhem/Look[/Mouse/delta,/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2926994867532943103}
+        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
+        m_MethodName: OnPauseInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 37733399-93da-44a7-839f-6c8d02a6acb2
+    m_ActionName: 'Mingolf Mayhem/Pause[/Keyboard/escape,/XInputControllerWindows/start,/XInputControllerWindows1/start]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 832443a4-660f-48f6-bef2-3e3b9d9cd23f
+    m_ActionName: 'Mingolf Mayhem/Join[/Keyboard/space,/XInputControllerWindows/select,/XInputControllerWindows1/select]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2926994867532943103}
+        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
+        m_MethodName: OnShootInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ae807423-6597-4ecd-90b3-dfc2fb960650
+    m_ActionName: 'Mingolf Mayhem/Shoot[/Mouse/leftButton,/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2926994867532943103}
+        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
+        m_MethodName: OnJumpInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6fd8ac2b-7b99-47ac-bbac-eeb7c7633295
+    m_ActionName: 'Mingolf Mayhem/Jump[/Keyboard/space,/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]'
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 7057679653509791993}

@@ -11,21 +11,17 @@ public class PlayerControllerMinigolfMayhem : Controller
     [Header("Movement")]
     private RigidbodyMovement rigidbodyMovement;
 
-    public CameraRotator CameraRotator;
+    // public CameraRotator CameraRotator;
 
     [Header("Input")]
     private PlayerInput playerInput;
 
     [Header("Settings")]
-    [SerializeField]
-    private float lookSensitivity = 2;
+    [SerializeField] private float lookSensitivity = 2;
 
-    [FoldoutGroup("Events", expanded: true)]
-    [SerializeField]
-    private UnityEvent OnPause;
-
-    [SerializeField]
-    private UnityEvent OnUnpause;
+    [FoldoutGroup("Events", expanded: true)] 
+    [SerializeField] private UnityEvent OnPause;
+    [SerializeField] private UnityEvent OnUnpause;
 
     private InputAction moveInputAction;
     private InputAction jumpInputAction;
@@ -39,12 +35,12 @@ public class PlayerControllerMinigolfMayhem : Controller
         rigidbodyMovement = GetComponent<RigidbodyMovement>();
         playerInput = GetComponent<PlayerInput>();
 
-        MapInputActions();
+        // MapInputActions();
     }
 
     private void OnEnable()
     {
-        playerInput.SwitchCurrentActionMap("Player");
+        playerInput.SwitchCurrentActionMap("MinigolfMayhem");
     }
 
 
@@ -59,32 +55,32 @@ public class PlayerControllerMinigolfMayhem : Controller
         // if (Mouse.current.rightButton.wasPressedThisFrame) Cursor.lockState = CursorLockMode.None;
 
         // var moveDirection = GetMoveDirectionFromInput();
-        // RigidbodyMovement.Move(moveDirection);
+        // rigidbodyMovement.Move(moveDirection);
 
         // if (Cursor.lockState == CursorLockMode.Locked) {
-        var rotation = GetRotationFromInput();
-        rigidbodyMovement.RotateHorizontal(rotation.x * lookSensitivity);
+        // var rotation = GetRotationFromInput();
+        // rigidbodyMovement.RotateHorizontal(rotation.x * lookSensitivity);
         // }
     }
 
-    /// <summary>
-    /// Rotates camera vertically if cursor lock mode is locked.
-    /// </summary>
-    private void LateUpdate()
-    {
-        if (CameraRotator != null)
-            UpdateCamera();
-    }
+    // /// <summary>
+    // /// Rotates camera vertically if cursor lock mode is locked.
+    // /// </summary>
+    // private void LateUpdate()
+    // {
+    //     if (CameraRotator != null)
+    //         UpdateCamera();
+    // }
 
-    /// <summary>
-    /// Gets rotation from input
-    /// Rotates camera in the direction of the rotation input
-    /// </summary>
-    private void UpdateCamera()
-    {
-        var rotation = GetRotationFromInput();
-        CameraRotator.Rotate(rotation.y);
-    }
+    // /// <summary>
+    // /// Gets rotation from input
+    // /// Rotates camera in the direction of the rotation input
+    // /// </summary>
+    // private void UpdateCamera()
+    // {
+    //     var rotation = GetRotationFromInput();
+    //     CameraRotator.Rotate(rotation.y);
+    // }
 
     public void Initialize(int playerIndex)
     {
@@ -95,29 +91,28 @@ public class PlayerControllerMinigolfMayhem : Controller
     /// Maps the input actions
     /// Subcribes methods to their matching input actions
     /// </summary>
-    private void MapInputActions()
-    {
-        //     moveInputAction = playerInput.actions["Move"];
-        //     moveInputAction.started += OnMoveInput;
-        //
-        //     jumpInputAction = playerInput.actions["Jump"];
-        //     jumpInputAction.started += OnJumpInput;
-        //
-        lookInputAction = playerInput.actions["Look"];
-        //
-        //     shootInputAction = playerInput.actions["LeftMouse"];
-        //     shootInputAction.started += OnShootInput;
-        //
-        //     pauseInputAction = playerInput.actions["Pause"];
-        //     pauseInputAction.started += OnPauseInput;
-        //     
-        //     unpauseInputAction = playerInput.actions["Unpause"];
-        //     unpauseInputAction.started += OnUnpauseInput;
-    }
-
+    // private void MapInputActions()
+    // {
+    //     //     moveInputAction = playerInput.actions["Move"];
+    //     //     moveInputAction.started += OnMoveInput;
+    //     //
+    //     //     jumpInputAction = playerInput.actions["Jump"];
+    //     //     jumpInputAction.started += OnJumpInput;
+    //     //
+    //     //     lookInputAction = playerInput.actions["Look"];
+    //     //
+    //     //     shootInputAction = playerInput.actions["LeftMouse"];
+    //     //     shootInputAction.started += OnShootInput;
+    //     //
+    //     //     pauseInputAction = playerInput.actions["Pause"];
+    //     //     pauseInputAction.started += OnPauseInput;
+    //     //     
+    //     //     unpauseInputAction = playerInput.actions["Unpause"];
+    //     //     unpauseInputAction.started += OnUnpauseInput;
+    // }
     public void SwitchToPlayerInputMap()
     {
-        playerInput.SwitchCurrentActionMap("Player");
+        playerInput.SwitchCurrentActionMap("MinigolfMayhem");
     }
 
     public void SwitchToUIInputMap()
@@ -150,30 +145,30 @@ public class PlayerControllerMinigolfMayhem : Controller
         rigidbodyMovement.Jump();
     }
 
-    public void OnLookInput(InputAction.CallbackContext _context)
-    {
-        var rotation = _context.ReadValue<Vector2>();
-        rigidbodyMovement.RotateHorizontal(rotation.x * lookSensitivity);
-        UpdateCamera();
-    }
+    // public void OnLookInput(InputAction.CallbackContext _context)
+    // {
+    //     var rotation = _context.ReadValue<Vector2>();
+    //     rigidbodyMovement.RotateHorizontal(rotation.x * lookSensitivity);
+    //     // UpdateCamera();
+    // }
 
-    /// <summary>
-    /// Gets the horizontal move direction from the input
-    /// Converts this input into a 3D vector and returns it
-    /// </summary>
-    public Vector3 GetMoveDirectionFromInput()
-    {
-        var moveInput = moveInputAction.ReadValue<Vector2>();
-        return new Vector3(moveInput.x, 0f, moveInput.y);
-    }
-
-    /// <summary>
-    /// Gets the rotation input and returns it
-    /// </summary>
-    public Vector2 GetRotationFromInput()
-    {
-        return lookInputAction.ReadValue<Vector2>();
-    }
+    // /// <summary>
+    // /// Gets the horizontal move direction from the input
+    // /// Converts this input into a 3D vector and returns it
+    // /// </summary>
+    // public Vector3 GetMoveDirectionFromInput()
+    // {
+    //     var moveInput = moveInputAction.ReadValue<Vector2>();
+    //     return new Vector3(moveInput.x, 0f, moveInput.y);
+    // }
+    //
+    // /// <summary>
+    // /// Gets the rotation input and returns it
+    // /// </summary>
+    // public Vector2 GetRotationFromInput()
+    // {
+    //     return lookInputAction.ReadValue<Vector2>();
+    // }
 
     public void LockMouseCursor()
     {
