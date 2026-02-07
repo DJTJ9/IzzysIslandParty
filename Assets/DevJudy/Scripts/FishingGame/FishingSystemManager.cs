@@ -12,10 +12,11 @@ namespace FishingGame
 {
     public class FishingSystemManager : MonoBehaviour
     {
-       [SerializeField] public int PlayerIndex; // !! Get from LevelService or PlayerJoiner or smth
-        
+        [SerializeField] public int PlayerIndex; // !! Get from LevelService or PlayerJoiner or smth
+
         [Header("Scripts: ")]
         [SerializeField] public QTEController QTEController;
+
         [SerializeField] public QTEDisplayService QTEDisplayService;
         [SerializeField] private FishDisplay fishDisplay;
         [SerializeField] private IconHandler iconHandler;
@@ -24,25 +25,30 @@ namespace FishingGame
 
         [Header("GameObjects: ")]
         [SerializeField] private GameScoreSO gameScore;
+
         [SerializeField] private TextMeshProUGUI pointsText;
         public Coroutine FishingRoutine;
-        
+
         public bool FishHooked { get; set; }
         public bool FishDisplayActive { get; set; }
 
         private void Awake()
         {
             fishingRodController = GetComponent<FishingRodController>();
-            
+
             catchEventHandler = GetComponentInChildren<CatchEventHandler>();
             if (catchEventHandler == null)
                 Debug.LogError("FishingSystemManager is missing catch EventHandler");
         }
-        
+
         public void SetUpFishDisplay(List<SO_Fish> _fishList)
         {
             if (fishDisplay != null)
             {
+                fishDisplay.enabled = true;
+
+                fishDisplay.SetupFishDisplay();
+                
                 SpawnInFishDisplayObjects(_fishList);
                 StopFishDisplay();
             }
@@ -54,16 +60,6 @@ namespace FishingGame
             {
                 _fishList[i].PrefabReferences.Add(fishDisplay.SpawnInFishPrefabs(_fishList[i]));
             }
-        }
-        
-        public void StopFishDisplay(FishDisplay _fishDisplay)
-        {
-            if (!FishDisplayActive)
-                return;
-            
-            fishDisplay?.StopDisplayFish();
-
-            FishDisplayActive = false;
         }
 
         public void DisplayFish(SO_Fish _caughtFish)
@@ -110,7 +106,12 @@ namespace FishingGame
 
         public void StopFishDisplay()
         {
+            if (!FishDisplayActive)
+                return;
+
             fishDisplay?.StopDisplayFish();
+
+            FishDisplayActive = false;
         }
 
         public void PlayFishBitingAnimation(bool _withIcon)

@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8949761670962246615}
+  - component: {fileID: 4121504909516395254}
   m_Layer: 13
   m_Name: Pf_RenderObjects
-  m_TagString: Untagged
+  m_TagString: FishUIRenderer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,6 +38,18 @@ Transform:
   - {fileID: 5976285064832070455}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &4121504909516395254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6855253073963802948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd5b4ee8a6886f4cb006778bd3255c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &838070919487634085
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -131,7 +144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6502596866369865551, guid: f57c478525fc69c469a15625c1f44097, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7381831737560679987, guid: f57c478525fc69c469a15625c1f44097, type: 3}
       propertyPath: m_Layer
@@ -165,7 +178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2552671844760119945, guid: 6ac62bc046b78d144bef2a0e628d82d5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2893344130604281907, guid: 6ac62bc046b78d144bef2a0e628d82d5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -235,7 +248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1465181154044907004, guid: c9d21a80be8faa740be277343139fff5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1597234024715953916, guid: c9d21a80be8faa740be277343139fff5, type: 3}
       propertyPath: m_Layer
@@ -371,6 +384,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoldneonPygmyGoby
       objectReference: {fileID: 0}
+    - target: {fileID: 6808067613495560405, guid: 5cc4f27b45e1ca041a96313ff57ee2e5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -419,7 +436,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4811707055762447647, guid: a993c0c9f586df34dacf316042c6d5f3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5299978915631482789, guid: a993c0c9f586df34dacf316042c6d5f3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -553,7 +570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3418234708253470664, guid: e0fd6b04834696f4089d0e933ed6da81, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5494567399764828258, guid: e0fd6b04834696f4089d0e933ed6da81, type: 3}
       propertyPath: m_Layer

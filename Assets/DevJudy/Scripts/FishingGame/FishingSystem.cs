@@ -48,6 +48,7 @@ namespace FishingGame
         public void OnPlayerJoined(SO_PlayerCollection _currentPlayers)
         {
             var fishingSystemManager = _currentPlayers.Players[^1].PlayerPrefab.GetComponentInChildren<FishingSystemManager>();
+            
             if (fishingSystemManager != null)
             {
                 fishingSystemManager.SetUpFishDisplay(fishList);

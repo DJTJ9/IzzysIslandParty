@@ -1,11 +1,9 @@
 using enums;
+using HelperScripts;
 using ScriptableObjects;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
-
 
 namespace FishingGame.Display
 {
@@ -15,48 +13,43 @@ namespace FishingGame.Display
         private const string uiActionMap = "FishingGameUI";
 
         [Header("UI")]
-        [SerializeField] private GameObject fishUIRenderer;
         [SerializeField] private TextMeshProUGUI fishNameText;
         [SerializeField] private TextMeshProUGUI fishSizeText;
         [SerializeField] private TextMeshProUGUI fishWeightText;
         [SerializeField] private GameObject fishDisplayPanel;
         [SerializeField] private GameObject stopFishDisplayButton;
+        [SerializeField] private GameObject fishUIRenderer;
 
         [Header("Input")]
         [SerializeField] private PlayerInput playerInput;
 
         private void OnEnable()
         {
-            if (fishUIRenderer == null)
-                Debug.LogError("FishUIRenderer is null");
-            else
-            {
-                Debug.Log("An here");
-                ClearDisplayParentObject();
-            }
-            
-            if (fishDisplayPanel == null)
-                Debug.LogError("No FishDisplayPanel found");
-            else
-                fishDisplayPanel.SetActive(false);
+            Debug.Log("FishDisplay OnEnable");
         }
-        
+
         private void Awake()
         {
-            if (playerInput == null)
-                Debug.LogError("inputActionAsset is null");
+            Debug.Log("FihDisplay OnAwake");
         }
 
         private void Start()
         {
+            Debug.Log("FishDisplay Start");
+        }
+
+        public void SetupFishDisplay()
+        {
+            Debug.Log("FishDisplay Setup");
+            
+            if (playerInput == null)
+                Debug.LogError("inputActionAsset is null");
+
             if (fishUIRenderer == null)
                 Debug.LogError("FishUIRenderer is null");
             else
-            {
-                Debug.Log("An here");
                 ClearDisplayParentObject();
-            }
-            
+
             if (fishDisplayPanel == null)
                 Debug.LogError("No FishDisplayPanel found");
             else
@@ -65,7 +58,7 @@ namespace FishingGame.Display
 
         public GameObject SpawnInFishPrefabs(SO_Fish _fish)
         {
-            GameObject obj = Instantiate(_fish.Prefab);
+            GameObject obj = Instantiate(_fish.Prefab); //fishUIRenderer.transform
             obj.layer = fishUIRenderer.gameObject.layer;
             obj.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
 
@@ -113,7 +106,7 @@ namespace FishingGame.Display
             Debug.Log("Enabled: " + playerInput.enabled);
             Debug.Log("Input: " + playerInput);
             Debug.Log("InputMap: " + playerInput.currentActionMap);
-            
+
             if (playerInput.enabled)
                 playerInput.SwitchCurrentActionMap(fishingActionMap);
 
@@ -127,11 +120,10 @@ namespace FishingGame.Display
 
         private void ClearDisplayParentObject()
         {
-            Debug.Log("And here too");
             int childCount = fishUIRenderer.transform.childCount;
 
             for (int i = childCount; i > 0; i--)
-                DestroyImmediate(fishUIRenderer.transform.GetChild(i - 1).gameObject);
+                DestroyImmediate(fishUIRenderer.transform.GetChild(i - 1).gameObject, true);
         }
     }
 }

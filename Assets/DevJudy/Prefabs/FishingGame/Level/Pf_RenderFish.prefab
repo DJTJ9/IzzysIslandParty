@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5520982504295114884}
-  m_Layer: 0
+  - component: {fileID: 4494000079571790718}
+  m_Layer: 13
   m_Name: Pf_RenderFish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,13 +27,25 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.8235297, y: 2.8235297, z: 2.8235297}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7301301184047325334}
   - {fileID: 2355248487415940014}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4494000079571790718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172931620695268931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd5b4ee8a6886f4cb006778bd3255c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4943543157010709249
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +226,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4121504909516395254, guid: 5fe23d18956b452438e2933ac79d8747, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

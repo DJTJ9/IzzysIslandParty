@@ -870,7 +870,7 @@ Transform:
   m_GameObject: {fileID: 2234337075584315550}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -328.7909, y: -401.29327, z: -313.9885}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1421,7 +1421,7 @@ Transform:
   m_GameObject: {fileID: 4111834667183023593}
   serializedVersion: 2
   m_LocalRotation: {x: 0.15957603, y: 0.659576, z: -0.14622447, w: 0.719801}
-  m_LocalPosition: {x: -2.52, y: 3.58, z: 4.15}
+  m_LocalPosition: {x: -2.61, y: 10.38, z: 3.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2270,7 +2270,7 @@ Transform:
   m_GameObject: {fileID: 7064022231146810569}
   serializedVersion: 2
   m_LocalRotation: {x: 0.15957603, y: 0.659576, z: -0.14622447, w: 0.719801}
-  m_LocalPosition: {x: -2.5199866, y: 3.5799866, z: 4.15}
+  m_LocalPosition: {x: -2.61, y: 10.38, z: 3.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2748,12 +2748,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bce4d31701622740abe455f781ef810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishUIRenderer: {fileID: 4814107827916803382}
   fishNameText: {fileID: 1551601134319379790}
   fishSizeText: {fileID: 857414873519580884}
   fishWeightText: {fileID: 7778267699284339845}
   fishDisplayPanel: {fileID: 8859049937256378470}
   stopFishDisplayButton: {fileID: 6367206117768532341}
+  fishUIRenderer: {fileID: 4814107827916803382}
   playerInput: {fileID: 6500719721459496473}
 --- !u!1 &8989522535335573195
 GameObject:
@@ -2854,8 +2854,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9120685519160240929}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.31, y: 0, z: -4.9}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2875,37 +2875,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pf_RenderFish
       objectReference: {fileID: 0}
-    - target: {fileID: 2583478096963892776, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3475113443836318699, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4673409691372632780, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5259129068610498219, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.8235295
-      objectReference: {fileID: 0}
-    - target: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.8235295
-      objectReference: {fileID: 0}
-    - target: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.8235295
-      objectReference: {fileID: 0}
     - target: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -960
+      value: -960.00006
       objectReference: {fileID: 0}
     - target: {fileID: 5520982504295114884, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2943,16 +2915,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5886111523227915062, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7674247101462934214, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4673409691372632780, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+    - {fileID: 5259129068610498219, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+    - {fileID: 2583478096963892776, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+    - {fileID: 5886111523227915062, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+    - {fileID: 3475113443836318699, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
+    - {fileID: 7674247101462934214, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2805ce5de3f7854da120a10e9517330, type: 3}
@@ -2990,10 +2960,6 @@ PrefabInstance:
       propertyPath: QTEDisplayService
       value: 
       objectReference: {fileID: 1683085752960084095}
-    - target: {fileID: 4456720291376179614, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: catchEventHandler
-      value: 
-      objectReference: {fileID: 2415450408739869664}
     - target: {fileID: 5562084680045443988, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
       propertyPath: m_Name
       value: FishingPlayer
@@ -3104,17 +3070,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5705243393259260562, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
   m_PrefabInstance: {fileID: 6498483857878816341}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2415450408739869664 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8910978767518238133, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-  m_PrefabInstance: {fileID: 6498483857878816341}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdeb6071cd0662547b48c0788f13777c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &5991227984578617490 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 651437242795570887, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
