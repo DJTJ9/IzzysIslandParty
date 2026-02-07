@@ -21,23 +21,23 @@ public class SwaggySnapshotsPlayerJoiner : MonoBehaviour
         currentPlayers.Players.Clear();
     }
 
-    public void PlayerJoinedBB(PlayerInput _playerInput)
+    public void PlayerJoined(PlayerInput _playerInput)
     {
-        if (_playerInput.gameObject.TryGetComponent(out NPC_BowlingBattleController npc))
+        if (_playerInput.gameObject.TryGetComponent(out NPC_SwaggySnapshots npc))
         {
-            // _playerInput.gameObject.transform.position = npcCollectionSS.Players[m_npcIndex].SpawnPoint;
+            npc.SetPlayerIndex(m_playerIndex);
             currentPlayers.Players.Add(npcCollectionSS.Players[m_npcIndex]);
+            ++m_playerIndex;
             ++m_npcIndex;
             return;
         }
 
-        // _playerInput.gameObject.transform.position = playerCollectionSS.Players[m_playerIndex].SpawnPoint;
         playerCollectionSS.Players[m_playerIndex].InitializePlayer(_playerInput.gameObject, playerCollectionSS.Players[m_playerIndex], m_playerIndex);
         currentPlayers.Players.Add(playerCollectionSS.Players[m_playerIndex]);
         ++m_playerIndex;
     }
     
-    public void JoinNPCsBB()
+    public void JoinNPCs()
     {
         for (var i = m_playerIndex - 1; i < npcCollectionSS.Players.Count; i++)
         {

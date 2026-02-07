@@ -313,7 +313,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerIndex: 0
-  onTakePhoto: {fileID: 11400000, guid: 519eb58666e1f7443bf4b5bc5e5e95e9, type: 2}
   onPause:
     m_PersistentCalls:
       m_Calls:
@@ -552,10 +551,10 @@ MonoBehaviour:
     m_ActionName: 'SwaggySnapshot/Crouch[/XInputControllerWindows/buttonEast,/Keyboard/c]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1918901649715819792}
-        m_TargetAssemblyTypeName: PhotoCapture, Assembly-CSharp
-        m_MethodName: TakePhoto
-        m_Mode: 1
+      - m_Target: {fileID: 7646641832864498062}
+        m_TargetAssemblyTypeName: PlayerControllerSwaggySnapshots, Assembly-CSharp
+        m_MethodName: OnTakePhoto
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -600,7 +599,7 @@ MonoBehaviour:
     m_ActionName: 'SwaggySnapshot/Join[/Keyboard/anyKey,/XInputControllerWindows/select]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: SwaggySnapshot
+  m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &1086479186432104138
@@ -1840,7 +1839,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4382110888806678621}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
   m_Name: 
