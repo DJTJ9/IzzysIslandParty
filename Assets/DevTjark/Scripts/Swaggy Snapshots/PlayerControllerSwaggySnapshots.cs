@@ -12,6 +12,7 @@ public class PlayerControllerSwaggySnapshots : Controller
     private InputAction m_unpauseInputAction;
     
     private PlayerInput playerInput;
+    private PhotoCapture photoCapture;
 
     public static event Action<int> onTakePhoto;
     [SerializeField] private UnityEvent onPause;
@@ -20,6 +21,7 @@ public class PlayerControllerSwaggySnapshots : Controller
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        photoCapture = GetComponent<PhotoCapture>();
     }
 
     public static void InvokePhotoTaken(int _playerIndex)
@@ -31,6 +33,7 @@ public class PlayerControllerSwaggySnapshots : Controller
     public void OnTakePhoto(InputAction.CallbackContext _context)
     {
         if (!_context.started) return;
+        if (!photoCapture.CanTakePhoto()) return;
         
         Debug.Log($"OnTakePhoto wurde aufgerufen für Spieler {PlayerIndex}");
         onTakePhoto?.Invoke(PlayerIndex);

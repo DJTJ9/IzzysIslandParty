@@ -9,7 +9,5 @@ public class SO_PlayerSwaggySnapshots : SO_Player
     {
         var playerController = _player.GetComponent<PlayerControllerSwaggySnapshots>();
         playerController.SetPlayerIndex(_playerIndex);
-        // playerController.BindPlayerSO(_playerSO);
-        // playerController.ResetComponents();
     }
 }

@@ -65,6 +65,8 @@ public class PhotoCapture : MonoBehaviour
         Debug.Log($"Spieler {_playerIndex} hat ein Foto gemacht!");
         StartCoroutine(CaptureScreenshot());
     }
+    
+    public bool CanTakePhoto() => !m_photoTaken && m_canTakePhoto;
 
     private IEnumerator CaptureScreenshot()
     {
