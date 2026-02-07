@@ -1,11 +1,11 @@
-using enums;
-using Juice;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace FishingGame
 {
+    [RequireComponent(typeof(FishingSystemManager))]
+    [RequireComponent(typeof(PlayerInput))]
     public class FishingRodController : MonoBehaviour
     {
         private static readonly int cast = Animator.StringToHash("IsCast");
@@ -13,22 +13,24 @@ namespace FishingGame
 
         private Animator animator;
         private LineRenderer lineRenderer;
-
-        [SerializeField] public IconHandler IconHandler;
+        private PlayerInput playerInput;
+        private FishingSystemManager fishingSystemManager;
+        
         [SerializeField] private Transform[] rodLineRendererPositions;
 
         private bool isCast = false;
-        public Coroutine FishingRoutine;
 
         [Header("Pausing: ")]
         [SerializeField] private UnityEvent OnPauseGame;
-
         [SerializeField] private UnityEvent OnUnpauseGame;
 
         private bool isPaused;
 
         private void Awake()
         {
+            fishingSystemManager = GetComponent<FishingSystemManager>();
+            playerInput = GetComponent<PlayerInput>();
+
             animator = GetComponentInChildren<Animator>();
             if (animator == null)
                 Debug.LogWarning("No animator attached to children of " + gameObject.name);
@@ -48,17 +50,17 @@ namespace FishingGame
 
         public void OnPause(InputAction.CallbackContext _context)
         {
-            if (_context.performed)
+            if (_context.started)
             {
                 if (!isPaused)
                 {
                     isPaused = true;
-                    OnPauseGame?.Invoke();
+                    OnPauseGame.Invoke();
                 }
                 else
                 {
                     isPaused = false;
-                    OnUnpauseGame?.Invoke();
+                    OnUnpauseGame.Invoke();
                 }
             }
         }
@@ -66,7 +68,7 @@ namespace FishingGame
         public void OnStopFishDisplay(InputAction.CallbackContext _context)
         {
             if (_context.performed)
-                FishingSystem.Instance.StopFishDisplay();
+                fishingSystemManager.StopFishDisplay();
         }
 
         public void OnCast(InputAction.CallbackContext _context)
@@ -78,15 +80,14 @@ namespace FishingGame
                     isCast = true;
                     animator.SetBool(cast, isCast);
 
-                    FishingSystem.Instance.StartFishing();
+                    fishingSystemManager.StartFishing();
 
                     return;
                 }
 
-                if (FishingSystem.Instance.FishHooked)
+                if (fishingSystemManager.FishHooked)
                 {
-                    FishingSystem.Instance.PressedCatch = true;
-                    IconHandler.DisplayIcon(EEmotion.Happy);
+                    fishingSystemManager.PressedCatch();
 
                     return;
                 }
@@ -95,21 +96,14 @@ namespace FishingGame
             }
         }
 
-        public void PullBackFishingRod(bool _stopFishingRoutine = true)
+        public void PullBackFishingRod()
         {
-            if (_stopFishingRoutine)
-                FishingSystem.Instance.StopFishing();
-
             isCast = false;
-
             animator.SetBool(cast, isCast);
         }
 
-        public void PlayFishBitingAnimation(bool _withIcon)
+        public void PlayFishBitingAnimation()
         {
-            if (_withIcon)
-                IconHandler.DisplayIcon(EEmotion.Alert);
-
             animator.SetBool(fishBiting, true);
         }
 
@@ -130,6 +124,16 @@ namespace FishingGame
                 lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
             else if (rodLineRendererPositions[2].gameObject.activeInHierarchy)
                 lineRenderer.SetPosition(1, rodLineRendererPositions[2].position);
+        }
+
+        public void SwitchToPlayerInputMap()
+        {
+            playerInput.SwitchCurrentActionMap("FishingGame");
+        }
+
+        public void SwitchToUIInputMap()
+        {
+            playerInput.SwitchCurrentActionMap("UI");
         }
     }
 }

@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace JetskiGame.Player.Multiplayer
+namespace FishingGame.Player.Multiplayer
 {
-    public class JetskiJoyridePlayerJoiner : MonoBehaviour
+    public class FishingFrenzyPlayerJoiner : MonoBehaviour
     {
         [SerializeField] private SO_PlayerCollection currentPlayers;
-        public SO_PlayerCollection PlayerCollectionJJ;
+        public SO_PlayerCollection playerCollectionFF;
 
         private int playerIndex;
         //private int npcIndex;
@@ -20,7 +20,9 @@ namespace JetskiGame.Player.Multiplayer
 
         public void PlayerJoined(PlayerInput _playerInput)
         {
-            _playerInput.gameObject.transform.position = PlayerCollectionJJ.Players[playerIndex].SpawnPoint;
+            currentPlayers.Players.Add(playerCollectionFF.Players[playerIndex]);
+            
+            _playerInput.gameObject.transform.position = playerCollectionFF.Players[playerIndex].SpawnPoint;
             ++playerIndex;
         }
     }

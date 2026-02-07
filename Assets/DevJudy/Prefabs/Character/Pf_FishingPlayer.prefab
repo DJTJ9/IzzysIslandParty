@@ -1122,6 +1122,124 @@ Transform:
   - {fileID: 3422033755314878143}
   m_Father: {fileID: 651437242795570887}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2268045854385791384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8951231228786076504}
+  - component: {fileID: 3187307299277298084}
+  - component: {fileID: 3902794038952810678}
+  - component: {fileID: 6032739385620744360}
+  m_Layer: 8
+  m_Name: GameEventListerner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8951231228786076504
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2268045854385791384}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5705243393259260562}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3187307299277298084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2268045854385791384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: b4c1de7ad322b894b8ed236533a23468, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1741299663787530852}
+        m_TargetAssemblyTypeName: FishingGame.FishingRodController, Assembly-CSharp
+        m_MethodName: SwitchToUIInputMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3902794038952810678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2268045854385791384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: cb8390d9fabb07843b5f42bf6275d672, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1741299663787530852}
+        m_TargetAssemblyTypeName: FishingGame.FishingRodController, Assembly-CSharp
+        m_MethodName: SwitchToPlayerInputMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6032739385620744360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2268045854385791384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: d85f1a13d5f3749468676f87ec48c10f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1741299663787530852}
+        m_TargetAssemblyTypeName: FishingGame.FishingRodController, Assembly-CSharp
+        m_MethodName: SwitchToUIInputMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2326932598984611270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,7 +1481,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7506628210960201533
 Transform:
   m_ObjectHideFlags: 0
@@ -1373,7 +1491,7 @@ Transform:
   m_GameObject: {fileID: 2741305163418993827}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.2, y: -6.59, z: 0.15}
+  m_LocalPosition: {x: 29.8, y: -9.9, z: 1.9}
   m_LocalScale: {x: 0.3, y: 0.15, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1732,7 +1850,7 @@ Transform:
   m_GameObject: {fileID: 3064157022802107680}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.84, y: -6.57, z: 1.93}
+  m_LocalPosition: {x: 29.8, y: -9.9, z: 1.9}
   m_LocalScale: {x: 0.3, y: 0.15, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2412,7 +2530,7 @@ Transform:
   m_GameObject: {fileID: 4674680182489744588}
   serializedVersion: 2
   m_LocalRotation: {x: 0.06162845, y: 0.70441604, z: -0.06162845, w: 0.70441604}
-  m_LocalPosition: {x: -0.3, y: 4.823, z: 0.968}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2731,6 +2849,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6134812781112865988}
+  - component: {fileID: 1985933516554988404}
   m_Layer: 8
   m_Name: FishingRodLineRendererPoint
   m_TagString: Untagged
@@ -2747,12 +2866,33 @@ Transform:
   m_GameObject: {fileID: 5411029241286054616}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.775, y: 7.171, z: -0.037}
+  m_LocalPosition: {x: 13.036, y: -0.146, z: 3.271}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2345773939867044420}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1985933516554988404
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5411029241286054616}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5412964295836528266
 GameObject:
   m_ObjectHideFlags: 0
@@ -2829,6 +2969,8 @@ GameObject:
   - component: {fileID: 4239609682233630430}
   - component: {fileID: 6881326045208652}
   - component: {fileID: 1741299663787530852}
+  - component: {fileID: 6874840815061034043}
+  - component: {fileID: 4456720291376179614}
   m_Layer: 8
   m_Name: Pf_FishingPlayer
   m_TagString: Untagged
@@ -2850,6 +2992,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 651437242795570887}
+  - {fileID: 8951231228786076504}
+  - {fileID: 7280690463702399638}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &4239609682233630430
@@ -2876,7 +3020,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 239378781582670930, guid: 3c84a283605944640bc061b48624fbd5, type: 3}
+  - {fileID: 2100000, guid: 8435cf02589d8a8489a77d02b617cbfa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2971,7 +3115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -3002,8 +3146,8 @@ MonoBehaviour:
     m_ActionName: 'FishingGame/Cast[/Keyboard/c]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: QTEController, Assembly-CSharp
+      - m_Target: {fileID: 6874840815061034043}
+        m_TargetAssemblyTypeName: FishingGame.QuickTimeEvents.QTEController, Assembly-CSharp
         m_MethodName: OnNorthButtonPressed
         m_Mode: 0
         m_Arguments:
@@ -3018,8 +3162,8 @@ MonoBehaviour:
     m_ActionName: 'FishingGame/NorthBttnQTE[/Keyboard/w]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: QTEController, Assembly-CSharp
+      - m_Target: {fileID: 6874840815061034043}
+        m_TargetAssemblyTypeName: FishingGame.QuickTimeEvents.QTEController, Assembly-CSharp
         m_MethodName: OnEastButtonPressed
         m_Mode: 0
         m_Arguments:
@@ -3034,8 +3178,8 @@ MonoBehaviour:
     m_ActionName: 'FishingGame/EastBttnQTE[/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: QTEController, Assembly-CSharp
+      - m_Target: {fileID: 6874840815061034043}
+        m_TargetAssemblyTypeName: FishingGame.QuickTimeEvents.QTEController, Assembly-CSharp
         m_MethodName: OnSouthButtonPressed
         m_Mode: 0
         m_Arguments:
@@ -3050,8 +3194,8 @@ MonoBehaviour:
     m_ActionName: 'FishingGame/SouthButtonQTE[/Keyboard/s]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: QTEController, Assembly-CSharp
+      - m_Target: {fileID: 6874840815061034043}
+        m_TargetAssemblyTypeName: FishingGame.QuickTimeEvents.QTEController, Assembly-CSharp
         m_MethodName: OnWestButtonPressed
         m_Mode: 0
         m_Arguments:
@@ -3066,8 +3210,8 @@ MonoBehaviour:
     m_ActionName: 'FishingGame/WestButtonQTE[/Keyboard/a]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: FishingGame.QuickTimeEvent.BarQTE, Assembly-CSharp
+      - m_Target: {fileID: 6874840815061034043}
+        m_TargetAssemblyTypeName: FishingGame.QuickTimeEvents.QTEController, Assembly-CSharp
         m_MethodName: OnLeftRightInput
         m_Mode: 0
         m_Arguments:
@@ -3133,19 +3277,7 @@ MonoBehaviour:
     m_ActionId: 3b13c68f-8270-4dad-9317-09df01ddb9ea
     m_ActionName: 'UI/Point[/Mouse/position]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1741299663787530852}
-        m_TargetAssemblyTypeName: FishingGame.FishingRodController, Assembly-CSharp
-        m_MethodName: OnTest
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: a1e48a85-021c-4fec-bd4c-addd5c22d662
     m_ActionName: 'UI/Click[/Mouse/leftButton]'
   - m_PersistentCalls:
@@ -3169,45 +3301,25 @@ MonoBehaviour:
     m_ActionId: 09ff5283-225b-46b2-91d4-ce404689c100
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1741299663787530852}
+        m_TargetAssemblyTypeName: FishingGame.FishingRodController, Assembly-CSharp
+        m_MethodName: OnUnpause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d8db3f96-6d5c-4180-b583-ebc634144dea
     m_ActionName: 'UI/Unpause[/Keyboard/escape]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 3f5b2076-0f7b-4ab2-b441-2a9c84f323cb
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c0acba80-ae38-4567-80bc-1a34a0d34f89
-    m_ActionName: 'Player/Look[/Mouse/delta]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5386e432-5750-4aab-81b7-b2396830b2a6
-    m_ActionName: 'Player/LeftMouse[/Mouse/leftButton,/Keyboard/enter]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b612b1bb-2f7f-4657-a2c0-f48c6e552617
-    m_ActionName: 'Player/Interact[/Keyboard/e]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 95d5b7cb-0875-4445-a78f-a205f3138d4e
-    m_ActionName: 'Player/Crouch[/Keyboard/c]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 82323fc8-0748-48f7-bf75-860a5499e6b3
-    m_ActionName: 'Player/Jump[/Keyboard/space]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ab9772d4-52b5-46af-b471-55773cc65d1e
-    m_ActionName: 'Player/Previous[/Keyboard/1]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c376c783-6d05-4576-9ab5-2b837187bcd6
-    m_ActionName: 'Player/Next[/Keyboard/2]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ce712994-46ce-4ee1-9444-b35bb73005c4
-    m_ActionName: 'Player/Sprint[/Keyboard/leftShift]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 292ed65c-2d01-4095-8369-c2949b5ea1e5
@@ -3222,49 +3334,85 @@ MonoBehaviour:
     m_ActionName: 'HurdleGame/Slide[/Keyboard/downArrow]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 69d7f3d9-adeb-4507-890a-9e36c4d97d7d
+    m_ActionId: 8095b1f7-a3ec-4cf9-9fdc-c4bb7d52de8e
+    m_ActionName: 'JetskiGame/Join[/Keyboard/anyKey]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cde468ba-184e-4c5d-9ae8-96f5986c5dcf
+    m_ActionName: 'UI/StartGame[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1741299663787530852}
+        m_TargetAssemblyTypeName: FishingGame.FishingRodController, Assembly-CSharp
+        m_MethodName: OnStopFishDisplay
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6d7cb911-4255-4d60-a577-159f56863289
+    m_ActionName: 'FishingGameUI/Submit[/Keyboard/enter,/Keyboard/x]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0dd5b048-e1dd-4f7f-81ac-e00f7c81dffb
     m_ActionName: 'SwaggySnapshot/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: e1b45550-7f77-4b49-9acb-4f34e60b5905
+    m_ActionId: 3cfd0d2b-0fb9-408b-a598-2c4598220792
     m_ActionName: 'SwaggySnapshot/Look[/Mouse/delta]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 843650a0-88fe-416e-ba52-b237b068d7cf
+    m_ActionId: 135e9a8b-f52f-4596-8ece-ddca8a81eea8
     m_ActionName: 'SwaggySnapshot/LeftMouse[/Mouse/leftButton,/Keyboard/enter]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 38441365-2d9f-4f4b-9df1-a7449976d000
+    m_ActionId: 0f146e1d-5095-4489-ade0-79a8d261e544
     m_ActionName: 'SwaggySnapshot/Interact[/Keyboard/e]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: ec7fe11c-2120-4980-afdd-04f3bffe5944
+    m_ActionId: e16901e0-9bad-4dc3-8742-01482cc388e1
     m_ActionName: 'SwaggySnapshot/Crouch[/Keyboard/c]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: d55016e2-e176-438c-83b1-c33d69ba1282
+    m_ActionId: d06de35d-67c7-49f6-9a25-c0481f048468
     m_ActionName: 'SwaggySnapshot/TakePhoto[/Keyboard/space]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 64702ccb-202c-485c-8137-f360aeb30f45
+    m_ActionId: 385ba492-6ea7-4c2f-b71a-c6036ef9b3bd
     m_ActionName: 'SwaggySnapshot/Previous[/Keyboard/1]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 81508bff-bbeb-41a2-ad38-240542f535ee
+    m_ActionId: 4a8eec9c-8cfd-4e38-9b12-47d03ad16a36
     m_ActionName: 'SwaggySnapshot/Next[/Keyboard/2]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: c22c5a95-896a-44b9-be7a-3658f6b35850
+    m_ActionId: d280e8c6-75cb-44a0-8452-15ea8253b03a
     m_ActionName: 'SwaggySnapshot/Sprint[/Keyboard/leftShift]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: acbeef20-41a0-462b-a91f-7767227eccfa
+    m_ActionId: ddfc4905-84d1-48c9-a43a-f4eacc564abc
     m_ActionName: 'SwaggySnapshot/Pause[/Keyboard/escape]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 37716735-96ef-4e92-b7e0-1dfcff3bb28b
+    m_ActionId: ca07eafe-b771-40de-a6b8-43ebb7da6306
     m_ActionName: 'SwaggySnapshot/Join[/Keyboard/anyKey]'
-  m_NeverAutoSwitchControlSchemes: 0
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a2f17958-1ccd-4227-81b0-a6b21f6efab2
+    m_ActionName: 'Player/Previous Ball[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a7ad0efa-33ed-4405-a546-ac1c4d69a023
+    m_ActionName: 'Player/Next Ball[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2fcd0ea7-79bf-481a-8ad0-9fd00f618f61
+    m_ActionName: 'FishingGame/Join[/Keyboard/space]'
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: FishingGame
   m_SplitScreenIndex: -1
@@ -3281,10 +3429,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7967eb4a04d46545bd2e88940c12bbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IconHandler: {fileID: 5526041761087462123}
   rodLineRendererPositions:
-  - {fileID: 4767166370553959256}
   - {fileID: 6134812781112865988}
+  - {fileID: 4767166370553959256}
+  - {fileID: 7506628210960201533}
   OnPauseGame:
     m_PersistentCalls:
       m_Calls:
@@ -3315,6 +3463,38 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6874840815061034043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5562084680045443988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37294612b1aa22c489876f4e54347ac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentQuickTimeEvent: 3
+--- !u!114 &4456720291376179614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5562084680045443988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d17256d18b536cf408c4e84ccec9fe60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerIndex: 0
+  gameScore: {fileID: 11400000, guid: 5cb636c38f28d2a4fbcde9462e931bc1, type: 2}
+  fishDisplay: {fileID: 0}
+  iconHandler: {fileID: 5526041761087462123}
+  QTEController: {fileID: 6874840815061034043}
+  QTEDisplayService: {fileID: 0}
+  pointsText: {fileID: 0}
 --- !u!1 &5589690360245084469
 GameObject:
   m_ObjectHideFlags: 0
@@ -4892,6 +5072,129 @@ Transform:
   - {fileID: 4229155011753490485}
   m_Father: {fileID: 8667076123307256079}
   m_LocalEulerAnglesHint: {x: 8.69245, y: 4.550693, z: -62.46531}
+--- !u!1 &8942367352810607454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7280690463702399638}
+  - component: {fileID: 6483802780915312964}
+  - component: {fileID: 8840589035386952617}
+  - component: {fileID: 7082973270299323437}
+  - component: {fileID: 8910978767518238133}
+  m_Layer: 0
+  m_Name: QTEHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7280690463702399638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8942367352810607454}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 328.7909, y: 401.29327, z: 313.9885}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5705243393259260562}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6483802780915312964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8942367352810607454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9506495349e5d94faefa21d7e556b02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  qteDisplayService: {fileID: 0}
+  qteController: {fileID: 6874840815061034043}
+  targetRing: {fileID: 0}
+  movingRing: {fileID: 0}
+  qteButtonText: {fileID: 0}
+  timingEventHolder: {fileID: 0}
+  allowedTimingOffset: 0.05
+  shrinkSpeed: 0.5
+  ringSuccessColor: {r: 0.2396766, g: 1, b: 0, a: 1}
+  ringFailureColor: {r: 1, g: 0.023529412, b: 0, a: 1}
+  ringNormalColor: {r: 0.77254903, g: 0.8627451, b: 0.81960785, a: 1}
+--- !u!114 &8840589035386952617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8942367352810607454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 146a00723b739274b8be7bea516a6708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  qteDisplayService: {fileID: 0}
+  qteController: {fileID: 6874840815061034043}
+  mashButtonText: {fileID: 0}
+  mashEventHolder: {fileID: 0}
+  mashButtonImage: {fileID: 0}
+  normalButtonColor: {r: 0.9607843, g: 1, b: 0.31764707, a: 1}
+  buttonPressedColor: {r: 0.9496855, g: 0.90220004, b: 0.26579243, a: 1}
+  wrongButtonColor: {r: 0.79607844, g: 0.09411765, b: 0.078431375, a: 1}
+  buttonMashAmount: 10
+  buttonMashTime: 5
+--- !u!114 &7082973270299323437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8942367352810607454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea12edb74d807604f8af878e3146dc9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barQTEHolder: {fileID: 0}
+  target: {fileID: 0}
+  catcher: {fileID: 0}
+  successSlider: {fileID: 0}
+  sliderFillImage: {fileID: 0}
+  normalColor: {r: 0.4117647, g: 0.61960787, b: 1, a: 1}
+  catcherInFrameColor: {r: 0.5647059, g: 1, b: 0.65882355, a: 1}
+  catcherOutFrameColor: {r: 0.9607843, g: 0.31764707, b: 0.30588236, a: 1}
+  targetMaxMovementLeft: -350
+  targetMaxMovementRight: 350
+  targetMoveSpeed: 250
+  targetChangeFrequency: 0.03
+  catcherMaxMovementLeft: -350
+  catcherMaxMovementRight: 350
+  catcherMoveSpeed: 250
+  successIncrement: 15
+  failDecrement: 12
+  successThreshold: 100
+  failThreshold: -100
+--- !u!114 &8910978767518238133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8942367352810607454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdeb6071cd0662547b48c0788f13777c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8991555294207774275
 GameObject:
   m_ObjectHideFlags: 0

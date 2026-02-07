@@ -1,128 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5654744993205193122
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7455469877854255543}
-  - component: {fileID: 2145280675510124134}
-  - component: {fileID: 7765344784415051621}
-  - component: {fileID: 7494653830283895259}
-  - component: {fileID: 8578146817481316929}
-  m_Layer: 0
-  m_Name: QTEHandler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7455469877854255543
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5654744993205193122}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7781495681180382056}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2145280675510124134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5654744993205193122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9506495349e5d94faefa21d7e556b02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  qteDisplayService: {fileID: 0}
-  qteController: {fileID: 0}
-  targetRing: {fileID: 0}
-  movingRing: {fileID: 0}
-  qteButtonText: {fileID: 0}
-  timingEventHolder: {fileID: 0}
-  allowedTimingOffset: 0.05
-  shrinkSpeed: 0.5
-  ringSuccessColor: {r: 0.2396766, g: 1, b: 0, a: 1}
-  ringFailureColor: {r: 1, g: 0.023529412, b: 0, a: 1}
-  ringNormalColor: {r: 0.77254903, g: 0.8627451, b: 0.81960785, a: 1}
---- !u!114 &7765344784415051621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5654744993205193122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 146a00723b739274b8be7bea516a6708, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  qteDisplayService: {fileID: 0}
-  qteController: {fileID: 0}
-  mashButtonText: {fileID: 0}
-  mashEventHolder: {fileID: 0}
-  mashButtonImage: {fileID: 0}
-  normalButtonColor: {r: 0.9607843, g: 1, b: 0.31764707, a: 1}
-  buttonPressedColor: {r: 0.9496855, g: 0.90220004, b: 0.26579243, a: 1}
-  wrongButtonColor: {r: 0.79607844, g: 0.09411765, b: 0.078431375, a: 1}
-  buttonMashAmount: 10
-  buttonMashTime: 5
---- !u!114 &7494653830283895259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5654744993205193122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea12edb74d807604f8af878e3146dc9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  barQTEHolder: {fileID: 0}
-  target: {fileID: 0}
-  catcher: {fileID: 0}
-  successSlider: {fileID: 0}
-  sliderFillImage: {fileID: 0}
-  normalColor: {r: 0.4117647, g: 0.61960787, b: 1, a: 1}
-  catcherInFrameColor: {r: 0.5647059, g: 1, b: 0.65882355, a: 1}
-  catcherOutFrameColor: {r: 0.9607843, g: 0.31764707, b: 0.30588236, a: 1}
-  targetMaxMovementLeft: -250
-  targetMaxMovementRight: 250
-  targetMoveSpeed: 250
-  targetChangeFrequency: 0.01
-  catcherMaxMovementLeft: -250
-  catcherMaxMovementRight: 250
-  catcherMoveSpeed: 250
-  successIncrement: 15
-  failDecrement: 12
-  successThreshold: 100
-  failThreshold: -100
---- !u!114 &8578146817481316929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5654744993205193122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdeb6071cd0662547b48c0788f13777c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6646979276144884312
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,10 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4792fc4969ebf63409e58426c3117813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishingRodController: {fileID: 0}
-  catchEventHandler: {fileID: 8578146817481316929}
+  fishingSystemManagers: []
+  catchEventHandler: {fileID: 0}
   uiPointsService: {fileID: 0}
-  fishDisplay: {fileID: 0}
   fishList:
   - {fileID: 11400000, guid: 2e9b8d7a63f78b74ba073a9578d1f423, type: 2}
   - {fileID: 11400000, guid: cf07be7dd2fe3f54d902350f2bebcf4c, type: 2}
@@ -216,7 +92,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1682718508243364013}
-  - {fileID: 7455469877854255543}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3886216125875864171
@@ -233,15 +108,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnLevelStart:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8587489525363768519}
+        m_TargetAssemblyTypeName: MultiuseScripts.LevelTimer, Assembly-CSharp
+        m_MethodName: StartTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnLevelEnd:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8587489525363768519}
+        m_TargetAssemblyTypeName: MultiuseScripts.LevelTimer, Assembly-CSharp
+        m_MethodName: EndTimerAndDisplayFinishTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3886216125875864171}
+        m_TargetAssemblyTypeName: FishingGame.FishingGameLevelService, Assembly-CSharp
+        m_MethodName: GetNPCScores
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
+        m_MethodName: ShowResultsScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  currentPlayers: {fileID: 11400000, guid: 97ae6e8cdb921dd4d97057deb65c1858, type: 2}
   gameAudioManager: {fileID: 0}
   levelTimer: {fileID: 8587489525363768519}
-  uiPanelManager: {fileID: 0}
+  playerCollection: {fileID: 11400000, guid: dd4935fb874cc9a49858d0e0e7b59c81, type: 2}
+  timingQTE: {fileID: 0}
+  buttonMashQTE: {fileID: 0}
+  barQTE: {fileID: 0}
   playerNames:
-  - Player
   - Hornet
   - Peach
   - Freddy
@@ -259,8 +185,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerManager: {fileID: 0}
-  uiPanelManager: {fileID: 0}
-  durationInMinutes: 1
+  levelService: {fileID: 3886216125875864171}
+  durationInMinutes: 5
   deductionFeedbackDuration: 0
   timerRunningDown: 1
-  startTimerOnLevelStart: 1
+  startTimerOnLevelStart: 0

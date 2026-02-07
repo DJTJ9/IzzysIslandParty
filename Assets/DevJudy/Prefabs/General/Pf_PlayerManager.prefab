@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7028254439613952691}
   - component: {fileID: 3799121933406901783}
-  - component: {fileID: 4161216485883749430}
+  - component: {fileID: 8378186178305893172}
   m_Layer: 0
   m_Name: Pf_PlayerManager
   m_TagString: Untagged
@@ -52,9 +52,22 @@ MonoBehaviour:
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4161216485883749430}
-        m_TargetAssemblyTypeName: PlayerJoiner, Assembly-CSharp
-        m_MethodName: PlayerJoinedJJ
+      - m_Target: {fileID: 8378186178305893172}
+        m_TargetAssemblyTypeName: FishingGame.Player.Multiplayer.FishingFrenzyPlayerJoiner,
+          Assembly-CSharp
+        m_MethodName: PlayerJoined
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
+        m_MethodName: OnPlayerJoined
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -66,7 +79,19 @@ MonoBehaviour:
         m_CallState: 2
   m_PlayerLeftEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
+        m_MethodName: OnPlayerLeft
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_JoinAction:
     m_UseReference: 1
     m_Action:
@@ -78,8 +103,8 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -4675742942015640628, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
-  m_PlayerPrefab: {fileID: 1353377157112977573, guid: 16c19efb55ee62849b803a3d670d18dc, type: 3}
+    m_Reference: {fileID: 8162944424003685325, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+  m_PlayerPrefab: {fileID: 0}
   m_SplitScreen: 1
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -89,7 +114,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &4161216485883749430
+--- !u!114 &8378186178305893172
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,9 +123,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 628692634014095975}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 178e1589141c44a8a901da2595c5802d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2bf75e1b3779443398afa934fd08f09f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCollectionBB: {fileID: 0}
-  npcCollectionBB: {fileID: 0}
-  playerInputs: {fileID: 0}
+  currentPlayers: {fileID: 11400000, guid: 97ae6e8cdb921dd4d97057deb65c1858, type: 2}
+  playerCollectionFF: {fileID: 11400000, guid: dd4935fb874cc9a49858d0e0e7b59c81, type: 2}

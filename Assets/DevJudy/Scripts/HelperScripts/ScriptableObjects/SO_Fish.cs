@@ -21,7 +21,7 @@ namespace ScriptableObjects
         [field: SerializeField] public List<EQuickTimeEvent> CatchEvents{ get; private set; }
         [field: SerializeField] public GameObject Prefab { get; private set; }
         
-        [HideInInspector] public GameObject PrefabReference;
+        [HideInInspector] public List<GameObject> PrefabReferences;
 
         public decimal GetRandomFromRange(Vector2 _fishSizeRange)
         {

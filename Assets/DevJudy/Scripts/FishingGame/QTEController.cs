@@ -6,14 +6,29 @@ namespace FishingGame.QuickTimeEvents
 {
     public class QTEController : MonoBehaviour
     {
-        [SerializeField] private TimingQTE timingQTE;
-        [SerializeField] private ButtonMashQTE buttonMashQTE;
-        [SerializeField] private BarQTE barQTE;
+        private TimingQTE timingQTE;
+        private ButtonMashQTE buttonMashQTE;
+        private BarQTE barQTE;
 
         [HideInInspector] public EQuickTimeEvent CurrentQuickTimeEvent = EQuickTimeEvent.None;
 
         private EButton currentButtonToPress;
         private float moveInput;
+
+        private void Awake()
+        {
+            timingQTE = GetComponentInChildren<TimingQTE>();
+            if (timingQTE == null)
+                Debug.LogError("Timing QTE not found in children");
+            
+            buttonMashQTE = GetComponentInChildren<ButtonMashQTE>();
+            if (buttonMashQTE == null)
+                Debug.LogError("ButtonMashQTE not found in children");
+            
+            barQTE = GetComponentInChildren<BarQTE>();
+            if (barQTE == null)
+                Debug.LogError("BarQTE not found in children");
+        }
 
         public void OnNorthButtonPressed(InputAction.CallbackContext _context)
         {
@@ -86,7 +101,7 @@ namespace FishingGame.QuickTimeEvents
                 }
             }
         }
-        
+
         public void OnLeftRightInput(InputAction.CallbackContext _context)
         {
             if (!barQTE.QTERunning)
@@ -106,10 +121,11 @@ namespace FishingGame.QuickTimeEvents
 
             if (_context.canceled)
                 moveInput = 0f;
-            
+
             barQTE.SetLeftRightInput(moveInput);
         }
 
+// !! IS THIS LEFTOVER?
         public void StopCurrentQTE()
         {
             switch (CurrentQuickTimeEvent)
@@ -118,8 +134,10 @@ namespace FishingGame.QuickTimeEvents
                     timingQTE.StopQTE();
                     break;
                 case EQuickTimeEvent.ButtonMash:
+                    buttonMashQTE.StopQTE();
                     break;
                 case EQuickTimeEvent.Bar:
+                    barQTE.StopQTE();
                     break;
                 default:
                     break;

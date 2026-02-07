@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using enums;
-using Juice;
 using ScriptableObjects;
 using UIScripts;
 using UnityEngine;
@@ -12,11 +11,9 @@ namespace FishingGame
     public class FishingSystem : MonoBehaviour
     {
         [Header("Dependencies: ")]
-        // !! Can't have only one controller for multiplayer
-        [SerializeField] private FishingRodController fishingRodController;
-        [SerializeField] private CatchEventHandler catchEventHandler;
+        private List<FishingSystemManager> fishingSystemManagers = new List<FishingSystemManager>();
+
         [SerializeField] private UIPointsService uiPointsService;
-        [SerializeField] private FishDisplay fishDisplay;
 
         [Header("Variables: ")]
         private static FishingSystem instance;
@@ -30,9 +27,7 @@ namespace FishingGame
 
         // Bools
         private bool fishing;
-        private bool fishDisplayActive;
         public bool PressedCatch { get; set; }
-        public bool FishHooked { get; private set; }
 
         private FishingSystem()
         {
@@ -41,21 +36,8 @@ namespace FishingGame
 
         private void Start()
         {
-            if (fishingRodController == null)
-                Debug.LogError("No FishingRodController assigned");
-
-            if (catchEventHandler == null)
-                Debug.LogError("No catchEventHandler assigned");
-
             if (fishList == null || fishList.Count <= 0)
                 Debug.LogError("FishingSystem fishList is null");
-            else
-            {
-                if (fishDisplay != null)
-                    SpawnInFishDisplayObjects();
-            }
-
-            StopFishDisplay();
         }
 
         private void OnDisable()
@@ -63,34 +45,39 @@ namespace FishingGame
             StopAllCoroutines();
         }
 
-        private void SpawnInFishDisplayObjects()
+        public void OnPlayerJoined(SO_PlayerCollection _currentPlayers)
         {
-            for (int i = 0; i < fishList.Count; i++)
+            var fishingSystemManager = _currentPlayers.Players[^1].PlayerPrefab.GetComponentInChildren<FishingSystemManager>();
+            if (fishingSystemManager != null)
             {
-                fishList[i].PrefabReference = fishDisplay?.SpawnInFishPrefabs(fishList[i]);
+                fishingSystemManager.SetUpFishDisplay(fishList);
+                fishingSystemManagers.Add(fishingSystemManager);
+            }
+            else
+            {
+                Debug.LogError("FishingSystemManager not found");
             }
         }
 
-        public void StartFishing()
+        public void StartFishing(FishingSystemManager _fishingSystemManager)
         {
             fishing = true;
 
-            // !! Cant do the usual coroutine stuff bc this is a singleton...
-            fishingRodController.FishingRoutine = StartCoroutine(FishingCoroutine());
+            _fishingSystemManager.FishingRoutine = StartCoroutine(FishingCoroutine(_fishingSystemManager));
         }
 
-        public void StopFishing()
+        public void StopFishing(FishingSystemManager _fishingSystemManager)
         {
-            if (fishingRodController.FishingRoutine != null)
+            if (_fishingSystemManager.FishingRoutine != null)
             {
-                fishingRodController.StopFishBitingAnimation();
+                _fishingSystemManager.StopFishBitingAnimation();
 
-                StopCoroutine(fishingRodController.FishingRoutine);
-                fishingRodController.FishingRoutine = null;
+                StopCoroutine(_fishingSystemManager.FishingRoutine);
+                _fishingSystemManager.FishingRoutine = null;
             }
 
             fishing = false;
-            FishHooked = false;
+            _fishingSystemManager.FishHooked = false;
         }
 
         private SO_Fish CalculateFishProbability()
@@ -119,7 +106,7 @@ namespace FishingGame
             return null;
         }
 
-        private IEnumerator FishingCoroutine()
+        private IEnumerator FishingCoroutine(FishingSystemManager _fishingSystemManager)
         {
             bool caughtAFish = false;
             SO_Fish caughtFish = null;
@@ -132,8 +119,8 @@ namespace FishingGame
 
                 caughtFish = CalculateFishProbability();
 
-                FishHooked = true;
-                fishingRodController.PlayFishBitingAnimation(true);
+                _fishingSystemManager.FishHooked = true;
+                _fishingSystemManager.PlayFishBitingAnimation(true);
 
                 float randomSecondsToPressCatch = Random.Range(buttonPressTimerRange.x, buttonPressTimerRange.y);
                 yield return new WaitForSeconds(randomSecondsToPressCatch);
@@ -141,70 +128,58 @@ namespace FishingGame
                 // Stop the animation a few milliseconds before checking input for coyote time
 
                 if (!PressedCatch)
-                    fishingRodController.StopFishBitingAnimation();
+                    _fishingSystemManager.StopFishBitingAnimation();
 
                 yield return new WaitForSeconds(coyoteTime.Value);
 
                 if (PressedCatch)
                 {
-                    fishingRodController.PlayFishBitingAnimation(false);
+                    _fishingSystemManager.PlayFishBitingAnimation(false);
                     fishing = false;
 
-                    catchEventHandler.StartFishEvent(caughtFish);
-                    yield return new WaitUntil(() => catchEventHandler.CatchEventFinished);
+                    _fishingSystemManager.StartFishEvent(caughtFish);
+                    yield return new WaitUntil(_fishingSystemManager.CheckIfCatchEventFinished);
 
-                    caughtAFish = catchEventHandler.CatchEventSuccess;
+                    caughtAFish = _fishingSystemManager.CheckIfCatchEventSucceeded();
                 }
                 else
-                    fishingRodController.IconHandler?.DisplayIcon(EEmotion.Embarrassed);
+                    _fishingSystemManager.DisplayIcon(EEmotion.Embarrassed);
 
                 PressedCatch = false;
-                FishHooked = false;
+                _fishingSystemManager.FishHooked = false;
             }
 
             if (caughtAFish)
             {
-                fishingRodController.IconHandler?.DisplayIcon(EEmotion.Love);
-                
-                fishingRodController.PullBackFishingRod(false);
-                fishDisplay?.DisplayFish(caughtFish);
-             
-                fishDisplayActive = true;
+                _fishingSystemManager.DisplayIcon(EEmotion.Love);
+
+                _fishingSystemManager.PullBackFishingRod(false);
+                _fishingSystemManager.DisplayFish(caughtFish);
+
+                _fishingSystemManager.FishDisplayActive = true;
                 yield return new WaitForSecondsRealtime(3f);
 
-                uiPointsService?.UpdatePointsText(caughtFish.Points);
-
-                //StopFishDisplay();
+                _fishingSystemManager.UpdatePoints(uiPointsService, caughtFish.Points);
             }
             else
             {
-                fishingRodController.PullBackFishingRod();
-                fishingRodController.IconHandler?.DisplayIcon(EEmotion.Sad);
+                _fishingSystemManager.PullBackFishingRod(false);
+                _fishingSystemManager.DisplayIcon(EEmotion.Sad);
             }
 
-            EndCoroutine();
+            EndCoroutine(_fishingSystemManager);
             yield return null;
         }
 
-        private void EndCoroutine()
+        private void EndCoroutine(FishingSystemManager _fishingSystemManager)
         {
-            if (fishingRodController.FishingRoutine != null)
+            if (_fishingSystemManager.FishingRoutine != null)
             {
-                fishingRodController.StopFishBitingAnimation();
+                _fishingSystemManager.StopFishBitingAnimation();
 
-                StopCoroutine(fishingRodController.FishingRoutine);
-                fishingRodController.FishingRoutine = null;
+                StopCoroutine(_fishingSystemManager.FishingRoutine);
+                _fishingSystemManager.FishingRoutine = null;
             }
-        }
-
-        public void StopFishDisplay()
-        {
-            if (!fishDisplayActive)
-                return;
-
-            fishDisplay?.StopDisplayFish();
-
-            fishDisplayActive = false;
         }
     }
 }

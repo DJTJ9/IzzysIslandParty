@@ -102,9 +102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 178e1589141c44a8a901da2595c5802d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCollectionBB: {fileID: 11400000, guid: b311deb974e253d4a87e88e50d801712, type: 2}
-  npcCollectionBB: {fileID: 11400000, guid: dac08bd5846bed34a9524d0c0d5cf376, type: 2}
-  playerInputs: {fileID: 11400000, guid: 2abbe52883f175347954cd0b2ca2f704, type: 2}
+  currentPlayers: {fileID: 0}
+  PlayerCollectionJJ: {fileID: 0}
 --- !u!1 &8920463407941432964
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,16 +151,4 @@ MonoBehaviour:
   Event: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
   Response:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6575249262868436842}
-        m_TargetAssemblyTypeName: PlayerJoiner, Assembly-CSharp
-        m_MethodName: JoinNPCsBB
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []

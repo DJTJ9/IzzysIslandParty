@@ -7,23 +7,32 @@ using UnityEngine;
 
 namespace FishingGame
 {
+    public class CatchEventVariables
+    {
+        public Coroutine QTECoroutine;
+        public int QTECounter;
+        public bool FailedEncounter;
+        public bool CatchEventSuccess;
+        public bool CatchEventFinished;
+    }
+
     public class CatchEventHandler : MonoBehaviour
     {
+        private const int maxNumberOfPlayers = 4;
+        
         private TimingQTE timingQTE;
         private ButtonMashQTE buttonMashQTE;
         private BarQTE barQTE;
 
-        private Coroutine qteCoroutine;
-
-        private int quickTimeEventCounter;
-        private bool failedEncounter;
-
-        public bool CatchEventSuccess { get; private set; }
-        public bool CatchEventFinished { get; private set; }
-
+        public readonly List<CatchEventVariables> CatchEventVariables = new List<CatchEventVariables>();
 
         private void Start()
         {
+            for (int i = 0; i < maxNumberOfPlayers; i++)
+            {
+                CatchEventVariables.Add(new CatchEventVariables());
+            }
+            
             barQTE = GetComponent<BarQTE>();
             if (barQTE == null)
                 Debug.LogWarning("No BarQTE script attached to " + gameObject.name);
@@ -36,45 +45,53 @@ namespace FishingGame
             if (timingQTE == null)
                 Debug.LogWarning("No TimingQTE script attached to " + gameObject.name);
         }
-        
-        public void StartFishEvent(SO_Fish _fishToCatch)
+
+        private void OnDisable()
         {
-            ResetCatchEventVariables();
-            
-            StartCoroutine(CatchEventCoroutine(_fishToCatch.CatchEvents));
+            StopAllCoroutines();
         }
 
-        private void ResetCatchEventVariables()
+        public void StartFishEvent(SO_Fish _fishToCatch, QTEController _qteController, QTEDisplayService _qteDisplayService, int _playerIndex)
         {
-            CatchEventFinished = false;
-            CatchEventSuccess = false;
-            failedEncounter = false;
+            ResetCatchEventVariables(_playerIndex);
 
-            quickTimeEventCounter = 0;
+            StartCoroutine(CatchEventCoroutine(_fishToCatch.CatchEvents, _playerIndex, _qteController, _qteDisplayService));
         }
-        
-        private IEnumerator CatchEventCoroutine(List<EQuickTimeEvent> _quickTimeEvent)
-        {
-            CatchEventSuccess = false;
 
-            while (quickTimeEventCounter < _quickTimeEvent.Count && !failedEncounter)
+        //!!ERROR
+        private void ResetCatchEventVariables(int _playerIndex)
+        {
+            CatchEventVariables[_playerIndex].CatchEventFinished = false;
+            CatchEventVariables[_playerIndex].CatchEventSuccess = false;
+            CatchEventVariables[_playerIndex].FailedEncounter = false;
+
+            CatchEventVariables[_playerIndex].QTECounter = 0;
+        }
+
+        private IEnumerator CatchEventCoroutine(List<EQuickTimeEvent> _quickTimeEvent, int _playerIndex, QTEController _qteController, QTEDisplayService _qteDisplayService)
+        {
+            CatchEventVariables[_playerIndex].CatchEventSuccess = false;
+
+            while (CatchEventVariables[_playerIndex].QTECounter < _quickTimeEvent.Count && !CatchEventVariables[_playerIndex].FailedEncounter)
             {
                 // Go through list of unityEvents and invoke those instead of repeating the same one
-                if (qteCoroutine == null)
+                if (CatchEventVariables[_playerIndex].QTECoroutine == null)
                 {
-                    qteCoroutine = StartCoroutine(QTECoroutine(GetQuickTimeEvent(_quickTimeEvent[quickTimeEventCounter])));
-                    quickTimeEventCounter++;
+                    CatchEventVariables[_playerIndex].QTECoroutine = StartCoroutine(
+                        QTECoroutine(GetQuickTimeEvent(_quickTimeEvent[CatchEventVariables[_playerIndex].QTECounter]), _playerIndex));
+                    
+                    CatchEventVariables[_playerIndex].QTECounter++;
                 }
 
                 yield return new WaitForEndOfFrame();
             }
 
-            yield return new WaitUntil(() => qteCoroutine == null);
+            yield return new WaitUntil(() => CatchEventVariables[_playerIndex].QTECoroutine == null);
 
-            if (!failedEncounter)
-                CatchEventSuccess = true;
+            if (!CatchEventVariables[_playerIndex].FailedEncounter)
+                CatchEventVariables[_playerIndex].CatchEventSuccess = true;
 
-            CatchEventFinished = true;
+            CatchEventVariables[_playerIndex].CatchEventFinished = true;
 
             yield return null;
         }
@@ -94,7 +111,7 @@ namespace FishingGame
             }
         }
 
-        private IEnumerator QTECoroutine(QuickTimeEvent _quickTimeEvent)
+        private IEnumerator QTECoroutine(QuickTimeEvent _quickTimeEvent, int _playerIndex)
         {
             _quickTimeEvent.StartQTE();
 
@@ -104,9 +121,9 @@ namespace FishingGame
             }
 
             if (!_quickTimeEvent.QTEFinishedSuccessfully)
-                failedEncounter = true;
+                CatchEventVariables[_playerIndex].FailedEncounter = true;
 
-            qteCoroutine = null;
+            CatchEventVariables[_playerIndex].QTECoroutine = null;
             yield return null;
         }
     }

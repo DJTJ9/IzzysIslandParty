@@ -33,7 +33,6 @@ namespace FishingGame.QuickTimeEvents
 
         private EButton currentButtonToPress;
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Start()
         {
             ButtonMashEventSetup();
@@ -116,8 +115,6 @@ namespace FishingGame.QuickTimeEvents
         private void OnButtonMash()
         {
             buttonMashCounter++;
-
-            // Show mashed color for like 0.5 seconds...
 
             float buttonTransform = (buttonMashAmount - buttonMashCounter) * 10;
 

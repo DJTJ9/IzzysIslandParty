@@ -5,20 +5,14 @@ namespace UIScripts
 {
     public class UIPointsService : MonoBehaviour
     {
-        [Header("Points: ")]
-        [SerializeField] private TextMeshProUGUI pointsText;
-
-        // !! This can be updated in the playerScore directly instead of only in UIPointsService
-        public int CurrentScore {get; private set;}
-        
-        public void UpdatePointsText(int _addedPoints)
+        public void UpdatePointsText(TextMeshProUGUI _pointsText, float _currentScore)
         {
-            CurrentScore += _addedPoints;
-
-            if (pointsText != null)
-                pointsText.text = "Points: " + CurrentScore.ToString();
+            if (_pointsText != null)
+                _pointsText.text = "Points: " + _currentScore;
             else
                 Debug.LogWarning("No points text set");
         }
+        
+        
     }
 }

@@ -25,6 +25,12 @@ namespace Audio
             instance = this;
         }
 
+        private void OnEnable()
+        {
+            this.gameObject.SetActive(true);
+            Debug.Log("Activr: " + this.gameObject.activeInHierarchy);
+        }
+
         private void OnDisable()
         {
             StopAllCoroutines();
