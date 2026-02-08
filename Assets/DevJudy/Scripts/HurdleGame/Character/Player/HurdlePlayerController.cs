@@ -1,5 +1,6 @@
 using ImprovedTimers;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace HurdleGame
@@ -37,12 +38,17 @@ namespace HurdleGame
         [SerializeField] private LayerMask groundLayer;
         [SerializeField] private float groundCheckOffset = 1f;
         [SerializeField] private float groundCheckRadius = 0.3f;
-
+        
         private bool IsGrounded
         {
             get;
             set;
         }
+        
+        [Header("Pausing: ")]
+        [SerializeField] private UnityEvent OnPauseGame;
+        [SerializeField] private UnityEvent OnUnpauseGame;
+        private bool isPaused;
 
         private void Awake()
         {
@@ -62,6 +68,23 @@ namespace HurdleGame
             //ogRunningPos = transform.position;
         }
 
+        public void OnPause(InputAction.CallbackContext _context)
+        {
+            if (_context.started)
+            {
+                if (!isPaused)
+                {
+                    isPaused = true;
+                    OnPauseGame.Invoke();
+                }
+                else
+                {
+                    isPaused = false;
+                    OnUnpauseGame.Invoke();
+                }
+            }
+        }
+        
         public void OnJump(InputAction.CallbackContext _context)
         {
             if (_context.started && IsGrounded)

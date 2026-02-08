@@ -13,6 +13,7 @@ namespace HelperScripts
                 {
                     _arrayToAddTo[i] = _objectToAdd;
                     success = true;
+                    break;
                 }
             }
 
@@ -43,6 +44,30 @@ namespace HelperScripts
             
             if (!success)
                 Debug.LogError("Could not remove " + _objectToRemove + " from " + _arrayToRemoveFrom);
+            
+            return newArray;
+        }
+
+        public static T[] RemoveEmptySpotsFromArray<T>(T[] _arrayToRemoveFrom)
+        {
+            bool success = false;
+            T[] newArray = new T[_arrayToRemoveFrom.Length - 1];
+            int j = 0;
+            
+            for (int i = 0; i < _arrayToRemoveFrom.Length; i++)
+            {
+                if (_arrayToRemoveFrom[i] == null)
+                {
+                    success = true;
+                    continue;
+                }
+                
+                newArray[j] = _arrayToRemoveFrom[i];
+                j++;
+            }
+            
+            if (!success)
+                Debug.LogError("Could not remove anything from " + _arrayToRemoveFrom);
             
             return newArray;
         }

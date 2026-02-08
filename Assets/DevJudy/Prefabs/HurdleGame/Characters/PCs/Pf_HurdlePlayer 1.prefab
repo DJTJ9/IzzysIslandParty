@@ -1887,7 +1887,7 @@ Transform:
   m_GameObject: {fileID: 4499268956465758374}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 8.8, y: -0.4, z: -5.6}
+  m_LocalPosition: {x: -5.05, y: 0.05, z: -5.6}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2043,38 +2043,6 @@ MonoBehaviour:
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: c0acba80-ae38-4567-80bc-1a34a0d34f89
-    m_ActionName: 'Player/Look[/Mouse/delta]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5386e432-5750-4aab-81b7-b2396830b2a6
-    m_ActionName: 'Player/LeftMouse[/Mouse/leftButton,/Keyboard/enter]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b612b1bb-2f7f-4657-a2c0-f48c6e552617
-    m_ActionName: 'Player/Interact[/Keyboard/e]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 95d5b7cb-0875-4445-a78f-a205f3138d4e
-    m_ActionName: 'Player/Crouch[/Keyboard/c]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 82323fc8-0748-48f7-bf75-860a5499e6b3
-    m_ActionName: 'Player/Jump[/Keyboard/space]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ab9772d4-52b5-46af-b471-55773cc65d1e
-    m_ActionName: 'Player/Previous[/Keyboard/1]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c376c783-6d05-4576-9ab5-2b837187bcd6
-    m_ActionName: 'Player/Next[/Keyboard/2]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ce712994-46ce-4ee1-9444-b35bb73005c4
-    m_ActionName: 'Player/Sprint[/Keyboard/leftShift]'
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 292ed65c-2d01-4095-8369-c2949b5ea1e5
     m_ActionName: 'Player/Pause[/Keyboard/escape]'
   - m_PersistentCalls:
@@ -2163,16 +2131,120 @@ MonoBehaviour:
     m_ActionName: 'UI/StartGame[/Keyboard/space,/XInputControllerWindows/buttonNorth]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 151f42cc-d059-4bbf-9169-f110e1d7c797
-    m_ActionName: 'Player/Navigate[/XInputControllerWindows/rightStick/up,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c6c3145b-2ca9-4326-a4f3-a8606709a4dd
-    m_ActionName: 'FishingGame/X[/Keyboard/x,/XInputControllerWindows/rightStickPress]'
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 8095b1f7-a3ec-4cf9-9fdc-c4bb7d52de8e
     m_ActionName: 'JetskiGame/Join[/Keyboard/anyKey,/XInputControllerWindows/select]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0dd5b048-e1dd-4f7f-81ac-e00f7c81dffb
+    m_ActionName: 'SwaggySnapshots/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3cfd0d2b-0fb9-408b-a598-2c4598220792
+    m_ActionName: 'SwaggySnapshots/Look[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 135e9a8b-f52f-4596-8ece-ddca8a81eea8
+    m_ActionName: 'SwaggySnapshots/LeftMouse[/Mouse/leftButton,/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0f146e1d-5095-4489-ade0-79a8d261e544
+    m_ActionName: 'SwaggySnapshots/Interact[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e16901e0-9bad-4dc3-8742-01482cc388e1
+    m_ActionName: 'SwaggySnapshots/Crouch[/Keyboard/c]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d06de35d-67c7-49f6-9a25-c0481f048468
+    m_ActionName: 'SwaggySnapshots/TakePhoto[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 385ba492-6ea7-4c2f-b71a-c6036ef9b3bd
+    m_ActionName: 'SwaggySnapshots/Previous[/Keyboard/1]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4a8eec9c-8cfd-4e38-9b12-47d03ad16a36
+    m_ActionName: 'SwaggySnapshots/Next[/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d280e8c6-75cb-44a0-8452-15ea8253b03a
+    m_ActionName: 'SwaggySnapshots/Sprint[/Keyboard/leftShift]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ddfc4905-84d1-48c9-a43a-f4eacc564abc
+    m_ActionName: 'SwaggySnapshots/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ca07eafe-b771-40de-a6b8-43ebb7da6306
+    m_ActionName: 'SwaggySnapshots/Join[/Keyboard/anyKey]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 68276f0f-d2f1-4528-874c-c770db9628e8
+    m_ActionName: 'Player/Look[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a2f17958-1ccd-4227-81b0-a6b21f6efab2
+    m_ActionName: 'Player/Previous Ball[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a7ad0efa-33ed-4405-a546-ac1c4d69a023
+    m_ActionName: 'Player/Next Ball[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1adf136c-4b4a-4528-981e-ae2a2886385c
+    m_ActionName: 'MinigolfMayhem/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3b7c6bd0-e2bf-4021-b694-19075839718a
+    m_ActionName: 'MinigolfMayhem/Look[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 37733399-93da-44a7-839f-6c8d02a6acb2
+    m_ActionName: 'MinigolfMayhem/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 832443a4-660f-48f6-bef2-3e3b9d9cd23f
+    m_ActionName: 'MinigolfMayhem/Join[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ae807423-6597-4ecd-90b3-dfc2fb960650
+    m_ActionName: 'MinigolfMayhem/Shoot[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6fd8ac2b-7b99-47ac-bbac-eeb7c7633295
+    m_ActionName: 'MinigolfMayhem/Jump[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2fcd0ea7-79bf-481a-8ad0-9fd00f618f61
+    m_ActionName: 'FishingGame/Join[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 64abd04f-c22d-40a7-aaa4-ed2efd306744
+    m_ActionName: 'JetskiGame/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3691804831972753286}
+        m_TargetAssemblyTypeName: HurdleGame.HurdlePlayerController, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f5284c38-a546-43e5-b966-4436bacd65e0
+    m_ActionName: 'HurdleGame/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: da4cc858-f7c2-4834-b23a-83f1948a0d62
+    m_ActionName: 'HurdleGame/Join[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6d7cb911-4255-4d60-a577-159f56863289
+    m_ActionName: 'FishingGameUI/Submit[/Keyboard/enter,/Keyboard/x]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: HurdleGame
@@ -2190,6 +2262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4122ebf3775cc64449850d71c4f2d98e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 637846957846280032}
 --- !u!114 &9142742951245964123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2244,6 +2317,36 @@ MonoBehaviour:
     m_Bits: 1024
   groundCheckOffset: -0.05
   groundCheckRadius: 0.3
+  OnPauseGame:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: b4c1de7ad322b894b8ed236533a23468, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnUnpauseGame:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: cb8390d9fabb07843b5f42bf6275d672, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4792716026928164661
 GameObject:
   m_ObjectHideFlags: 0

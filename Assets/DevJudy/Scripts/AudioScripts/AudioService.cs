@@ -27,8 +27,8 @@ namespace Audio
 
         private void OnEnable()
         {
-            this.gameObject.SetActive(true);
-            Debug.Log("Activr: " + this.gameObject.activeInHierarchy);
+            gameObject.SetActive(true);
+           // Debug.Log("AudioService active: " + this.gameObject.activeInHierarchy);
         }
 
         private void OnDisable()

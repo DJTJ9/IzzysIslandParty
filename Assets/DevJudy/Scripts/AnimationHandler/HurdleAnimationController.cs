@@ -12,7 +12,7 @@ namespace AnimationHandler
         private static readonly int hitObstacle = Animator.StringToHash("HitObstacle");
         private static readonly int gameStart = Animator.StringToHash("GameStart");
 
-        private Animator animator;
+        [SerializeField] private Animator animator;
         private Rigidbody rb;
 
         private Timer obstacleHitTimer;
@@ -20,7 +20,7 @@ namespace AnimationHandler
 
         private void Awake()
         {
-            animator = GetComponent<Animator>();
+            //animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody>();
         }
 
@@ -32,7 +32,15 @@ namespace AnimationHandler
 
         public void OnGameStart()
         {
-            animator.SetBool(gameStart, true);
+            animator.gameObject.SetActive(true);
+            animator.enabled = true;
+            
+            if (animator.isActiveAndEnabled)
+                animator.SetBool(gameStart, true);
+            else
+            {
+                Debug.Log("Not active and enabled");
+            }
         }
 
         private void Update()

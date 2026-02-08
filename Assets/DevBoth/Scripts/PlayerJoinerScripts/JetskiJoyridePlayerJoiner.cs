@@ -3,10 +3,10 @@ using UnityEngine.InputSystem;
 
 namespace JetskiGame.Player.Multiplayer
 {
-    public class JetskiJoyridePlayerJoiner : MonoBehaviour
+    public class RacingGamePlayerJoiner : MonoBehaviour
     {
         [SerializeField] private SO_PlayerCollection currentPlayers;
-        public SO_PlayerCollection PlayerCollectionJJ;
+        public SO_PlayerCollection PlayerCollection;
 
         private int playerIndex;
         //private int npcIndex;
@@ -20,7 +20,9 @@ namespace JetskiGame.Player.Multiplayer
 
         public void PlayerJoined(PlayerInput _playerInput)
         {
-            _playerInput.gameObject.transform.position = PlayerCollectionJJ.Players[playerIndex].SpawnPoint;
+            currentPlayers.Players.Add(PlayerCollection.Players[playerIndex]);
+            
+            _playerInput.gameObject.transform.position = PlayerCollection.Players[playerIndex].SpawnPoint;
             ++playerIndex;
         }
     }

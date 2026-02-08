@@ -2,6 +2,7 @@ using Audio;
 using enums;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace JetskiGame
@@ -33,6 +34,12 @@ namespace JetskiGame
         [SerializeField] private float groundCheckRadius = 0.2f;
         [SerializeField] private bool isGrounded;
 
+        [Header("Pausing: ")]
+        [SerializeField] private UnityEvent OnPauseGame;
+        [SerializeField] private UnityEvent OnUnpauseGame;
+        private bool isPaused;
+
+        
         [Header("Temp: ")]
         [SerializeField] private ForceMode forceMode;
 
@@ -61,6 +68,23 @@ namespace JetskiGame
         {
             // ?? Doesn't this also disable the ability to pause?
             playerInput.enabled = false;
+        }
+        
+        public void OnPause(InputAction.CallbackContext _context)
+        {
+            if (_context.started)
+            {
+                if (!isPaused)
+                {
+                    isPaused = true;
+                    OnPauseGame.Invoke();
+                }
+                else
+                {
+                    isPaused = false;
+                    OnUnpauseGame.Invoke();
+                }
+            }
         }
 
         public void OnMove(InputAction.CallbackContext _context)

@@ -1886,7 +1886,7 @@ Transform:
   m_GameObject: {fileID: 4499268956465758374}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 8.8, y: -0.4, z: -5.6}
+  m_LocalPosition: {x: -5.25, y: 0.05, z: -5.6}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2193,11 +2193,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ca19d0d3aa62064aa82abce402dae44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnHitObstacleEvents:
+    m_PersistentCalls:
+      m_Calls: []
   moveSpeed:
     UseConstant: 0
     ConstantValue: 3
     Variable: {fileID: 11400000, guid: 521306ef3d86e624397817d16824f5c4, type: 2}
-  canMove: 0
 --- !u!114 &3691804831972753286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2221,6 +2223,12 @@ MonoBehaviour:
     m_Bits: 1024
   groundCheckOffset: -0.05
   groundCheckRadius: 0.3
+  OnPauseGame:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUnpauseGame:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4792716026928164661
 GameObject:
   m_ObjectHideFlags: 0

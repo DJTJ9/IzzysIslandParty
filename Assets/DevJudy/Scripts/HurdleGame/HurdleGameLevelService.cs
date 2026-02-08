@@ -23,7 +23,6 @@ namespace HurdleGame
 
         [Header("Level start/end: ")]
         [SerializeField] private int secondsToStartLevel;
-
         [SerializeField] private Transform goalTransform;
         [SerializeField] private TextMeshProUGUI levelCountdownText;
 
@@ -33,7 +32,6 @@ namespace HurdleGame
         [Header("Temp ")]
         // !! The text belongs in another class
         [SerializeField] private TextMeshProUGUI placementText;
-
         [SerializeField] private TextMeshProUGUI onFinishLineCrossedText;
         [SerializeField] private GameAudioManager audioManager;
         [SerializeField] private bool checkXOnly;
@@ -41,8 +39,18 @@ namespace HurdleGame
         private void Awake()
         {
             WinnerPlacementOrder = new Dictionary<int, Tuple<GameObject, string>>();
+        }
+        
+        private void Start()
+        {
+            if (audioManager != null)
+                audioManager.StartBackgroundMusic(() => !raceEnded);
 
-            CheckPlacementList();
+            if (goalTransform == null)
+            {
+                Debug.LogWarning("Goal transform not set");
+                checkPlacements = false;
+            }
         }
 
         private void CheckPlacementList()
@@ -58,27 +66,23 @@ namespace HurdleGame
                 if (placementOrder[i] == null)
                 {
                     Debug.LogWarning($"PlacementOrder[{i}] is empty, resizing array");
-                    ArrayHelper.RemoveFromArray(placementOrder, placementOrder[i]);
+                    placementOrder = ArrayHelper.RemoveEmptySpotsFromArray(placementOrder);
                 }
             }
         }
 
-        private void Start()
+        public void OnPlayerJoined(SO_PlayerCollection _playerCollection)
         {
-            if (audioManager != null)
-                audioManager.StartBackgroundMusic(() => !raceEnded);
-
-            if (goalTransform == null)
-            {
-                Debug.LogWarning("Goal transform not set");
-                checkPlacements = false;
-            }
-
-            StartLevel();
+            if (placementOrder == null || placementOrder.Length < 1)
+                placementOrder = new GameObject[maxNumberOfPlayers];
+            
+            ArrayHelper.AddToArray(placementOrder, _playerCollection.Players[^1].PlayerPrefab);
         }
 
         public override void StartLevel()
         {
+            CheckPlacementList();
+            
             StartCoroutine(CountdownToLevelStart());
         }
 
@@ -94,12 +98,15 @@ namespace HurdleGame
         
         private void PlayerStart()
         {
-            foreach (GameObject obj in placementOrder)
+            for (int i = 0; i < placementOrder.Length; i++)
             {
-                if (obj.TryGetComponent(out CharacterMover characterMover))
+                if (placementOrder[i] == null)
+                    break;
+                
+                if (placementOrder[i].TryGetComponent(out CharacterMover characterMover))
                     characterMover.CanMove();
 
-                if (obj.TryGetComponent(out HurdleAnimationHandler animationHandler))
+                if (placementOrder[i].TryGetComponent(out HurdleAnimationHandler animationHandler))
                     animationHandler.OnGameStart();
             }
         }
