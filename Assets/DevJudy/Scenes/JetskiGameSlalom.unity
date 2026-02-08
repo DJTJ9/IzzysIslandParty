@@ -2800,10 +2800,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raceOverPanel: {fileID: 821698137}
   scoresPanel: {fileID: 358163567}
-  playerTimesText: {fileID: 1914189322}
-  endGameMenu: {fileID: 300351577}
   levelPanel: {fileID: 667080403}
-  levelTimer: {fileID: 2001284367}
+  playerPlacementsText: {fileID: 0}
+  playerNamesText: {fileID: 0}
+  playerPointsText: {fileID: 0}
+  racingGame: 0
+  racingGameLevelService: {fileID: 0}
+  endGameMenu: {fileID: 300351577}
   waitTimeAfterGameOver: 3
 --- !u!114 &345387529
 MonoBehaviour:
@@ -2817,7 +2820,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a04a8ff7d15bf2e45adafa3296f19160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsText: {fileID: 0}
   timerText: {fileID: 1825615321}
 --- !u!1001 &346704015
 PrefabInstance:
@@ -15210,12 +15212,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  levelCountdownText: {fileID: 1707071722}
-  secondsToStartLevel: 3
-  goalTransform: {fileID: 1412829236}
   checkPlacements: 0
   placementOrder:
   - {fileID: 415596256}
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  secondsToStartLevel: 3
+  goalTransform: {fileID: 1412829236}
+  levelCountdownText: {fileID: 1707071722}
+  secondsToEndLevel: 10
   placementText: {fileID: 394836195}
   onFinishLineCrossedText: {fileID: 2053893515}
   audioManager: {fileID: 1423664960}
@@ -15247,8 +15253,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bce12737ce32a64ca8776d25f07b301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textManager: {fileID: 345387529}
-  uiPanelManager: {fileID: 345387528}
+  timerManager: {fileID: 345387529}
+  levelService: {fileID: 0}
   durationInMinutes: 5
   deductionFeedbackDuration: 2
   timerRunningDown: 0
