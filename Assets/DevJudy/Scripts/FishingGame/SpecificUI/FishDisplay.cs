@@ -1,5 +1,4 @@
 using enums;
-using HelperScripts;
 using ScriptableObjects;
 using TMPro;
 using UnityEngine;
@@ -14,29 +13,27 @@ namespace FishingGame.Display
 
         [Header("UI: ")]
         [SerializeField] private TextMeshProUGUI fishNameText;
-
         [SerializeField] private TextMeshProUGUI fishSizeText;
         [SerializeField] private TextMeshProUGUI fishWeightText;
         [SerializeField] private GameObject fishDisplayPanel;
         [SerializeField] private GameObject stopFishDisplayButton;
 
         [Header("Rendering: ")]
+        [SerializeField] private Vector3 fishUIRendererPosition = new Vector3(-0.56f, -50f, -42.87f);
         private GameObject fishUIRenderer;
-
         private GameObject fishUIRendererParent;
-        [SerializeField] private Vector3 fishUIRendererPosition = new Vector3(0f, -50f, -42.6f);
         private GameObject currentFishShown;
 
         [Header("Input: ")]
         [SerializeField] private PlayerInput playerInput;
 
-        public void SetupFishDisplay()
+        public void SetupFishDisplay(int _playerIndex)
         {
             if (playerInput == null)
                 Debug.LogError("inputActionAsset is null");
 
             fishUIRendererParent = GameObject.FindGameObjectWithTag("FishUIRenderer");
-            InstantiateFishUIRenderer();
+            InstantiateFishUIRenderer(_playerIndex + 1);
 
             if (fishDisplayPanel == null)
                 Debug.LogError("No FishDisplayPanel found");
@@ -44,15 +41,15 @@ namespace FishingGame.Display
                 fishDisplayPanel.SetActive(false);
         }
 
-        private void InstantiateFishUIRenderer()
+        private void InstantiateFishUIRenderer(int _playerIndex)
         {
             var emptyObj = new GameObject();
             var instantiatedObj = Instantiate(emptyObj).gameObject;
-            fishUIRenderer = instantiatedObj;
             
+            fishUIRenderer = instantiatedObj;
             fishUIRenderer.name = "FishUIRendererObjects";
             fishUIRenderer.transform.SetParent(fishUIRendererParent.transform);
-            fishUIRenderer.transform.localPosition = fishUIRendererPosition;
+            fishUIRenderer.transform.localPosition = fishUIRendererPosition; // Multiplay the transform (or an addition) with the playerIndex
             fishUIRenderer.transform.rotation = new Quaternion(0f, 90f, 0f, 0f);
             fishUIRenderer.layer = fishUIRendererParent.layer;
             

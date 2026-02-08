@@ -132,6 +132,9 @@ namespace JetskiGame
         {
             if (raceStarted && checkPlacements)
                 CheckRacerPlacements();
+            
+            if (endLevelTimer.IsRunning)
+                endLevelTimer.Tick(Time.deltaTime);
         }
 
         private void CheckRacerPlacements()

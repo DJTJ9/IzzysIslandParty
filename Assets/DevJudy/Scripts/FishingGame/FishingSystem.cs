@@ -14,8 +14,6 @@ namespace FishingGame
         [Header("Dependencies: ")]
         private List<FishingSystemManager> fishingSystemManagers = new List<FishingSystemManager>();
 
-        [SerializeField] private UIPointsService uiPointsService;
-
         [Header("Variables: ")]
         private static FishingSystem instance;
 
@@ -53,7 +51,9 @@ namespace FishingGame
             if (fishingSystemManager != null)
             {
                 fishingSystemManager.SetUpFishDisplay(fishList);
+                
                 fishingSystemManagers.Add(fishingSystemManager);
+                fishingSystemManager.OnPlayerJoined(_currentPlayers.Players[^1].PlayerScore, _currentPlayers.Players.Count - 1);
             }
             else
             {
@@ -155,7 +155,7 @@ namespace FishingGame
                 _fishingSystemManager.FishDisplayActive = true;
                 yield return new WaitForSecondsRealtime(3f);
 
-                _fishingSystemManager.UpdatePoints(uiPointsService, caughtFish.Points);
+                _fishingSystemManager.UpdatePoints(caughtFish.Points);
             }
             else
             {

@@ -54,11 +54,22 @@ namespace HurdleGame
 
         private void FixedUpdate()
         {
+            TickTimers();
+            
             GroundCheck();
             
             if (Physics.OverlapSphere(transform.position + obstacleCheckPosition, obstacleCheckSize, obstacleLayerMask).Length > 0
                 && canJump)
                 CheckIfCharJumps();
+        }
+
+        private void TickTimers()
+        {
+            if (jumpCooldownTimer.IsRunning)
+                jumpCooldownTimer.Tick(Time.deltaTime);
+            
+            if (smallJumpTimer.IsRunning)
+                smallJumpTimer.Tick(Time.deltaTime);
         }
 
         private void CheckIfCharJumps()

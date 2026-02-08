@@ -11,22 +11,21 @@ using UnityEngine;
 namespace FishingGame
 {
     public class FishingSystemManager : MonoBehaviour
-    {
-        [SerializeField] public int PlayerIndex; // !! Get from LevelService or PlayerJoiner or smth
-
+    { 
+        private int playerIndex;
+        
         [Header("Scripts: ")]
         [SerializeField] public QTEController QTEController;
-
         [SerializeField] public QTEDisplayService QTEDisplayService;
         [SerializeField] private FishDisplay fishDisplay;
         [SerializeField] private IconHandler iconHandler;
+        [SerializeField] private UIPointsService pointsService;
         private FishingRodController fishingRodController;
         private CatchEventHandler catchEventHandler;
 
         [Header("GameObjects: ")]
-        [SerializeField] private GameScoreSO gameScore;
-
         [SerializeField] private TextMeshProUGUI pointsText;
+        private GameScoreSO gameScore;
         public Coroutine FishingRoutine;
 
         public bool FishHooked { get; set; }
@@ -41,13 +40,19 @@ namespace FishingGame
                 Debug.LogError("FishingSystemManager is missing catch EventHandler");
         }
 
+        public void OnPlayerJoined(GameScoreSO _gameScore, int _playerIndex)
+        {
+            gameScore = _gameScore;
+            playerIndex = _playerIndex;
+        }
+
         public void SetUpFishDisplay(List<SO_Fish> _fishList)
         {
             if (fishDisplay != null)
             {
                 fishDisplay.enabled = true;
 
-                fishDisplay.SetupFishDisplay();
+                fishDisplay.SetupFishDisplay(playerIndex);
                 
                 SpawnInFishDisplayObjects(_fishList);
                 StopFishDisplay();
@@ -65,7 +70,7 @@ namespace FishingGame
 
         public void DisplayFish(SO_Fish _caughtFish)
         {
-            fishDisplay?.DisplayFish(_caughtFish, PlayerIndex);
+            fishDisplay?.DisplayFish(_caughtFish, playerIndex);
         }
 
         public void DisplayIcon(EEmotion _emotion)
@@ -80,17 +85,17 @@ namespace FishingGame
 
         public void StartFishEvent(SO_Fish _caughtFish)
         {
-            catchEventHandler.StartFishEvent(_caughtFish, QTEController, QTEDisplayService, PlayerIndex);
+            catchEventHandler.StartFishEvent(_caughtFish, QTEController, QTEDisplayService, playerIndex);
         }
 
         public bool CheckIfCatchEventFinished()
         {
-            return catchEventHandler.CatchEventVariables[PlayerIndex].CatchEventFinished;
+            return catchEventHandler.CatchEventVariables[playerIndex].CatchEventFinished;
         }
 
         public bool CheckIfCatchEventSucceeded()
         {
-            return catchEventHandler.CatchEventVariables[PlayerIndex].CatchEventSuccess;
+            return catchEventHandler.CatchEventVariables[playerIndex].CatchEventSuccess;
         }
 
         public void PressedCatch()
@@ -136,10 +141,10 @@ namespace FishingGame
             fishingRodController.PullBackFishingRod();
         }
 
-        public void UpdatePoints(UIPointsService _pointsService, int _points)
+        public void UpdatePoints(int _points)
         {
             gameScore.Value += _points;
-            _pointsService?.UpdatePointsText(pointsText, gameScore.Value);
+            pointsService?.UpdatePointsText(pointsText, gameScore.Value);
         }
     }
 }

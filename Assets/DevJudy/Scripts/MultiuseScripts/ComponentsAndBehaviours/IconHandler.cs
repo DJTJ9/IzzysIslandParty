@@ -8,7 +8,7 @@ namespace Juice
     public class IconHandler : MonoBehaviour
     {
         [SerializeField] private MeshRenderer target;
-        private GameObject targetObject => target.gameObject;
+        private GameObject targetObject => target?.gameObject;
         
         [SerializeField] private SO_Emotion[] emotions;
         [SerializeField] private float displayIconSeconds = 3f;
@@ -59,6 +59,12 @@ namespace Juice
 
             _iconMaterial = null;
             return false;
+        }
+
+        private void FixedUpdate()
+        {
+            if (iconTimer.IsRunning)
+                iconTimer.Tick(Time.deltaTime);
         }
     }
 }

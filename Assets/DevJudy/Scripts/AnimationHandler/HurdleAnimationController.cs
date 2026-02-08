@@ -40,6 +40,12 @@ namespace AnimationHandler
             animator.SetFloat(velocityY, rb.linearVelocity.y);
         }
 
+        private void FixedUpdate()
+        {
+            if (obstacleHitTimer.IsRunning)
+                obstacleHitTimer.Tick(Time.deltaTime);
+        }
+
         public void OnHitObstacle()
         {
             if (obstacleHitTimer.IsRunning)

@@ -1600,7 +1600,7 @@ Transform:
   m_GameObject: {fileID: 4997358684775858759}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -50.95, z: -49.7}
+  m_LocalPosition: {x: -0.37, y: -58.2, z: -54.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2894,7 +2894,7 @@ MonoBehaviour:
   fishWeightText: {fileID: 7778267699284339845}
   fishDisplayPanel: {fileID: 8859049937256378470}
   stopFishDisplayButton: {fileID: 6367206117768532341}
-  fishUIRendererPosition: {x: 0, y: -50, z: -42.6}
+  fishUIRendererPosition: {x: 0, y: -50, z: -42.87}
   playerInput: {fileID: 6500719721459496473}
 --- !u!1 &8989522535335573195
 GameObject:
@@ -3109,6 +3109,10 @@ PrefabInstance:
       propertyPath: fishDisplay
       value: 
       objectReference: {fileID: 1404263380630774466}
+    - target: {fileID: 4456720291376179614, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: pointsService
+      value: 
+      objectReference: {fileID: 5960224607700420211}
     - target: {fileID: 4456720291376179614, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
       propertyPath: QTEDisplayService
       value: 
