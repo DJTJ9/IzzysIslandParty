@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using AnimationHandler;
 using Audio;
 using HelperScripts;
+using HurdleGame.Camera;
 using MultiuseScripts;
 using TMPro;
 using UnityEngine;
@@ -26,21 +26,26 @@ namespace HurdleGame
         [SerializeField] private Transform goalTransform;
         [SerializeField] private TextMeshProUGUI levelCountdownText;
 
+        private int playerCount = 0;
+        
         private bool raceStarted = false;
         private bool raceEnded = false;
+        
 
         [Header("Temp ")]
         // !! The text belongs in another class
         [SerializeField] private TextMeshProUGUI placementText;
+
         [SerializeField] private TextMeshProUGUI onFinishLineCrossedText;
         [SerializeField] private GameAudioManager audioManager;
+        [SerializeField] private CameraMoverAddition cameraMoverAddition;
         [SerializeField] private bool checkXOnly;
 
         private void Awake()
         {
             WinnerPlacementOrder = new Dictionary<int, Tuple<GameObject, string>>();
         }
-        
+
         private void Start()
         {
             if (audioManager != null)
@@ -71,18 +76,25 @@ namespace HurdleGame
             }
         }
 
-        public void OnPlayerJoined(SO_PlayerCollection _playerCollection)
+        public void OnPlayerJoined(GameObject _player)
         {
             if (placementOrder == null || placementOrder.Length < 1)
                 placementOrder = new GameObject[maxNumberOfPlayers];
+
+            if (playerCount == 0)
+                cameraMoverAddition.SetOrientationCharacter(_player.gameObject.GetComponent<CharacterMover>());
             
-            ArrayHelper.AddToArray(placementOrder, _playerCollection.Players[^1].PlayerPrefab);
+            if (placementOrder.Length == 1)
+                cameraMoverAddition.SetOrientationCharacter(_player.GetComponent<CharacterMover>());
+            
+            ArrayHelper.AddToArray(placementOrder, _player);
+            playerCount++;
         }
 
         public override void StartLevel()
         {
             CheckPlacementList();
-            
+
             StartCoroutine(CountdownToLevelStart());
         }
 
@@ -90,25 +102,9 @@ namespace HurdleGame
         {
             StopCoroutine(CountdownToLevelStart());
 
-            PlayerStart();
             OnLevelStart.Invoke();
-            
-            raceStarted = true;
-        }
-        
-        private void PlayerStart()
-        {
-            for (int i = 0; i < placementOrder.Length; i++)
-            {
-                if (placementOrder[i] == null)
-                    break;
-                
-                if (placementOrder[i].TryGetComponent(out CharacterMover characterMover))
-                    characterMover.CanMove();
 
-                if (placementOrder[i].TryGetComponent(out HurdleAnimationHandler animationHandler))
-                    animationHandler.OnGameStart();
-            }
+            raceStarted = true;
         }
 
         private IEnumerator CountdownToLevelStart()
@@ -169,6 +165,7 @@ namespace HurdleGame
             placementText.text = (placement.ToString() + "/" + placementOrder.Length);
         }
 
+        // !! REWORK
         private int GetPlayerNumber()
         {
             for (int i = 0; i < placementOrder.Length; i++)
@@ -203,7 +200,6 @@ namespace HurdleGame
                 EndLevel();
         }
 
-
         private void OnPlayerCrossedFinishLine()
         {
             if (onFinishLineCrossedText != null)
@@ -229,7 +225,7 @@ namespace HurdleGame
                     characterMover.CantMove();
             }
         }
-        
+
         public override void EndLevel()
         {
             CheckWinnerPlacementList();

@@ -20,7 +20,6 @@ namespace AnimationHandler
 
         private void Awake()
         {
-            //animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody>();
         }
 
@@ -32,15 +31,8 @@ namespace AnimationHandler
 
         public void OnGameStart()
         {
-            animator.gameObject.SetActive(true);
-            animator.enabled = true;
-            
             if (animator.isActiveAndEnabled)
                 animator.SetBool(gameStart, true);
-            else
-            {
-                Debug.Log("Not active and enabled");
-            }
         }
 
         private void Update()

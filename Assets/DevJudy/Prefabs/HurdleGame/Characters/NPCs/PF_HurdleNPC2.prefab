@@ -1965,6 +1965,107 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5771357484704165952}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4484774836131863907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6599561167248105984}
+  - component: {fileID: 3554855903239068368}
+  - component: {fileID: 7346369055861042215}
+  m_Layer: 8
+  m_Name: GameEventListener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6599561167248105984
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4484774836131863907}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.0784592, z: -0, w: 0.9969174}
+  m_LocalPosition: {x: 2.0518703, y: 0.072500005, z: -3.5522172}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1577412237222929094}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3554855903239068368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4484774836131863907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 6ef1ab33403901542b2593277cbc77fc, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5707798297618985591}
+        m_TargetAssemblyTypeName: HurdleGame.CharacterMover, Assembly-CSharp
+        m_MethodName: CanMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3393421108823597717}
+        m_TargetAssemblyTypeName: AnimationHandler.HurdleAnimationHandler, Assembly-CSharp
+        m_MethodName: OnGameStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7346369055861042215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4484774836131863907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 4a81190c65fb08446bb08b7d70357d6d, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5707798297618985591}
+        m_TargetAssemblyTypeName: HurdleGame.CharacterMover, Assembly-CSharp
+        m_MethodName: CantMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4594340331601958449
 GameObject:
   m_ObjectHideFlags: 0
@@ -2367,8 +2468,9 @@ GameObject:
   - component: {fileID: 5707798297618985591}
   - component: {fileID: 2252976469996088417}
   - component: {fileID: 3393421108823597717}
+  - component: {fileID: 6106834439669917413}
   m_Layer: 7
-  m_Name: PF_HurdleNPC2
+  m_Name: Pf_HurdleNPC2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2390,6 +2492,7 @@ Transform:
   - {fileID: 5128669204515985647}
   - {fileID: 2662169093823058904}
   - {fileID: 8144385937823926310}
+  - {fileID: 6599561167248105984}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 81, z: 0}
 --- !u!95 &1381396190741388639
@@ -2507,6 +2610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb66c1d320d0784eb0dfba274348a21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerIndex: 0
   obstacleCheckSize: 1
   obstacleCheckPosition: {x: 5, y: 0, z: 0}
   obstacleLayerMask:
@@ -2534,6 +2638,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4122ebf3775cc64449850d71c4f2d98e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 1381396190741388639}
+--- !u!114 &6106834439669917413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5402956959211804641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: 0}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: 
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &5579323751881904979
 GameObject:
   m_ObjectHideFlags: 0

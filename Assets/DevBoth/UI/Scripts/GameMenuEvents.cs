@@ -1,15 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using System.Linq;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 using Button = UnityEngine.UIElements.Button;
 
 public class GameMenuEvents : MonoBehaviour
@@ -313,7 +309,6 @@ public class GameMenuEvents : MonoBehaviour
 
     public void ShowResultsScreen()
     {
-
         ShowResults(currentPlayers.Players);
         resultsScreen.style.display = DisplayStyle.Flex;
         FocusButton(resultScreenContinueButton);

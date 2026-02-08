@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12a60e4756ee9ea4d940faa4bcb0f711, type: 3}
-  m_Name: SO_PlayerHastyHurdles 1
+  m_Script: {fileID: 11500000, guid: cd3c88f235f67304dae094936e86f0b6, type: 3}
+  m_Name: SO_NPCCollectionHurdleGame
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,10 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  Name: Player 1
-  PlayerPrefab: {fileID: 4499268956465758374, guid: 7913142d4f042844e8fb620c242b6756, type: 3}
-  PlayerScore: {fileID: 11400000, guid: 88e9de5139fd24b4a892bf196ed6734a, type: 2}
-  SpawnPoint: {x: -5.05, y: 0.05, z: -5.6}
-  IsNPC: 0
-  Placement: 0
-  Time: 
+  Players:
+  - {fileID: 11400000, guid: af696f08c5bc5c145bf00994f1798593, type: 2}
+  - {fileID: 11400000, guid: 408d12e630d390b47b387a60cec2096e, type: 2}
+  - {fileID: 11400000, guid: 29f7bd34ed1056843ad9a80445595e44, type: 2}

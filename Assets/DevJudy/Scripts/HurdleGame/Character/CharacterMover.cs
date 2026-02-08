@@ -51,10 +51,11 @@ namespace HurdleGame
 
         private void FixedUpdate()
         {
-            // Debug.Log(gameObject.name + " CanMove: " + canMove);
-            if (canMove)
-                rb.linearVelocity = new Vector3((moveDirMultiplier * moveSpeed.Value) * (Time.deltaTime * individualMultiplier), rb.linearVelocity.y,
-                    rb.linearVelocity.z);
+            if (!canMove)
+                return;
+
+            rb.linearVelocity = new Vector3((moveDirMultiplier * moveSpeed.Value) * (Time.deltaTime * individualMultiplier), rb.linearVelocity.y,
+                rb.linearVelocity.z);
 
             individualMultiplier += 0.001f;
         }

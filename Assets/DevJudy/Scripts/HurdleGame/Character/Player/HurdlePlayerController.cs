@@ -64,8 +64,6 @@ namespace HurdleGame
             smallJumpHeight = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * hopMultiplier);
 
             shortSlideSeconds = longSlideSeconds * shortSlideMultiplier;
-
-            //ogRunningPos = transform.position;
         }
 
         public void OnPause(InputAction.CallbackContext _context)
@@ -161,12 +159,10 @@ namespace HurdleGame
 
         private void FixedUpdate()
         {
-            if (slideTimer.IsRunning && !slideTimer.IsRunning)
-            {
-                ChangeCollider(false);
-
-                // Cancel animation
-            }
+           // if (slideTimer.IsRunning && !slideTimer.IsRunning)
+           // {
+           //     ChangeCollider(false);
+           // }
 
             GroundCheck();
         }

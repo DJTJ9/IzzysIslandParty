@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 namespace HurdleGame
 {
-    public class HurdleGameNPCBehaviour : MonoBehaviour
+    public class HurdleGameNPCBehaviour : Controller
     {
         private Rigidbody rb;
 
