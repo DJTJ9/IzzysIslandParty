@@ -10,15 +10,14 @@ public class MinigolfHole : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!other.CompareTag("Player")) return;
+        
+        other.TryGetComponent<PlayerControllerMinigolfMayhem>(out var playerController);
         {
-            other.TryGetComponent<PlayerControllerMinigolfMayhem>(out var playerController);
-            {
-                placingSO.AddPlayerToPlacingList(playerController.PlayerIndex);
-                playerFinished.Invoke();
-            }
-            
-            other.gameObject.SetActive(false);
+            placingSO.AddPlayerToPlacingList(playerController.PlayerIndex);
+            playerFinished.Invoke();
         }
+            
+        other.gameObject.SetActive(false);
     }
 }
