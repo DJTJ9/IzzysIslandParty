@@ -6,7 +6,6 @@ using UnityEngine.Serialization;
 [RequireComponent (typeof(GroundChecker))]
 public class GoapRigidbodyMovement : MonoBehaviour
 {
-    [FormerlySerializedAs("pushForce")]
     [FoldoutGroup("Push Settings", expanded: true)]
     [SerializeField] private float pushForce;
     [SerializeField] private float pushCooldown;

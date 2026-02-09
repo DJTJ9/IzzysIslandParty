@@ -35,7 +35,7 @@ public class DanceMoveSwitcher : StateMachineBehaviour
     public void OnDanceMoveChange()
     {
         // hasTriggered = true;
-        m_animator.SetTrigger(danceMoveTriggersSO.GetNextDanceMove());
+        m_animator.SetTrigger(danceMoveTriggersSO.GetRandomDanceMove());
     }
 
     // public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

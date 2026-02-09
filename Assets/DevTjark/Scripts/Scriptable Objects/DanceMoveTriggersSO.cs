@@ -11,7 +11,7 @@ public class DanceMoveTriggersSO : SerializedScriptableObject
     private DanceMoveTriggers m_lastKey;
     private bool m_hasLastKey; 
     
-    public string GetNextDanceMove()
+    public string GetRandomDanceMove()
     {
         if (DanceMoveTriggersDictionary == null || DanceMoveTriggersDictionary.Count == 0)
             throw new System.InvalidOperationException("Dictionary is empty.");
@@ -23,7 +23,7 @@ public class DanceMoveTriggersSO : SerializedScriptableObject
 
         do
         {
-            int index = Random.Range(0, DanceMoveTriggersDictionary.Count);
+            var index = Random.Range(0, DanceMoveTriggersDictionary.Count);
             newKey = DanceMoveTriggersDictionary.ElementAt(index).Key;
         }
         while (m_hasLastKey && newKey == m_lastKey);

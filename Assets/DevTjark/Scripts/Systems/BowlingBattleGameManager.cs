@@ -46,9 +46,9 @@ private void Start()
 
     private void Update()
     {
-        // m_joinPhaseTimer.Tick(Time.deltaTime);
-        // m_preparationPhaseTimer.Tick(Time.deltaTime);
-        // m_roundTimer.Tick(Time.deltaTime);
+        m_joinPhaseTimer.Tick(Time.deltaTime);
+        m_preparationPhaseTimer.Tick(Time.deltaTime);
+        m_roundTimer.Tick(Time.deltaTime);
 
         PreparationPhaseTimer = m_preparationPhaseTimer.CurrentTime;
     }
