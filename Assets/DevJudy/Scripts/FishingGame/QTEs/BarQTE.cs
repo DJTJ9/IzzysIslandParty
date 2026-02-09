@@ -163,7 +163,8 @@ namespace FishingGame.QuickTimeEvents
 
         private bool CheckIfRTsOverlapping(RectTransform _rt1, RectTransform _rt2)
         {
-            bool overlap = Overlaps(_rt1, _rt2);
+            //bool overlap = Overlaps(_rt1, _rt2);
+            bool overlap = RectContainsAnother1(_rt2, _rt1);
 
             if (overlap)
                 sliderFillImage.color = catcherInFrameColor;
@@ -173,19 +174,23 @@ namespace FishingGame.QuickTimeEvents
             return overlap;
         }
 
-        private bool Overlaps(RectTransform _a, RectTransform _b)
+        private bool RectContainsAnother1(RectTransform _rct, RectTransform _other)
         {
-            return WorldRect(_a).Overlaps(WorldRect(_b));
-        }
+            Vector2 minMaxValuesX = new Vector2(0, 0);
+            Vector2 minMaxValuesY = new Vector2(0, 0);
 
-        private Rect WorldRect(RectTransform _rectTransform)
-        {
-            Vector2 sizeDelta = _rectTransform.sizeDelta;
-            float rectTransformWidth = sizeDelta.x * _rectTransform.lossyScale.x;
-            float rectTransformHeight = sizeDelta.y * _rectTransform.lossyScale.y;
+            minMaxValuesX.x = _other.localPosition.x - (_other.rect.width / 2);
+            minMaxValuesX.y = _other.localPosition.x + (_other.rect.width / 2);
+            minMaxValuesY.x = _other.localPosition.y - (_other.rect.height / 2);
+            minMaxValuesY.y = _other.localPosition.y + (_other.rect.height / 2);
 
-            Vector3 position = _rectTransform.position;
-            return new Rect(position.x - rectTransformWidth / 2f, position.y - rectTransformHeight / 2f, rectTransformWidth, rectTransformHeight);
+            if (_rct.localPosition.x > minMaxValuesX.x & _rct.localPosition.x < minMaxValuesX.y)
+            {
+                if (_rct.localPosition.y > minMaxValuesY.x & _rct.localPosition.y < minMaxValuesY.y)
+                    return true;
+            }
+
+            return false;
         }
 
         private void OverlappingCalculation()
@@ -217,7 +222,7 @@ namespace FishingGame.QuickTimeEvents
             successSlider.value = successCounter;
 
             QTERunning = false;
-            
+
             barQTEHolder.SetActive(false);
         }
 
