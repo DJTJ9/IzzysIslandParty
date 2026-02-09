@@ -179,17 +179,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &78978625 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7646641832864498062, guid: d3a7e72e5146ad14689a286b4891657c, type: 3}
-  m_PrefabInstance: {fileID: 7287902982189475959}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84a01a86bd504b678437a157a9826f7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &109064979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1533,10 +1522,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b6423836b7bb1468128ee17b76f9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMoveDuration: 5
-  roundTime: 15
-  danceMoveDuration: 3
-  photoShowDuration: 10
+  m_startMoveDuration: 3
+  m_roundTime: 30
+  m_danceMoveDuration: 3
+  m_photoShowDuration: 10
+  SO_Players: {fileID: 11400000, guid: 1b822cf7c8d19d644a003d59bb91fa77, type: 2}
   onDanceMoveChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3593,41 +3583,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 801672874729669811, guid: d3a7e72e5146ad14689a286b4891657c, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 801672874729669811, guid: d3a7e72e5146ad14689a286b4891657c, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 801672874729669811, guid: d3a7e72e5146ad14689a286b4891657c, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 78978625}
-    - target: {fileID: 801672874729669811, guid: d3a7e72e5146ad14689a286b4891657c, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 801672874729669811, guid: d3a7e72e5146ad14689a286b4891657c, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: SwitchToUIInputMap
-      objectReference: {fileID: 0}
-    - target: {fileID: 801672874729669811, guid: d3a7e72e5146ad14689a286b4891657c, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: PlayerControllerSwaggySnapshots, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 801672874729669811, guid: d3a7e72e5146ad14689a286b4891657c, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 1014812389145759665, guid: d3a7e72e5146ad14689a286b4891657c, type: 3}
       propertyPath: m_Name
       value: Player 1
       objectReference: {fileID: 0}
     - target: {fileID: 1014812389145759665, guid: d3a7e72e5146ad14689a286b4891657c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4205029339261131883, guid: d3a7e72e5146ad14689a286b4891657c, type: 3}
       propertyPath: m_Camera

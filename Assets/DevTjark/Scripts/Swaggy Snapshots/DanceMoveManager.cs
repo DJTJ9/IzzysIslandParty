@@ -20,7 +20,7 @@ public class DanceMoveManager : MonoBehaviour
 
     public void ChangeDanceMove()
     {
-        m_animator.SetTrigger(danceMoveTriggersSO.GetNextDanceMove());
+        m_animator.SetTrigger(danceMoveTriggersSO.GetRandomDanceMove());
     }
 
     public void ChangeFace()

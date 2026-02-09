@@ -19,7 +19,7 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
     public static float StartMoveDuration = 5f;
     public static float RoundTime = 15f;
     
-    [SerializeField] private SO_PlayerCollection currentPlayers;
+    [SerializeField] private SO_PlayerCollection SO_Players;
     
     [FoldoutGroup("Events", expanded: false)]
     [SerializeField] private UnityEvent onDanceMoveChanged;
@@ -50,7 +50,7 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
             m_danceMoveSwitchTimer.Start();
         };
         
-        m_roundTimer = new CountdownTimer(RoundTime);
+        m_roundTimer = new CountdownTimer(m_roundTime);
         m_roundTimer.OnTimerStop += OnRoundEnd;
         
         m_photoShowTimer = new CountdownTimer(m_photoShowDuration);
@@ -59,9 +59,15 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
         FreezeTimeScale();
     }
 
+    private void Update()
+    {
+        m_roundTimer.Tick(Time.deltaTime);
+        m_photoShowTimer.Tick(Time.deltaTime);
+    }
+
     private void OnEnable()
     {
-        foreach (var player in currentPlayers.Players)
+        foreach (var player in SO_Players.Players)
         {
             player.PlayerScore.ResetScore();
         }
