@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using enums;
 using ScriptableObjects;
 using TMPro;
@@ -33,7 +34,7 @@ namespace FishingGame.Display
                 Debug.LogError("inputActionAsset is null");
 
             fishUIRendererParent = GameObject.FindGameObjectWithTag("FishUIRenderer");
-            InstantiateFishUIRenderer(_playerIndex + 1);
+            InstantiateFishUIRenderer(_playerIndex);
 
             if (fishDisplayPanel == null)
                 Debug.LogError("No FishDisplayPanel found");
@@ -114,6 +115,14 @@ namespace FishingGame.Display
             
             currentFishShown.SetActive(false);
             currentFishShown = null;
+        }
+
+        public void ClearPrefabReferences(List<SO_Fish> _fishList)
+        {
+            for (int i = 0; i < _fishList.Count; i++)
+            {
+                _fishList[i].PrefabReferences.Clear();
+            }
         }
     }
 }

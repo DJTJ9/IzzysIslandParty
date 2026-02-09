@@ -11,9 +11,6 @@ namespace FishingGame
     [DefaultExecutionOrder(-100)]
     public class FishingSystem : MonoBehaviour
     {
-        [Header("Dependencies: ")]
-        private List<FishingSystemManager> fishingSystemManagers = new List<FishingSystemManager>();
-
         [Header("Variables: ")]
         private static FishingSystem instance;
 
@@ -50,10 +47,8 @@ namespace FishingGame
 
             if (fishingSystemManager != null)
             {
-                fishingSystemManager.SetUpFishDisplay(fishList);
-                
-                fishingSystemManagers.Add(fishingSystemManager);
                 fishingSystemManager.OnPlayerJoined(_currentPlayers.Players[^1].PlayerScore, _currentPlayers.Players.Count - 1);
+                fishingSystemManager.SetUpFishDisplay(fishList);
             }
             else
             {
@@ -153,7 +148,6 @@ namespace FishingGame
                 _fishingSystemManager.DisplayFish(caughtFish);
 
                 _fishingSystemManager.FishDisplayActive = true;
-                yield return new WaitForSecondsRealtime(3f);
 
                 _fishingSystemManager.UpdatePoints(caughtFish.Points);
             }

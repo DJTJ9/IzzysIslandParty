@@ -44,10 +44,14 @@ namespace FishingGame
         {
             gameScore = _gameScore;
             playerIndex = _playerIndex;
+            Debug.Log("PI: " + playerIndex + " GameScore: " + gameScore);
         }
 
         public void SetUpFishDisplay(List<SO_Fish> _fishList)
         {
+            if (playerIndex == 0)
+                fishDisplay.ClearPrefabReferences(_fishList);
+            
             if (fishDisplay != null)
             {
                 fishDisplay.enabled = true;
@@ -63,7 +67,6 @@ namespace FishingGame
         {
             for (int i = 0; i < _fishList.Count; i++)
             {
-                _fishList[i].PrefabReferences.Clear();
                 _fishList[i].PrefabReferences.Add(fishDisplay.SpawnInFishPrefabs(_fishList[i]));
             }
         }
