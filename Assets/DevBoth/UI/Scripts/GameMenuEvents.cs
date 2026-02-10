@@ -53,6 +53,18 @@ public class GameMenuEvents : MonoBehaviour
     [Header("Controller Selection")]
     private Button controllerSelectionReadyButton;
     private Button controllerSelectionBackButton;
+    private VisualElement bowlingBattleHeader;
+    private VisualElement fishingFrenzyHeader;
+    private VisualElement jetskiJoyrideHeader;
+    private VisualElement minigolfMayhemHeader;
+    private VisualElement swaggySnapshotsHeader;
+    private VisualElement hastyHurdlesHeader;
+    private VisualElement bowlingBattleInstructions;
+    private VisualElement fishingFrenzyInstructions;
+    private VisualElement jetskiJoyrideInstructions;
+    private VisualElement minigolfMayhemInstructions;
+    private VisualElement swaggySnapshotsInstructions;
+    private VisualElement hastyHurdlesInstructions;
     private VisualElement[] m_slots;
     private int m_joinedPlayers = 0;
     
@@ -109,9 +121,21 @@ public class GameMenuEvents : MonoBehaviour
         endScreenChangeLevelButton = document.rootVisualElement.Q("end-screen-menu-change-level__button") as Button;
         endScreenQuitButton = document.rootVisualElement.Q("end-screen-menu-quit__button") as Button;
         
-        // Controller selection menu buttons
+        // Controller selection menu
         controllerSelectionReadyButton = document.rootVisualElement.Q("controller-selection-ready__button") as Button;
         controllerSelectionBackButton = document.rootVisualElement.Q("controller-selection-back__button") as Button;
+        bowlingBattleHeader = document.rootVisualElement.Q("bb-controller-selection-header__container");
+        fishingFrenzyHeader = document.rootVisualElement.Q("ff-controller-selection-header__container");
+        jetskiJoyrideHeader = document.rootVisualElement.Q("jj-controller-selection-header__container");
+        minigolfMayhemHeader  = document.rootVisualElement.Q("mm-controller-selection-header__container");
+        swaggySnapshotsHeader = document.rootVisualElement.Q("ss-controller-selection-header__container");
+        hastyHurdlesHeader  = document.rootVisualElement.Q("hh-controller-selection-header__container");
+        bowlingBattleInstructions = document.rootVisualElement.Q("bb-instructions__container");
+        fishingFrenzyInstructions  = document.rootVisualElement.Q("ff-instructions__container");
+        jetskiJoyrideInstructions = document.rootVisualElement.Q("jj-instructions__container");
+        minigolfMayhemInstructions  = document.rootVisualElement.Q("mm-instructions__container");
+        swaggySnapshotsInstructions  = document.rootVisualElement.Q("ss-instructions__container");
+        hastyHurdlesInstructions   = document.rootVisualElement.Q("hh-instructions__container");
     }
 
     private void RegisterButtonCallbacks()
@@ -237,9 +261,83 @@ public class GameMenuEvents : MonoBehaviour
         FocusButton(endScreenRestartButton);
     }
 
+    public void ShowControllerSelectionScreen()
+    {
+        controllerSelectionMenu.style.display = DisplayStyle.Flex;
+    }
+
+    public void ShowBowlingBattleControllerSelectionScreen()
+    {
+        controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        HideAllGameLabelsAndInstructions();
+        bowlingBattleHeader.style.display = DisplayStyle.Flex;
+        bowlingBattleInstructions.style.display = DisplayStyle.Flex;
+    }
+
+    public void ShowFishingFrenzyControllerSelectionScreen()
+    {
+        controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        HideAllGameLabelsAndInstructions();
+        fishingFrenzyHeader.style.display = DisplayStyle.Flex;
+        fishingFrenzyInstructions.style.display = DisplayStyle.Flex;
+    }
+
+    public void ShowJetskiJoyrideControllerSelectionScreen()
+    {
+        controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        HideAllGameLabelsAndInstructions();
+        jetskiJoyrideHeader.style.display = DisplayStyle.Flex;
+        jetskiJoyrideInstructions.style.display = DisplayStyle.Flex;
+    }
+
+    public void ShowMinigolfMayhemControllerSelectionScreen()
+    {
+        controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        HideAllGameLabelsAndInstructions();
+        minigolfMayhemHeader.style.display = DisplayStyle.Flex;
+        minigolfMayhemInstructions.style.display = DisplayStyle.Flex;
+    }
+
+    public void ShowSwaggySnapshotsControllerSelectionScreen()
+    {
+        controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        HideAllGameLabelsAndInstructions();
+        swaggySnapshotsHeader.style.display = DisplayStyle.Flex;
+        swaggySnapshotsInstructions.style.display = DisplayStyle.Flex;
+    }
+
+    public void ShowHastyHurdlesControllerSelectionScreen()
+    {
+        controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        HideAllGameLabelsAndInstructions();
+        hastyHurdlesHeader.style.display = DisplayStyle.Flex;
+        hastyHurdlesInstructions.style.display = DisplayStyle.Flex;
+    }
+
+    public void HideBowlingBattleControllerSelectionScreen()
+    {
+        controllerSelectionMenu.style.display = DisplayStyle.None;
+    }
+
     public void HideControllerSelectionScreen()
     {
         controllerSelectionMenu.style.display = DisplayStyle.None;
+    }
+
+    private void HideAllGameLabelsAndInstructions()
+    {
+        bowlingBattleHeader.style.display = DisplayStyle.None;
+        fishingFrenzyHeader.style.display = DisplayStyle.None;
+        minigolfMayhemHeader.style.display = DisplayStyle.None;
+        swaggySnapshotsHeader.style.display = DisplayStyle.None;
+        hastyHurdlesHeader.style.display = DisplayStyle.None;
+        jetskiJoyrideHeader.style.display = DisplayStyle.None;
+        bowlingBattleInstructions.style.display = DisplayStyle.None;
+        fishingFrenzyInstructions.style.display = DisplayStyle.None;
+        minigolfMayhemInstructions.style.display = DisplayStyle.None;
+        swaggySnapshotsInstructions.style.display = DisplayStyle.None;
+        hastyHurdlesInstructions.style.display = DisplayStyle.None;
+        jetskiJoyrideInstructions.style.display = DisplayStyle.None;
     }
     
     private void OnControllerSelectionReadyButtonClick()
@@ -250,13 +348,12 @@ public class GameMenuEvents : MonoBehaviour
     
     private void OnControllerSelectionBackButtonClick()
     {
-        controllerSelectionMenu.style.display = DisplayStyle.None;
         LoadSingleScene(SceneNames.MainMenu);
     }
 
     private void OnLoadBowlingBattle()
     {
-        LoadSceneWithLevel(SceneNames.BowlingBattleGame, SceneNames.BowlingBattleLevel);
+        LoadSingleScene(SceneNames.BowlingBattleGame);
     }
 
     private void OnLoadFishingFrenzy()
