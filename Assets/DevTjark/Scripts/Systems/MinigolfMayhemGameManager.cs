@@ -10,4 +10,11 @@ public class MinigolfMayhemGameManager : MonoBehaviour
     {
         onGameStart.Invoke();
     }
+
+    private void Update()
+    {
+#if !UNITY_EDITOR
+// <-- Timers.Tick() here
+#endif
+    }
 }

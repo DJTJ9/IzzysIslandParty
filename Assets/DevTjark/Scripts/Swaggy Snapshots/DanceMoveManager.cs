@@ -3,19 +3,17 @@ using UnityEngine;
 
 public class DanceMoveManager : MonoBehaviour
 {
-    [SerializeField]
-    private SkinnedMeshRenderer skinnedMeshRenderer;
-    
-    [SerializeField]
-    private DanceMoveTriggersSO danceMoveTriggersSO;
-    [SerializeField]
-    private FaceSwapSO faceSwapSO;
+    [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
+
+    [SerializeField] private DanceMoveTriggersSO danceMoveTriggersSO;
+    [SerializeField] private FaceSwapSO faceSwapSO;
 
     private Animator m_animator;
 
     private void Awake()
     {
         m_animator = GetComponent<Animator>();
+        m_animator.Play("Start_Move");
     }
 
     public void ChangeDanceMove()

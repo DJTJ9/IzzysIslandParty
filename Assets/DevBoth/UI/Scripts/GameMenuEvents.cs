@@ -41,6 +41,7 @@ public class GameMenuEvents : MonoBehaviour
     private Button jetskiJoyrideButton;
     private Button minigolfMayhemButton;
     private Button swaggySnapshotsButton;
+    private Button hastyHurdlesButton;
     private Button playerHUBBackButton;
     
     [Header("End Screen Buttons")]
@@ -99,6 +100,7 @@ public class GameMenuEvents : MonoBehaviour
         jetskiJoyrideButton = document.rootVisualElement.Q("play-jetski-joyride__button") as Button;
         minigolfMayhemButton = document.rootVisualElement.Q("play-minigolf-mayhem__button") as Button;
         swaggySnapshotsButton = document.rootVisualElement.Q("play-swaggy-snapshots__button") as Button;
+        hastyHurdlesButton = document.rootVisualElement.Q("play-hasty-hurdles__button") as Button;
         playerHUBBackButton = document.rootVisualElement.Q("player-hub-back__button") as Button;
         
         // End screen buttons
@@ -126,6 +128,7 @@ public class GameMenuEvents : MonoBehaviour
         jetskiJoyrideButton.clicked += OnLoadJetskiJoyride;
         minigolfMayhemButton.clicked += OnLoadMinigolfMayhem;
         swaggySnapshotsButton.clicked += OnLoadSwaggySnapshots;
+        hastyHurdlesButton.clicked += OnLoadHastyHurdles;
         playerHUBBackButton.clicked += OnPlayerHubBack;
         
         // End screen buttons
@@ -153,6 +156,7 @@ public class GameMenuEvents : MonoBehaviour
         jetskiJoyrideButton.clicked -= OnLoadJetskiJoyride;
         minigolfMayhemButton.clicked -= OnLoadMinigolfMayhem;
         swaggySnapshotsButton.clicked -= OnLoadSwaggySnapshots;
+        hastyHurdlesButton.clicked -= OnLoadHastyHurdles;
         playerHUBBackButton.clicked -= OnPlayerHubBack;
         
         // End screen buttons
@@ -169,10 +173,6 @@ public class GameMenuEvents : MonoBehaviour
     public void ShowPauseMenu()
     {
         pauseMenu.style.display = DisplayStyle.Flex;
-        // pauseMenu.schedule.Execute(() => pauseMenuResumeButton.Focus()).StartingIn(0);
-        // pauseMenu.schedule.Execute(() => pauseMenuResumeButton.Focus()).StartingIn(50);
-        // pauseMenu.schedule.Execute(() => pauseMenuResumeButton.Focus()).StartingIn(100);
-
         FocusButton(pauseMenuResumeButton);
         Time.timeScale = 0f;
     }
@@ -199,10 +199,8 @@ public class GameMenuEvents : MonoBehaviour
     {
         onRestart.Invoke();
         HideEndScreenUI();
-        Time.timeScale = 1f;
-        var sceneName = SceneManager.GetActiveScene().name;
-        SceneManager.UnloadSceneAsync(sceneName);
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        Time.timeScale = 0f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 
     private void OnResumeGameClick()
@@ -256,21 +254,6 @@ public class GameMenuEvents : MonoBehaviour
         LoadSingleScene(SceneNames.MainMenu);
     }
 
-    public void LoadBowlingBattle()
-    {
-        LoadSceneWithLevel(SceneNames.BowlingBattleGame, SceneNames.BowlingBattleLevel);
-    }
-
-    public void LoadMinigolfMayhemLevel1()
-    {
-        LoadSceneWithLevel(SceneNames.MinigolfMayhemGame, SceneNames.MinigolfMayhemLevel1);
-    }
-    
-    public void LoadSwaggySnapshots()
-    {
-        LoadSceneWithLevel(SceneNames.SwaggySnapshotsGame, SceneNames.SwaggySnapshotsLevel);
-    }
-
     private void OnLoadBowlingBattle()
     {
         LoadSceneWithLevel(SceneNames.BowlingBattleGame, SceneNames.BowlingBattleLevel);
@@ -288,12 +271,17 @@ public class GameMenuEvents : MonoBehaviour
 
     private void OnLoadMinigolfMayhem()
     {
-        LoadSceneWithLevel(SceneNames.MinigolfMayhemGame, SceneNames.MinigolfMayhemLevel1);
+        LoadSingleScene(SceneNames.MinigolfMayhemGame);
     }
 
     private void OnLoadSwaggySnapshots()
     {
-        LoadSceneWithLevel(SceneNames.SwaggySnapshotsGame, SceneNames.SwaggySnapshotsLevel);
+        LoadSingleScene(SceneNames.SwaggySnapshotsGame);
+    }
+
+    private void OnLoadHastyHurdles()
+    {
+        LoadSingleScene(SceneNames.HastyHurdles);
     }
 
     private void LoadSingleScene(SceneNames sceneName)
@@ -331,16 +319,28 @@ public class GameMenuEvents : MonoBehaviour
         var ordered = _results
             .OrderByDescending(_r => _r.PlayerScore.Value)
             .ToList();
+        
+        var currentRank = 1;
+        var previousScore = float.MinValue;
 
         for (var i = 0; i < ordered.Count; i++)
         {
             var data = ordered[i];
             var row = rowTemplate.CloneTree();
+            
+            var currentScore = data.PlayerScore.Value;
 
-            row.Q<Label>("RankLabel").text = (i + 1).ToString();
+            if (i > 0 && currentScore != previousScore)
+            {
+                currentRank = i + 1;
+            }
+
+            row.Q<Label>("RankLabel").text = $"{currentRank}";
             row.Q<Label>("NameLabel").text = data.Name;
             row.Q<Label>("ScoreLabel").text = data.PlayerScore.Value.ToString();
 
+            previousScore = currentScore;
+            
             // if (i == 0)
             //     row.AddToClassList("winner");
             //
