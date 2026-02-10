@@ -10,7 +10,8 @@ namespace FishingGame.QuickTimeEvents
         private ButtonMashQTE buttonMashQTE;
         private BarQTE barQTE;
 
-        [HideInInspector] public EQuickTimeEvent CurrentQuickTimeEvent = EQuickTimeEvent.None;
+        //  [HideInInspector]
+       public EQuickTimeEvent CurrentQuickTimeEvent = EQuickTimeEvent.None;
 
         private EButton currentButtonToPress;
         private float moveInput;

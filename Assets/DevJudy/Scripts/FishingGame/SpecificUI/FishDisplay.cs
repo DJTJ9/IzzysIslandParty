@@ -75,7 +75,7 @@ namespace FishingGame.Display
         {
             playerInput.SwitchCurrentActionMap(uiActionMap);
 
-            Time.timeScale = 0f;
+           // Time.timeScale = 0f;
 
             currentFishShown = _fish.PrefabReferences[_playerIndex].gameObject;
 
@@ -111,7 +111,7 @@ namespace FishingGame.Display
 
             fishDisplayPanel.SetActive(false);
             
-            Time.timeScale = 1f;
+           // Time.timeScale = 1f;
             
             currentFishShown.SetActive(false);
             currentFishShown = null;

@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using enums;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -7,14 +8,14 @@ namespace FishingGame.QuickTimeEvents
 {
     public class BarQTE : QuickTimeEvent
     {
+        [SerializeField] private QTEController qteController;
+        
         [Header("Components: ")]
         [SerializeField] private GameObject barQTEHolder;
-
         [SerializeField] private GameObject target;
         [SerializeField] private GameObject catcher;
         private RectTransform targetRT;
         private RectTransform catcherRT;
-        private RawImage catcherImage;
 
         [Header("Slider: ")]
         [SerializeField] private Slider successSlider;
@@ -61,10 +62,7 @@ namespace FishingGame.QuickTimeEvents
             if (catcher == null)
                 Debug.LogError("Catcher is null");
             else
-            {
-                catcherImage = catcher.GetComponent<RawImage>();
                 catcherRT = catcher.GetComponent<RectTransform>();
-            }
 
             if (successSlider == null)
                 Debug.LogError("SuccessSlider is null");
@@ -93,6 +91,7 @@ namespace FishingGame.QuickTimeEvents
             QTERunning = true;
             QTEFinishedSuccessfully = false;
 
+            qteController.CurrentQuickTimeEvent = EQuickTimeEvent.Bar;
             barQTEHolder.SetActive(true);
 
             ChangeTargetDestination();
@@ -221,6 +220,7 @@ namespace FishingGame.QuickTimeEvents
 
             QTERunning = false;
 
+            qteController.CurrentQuickTimeEvent = EQuickTimeEvent.None;
             barQTEHolder.SetActive(false);
         }
 

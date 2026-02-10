@@ -11,11 +11,12 @@ using UnityEngine;
 namespace FishingGame
 {
     public class FishingSystemManager : MonoBehaviour
-    { 
+    {
         private int playerIndex;
-        
+
         [Header("Scripts: ")]
         [SerializeField] public QTEController QTEController;
+
         [SerializeField] public QTEDisplayService QTEDisplayService;
         [SerializeField] private FishDisplay fishDisplay;
         [SerializeField] private IconHandler iconHandler;
@@ -25,6 +26,7 @@ namespace FishingGame
 
         [Header("GameObjects: ")]
         [SerializeField] private TextMeshProUGUI pointsText;
+
         private GameScoreSO gameScore;
         public Coroutine FishingRoutine;
 
@@ -50,13 +52,13 @@ namespace FishingGame
         {
             if (playerIndex == 0)
                 fishDisplay.ClearPrefabReferences(_fishList);
-            
+
             if (fishDisplay != null)
             {
                 fishDisplay.enabled = true;
 
                 fishDisplay.SetupFishDisplay(playerIndex);
-                
+
                 SpawnInFishDisplayObjects(_fishList);
                 StopFishDisplay();
             }
@@ -102,9 +104,10 @@ namespace FishingGame
 
         public void PressedCatch()
         {
-            FishingSystem.Instance.PressedCatch = true;
+            if (!FishingSystem.Instance.PressedCatch)
+                iconHandler?.DisplayIcon(EEmotion.Happy);
 
-            iconHandler?.DisplayIcon(EEmotion.Happy);
+            FishingSystem.Instance.PressedCatch = true;
         }
 
         public void StopFishing()

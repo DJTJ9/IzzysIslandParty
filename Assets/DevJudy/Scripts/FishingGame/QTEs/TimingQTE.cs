@@ -8,7 +8,6 @@ namespace FishingGame.QuickTimeEvents
 {
     public class TimingQTE : QuickTimeEvent
     {
-        // !! Both of these can maybe be set when qte is started, maybe start it from a mediator to give each player
         [SerializeField] private QTEDisplayService qteDisplayService;
         [SerializeField] private QTEController qteController;
 

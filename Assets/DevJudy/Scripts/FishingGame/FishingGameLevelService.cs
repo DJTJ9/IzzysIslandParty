@@ -35,8 +35,6 @@ namespace FishingGame
         {
             playerCollection.Players[0] = currentPlayers.Players[0];
             
-           // playerCollection.Players[0].PlayerScore.Value = currentPlayers.Players[0].PlayerScore.Value;
-            
             for (int i = 1; i < playerCollection.Players.Count; i++)
             {
                 if (playerCollection.Players[i].PlayerScore.Value > 0)
@@ -50,7 +48,7 @@ namespace FishingGame
             }
             
             currentPlayers.Players.Clear();
-            currentPlayers = playerCollection;
+            currentPlayers.Players = playerCollection.Players;
         }
 
         public override void EndLevel()
