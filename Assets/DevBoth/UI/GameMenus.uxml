@@ -16,14 +16,14 @@
         </ui:VisualElement>
         <ui:VisualElement name="player-hub-middle__container" style="flex-grow: 1; height: 70%;">
             <ui:VisualElement name="player-hub-middle-first-row__container" class="gameSelectorContainer" style="width: 90%; justify-content: center;">
-                <ui:Button text="Bowling Battle" name="play-bowling-battle__button" class="levelButton" />
-                <ui:Button text="Fishing Frenzy" name="play-fishing-frenzy__button" class="levelButton" />
-                <ui:Button text="Jetski Joyride" name="play-jetski-joyride__button" class="levelButton" />
+                <ui:Button text="BOWLING BATTLE" name="play-bowling-battle__button" class="levelButton" />
+                <ui:Button text="FISHING FRENZY" name="play-fishing-frenzy__button" class="levelButton" />
+                <ui:Button text="JETSKI JOYRIDE" name="play-jetski-joyride__button" class="levelButton" />
             </ui:VisualElement>
             <ui:VisualElement name="player-hub-middle-second-row__container" class="gameSelectorContainer" style="width: 90%;">
-                <ui:Button text="Minigolf Mayhem" name="play-minigolf-mayhem__button" class="levelButton" style="overflow: visible;" />
-                <ui:Button text="Swaggy Snapshots" name="play-swaggy-snapshots__button" class="levelButton" />
-                <ui:Button text="To be added..." class="levelButton" />
+                <ui:Button text="MINIGOLF MAYHEM" name="play-minigolf-mayhem__button" class="levelButton" style="overflow: visible;" />
+                <ui:Button text="SWAGGY SNAPSHOTS" name="play-swaggy-snapshots__button" class="levelButton" />
+                <ui:Button text="HASTY HURDLES" name="play-hasty-hurdles__button" class="levelButton" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="player-hub-bottom__container" style="flex-grow: 1; align-items: center; display: flex; visibility: visible;">
@@ -52,7 +52,13 @@
         <ui:VisualElement name="results-header__container" style="flex-grow: 1; width: 100%; align-items: center; justify-content: center;">
             <ui:Label text="END RESULTS" name="results-header__label" class="header" style="color: rgb(254, 202, 129); -unity-text-outline-width: 4px; -unity-text-outline-color: rgb(0, 0, 0);" />
         </ui:VisualElement>
-        <ui:VisualElement name="results-screen__container" class="result-screen-container" style="flex-grow: 1; width: 60%; height: 70%; align-items: center; justify-content: center; background-color: rgba(93, 197, 72, 0); background-size: 100% 90%; background-image: url(&quot;project://database/Assets/Minigolf%20Graphics%20Pack/Textures/Backgrounds/Background02_Green.png?fileID=2800000&amp;guid=702fac7ccdd300745a113e7ab023857e&amp;type=3#Background02_Green&quot;); display: flex;" />
+        <ui:VisualElement name="results-screen__container" class="result-screen-container" style="flex-grow: 1; width: 60%; height: 70%; align-items: center; justify-content: center; background-color: rgba(93, 197, 72, 0); background-size: 100% 90%; background-image: url(&quot;project://database/Assets/Minigolf%20Graphics%20Pack/Textures/Backgrounds/Background02_Green.png?fileID=2800000&amp;guid=702fac7ccdd300745a113e7ab023857e&amp;type=3#Background02_Green&quot;); display: flex;">
+            <ui:VisualElement name="Row" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: space-between; height: 40px; padding-right: 50px; padding-left: 50px; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; width: 100%; align-self: center; padding-top: 50px; padding-bottom: 50px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; display: none;">
+                <ui:Label text="1" name="RankLabel" class="label" style="width: 20%; -unity-text-align: upper-center; -unity-font-definition: url(&quot;project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&amp;guid=9edcdbbb09ae8aa46b3612271126dd6b&amp;type=3#DraftingMono-Bold&quot;); font-size: 50px; height: 10%; align-items: center; align-self: center; flex-direction: row; justify-content: flex-start; align-content: flex-start;" />
+                <ui:Label text="Player" name="NameLabel" class="label" style="margin-top: 8px; margin-right: 8px; margin-bottom: 8px; margin-left: 8px; flex-grow: 0; -unity-font-definition: url(&quot;project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&amp;guid=9edcdbbb09ae8aa46b3612271126dd6b&amp;type=3#DraftingMono-Bold&quot;); width: 60%; height: 10%; font-size: 50px; align-items: center; flex-direction: row; align-self: center; align-content: center; position: relative; left: auto; right: auto; justify-content: center;" />
+                <ui:Label text="0" name="ScoreLabel" class="label" style="width: 20%; -unity-text-align: upper-center; height: 10%; font-size: 50px; -unity-font-definition: url(&quot;project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&amp;guid=9edcdbbb09ae8aa46b3612271126dd6b&amp;type=3#DraftingMono-Bold&quot;); align-self: center; align-items: center; flex-direction: row; align-content: flex-end; justify-content: flex-start;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
         <ui:VisualElement name="results-button__container" style="flex-grow: 1; justify-content: center;">
             <ui:Button text="CONTINUE" name="results-screen-continue__button" class="button" style="width: 300px; height: 70px;" />
         </ui:VisualElement>

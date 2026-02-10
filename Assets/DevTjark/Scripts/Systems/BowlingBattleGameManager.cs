@@ -14,14 +14,14 @@ public class BowlingBattleGameManager : MonoBehaviour
     [SerializeField] private UnityEvent onGameEnd;
     [SerializeField] private UnityEvent onStartSplitScreen;
 
-    [FoldoutGroup("Round Settings", expanded: true)]
+    [FoldoutGroup("Round Settings", expanded: true)] 
     [SerializeField] private float joinPhaseDuration = 4f;
     [SerializeField] private float preparationPhaseDuration = 10f;
     [SerializeField] private float roundDuration = 15f;
     [SerializeField] private int maxRounds = 3;
 
     [HideInInspector] public static float PreparationPhaseTimer;
-    
+
     private int m_roundIndex = 1;
 
     private CountdownTimer m_joinPhaseTimer;
@@ -29,14 +29,18 @@ public class BowlingBattleGameManager : MonoBehaviour
     private CountdownTimer m_roundTimer;
 
 
-private void Start()
+    private void Start()
     {
         ResetRoundIndex();
-        
+
         InstantiateCountdownTimers();
         SubscribeToCountdownTimersActions();
-        
+    }
+    
+    private void OnEnable()
+    {
         FreezeTimeScale();
+
     }
 
     private void OnDisable()
@@ -46,9 +50,11 @@ private void Start()
 
     private void Update()
     {
+#if !UNITY_EDITOR
         m_joinPhaseTimer.Tick(Time.deltaTime);
         m_preparationPhaseTimer.Tick(Time.deltaTime);
         m_roundTimer.Tick(Time.deltaTime);
+#endif
 
         PreparationPhaseTimer = m_preparationPhaseTimer.CurrentTime;
     }
@@ -57,7 +63,7 @@ private void Start()
     {
         onGameStart.Invoke();
     }
-    
+
     public void StartPreparationPhase()
     {
         onPreparationPhaseStart.Invoke();
@@ -74,27 +80,27 @@ private void Start()
     private void SubscribeToCountdownTimersActions()
     {
         m_joinPhaseTimer.OnTimerStop += StartGame;
-        
+
         m_preparationPhaseTimer.OnTimerStop += ReleaseBall;
-        
+
         m_roundTimer.OnTimerStop += EndRound;
     }
 
     private void UnsubscribeFromCountdownTimersActions()
     {
         m_joinPhaseTimer.OnTimerStop -= StartGame;
-        
+
         m_preparationPhaseTimer.OnTimerStop -= ReleaseBall;
-        
+
         m_roundTimer.OnTimerStop -= EndRound;
     }
 
     private void EndRound()
     {
         HandleRoundEnd();
-        
+
         ++m_roundIndex;
-    } 
+    }
 
     private void ReleaseBall()
     {
@@ -110,14 +116,14 @@ private void Start()
             onGameEnd.Invoke();
             return;
         }
-        
+
         onRoundEnd.Invoke();
         StartPreparationPhase();
     }
-    
+
     private void ResetRoundIndex() => m_roundIndex = 1;
-    
-    public void FreezeTimeScale()   => Time.timeScale = 0f;
-    
+
+    public void FreezeTimeScale() => Time.timeScale = 0f;
+
     public void UnfreezeTimeScale() => Time.timeScale = 1f;
 }

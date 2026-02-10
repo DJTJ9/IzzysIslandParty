@@ -16,8 +16,8 @@ public class PlayerControllerMinigolfMayhem : Controller
     [Header("Input")]
     private PlayerInput playerInput;
 
-    [Header("Settings")]
-    [SerializeField] private float lookSensitivity = 2;
+    // [Header("Settings")]
+    // [SerializeField] private float lookSensitivity = 2;
 
     [FoldoutGroup("Events", expanded: true)] 
     [SerializeField] private UnityEvent OnPause;
