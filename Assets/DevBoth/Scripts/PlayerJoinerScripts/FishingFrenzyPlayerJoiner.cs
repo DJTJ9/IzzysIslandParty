@@ -20,7 +20,7 @@ namespace FishingGame.Player.Multiplayer
 
         public void PlayerJoined(PlayerInput _playerInput)
         {
-            playerCollectionFF.Players[playerIndex].PlayerPrefab = _playerInput.gameObject;
+            playerCollectionFF.Players[playerIndex].PlayerReference = _playerInput.gameObject;
             
             currentPlayers.Players.Add(playerCollectionFF.Players[playerIndex]);
             var parent = _playerInput.gameObject.transform.parent;

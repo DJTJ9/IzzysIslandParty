@@ -5,10 +5,11 @@ using Audio;
 using HelperScripts;
 using HurdleGame.Camera;
 using MultiuseScripts;
+using Player.Collections;
 using TMPro;
 using UnityEngine;
 
-namespace HurdleGame
+namespace HurdleGame.LevelService
 {
     public class HurdleGameLevelService : RacingGameLevelService
     {
@@ -23,22 +24,26 @@ namespace HurdleGame
 
         [Header("Level start/end: ")]
         [SerializeField] private int secondsToStartLevel;
+
         [SerializeField] private Transform goalTransform;
         [SerializeField] private TextMeshProUGUI levelCountdownText;
 
         private int playerCount = 0;
-        
+        private int humanPlayerCount = 0;
+        private int placement = 0;
+
         private bool raceStarted = false;
         private bool raceEnded = false;
-        
+
+        [Header("Dependencies: ")]
+        [SerializeField] private SO_PlayerCollectionRacingGames currentPlayersRacing;
+        [SerializeField] private CameraMoverAddition cameraMoverAddition;
 
         [Header("Temp ")]
-        // !! The text belongs in another class
-        [SerializeField] private TextMeshProUGUI placementText;
-
+        //[SerializeField] private TextMeshProUGUI placementText;
         [SerializeField] private TextMeshProUGUI onFinishLineCrossedText;
+
         [SerializeField] private GameAudioManager audioManager;
-        [SerializeField] private CameraMoverAddition cameraMoverAddition;
         [SerializeField] private bool checkXOnly;
 
         private void Awake()
@@ -83,10 +88,18 @@ namespace HurdleGame
 
             if (playerCount == 0)
                 cameraMoverAddition.SetOrientationCharacter(_player.gameObject.GetComponent<CharacterMover>());
-            
+
             if (placementOrder.Length == 1)
                 cameraMoverAddition.SetOrientationCharacter(_player.GetComponent<CharacterMover>());
-            
+
+            ArrayHelper.AddToArray(placementOrder, _player);
+
+            playerCount++;
+            humanPlayerCount++;
+        }
+
+        public void OnNPCJoined(GameObject _player)
+        {
             ArrayHelper.AddToArray(placementOrder, _player);
             playerCount++;
         }
@@ -160,21 +173,8 @@ namespace HurdleGame
                 placementOrder[leftNeighbour + 1] = currentGameObjectBeingCompared;
             }
 
-            var placement = GetPlayerNumber() + 1;
-
-            placementText.text = (placement.ToString() + "/" + placementOrder.Length);
-        }
-
-        // !! REWORK
-        private int GetPlayerNumber()
-        {
-            for (int i = 0; i < placementOrder.Length; i++)
-            {
-                if (placementOrder[i].CompareTag("Player"))
-                    return i;
-            }
-
-            return -1;
+            //var placement = GetPlayerNumber() + 1;
+            //placementText.text = (placement.ToString() + "/" + placementOrder.Length);
         }
 
         private float GetDistanceToGoal(Vector3 _gameObjectPos)
@@ -186,57 +186,49 @@ namespace HurdleGame
 
         public override void OnFinishLineCrossed(GameObject _triggeringObj)
         {
-            int placement = WinnerPlacementOrder.Count + 1;
+            placement = (placement + 1);
 
-            var currentObj = new Tuple<GameObject, string>(_triggeringObj, null);
-            WinnerPlacementOrder.Add(placement, currentObj);
-
+           int triggeringObjPlayerIndex = GetTriggeringObjFromCurrentPlayers(_triggeringObj);
+           
+           currentPlayersRacing.Players[triggeringObjPlayerIndex].PlayerScore.Value = placement;
+            
             if (((1 << _triggeringObj.layer) & playerLayerMask) != 0)
-            {
                 OnPlayerCrossedFinishLine();
-            }
-
-            if (WinnerPlacementOrder.Count >= maxNumberOfPlayers)
+            
+            if (placement >= maxNumberOfPlayers)
                 EndLevel();
+        }
+
+        private int GetTriggeringObjFromCurrentPlayers(GameObject _triggeringObj)
+        {
+            for (int i = 0; i < currentPlayersRacing.Players.Count; i++)
+            {
+                if (currentPlayersRacing.Players[i].Name == _triggeringObj.name)
+                    return i;
+            }
+            Debug.LogError("Something went wrong");
+            return -1;
         }
 
         private void OnPlayerCrossedFinishLine()
         {
-            if (onFinishLineCrossedText != null)
-                onFinishLineCrossedText.gameObject.SetActive(true);
-        }
+            humanPlayerCount--;
 
-        private void CheckWinnerPlacementList()
-        {
-            if (WinnerPlacementOrder.Count < maxNumberOfPlayers)
+            if (humanPlayerCount == 0)
             {
-                for (int i = WinnerPlacementOrder.Count; i < maxNumberOfPlayers; i++)
-                {
-                    WinnerPlacementOrder.Add(WinnerPlacementOrder.Count + 1, new Tuple<GameObject, string>(placementOrder[i], null));
-                }
+                if (onFinishLineCrossedText != null)
+                    onFinishLineCrossedText.gameObject.SetActive(true);
             }
         }
-
-        private void PlayerEnd()
-        {
-            foreach (GameObject obj in placementOrder)
-            {
-                if (TryGetComponent(out CharacterMover characterMover))
-                    characterMover.CantMove();
-            }
-        }
-
+        
         public override void EndLevel()
         {
-            CheckWinnerPlacementList();
-
             raceEnded = true;
 
             onFinishLineCrossedText?.gameObject.SetActive(true);
             raceStarted = false;
 
             OnLevelEnd?.Invoke();
-            PlayerEnd();
         }
     }
 }

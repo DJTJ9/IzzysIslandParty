@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using HurdleGame;
+using HurdleGame.LevelService;
+using Player.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,9 +10,9 @@ namespace JetskiGame.Player.Multiplayer
     public class RacingGamePlayerJoiner : MonoBehaviour
     {
         [SerializeField] private HurdleGameLevelService levelService;
-        [SerializeField] private SO_PlayerCollection currentPlayers;
-        [SerializeField] private SO_PlayerCollection playerCollection;
-        [SerializeField] private SO_PlayerCollection npcCollection;
+        [SerializeField] private SO_PlayerCollectionRacingGames currentPlayers;
+        [SerializeField] private SO_PlayerCollectionRacingGames playerCollection;
+        [SerializeField] private SO_PlayerCollectionRacingGames npcCollection;
         private int playerIndex;
         private int npcIndex;
 
@@ -23,11 +25,17 @@ namespace JetskiGame.Player.Multiplayer
 
         public void PlayerJoined(PlayerInput _playerInput)
         {
+            playerCollection.Players[playerIndex].PlayerReference = _playerInput.gameObject;
+            
             if (_playerInput.gameObject.TryGetComponent(out HurdleGameNPCBehaviour npc))
             {
                 npc.SetPlayerIndex(playerIndex);
+                
+                _playerInput.gameObject.name = npcCollection.Players[npc.GetPlayerIndex() - 1].Name;
+                
                 currentPlayers.Players.Add(npcCollection.Players[npc.GetPlayerIndex() - 1]);
-
+                levelService.OnNPCJoined(_playerInput.gameObject);
+                
                 ++playerIndex;
                 ++npcIndex;
 
@@ -36,6 +44,7 @@ namespace JetskiGame.Player.Multiplayer
 
             currentPlayers.Players.Add(playerCollection.Players[playerIndex]);
 
+            _playerInput.gameObject.name = playerCollection.Players[playerIndex].Name;
             _playerInput.gameObject.transform.position = playerCollection.Players[playerIndex].SpawnPoint;
             levelService.OnPlayerJoined(_playerInput.gameObject);
 
@@ -58,8 +67,8 @@ namespace JetskiGame.Player.Multiplayer
 
             for (var i = nPCStartIndex; i < npcCollection.Players.Count; i++)
             {
-                Instantiate(npcCollection.Players[i].PlayerPrefab, npcCollection.Players[i].SpawnPoint, 
-                    npcCollection.Players[i].PlayerPrefab.transform.rotation);
+                Instantiate(npcCollection.Players[i].PlayerReference, npcCollection.Players[i].SpawnPoint, 
+                    npcCollection.Players[i].PlayerReference.transform.rotation);
             }
         }
     }

@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Player.Collections
 {
     [CreateAssetMenu(fileName = "PlayerCollection", menuName = "Scriptable Objects/Player/PlayerCollection/Racing Games")]
-    public class SO_PlayerCollectionRacingGames : SO_PlayerCollection
+    public class SO_PlayerCollectionRacingGames  : ScriptableObject
     {
-      //  [SerializeField] public new SO_PlayerRacingGames[] Players = new  SO_PlayerRacingGames[4];
+      [SerializeField] public List<SO_PlayerRacingGames> Players = new List<SO_PlayerRacingGames>();
     }
 }

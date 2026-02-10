@@ -40,7 +40,7 @@ public class BowlingBattlePlayerJoiner : MonoBehaviour
     {
         for (var i = m_playerIndex - 1; i < npcCollectionBB.Players.Count; i++)
         {
-            Instantiate(npcCollectionBB.Players[i].PlayerPrefab, npcCollectionBB.Players[i].SpawnPoint, Quaternion.identity);
+            Instantiate(npcCollectionBB.Players[i].PlayerReference, npcCollectionBB.Players[i].SpawnPoint, Quaternion.identity);
         }
     }
 }

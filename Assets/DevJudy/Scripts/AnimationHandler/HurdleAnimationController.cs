@@ -35,6 +35,12 @@ namespace AnimationHandler
                 animator.SetBool(gameStart, true);
         }
 
+        public void OnGameOver()
+        {
+            if (animator.isActiveAndEnabled)
+                animator.enabled = false;
+        }
+
         private void Update()
         {
             animator.SetFloat(velocityY, rb.linearVelocity.y);

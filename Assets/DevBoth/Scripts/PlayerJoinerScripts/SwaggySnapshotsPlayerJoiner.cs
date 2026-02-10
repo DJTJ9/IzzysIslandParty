@@ -42,7 +42,7 @@ public class SwaggySnapshotsPlayerJoiner : MonoBehaviour
         var nPCStartIndex = m_playerIndex - 1;
         for (var i = nPCStartIndex; i < npcCollectionSS.Players.Count; i++)
         {
-            Instantiate(npcCollectionSS.Players[i].PlayerPrefab, npcCollectionSS.Players[i].SpawnPoint, Quaternion.identity);
+            Instantiate(npcCollectionSS.Players[i].PlayerReference, npcCollectionSS.Players[i].SpawnPoint, Quaternion.identity);
         }
     }
 }

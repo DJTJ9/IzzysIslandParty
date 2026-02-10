@@ -30,7 +30,7 @@ public class BallSpawner : MonoBehaviour, IDependencyProvider
         if (CurrentBallInstance != null)
             Destroy(CurrentBallInstance);
         
-        CurrentBallInstance = Instantiate(_battle.PlayerPrefab, transform.position, transform.rotation);
+        CurrentBallInstance = Instantiate(_battle.PlayerReference, transform.position, transform.rotation);
         CurrentBattle = _battle;
     }
     

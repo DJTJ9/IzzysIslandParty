@@ -5,7 +5,7 @@ using UnityEngine;
 public class SO_Player : SerializedScriptableObject
 {
     public string Name;
-    public GameObject PlayerPrefab;
+    public GameObject PlayerReference;
     public GameScoreSO PlayerScore;
     public Vector3 SpawnPoint;
     public bool IsNPC;

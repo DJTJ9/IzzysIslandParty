@@ -54,7 +54,7 @@ public class PlayerSpawner : MonoBehaviour
     {
         for (var i = activePlayerInputs.PlayerInputs.Count - 1; i < npcCollectionBB.Players.Count; i++)
         {
-            Instantiate(npcCollectionBB.Players[i].PlayerPrefab, npcCollectionBB.Players[i].SpawnPoint, Quaternion.identity);
+            Instantiate(npcCollectionBB.Players[i].PlayerReference, npcCollectionBB.Players[i].SpawnPoint, Quaternion.identity);
         }
     }
 
@@ -74,7 +74,7 @@ public class PlayerSpawner : MonoBehaviour
     
     private GameObject SpawnPlayer(int _playerIndex)
     {
-        var player = Instantiate(PlayerCollectionSO.Players[_playerIndex].PlayerPrefab, PlayerCollectionSO.Players[_playerIndex].SpawnPoint, Quaternion.identity);
+        var player = Instantiate(PlayerCollectionSO.Players[_playerIndex].PlayerReference, PlayerCollectionSO.Players[_playerIndex].SpawnPoint, Quaternion.identity);
         return player;
     }
 }

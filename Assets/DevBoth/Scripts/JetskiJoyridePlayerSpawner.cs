@@ -31,7 +31,7 @@ namespace JetskiJoyride.Player.Multiplayer
         [Button]
         public void SpawnPlayer(int _playerIndex)
         {
-            var player = Instantiate(playerCollection.Players[_playerIndex].PlayerPrefab,
+            var player = Instantiate(playerCollection.Players[_playerIndex].PlayerReference,
                 playerCollection.Players[_playerIndex].SpawnPoint, Quaternion.identity);
 
             if (player.TryGetComponent(out PlayerInput input))
