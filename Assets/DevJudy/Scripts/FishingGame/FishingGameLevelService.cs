@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Audio;
-using FishingGame.QuickTimeEvents;
 using MultiuseScripts;
 using Player.Collections;
 using UnityEngine;
@@ -34,7 +33,9 @@ namespace FishingGame
         //!! REWORK
         public void GetNPCScores()
         {
-            playerCollection.Players[0].PlayerScore.Value = currentPlayers.Players[0].PlayerScore.Value;
+            playerCollection.Players[0] = currentPlayers.Players[0];
+            
+           // playerCollection.Players[0].PlayerScore.Value = currentPlayers.Players[0].PlayerScore.Value;
             
             for (int i = 1; i < playerCollection.Players.Count; i++)
             {
@@ -47,6 +48,9 @@ namespace FishingGame
 
                 playerCollection.Players[i].Name = playerNames[i - 1];
             }
+            
+            currentPlayers.Players.Clear();
+            currentPlayers = playerCollection;
         }
 
         public override void EndLevel()

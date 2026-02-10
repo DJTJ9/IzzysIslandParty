@@ -44,7 +44,6 @@ namespace FishingGame
         {
             gameScore = _gameScore;
             playerIndex = _playerIndex;
-            Debug.Log("PI: " + playerIndex + " GameScore: " + gameScore);
         }
 
         public void SetUpFishDisplay(List<SO_Fish> _fishList)

@@ -116,8 +116,6 @@ namespace FishingGame
                 float randomSecondsToPressCatch = Random.Range(buttonPressTimerRange.x, buttonPressTimerRange.y);
                 yield return new WaitForSeconds(randomSecondsToPressCatch);
 
-                // Stop the animation a few milliseconds before checking input for coyote time
-
                 if (!PressedCatch)
                     _fishingSystemManager.StopFishBitingAnimation();
 

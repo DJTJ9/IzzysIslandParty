@@ -2992,8 +2992,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 651437242795570887}
-  - {fileID: 8951231228786076504}
   - {fileID: 7280690463702399638}
+  - {fileID: 8951231228786076504}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &4239609682233630430
@@ -3412,6 +3412,46 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 2fcd0ea7-79bf-481a-8ad0-9fd00f618f61
     m_ActionName: 'FishingGame/Join[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 68276f0f-d2f1-4528-874c-c770db9628e8
+    m_ActionName: 'Player/Look[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1adf136c-4b4a-4528-981e-ae2a2886385c
+    m_ActionName: 'MinigolfMayhem/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3b7c6bd0-e2bf-4021-b694-19075839718a
+    m_ActionName: 'MinigolfMayhem/Look[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 37733399-93da-44a7-839f-6c8d02a6acb2
+    m_ActionName: 'MinigolfMayhem/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 832443a4-660f-48f6-bef2-3e3b9d9cd23f
+    m_ActionName: 'MinigolfMayhem/Join[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ae807423-6597-4ecd-90b3-dfc2fb960650
+    m_ActionName: 'MinigolfMayhem/Shoot[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6fd8ac2b-7b99-47ac-bbac-eeb7c7633295
+    m_ActionName: 'MinigolfMayhem/Jump[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 64abd04f-c22d-40a7-aaa4-ed2efd306744
+    m_ActionName: 'JetskiGame/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f5284c38-a546-43e5-b966-4436bacd65e0
+    m_ActionName: 'HurdleGame/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: da4cc858-f7c2-4834-b23a-83f1948a0d62
+    m_ActionName: 'HurdleGame/Join[/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: FishingGame
@@ -3488,12 +3528,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d17256d18b536cf408c4e84ccec9fe60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerIndex: 0
   QTEController: {fileID: 6874840815061034043}
   QTEDisplayService: {fileID: 0}
   fishDisplay: {fileID: 0}
   iconHandler: {fileID: 5526041761087462123}
-  gameScore: {fileID: 11400000, guid: 5cb636c38f28d2a4fbcde9462e931bc1, type: 2}
+  pointsService: {fileID: 0}
   pointsText: {fileID: 0}
 --- !u!1 &5589690360245084469
 GameObject:

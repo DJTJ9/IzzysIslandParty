@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -163,7 +162,6 @@ namespace FishingGame.QuickTimeEvents
 
         private bool CheckIfRTsOverlapping(RectTransform _rt1, RectTransform _rt2)
         {
-            //bool overlap = Overlaps(_rt1, _rt2);
             bool overlap = RectContainsAnother1(_rt2, _rt1);
 
             if (overlap)

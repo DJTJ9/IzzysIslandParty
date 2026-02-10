@@ -124,10 +124,10 @@ namespace FishingGame.QuickTimeEvents
 
             barQTE.SetLeftRightInput(moveInput);
         }
-
-// !! IS THIS LEFTOVER?
+        
         public void StopCurrentQTE()
         {
+            //!! The current qte is null
             switch (CurrentQuickTimeEvent)
             {
                 case EQuickTimeEvent.Timing:

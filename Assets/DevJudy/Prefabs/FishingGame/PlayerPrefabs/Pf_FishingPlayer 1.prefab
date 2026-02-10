@@ -1727,7 +1727,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5788472164859899239}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1735,7 +1735,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 26, y: -160}
+  m_AnchoredPosition: {x: 26, y: -158}
   m_SizeDelta: {x: 493.40002, y: 30}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1681255378073820547
@@ -3161,6 +3161,70 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 380298981326713454}
+    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4757233264109423665}
+    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 4757233264109423665}
+    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StopCurrentQTE
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SwitchToUIInputMap
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SwitchToUIInputMap
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FishingGame.QuickTimeEvents.QTEController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: FishingGame.FishingRodController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: FishingGame.FishingRodController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6483802780915312964, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
       propertyPath: movingRing
       value: 
@@ -3222,11 +3286,33 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+--- !u!114 &380298981326713454 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6874840815061034043, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+  m_PrefabInstance: {fileID: 6498483857878816341}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37294612b1aa22c489876f4e54347ac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1513869182094466247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5705243393259260562, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
   m_PrefabInstance: {fileID: 6498483857878816341}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4757233264109423665 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1741299663787530852, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+  m_PrefabInstance: {fileID: 6498483857878816341}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7967eb4a04d46545bd2e88940c12bbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5991227984578617490 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 651437242795570887, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
