@@ -12,37 +12,48 @@ public class GUIBowlingBattle : MonoBehaviour
 {
     [FoldoutGroup("Canvas Elements", expanded: false)]
     [SerializeField] private GameObject bowlingBattleUI;
-    // [SerializeField] private GameObject ballButtons;
-    [SerializeField] private GameObject timer;
+    [SerializeField] private GameObject preparationPhaseTimer;
+    [SerializeField] private TMP_Text preparationPhaseTimerLabel;
+    [SerializeField] private GameObject roundTimer;
+    [SerializeField] private TMP_Text roundTimerLabel;
     [SerializeField] private GameObject score;
-    [SerializeField] private TMP_Text timerLabel;
     [SerializeField] private TMP_Text scoreLabel;
     [SerializeField] private SO_PlayerCollection playersSO;
     [SerializeField] private PlayerControllerBowlingBattle playerController;
 
     private Button m_currentSelectedButton;
-    
-    // private void Start()
-    // {
-    //     ConfigureButtonClickEvents();
-    // }
 
     private void Update()
     {
         UpdateScoreAndTimerLabels();
     }
     
-    public void ShowUI()
+    public void ShowPreparationPhaseTimer()
     {
         bowlingBattleUI.SetActive(true);
-        timer.SetActive(true);
+        preparationPhaseTimer.SetActive(true);
     }
 
-    public void HideUI() => timer.SetActive(false);
+    public void HidePreparationPhaseTimer()
+    {
+        preparationPhaseTimer.SetActive(false);
+    }
+    
+    public void ShowRoundTimer()
+    {
+        bowlingBattleUI.SetActive(true);
+        roundTimer.SetActive(true);
+    }
+    
+    public void HideRoundTimer()
+    {
+        roundTimer.SetActive(false);
+    }
 
     private void UpdateScoreAndTimerLabels()
     {
-        timerLabel.text = BowlingBattleGameManager.PreparationPhaseTimer.ToString("0");
+        preparationPhaseTimerLabel.text = BowlingBattleGameManager.PreparationPhaseTimer.ToString("0");
+        roundTimerLabel.text = BowlingBattleGameManager.RoundTimer.ToString("0");
         scoreLabel.text = playersSO.Players[playerController.GetPlayerIndex()].PlayerScore.Value.ToString("0");
     }
 }

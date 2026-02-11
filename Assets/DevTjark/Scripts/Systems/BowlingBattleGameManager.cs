@@ -12,15 +12,14 @@ public class BowlingBattleGameManager : MonoBehaviour
     [SerializeField] private UnityEvent onReleaseBall;
     [SerializeField] private UnityEvent onRoundEnd;
     [SerializeField] private UnityEvent onGameEnd;
-    [SerializeField] private UnityEvent onLevelLoaded;
 
     [FoldoutGroup("Round Settings", expanded: true)] 
-    [SerializeField] private float joinPhaseDuration = 4f;
     [SerializeField] private float preparationPhaseDuration = 10f;
     [SerializeField] private float roundDuration = 15f;
     [SerializeField] private int maxRounds = 3;
 
     [HideInInspector] public static float PreparationPhaseTimer;
+    [HideInInspector] public static float RoundTimer;
 
     private int m_roundIndex = 1;
 
@@ -36,11 +35,10 @@ public class BowlingBattleGameManager : MonoBehaviour
         InstantiateCountdownTimers();
         SubscribeToCountdownTimersActions();
     }
-    
+
     private void OnEnable()
     {
         FreezeTimeScale();
-        onLevelLoaded.Invoke();
     }
 
     private void OnDisable()
@@ -56,7 +54,8 @@ public class BowlingBattleGameManager : MonoBehaviour
         m_roundTimer.Tick(Time.deltaTime);
 #endif
 
-        PreparationPhaseTimer = m_preparationPhaseTimer.CurrentTime;
+        PreparationPhaseTimer = m_preparationPhaseTimer.IsRunning ? m_preparationPhaseTimer.CurrentTime : preparationPhaseDuration;
+        RoundTimer = m_roundTimer.IsRunning ? m_roundTimer.CurrentTime : roundDuration;
     }
 
     public void StartGame()
@@ -72,26 +71,19 @@ public class BowlingBattleGameManager : MonoBehaviour
 
     private void InstantiateCountdownTimers()
     {
-        m_joinPhaseTimer = new CountdownTimer(joinPhaseDuration);
         m_preparationPhaseTimer = new CountdownTimer(preparationPhaseDuration);
         m_roundTimer = new CountdownTimer(roundDuration);
     }
 
     private void SubscribeToCountdownTimersActions()
     {
-        m_joinPhaseTimer.OnTimerStop += StartGame;
-
         m_preparationPhaseTimer.OnTimerStop += ReleaseBall;
-
         m_roundTimer.OnTimerStop += EndRound;
     }
 
     private void UnsubscribeFromCountdownTimersActions()
     {
-        m_joinPhaseTimer.OnTimerStop -= StartGame;
-
         m_preparationPhaseTimer.OnTimerStop -= ReleaseBall;
-
         m_roundTimer.OnTimerStop -= EndRound;
     }
 

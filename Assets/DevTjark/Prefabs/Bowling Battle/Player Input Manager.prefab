@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1309612935844456611}
   - component: {fileID: 7413617804279299412}
-  - component: {fileID: 6575249262868436842}
+  - component: {fileID: 6942273201229936858}
   m_Layer: 0
   m_Name: Player Input Manager
   m_TagString: Untagged
@@ -47,15 +47,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 2
-  m_MaxPlayerCount: -1
+  m_MaxPlayerCount: 4
   m_AllowJoining: 1
   m_JoinBehavior: 1
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6575249262868436842}
-        m_TargetAssemblyTypeName: PlayerJoiner, Assembly-CSharp
+      - m_Target: {fileID: 6942273201229936858}
+        m_TargetAssemblyTypeName: BowlingBattlePlayerJoiner, Assembly-CSharp
         m_MethodName: PlayerJoinedBB
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
+        m_MethodName: OnPlayerJoined
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: StartCamera, Assembly-CSharp
+        m_MethodName: DisableStartCamera
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -67,7 +91,19 @@ MonoBehaviour:
         m_CallState: 2
   m_PlayerLeftEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
+        m_MethodName: OnPlayerLeft
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_JoinAction:
     m_UseReference: 1
     m_Action:
@@ -79,7 +115,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -975019053593515004, guid: ef22b2227ffac9a46972f1586ac4c0ff, type: 3}
+    m_Reference: {fileID: -975019053593515004, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
   m_PlayerPrefab: {fileID: 8896167442070573846, guid: e6feb88b3c5738b4da86a05bbb189204, type: 3}
   m_SplitScreen: 1
   m_MaintainAspectRatioInSplitScreen: 0
@@ -90,7 +126,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &6575249262868436842
+--- !u!114 &6942273201229936858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,11 +135,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6872047163604667374}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 178e1589141c44a8a901da2595c5802d, type: 3}
+  m_Script: {fileID: 11500000, guid: 243621da5fc14aedb2a3a86dd50625d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPlayers: {fileID: 0}
-  PlayerCollectionJJ: {fileID: 0}
+  currentPlayers: {fileID: 11400000, guid: 97ae6e8cdb921dd4d97057deb65c1858, type: 2}
+  playerCollectionBB: {fileID: 11400000, guid: b311deb974e253d4a87e88e50d801712, type: 2}
+  npcCollectionBB: {fileID: 11400000, guid: dac08bd5846bed34a9524d0c0d5cf376, type: 2}
 --- !u!1 &8920463407941432964
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,4 +188,16 @@ MonoBehaviour:
   Event: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
   Response:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6942273201229936858}
+        m_TargetAssemblyTypeName: BowlingBattlePlayerJoiner, Assembly-CSharp
+        m_MethodName: JoinNPCsBB
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

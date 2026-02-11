@@ -266,7 +266,6 @@ public class MainMenuEvents : MonoBehaviour
     {
         controllerSelectionMenu.style.display = DisplayStyle.None;
         playerHub.style.display = DisplayStyle.Flex;
-        // playerJoiner.JoinNPCs();
     }
 
     private void OnControllerSelectionBackButtonClick()

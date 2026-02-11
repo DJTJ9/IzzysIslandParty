@@ -18,6 +18,7 @@ public class GameMenuEvents : MonoBehaviour
     [SerializeField] private UnityEvent onGameStart;
     [SerializeField] private UnityEvent onUnpause;
     [SerializeField] private UnityEvent onRestart;
+    [SerializeField] private UnityEvent onLevelLoaded;
     
     private UIDocument document;
     
@@ -53,8 +54,22 @@ public class GameMenuEvents : MonoBehaviour
     [Header("Controller Selection")]
     private Button controllerSelectionReadyButton;
     private Button controllerSelectionBackButton;
+    private VisualElement bowlingBattleHeader;
+    private VisualElement fishingFrenzyHeader;
+    private VisualElement jetskiJoyrideHeader;
+    private VisualElement minigolfMayhemHeader;
+    private VisualElement swaggySnapshotsHeader;
+    private VisualElement hastyHurdlesHeader;
+    private VisualElement bowlingBattleInstructions;
+    private VisualElement fishingFrenzyInstructions;
+    private VisualElement jetskiJoyrideInstructions;
+    private VisualElement minigolfMayhemInstructions;
+    private VisualElement swaggySnapshotsInstructions;
+    private VisualElement hastyHurdlesInstructions;
     private VisualElement[] m_slots;
     private int m_joinedPlayers = 0;
+    
+    private bool m_playerJoined = false;
     
     private void Awake()
     {
@@ -63,12 +78,15 @@ public class GameMenuEvents : MonoBehaviour
         BindVisualElements();
         BindButtons();
         InitializeSlotElements();
+        onLevelLoaded.Invoke();
         FocusButton(controllerSelectionReadyButton);
     }
 
     private void OnEnable()
     {
+        onLevelLoaded.Invoke();
         RegisterButtonCallbacks();
+        m_playerJoined = false;
     }
 
     private void OnDisable()
@@ -109,9 +127,21 @@ public class GameMenuEvents : MonoBehaviour
         endScreenChangeLevelButton = document.rootVisualElement.Q("end-screen-menu-change-level__button") as Button;
         endScreenQuitButton = document.rootVisualElement.Q("end-screen-menu-quit__button") as Button;
         
-        // Controller selection menu buttons
+        // Controller selection menu
         controllerSelectionReadyButton = document.rootVisualElement.Q("controller-selection-ready__button") as Button;
         controllerSelectionBackButton = document.rootVisualElement.Q("controller-selection-back__button") as Button;
+        bowlingBattleHeader = document.rootVisualElement.Q("bb-controller-selection-header__container");
+        fishingFrenzyHeader = document.rootVisualElement.Q("ff-controller-selection-header__container");
+        jetskiJoyrideHeader = document.rootVisualElement.Q("jj-controller-selection-header__container");
+        minigolfMayhemHeader = document.rootVisualElement.Q("mm-controller-selection-header__container");
+        swaggySnapshotsHeader = document.rootVisualElement.Q("ss-controller-selection-header__container");
+        hastyHurdlesHeader  = document.rootVisualElement.Q("hh-controller-selection-header__container");
+        bowlingBattleInstructions = document.rootVisualElement.Q("bb-instructions__container");
+        fishingFrenzyInstructions = document.rootVisualElement.Q("ff-instructions__container");
+        jetskiJoyrideInstructions = document.rootVisualElement.Q("jj-instructions__container");
+        minigolfMayhemInstructions = document.rootVisualElement.Q("mm-instructions__container");
+        swaggySnapshotsInstructions = document.rootVisualElement.Q("ss-instructions__container");
+        hastyHurdlesInstructions = document.rootVisualElement.Q("hh-instructions__container");
     }
 
     private void RegisterButtonCallbacks()
@@ -180,7 +210,7 @@ public class GameMenuEvents : MonoBehaviour
     public void HidePauseMenu()
     {
         pauseMenu.style.display = DisplayStyle.None;
-        Time.timeScale = 1f;
+        UnfreezeTimeScale();
     }
     
     public void ShowEndScreenUI()
@@ -189,7 +219,7 @@ public class GameMenuEvents : MonoBehaviour
         FocusButton(resultScreenContinueButton);
     }
     
-    public void HideEndScreenUI()
+    private void HideEndScreenUI()
     {
         resultsScreen.style.display = DisplayStyle.None;
         endScreenUI.style.display = DisplayStyle.None;
@@ -199,7 +229,7 @@ public class GameMenuEvents : MonoBehaviour
     {
         onRestart.Invoke();
         HideEndScreenUI();
-        Time.timeScale = 0f;
+        FreezeTimeScale();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 
@@ -226,7 +256,7 @@ public class GameMenuEvents : MonoBehaviour
 
     private void OnQuitClick()
     {
-        Time.timeScale = 1f;
+        UnfreezeTimeScale();
         LoadSingleScene(SceneNames.MainMenu);
     }
 
@@ -237,13 +267,76 @@ public class GameMenuEvents : MonoBehaviour
         FocusButton(endScreenRestartButton);
     }
 
-    public void HideControllerSelectionScreen()
+    public void ShowBowlingBattleStartScreen()
+    {
+        FreezeTimeScale();
+        controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        HideAllGameHeadersAndInstructions();
+        FocusButton(controllerSelectionReadyButton);
+        bowlingBattleHeader.style.display = DisplayStyle.Flex;
+        bowlingBattleInstructions.style.display = DisplayStyle.Flex;
+    }
+
+    public void ShowFishingFrenzyStartScreen()
+    {
+        FreezeTimeScale();
+        controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        HideAllGameHeadersAndInstructions();
+        FocusButton(controllerSelectionReadyButton);
+        fishingFrenzyHeader.style.display = DisplayStyle.Flex;
+        fishingFrenzyInstructions.style.display = DisplayStyle.Flex;
+    }
+
+    public void ShowJetskiJoyrideStartScreen()
+    {
+        FreezeTimeScale();
+        controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        HideAllGameHeadersAndInstructions();
+        FocusButton(controllerSelectionReadyButton);
+        jetskiJoyrideHeader.style.display = DisplayStyle.Flex;
+        jetskiJoyrideInstructions.style.display = DisplayStyle.Flex;
+    }
+
+    public void ShowMinigolfMayhemStartScreen()
+    {
+        FreezeTimeScale();
+        controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        HideAllGameHeadersAndInstructions();
+        FocusButton(controllerSelectionReadyButton);
+        minigolfMayhemHeader.style.display = DisplayStyle.Flex;
+        minigolfMayhemInstructions.style.display = DisplayStyle.Flex;
+    }
+
+    public void ShowSwaggySnapshotsStartScreen()
+    {
+        FreezeTimeScale();
+        controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        HideAllGameHeadersAndInstructions();
+        FocusButton(controllerSelectionReadyButton);
+        swaggySnapshotsHeader.style.display = DisplayStyle.Flex;
+        swaggySnapshotsInstructions.style.display = DisplayStyle.Flex;
+    }
+
+    public void ShowHastyHurdlesStartScreen()
+    {
+        FreezeTimeScale();
+        controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        HideAllGameHeadersAndInstructions();
+        FocusButton(controllerSelectionReadyButton);
+        hastyHurdlesHeader.style.display = DisplayStyle.Flex;
+        hastyHurdlesInstructions.style.display = DisplayStyle.Flex;
+    }
+    
+    private void HideControllerSelectionScreen()
     {
         controllerSelectionMenu.style.display = DisplayStyle.None;
     }
     
     private void OnControllerSelectionReadyButtonClick()
     {
+        if (!m_playerJoined) return;
+        
+        UnfreezeTimeScale();
         HideControllerSelectionScreen();
         onGameStart.Invoke();
     }
@@ -256,7 +349,7 @@ public class GameMenuEvents : MonoBehaviour
 
     private void OnLoadBowlingBattle()
     {
-        LoadSceneWithLevel(SceneNames.BowlingBattleGame, SceneNames.BowlingBattleLevel);
+        LoadSingleScene(SceneNames.BowlingBattleGame);
     }
 
     private void OnLoadFishingFrenzy()
@@ -401,6 +494,7 @@ public class GameMenuEvents : MonoBehaviour
         slot.RemoveFromClassList("waiting");
         slot.AddToClassList("ready");
 
+        m_playerJoined = true;
         m_joinedPlayers++;
     }
     
@@ -424,4 +518,23 @@ public class GameMenuEvents : MonoBehaviour
         yield return null;
         _button.Focus();
     }
+
+    private void HideAllGameHeadersAndInstructions()
+    {
+        bowlingBattleHeader.style.display = DisplayStyle.None;
+        fishingFrenzyHeader.style.display = DisplayStyle.None;
+        jetskiJoyrideHeader.style.display = DisplayStyle.None;
+        minigolfMayhemHeader.style.display = DisplayStyle.None;
+        swaggySnapshotsHeader.style.display = DisplayStyle.None;
+        hastyHurdlesHeader.style.display = DisplayStyle.None;
+        bowlingBattleInstructions.style.display = DisplayStyle.None;
+        fishingFrenzyInstructions.style.display = DisplayStyle.None;
+        jetskiJoyrideInstructions.style.display = DisplayStyle.None;
+        minigolfMayhemInstructions.style.display = DisplayStyle.None;
+        swaggySnapshotsInstructions.style.display = DisplayStyle.None;
+        hastyHurdlesInstructions.style.display = DisplayStyle.None;
+    }
+    
+    private void FreezeTimeScale() => Time.timeScale = 0;
+    private void UnfreezeTimeScale() => Time.timeScale = 1;
 }

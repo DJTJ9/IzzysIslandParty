@@ -9,8 +9,10 @@ public class NPC_GUIBowlingBattle : MonoBehaviour
     [SerializeField] private GameObject bowlingBattleUI;
     // [SerializeField] private GameObject ballButtons;
     [SerializeField] private GameObject timer;
-    [SerializeField] private GameObject score;
     [SerializeField] private TMP_Text timerLabel;
+    [SerializeField] private GameObject roundTimer;
+    [SerializeField] private TMP_Text roundTimerLabel;
+    [SerializeField] private GameObject score;
     [SerializeField] private TMP_Text scoreLabel;
     [SerializeField] private SO_PlayerCollection npcSO;
     
@@ -19,19 +21,29 @@ public class NPC_GUIBowlingBattle : MonoBehaviour
     private void Update()
     {
         timerLabel.text = BowlingBattleGameManager.PreparationPhaseTimer.ToString("0");
+        roundTimerLabel.text = BowlingBattleGameManager.RoundTimer.ToString("0");
         scoreLabel.text = npcSO.Players[npcController.NPCIndex].PlayerScore.Value.ToString("0");
     }
 
-    public void ShowUI()
+    public void ShowPreparationPhaseTimer()
     {
         bowlingBattleUI.SetActive(true);
-        // ballButtons.SetActive(true);
         timer.SetActive(true);
     }
 
-    public void HideUI()
+    public void HidePreparationPhaseTimer()
     {
-        // ballButtons.SetActive(false);
         timer.SetActive(false);
     } 
+    
+    public void ShowRoundTimer()
+    {
+        bowlingBattleUI.SetActive(true);
+        roundTimer.SetActive(true);
+    }
+    
+    public void HideRoundTimer()
+    {
+        roundTimer.SetActive(false);
+    }
 }
