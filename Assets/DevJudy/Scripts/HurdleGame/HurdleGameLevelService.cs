@@ -54,7 +54,12 @@ namespace HurdleGame.LevelService
         private void Start()
         {
             if (audioManager != null)
+            {
+                audioManager.gameObject.SetActive(true);
+                audioManager.enabled = true;
+                
                 audioManager.StartBackgroundMusic(() => !raceEnded);
+            }
 
             if (goalTransform == null)
             {

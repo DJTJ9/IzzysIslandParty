@@ -23,6 +23,11 @@ namespace JetskiGame.Player.Multiplayer
             currentPlayers.Players.Clear();
         }
 
+        private void OnDestroy()
+        {
+            ClearPlayerReferences();
+        }
+        
         public void PlayerJoined(PlayerInput _playerInput)
         {
             playerCollection.Players[playerIndex].PlayerReference = _playerInput.gameObject;
@@ -49,14 +54,15 @@ namespace JetskiGame.Player.Multiplayer
             levelService.OnPlayerJoined(_playerInput.gameObject);
 
             ++playerIndex;
-            StartCoroutine(WaitForPlayerJoin(_playerInput.gameObject));
+            var currentPlayerIndex = playerIndex;
+            StartCoroutine(WaitForPlayerJoin(_playerInput.gameObject, currentPlayerIndex));
         }
 
-        private IEnumerator WaitForPlayerJoin(GameObject _player)
+        private IEnumerator WaitForPlayerJoin(GameObject _player, int _currentPlayerIndex)
         {
             yield return new WaitForSeconds(0.5f);
 
-            _player.transform.position = playerCollection.Players[playerIndex - 1].SpawnPoint;
+            _player.transform.position = playerCollection.Players[_currentPlayerIndex - 1].SpawnPoint;
 
             yield return null;
         }
@@ -69,6 +75,15 @@ namespace JetskiGame.Player.Multiplayer
             {
                 Instantiate(npcCollection.Players[i].PlayerReference, npcCollection.Players[i].SpawnPoint, 
                     npcCollection.Players[i].PlayerReference.transform.rotation);
+            }
+        }
+
+        public void ClearPlayerReferences()
+        {
+            for (int i = 0; i < currentPlayers.Players.Count; i++)
+            {
+                if (!currentPlayers.Players[i].IsNPC)
+                    currentPlayers.Players[i].PlayerReference = null;
             }
         }
     }

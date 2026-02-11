@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 namespace Audio
 {
+    [DefaultExecutionOrder(-6000)]
     public class AudioService : MonoBehaviour
     {
         private static AudioService instance;
@@ -25,12 +26,11 @@ namespace Audio
             instance = this;
         }
 
-        private void OnEnable()
+        private void Awake()
         {
             gameObject.SetActive(true);
-           // Debug.Log("AudioService active: " + this.gameObject.activeInHierarchy);
         }
-
+        
         private void OnDisable()
         {
             StopAllCoroutines();

@@ -128,6 +128,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
+      propertyPath: audioService
+      value: 
+      objectReference: {fileID: 165015151}
+    - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
       propertyPath: levelBackgroundMusic
       value: BackgroundMusic
       objectReference: {fileID: 0}
@@ -187,6 +191,17 @@ PrefabInstance:
       addedObject: {fileID: 1765754222}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
+--- !u!114 &165015151 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1794162964901148465, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
+  m_PrefabInstance: {fileID: 165015150}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df81c45e781e04a4cb54fdd681697b89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &217608408
 GameObject:
   m_ObjectHideFlags: 0

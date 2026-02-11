@@ -4714,6 +4714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da9839782ab0be94a9d3541b29b4022c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioService: {fileID: 1560651716}
   bgmVolume:
     UseConstant: 0
     ConstantValue: 0
@@ -4976,6 +4977,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 806279231891789792, guid: e80de2aeace119d41a98a09f32c2ba7c, type: 3}
   m_PrefabInstance: {fileID: 1541291835}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1560651716 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6110772869683597853, guid: 45ed1282608e84b40954217baa81b167, type: 3}
+  m_PrefabInstance: {fileID: 1002449824}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df81c45e781e04a4cb54fdd681697b89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1583718358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6313,17 +6325,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079459247}
   m_CullTransparentMesh: 1
---- !u!114 &2109170960 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
-  m_PrefabInstance: {fileID: 6223619115058927872}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 178e1589141c44a8a901da2595c5802d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2119490861
 GameObject:
   m_ObjectHideFlags: 0
@@ -6943,10 +6944,6 @@ PrefabInstance:
       propertyPath: levelService
       value: 
       objectReference: {fileID: 1315196312}
-    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
-      propertyPath: currentPlayers
-      value: 
-      objectReference: {fileID: 11400000, guid: 0f53a93ee4a82a94ea1754a908dd21bd, type: 2}
     - target: {fileID: 5413502618019380367, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6990,45 +6987,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3606515755815814517, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6223619115058927874}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
---- !u!1 &6223619115058927873 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3606515755815814517, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
-  m_PrefabInstance: {fileID: 6223619115058927872}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6223619115058927874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6223619115058927873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2109170960}
-        m_TargetAssemblyTypeName: JetskiGame.Player.Multiplayer.RacingGamePlayerJoiner,
-          Assembly-CSharp
-        m_MethodName: JoinNPCs
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &7901871804622472836 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 806279231891789792, guid: e80de2aeace119d41a98a09f32c2ba7c, type: 3}
