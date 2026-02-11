@@ -1258,79 +1258,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3050538556472480711, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050538556472480711, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050538556472480711, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050538556472480711, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050538556472480711, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050538556472480711, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050538556472480711, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050538556472480711, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 726
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050538556472480711, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050538556472480711, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 386
-      objectReference: {fileID: 0}
-    - target: {fileID: 4207332839598075675, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
-      propertyPath: playerPointsText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4207332839598075675, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
-      propertyPath: playerPlacementsText
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4778689148346280094, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
       propertyPath: m_Name
       value: SharedCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 4778689148346280094, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6920824498573271067, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
-      propertyPath: m_fontSize
-      value: 160
-      objectReference: {fileID: 0}
-    - target: {fileID: 6920824498573271067, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 160
-      objectReference: {fileID: 0}
-    - target: {fileID: 6920824498573271067, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 1859887889173727227, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
-    - {fileID: 4017702116115731141, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
-    - {fileID: 139622010205744087, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfeb16dc7e321fe48a38b5f268d2bc3b, type: 3}
@@ -1353,6 +1286,10 @@ PrefabInstance:
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: buttonMashQTE
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
+      propertyPath: npcPointRange.y
+      value: 101
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: gameAudioManager
@@ -1464,7 +1401,7 @@ PrefabInstance:
       objectReference: {fileID: 420987123}
     - target: {fileID: 8587489525363768519, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: durationInMinutes
-      value: 0.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8627035054511115762, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: m_Name

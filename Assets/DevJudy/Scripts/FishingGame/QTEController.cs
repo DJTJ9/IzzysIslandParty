@@ -10,8 +10,7 @@ namespace FishingGame.QuickTimeEvents
         private ButtonMashQTE buttonMashQTE;
         private BarQTE barQTE;
 
-        //  [HideInInspector]
-       public EQuickTimeEvent CurrentQuickTimeEvent = EQuickTimeEvent.None;
+        [HideInInspector] public EQuickTimeEvent CurrentQuickTimeEvent = EQuickTimeEvent.None;
 
         private EButton currentButtonToPress;
         private float moveInput;
@@ -110,7 +109,7 @@ namespace FishingGame.QuickTimeEvents
 
             if (_context.started)
             {
-                moveInput = _context.ReadValue<float>();
+                moveInput = _context.ReadValue<Vector2>().x;
 
                 if (moveInput > 0.02f)
                     moveInput = 1f;

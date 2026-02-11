@@ -1808,12 +1808,12 @@
                 },
                 {
                     "name": "LeftRightQTE",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "645fff6a-fa79-4f4d-86f8-19c46ad9a955",
-                    "expectedControlType": "",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Pause",
@@ -1946,9 +1946,9 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "1D Axis",
+                    "name": "2D Vector",
                     "id": "999eb1c9-6d64-4909-baba-f3927b9bbc4e",
-                    "path": "1DAxis",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -1957,7 +1957,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
+                    "name": "Left",
                     "id": "f956fe46-ca04-4bf7-b7ed-c448b2cf8716",
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
@@ -1968,7 +1968,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "negative",
+                    "name": "Left",
                     "id": "15a07bef-c069-477d-8178-a664d65d6a5c",
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
@@ -1979,7 +1979,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
+                    "name": "Right",
                     "id": "f304aeb0-d7c9-4216-93f2-94b7008ed462",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
@@ -1990,7 +1990,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
+                    "name": "Right",
                     "id": "c5e2de68-7f48-4c48-82b2-cf2fe8460afe",
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
