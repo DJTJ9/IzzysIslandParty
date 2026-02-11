@@ -2188,7 +2188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_startMoveDuration: 8.3
-  m_roundTime: 26
+  m_roundTime: 25
   m_danceMoveDuration: 3.98
   m_photoShowDuration: 10
   SO_Players: {fileID: 11400000, guid: 1b822cf7c8d19d644a003d59bb91fa77, type: 2}
@@ -4666,7 +4666,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneCollection: {fileID: 11400000, guid: 6fd8971a4dff91645b76a391153753d8, type: 2}
+  racingGame: 0
   currentPlayers: {fileID: 11400000, guid: 97ae6e8cdb921dd4d97057deb65c1858, type: 2}
+  currentPlayersRacing: {fileID: 0}
   rowTemplate: {fileID: 9197481963319205126, guid: a5da0a2b314073b4f97b6ae48036cd3c, type: 3}
   onGameStart:
     m_PersistentCalls:
