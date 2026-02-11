@@ -21,18 +21,22 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
 
     [SerializeField] private SO_PlayerCollection SO_Players;
 
-    [FoldoutGroup("Events", expanded: false)] [SerializeField] private UnityEvent onDanceMoveChanged;
+    [FoldoutGroup("Events", expanded: false)] 
+    [SerializeField] private UnityEvent onDanceMoveChanged;
     [SerializeField] private UnityEvent onGameStart;
     [SerializeField] private UnityEvent onRoundEnd;
     [SerializeField] private UnityEvent onGameEnd;
-
+    [SerializeField] private UnityEvent onLevelLoaded;
+    
     private CountdownTimer m_roundTimer;
     private CountdownTimer m_photoShowTimer;
 
     private void OnEnable()
     {
         InitializeTimers();
+        onLevelLoaded.Invoke();
         FreezeTimeScale();
+        
 
         StartMoveDuration = m_startMoveDuration;
         RoundTime = m_roundTime;
