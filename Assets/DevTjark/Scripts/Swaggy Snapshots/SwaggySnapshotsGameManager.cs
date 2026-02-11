@@ -34,9 +34,9 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
     private void OnEnable()
     {
         InitializeTimers();
+        onLevelLoaded.Invoke();
         FreezeTimeScale();
         
-        onLevelLoaded.Invoke();
 
         StartMoveDuration = m_startMoveDuration;
         RoundTime = m_roundTime;

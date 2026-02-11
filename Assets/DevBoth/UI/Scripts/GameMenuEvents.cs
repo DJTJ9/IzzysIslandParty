@@ -266,12 +266,18 @@ public class GameMenuEvents : MonoBehaviour
         controllerSelectionMenu.style.display = DisplayStyle.Flex;
     }
 
+    public void HideControllerSelectionScreen()
+    {
+        controllerSelectionMenu.style.display = DisplayStyle.None;
+    }
+
     public void ShowBowlingBattleControllerSelectionScreen()
     {
         controllerSelectionMenu.style.display = DisplayStyle.Flex;
         HideAllGameLabelsAndInstructions();
         bowlingBattleHeader.style.display = DisplayStyle.Flex;
         bowlingBattleInstructions.style.display = DisplayStyle.Flex;
+        FocusButton(controllerSelectionReadyButton);
     }
 
     public void ShowFishingFrenzyControllerSelectionScreen()
@@ -280,6 +286,7 @@ public class GameMenuEvents : MonoBehaviour
         HideAllGameLabelsAndInstructions();
         fishingFrenzyHeader.style.display = DisplayStyle.Flex;
         fishingFrenzyInstructions.style.display = DisplayStyle.Flex;
+        FocusButton(controllerSelectionReadyButton);
     }
 
     public void ShowJetskiJoyrideControllerSelectionScreen()
@@ -288,6 +295,7 @@ public class GameMenuEvents : MonoBehaviour
         HideAllGameLabelsAndInstructions();
         jetskiJoyrideHeader.style.display = DisplayStyle.Flex;
         jetskiJoyrideInstructions.style.display = DisplayStyle.Flex;
+        FocusButton(controllerSelectionReadyButton);
     }
 
     public void ShowMinigolfMayhemControllerSelectionScreen()
@@ -296,6 +304,7 @@ public class GameMenuEvents : MonoBehaviour
         HideAllGameLabelsAndInstructions();
         minigolfMayhemHeader.style.display = DisplayStyle.Flex;
         minigolfMayhemInstructions.style.display = DisplayStyle.Flex;
+        FocusButton(controllerSelectionReadyButton);
     }
 
     public void ShowSwaggySnapshotsControllerSelectionScreen()
@@ -304,6 +313,7 @@ public class GameMenuEvents : MonoBehaviour
         HideAllGameLabelsAndInstructions();
         swaggySnapshotsHeader.style.display = DisplayStyle.Flex;
         swaggySnapshotsInstructions.style.display = DisplayStyle.Flex;
+        FocusButton(controllerSelectionReadyButton);
     }
 
     public void ShowHastyHurdlesControllerSelectionScreen()
@@ -312,16 +322,7 @@ public class GameMenuEvents : MonoBehaviour
         HideAllGameLabelsAndInstructions();
         hastyHurdlesHeader.style.display = DisplayStyle.Flex;
         hastyHurdlesInstructions.style.display = DisplayStyle.Flex;
-    }
-
-    public void HideBowlingBattleControllerSelectionScreen()
-    {
-        controllerSelectionMenu.style.display = DisplayStyle.None;
-    }
-
-    public void HideControllerSelectionScreen()
-    {
-        controllerSelectionMenu.style.display = DisplayStyle.None;
+        FocusButton(controllerSelectionReadyButton);
     }
 
     private void HideAllGameLabelsAndInstructions()
