@@ -96,6 +96,11 @@ public class GameMenuEvents : MonoBehaviour
         FocusButton(controllerSelectionReadyButton);
     }
 
+    public void Test()
+    {
+        Debug.Log("Test");
+    }
+
     private void OnEnable()
     {
         onLevelLoaded.Invoke();
@@ -293,6 +298,7 @@ public class GameMenuEvents : MonoBehaviour
 
     public void ShowFishingFrenzyStartScreen()
     {
+        Debug.Log("ShowFishingFrenzyStartScreen");
         FreezeTimeScale();
         controllerSelectionMenu.style.display = DisplayStyle.Flex;
         HideAllGameHeadersAndInstructions();

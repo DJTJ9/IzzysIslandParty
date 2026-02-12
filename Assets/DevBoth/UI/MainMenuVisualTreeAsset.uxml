@@ -29,10 +29,10 @@
                 <ui:VisualElement name="player-hub-middle-first-row__container" class="gameSelectorContainer" style="width: 90%; justify-content: center;">
                     <ui:Button text="BOWLING BATTLE" name="play-bowling-battle__button" class="levelButton" />
                     <ui:Button text="FISHING FRENZY" name="play-fishing-frenzy__button" class="levelButton" />
-                    <ui:Button text="JETSKI JOYRIDE" name="play-jetski-joyride__button" class="levelButton" />
+                    <ui:Button text="JETSKI JOYRIDE" name="play-jetski-joyride__button" class="levelButton" style="display: none;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="player-hub-middle-second-row__container" class="gameSelectorContainer" style="width: 90%;">
-                    <ui:Button text="MINIGOLF MAYHEM" name="play-minigolf-mayhem__button" class="levelButton" style="overflow: visible;" />
+                    <ui:Button text="MINIGOLF MAYHEM" name="play-minigolf-mayhem__button" class="levelButton" style="overflow: visible; display: none;" />
                     <ui:Button text="SWAGGY SNAPSHOTS" name="play-swaggy-snapshots__button" class="levelButton" />
                     <ui:Button text="HASTY HURDLES" name="play-hasty-hurdles__button" class="levelButton" />
                 </ui:VisualElement>
