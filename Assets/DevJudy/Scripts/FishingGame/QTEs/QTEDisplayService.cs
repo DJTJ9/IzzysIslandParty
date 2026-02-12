@@ -1,5 +1,6 @@
 using enums;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace FishingGame.QuickTimeEvents
 {
@@ -17,9 +18,30 @@ namespace FishingGame.QuickTimeEvents
         private const string southButtonCTRL = "X";
         private const string westButtonCTRL = "☐";
 
+        private const string northButtonXbox = "Y";
+        private const string eastButtonXbox = "B";
+        private const string southButtonXbox = "A";
+        private const string westButtonXbox = "X";
+
         #endregion
+
+        [SerializeField] private InputAction ia;
         
+        public EControlScheme controlScheme;
+
         public string DisplayButtonToPress(EButton _buttonToPress)
+        {
+            switch (controlScheme)
+            {
+                case EControlScheme.Keyboard:
+                    return GetKeyboardButton(_buttonToPress);
+            }
+
+            // This should never return anything but a valid button
+            return "!";
+        }
+
+        private string GetKeyboardButton(EButton _buttonToPress)
         {
             switch (_buttonToPress)
             {
@@ -33,8 +55,21 @@ namespace FishingGame.QuickTimeEvents
                     return westButtonKB;
             }
 
-            // This should never return anything but a valid button
-            return "!";
+            return "?";
         }
+        
+        // // !! Beim joinen holen
+       // var device = _context.control.device;
+
+       //     if (device is Gamepad gamepad)
+       // {
+       //     if (gamepad is DualShockGamepad dualShockGamepad)
+       //         Debug.Log("PlayStation controller");
+       //     else if (gamepad is XInputController xInputController)
+       //         Debug.Log("Xbox controller");
+       //         
+       // }
+       // else if (device is Keyboard keyboard)
+       // Debug.Log("Keyboard controller");
     }
 }

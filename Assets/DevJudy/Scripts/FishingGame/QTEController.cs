@@ -127,7 +127,6 @@ namespace FishingGame.QuickTimeEvents
         
         public void StopCurrentQTE()
         {
-            //!! The current qte is null
             switch (CurrentQuickTimeEvent)
             {
                 case EQuickTimeEvent.Timing:

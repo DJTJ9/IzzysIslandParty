@@ -1199,6 +1199,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bb61aab394a98f4a95c1582ba64069d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ia:
+    m_Name: Ia
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 241630a8-5e9f-44db-831b-c779ef7d88e4
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  controlScheme: 0
 --- !u!1 &3657558143663239887
 GameObject:
   m_ObjectHideFlags: 0
@@ -3018,93 +3028,53 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4225491165619746762}
     - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 54
+      propertyPath: m_DefaultActionMap
+      value: UI
       objectReference: {fileID: 0}
     - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[44].m_ActionId
-      value: 68276f0f-d2f1-4528-874c-c770db9628e8
+      propertyPath: m_ActionEvents.Array.data[27].m_PersistentCalls.m_Calls.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[45].m_ActionId
-      value: 1adf136c-4b4a-4528-981e-ae2a2886385c
+      propertyPath: m_ActionEvents.Array.data[43].m_PersistentCalls.m_Calls.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[46].m_ActionId
-      value: 3b7c6bd0-e2bf-4021-b694-19075839718a
+      propertyPath: m_ActionEvents.Array.data[27].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[47].m_ActionId
-      value: 37733399-93da-44a7-839f-6c8d02a6acb2
+      propertyPath: m_ActionEvents.Array.data[43].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[48].m_ActionId
-      value: 832443a4-660f-48f6-bef2-3e3b9d9cd23f
+      propertyPath: m_ActionEvents.Array.data[43].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4757233264109423665}
+    - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: m_ActionEvents.Array.data[27].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[49].m_ActionId
-      value: ae807423-6597-4ecd-90b3-dfc2fb960650
+      propertyPath: m_ActionEvents.Array.data[43].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[50].m_ActionId
-      value: 6fd8ac2b-7b99-47ac-bbac-eeb7c7633295
+      propertyPath: m_ActionEvents.Array.data[43].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnJoin
       objectReference: {fileID: 0}
     - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[51].m_ActionId
-      value: 64abd04f-c22d-40a7-aaa4-ed2efd306744
+      propertyPath: m_ActionEvents.Array.data[43].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FishingGame.FishingRodController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[52].m_ActionId
-      value: f5284c38-a546-43e5-b966-4436bacd65e0
+      propertyPath: m_ActionEvents.Array.data[43].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[53].m_ActionId
-      value: da4cc858-f7c2-4834-b23a-83f1948a0d62
-      objectReference: {fileID: 0}
-    - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[44].m_ActionName
-      value: 'Player/Look[/Mouse/delta,/DualShock4GamepadHID/rightStick]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[45].m_ActionName
-      value: 'MinigolfMayhem/Move[/DualShock4GamepadHID/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[46].m_ActionName
-      value: 'MinigolfMayhem/Look[/Mouse/delta,/DualShock4GamepadHID/rightStick]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[47].m_ActionName
-      value: 'MinigolfMayhem/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[48].m_ActionName
-      value: 'MinigolfMayhem/Join[/Keyboard/space,/DualShock4GamepadHID/select]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[49].m_ActionName
-      value: 'MinigolfMayhem/Shoot[/Mouse/leftButton,/DualShock4GamepadHID/buttonEast]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[50].m_ActionName
-      value: 'MinigolfMayhem/Jump[/Keyboard/space,/DualShock4GamepadHID/buttonSouth]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[51].m_ActionName
-      value: 'JetskiGame/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[52].m_ActionName
-      value: 'HurdleGame/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6881326045208652, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_ActionEvents.Array.data[53].m_ActionName
-      value: 'HurdleGame/Join[/Keyboard/space,/DualShock4GamepadHID/select]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 2268045854385791384, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: m_Name
-      value: GameEventListener
-      objectReference: {fileID: 0}
+    - target: {fileID: 1741299663787530852, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: qteDisplayService
+      value: 
+      objectReference: {fileID: 1683085752960084095}
     - target: {fileID: 4456720291376179614, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
       propertyPath: pointsText
       value: 
@@ -3165,70 +3135,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 380298981326713454}
-    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 4757233264109423665}
-    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 4757233264109423665}
-    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StopCurrentQTE
-      objectReference: {fileID: 0}
-    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SwitchToUIInputMap
-      objectReference: {fileID: 0}
-    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: SwitchToUIInputMap
-      objectReference: {fileID: 0}
-    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FishingGame.QuickTimeEvents.QTEController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: FishingGame.FishingRodController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: FishingGame.FishingRodController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6032739385620744360, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 6483802780915312964, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
       propertyPath: movingRing
       value: 
@@ -3262,14 +3168,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2978198915648699706}
     - target: {fileID: 7082973270299323437, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: failDecrement
-      value: 22
-      objectReference: {fileID: 0}
-    - target: {fileID: 7082973270299323437, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: qteController
-      value: 
-      objectReference: {fileID: 380298981326713454}
-    - target: {fileID: 7082973270299323437, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
       propertyPath: successSlider
       value: 
       objectReference: {fileID: 6125168425352121898}
@@ -3277,10 +3175,6 @@ PrefabInstance:
       propertyPath: sliderFillImage
       value: 
       objectReference: {fileID: 5114257673340405221}
-    - target: {fileID: 7082973270299323437, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-      propertyPath: successIncrement
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 8840589035386952617, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
       propertyPath: mashButtonText
       value: 
@@ -3302,17 +3196,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
---- !u!114 &380298981326713454 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6874840815061034043, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
-  m_PrefabInstance: {fileID: 6498483857878816341}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37294612b1aa22c489876f4e54347ac4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1513869182094466247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5705243393259260562, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}

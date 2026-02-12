@@ -1,6 +1,10 @@
+using enums;
+using FishingGame.QuickTimeEvents;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.DualShock;
+using UnityEngine.InputSystem.XInput;
 
 namespace FishingGame
 {
@@ -8,6 +12,8 @@ namespace FishingGame
     [RequireComponent(typeof(PlayerInput))]
     public class FishingRodController : MonoBehaviour
     {
+        [SerializeField] private QTEDisplayService qteDisplayService;
+
         private static readonly int cast = Animator.StringToHash("IsCast");
         private static readonly int fishBiting = Animator.StringToHash("FishBiting");
 
@@ -15,13 +21,14 @@ namespace FishingGame
         private LineRenderer lineRenderer;
         private PlayerInput playerInput;
         private FishingSystemManager fishingSystemManager;
-        
+
         [SerializeField] private Transform[] rodLineRendererPositions;
 
         private bool isCast = false;
 
         [Header("Pausing: ")]
         [SerializeField] private UnityEvent OnPauseGame;
+
         [SerializeField] private UnityEvent OnUnpauseGame;
         private bool isPaused;
 
@@ -61,6 +68,32 @@ namespace FishingGame
                     isPaused = false;
                     OnUnpauseGame.Invoke();
                 }
+            }
+        }
+
+        public void OnJoin(InputAction.CallbackContext _context)
+        {
+            Debug.Log("Join");
+            
+            var device = _context.control.device;
+
+            if (device is Gamepad gamepad)
+            {
+                if (gamepad is DualShockGamepad dualShockGamepad)
+                {
+                    Debug.Log("PlayStation controller");
+                    qteDisplayService.controlScheme = EControlScheme.PlayStation;
+                }
+                else if (gamepad is XInputController xInputController)
+                {
+                    Debug.Log("Xbox controller");
+                    qteDisplayService.controlScheme = EControlScheme.Xbox;
+                }
+            }
+            else if (device is Keyboard keyboard)
+            {
+                Debug.Log("Keyboard controller");
+                qteDisplayService.controlScheme = EControlScheme.Keyboard;
             }
         }
 

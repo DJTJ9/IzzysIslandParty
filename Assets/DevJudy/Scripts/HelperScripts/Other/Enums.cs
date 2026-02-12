@@ -1,5 +1,13 @@
 namespace enums
 {
+
+    public enum EControlScheme
+    {
+        Keyboard,
+        PlayStation,
+        Xbox,
+    }
+    
     public enum EButton
     {
         NorthButton,

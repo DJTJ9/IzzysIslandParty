@@ -1134,8 +1134,9 @@ GameObject:
   - component: {fileID: 3187307299277298084}
   - component: {fileID: 3902794038952810678}
   - component: {fileID: 6032739385620744360}
+  - component: {fileID: 8846829930964700095}
   m_Layer: 8
-  m_Name: GameEventListerner
+  m_Name: GameEventListener
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1228,9 +1229,49 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 6874840815061034043}
+        m_TargetAssemblyTypeName: FishingGame.QuickTimeEvents.QTEController, Assembly-CSharp
+        m_MethodName: StopCurrentQTE
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1741299663787530852}
         m_TargetAssemblyTypeName: FishingGame.FishingRodController, Assembly-CSharp
         m_MethodName: SwitchToUIInputMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8846829930964700095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2268045854385791384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1741299663787530852}
+        m_TargetAssemblyTypeName: FishingGame.FishingRodController, Assembly-CSharp
+        m_MethodName: SwitchToPlayerInputMap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3415,46 +3456,46 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 68276f0f-d2f1-4528-874c-c770db9628e8
-    m_ActionName: 'Player/Look[/Mouse/delta]'
+    m_ActionName: 'Player/Look[/Mouse/delta,/DualShock4GamepadHID/rightStick]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 1adf136c-4b4a-4528-981e-ae2a2886385c
-    m_ActionName: 'MinigolfMayhem/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+    m_ActionName: 'MinigolfMayhem/Move[/DualShock4GamepadHID/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 3b7c6bd0-e2bf-4021-b694-19075839718a
-    m_ActionName: 'MinigolfMayhem/Look[/Mouse/delta]'
+    m_ActionName: 'MinigolfMayhem/Look[/Mouse/delta,/DualShock4GamepadHID/rightStick]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 37733399-93da-44a7-839f-6c8d02a6acb2
-    m_ActionName: 'MinigolfMayhem/Pause[/Keyboard/escape]'
+    m_ActionName: 'MinigolfMayhem/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 832443a4-660f-48f6-bef2-3e3b9d9cd23f
-    m_ActionName: 'MinigolfMayhem/Join[/Keyboard/space]'
+    m_ActionName: 'MinigolfMayhem/Join[/Keyboard/space,/DualShock4GamepadHID/select]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: ae807423-6597-4ecd-90b3-dfc2fb960650
-    m_ActionName: 'MinigolfMayhem/Shoot[/Mouse/leftButton]'
+    m_ActionName: 'MinigolfMayhem/Shoot[/Mouse/leftButton,/DualShock4GamepadHID/buttonEast]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 6fd8ac2b-7b99-47ac-bbac-eeb7c7633295
-    m_ActionName: 'MinigolfMayhem/Jump[/Keyboard/space]'
+    m_ActionName: 'MinigolfMayhem/Jump[/Keyboard/space,/DualShock4GamepadHID/buttonSouth]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 64abd04f-c22d-40a7-aaa4-ed2efd306744
-    m_ActionName: 'JetskiGame/Pause[/Keyboard/escape]'
+    m_ActionName: 'JetskiGame/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: f5284c38-a546-43e5-b966-4436bacd65e0
-    m_ActionName: 'HurdleGame/Pause[/Keyboard/escape]'
+    m_ActionName: 'HurdleGame/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: da4cc858-f7c2-4834-b23a-83f1948a0d62
-    m_ActionName: 'HurdleGame/Join[/Keyboard/space]'
+    m_ActionName: 'HurdleGame/Join[/Keyboard/space,/DualShock4GamepadHID/select]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: FishingGame
+  m_DefaultActionMap: 2515a67c-dbb9-4625-afc0-6efe561e5ced
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &1741299663787530852
@@ -5203,6 +5244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea12edb74d807604f8af878e3146dc9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  qteController: {fileID: 6874840815061034043}
   barQTEHolder: {fileID: 0}
   target: {fileID: 0}
   catcher: {fileID: 0}
@@ -5218,8 +5260,8 @@ MonoBehaviour:
   catcherMaxMovementLeft: -350
   catcherMaxMovementRight: 350
   catcherMoveSpeed: 250
-  successIncrement: 15
-  failDecrement: 12
+  successIncrement: 25
+  failDecrement: 22
   successThreshold: 100
   failThreshold: -100
 --- !u!114 &8910978767518238133
