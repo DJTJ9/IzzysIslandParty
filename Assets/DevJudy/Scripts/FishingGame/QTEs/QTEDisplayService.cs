@@ -13,10 +13,10 @@ namespace FishingGame.QuickTimeEvents
         private const string southButtonKB = "S";
         private const string westButtonKB = "A";
 
-        private const string northButtonCTRL = "Δ";
-        private const string eastButtonCTRL = "O";
-        private const string southButtonCTRL = "X";
-        private const string westButtonCTRL = "☐";
+        private const string northButtonPS = "Δ";
+        private const string eastButtonPS = "O";
+        private const string southButtonPS = "X";
+        private const string westButtonPS = "☐";
 
         private const string northButtonXbox = "Y";
         private const string eastButtonXbox = "B";
@@ -35,6 +35,11 @@ namespace FishingGame.QuickTimeEvents
             {
                 case EControlScheme.Keyboard:
                     return GetKeyboardButton(_buttonToPress);
+                case EControlScheme.PlayStation:
+                    return GetPlayStationButton(_buttonToPress);
+                case EControlScheme.Xbox:
+                default:
+                    return GetXboxButton(_buttonToPress);
             }
 
             // This should never return anything but a valid button
@@ -58,18 +63,38 @@ namespace FishingGame.QuickTimeEvents
             return "?";
         }
         
-        // // !! Beim joinen holen
-       // var device = _context.control.device;
+        private string GetPlayStationButton(EButton _buttonToPress)
+        {
+            switch (_buttonToPress)
+            {
+                case EButton.NorthButton:
+                    return northButtonPS;
+                case EButton.EastButton:
+                    return eastButtonPS;
+                case EButton.SouthButton:
+                    return southButtonPS;
+                case EButton.WestButton:
+                    return westButtonPS;
+            }
 
-       //     if (device is Gamepad gamepad)
-       // {
-       //     if (gamepad is DualShockGamepad dualShockGamepad)
-       //         Debug.Log("PlayStation controller");
-       //     else if (gamepad is XInputController xInputController)
-       //         Debug.Log("Xbox controller");
-       //         
-       // }
-       // else if (device is Keyboard keyboard)
-       // Debug.Log("Keyboard controller");
+            return "?";
+        }
+        
+        private string GetXboxButton(EButton _buttonToPress)
+        {
+            switch (_buttonToPress)
+            {
+                case EButton.NorthButton:
+                    return northButtonXbox;
+                case EButton.EastButton:
+                    return eastButtonXbox;
+                case EButton.SouthButton:
+                    return southButtonXbox;
+                case EButton.WestButton:
+                    return westButtonXbox;
+            }
+
+            return "?";
+        }
     }
 }

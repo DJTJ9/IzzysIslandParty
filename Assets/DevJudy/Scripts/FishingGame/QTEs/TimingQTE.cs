@@ -19,7 +19,7 @@ namespace FishingGame.QuickTimeEvents
         [SerializeField] private GameObject timingEventHolder;
 
         [Header("TimingEvent variables: ")]
-        [SerializeField] private float allowedTimingOffset = 0.04f;
+        [SerializeField] private float allowedTimingOffset = 0.00007f;
         [SerializeField] private float shrinkSpeed = 0.5f;
         private float ringTargetScale;
         private Vector3 ringStartScale;
@@ -27,11 +27,16 @@ namespace FishingGame.QuickTimeEvents
         [SerializeField] private Color ringSuccessColor;
         [SerializeField] private Color ringFailureColor;
         [SerializeField] private Color ringNormalColor;
-
+        
         private EButton currentButtonToPress;
 
+        private bool qteFailed;
+        
+        [Header("Test: ")]
+        [SerializeField] private GameObject testObject;
+
         private void Start()
-        {
+        {  
             TimingEventSetup();
         }
 
@@ -49,13 +54,16 @@ namespace FishingGame.QuickTimeEvents
             if (QTERunning)
                 ShrinkRing();
 
-            if (movingRing.transform.localScale.x <= 0.03)
+            if (movingRing.transform.localScale.x <= 0.03 || qteFailed)
                 StopShrinkingRing();
         }
 
         [ContextMenu("ShrinkRing")]
         public override void StartQTE()
         {
+            testObject.transform.localScale = Vector3.zero;
+            
+            qteFailed = false;
             QTEFinishedSuccessfully = false;
 
             targetRing.color = ringNormalColor;
@@ -86,6 +94,8 @@ namespace FishingGame.QuickTimeEvents
         public void CheckTimingSuccess(EButton _buttonPressed)
         {
             float ringScale = movingRing.transform.lossyScale.x;
+            
+            testObject.transform.localScale = new Vector3(ringTargetScale + allowedTimingOffset, ringTargetScale + allowedTimingOffset, 1);
 
             if (ringTargetScale + allowedTimingOffset >= ringScale && _buttonPressed == currentButtonToPress)
             {
@@ -95,6 +105,7 @@ namespace FishingGame.QuickTimeEvents
             else
             {
                 targetRing.color = ringFailureColor;
+                qteFailed = true;
             }
         }
 

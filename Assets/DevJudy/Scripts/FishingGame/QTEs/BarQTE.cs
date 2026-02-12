@@ -88,6 +88,8 @@ namespace FishingGame.QuickTimeEvents
 
         public override void StartQTE()
         {
+            moveInput = 0f;
+            
             QTERunning = true;
             QTEFinishedSuccessfully = false;
 

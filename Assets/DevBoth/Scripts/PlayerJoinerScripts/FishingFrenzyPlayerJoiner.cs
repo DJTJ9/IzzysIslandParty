@@ -20,6 +20,12 @@ namespace FishingGame.Player.Multiplayer
 
         public void PlayerJoined(PlayerInput _playerInput)
         {
+            if (playerCollectionFF == null || playerCollectionFF.Players.Count < 1)
+            {
+                Debug.Log("No players could join");
+                return;
+            }
+            
             playerCollectionFF.Players[playerIndex].PlayerReference = _playerInput.gameObject;
             
             currentPlayers.Players.Add(playerCollectionFF.Players[playerIndex]);

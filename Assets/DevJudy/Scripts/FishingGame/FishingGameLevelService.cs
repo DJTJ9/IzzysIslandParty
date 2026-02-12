@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Audio;
 using MultiuseScripts;
 using Player.Collections;
@@ -11,10 +10,8 @@ namespace FishingGame
         [SerializeField] private SO_PlayerCollection currentPlayers;
         [SerializeField] private GameAudioManager gameAudioManager;
         [SerializeField] private LevelTimer levelTimer;
-        [SerializeField] private SO_PlayerCollectionFishingGame playerCollection; // !! Do I need both??
         
         [Header("Temp: ")]
-        [SerializeField] private List<string> playerNames;
         [SerializeField] private Vector2 npcPointRange;
         
         private void Start()
@@ -30,30 +27,23 @@ namespace FishingGame
             OnLevelStart.Invoke();
         }
         
-        //!! REWORK
+        //!! Put in NPC script
         public void GetNPCScores()
         {
-            playerCollection.Players[0] = currentPlayers.Players[0];
             
-            for (int i = 1; i < playerCollection.Players.Count; i++)
+            for (int i = 1; i < currentPlayers.Players.Count; i++)
             {
-                if (playerCollection.Players[i].PlayerScore.Value > 0)
+                if (currentPlayers.Players[i].PlayerScore.Value > 0)
                     continue;
                 
                 float randomScore = Random.Range(npcPointRange.x, npcPointRange.y + 1);
                 
-                playerCollection.Players[i].PlayerScore.Value = (int)randomScore;
-
-                playerCollection.Players[i].Name = playerNames[i - 1];
+                currentPlayers.Players[i].PlayerScore.Value = (int)randomScore;
             }
-            
-            currentPlayers.Players.Clear();
-            currentPlayers.Players = playerCollection.Players;
         }
 
         public override void EndLevel()
         {
-            Debug.Log("Ending level");
             OnLevelEnd.Invoke();
         }
     }

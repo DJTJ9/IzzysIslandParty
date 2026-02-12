@@ -531,21 +531,9 @@ MonoBehaviour:
   onLevelLoaded:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 130711ff1a6413a4a9f360a3cd13980d, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 317348923}
         m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
-        m_MethodName: Test
+        m_MethodName: ShowFishingFrenzyStartScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -776,7 +764,6 @@ GameObject:
   - component: {fileID: 1463357251}
   - component: {fileID: 1463357250}
   - component: {fileID: 1463357249}
-  - component: {fileID: 1463357252}
   - component: {fileID: 1463357253}
   m_Layer: 0
   m_Name: Game Event Listeners
@@ -875,46 +862,6 @@ MonoBehaviour:
       - m_Target: {fileID: 317348923}
         m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
         m_MethodName: ShowPauseMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1463357252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463357247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 130711ff1a6413a4a9f360a3cd13980d, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 317348923}
-        m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
-        m_MethodName: ShowFishingFrenzyStartScreen
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 317348923}
-        m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
-        m_MethodName: Test
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1062,8 +1009,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2234337075584315550, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
     - target: {fileID: 3799121933406901783, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: m_MaxPlayerCount
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799121933406901783, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: m_JoinAction.m_UseReference
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799121933406901783, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: m_PlayerLeftEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799121933406901783, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
       propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799121933406901783, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: m_PlayerLeftEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3799121933406901783, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
       propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
@@ -1078,6 +1041,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 317348923}
     - target: {fileID: 3799121933406901783, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: m_PlayerLeftEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 317348923}
+    - target: {fileID: 3799121933406901783, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
       propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 317348923}
@@ -1089,6 +1056,14 @@ PrefabInstance:
       propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 433884986}
+    - target: {fileID: 3799121933406901783, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: m_PlayerLeftEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799121933406901783, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: m_PlayerLeftEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnPlayerLeft
+      objectReference: {fileID: 0}
     - target: {fileID: 3799121933406901783, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
       propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
@@ -1106,6 +1081,10 @@ PrefabInstance:
       value: OnPlayerJoined
       objectReference: {fileID: 0}
     - target: {fileID: 3799121933406901783, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: m_PlayerLeftEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: GameMenuEvents, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799121933406901783, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
       propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: FishingGame.FishingSystem, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -1121,6 +1100,10 @@ PrefabInstance:
       propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 11400000, guid: 97ae6e8cdb921dd4d97057deb65c1858, type: 2}
+    - target: {fileID: 3799121933406901783, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: m_PlayerLeftEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.InputSystem.PlayerInput, Unity.InputSystem
+      objectReference: {fileID: 0}
     - target: {fileID: 3799121933406901783, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
       propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: SO_PlayerCollection, Assembly-CSharp
@@ -1420,6 +1403,14 @@ PrefabInstance:
     - target: {fileID: 8522278277453344538, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: catchEventHandler
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522278277453344538, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
+      propertyPath: buttonPressTimerRange.y
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522278277453344538, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
+      propertyPath: secondsUntilFishBiteRange.y
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8587489525363768519, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: timerManager

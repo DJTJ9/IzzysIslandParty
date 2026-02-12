@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c5dc845ff9c42648bde53b06322345f, type: 3}
-  m_Name: SO_PlayerCollectionFishingGame
+  m_Script: {fileID: 11500000, guid: 70e4752b76d91124db5259300668995b, type: 3}
+  m_Name: SO_NPCFishingFrenzy 2
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,8 +21,8 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  Players:
-  - {fileID: 11400000, guid: 0f1c7de181b57ca46939899a0f48780d, type: 2}
-  - {fileID: 11400000, guid: 5ab8331a4c1f50f46b20cb519f44a9b0, type: 2}
-  - {fileID: 11400000, guid: 4350e09065a4e3a4290c256cb8a06cd8, type: 2}
-  - {fileID: 11400000, guid: 26013e9dab7275d4da50cbe748bf4ae6, type: 2}
+  Name: NPC 2
+  PlayerReference: {fileID: 0}
+  PlayerScore: {fileID: 11400000, guid: 60785a2475b08ce4fa0ad03e1607a3b1, type: 2}
+  SpawnPoint: {x: -0.25, y: 7.1, z: 10.4}
+  IsNPC: 1
