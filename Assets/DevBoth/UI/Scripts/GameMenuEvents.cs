@@ -27,7 +27,6 @@ public class GameMenuEvents : MonoBehaviour
     [SerializeField] private UnityEvent onGameStart;
     [SerializeField] private UnityEvent onUnpause;
     [SerializeField] private UnityEvent onRestart;
-    [SerializeField] private UnityEvent onLevelLoaded;
 
     private UIDocument document;
 
@@ -65,8 +64,9 @@ public class GameMenuEvents : MonoBehaviour
     private Button endScreenQuitButton;
 
     [Header("Controller Selection")]
+    [SerializeField] private float animDuration = 0.3f;
+    [SerializeField] private float holdDuration = 2f;
     private Button controllerSelectionReadyButton;
-
     private Button controllerSelectionBackButton;
     private VisualElement bowlingBattleHeader;
     private VisualElement fishingFrenzyHeader;
@@ -81,8 +81,10 @@ public class GameMenuEvents : MonoBehaviour
     private VisualElement swaggySnapshotsInstructions;
     private VisualElement hastyHurdlesInstructions;
     private VisualElement[] m_slots;
+    private VisualElement joinInstruction;
+    private VisualElement startGameInstruction;
+    
     private int m_joinedPlayers = 0;
-
     private bool m_playerJoined = false;
 
     private void Awake()
@@ -92,10 +94,10 @@ public class GameMenuEvents : MonoBehaviour
         BindVisualElements();
         BindButtons();
         InitializeSlotElements();
-        onLevelLoaded.Invoke();
         FocusButton(controllerSelectionReadyButton);
     }
 
+    
     public void Test()
     {
         Debug.Log("Test");
@@ -103,9 +105,9 @@ public class GameMenuEvents : MonoBehaviour
 
     private void OnEnable()
     {
-        onLevelLoaded.Invoke();
         RegisterButtonCallbacks();
         m_playerJoined = false;
+        StartCoroutine(ShowOnlyJoinInstruction());
     }
 
     private void OnDisable()
@@ -161,6 +163,8 @@ public class GameMenuEvents : MonoBehaviour
         minigolfMayhemInstructions = document.rootVisualElement.Q("mm-instructions__container");
         swaggySnapshotsInstructions = document.rootVisualElement.Q("ss-instructions__container");
         hastyHurdlesInstructions = document.rootVisualElement.Q("hh-instructions__container");
+        joinInstruction = document.rootVisualElement.Q("join-instruction");
+        startGameInstruction = document.rootVisualElement.Q("start-game-instruction");
     }
 
     private void RegisterButtonCallbacks()
@@ -356,6 +360,8 @@ public class GameMenuEvents : MonoBehaviour
     {
         if (!m_playerJoined) return;
 
+        StopCoroutine(ShowStartAndJoinInstruction());
+        StopCoroutine(ShowJoinAndStartInstruction());
         UnfreezeTimeScale();
         HideControllerSelectionScreen();
         onGameStart.Invoke();
@@ -558,6 +564,86 @@ public class GameMenuEvents : MonoBehaviour
         minigolfMayhemInstructions.style.display = DisplayStyle.None;
         swaggySnapshotsInstructions.style.display = DisplayStyle.None;
         hastyHurdlesInstructions.style.display = DisplayStyle.None;
+    }
+    
+    private IEnumerator ShowOnlyJoinInstruction()
+    {
+        joinInstruction.style.display = DisplayStyle.Flex;
+
+        if (joinInstruction.style.scale.value.value.y <= 1f)
+        {
+            yield return AnimateScaleCoroutine(joinInstruction, new Vector3(1,0,1), new Vector3(1,1,1), animDuration);
+        }
+
+        yield return new WaitForSecondsRealtime(holdDuration);
+
+        yield return AnimateScaleCoroutine(joinInstruction, new Vector3(1,1,1), new Vector3(1,0,1), animDuration);
+
+        joinInstruction.style.display = DisplayStyle.None;
+
+        if (m_playerJoined)
+        {
+            StopCoroutine(ShowOnlyJoinInstruction());
+            StartCoroutine(ShowStartAndJoinInstruction());
+            yield break;
+        }
+        
+        StartCoroutine(ShowOnlyJoinInstruction());
+    }
+    
+    private IEnumerator ShowJoinAndStartInstruction()
+    {
+        joinInstruction.style.display = DisplayStyle.Flex;
+
+        if (joinInstruction.style.scale.value.value.y <= 1f)
+        {
+            yield return AnimateScaleCoroutine(joinInstruction, new Vector3(1,0,1), new Vector3(1,1,1), animDuration);
+        }
+
+        yield return new WaitForSecondsRealtime(holdDuration);
+
+        yield return AnimateScaleCoroutine(joinInstruction, new Vector3(1,1,1), new Vector3(1,0,1), animDuration);
+
+        joinInstruction.style.display = DisplayStyle.None;
+
+        StartCoroutine(ShowStartAndJoinInstruction());
+    }
+
+    private IEnumerator ShowStartAndJoinInstruction()
+    {
+        startGameInstruction.style.display = DisplayStyle.Flex;
+
+        yield return AnimateScaleCoroutine(startGameInstruction, new Vector3(1,0,1), new Vector3(1,1,1), animDuration);
+
+        yield return new WaitForSecondsRealtime(holdDuration);
+
+        yield return AnimateScaleCoroutine(startGameInstruction, new Vector3(1,1,1), new Vector3(1,0,1), animDuration);
+
+        startGameInstruction.style.display = DisplayStyle.None;
+
+        StartCoroutine(ShowJoinAndStartInstruction());
+    }
+
+    private IEnumerator AnimateScaleCoroutine(VisualElement element, Vector3 from, Vector3 to, float duration)
+    {
+        var elapsed = 0f;
+
+        element.style.scale = new Scale(from);
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            var t = Mathf.Clamp01(elapsed / duration);
+
+            t = Mathf.SmoothStep(0f, 1f, t);
+
+            Vector3 current = Vector3.Lerp(from, to, t);
+            element.style.scale = new Scale(current);
+
+            yield return null;
+        }
+
+        element.style.scale = new Scale(to);
     }
 
     private void FreezeTimeScale() => Time.timeScale = 0;
