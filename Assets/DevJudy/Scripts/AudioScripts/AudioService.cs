@@ -3,6 +3,7 @@ using System.Collections;
 using enums;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 namespace Audio
@@ -241,6 +242,64 @@ namespace Audio
             yield return new WaitUntil(() => audioSource == null);
         }
 
+        /// <summary>
+        /// Play a sound while the given condition is met, then fade it out or delete it immediately
+        /// Use for audios like background music
+        /// </summary>
+        /// <param name="_condition"></param>
+        /// <param name="_clip"></param>
+        /// <param name="_audioType"></param>
+        /// <param name="_goalVolume"></param>
+        /// <param name="_onMusicEnd"></param>
+        /// <param name="_fadeOut"></param>
+        /// <param name="_fadeIn"></param>
+        /// <param name="_fadeSpeed"></param>
+        public void PlaySoundWhile(Func<bool> _condition, AudioClip _clip, EAudioType _audioType, UnityEvent _onMusicEnd,
+            bool _fadeOut, bool _fadeIn, float _fadeSpeed = 0.5f, float _goalVolume = 1f)
+        {
+            StartCoroutine(PlaySoundContinuously(_condition, _clip, _audioType, _goalVolume, _fadeOut, _fadeIn, _fadeSpeed));
+        }
+
+
+        /// <summary>
+        /// Play a sound until the given condition is met, then fade it out or delete it immediately.
+        /// Use for audios like background music
+        /// </summary>
+        /// <param name="_condition"></param>
+        /// <param name="_audioClip"></param>
+        /// <param name="_audioType"></param>
+        /// <param name="_onMusicEnd"></param>
+        /// <param name="_goalVolume"></param>
+        /// <param name="_fadeOut"></param>
+        /// <param name="_fadeIn"></param>
+        /// <param name="_fadeSpeed"></param>
+        /// <returns></returns>
+        private IEnumerator PlaySoundContinuously(Func<bool> _condition, AudioClip _audioClip, EAudioType _audioType, UnityEvent _onMusicEnd,float _goalVolume,
+            bool _fadeOut, bool _fadeIn, float _fadeSpeed = 0.2f)
+        {
+            AudioSource audioSource = CreateSound(_audioClip, _audioType, _goalVolume);
+
+            if (_fadeIn)
+                StartCoroutine(FadeInSound(audioSource, _fadeSpeed, _goalVolume));
+
+            while (_condition())
+            {
+                if (!audioSource.isPlaying)
+                    PlaySound(audioSource, false);
+
+                yield return new WaitForFixedUpdate();
+            }
+
+            if (_fadeOut)
+                StartCoroutine(FadeOutSound(audioSource, _fadeSpeed));
+            else
+                StopSoundImmediately(audioSource);
+
+            yield return new WaitUntil(() => audioSource == null);
+            
+            _onMusicEnd?.Invoke();
+        }
+        
         /// <summary>
         /// Play a random sound with a random volume and pitch while the given condition is met, then delete it immediately.
         /// Use for audios like footsteps while walking

@@ -31,9 +31,6 @@ namespace FishingGame.QuickTimeEvents
         private EButton currentButtonToPress;
 
         private bool qteFailed;
-        
-        [Header("Test: ")]
-        [SerializeField] private GameObject testObject;
 
         private void Start()
         {  
@@ -61,8 +58,6 @@ namespace FishingGame.QuickTimeEvents
         [ContextMenu("ShrinkRing")]
         public override void StartQTE()
         {
-            testObject.transform.localScale = Vector3.zero;
-            
             qteFailed = false;
             QTEFinishedSuccessfully = false;
 
@@ -95,8 +90,6 @@ namespace FishingGame.QuickTimeEvents
         {
             float ringScale = movingRing.transform.lossyScale.x;
             
-            testObject.transform.localScale = new Vector3(ringTargetScale + allowedTimingOffset, ringTargetScale + allowedTimingOffset, 1);
-
             if (ringTargetScale + allowedTimingOffset >= ringScale && _buttonPressed == currentButtonToPress)
             {
                 targetRing.color = ringSuccessColor;

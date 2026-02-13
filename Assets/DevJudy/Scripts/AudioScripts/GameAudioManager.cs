@@ -2,6 +2,7 @@ using System;
 using enums;
 using Helper;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Audio
 {
@@ -16,64 +17,60 @@ namespace Audio
         // !! TEMP, to be changed to an enum/SO
         [Header("TEMP: ")]
         [SerializeField] private string levelBackgroundMusic;
+        private UnityEvent onMusicEnd;
 
+        private bool isRunning;
         private bool isFinished;
 
         private void Awake()
         {
             levelAudioCollection = GetComponentInChildren<AudioCollection>();
+            
             if (levelAudioCollection == null)
                 Debug.LogError("AudioCollection is null");
+        }
 
-           // AudioService.Instance.gameObject.SetActive(true);
-           // AudioService.Instance.enabled = true;
+        private void Start()
+        {
+            onMusicEnd.AddListener(SetIsRunningFalse);
         }
 
         public void StartMusic()
         {
+            if (isRunning)
+                return;
+            
             if (audioService == null)
                 Debug.LogError("AudioService is null");
             else
+            {
                 audioService.PlaySoundWhile(() => !isFinished, levelAudioCollection.levelSoundsDictionary.LevelAudios[levelBackgroundMusic],
-                    EAudioType.Music, true, true, bgmFadeInSpeed.Value, bgmVolume.Value);
-
-            //StartCoroutine(WaitForLoading(() => !isFinished));
+                    EAudioType.Music, onMusicEnd, true, true, bgmFadeInSpeed.Value, bgmVolume.Value);
+                
+                isRunning = true;
+            }
         }
 
         public void StartBackgroundMusic(Func<bool> _condition)
         {
+            if (isRunning)
+                return;
+            
             if (audioService == null)
                 Debug.LogError("AudioService is null");
             else
+            {
                 audioService.PlaySoundWhile(_condition, levelAudioCollection.levelSoundsDictionary.LevelAudios[levelBackgroundMusic],
                     EAudioType.Music, true, true, bgmFadeInSpeed.Value, bgmVolume.Value);
-
-            //StartCoroutine(WaitForLoading(_condition));
+                
+                isRunning = true;
+            }
+            
         }
 
-       // private IEnumerator WaitForLoading(Func<bool> _condition)
-       // {
-       //     yield return new WaitForEndOfFrame();
-//
-       //     //gameObject.SetActive(true);
-       //     AudioService.Instance.gameObject.SetActive(true);
-       //     AudioService.Instance.enabled = true;
-//
-       //     while (!AudioService.Instance.enabled || !AudioService.Instance.gameObject.activeInHierarchy)
-       //     {
-       //         Debug.Log("AudioService.Instance.go is active: " + AudioService.Instance.gameObject.activeSelf);
-       //         Debug.Log("AudioService.Instance.go is activeInHi: " + AudioService.Instance.gameObject.activeInHierarchy);
-       //         Debug.Log("AudioService.Instance.enabled is active: " + AudioService.Instance.enabled);
-//
-       //         gameObject.SetActive(true);
-       //         AudioService.Instance.gameObject.SetActive(true);
-       //         AudioService.Instance.enabled = true;
-//
-       //         yield return new WaitForEndOfFrame();
-       //     }
-//
-       //     AudioService.Instance.PlaySoundWhile(_condition, levelAudioCollection.levelSoundsDictionary.LevelAudios[levelBackgroundMusic],
-       //         EAudioType.Music, true, true, bgmFadeInSpeed.Value, bgmVolume.Value);
-       // }
+        private void SetIsRunningFalse()
+        {
+            isRunning = false;
+        }
     }
 }
