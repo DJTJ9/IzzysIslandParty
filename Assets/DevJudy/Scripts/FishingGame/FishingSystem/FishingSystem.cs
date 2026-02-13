@@ -50,10 +50,6 @@ namespace FishingGame
                 fishingSystemManager.OnPlayerJoined(_currentPlayers.Players[^1].PlayerScore, _currentPlayers.Players.Count - 1);
                 fishingSystemManager.SetUpFishDisplay(fishList);
             }
-            else
-            {
-                Debug.LogError("FishingSystemManager not found");
-            }
         }
 
         public void StartFishing(FishingSystemManager _fishingSystemManager)

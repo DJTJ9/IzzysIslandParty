@@ -17,7 +17,7 @@ namespace Audio
         // !! TEMP, to be changed to an enum/SO
         [Header("TEMP: ")]
         [SerializeField] private string levelBackgroundMusic;
-        private UnityEvent onMusicEnd;
+        [SerializeField] private UnityEvent onMusicEnd;
 
         private bool isRunning;
         private bool isFinished;
@@ -28,11 +28,6 @@ namespace Audio
             
             if (levelAudioCollection == null)
                 Debug.LogError("AudioCollection is null");
-        }
-
-        private void Start()
-        {
-            onMusicEnd.AddListener(SetIsRunningFalse);
         }
 
         public void StartMusic()
@@ -68,7 +63,7 @@ namespace Audio
             
         }
 
-        private void SetIsRunningFalse()
+        public void SetIsRunningFalse()
         {
             isRunning = false;
         }

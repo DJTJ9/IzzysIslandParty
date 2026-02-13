@@ -41,9 +41,6 @@ namespace FishingGame.QuickTimeEvents
                 default:
                     return GetXboxButton(_buttonToPress);
             }
-
-            // This should never return anything but a valid button
-            return "!";
         }
 
         private string GetKeyboardButton(EButton _buttonToPress)

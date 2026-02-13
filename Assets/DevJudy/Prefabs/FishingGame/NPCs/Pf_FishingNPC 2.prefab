@@ -736,6 +736,7 @@ GameObject:
   - component: {fileID: 6987719823818852491}
   - component: {fileID: 6500719721459496473}
   - component: {fileID: 7295863958124258767}
+  - component: {fileID: 376750917119569079}
   m_Layer: 8
   m_Name: FishingPlayer
   m_TagString: Untagged
@@ -1245,6 +1246,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerIndex: 0
+  fishingSystem: {fileID: 376750917119569079}
+  iconHandler: {fileID: 1630075566880033982}
+  animator: {fileID: 7954142965795783733}
+  timeBetweenCasting: {x: 0.8, y: 2.8}
+  timeUntilFishBites: {x: 3.5, y: 5.2}
+  waitTimeBetweenFishEvents: {x: 1.5, y: 2.8}
+  chanceToHookFish: 80
+  chanceToFinishQTESuccessfully: 80
+--- !u!114 &376750917119569079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666118760810556865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc5c15f0574464b4f955be4f9b606a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishList:
+  - {fileID: 11400000, guid: 2e9b8d7a63f78b74ba073a9578d1f423, type: 2}
+  - {fileID: 11400000, guid: cf07be7dd2fe3f54d902350f2bebcf4c, type: 2}
+  - {fileID: 11400000, guid: 04fb385bb7844184aa43422b4c367aac, type: 2}
+  - {fileID: 11400000, guid: ca8c70e46bff9284596cf3db7834ccf3, type: 2}
+  - {fileID: 11400000, guid: af94e1362517bfd4b8fdfb905d570f19, type: 2}
+  - {fileID: 11400000, guid: b7d56121bbfa99643b200ea5656fbbe0, type: 2}
 --- !u!1 &1710753673810769760
 GameObject:
   m_ObjectHideFlags: 0
@@ -5390,7 +5418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3603906875005821288
 Transform:
   m_ObjectHideFlags: 0
@@ -5570,6 +5598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9174448352233099098}
+  - component: {fileID: 5415787761913766384}
   m_Layer: 0
   m_Name: CameraHolder
   m_TagString: Untagged
@@ -5594,6 +5623,18 @@ Transform:
   - {fileID: 2891171709907646934}
   m_Father: {fileID: 5317911460612665810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5415787761913766384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9120685519160240929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd5b4ee8a6886f4cb006778bd3255c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9157306085028851279
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,5 @@
 using Audio;
 using MultiuseScripts;
-using Player.Collections;
 using UnityEngine;
 
 namespace FishingGame
@@ -27,21 +26,6 @@ namespace FishingGame
             OnLevelStart.Invoke();
         }
         
-        //!! Put in NPC script
-        public void GetNPCScores()
-        {
-            
-            for (int i = 1; i < currentPlayers.Players.Count; i++)
-            {
-                if (currentPlayers.Players[i].PlayerScore.Value > 0)
-                    continue;
-                
-                float randomScore = Random.Range(npcPointRange.x, npcPointRange.y + 1);
-                
-                currentPlayers.Players[i].PlayerScore.Value = (int)randomScore;
-            }
-        }
-
         public override void EndLevel()
         {
             OnLevelEnd.Invoke();

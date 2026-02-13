@@ -1,4 +1,5 @@
 ﻿using FishingGame.NPCs;
+using HelperScripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,7 @@ namespace FishingGame.Player.Multiplayer
         public SO_PlayerCollection playerCollectionFF;
 
         private int playerIndex;
+        private int humanPlayerIndex;
         private int npcIndex;
 
         [SerializeField] private PlayerInputManager playerInputManager;
@@ -39,13 +41,20 @@ namespace FishingGame.Player.Multiplayer
 
             if (_playerInput.gameObject.TryGetComponent(out FishingGameNPCBehaviour npc))
             {
+                if (humanPlayerIndex == 1)
+                {
+                    Identifier cameraHolder = _playerInput.transform.parent.gameObject.GetComponentInChildren<Identifier>();
+                    cameraHolder.gameObject.SetActive(false);
+                }
+
                 npc.SetPlayerIndex(playerIndex);
+                npc.OnNPCJoined(npcCollection.Players[playerIndex - 1].PlayerScore);
 
                 _playerInput.gameObject.name = npcCollection.Players[npc.GetPlayerIndex() - 1].Name;
 
                 currentPlayers.Players.Add(npcCollection.Players[npc.GetPlayerIndex() - 1]);
 
-                parent.transform.position = npcCollection.Players[playerIndex].SpawnPoint;
+                parent.transform.position = npcCollection.Players[playerIndex - 1].SpawnPoint;
 
                 ++npcIndex;
                 ++playerIndex;
@@ -60,6 +69,7 @@ namespace FishingGame.Player.Multiplayer
             parent.transform.position = playerCollectionFF.Players[playerIndex].SpawnPoint;
 
             ++playerIndex;
+            ++humanPlayerIndex;
         }
 
         public void JoinNPCs()

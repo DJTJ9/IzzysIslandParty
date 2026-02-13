@@ -721,6 +721,67 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1026612922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1026612923}
+  - component: {fileID: 1026612924}
+  m_Layer: 0
+  m_Name: GameEventListener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1026612923
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026612922}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1794008910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1026612924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026612922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1794008909}
+        m_TargetAssemblyTypeName: FishingGame.Player.Multiplayer.FishingFrenzyPlayerJoiner,
+          Assembly-CSharp
+        m_MethodName: JoinNPCs
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1434472933
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,11 +1213,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8378186178305893172, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: npcCollection
+      value: 
+      objectReference: {fileID: 11400000, guid: 258eba8b9347dc04ca87b8fc8bede2de, type: 2}
+    - target: {fileID: 8378186178305893172, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: playerInputManager
+      value: 
+      objectReference: {fileID: 1794008908}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7028254439613952691, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1026612923}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+--- !u!114 &1794008908 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3799121933406901783, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+  m_PrefabInstance: {fileID: 1794008907}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1794008909 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8378186178305893172, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+  m_PrefabInstance: {fileID: 1794008907}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bf75e1b3779443398afa934fd08f09f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1794008910 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7028254439613952691, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+  m_PrefabInstance: {fileID: 1794008907}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1820299507 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
@@ -1306,7 +1405,7 @@ PrefabInstance:
       objectReference: {fileID: 297471805}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
@@ -1315,11 +1414,11 @@ PrefabInstance:
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1820299507}
+      objectReference: {fileID: 1820299509}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1820299509}
+      objectReference: {fileID: 11400000, guid: d85f1a13d5f3749468676f87ec48c10f, type: 2}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -1330,11 +1429,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GetNPCScores
+      value: EndTimerAndDisplayFinishTime
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: EndTimerAndDisplayFinishTime
+      value: Raise
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -1342,11 +1441,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FishingGame.FishingGameLevelService, Assembly-CSharp
+      value: MultiuseScripts.LevelTimer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: MultiuseScripts.LevelTimer, Assembly-CSharp
+      value: GameEvent, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
@@ -1510,6 +1609,34 @@ PrefabInstance:
       propertyPath: audioService
       value: 
       objectReference: {fileID: 6692930093732020759}
+    - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
+      propertyPath: onMusicEnd.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
+      propertyPath: onMusicEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
+      propertyPath: onMusicEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 297471805}
+    - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
+      propertyPath: onMusicEnd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
+      propertyPath: onMusicEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetIsRunningFalse
+      objectReference: {fileID: 0}
+    - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
+      propertyPath: onMusicEnd.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Audio.GameAudioManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
+      propertyPath: onMusicEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4207834752011282111, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
       propertyPath: m_Name
       value: AudioManager
