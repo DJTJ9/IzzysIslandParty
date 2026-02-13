@@ -12,6 +12,7 @@ public class BowlingBattleGameManager : MonoBehaviour
     [SerializeField] private UnityEvent onReleaseBall;
     [SerializeField] private UnityEvent onRoundEnd;
     [SerializeField] private UnityEvent onGameEnd;
+    [SerializeField] private UnityEvent onLevelLoaded;
 
     [FoldoutGroup("Round Settings", expanded: true)] 
     [SerializeField] private float preparationPhaseDuration = 10f;
@@ -39,6 +40,7 @@ public class BowlingBattleGameManager : MonoBehaviour
     private void OnEnable()
     {
         FreezeTimeScale();
+        onLevelLoaded.Invoke();
     }
 
     private void OnDisable()
