@@ -137,7 +137,8 @@ public class PlayerControllerMinigolfMayhem : Controller
 
     public void OnShootInput(InputAction.CallbackContext _context)
     {
-        rigidbodyMovement.Shoot();
+        rigidbodyMovement.StartCharging(_context);
+        // rigidbodyMovement.Shoot();
     }
 
     public void OnJumpInput(InputAction.CallbackContext _context)
