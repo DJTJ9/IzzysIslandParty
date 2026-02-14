@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace FishingGame.Player.Multiplayer
@@ -7,15 +9,20 @@ namespace FishingGame.Player.Multiplayer
     {
         [SerializeField] private SO_PlayerCollection currentPlayers;
         public SO_PlayerCollection playerCollectionFF;
+        [SerializeField] private UnityEvent onLevelLoaded;
 
         private int playerIndex;
-        //private int npcIndex;
 
         private void Start()
         {
+            onLevelLoaded.Invoke();
             playerIndex = 0;
-            //npcIndex = 0;
             currentPlayers.Players.Clear();
+        }
+
+        private void OnEnable()
+        {
+            onLevelLoaded.Invoke();
         }
 
         public void PlayerJoined(PlayerInput _playerInput)

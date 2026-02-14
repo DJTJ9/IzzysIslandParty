@@ -528,33 +528,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onLevelLoaded:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 130711ff1a6413a4a9f360a3cd13980d, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 317348923}
-        m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
-        m_MethodName: Test
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  animDuration: 0.3
+  holdDuration: 2
 --- !u!114 &317348924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1062,6 +1037,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2234337075584315550, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
     - target: {fileID: 3799121933406901783, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: m_JoinAction.m_Reference
+      value: 
+      objectReference: {fileID: 3698153326005167589, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+    - target: {fileID: 3799121933406901783, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
       propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -1168,6 +1147,34 @@ PrefabInstance:
     - target: {fileID: 7028254439613952691, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8378186178305893172, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: onLevelLoaded.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8378186178305893172, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: onLevelLoaded.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8378186178305893172, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: onLevelLoaded.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 130711ff1a6413a4a9f360a3cd13980d, type: 2}
+    - target: {fileID: 8378186178305893172, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: onLevelLoaded.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8378186178305893172, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: onLevelLoaded.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Raise
+      objectReference: {fileID: 0}
+    - target: {fileID: 8378186178305893172, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: onLevelLoaded.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameEvent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8378186178305893172, guid: 902499a3e5a580a459531fea9c50a394, type: 3}
+      propertyPath: onLevelLoaded.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

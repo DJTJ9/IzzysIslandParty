@@ -3,6 +3,7 @@ using HurdleGame;
 using HurdleGame.LevelService;
 using Player.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace JetskiGame.Player.Multiplayer
@@ -13,14 +14,19 @@ namespace JetskiGame.Player.Multiplayer
         [SerializeField] private SO_PlayerCollectionRacingGames currentPlayers;
         [SerializeField] private SO_PlayerCollectionRacingGames playerCollection;
         [SerializeField] private SO_PlayerCollectionRacingGames npcCollection;
+        [SerializeField] private UnityEvent onLevelLoaded;
         private int playerIndex;
-        private int npcIndex;
 
         private void Start()
         {
+            onLevelLoaded.Invoke();
             playerIndex = 0;
-            npcIndex = 0;
             currentPlayers.Players.Clear();
+        }
+        
+        private void OnEnable()
+        {
+            onLevelLoaded.Invoke();
         }
 
         private void OnDestroy()
@@ -42,7 +48,6 @@ namespace JetskiGame.Player.Multiplayer
                 levelService.OnNPCJoined(_playerInput.gameObject);
                 
                 ++playerIndex;
-                ++npcIndex;
 
                 return;
             }

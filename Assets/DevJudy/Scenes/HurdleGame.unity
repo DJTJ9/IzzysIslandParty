@@ -4558,21 +4558,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onLevelLoaded:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 130711ff1a6413a4a9f360a3cd13980d, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  animDuration: 0.3
+  holdDuration: 2
 --- !u!114 &1486659544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6946,6 +6933,34 @@ PrefabInstance:
       propertyPath: levelService
       value: 
       objectReference: {fileID: 1315196312}
+    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      propertyPath: onLevelLoaded.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      propertyPath: onLevelLoaded.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      propertyPath: onLevelLoaded.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 130711ff1a6413a4a9f360a3cd13980d, type: 2}
+    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      propertyPath: onLevelLoaded.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      propertyPath: onLevelLoaded.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Raise
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      propertyPath: onLevelLoaded.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameEvent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      propertyPath: onLevelLoaded.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5413502618019380367, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
