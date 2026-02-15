@@ -151,7 +151,8 @@ public class RigidbodyMovement : MonoBehaviour
         Vector3 direction = (targetPoint - rigidbody.transform.position).normalized;
 
         rigidbody.AddForce(direction * CurrentShootForce, ForceMode.Impulse);
-        
+
+        CurrentShootForce = minShootForce;
         shootCooldownTimer.Reset();
         shootCooldownTimer.Start();
         canShoot = false;
