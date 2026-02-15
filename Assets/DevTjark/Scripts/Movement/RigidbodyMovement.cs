@@ -10,8 +10,8 @@ public class RigidbodyMovement : MonoBehaviour
     [SerializeField] private float pushForce;
     [SerializeField] private float pushCooldown;
     [FoldoutGroup("Shoot Settings", expanded: true)]
-    [SerializeField] private float minShootForce;
-    [SerializeField] private float maxShootForce;
+    [SerializeField] public float minShootForce;
+    [SerializeField] public float maxShootForce;
     [SerializeField] private float shootForceChangeSpeed;
     [SerializeField] private float shootCooldown;
     [FoldoutGroup("Jump Settings", expanded: true)]
@@ -64,6 +64,8 @@ public class RigidbodyMovement : MonoBehaviour
     private void UpdateChargePower()
     {
         if (!IsCharging) return;
+
+        // CurrentShootForce = minShootForce;
 
         if (isIncreasing)
         {
