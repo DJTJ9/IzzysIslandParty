@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2234337075584315550, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
       propertyPath: m_Name
-      value: Pf_FishingNPC 2 Variant
+      value: Pf_FishingNPC 3
       objectReference: {fileID: 0}
     - target: {fileID: 5317911460612665810, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
       propertyPath: m_LocalPosition.x
@@ -52,6 +52,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5599365796476707464, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: aa2928ae53923cd40ae7ee1afc998718, type: 2}
+    - target: {fileID: 5630609430523852452, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: aa2928ae53923cd40ae7ee1afc998718, type: 2}
     - target: {fileID: 6100954839813706306, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -60,6 +68,34 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 217f9b1d9e0aea3418c1705493cbe83c, type: 2}
+    - target: {fileID: 7295863958124258767, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 7112903903214495086}
+    - target: {fileID: 7295863958124258767, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
+      propertyPath: iconHandler
+      value: 
+      objectReference: {fileID: 1894862738469252581}
+    - target: {fileID: 7295863958124258767, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
+      propertyPath: fishingSystem
+      value: 
+      objectReference: {fileID: 715696853232782828}
+    - target: {fileID: 7295863958124258767, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
+      propertyPath: chanceToHookFish
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 7295863958124258767, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
+      propertyPath: timeBetweenCasting.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7295863958124258767, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
+      propertyPath: timeBetweenCasting.y
+      value: 2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7295863958124258767, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
+      propertyPath: timeUntilFishBites.y
+      value: 5.8
+      objectReference: {fileID: 0}
     - target: {fileID: 8305734998791210448, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
       propertyPath: m_Name
       value: Cat
@@ -69,3 +105,30 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
+--- !u!114 &715696853232782828 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 376750917119569079, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
+  m_PrefabInstance: {fileID: 924599705142878555}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc5c15f0574464b4f955be4f9b606a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1894862738469252581 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1630075566880033982, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
+  m_PrefabInstance: {fileID: 924599705142878555}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 052768314f11ad44d818d1fc9155a407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &7112903903214495086 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7954142965795783733, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
+  m_PrefabInstance: {fileID: 924599705142878555}
+  m_PrefabAsset: {fileID: 0}

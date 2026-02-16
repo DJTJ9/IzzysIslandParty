@@ -1249,10 +1249,14 @@ MonoBehaviour:
   fishingSystem: {fileID: 376750917119569079}
   iconHandler: {fileID: 1630075566880033982}
   animator: {fileID: 7954142965795783733}
-  timeBetweenCasting: {x: 0.8, y: 2.8}
-  timeUntilFishBites: {x: 3.5, y: 5.2}
-  waitTimeBetweenFishEvents: {x: 1.5, y: 2.8}
-  chanceToHookFish: 80
+  rodLineRendererPositions:
+  - {fileID: 1084376969987498641}
+  - {fileID: 1731387959685711117}
+  - {fileID: 3603906875005821288}
+  timeBetweenCasting: {x: 1.2, y: 3.5}
+  timeUntilFishBites: {x: 4.5, y: 6.2}
+  waitTimeBetweenFishEvents: {x: 1.5, y: 3.8}
+  chanceToHookFish: 75
   chanceToFinishQTESuccessfully: 80
 --- !u!114 &376750917119569079
 MonoBehaviour:
@@ -3754,7 +3758,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &924203869828930286
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4965,7 +4969,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fbc9ff48e8dced84096fef439a8549e0, type: 2}
+  - {fileID: 2100000, guid: 93b3b00152caf784991912bdfc1596c0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5527,7 +5531,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fbc9ff48e8dced84096fef439a8549e0, type: 2}
+  - {fileID: 2100000, guid: 93b3b00152caf784991912bdfc1596c0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

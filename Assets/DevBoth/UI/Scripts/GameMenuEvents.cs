@@ -14,7 +14,7 @@ using Button = UnityEngine.UIElements.Button;
 public class GameMenuEvents : MonoBehaviour
 {
     [SerializeField] private SceneCollectionSO sceneCollection;
-    [SerializeField] private bool racingGame = false;
+    [SerializeField] private bool racingGame;
 
     [HideIf("racingGame")]
     [SerializeField] private SO_PlayerCollection currentPlayers;

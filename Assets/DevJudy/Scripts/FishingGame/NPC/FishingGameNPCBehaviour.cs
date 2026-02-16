@@ -2,7 +2,6 @@ using System.Collections;
 using enums;
 using Juice;
 using ScriptableObjects;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace FishingGame.NPCs
@@ -13,10 +12,14 @@ namespace FishingGame.NPCs
         private static readonly int cast = Animator.StringToHash("IsCast");
         private static readonly int fishBiting = Animator.StringToHash("FishBiting");
 
+        [Header("Dependencies: ")]
         [SerializeField] private NPCFishingSystem fishingSystem;
         [SerializeField] private IconHandler iconHandler;
         [SerializeField] private Animator animator;
 
+        private LineRenderer lineRenderer;
+        [SerializeField] private Transform[] rodLineRendererPositions;
+        
         private GameScoreSO gameScore;
         private SO_Fish hookedFish;
 
@@ -35,8 +38,24 @@ namespace FishingGame.NPCs
         private Coroutine waitingToFishCoroutine;
 
         private bool fishing = false;
+        private bool fishHooked = false;
         private bool fishFailed = false;
 
+        private void Awake()
+        {
+            lineRenderer = GetComponent<LineRenderer>();
+            if (lineRenderer == null)
+                Debug.LogWarning("No lineRenderer attached to " + gameObject.name);
+
+            lineRenderer.enabled = true;
+            lineRenderer.useWorldSpace = true;
+            lineRenderer.startWidth = lineRenderer.endWidth = 0.02f;
+            lineRenderer.positionCount = 2;
+
+            lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
+            lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
+        }
+        
         private void OnDisable()
         {
             StopAllCoroutines();
@@ -54,16 +73,14 @@ namespace FishingGame.NPCs
 
         private IEnumerator StartFishingCycleCoroutine()
         {
-            var randomWaitTime = Random.Range(waitTimeBetweenFishEvents.x, waitTimeBetweenFishEvents.y + 1);
+            var randomWaitTime = Random.Range(waitTimeBetweenFishEvents.x, waitTimeBetweenFishEvents.y);
             yield return new WaitForSecondsRealtime(randomWaitTime);
-            
+
             StartFishing();
         }
 
         private void StartFishing()
         {
-            animator.SetBool(cast, true);
-
             if (fishingCoroutine != null)
             {
                 StopCoroutine(fishingCoroutine);
@@ -71,6 +88,8 @@ namespace FishingGame.NPCs
             }
 
             fishing = true;
+            animator.SetBool(cast, true);
+            
             fishingCoroutine = StartCoroutine(FishingCoroutine());
 
             if (waitingToFishCoroutine != null)
@@ -83,6 +102,10 @@ namespace FishingGame.NPCs
         private void StopFishing()
         {
             animator.SetBool(cast, false);
+            
+            fishing = false;
+            fishHooked = false;
+            fishFailed = false;
 
             if (fishingCoroutine != null)
             {
@@ -100,32 +123,37 @@ namespace FishingGame.NPCs
         {
             while (fishing)
             {
-                var randomTimeToFishBite = Random.Range(timeUntilFishBites.x, timeUntilFishBites.y);
-                yield return new WaitForSecondsRealtime(randomTimeToFishBite);
-
-                animator.SetBool(fishBiting, true);
-                iconHandler.DisplayIcon(EEmotion.Alert);
-
-                yield return new WaitForSecondsRealtime(Random.Range(timeUntilFishBites.x, timeUntilFishBites.y));
-
-                var randomChanceToHookFish = Random.Range(0, 101);
-
-                if (randomChanceToHookFish <= chanceToHookFish)
+                if (!fishHooked)
                 {
-                    animator.SetBool(fishBiting, false);
-                    iconHandler.DisplayIcon(EEmotion.Embarrassed);
+                    var randomTimeToFishBite = Random.Range(timeUntilFishBites.x, timeUntilFishBites.y);
+                    yield return new WaitForSecondsRealtime(randomTimeToFishBite);
 
-                    fishFailed = true;
+                    animator.SetBool(fishBiting, true);
+                    iconHandler.DisplayIcon(EEmotion.Alert);
 
-                    continue;
+                    yield return new WaitForSecondsRealtime(Random.Range(timeUntilFishBites.x, timeUntilFishBites.y));
+
+                    var randomChanceToHookFish = Random.Range(0, 101);
+
+                    if (randomChanceToHookFish > chanceToHookFish)
+                    {
+                        animator.SetBool(fishBiting, false);
+                        iconHandler.DisplayIcon(EEmotion.Embarrassed);
+
+                        fishFailed = true;
+
+                        continue;
+                    }
+                    
+                    iconHandler.DisplayIcon(EEmotion.Happy);
+                    hookedFish = fishingSystem.CalculateFishProbability();
+                    
+                    fishHooked = true;
                 }
-
-                iconHandler.DisplayIcon(EEmotion.Happy);
-                hookedFish = fishingSystem.CalculateFishProbability();
 
                 int i = 0;
 
-                while (i < numberOfCatchEvents && !fishFailed)
+                while (i < numberOfCatchEvents && fishHooked)
                 {
                     i++;
 
@@ -137,7 +165,10 @@ namespace FishingGame.NPCs
                     if (randomChanceToFinishQTESuccessfully > chanceToFinishQTESuccessfully)
                     {
                         fishFailed = true;
-                        iconHandler.DisplayIcon(EEmotion.Angry);
+                        fishHooked = false;
+                        
+                        animator.SetBool(fishBiting, false);
+                        iconHandler.DisplayIcon(EEmotion.Sad);
 
                         StopFishing();
                     }
@@ -145,14 +176,16 @@ namespace FishingGame.NPCs
 
                 if (!fishFailed)
                 {
+                    animator.SetBool(fishBiting, false);
                     iconHandler.DisplayIcon(EEmotion.Love);
+                    
                     gameScore.Value += hookedFish.Points;
-
-                    fishing = false;
+                    
+                    StopFishing();
                 }
-            }
 
-            StopFishing();
+                fishing = false;
+            }
 
             yield return null;
         }
@@ -163,6 +196,20 @@ namespace FishingGame.NPCs
             yield return new WaitForSecondsRealtime(randomWaitTime);
 
             StartFishing();
+        }
+        
+        private void LateUpdate()
+        {
+            if (lineRenderer == null || rodLineRendererPositions == null || rodLineRendererPositions.Length < 1)
+                return;
+
+            lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
+
+            // The second position is either the animationLure, or the physicsLure depending on what is currently active
+            if (rodLineRendererPositions[1].gameObject.activeInHierarchy)
+                lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
+            else if (rodLineRendererPositions[2].gameObject.activeInHierarchy)
+                lineRenderer.SetPosition(1, rodLineRendererPositions[2].position);
         }
     }
 }

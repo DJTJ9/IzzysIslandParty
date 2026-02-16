@@ -50,7 +50,7 @@ namespace FishingGame.Player.Multiplayer
                 npc.SetPlayerIndex(playerIndex);
                 npc.OnNPCJoined(npcCollection.Players[playerIndex - 1].PlayerScore);
 
-                _playerInput.gameObject.name = npcCollection.Players[npc.GetPlayerIndex() - 1].Name;
+                parent.gameObject.name = npcCollection.Players[npc.GetPlayerIndex() - 1].Name;
 
                 currentPlayers.Players.Add(npcCollection.Players[npc.GetPlayerIndex() - 1]);
 

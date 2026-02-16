@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pf_FishingNPC 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4710808151481353171, guid: b9f6d8a40c2491c489870551e244bb3d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fbc9ff48e8dced84096fef439a8549e0, type: 2}
+    - target: {fileID: 4825369478955948031, guid: b9f6d8a40c2491c489870551e244bb3d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fbc9ff48e8dced84096fef439a8549e0, type: 2}
     - target: {fileID: 4979242603308585097, guid: b9f6d8a40c2491c489870551e244bb3d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -60,6 +68,22 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: b89f018c33ad59148b32857c65cdda20, type: 2}
+    - target: {fileID: 7607928962025161876, guid: b9f6d8a40c2491c489870551e244bb3d, type: 3}
+      propertyPath: chanceToHookFish
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 7607928962025161876, guid: b9f6d8a40c2491c489870551e244bb3d, type: 3}
+      propertyPath: timeBetweenCasting.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7607928962025161876, guid: b9f6d8a40c2491c489870551e244bb3d, type: 3}
+      propertyPath: timeUntilFishBites.y
+      value: 5.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7607928962025161876, guid: b9f6d8a40c2491c489870551e244bb3d, type: 3}
+      propertyPath: chanceToFinishQTESuccessfully
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 9193873727694185611, guid: b9f6d8a40c2491c489870551e244bb3d, type: 3}
       propertyPath: m_Name
       value: Bear
