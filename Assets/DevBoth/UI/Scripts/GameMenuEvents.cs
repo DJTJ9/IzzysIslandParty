@@ -14,7 +14,7 @@ using Button = UnityEngine.UIElements.Button;
 public class GameMenuEvents : MonoBehaviour
 {
     [SerializeField] private SceneCollectionSO sceneCollection;
-    [SerializeField] private bool racingGame;
+    [SerializeField] private bool racingGame = false;
 
     [HideIf("racingGame")]
     [SerializeField] private SO_PlayerCollection currentPlayers;
@@ -27,7 +27,6 @@ public class GameMenuEvents : MonoBehaviour
     [SerializeField] private UnityEvent onGameStart;
     [SerializeField] private UnityEvent onUnpause;
     [SerializeField] private UnityEvent onRestart;
-    [SerializeField] private UnityEvent onLevelLoaded;
 
     private UIDocument document;
 
@@ -65,24 +64,50 @@ public class GameMenuEvents : MonoBehaviour
     private Button endScreenQuitButton;
 
     [Header("Controller Selection")]
+    [SerializeField] private float animDuration = 0.3f;
+    [SerializeField] private float holdDuration = 2f;
+    [SerializeField] private UIToolkitVideo uiToolkitVideo;
+    [SerializeField] private RenderTexture videoTexture;
+    [SerializeField] private SO_GamePreviewClips gamePreviewClipsSO;
     private Button controllerSelectionReadyButton;
-
     private Button controllerSelectionBackButton;
     private VisualElement bowlingBattleHeader;
-    private VisualElement fishingFrenzyHeader;
-    private VisualElement jetskiJoyrideHeader;
-    private VisualElement minigolfMayhemHeader;
-    private VisualElement swaggySnapshotsHeader;
-    private VisualElement hastyHurdlesHeader;
     private VisualElement bowlingBattleInstructions;
+    private VisualElement bowlingBattlePreviewImage;
+    private VisualElement bowlingBattleInstructionsText;
+    private VisualElement fishingFrenzyHeader;
     private VisualElement fishingFrenzyInstructions;
-    private VisualElement jetskiJoyrideInstructions;
-    private VisualElement minigolfMayhemInstructions;
+    private VisualElement fishingFrenzyPreviewImage;
+    private VisualElement fishingFrenzyInstructionsText;
+    private VisualElement jetskiJoyrideRaceHeader;
+    private VisualElement jetskiJoyrideRaceInstructions;
+    private VisualElement jetskiJoyrideRacePreviewImage;
+    private VisualElement jetskiJoyrideRaceInstructionsText;
+    private VisualElement jetskiJoyrideSlalomHeader;
+    private VisualElement jetskiJoyrideSlalomInstructions;
+    private VisualElement jetskiJoyrideSlalomPreviewImage;
+    private VisualElement jetskiJoyrideSlalomInstructionsText;
+    private VisualElement minigolfMayhemClassicHeader;
+    private VisualElement minigolfMayhemClassicInstructions;
+    private VisualElement minigolfMayhemClassicPreviewImage;
+    private VisualElement minigolfMayhemClassicInstructionsText;
+    private VisualElement minigolfMayhemRaceHeader;
+    private VisualElement minigolfMayhemRaceInstructions;
+    private VisualElement minigolfMayhemRacePreviewImage;
+    private VisualElement minigolfMayhemRaceInstructionsText;
+    private VisualElement swaggySnapshotsHeader;
     private VisualElement swaggySnapshotsInstructions;
+    private VisualElement swaggySnapshotsPreviewImage;
+    private VisualElement swaggySnapshotsInstructionsText;
+    private VisualElement hastyHurdlesHeader;
     private VisualElement hastyHurdlesInstructions;
+    private VisualElement hastyHurdlesPreviewImage;
+    private VisualElement hastyHurdlesInstructionsText;
     private VisualElement[] m_slots;
+    private VisualElement joinInstruction;
+    private VisualElement startGameInstruction;
+    
     private int m_joinedPlayers = 0;
-
     private bool m_playerJoined = false;
 
     private void Awake()
@@ -92,15 +117,20 @@ public class GameMenuEvents : MonoBehaviour
         BindVisualElements();
         BindButtons();
         InitializeSlotElements();
-        onLevelLoaded.Invoke();
         FocusButton(controllerSelectionReadyButton);
     }
+
     
+    public void Test()
+    {
+        Debug.Log("Test");
+    }
+
     private void OnEnable()
     {
-        onLevelLoaded.Invoke();
         RegisterButtonCallbacks();
         m_playerJoined = false;
+        StartCoroutine(ShowOnlyJoinInstruction());
     }
 
     private void OnDisable()
@@ -146,16 +176,38 @@ public class GameMenuEvents : MonoBehaviour
         controllerSelectionBackButton = document.rootVisualElement.Q("controller-selection-back__button") as Button;
         bowlingBattleHeader = document.rootVisualElement.Q("bb-controller-selection-header__container");
         fishingFrenzyHeader = document.rootVisualElement.Q("ff-controller-selection-header__container");
-        jetskiJoyrideHeader = document.rootVisualElement.Q("jj-controller-selection-header__container");
-        minigolfMayhemHeader = document.rootVisualElement.Q("mm-controller-selection-header__container");
+        jetskiJoyrideRaceHeader = document.rootVisualElement.Q("jj-race-controller-selection-header__container");
+        jetskiJoyrideSlalomHeader = document.rootVisualElement.Q("jj-slalom-controller-selection-header__container");
+        minigolfMayhemClassicHeader = document.rootVisualElement.Q("mm-classic-controller-selection-header__container");
+        minigolfMayhemRaceHeader = document.rootVisualElement.Q("mm-race-controller-selection-header__container");
         swaggySnapshotsHeader = document.rootVisualElement.Q("ss-controller-selection-header__container");
         hastyHurdlesHeader = document.rootVisualElement.Q("hh-controller-selection-header__container");
-        bowlingBattleInstructions = document.rootVisualElement.Q("bb-instructions__container");
-        fishingFrenzyInstructions = document.rootVisualElement.Q("ff-instructions__container");
-        jetskiJoyrideInstructions = document.rootVisualElement.Q("jj-instructions__container");
-        minigolfMayhemInstructions = document.rootVisualElement.Q("mm-instructions__container");
-        swaggySnapshotsInstructions = document.rootVisualElement.Q("ss-instructions__container");
-        hastyHurdlesInstructions = document.rootVisualElement.Q("hh-instructions__container");
+        bowlingBattleInstructions = document.rootVisualElement.Q("bb-controls__container");
+        fishingFrenzyInstructions = document.rootVisualElement.Q("ff-controls__container");
+        jetskiJoyrideRaceInstructions = document.rootVisualElement.Q("jj-race-controls__container");
+        jetskiJoyrideSlalomInstructions = document.rootVisualElement.Q("jj-slalom-controls__container");
+        minigolfMayhemClassicInstructions = document.rootVisualElement.Q("mm-classic-controls__container");
+        minigolfMayhemRaceInstructions = document.rootVisualElement.Q("mm-race-controls__container");
+        swaggySnapshotsInstructions = document.rootVisualElement.Q("ss-controls__container");
+        hastyHurdlesInstructions = document.rootVisualElement.Q("hh-controls__container");
+        bowlingBattlePreviewImage = document.rootVisualElement.Q("bb-game-preview__image");
+        fishingFrenzyPreviewImage = document.rootVisualElement.Q("ff-game-preview__image");
+        jetskiJoyrideRacePreviewImage = document.rootVisualElement.Q("jj-race-game-preview__image");
+        jetskiJoyrideSlalomPreviewImage = document.rootVisualElement.Q("jj-slalom-game-preview__image");
+        minigolfMayhemClassicPreviewImage = document.rootVisualElement.Q("mm-classic-game-preview__image");
+        minigolfMayhemRacePreviewImage = document.rootVisualElement.Q("mm-race-game-preview__image");
+        swaggySnapshotsPreviewImage = document.rootVisualElement.Q("ss-game-preview__image");
+        hastyHurdlesPreviewImage = document.rootVisualElement.Q("hh-game-preview__image");
+        bowlingBattleInstructionsText = document.rootVisualElement.Q("bb-game-instruction-text__label");
+        fishingFrenzyInstructionsText = document.rootVisualElement.Q("ff-game-instruction-text__label");
+        jetskiJoyrideRaceInstructionsText = document.rootVisualElement.Q("jj-race-game-instruction-text__label");
+        jetskiJoyrideSlalomInstructionsText = document.rootVisualElement.Q("jj-slalom-game-instruction-text__label");
+        minigolfMayhemClassicInstructionsText = document.rootVisualElement.Q("mm-classic-game-instruction-text__label");
+        minigolfMayhemRaceInstructionsText = document.rootVisualElement.Q("mm-race-game-instruction-text__label");
+        swaggySnapshotsInstructionsText = document.rootVisualElement.Q("ss-game-instruction-text__label");
+        hastyHurdlesInstructionsText = document.rootVisualElement.Q("hh-game-instruction-text__label");
+        joinInstruction = document.rootVisualElement.Q("join-instruction");
+        startGameInstruction = document.rootVisualElement.Q("start-game-instruction");
     }
 
     private void RegisterButtonCallbacks()
@@ -289,36 +341,81 @@ public class GameMenuEvents : MonoBehaviour
         FocusButton(controllerSelectionReadyButton);
         bowlingBattleHeader.style.display = DisplayStyle.Flex;
         bowlingBattleInstructions.style.display = DisplayStyle.Flex;
+        bowlingBattleInstructionsText.style.display = DisplayStyle.Flex;
+        bowlingBattlePreviewImage.style.display = DisplayStyle.Flex;
+        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.BowlingBattle, out var clip) ? clip : throw new KeyNotFoundException());
+        uiToolkitVideo.PlayVideo();
     }
 
     public void ShowFishingFrenzyStartScreen()
     {
+        Debug.Log("ShowFishingFrenzyStartScreen");
         FreezeTimeScale();
         controllerSelectionMenu.style.display = DisplayStyle.Flex;
         HideAllGameHeadersAndInstructions();
         FocusButton(controllerSelectionReadyButton);
         fishingFrenzyHeader.style.display = DisplayStyle.Flex;
         fishingFrenzyInstructions.style.display = DisplayStyle.Flex;
+        fishingFrenzyInstructionsText.style.display = DisplayStyle.Flex;
+        fishingFrenzyPreviewImage.style.display = DisplayStyle.Flex;
+        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.FishingFrenzy, out var clip) ? clip : throw new KeyNotFoundException());
+        uiToolkitVideo.PlayVideo();
     }
 
-    public void ShowJetskiJoyrideStartScreen()
+    public void ShowJetskiJoyrideRaceStartScreen()
     {
         FreezeTimeScale();
         controllerSelectionMenu.style.display = DisplayStyle.Flex;
         HideAllGameHeadersAndInstructions();
         FocusButton(controllerSelectionReadyButton);
-        jetskiJoyrideHeader.style.display = DisplayStyle.Flex;
-        jetskiJoyrideInstructions.style.display = DisplayStyle.Flex;
+        jetskiJoyrideRaceHeader.style.display = DisplayStyle.Flex;
+        jetskiJoyrideRaceInstructions.style.display = DisplayStyle.Flex;
+        jetskiJoyrideRaceInstructionsText.style.display = DisplayStyle.Flex;
+        jetskiJoyrideRacePreviewImage.style.display = DisplayStyle.Flex;
+        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.JetskiJoyrideRace, out var clip) ? clip : throw new KeyNotFoundException());
+        uiToolkitVideo.PlayVideo();
     }
-
-    public void ShowMinigolfMayhemStartScreen()
+    
+    public void ShowJetskiJoyrideSlalomStartScreen()
     {
         FreezeTimeScale();
         controllerSelectionMenu.style.display = DisplayStyle.Flex;
         HideAllGameHeadersAndInstructions();
         FocusButton(controllerSelectionReadyButton);
-        minigolfMayhemHeader.style.display = DisplayStyle.Flex;
-        minigolfMayhemInstructions.style.display = DisplayStyle.Flex;
+        jetskiJoyrideRaceHeader.style.display = DisplayStyle.Flex;
+        jetskiJoyrideRaceInstructions.style.display = DisplayStyle.Flex;
+        jetskiJoyrideRaceInstructionsText.style.display = DisplayStyle.Flex;
+        jetskiJoyrideRacePreviewImage.style.display = DisplayStyle.Flex;
+        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.JetskiJoyrideSlalom, out var clip) ? clip : throw new KeyNotFoundException());
+        uiToolkitVideo.PlayVideo();
+    }
+
+    public void ShowMinigolfMayhemClassicStartScreen()
+    {
+        FreezeTimeScale();
+        controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        HideAllGameHeadersAndInstructions();
+        FocusButton(controllerSelectionReadyButton);
+        minigolfMayhemClassicHeader.style.display = DisplayStyle.Flex;
+        minigolfMayhemClassicInstructions.style.display = DisplayStyle.Flex;
+        minigolfMayhemClassicInstructionsText.style.display = DisplayStyle.Flex;
+        minigolfMayhemClassicPreviewImage.style.display = DisplayStyle.Flex;
+        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.MinigolfMayhemClassic, out var clip) ? clip : throw new KeyNotFoundException());
+        uiToolkitVideo.PlayVideo();
+    }
+    
+    public void ShowMinigolfMayhemRaceStartScreen()
+    {
+        FreezeTimeScale();
+        controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        HideAllGameHeadersAndInstructions();
+        FocusButton(controllerSelectionReadyButton);
+        minigolfMayhemClassicHeader.style.display = DisplayStyle.Flex;
+        minigolfMayhemClassicInstructions.style.display = DisplayStyle.Flex;
+        minigolfMayhemClassicInstructionsText.style.display = DisplayStyle.Flex;
+        minigolfMayhemClassicPreviewImage.style.display = DisplayStyle.Flex;
+        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.MinigolfMayhemRace, out var clip) ? clip : throw new KeyNotFoundException());
+        uiToolkitVideo.PlayVideo();
     }
 
     public void ShowSwaggySnapshotsStartScreen()
@@ -329,6 +426,10 @@ public class GameMenuEvents : MonoBehaviour
         FocusButton(controllerSelectionReadyButton);
         swaggySnapshotsHeader.style.display = DisplayStyle.Flex;
         swaggySnapshotsInstructions.style.display = DisplayStyle.Flex;
+        swaggySnapshotsInstructionsText.style.display = DisplayStyle.Flex;
+        swaggySnapshotsPreviewImage.style.display = DisplayStyle.Flex;
+        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.SwaggySnapshots, out var clip) ? clip : throw new KeyNotFoundException());
+        uiToolkitVideo.PlayVideo();
     }
 
     public void ShowHastyHurdlesStartScreen()
@@ -339,6 +440,10 @@ public class GameMenuEvents : MonoBehaviour
         FocusButton(controllerSelectionReadyButton);
         hastyHurdlesHeader.style.display = DisplayStyle.Flex;
         hastyHurdlesInstructions.style.display = DisplayStyle.Flex;
+        hastyHurdlesInstructionsText.style.display = DisplayStyle.Flex;
+        hastyHurdlesPreviewImage.style.display = DisplayStyle.Flex;
+        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.HastyHurdles, out var clip) ? clip : throw new KeyNotFoundException());
+        uiToolkitVideo.PlayVideo();
     }
 
     private void HideControllerSelectionScreen()
@@ -350,6 +455,8 @@ public class GameMenuEvents : MonoBehaviour
     {
         if (!m_playerJoined) return;
 
+        StopCoroutine(ShowStartAndJoinInstruction());
+        StopCoroutine(ShowJoinAndStartInstruction());
         UnfreezeTimeScale();
         HideControllerSelectionScreen();
         onGameStart.Invoke();
@@ -542,16 +649,108 @@ public class GameMenuEvents : MonoBehaviour
     {
         bowlingBattleHeader.style.display = DisplayStyle.None;
         fishingFrenzyHeader.style.display = DisplayStyle.None;
-        jetskiJoyrideHeader.style.display = DisplayStyle.None;
-        minigolfMayhemHeader.style.display = DisplayStyle.None;
+        jetskiJoyrideRaceHeader.style.display = DisplayStyle.None;
+        minigolfMayhemClassicHeader.style.display = DisplayStyle.None;
         swaggySnapshotsHeader.style.display = DisplayStyle.None;
         hastyHurdlesHeader.style.display = DisplayStyle.None;
         bowlingBattleInstructions.style.display = DisplayStyle.None;
         fishingFrenzyInstructions.style.display = DisplayStyle.None;
-        jetskiJoyrideInstructions.style.display = DisplayStyle.None;
-        minigolfMayhemInstructions.style.display = DisplayStyle.None;
+        jetskiJoyrideRaceInstructions.style.display = DisplayStyle.None;
+        minigolfMayhemClassicInstructions.style.display = DisplayStyle.None;
         swaggySnapshotsInstructions.style.display = DisplayStyle.None;
         hastyHurdlesInstructions.style.display = DisplayStyle.None;
+        bowlingBattlePreviewImage.style.display = DisplayStyle.None;
+        fishingFrenzyPreviewImage.style.display = DisplayStyle.None;
+        jetskiJoyrideRacePreviewImage.style.display = DisplayStyle.None;
+        minigolfMayhemClassicPreviewImage.style.display = DisplayStyle.None;
+        swaggySnapshotsPreviewImage.style.display = DisplayStyle.None;
+        hastyHurdlesPreviewImage.style.display = DisplayStyle.None;
+        bowlingBattleInstructionsText.style.display = DisplayStyle.None;
+        fishingFrenzyInstructionsText.style.display = DisplayStyle.None;
+        jetskiJoyrideRaceInstructionsText.style.display = DisplayStyle.None;
+        minigolfMayhemClassicInstructionsText.style.display = DisplayStyle.None;
+        swaggySnapshotsInstructionsText.style.display = DisplayStyle.None;
+        hastyHurdlesInstructionsText.style.display = DisplayStyle.None;
+    }
+    
+    private IEnumerator ShowOnlyJoinInstruction()
+    {
+        joinInstruction.style.display = DisplayStyle.Flex;
+
+        if (joinInstruction.style.scale.value.value.y <= 1f)
+        {
+            yield return AnimateScaleCoroutine(joinInstruction, new Vector3(1,0,1), new Vector3(1,1,1), animDuration);
+        }
+
+        yield return new WaitForSecondsRealtime(holdDuration);
+
+        yield return AnimateScaleCoroutine(joinInstruction, new Vector3(1,1,1), new Vector3(1,0,1), animDuration);
+
+        joinInstruction.style.display = DisplayStyle.None;
+
+        if (m_playerJoined)
+        {
+            StopCoroutine(ShowOnlyJoinInstruction());
+            StartCoroutine(ShowStartAndJoinInstruction());
+            yield break;
+        }
+        
+        StartCoroutine(ShowOnlyJoinInstruction());
+    }
+    
+    private IEnumerator ShowJoinAndStartInstruction()
+    {
+        joinInstruction.style.display = DisplayStyle.Flex;
+
+        if (joinInstruction.style.scale.value.value.y <= 1f)
+        {
+            yield return AnimateScaleCoroutine(joinInstruction, new Vector3(1,0,1), new Vector3(1,1,1), animDuration);
+        }
+
+        yield return new WaitForSecondsRealtime(holdDuration);
+
+        yield return AnimateScaleCoroutine(joinInstruction, new Vector3(1,1,1), new Vector3(1,0,1), animDuration);
+
+        joinInstruction.style.display = DisplayStyle.None;
+
+        StartCoroutine(ShowStartAndJoinInstruction());
+    }
+
+    private IEnumerator ShowStartAndJoinInstruction()
+    {
+        startGameInstruction.style.display = DisplayStyle.Flex;
+
+        yield return AnimateScaleCoroutine(startGameInstruction, new Vector3(1,0,1), new Vector3(1,1,1), animDuration);
+
+        yield return new WaitForSecondsRealtime(holdDuration);
+
+        yield return AnimateScaleCoroutine(startGameInstruction, new Vector3(1,1,1), new Vector3(1,0,1), animDuration);
+
+        startGameInstruction.style.display = DisplayStyle.None;
+
+        StartCoroutine(ShowJoinAndStartInstruction());
+    }
+
+    private IEnumerator AnimateScaleCoroutine(VisualElement element, Vector3 from, Vector3 to, float duration)
+    {
+        var elapsed = 0f;
+
+        element.style.scale = new Scale(from);
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            var t = Mathf.Clamp01(elapsed / duration);
+
+            t = Mathf.SmoothStep(0f, 1f, t);
+
+            Vector3 current = Vector3.Lerp(from, to, t);
+            element.style.scale = new Scale(current);
+
+            yield return null;
+        }
+
+        element.style.scale = new Scale(to);
     }
 
     private void FreezeTimeScale() => Time.timeScale = 0;

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using ImprovedTimers;
 using Sirenix.OdinInspector;
+using UnityEngine.InputSystem;
 
 [RequireComponent (typeof(GroundChecker))]
 public class RigidbodyMovement : MonoBehaviour
@@ -9,7 +10,9 @@ public class RigidbodyMovement : MonoBehaviour
     [SerializeField] private float pushForce;
     [SerializeField] private float pushCooldown;
     [FoldoutGroup("Shoot Settings", expanded: true)]
-    [SerializeField] private float shootForce;
+    [SerializeField] public float minShootForce;
+    [SerializeField] public float maxShootForce;
+    [SerializeField] private float shootForceChangeSpeed;
     [SerializeField] private float shootCooldown;
     [FoldoutGroup("Jump Settings", expanded: true)]
     [SerializeField] private float jumpPower;
@@ -23,10 +26,13 @@ public class RigidbodyMovement : MonoBehaviour
     private new Rigidbody rigidbody;
     private GroundChecker groundChecker;
 
+    public float CurrentShootForce;
     private Vector3 moveDirection;
     private bool canMove = true;
     private bool canShoot = true;
     private bool canJump = true;
+    [HideInInspector] public bool IsCharging;
+    private bool isIncreasing = true;
     
     private CountdownTimer pushCooldownTimer;
     private CountdownTimer shootCooldownTimer;
@@ -46,14 +52,57 @@ public class RigidbodyMovement : MonoBehaviour
         
         jumpCooldownTimer = new CountdownTimer(jumpCooldown);
         jumpCooldownTimer.OnTimerStop += EnableJumping;
+
+        CurrentShootForce = minShootForce;
     }
     
     private void FixedUpdate()
     {
-        // UpdateHorizontalMovement();
-        // UpdateVerticalMovement();
+        UpdateChargePower();
     }
 
+    private void UpdateChargePower()
+    {
+        if (!IsCharging) return;
+
+        // CurrentShootForce = minShootForce;
+
+        if (isIncreasing)
+        {
+            CurrentShootForce += shootForceChangeSpeed * Time.deltaTime;
+            if (CurrentShootForce >= maxShootForce)
+            {
+                CurrentShootForce = maxShootForce;
+                isIncreasing = false;
+            }
+        }
+        else
+        {
+            CurrentShootForce -= shootForceChangeSpeed * Time.deltaTime;
+            if (CurrentShootForce <= minShootForce)
+            {
+                CurrentShootForce = minShootForce;
+                isIncreasing = true;
+            }
+        }
+    }
+
+    public void StartCharging(InputAction.CallbackContext _context)
+    {
+        if (_context.started)
+        {
+            IsCharging = true;
+            CurrentShootForce = minShootForce;
+            isIncreasing = true;
+        }
+        else if (_context.canceled)
+        {
+            Shoot();
+            IsCharging = false;
+        }
+    }
+
+    
     /// <summary>
     /// Recieves a move direction
     /// </summary>
@@ -101,8 +150,9 @@ public class RigidbodyMovement : MonoBehaviour
 
         Vector3 direction = (targetPoint - rigidbody.transform.position).normalized;
 
-        rigidbody.AddForce(direction * shootForce, ForceMode.Impulse);
-        
+        rigidbody.AddForce(direction * CurrentShootForce, ForceMode.Impulse);
+
+        CurrentShootForce = minShootForce;
         shootCooldownTimer.Reset();
         shootCooldownTimer.Start();
         canShoot = false;

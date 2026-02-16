@@ -1,5 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
@@ -10,15 +11,20 @@ public class SwaggySnapshotsPlayerJoiner : MonoBehaviour
     [FoldoutGroup("Scriptable Objects", expanded: true)]
     [SerializeField] private SO_PlayerCollection playerCollectionSS;
     [SerializeField] private SO_PlayerCollection npcCollectionSS;
+    [SerializeField] private UnityEvent onLevelLoaded;
 
     private int m_playerIndex = 0;
-    private int m_npcIndex = 0;
 
     private void Start()
     {
+        onLevelLoaded.Invoke();
         m_playerIndex = 0;
-        m_npcIndex = 0;
         currentPlayers.Players.Clear();
+    }
+    
+    private void OnEnable()
+    {
+        onLevelLoaded.Invoke();
     }
 
     public void PlayerJoined(PlayerInput _playerInput)
@@ -28,7 +34,6 @@ public class SwaggySnapshotsPlayerJoiner : MonoBehaviour
             npc.SetPlayerIndex(m_playerIndex);
             currentPlayers.Players.Add(npcCollectionSS.Players[npc.GetPlayerIndex() - 1]);
             ++m_playerIndex;
-            ++m_npcIndex;
             return;
         }
 

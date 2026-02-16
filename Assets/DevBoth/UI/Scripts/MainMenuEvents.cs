@@ -69,13 +69,8 @@ public class MainMenuEvents : MonoBehaviour
     private void Awake()
     {
         document = GetComponent<UIDocument>();
-
-        BindVisualElements();
-        BindButtons();
-        RegisterButtonCallbacks();
-
+        
         InitializeResultScreenSlots();
-        FocusButton(startGameButton);
 
         #region Examples
 
@@ -93,6 +88,12 @@ public class MainMenuEvents : MonoBehaviour
 
     private void OnEnable()
     {
+        BindVisualElements();
+        BindButtons();
+        RegisterButtonCallbacks();
+
+        FocusButton(startGameButton);
+
         onGameStart.Invoke();
     }
 

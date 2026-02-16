@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [RequireComponent (typeof(GroundChecker))]
-public class GoapRigidbodyMovement : MonoBehaviour
+public class GoapRigidbodyMovement : Controller
 {
     [FoldoutGroup("Push Settings", expanded: true)]
     [SerializeField] private float pushForce;
@@ -41,17 +41,54 @@ public class GoapRigidbodyMovement : MonoBehaviour
 
     public void Shoot(Vector3 _targetPosition)
     {
+        if (!m_isActive) return;
         if (!groundChecker.IsGrounded) return;
+
+        var direction = (_targetPosition - rb.transform.position).normalized;
         
-        // Ray ray = cam.ScreenPointToRay(
-        //     new Vector3(Screen.width / 2f, Screen.height / 2f, 0f)
-        // );
+        var impulse = CalculateImpulse(rb, _targetPosition);
+        rb.AddForce(impulse, ForceMode.Impulse);
+    }
+    
+    private Vector3 CalculateImpulse(Rigidbody _rb, Vector3 target)
+    {
+        Vector3 start = rb.position;
+        Vector3 toTarget = target - start;
+
+        float mass = rb.mass;
+        Vector3 gravity = Physics.gravity;
+
+        // --- Horizontale Bewegung ---
+        Vector3 horizontal = new Vector3(toTarget.x, 0f, toTarget.z);
+        float horizontalDistance = horizontal.magnitude;
+
+        float horizontalSpeedFactor = 20f;  // Tuning
+        float t = horizontalDistance / horizontalSpeedFactor;
+
+        // Horizontal velocity
+        Vector3 vHorizontal = horizontal / t;
+
+        // --- Vertikale Bewegung ---
+        float y = toTarget.y;
+
+        float vY = (y - 0.5f * gravity.y * t * t) / t;
+
+        Vector3 v0 = vHorizontal + Vector3.up * vY;
+
+        return mass * v0;
+        // var start = _rb.position;
+        // var toTarget = target - start;
+        // var distance = toTarget.magnitude;
         //
-        // Vector3 targetPoint = ray.GetPoint(500f);
-
-        Vector3 direction = (_targetPosition - rb.transform.position).normalized;
-
-        rb.AddForce(direction * shootForce, ForceMode.Impulse);
+        // var speedFactor = 5f;
+        //
+        // var t = distance / speedFactor;
+        //
+        // var gravity = Physics.gravity;
+        //
+        // var v0 = (toTarget - gravity * (0.5f * t * t)) / t;
+        //
+        // return _rb.mass * v0;
     }
 
     private void InitializeGroundChecker()

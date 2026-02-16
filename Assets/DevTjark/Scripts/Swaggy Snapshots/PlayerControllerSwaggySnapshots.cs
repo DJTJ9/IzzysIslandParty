@@ -11,7 +11,7 @@ public class PlayerControllerSwaggySnapshots : Controller
     private InputAction m_pauseInputAction;
     private InputAction m_unpauseInputAction;
     
-    private PlayerInput playerInput;
+    // private PlayerInput playerInput;
     private PhotoCapture photoCapture;
 
     public static event Action<int> onTakePhoto;
@@ -53,13 +53,8 @@ public class PlayerControllerSwaggySnapshots : Controller
         onUnpause.Invoke();
     }
     
-    public void SwitchToPlayerInputMap()
+    public override void SwitchToPlayerInputMap()
     {
         playerInput.SwitchCurrentActionMap("SwaggySnapshots");
-    }
-    
-    public void SwitchToUIInputMap()
-    {
-        playerInput.SwitchCurrentActionMap("UI");
     }
 }
