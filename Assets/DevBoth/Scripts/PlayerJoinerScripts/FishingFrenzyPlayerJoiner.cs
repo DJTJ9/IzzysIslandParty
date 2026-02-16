@@ -1,6 +1,7 @@
 ﻿using FishingGame.NPCs;
 using HelperScripts;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace FishingGame.Player.Multiplayer
@@ -11,6 +12,8 @@ namespace FishingGame.Player.Multiplayer
         [SerializeField] private SO_PlayerCollection npcCollection;
         public SO_PlayerCollection playerCollectionFF;
 
+        [SerializeField]private UnityEvent onLevelLoad;
+        
         private int playerIndex;
         private int humanPlayerIndex;
         private int npcIndex;
@@ -22,8 +25,15 @@ namespace FishingGame.Player.Multiplayer
             playerIndex = 0;
             npcIndex = 0;
             currentPlayers.Players.Clear();
+            
+            onLevelLoad.Invoke();
         }
 
+        private void OnEnable()
+        {
+            onLevelLoad.Invoke();
+        }
+        
         private void OnDestroy()
         {
             ClearPlayerReferences();

@@ -61,12 +61,7 @@ namespace FishingGame.NPCs
         {
             StopAllCoroutines();
         }
-
-        private void OnDestroy()
-        {
-            StopAllCoroutines();
-        }
-
+        
         public void ActivateIconHandler()
         {
             iconHandler =  iconHandlerObj.GetComponent<IconHandler>();

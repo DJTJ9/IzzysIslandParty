@@ -295,6 +295,7 @@ public class GameMenuEvents : MonoBehaviour
         onRestart.Invoke();
         HideEndScreenUI();
         FreezeTimeScale();
+        // In ein Script was dont denstroy on load ist, vorher szene xy laden, und dann diese hier erneut (kein Laden der selben szene aus sich selbst)
         SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 
@@ -349,6 +350,7 @@ public class GameMenuEvents : MonoBehaviour
     public void ShowFishingFrenzyStartScreen()
     {
         Debug.Log("ShowFishingFrenzyStartScreen");
+        
         FreezeTimeScale();
         controllerSelectionMenu.style.display = DisplayStyle.Flex;
         HideAllGameHeadersAndInstructions();

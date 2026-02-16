@@ -10,7 +10,7 @@ namespace FishingGame
 {
     [RequireComponent(typeof(FishingSystemManager))]
     [RequireComponent(typeof(PlayerInput))]
-    public class FishingRodController : MonoBehaviour
+    public class FishingRodController : Controller
     {
         [SerializeField] private QTEDisplayService qteDisplayService;
 
@@ -19,7 +19,6 @@ namespace FishingGame
 
         private Animator animator;
         private LineRenderer lineRenderer;
-        private PlayerInput playerInput;
         private FishingSystemManager fishingSystemManager;
 
         [SerializeField] private Transform[] rodLineRendererPositions;
@@ -110,6 +109,7 @@ namespace FishingGame
             {
                 if (!isCast)
                 {
+                    Debug.Log("FRC Cast");
                     isCast = true;
                     animator.SetBool(cast, isCast);
 
@@ -139,6 +139,7 @@ namespace FishingGame
 
         public void PlayFishBitingAnimation()
         {
+            Debug.Log("FRC Fish biting animation the second");
             animator.SetBool(fishBiting, true);
         }
 
@@ -161,14 +162,9 @@ namespace FishingGame
                 lineRenderer.SetPosition(1, rodLineRendererPositions[2].position);
         }
 
-        public void SwitchToPlayerInputMap()
+        public override void SwitchToPlayerInputMap()
         {
             playerInput.SwitchCurrentActionMap("FishingGame");
-        }
-
-        public void SwitchToUIInputMap()
-        {
-            playerInput.SwitchCurrentActionMap("UI");
         }
     }
 }

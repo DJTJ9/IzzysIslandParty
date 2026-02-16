@@ -51,7 +51,7 @@ namespace FishingGame
             }
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             StopAllCoroutines();
         }
@@ -113,8 +113,8 @@ namespace FishingGame
         {
             if (!FishingSystem.Instance.enabled || !FishingSystem.Instance.gameObject.activeInHierarchy)
                 ActivateFishingSystem();
-            else
-                FishingSystem.Instance.StartFishing(this);
+
+            FishingSystem.Instance.StartFishing(this);
         }
 
         public void StartFishEvent(SO_Fish _caughtFish)
@@ -157,6 +157,8 @@ namespace FishingGame
 
         public void PlayFishBitingAnimation(bool _withIcon)
         {
+            Debug.Log("FSM Fishing biting animation");
+
             if (_withIcon)
                 DisplayIcon(EEmotion.Alert);
 

@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using enums;
 using Helper;
 using ScriptableObjects;
-using UIScripts;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace FishingGame
 {
@@ -25,15 +26,24 @@ namespace FishingGame
         private bool fishing;
         public bool PressedCatch { get; set; }
 
-        private FishingSystem()
+        private void Awake()
         {
-            instance = this;
+            if (Instance == null)
+                instance = this;
+            else
+            {
+                Debug.LogError("More than one instance of this script exists, destroying self");
+                Destroy(gameObject);
+            }
         }
 
         private void Start()
         {
             if (fishList == null || fishList.Count <= 0)
                 Debug.LogError("FishingSystem fishList is null");
+
+            this.gameObject.SetActive(true);
+            this.gameObject.transform.parent.gameObject.SetActive(true);
         }
 
         private void OnDisable()
@@ -54,7 +64,26 @@ namespace FishingGame
 
         public void StartFishing(FishingSystemManager _fishingSystemManager)
         {
+            Debug.Log("FS Fishing start");
             fishing = true;
+
+            if (!this.gameObject.transform.parent.gameObject.activeInHierarchy)
+            {
+                Debug.Log("FishingSystem ob parent " + gameObject.transform.parent.gameObject.name + " disabled");
+                this.gameObject.transform.parent.gameObject.SetActive(true);
+            }
+
+            if (!this.gameObject.activeInHierarchy)
+            {
+                Debug.Log("FishingSystem obj disabled");
+                this.gameObject.SetActive(true);
+            }
+
+            if (!this.enabled)
+            {
+                Debug.Log("FishingSystem disabled");
+                this.enabled = true;
+            }
 
             _fishingSystemManager.FishingRoutine = StartCoroutine(FishingCoroutine(_fishingSystemManager));
         }
@@ -62,7 +91,7 @@ namespace FishingGame
         public void StopFishing(FishingSystemManager _fishingSystemManager)
         {
             EndCoroutine(_fishingSystemManager);
-            
+
             fishing = false;
             _fishingSystemManager.FishHooked = false;
         }
