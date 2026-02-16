@@ -8,7 +8,7 @@ namespace Juice
     public class IconHandler : MonoBehaviour
     {
         [SerializeField] private MeshRenderer target;
-        
+
         [SerializeField] private SO_Emotion[] emotions;
         [SerializeField] private float displayIconSeconds = 3f;
 
@@ -16,13 +16,15 @@ namespace Juice
 
         private GameObject TargetObject()
         {
+            Debug.Log("Looking for target");
+            
             if (this == null)
                 Debug.Log("I am null somehow...");
-            
+
             if (this.enabled == false)
             {
                 enabled = true;
-             Debug.Log("I was disabled");
+                Debug.Log("I was disabled");
             }
 
             if (this.gameObject.activeInHierarchy == false)
@@ -30,14 +32,14 @@ namespace Juice
                 Debug.Log("My GO was disabled");
                 gameObject.SetActive(true);
             }
-            
+
             // Just in case
             if (target == null)
             {
-                Debug.LogError("Target is null " + target);
+                Debug.LogError("Target is null ");
                 target = gameObject.GetComponentInChildren<MeshRenderer>();
             }
-            
+
             return target.gameObject;
         }
 
@@ -56,24 +58,24 @@ namespace Juice
         {
             if (target == null)
                 target = GetComponentInChildren<MeshRenderer>();
-            
+
             iconTimer = new CountdownTimer(displayIconSeconds);
-            
+
             Debug.Log("i am here, in start " + gameObject.transform.parent.parent.parent.name);
             iconTimer.OnTimerStop += () => { TargetObject().SetActive(false); };
             iconTimer.OnTimerStart += () => { TargetObject().SetActive(true); };
-            
+
             SetTargetRotation();
-            
+
             TargetObject().SetActive(false);
         }
-        
+
         private void SetTargetRotation()
         {
             Camera mainCamera = Camera.main;
             TargetObject().transform.rotation = Quaternion.LookRotation(-mainCamera.transform.up, -mainCamera.transform.forward);
         }
-        
+
         public void DisplayIcon(EEmotion _emotion)
         {
             if (TryGetEmotion(_emotion, out Material iconMaterial))

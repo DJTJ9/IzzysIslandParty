@@ -15,6 +15,7 @@ namespace FishingGame.NPCs
         [Header("Dependencies: ")]
         [SerializeField] private NPCFishingSystem fishingSystem;
         [SerializeField] private IconHandler iconHandler;
+        [SerializeField] private GameObject iconHandlerObj;
         [SerializeField] private Animator animator;
 
         private LineRenderer lineRenderer;
@@ -64,6 +65,11 @@ namespace FishingGame.NPCs
         private void OnDestroy()
         {
             StopAllCoroutines();
+        }
+
+        public void ActivateIconHandler()
+        {
+            iconHandler =  iconHandlerObj.GetComponent<IconHandler>();
         }
 
         public void OnNPCJoined(GameScoreSO _gameScore)

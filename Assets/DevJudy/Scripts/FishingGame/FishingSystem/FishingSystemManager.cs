@@ -20,6 +20,7 @@ namespace FishingGame
         [SerializeField] public QTEDisplayService QTEDisplayService;
         [SerializeField] private FishDisplay fishDisplay;
         [SerializeField] private IconHandler iconHandler;
+        [SerializeField] private GameObject iconHandlerObj;
         [SerializeField] private UIPointsService pointsService;
         private FishingRodController fishingRodController;
         private CatchEventHandler catchEventHandler;
@@ -59,6 +60,11 @@ namespace FishingGame
         {
             FishingSystem.Instance.gameObject.SetActive(true);
             FishingSystem.Instance.enabled = true;
+        }
+
+        public void ActivateIconHandler()
+        {
+            iconHandler = iconHandlerObj.GetComponent<IconHandler>();
         }
 
         public void OnPlayerJoined(GameScoreSO _gameScore, int _playerIndex)
