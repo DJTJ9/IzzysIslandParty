@@ -42,6 +42,25 @@ namespace FishingGame
                 Debug.LogError("FishingSystemManager is missing catch EventHandler");
         }
 
+        private void Start()
+        {
+            if (playerIndex == 0)
+            {
+                ActivateFishingSystem();
+            }
+        }
+
+        private void OnDestroy()
+        {
+            StopAllCoroutines();
+        }
+
+        private void ActivateFishingSystem()
+        {
+            FishingSystem.Instance.gameObject.SetActive(true);
+            FishingSystem.Instance.enabled = true;
+        }
+
         public void OnPlayerJoined(GameScoreSO _gameScore, int _playerIndex)
         {
             gameScore = _gameScore;
@@ -86,7 +105,10 @@ namespace FishingGame
 
         public void StartFishing()
         {
-            FishingSystem.Instance.StartFishing(this);
+            if (!FishingSystem.Instance.enabled || !FishingSystem.Instance.gameObject.activeInHierarchy)
+                ActivateFishingSystem();
+            else
+                FishingSystem.Instance.StartFishing(this);
         }
 
         public void StartFishEvent(SO_Fish _caughtFish)

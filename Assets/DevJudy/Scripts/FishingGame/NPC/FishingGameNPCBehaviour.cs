@@ -61,6 +61,11 @@ namespace FishingGame.NPCs
             StopAllCoroutines();
         }
 
+        private void OnDestroy()
+        {
+            StopAllCoroutines();
+        }
+
         public void OnNPCJoined(GameScoreSO _gameScore)
         {
             gameScore = _gameScore;

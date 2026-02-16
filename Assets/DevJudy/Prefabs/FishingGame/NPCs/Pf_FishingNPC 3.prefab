@@ -75,7 +75,7 @@ PrefabInstance:
     - target: {fileID: 7295863958124258767, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
       propertyPath: iconHandler
       value: 
-      objectReference: {fileID: 1894862738469252581}
+      objectReference: {fileID: 9007694439354142239}
     - target: {fileID: 7295863958124258767, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
       propertyPath: fishingSystem
       value: 
@@ -116,9 +116,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5c15f0574464b4f955be4f9b606a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1894862738469252581 stripped
+--- !u!95 &7112903903214495086 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7954142965795783733, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
+  m_PrefabInstance: {fileID: 924599705142878555}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9007694439354142239 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1630075566880033982, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8202485207267274564, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
   m_PrefabInstance: {fileID: 924599705142878555}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -127,8 +132,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052768314f11ad44d818d1fc9155a407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &7112903903214495086 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7954142965795783733, guid: 4072afcebd9c431418b6e4e8b0076600, type: 3}
-  m_PrefabInstance: {fileID: 924599705142878555}
-  m_PrefabAsset: {fileID: 0}
