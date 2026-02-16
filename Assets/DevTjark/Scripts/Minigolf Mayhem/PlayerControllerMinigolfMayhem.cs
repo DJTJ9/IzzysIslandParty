@@ -6,15 +6,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerControllerMinigolfMayhem : Controller
 {
-    // public int PlayerIndex { get; private set; }
-
     [Header("Movement")]
     private RigidbodyMovement rigidbodyMovement;
 
-    // public CameraRotator CameraRotator;
-
     [Header("Input")]
-    private PlayerInput playerInput;
+    // private PlayerInput playerInput;
 
     // [Header("Settings")]
     // [SerializeField] private float lookSensitivity = 2;
@@ -23,19 +19,10 @@ public class PlayerControllerMinigolfMayhem : Controller
     [SerializeField] private UnityEvent OnPause;
     [SerializeField] private UnityEvent OnUnpause;
 
-    private InputAction moveInputAction;
-    private InputAction jumpInputAction;
-    private InputAction lookInputAction;
-    private InputAction shootInputAction;
-    private InputAction pauseInputAction;
-    private InputAction unpauseInputAction;
-
     private void Awake()
     {
         rigidbodyMovement = GetComponent<RigidbodyMovement>();
         playerInput = GetComponent<PlayerInput>();
-
-        // MapInputActions();
     }
 
     private void OnEnable()
@@ -63,30 +50,6 @@ public class PlayerControllerMinigolfMayhem : Controller
         // }
     }
 
-    // /// <summary>
-    // /// Rotates camera vertically if cursor lock mode is locked.
-    // /// </summary>
-    // private void LateUpdate()
-    // {
-    //     if (CameraRotator != null)
-    //         UpdateCamera();
-    // }
-
-    // /// <summary>
-    // /// Gets rotation from input
-    // /// Rotates camera in the direction of the rotation input
-    // /// </summary>
-    // private void UpdateCamera()
-    // {
-    //     var rotation = GetRotationFromInput();
-    //     CameraRotator.Rotate(rotation.y);
-    // }
-
-    public void Initialize(int playerIndex)
-    {
-        PlayerIndex = playerIndex;
-    }
-
     /// <summary>
     /// Maps the input actions
     /// Subcribes methods to their matching input actions
@@ -110,15 +73,15 @@ public class PlayerControllerMinigolfMayhem : Controller
     //     //     unpauseInputAction = playerInput.actions["Unpause"];
     //     //     unpauseInputAction.started += OnUnpauseInput;
     // }
-    public void SwitchToPlayerInputMap()
+    public override void SwitchToPlayerInputMap()
     {
         playerInput.SwitchCurrentActionMap("MinigolfMayhem");
     }
 
-    public void SwitchToUIInputMap()
-    {
-        playerInput.SwitchCurrentActionMap("UI");
-    }
+    // public void SwitchToUIInputMap()
+    // {
+    //     playerInput.SwitchCurrentActionMap("UI");
+    // }
 
     public void OnPauseInput(InputAction.CallbackContext _context)
     {
@@ -132,44 +95,25 @@ public class PlayerControllerMinigolfMayhem : Controller
 
     public void OnMoveInput(InputAction.CallbackContext _context)
     {
+        if (!m_isActive) return;
+        
         rigidbodyMovement.Move(_context.ReadValue<Vector2>());
     }
 
     public void OnShootInput(InputAction.CallbackContext _context)
     {
+        if (!m_isActive) return;
+
         rigidbodyMovement.StartCharging(_context);
         // rigidbodyMovement.Shoot();
     }
 
     public void OnJumpInput(InputAction.CallbackContext _context)
     {
+        if (!m_isActive) return;
+
         rigidbodyMovement.Jump();
     }
-
-    // public void OnLookInput(InputAction.CallbackContext _context)
-    // {
-    //     var rotation = _context.ReadValue<Vector2>();
-    //     rigidbodyMovement.RotateHorizontal(rotation.x * lookSensitivity);
-    //     // UpdateCamera();
-    // }
-
-    // /// <summary>
-    // /// Gets the horizontal move direction from the input
-    // /// Converts this input into a 3D vector and returns it
-    // /// </summary>
-    // public Vector3 GetMoveDirectionFromInput()
-    // {
-    //     var moveInput = moveInputAction.ReadValue<Vector2>();
-    //     return new Vector3(moveInput.x, 0f, moveInput.y);
-    // }
-    //
-    // /// <summary>
-    // /// Gets the rotation input and returns it
-    // /// </summary>
-    // public Vector2 GetRotationFromInput()
-    // {
-    //     return lookInputAction.ReadValue<Vector2>();
-    // }
 
     public void LockMouseCursor()
     {

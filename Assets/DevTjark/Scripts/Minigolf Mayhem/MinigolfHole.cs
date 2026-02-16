@@ -12,12 +12,19 @@ public class MinigolfHole : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
         
+        other.TryGetComponent<Controller>(out var controller);
+        {
+            placingSO.AddPlayerToPlacingList(controller.PlayerIndex);
+            playerFinished.Invoke();
+            controller.DisableController();
+            ConsoleProDebug.LogToFilter($"Player {controller.PlayerIndex} finished at {placingSO.playerPlacing.Count} place!", "Event");
+        }
+        
         other.TryGetComponent<PlayerControllerMinigolfMayhem>(out var playerController);
         {
-            placingSO.AddPlayerToPlacingList(playerController.PlayerIndex);
-            playerFinished.Invoke();
+            playerController.SwitchToUIInputMap();
         }
             
-        other.gameObject.SetActive(false);
+        // other.gameObject.SetActive(false);
     }
 }

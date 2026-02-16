@@ -336,7 +336,31 @@ MonoBehaviour:
   Event: {fileID: 11400000, guid: fa65f5c48a074014486b3bdbfb66852d, type: 2}
   Response:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2926994867532943103}
+        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
+        m_MethodName: DisableController
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2926994867532943103}
+        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
+        m_MethodName: SwitchToUIInputMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6215874565374681436
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,8 +435,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6784404951212928872}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.081625916, y: 0.000000041429676, z: 0.0000000033930578, w: 0.99666303}
-  m_LocalPosition: {x: -23.58, y: 1.9567472, z: -5.1464005}
+  m_LocalRotation: {x: -0.039844755, y: -1.3955642e-10, z: -5.56501e-12, w: 0.9992059}
+  m_LocalPosition: {x: 0, y: 1.994648, z: -4.3264008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -451,7 +475,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 75
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -590,8 +614,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7205134141381534054}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.081625916, y: 0.000000041641595, z: 0.0000000059806173, w: 0.9966631}
-  m_LocalPosition: {x: 0, y: 1.4567472, z: -4.3264008}
+  m_LocalRotation: {x: -0.039844755, y: -1.3955642e-10, z: -5.5650345e-12, w: 0.9992059}
+  m_LocalPosition: {x: 0, y: 1.994648, z: -4.3264008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -621,7 +645,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 60
+    FieldOfView: 75
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -664,13 +688,13 @@ MonoBehaviour:
   Orbits:
     Top:
       Radius: 6.5
-      Height: 1.7
+      Height: 0.7
     Center:
       Radius: 6.5
       Height: 0.3
     Bottom:
       Radius: 5.75
-      Height: -2.5
+      Height: -1.5
     SplineCurvature: 0.5
   RecenteringTarget: 2
   HorizontalAxis:
@@ -880,7 +904,7 @@ GameObject:
   - component: {fileID: 6519078515828607143}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -959,8 +983,8 @@ MonoBehaviour:
   pushForce: 10
   pushCooldown: 0.1
   minShootForce: 10
-  maxShootForce: 30
-  shootForceChangeSpeed: 30
+  maxShootForce: 50
+  shootForceChangeSpeed: 60
   shootCooldown: 0.1
   jumpPower: 5
   jumpCooldown: 0.1
@@ -1087,8 +1111,8 @@ Rigidbody:
   m_GameObject: {fileID: 8754331490394771550}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0.1
-  m_AngularDrag: 0.1
+  m_Drag: 0.5
+  m_AngularDrag: 0.5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1545,7 +1569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5831366682775931218, guid: af7bf084c7d704fefbedccb4c5180cc7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -800
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 5831366682775931218, guid: af7bf084c7d704fefbedccb4c5180cc7, type: 3}
       propertyPath: m_AnchoredPosition.y

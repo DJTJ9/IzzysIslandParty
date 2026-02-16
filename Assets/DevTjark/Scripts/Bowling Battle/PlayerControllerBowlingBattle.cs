@@ -28,7 +28,7 @@ public class PlayerControllerBowlingBattle : Controller
 
     [Header("References")] 
     private CharacterController controller;
-    private PlayerInput playerInput;
+    // private PlayerInput playerInput;
     private Rigidbody rb;
 
     [FoldoutGroup("Unity Events", expanded: false)]
@@ -148,14 +148,9 @@ private void Start()
         playerInput.enabled = true;
     }
 
-    public void SwitchToPlayerInputMap()
+    public override void SwitchToPlayerInputMap()
     {
         playerInput.SwitchCurrentActionMap("Player");
-    }
-    
-    public void SwitchToUIInputMap()
-    {
-        playerInput.SwitchCurrentActionMap("UI");
     }
 
     public void BindPlayerSO(SO_Player _playerSO)
