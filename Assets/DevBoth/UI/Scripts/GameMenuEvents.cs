@@ -27,6 +27,7 @@ public class GameMenuEvents : MonoBehaviour
     [SerializeField] private UnityEvent onGameStart;
     [SerializeField] private UnityEvent onUnpause;
     [SerializeField] private UnityEvent onRestart;
+    [SerializeField] private UnityEvent onLevelLoaded;
 
     private UIDocument document;
 
@@ -118,12 +119,8 @@ public class GameMenuEvents : MonoBehaviour
         BindButtons();
         InitializeSlotElements();
         FocusButton(controllerSelectionReadyButton);
-    }
-
-    
-    public void Test()
-    {
-        Debug.Log("Test");
+        
+        onLevelLoaded.Invoke();
     }
 
     private void OnEnable()
@@ -131,6 +128,8 @@ public class GameMenuEvents : MonoBehaviour
         RegisterButtonCallbacks();
         m_playerJoined = false;
         StartCoroutine(ShowOnlyJoinInstruction());
+        
+        onLevelLoaded.Invoke();
     }
 
     private void OnDisable()

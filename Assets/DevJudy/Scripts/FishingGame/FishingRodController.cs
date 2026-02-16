@@ -73,27 +73,28 @@ namespace FishingGame
 
         public void OnJoin(InputAction.CallbackContext _context)
         {
-            Debug.Log("Join");
-            
-            var device = _context.control.device;
+            if (_context.started)
+            {
+                var device = _context.control.device;
 
-            if (device is Gamepad gamepad)
-            {
-                if (gamepad is DualShockGamepad dualShockGamepad)
+                if (device is Gamepad gamepad)
                 {
-                    Debug.Log("PlayStation controller");
-                    qteDisplayService.controlScheme = EControlScheme.PlayStation;
+                    if (gamepad is DualShockGamepad dualShockGamepad)
+                    {
+                        Debug.Log("PlayStation controller");
+                        qteDisplayService.controlScheme = EControlScheme.PlayStation;
+                    }
+                    else if (gamepad is XInputController xInputController)
+                    {
+                        Debug.Log("Xbox controller");
+                        qteDisplayService.controlScheme = EControlScheme.Xbox;
+                    }
                 }
-                else if (gamepad is XInputController xInputController)
+                else if (device is Keyboard keyboard)
                 {
-                    Debug.Log("Xbox controller");
-                    qteDisplayService.controlScheme = EControlScheme.Xbox;
+                    Debug.Log("Keyboard controller");
+                    qteDisplayService.controlScheme = EControlScheme.Keyboard;
                 }
-            }
-            else if (device is Keyboard keyboard)
-            {
-                Debug.Log("Keyboard controller");
-                qteDisplayService.controlScheme = EControlScheme.Keyboard;
             }
         }
 

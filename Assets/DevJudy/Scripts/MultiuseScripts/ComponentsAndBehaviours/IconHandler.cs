@@ -14,10 +14,13 @@ namespace Juice
 
         private CountdownTimer iconTimer;
 
+        [SerializeField] private bool debug;
+
         private GameObject TargetObject()
         {
-            Debug.Log("Looking for target");
-            
+            if (debug)
+                Debug.Log("Looking for target");
+
             if (this == null)
                 Debug.Log("I am null somehow...");
 
@@ -61,7 +64,9 @@ namespace Juice
 
             iconTimer = new CountdownTimer(displayIconSeconds);
 
-            Debug.Log("i am here, in start " + gameObject.transform.parent.parent.parent.name);
+            if (debug)
+                Debug.Log("i am here, in start " + gameObject.transform.parent.parent.parent.name);
+            
             iconTimer.OnTimerStop += () => { TargetObject().SetActive(false); };
             iconTimer.OnTimerStart += () => { TargetObject().SetActive(true); };
 
