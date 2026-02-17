@@ -7,6 +7,7 @@ using HurdleGame.Camera;
 using MultiuseScripts;
 using Player.Collections;
 using TMPro;
+using UIScripts;
 using UnityEngine;
 
 namespace HurdleGame.LevelService
@@ -38,6 +39,7 @@ namespace HurdleGame.LevelService
         [Header("Dependencies: ")]
         [SerializeField] private SO_PlayerCollectionRacingGames currentPlayersRacing;
         [SerializeField] private CameraMoverAddition cameraMoverAddition;
+        [SerializeField] private UIPanelManager uiPanelManager;
 
         [Header("Temp ")]
         //[SerializeField] private TextMeshProUGUI placementText;
@@ -101,6 +103,8 @@ namespace HurdleGame.LevelService
 
             playerCount++;
             humanPlayerCount++;
+            
+            uiPanelManager.SetPlayers(humanPlayerCount);
         }
 
         public void OnNPCJoined(GameObject _player)
