@@ -24,6 +24,7 @@ namespace FishingGame
         [SerializeField] private Transform[] rodLineRendererPositions;
 
         private bool isCast = false;
+        private bool firstTimeCast = true;
 
         [Header("Pausing: ")]
         [SerializeField] private UnityEvent OnPauseGame;
@@ -72,29 +73,17 @@ namespace FishingGame
 
         public void OnJoin(InputAction.CallbackContext _context)
         {
-            if (_context.started)
-            {
-                var device = _context.control.device;
+            var device = _context.control.device;
 
-                if (device is Gamepad gamepad)
-                {
-                    if (gamepad is DualShockGamepad dualShockGamepad)
-                    {
-                        Debug.Log("PlayStation controller");
-                        qteDisplayService.controlScheme = EControlScheme.PlayStation;
-                    }
-                    else if (gamepad is XInputController xInputController)
-                    {
-                        Debug.Log("Xbox controller");
-                        qteDisplayService.controlScheme = EControlScheme.Xbox;
-                    }
-                }
-                else if (device is Keyboard keyboard)
-                {
-                    Debug.Log("Keyboard controller");
-                    qteDisplayService.controlScheme = EControlScheme.Keyboard;
-                }
+            if (device is Gamepad gamepad)
+            {
+                if (gamepad is DualShockGamepad dualShockGamepad)
+                    qteDisplayService.controlScheme = EControlScheme.PlayStation;
+                else if (gamepad is XInputController xInputController)
+                    qteDisplayService.controlScheme = EControlScheme.Xbox;
             }
+            else if (device is Keyboard keyboard)
+                qteDisplayService.controlScheme = EControlScheme.Keyboard;
         }
 
         public void OnStopFishDisplay(InputAction.CallbackContext _context)
@@ -107,9 +96,14 @@ namespace FishingGame
         {
             if (_context.performed)
             {
+                if (firstTimeCast)
+                {
+                    OnJoin(_context);
+                    firstTimeCast = false;
+                }
+
                 if (!isCast)
                 {
-                    Debug.Log("FRC Cast");
                     isCast = true;
                     animator.SetBool(cast, isCast);
 
@@ -139,7 +133,6 @@ namespace FishingGame
 
         public void PlayFishBitingAnimation()
         {
-            Debug.Log("FRC Fish biting animation the second");
             animator.SetBool(fishBiting, true);
         }
 

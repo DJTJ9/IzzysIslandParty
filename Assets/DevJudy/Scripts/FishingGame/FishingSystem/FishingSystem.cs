@@ -64,27 +64,7 @@ namespace FishingGame
 
         public void StartFishing(FishingSystemManager _fishingSystemManager)
         {
-            Debug.Log("FS Fishing start");
             fishing = true;
-
-            if (!this.gameObject.transform.parent.gameObject.activeInHierarchy)
-            {
-                Debug.Log("FishingSystem ob parent " + gameObject.transform.parent.gameObject.name + " disabled");
-                this.gameObject.transform.parent.gameObject.SetActive(true);
-            }
-
-            if (!this.gameObject.activeInHierarchy)
-            {
-                Debug.Log("FishingSystem obj disabled");
-                this.gameObject.SetActive(true);
-            }
-
-            if (!this.enabled)
-            {
-                Debug.Log("FishingSystem disabled");
-                this.enabled = true;
-            }
-
             _fishingSystemManager.FishingRoutine = StartCoroutine(FishingCoroutine(_fishingSystemManager));
         }
 

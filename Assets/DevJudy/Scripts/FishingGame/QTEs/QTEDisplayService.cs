@@ -16,7 +16,7 @@ namespace FishingGame.QuickTimeEvents
         private const string northButtonPS = "Δ";
         private const string eastButtonPS = "O";
         private const string southButtonPS = "X";
-        private const string westButtonPS = "☐";
+        private const string westButtonPS = "□";
 
         private const string northButtonXbox = "Y";
         private const string eastButtonXbox = "B";

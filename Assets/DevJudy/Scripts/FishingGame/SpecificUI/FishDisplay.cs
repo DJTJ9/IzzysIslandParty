@@ -50,7 +50,7 @@ namespace FishingGame.Display
             fishUIRenderer = instantiatedObj;
             fishUIRenderer.name = "FishUIRendererObjects";
             fishUIRenderer.transform.SetParent(fishUIRendererParent.transform);
-            fishUIRenderer.transform.localPosition = fishUIRendererPosition; // Multiplay the transform (or an addition) with the playerIndex
+            fishUIRenderer.transform.localPosition = fishUIRendererPosition;
             fishUIRenderer.transform.rotation = new Quaternion(0f, 90f, 0f, 0f);
             fishUIRenderer.layer = fishUIRendererParent.layer;
             

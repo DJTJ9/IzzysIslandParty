@@ -349,8 +349,6 @@ public class GameMenuEvents : MonoBehaviour
 
     public void ShowFishingFrenzyStartScreen()
     {
-        Debug.Log("ShowFishingFrenzyStartScreen");
-        
         FreezeTimeScale();
         controllerSelectionMenu.style.display = DisplayStyle.Flex;
         HideAllGameHeadersAndInstructions();
