@@ -24,11 +24,6 @@ public class GameMenuEvents : MonoBehaviour
 
     [SerializeField] private VisualTreeAsset rowTemplate;
 
-    [SerializeField] private UnityEvent onGameStart;
-    [SerializeField] private UnityEvent onUnpause;
-    [SerializeField] private UnityEvent onRestart;
-    [SerializeField] private UnityEvent onLevelLoaded;
-
     private UIDocument document;
 
     [Header("Menus")]
@@ -107,6 +102,12 @@ public class GameMenuEvents : MonoBehaviour
     private VisualElement[] m_slots;
     private VisualElement joinInstruction;
     private VisualElement startGameInstruction;
+    
+    [FoldoutGroup("Events", expanded: false)]
+    [SerializeField] private UnityEvent onGameStart;
+    [SerializeField] private UnityEvent onUnpause;
+    [SerializeField] private UnityEvent onRestart;
+    [SerializeField] private UnityEvent onLevelLoaded;
     
     private int m_joinedPlayers = 0;
     private bool m_playerJoined = false;
@@ -520,6 +521,13 @@ public class GameMenuEvents : MonoBehaviour
         FocusButton(resultScreenContinueButton);
     }
 
+    public void ShowMinigolfRaceResultsScreen()
+    {
+        ShowMinigolfResults(currentPlayersRacing.Players);
+        resultsScreen.style.display = DisplayStyle.Flex;
+        FocusButton(resultScreenContinueButton);
+    }
+
     public void ShowRaceResultsScreen()
     {
         ShowRaceResults(currentPlayersRacing.Players);
@@ -558,6 +566,48 @@ public class GameMenuEvents : MonoBehaviour
             row.Q<Label>("ScoreLabel").text = data.PlayerScore.Value.ToString();
 
             previousScore = currentScore;
+
+            // if (i == 0)
+            //     row.AddToClassList("winner");
+            //
+            // if (data.IsNPC)
+            //     row.AddToClassList("npc");
+
+            container.Add(row);
+        }
+    }
+    
+    private void ShowMinigolfResults(List<SO_PlayerRacingGames> _results)
+    {
+        var root = GetComponent<UIDocument>().rootVisualElement;
+        var container = resultsModal;
+
+        container.Clear();
+
+        var ordered = _results
+            .OrderByDescending(_r => _r.TimeValue)
+            .ToList();
+
+        var currentRank = 1;
+        var previousTime = float.MinValue;
+
+        for (var i = 0; i < ordered.Count; i++)
+        {
+            var data = ordered[i];
+            var row = rowTemplate.CloneTree();
+
+            var currentTime = data.TimeValue;
+
+            if (i > 0 && currentTime != previousTime)
+            {
+                currentRank = i + 1;
+            }
+
+            row.Q<Label>("RankLabel").text = $"{currentRank}";
+            row.Q<Label>("NameLabel").text = data.Name;
+            row.Q<Label>("ScoreLabel").text = data.TimeValue.ToString("0.00:000");
+
+            previousTime = currentTime;
 
             // if (i == 0)
             //     row.AddToClassList("winner");

@@ -9,11 +9,7 @@ public class PlayerControllerMinigolfMayhem : Controller
     [Header("Movement")]
     private RigidbodyMovement rigidbodyMovement;
 
-    [Header("Input")]
-    // private PlayerInput playerInput;
-
-    // [Header("Settings")]
-    // [SerializeField] private float lookSensitivity = 2;
+    [HideInInspector] public int ShootCount;
 
     [FoldoutGroup("Events", expanded: true)] 
     [SerializeField] private UnityEvent OnPause;
@@ -28,6 +24,7 @@ public class PlayerControllerMinigolfMayhem : Controller
     private void OnEnable()
     {
         playerInput.SwitchCurrentActionMap("MinigolfMayhem");
+        ShootCount = 0;
     }
 
 
@@ -105,7 +102,7 @@ public class PlayerControllerMinigolfMayhem : Controller
         if (!m_isActive) return;
 
         rigidbodyMovement.StartCharging(_context);
-        // rigidbodyMovement.Shoot();
+        ++ShootCount;
     }
 
     public void OnJumpInput(InputAction.CallbackContext _context)

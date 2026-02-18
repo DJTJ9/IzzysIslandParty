@@ -1,12 +1,23 @@
 ﻿using System;
+using Player;
+using Player.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class MinigolfHole : MonoBehaviour
 {
-    [SerializeField] private SO_Placing placingSO;
+    [SerializeField] private SO_PlayerCollectionRacingGames currentPlayersSO;
 
-    [SerializeField] private UnityEvent playerFinished;
+    public static event Action<int> onMinigolfPlayerFinished;
+    [SerializeField] private UnityEvent onGameEnd;
+    
+    private int m_finishedPlayers;
+    private const int MAX_PLAYER_COUNT = 4;
+
+    private void OnEnable()
+    {
+        m_finishedPlayers = 0;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,16 +25,24 @@ public class MinigolfHole : MonoBehaviour
         
         other.TryGetComponent<Controller>(out var controller);
         {
-            placingSO.AddPlayerToPlacingList(controller.PlayerIndex);
-            playerFinished.Invoke();
+            onMinigolfPlayerFinished?.Invoke(controller.PlayerIndex);
             controller.DisableController();
-            ConsoleProDebug.LogToFilter($"Player {controller.PlayerIndex} finished at {placingSO.playerPlacing.Count} place!", "Event");
+            
+            ++m_finishedPlayers;
+            
+            if (m_finishedPlayers == MAX_PLAYER_COUNT - 1)
+            {
+                onGameEnd.Invoke();
+                ConsoleProDebug.LogToFilter("Game End!", "Event");
+            }
         }
         
         other.TryGetComponent<PlayerControllerMinigolfMayhem>(out var playerController);
         {
             playerController.SwitchToUIInputMap();
         }
+        
+        other.transform.parent.GetComponentInChildren<PlayerUIMinigolfMayhem>().StopTimer();
             
         // other.gameObject.SetActive(false);
     }
