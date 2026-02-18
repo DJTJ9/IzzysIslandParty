@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 121aad1d17ab4083b1ee0a0475c0ae78, type: 3}
-  m_Name: Current Players
+  m_Script: {fileID: 11500000, guid: 12a60e4756ee9ea4d940faa4bcb0f711, type: 3}
+  m_Name: Minigolf Mayhem NPC 1
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,8 +21,10 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  Players:
-  - {fileID: 11400000, guid: 12afc510c686fbb469b167d62f12c5ba, type: 2}
-  - {fileID: 11400000, guid: 7e6b95c077dc0a341a38538f1dd11cb2, type: 2}
-  - {fileID: 11400000, guid: fb374fd9730cee64884233d0d0fef9fd, type: 2}
-  - {fileID: 11400000, guid: 62a7041be2ae4314abb7890942c60732, type: 2}
+  Name: Bob
+  PlayerReference: {fileID: 2958070555665010310, guid: 30ae0d8a105a974429073e8f505a1f0c, type: 3}
+  PlayerScore: {fileID: 11400000, guid: b8a06302b0b40e843947a0a489e94e4e, type: 2}
+  SpawnPoint: {x: 105, y: 0.5, z: 32}
+  IsNPC: 0
+  Time: 0:54
+  TimeValue: 53.745567

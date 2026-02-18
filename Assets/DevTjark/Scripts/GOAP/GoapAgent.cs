@@ -1,38 +1,37 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DependencyInjection;
-using ImprovedTimers; // https://github.com/adammyhre/Unity-Dependency-Injection-Lite
+using ImprovedTimers;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class GoapAgent : MonoBehaviour {
     [Header("Settings")]
-    [SerializeField] float cooldownTimerDuration = 5f;
+    [SerializeField] private float cooldownTimerDuration = 5f;
     
     [Header("Sensors")] 
-    [SerializeField] Sensor chaseSensor;
-    [SerializeField] Sensor attackSensor;
+    [SerializeField] private Sensor chaseSensor;
+    [SerializeField] private Sensor attackSensor;
     
     [Header("Known Locations")] 
-    [SerializeField] Transform playerTransform;
-    [SerializeField] Transform finishTransform;
-    [SerializeField] Transform checkPoint1;
-    [SerializeField] Transform checkPoint2;
-    [SerializeField] Transform checkPoint3;
-    // [SerializeField] Transform doorTwoPosition;
+    [SerializeField] private Transform player1Transform;
+    [SerializeField] private Transform player2Transform;
+    // [SerializeField] private Transform player3Transform;
+    [SerializeField] private Transform finishTransform;
+    [SerializeField] private Transform checkPoint1;
+    [SerializeField] private Transform checkPoint2;
+    [SerializeField] private Transform checkPoint3;
     
-    Rigidbody rb;
-    GoapRigidbodyMovement rigidbodyMovement;
-    
-    CountdownTimer statsTimer;
-    CountdownTimer moveCooldownTimer;
+    private Rigidbody rb;
+    private GoapRigidbodyMovement rigidbodyMovement;
+
+    private CountdownTimer statsTimer;
+    private CountdownTimer moveCooldownTimer;
     
     // private bool m_isOnCooldown;
     
-    GameObject target;
-    Vector3 destination;
+    private GameObject target;
+    private Vector3 destination;
     
-    AgentGoal lastGoal;
+    private AgentGoal lastGoal;
     public AgentGoal currentGoal;
     public ActionPlan actionPlan;
     public AgentAction currentAction;
@@ -41,24 +40,32 @@ public class GoapAgent : MonoBehaviour {
     public HashSet<AgentAction> actions;
     public HashSet<AgentGoal> goals;
     
-    IGoapPlanner gPlanner;
+    private IGoapPlanner gPlanner;
     
-    void Awake() {
+    private void Awake() {
         rb = GetComponent<Rigidbody>();
         // rb.freezeRotation = true;
         rigidbodyMovement = GetComponent<GoapRigidbodyMovement>();
         
         gPlanner = new GoapPlanner();
+
+        player1Transform = LocationService.Instance.GetTransform("Player1");
+        player2Transform = LocationService.Instance.GetTransform("Player2");
+        // player3Transform = LocationService.Instance.GetTransform("Player3");
+        finishTransform = LocationService.Instance.GetTransform("Finish");
+        checkPoint1 = LocationService.Instance.GetTransform("CheckPoint1");
+        checkPoint2 = LocationService.Instance.GetTransform("CheckPoint2");
+        checkPoint3 = LocationService.Instance.GetTransform("CheckPoint3");
     }
 
-    void Start() {
+    private void Start() {
         SetupTimers();
         SetupBeliefs();
         SetupActions();
         SetupGoals();
     }
 
-    void SetupBeliefs() {
+    private void SetupBeliefs() {
         beliefs = new Dictionary<Beliefs, AgentBelief>();
         BeliefFactory factory = new BeliefFactory(this, beliefs);
         
@@ -86,15 +93,19 @@ public class GoapAgent : MonoBehaviour {
         factory.AddLocationBelief(Beliefs.CheckPoint2InReach, 30f, checkPoint2);
         factory.AddLocationBelief(Beliefs.CheckPoint3InReach, 30f, checkPoint3);
         
-        factory.AddLocationBelief(Beliefs.PlayerClose, 15f, playerTransform);
-        // factory.AddLocationBelief("PlayerChasable", 30f, playerTransform);
+        factory.AddLocationBelief(Beliefs.Player1Close, 15f, player1Transform);
+        factory.AddLocationBelief(Beliefs.Player2Close, 15f, player2Transform);
+        // factory.AddLocationBelief(Beliefs.Player3Close, 15f, player3Transform);
+        // factory.AddLocationBelief("PlayerChasable", 30f, player1Transform);
         
         // factory.AddSensorBelief("PlayerInChaseRange", chaseSensor);
         // factory.AddSensorBelief("PlayerInAttackRange", attackSensor);
-        factory.AddBelief(Beliefs.AttackingPlayer, () => false); // Player can always be attacked, this will never become true
+        factory.AddBelief(Beliefs.AttackingPlayer1, () => false);
+        factory.AddBelief(Beliefs.AttackingPlayer2, () => false);
+        factory.AddBelief(Beliefs.AttackingPlayer3, () => false);
     }
 
-    void SetupActions() {
+    private void SetupActions() {
         actions = new HashSet<AgentAction>();
         
         actions.Add(new AgentAction.Builder(Actions.Relax)
@@ -142,16 +153,28 @@ public class GoapAgent : MonoBehaviour {
         //     .Build());
 
         // actions.Add(new AgentAction.Builder("ChasePlayer")
-        //     .WithStrategy(new MoveStrategy(rigidbodyMovement ,() => playerTransform.position, cooldownTimerDuration))
+        //     .WithStrategy(new MoveStrategy(rigidbodyMovement ,() => player1Transform.position, cooldownTimerDuration))
         //     .AddPrecondition(beliefs["PlayerChasable"])
-        //     .AddEffect(beliefs["AttackingPlayer"])
+        //     .AddEffect(beliefs["AttackingPlayer1"])
         //     .Build());
 
-        actions.Add(new AgentAction.Builder(Actions.AttackPlayer)
-            .WithStrategy(new AttackStrategy(rigidbodyMovement ,() => playerTransform.position, cooldownTimerDuration))
-            .AddPrecondition(beliefs[Beliefs.PlayerClose])
-            .AddEffect(beliefs[Beliefs.AttackingPlayer])
+        actions.Add(new AgentAction.Builder(Actions.AttackPlayer1)
+            .WithStrategy(new AttackStrategy(rigidbodyMovement ,() => player1Transform.position, cooldownTimerDuration))
+            .AddPrecondition(beliefs[Beliefs.Player1Close])
+            .AddEffect(beliefs[Beliefs.AttackingPlayer1])
             .Build());
+        
+        actions.Add(new AgentAction.Builder(Actions.AttackPlayer2)
+            .WithStrategy(new AttackStrategy(rigidbodyMovement ,() => player2Transform.position, cooldownTimerDuration))
+            .AddPrecondition(beliefs[Beliefs.Player2Close])
+            .AddEffect(beliefs[Beliefs.AttackingPlayer2])
+            .Build());
+        
+        // actions.Add(new AgentAction.Builder(Actions.AttackPlayer3)
+        //     .WithStrategy(new AttackStrategy(rigidbodyMovement ,() => player3Transform.position, cooldownTimerDuration))
+        //     .AddPrecondition(beliefs[Beliefs.Player3Close])
+        //     .AddEffect(beliefs[Beliefs.AttackingPlayer3])
+        //     .Build());
         
                 #region Examples
         // actions.Add(new AgentAction.Builder("MoveToEatingPosition")
@@ -196,7 +219,7 @@ public class GoapAgent : MonoBehaviour {
         #endregion
     }
 
-    void SetupGoals() {
+    private void SetupGoals() {
         goals = new HashSet<AgentGoal>();
         
         goals.Add(new AgentGoal.Builder(Goals.ChillOut)
@@ -214,14 +237,19 @@ public class GoapAgent : MonoBehaviour {
             .WithDesiredEffect(beliefs[Beliefs.FindNextPosition])
             .Build());
         
-        goals.Add(new AgentGoal.Builder(Goals.AttackPlayer)
+        goals.Add(new AgentGoal.Builder(Goals.AttackPlayer1)
             .WithPriority(250)
-            .WithDesiredEffect(beliefs[Beliefs.AttackingPlayer])
+            .WithDesiredEffect(beliefs[Beliefs.AttackingPlayer1])
             .Build());
-
-        // goals.Add(new AgentGoal.Builder("WaitForCooldown")
-        //     .WithPriority(100)
-        //     .WithDesiredEffect(beliefs["CooldownComplete"])
+        
+        goals.Add(new AgentGoal.Builder(Goals.AttackPlayer2)
+            .WithPriority(250)
+            .WithDesiredEffect(beliefs[Beliefs.AttackingPlayer2])
+            .Build());
+        
+        // goals.Add(new AgentGoal.Builder(Goals.AttackPlayer3)
+        //     .WithPriority(250)
+        //     .WithDesiredEffect(beliefs[Beliefs.AttackingPlayer3])
         //     .Build());
 
         goals.Add(new AgentGoal.Builder(Goals.GoForCheckPoint1)
@@ -245,8 +273,8 @@ public class GoapAgent : MonoBehaviour {
             .Build());
     }
 
-    void SetupTimers() {
-        statsTimer = new CountdownTimer(2f);
+    private void SetupTimers() {
+        statsTimer = new CountdownTimer(1f);
         statsTimer.OnTimerStop += () => {
             UpdateStats();
             SetupBeliefs();
@@ -262,14 +290,14 @@ public class GoapAgent : MonoBehaviour {
     }
 
     // TODO move to stats system
-    void UpdateStats() {
+    private void UpdateStats() {
         // stamina += InRangeOf(restingPosition.position, 3f) ? 20 : -10;
         // health += InRangeOf(foodShack.position, 3f) ? 20 : -5;
         // stamina = Mathf.Clamp(stamina, 0, 100);
         // health = Mathf.Clamp(health, 0, 100);
     }
     
-    bool InRangeOf(Vector3 pos, float range) => Vector3.Distance(transform.position, pos) < range;
+    private bool InRangeOf(Vector3 pos, float range) => Vector3.Distance(transform.position, pos) < range;
     
     // void OnEnable() => chaseSensor.OnTargetChanged += HandleTargetChanged;
     // void OnDisable() => chaseSensor.OnTargetChanged -= HandleTargetChanged;
@@ -281,7 +309,7 @@ public class GoapAgent : MonoBehaviour {
     //     currentGoal = null;
     // }
 
-    void Update() {
+    private void Update() {
         statsTimer.Tick(Time.deltaTime);
         
         // Update the plan and current action if there is one
@@ -325,7 +353,7 @@ public class GoapAgent : MonoBehaviour {
         }
     }
 
-    void CalculatePlan() {
+    private void CalculatePlan() {
         var priorityLevel = currentGoal?.Priority ?? 0;
         
         HashSet<AgentGoal> goalsToCheck = goals;

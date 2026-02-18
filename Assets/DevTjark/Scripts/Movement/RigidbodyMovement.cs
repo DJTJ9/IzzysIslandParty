@@ -141,14 +141,14 @@ public class RigidbodyMovement : MonoBehaviour
     {
         if (!canShoot) return;
         if (!groundChecker.IsGrounded) return;
+
+        var screenCenter = cam.ViewportToScreenPoint(new Vector3(0.5f, 0.5f, 0f));
         
-        Ray ray = cam.ScreenPointToRay(
-            new Vector3(Screen.width / 2f, Screen.height / 2f, 0f)
-        );
+        var ray = cam.ScreenPointToRay(screenCenter); 
 
-        Vector3 targetPoint = ray.GetPoint(500f);
+        var targetPoint = ray.GetPoint(500f);
 
-        Vector3 direction = (targetPoint - rigidbody.transform.position).normalized;
+        var direction = (targetPoint - rigidbody.transform.position).normalized;
 
         rigidbody.AddForce(direction * CurrentShootForce, ForceMode.Impulse);
 
