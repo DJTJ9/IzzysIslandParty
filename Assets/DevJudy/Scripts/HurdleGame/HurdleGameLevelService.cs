@@ -88,7 +88,7 @@ namespace HurdleGame.LevelService
             }
         }
 
-        public void OnPlayerJoined(GameObject _player)
+        public override void OnPlayerJoined(GameObject _player)
         {
             if (placementOrder == null || placementOrder.Length < 1)
                 placementOrder = new GameObject[maxNumberOfPlayers];
@@ -107,9 +107,9 @@ namespace HurdleGame.LevelService
             uiPanelManager.SetPlayers(humanPlayerCount);
         }
 
-        public void OnNPCJoined(GameObject _player)
+        public override void OnNPCJoined(GameObject _npc)
         {
-            ArrayHelper.AddToArray(placementOrder, _player);
+            ArrayHelper.AddToArray(placementOrder, _npc);
             playerCount++;
         }
 

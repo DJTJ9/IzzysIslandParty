@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 6809091188418600379}
   - component: {fileID: 6664637134840430477}
   - component: {fileID: 8925634802497040469}
+  - component: {fileID: -3731177486294092143}
   - component: {fileID: 2711142849334284071}
   - component: {fileID: 3418707877744614544}
   m_Layer: 7
@@ -236,6 +237,280 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &-3731177486294092143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2877345010806901709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: 0}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4f1ea0a2-cd42-4189-9b5d-a19b8315a4c8
+    m_ActionName: 'FishingGame/Cast[/Keyboard/c]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 84efd159-768b-41d1-b930-c839dd262958
+    m_ActionName: 'FishingGame/NorthBttnQTE[/Keyboard/w]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 680198ec-fa4a-428c-80ce-5effa0145284
+    m_ActionName: 'FishingGame/EastBttnQTE[/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4b597dbf-2a99-4998-8b23-70ff5908e42a
+    m_ActionName: 'FishingGame/SouthButtonQTE[/Keyboard/s]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 19a2ed36-1615-4147-bfdc-556d4edb32f1
+    m_ActionName: 'FishingGame/WestButtonQTE[/Keyboard/a]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 645fff6a-fa79-4f4d-86f8-19c46ad9a955
+    m_ActionName: 'FishingGame/LeftRightQTE[/Keyboard/leftArrow,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: JetskiGame.JetskiController, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 79e1a1a1-08ff-466d-bb2d-447d3fb32af6
+    m_ActionName: 'JetskiGame/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 20a6b32b-9f96-451d-b18d-dcf1b9dbf747
+    m_ActionName: 'JetskiGame/Look[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: JetskiGame.JetskiController, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 12c0e927-bf54-487c-bfd9-7faaa92b65c9
+    m_ActionName: 'JetskiGame/Jump[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 98fe41cb-6083-425f-b020-139b28f39e47
+    m_ActionName: 'HurdleGame/Jump[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a3c7abb7-3100-407a-9cb5-984300144824
+    m_ActionName: 'UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4b20b941-3d6b-4e87-abed-3645bf3d7f21
+    m_ActionName: 'UI/Submit[/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 468c52c5-95e9-457d-957e-70489283e262
+    m_ActionName: 'UI/Cancel[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3b13c68f-8270-4dad-9317-09df01ddb9ea
+    m_ActionName: 'UI/Point[/Mouse/position]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a1e48a85-021c-4fec-bd4c-addd5c22d662
+    m_ActionName: 'UI/Click[/Mouse/leftButton,/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b436a17e-c699-4f03-942e-2569f8d434e5
+    m_ActionName: 'UI/RightClick[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8b4d5d27-a8c9-4dd1-ab80-3574f1f6df32
+    m_ActionName: 'UI/MiddleClick[/Mouse/middleButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bde3249d-a514-4599-a6fb-59788109c645
+    m_ActionName: 'UI/ScrollWheel[/Mouse/scroll]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 37b7f79d-f302-4adb-925d-33951a7a95e2
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 09ff5283-225b-46b2-91d4-ce404689c100
+    m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d8db3f96-6d5c-4180-b583-ebc634144dea
+    m_ActionName: 'UI/Unpause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3f5b2076-0f7b-4ab2-b441-2a9c84f323cb
+    m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 292ed65c-2d01-4095-8369-c2949b5ea1e5
+    m_ActionName: 'Player/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b26b0f3f-5251-4593-b140-879a2f44f5c2
+    m_ActionName: 'Player/Join[/Keyboard/anyKey]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5bdcf41b-252b-4f3a-b0c1-7418f789a24e
+    m_ActionName: 'FishingGame/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 40ca9c30-5f39-43a4-bf92-d909781d54bf
+    m_ActionName: 'HurdleGame/Slide[/Keyboard/downArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f60f81e8-8952-4e5f-9c65-96b348c0117f
+    m_ActionName: New action map/New action
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cde468ba-184e-4c5d-9ae8-96f5986c5dcf
+    m_ActionName: 'UI/StartGame[/Keyboard/p]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b59bf41b-9b2b-4f85-bb39-53fb6513bdfd
+    m_ActionName: 'UI/Join[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0dd5b048-e1dd-4f7f-81ac-e00f7c81dffb
+    m_ActionName: 'SwaggySnapshots/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3cfd0d2b-0fb9-408b-a598-2c4598220792
+    m_ActionName: 'SwaggySnapshots/Look[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 135e9a8b-f52f-4596-8ece-ddca8a81eea8
+    m_ActionName: 'SwaggySnapshots/LeftMouse[/Mouse/leftButton,/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0f146e1d-5095-4489-ade0-79a8d261e544
+    m_ActionName: 'SwaggySnapshots/Interact[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e16901e0-9bad-4dc3-8742-01482cc388e1
+    m_ActionName: 'SwaggySnapshots/Crouch[/Keyboard/c]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d06de35d-67c7-49f6-9a25-c0481f048468
+    m_ActionName: 'SwaggySnapshots/TakePhoto[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 385ba492-6ea7-4c2f-b71a-c6036ef9b3bd
+    m_ActionName: 'SwaggySnapshots/Previous[/Keyboard/1]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4a8eec9c-8cfd-4e38-9b12-47d03ad16a36
+    m_ActionName: 'SwaggySnapshots/Next[/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d280e8c6-75cb-44a0-8452-15ea8253b03a
+    m_ActionName: 'SwaggySnapshots/Sprint[/Keyboard/leftShift]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ddfc4905-84d1-48c9-a43a-f4eacc564abc
+    m_ActionName: 'SwaggySnapshots/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ca07eafe-b771-40de-a6b8-43ebb7da6306
+    m_ActionName: 'SwaggySnapshots/Join[/Keyboard/anyKey]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 68276f0f-d2f1-4528-874c-c770db9628e8
+    m_ActionName: 'Player/Look[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a2f17958-1ccd-4227-81b0-a6b21f6efab2
+    m_ActionName: 'Player/Previous Ball[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a7ad0efa-33ed-4405-a546-ac1c4d69a023
+    m_ActionName: 'Player/Next Ball[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1adf136c-4b4a-4528-981e-ae2a2886385c
+    m_ActionName: 'MinigolfMayhem/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3b7c6bd0-e2bf-4021-b694-19075839718a
+    m_ActionName: 'MinigolfMayhem/Look[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 37733399-93da-44a7-839f-6c8d02a6acb2
+    m_ActionName: 'MinigolfMayhem/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 832443a4-660f-48f6-bef2-3e3b9d9cd23f
+    m_ActionName: 'MinigolfMayhem/Join[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ae807423-6597-4ecd-90b3-dfc2fb960650
+    m_ActionName: 'MinigolfMayhem/Shoot[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6fd8ac2b-7b99-47ac-bbac-eeb7c7633295
+    m_ActionName: 'MinigolfMayhem/Jump[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2fcd0ea7-79bf-481a-8ad0-9fd00f618f61
+    m_ActionName: 'FishingGame/Join[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 64abd04f-c22d-40a7-aaa4-ed2efd306744
+    m_ActionName: 'JetskiGame/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8095b1f7-a3ec-4cf9-9fdc-c4bb7d52de8e
+    m_ActionName: 'JetskiGame/Join[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f5284c38-a546-43e5-b966-4436bacd65e0
+    m_ActionName: 'HurdleGame/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: da4cc858-f7c2-4834-b23a-83f1948a0d62
+    m_ActionName: 'HurdleGame/Join[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6d7cb911-4255-4d60-a577-159f56863289
+    m_ActionName: 'FishingGameUI/Submit[/Keyboard/enter,/Keyboard/x]'
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: JetskiGame
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!114 &2711142849334284071
 MonoBehaviour:
   m_ObjectHideFlags: 0

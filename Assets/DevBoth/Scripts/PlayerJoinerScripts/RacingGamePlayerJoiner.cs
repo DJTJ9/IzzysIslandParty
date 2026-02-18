@@ -1,6 +1,8 @@
 ﻿using System.Collections;
+using HelperScripts;
 using HurdleGame;
-using HurdleGame.LevelService;
+using MultiuseScripts;
+using Pathfinding;
 using Player.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,12 +12,18 @@ namespace JetskiGame.Player.Multiplayer
 {
     public class RacingGamePlayerJoiner : MonoBehaviour
     {
-        [SerializeField] private HurdleGameLevelService levelService;
+        [SerializeField] private RacingGameLevelService levelService;
         [SerializeField] private SO_PlayerCollectionRacingGames currentPlayers;
         [SerializeField] private SO_PlayerCollectionRacingGames playerCollection;
         [SerializeField] private SO_PlayerCollectionRacingGames npcCollection;
         [SerializeField] private UnityEvent onLevelLoaded;
+        
         private int playerIndex;
+        private int humanPlayerIndex;
+        private int npcIndex;
+        
+        [SerializeField] private PlayerInputManager playerInputManager;
+        [SerializeField] private Controller npcBehaviour;
 
         private void Start()
         {
@@ -38,13 +46,19 @@ namespace JetskiGame.Player.Multiplayer
         {
             playerCollection.Players[playerIndex].PlayerReference = _playerInput.gameObject;
             
-            if (_playerInput.gameObject.TryGetComponent(out HurdleGameNPCBehaviour npc))
+            if (_playerInput.gameObject.TryGetComponent(out npcBehaviour))
             {
-                npc.SetPlayerIndex(playerIndex);
+                if (humanPlayerIndex == 1 && levelService is JetskiGameLevelService)
+                {
+                    Identifier cameraHolder = _playerInput.transform.parent.gameObject.GetComponentInChildren<Identifier>();
+                    cameraHolder.gameObject.SetActive(false);
+                }
                 
-                _playerInput.gameObject.name = npcCollection.Players[npc.GetPlayerIndex() - 1].Name;
+                npcBehaviour.SetPlayerIndex(playerIndex);
                 
-                currentPlayers.Players.Add(npcCollection.Players[npc.GetPlayerIndex() - 1]);
+                _playerInput.gameObject.name = npcCollection.Players[npcBehaviour.GetPlayerIndex() - 1].Name;
+                
+                currentPlayers.Players.Add(npcCollection.Players[npcBehaviour.GetPlayerIndex() - 1]);
                 levelService.OnNPCJoined(_playerInput.gameObject);
                 
                 ++playerIndex;
@@ -74,6 +88,9 @@ namespace JetskiGame.Player.Multiplayer
 
         public void JoinNPCs()
         {
+            if (playerIndex == 1)
+                playerInputManager.splitScreen = false;
+            
             var nPCStartIndex = playerIndex - 1;
 
             for (var i = nPCStartIndex; i < npcCollection.Players.Count; i++)

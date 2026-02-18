@@ -7,6 +7,7 @@ using ImprovedTimers;
 using MultiuseScripts;
 using Pathfinding;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace JetskiGame
@@ -41,10 +42,11 @@ namespace JetskiGame
 
         private void Awake()
         {
-            WinnerPlacementOrder =  new Dictionary<int, Tuple<GameObject, string>>();
+            WinnerPlacementOrder = new Dictionary<int, Tuple<GameObject, string>>();
             endLevelTimer = new CountdownTimer(secondsToEndLevel);
-            
-            CheckPlacementList();
+
+            if (checkPlacements)
+                CheckPlacementList();
         }
 
         private void CheckPlacementList()
@@ -75,8 +77,22 @@ namespace JetskiGame
                 Debug.LogWarning("Goal transform not set");
                 checkPlacements = false;
             }
+        }
 
-            StartLevel();
+        public override void OnPlayerJoined(GameObject _player)
+        {
+            if (placementOrder == null || placementOrder.Length < 1)
+                placementOrder = new GameObject[maxNumberOfPlayers];
+            
+            Debug.Log("OnPlayerJoined");
+            
+            ArrayHelper.AddToArray(placementOrder, _player);
+        }
+
+        public override void OnNPCJoined(GameObject _npc)
+        {
+            Debug.Log("OnNPCJoined");
+            ArrayHelper.AddToArray(placementOrder, _npc);
         }
 
         public override void StartLevel()
@@ -86,10 +102,22 @@ namespace JetskiGame
 
         private void LetNPCsStart()
         {
-            foreach (GameObject obj in placementOrder)
+            if (placementOrder == null || placementOrder.Length < 1)
             {
-                if (obj.TryGetComponent(out PathfindingUnit pathfindingUnit))
+                Debug.LogWarning("PlacementOrder array is empty");
+                return;
+            }
+            
+            for (int i = 0; i < placementOrder.Length; i++)
+            {
+                if (!placementOrder[i])
+                    Debug.LogWarning($"PlacementOrder[{i}] is empty...");
+
+                if (placementOrder[i].TryGetComponent(out PathfindingUnit pathfindingUnit))
+                {
+                    pathfindingUnit.SetTarget(goalTransform);
                     pathfindingUnit.CanFollowPath();
+                }
             }
         }
 
@@ -132,7 +160,7 @@ namespace JetskiGame
         {
             if (raceStarted && checkPlacements)
                 CheckRacerPlacements();
-            
+
             if (endLevelTimer.IsRunning)
                 endLevelTimer.Tick(Time.deltaTime);
         }
@@ -185,11 +213,11 @@ namespace JetskiGame
             int placement = WinnerPlacementOrder.Count + 1;
             var currentObj = new Tuple<GameObject, string>(_triggeringObj, LevelTimer.Instance.GetTimeAsString());
             WinnerPlacementOrder.Add(placement, currentObj);
-            
+
             if (((1 << _triggeringObj.layer) & playerLayerMask) != 0)
             {
                 OnPlayerCrossedFinishLine();
-                
+
                 StartCoroutine(StartLevelCountdownTimer());
             }
         }
@@ -203,14 +231,14 @@ namespace JetskiGame
         private IEnumerator StartLevelCountdownTimer()
         {
             endLevelTimer.Start();
-            
+
             while (endLevelTimer.IsRunning)
             {
                 yield return new WaitForFixedUpdate();
             }
 
             CheckWinnerPlacementList();
-            
+
             raceEnded = true;
             EndLevel();
 
@@ -231,10 +259,10 @@ namespace JetskiGame
         public override void EndLevel()
         {
             LevelTimer.Instance.EndTimerAndDisplayFinishTime();
-            
+
             onFinishLineCrossedText?.gameObject.SetActive(true);
             raceStarted = false;
-            
+
             OnLevelEnd?.Invoke();
         }
     }

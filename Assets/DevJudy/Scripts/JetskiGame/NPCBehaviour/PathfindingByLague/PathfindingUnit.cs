@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Pathfinding
 {
-    public class PathfindingUnit : MonoBehaviour
+    public class PathfindingUnit : Controller
     {
         private Rigidbody rb;
         
@@ -28,15 +28,18 @@ namespace Pathfinding
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
-            
-            // Register Unit
-            
-            StartCoroutine(UpdatePath());
+        }
+
+        public void SetTarget(Transform _target)
+        {
+            target = _target;
         }
 
         public void CanFollowPath()
         {
             canFollowPath = true;
+            
+            StartCoroutine(UpdatePath());
         }
         
         private void FixedUpdate()

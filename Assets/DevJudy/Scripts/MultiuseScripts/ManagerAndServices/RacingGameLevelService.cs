@@ -17,6 +17,10 @@ namespace MultiuseScripts
         
         public Dictionary<int, Tuple<GameObject, string>> WinnerPlacementOrder {get; protected set;}
         
+        public virtual void OnPlayerJoined(GameObject _player) { }
+        
+        public virtual void OnNPCJoined(GameObject _npc) { }
+        
         public virtual void OnFinishLineCrossed(GameObject _collidingObj) { }
     }
 }

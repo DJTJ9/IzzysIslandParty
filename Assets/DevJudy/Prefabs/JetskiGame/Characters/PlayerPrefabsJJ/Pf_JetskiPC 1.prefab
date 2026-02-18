@@ -170,6 +170,7 @@ Transform:
   - {fileID: 4373288823102948058}
   - {fileID: 2005656355114295213}
   - {fileID: 8755520025190681177}
+  - {fileID: 8624428486470604843}
   - {fileID: 5891404363016583560}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -964,15 +965,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raceOverPanel: {fileID: 898198963979465376}
-  scoresPanel: {fileID: 6586943977280491912}
   levelPanel: {fileID: 5601759341839017761}
-  showTimer: 0
-  playerPlacementsText: {fileID: 5623170966950890524}
-  playerNamesText: {fileID: 910385124040417568}
-  playerTimesText: {fileID: 6473632536036500382}
-  racingGameLevelService: {fileID: 0}
-  endGameMenu: {fileID: 5348165687540403033}
-  waitTimeAfterGameOver: 3
+  playerIdentPanel: {fileID: 0}
+  playerIdentImages: []
 --- !u!114 &4124002613061011342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -985,7 +980,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a04a8ff7d15bf2e45adafa3296f19160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsText: {fileID: 0}
   timerText: {fileID: 1841072576835433566}
 --- !u!1 &5348165687540403033
 GameObject:
@@ -1458,38 +1452,6 @@ MonoBehaviour:
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: c0acba80-ae38-4567-80bc-1a34a0d34f89
-    m_ActionName: 'Player/Look[/Mouse/delta]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5386e432-5750-4aab-81b7-b2396830b2a6
-    m_ActionName: 'Player/LeftMouse[/Mouse/leftButton,/Keyboard/enter]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b612b1bb-2f7f-4657-a2c0-f48c6e552617
-    m_ActionName: 'Player/Interact[/Keyboard/e]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 95d5b7cb-0875-4445-a78f-a205f3138d4e
-    m_ActionName: 'Player/Crouch[/Keyboard/c]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 82323fc8-0748-48f7-bf75-860a5499e6b3
-    m_ActionName: 'Player/Jump[/Keyboard/space]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ab9772d4-52b5-46af-b471-55773cc65d1e
-    m_ActionName: 'Player/Previous[/Keyboard/1]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c376c783-6d05-4576-9ab5-2b837187bcd6
-    m_ActionName: 'Player/Next[/Keyboard/2]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ce712994-46ce-4ee1-9444-b35bb73005c4
-    m_ActionName: 'Player/Sprint[/Keyboard/leftShift]'
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 292ed65c-2d01-4095-8369-c2949b5ea1e5
     m_ActionName: 'Player/Pause[/Keyboard/escape]'
   - m_PersistentCalls:
@@ -1510,10 +1472,130 @@ MonoBehaviour:
     m_ActionName: New action map/New action
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 4ec5b392-97e1-4254-953b-fe35e0c7cfb8
-    m_ActionName: 'Player/Navigate[/DualShock4GamepadHID/leftStick/up,/DualShock4GamepadHID/rightStick/up,/DualShock4GamepadHID/leftStick/down,/DualShock4GamepadHID/rightStick/down,/DualShock4GamepadHID/leftStick/left,/DualShock4GamepadHID/rightStick/left,/DualShock4GamepadHID/leftStick/right,/DualShock4GamepadHID/rightStick/right,/DualShock4GamepadHID/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+    m_ActionId: cde468ba-184e-4c5d-9ae8-96f5986c5dcf
+    m_ActionName: 'UI/StartGame[/Keyboard/p]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b59bf41b-9b2b-4f85-bb39-53fb6513bdfd
+    m_ActionName: 'UI/Join[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0dd5b048-e1dd-4f7f-81ac-e00f7c81dffb
+    m_ActionName: 'SwaggySnapshots/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3cfd0d2b-0fb9-408b-a598-2c4598220792
+    m_ActionName: 'SwaggySnapshots/Look[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 135e9a8b-f52f-4596-8ece-ddca8a81eea8
+    m_ActionName: 'SwaggySnapshots/LeftMouse[/Mouse/leftButton,/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0f146e1d-5095-4489-ade0-79a8d261e544
+    m_ActionName: 'SwaggySnapshots/Interact[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e16901e0-9bad-4dc3-8742-01482cc388e1
+    m_ActionName: 'SwaggySnapshots/Crouch[/Keyboard/c]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d06de35d-67c7-49f6-9a25-c0481f048468
+    m_ActionName: 'SwaggySnapshots/TakePhoto[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 385ba492-6ea7-4c2f-b71a-c6036ef9b3bd
+    m_ActionName: 'SwaggySnapshots/Previous[/Keyboard/1]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4a8eec9c-8cfd-4e38-9b12-47d03ad16a36
+    m_ActionName: 'SwaggySnapshots/Next[/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d280e8c6-75cb-44a0-8452-15ea8253b03a
+    m_ActionName: 'SwaggySnapshots/Sprint[/Keyboard/leftShift]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ddfc4905-84d1-48c9-a43a-f4eacc564abc
+    m_ActionName: 'SwaggySnapshots/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ca07eafe-b771-40de-a6b8-43ebb7da6306
+    m_ActionName: 'SwaggySnapshots/Join[/Keyboard/anyKey]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 68276f0f-d2f1-4528-874c-c770db9628e8
+    m_ActionName: 'Player/Look[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a2f17958-1ccd-4227-81b0-a6b21f6efab2
+    m_ActionName: 'Player/Previous Ball[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a7ad0efa-33ed-4405-a546-ac1c4d69a023
+    m_ActionName: 'Player/Next Ball[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1adf136c-4b4a-4528-981e-ae2a2886385c
+    m_ActionName: 'MinigolfMayhem/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3b7c6bd0-e2bf-4021-b694-19075839718a
+    m_ActionName: 'MinigolfMayhem/Look[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 37733399-93da-44a7-839f-6c8d02a6acb2
+    m_ActionName: 'MinigolfMayhem/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 832443a4-660f-48f6-bef2-3e3b9d9cd23f
+    m_ActionName: 'MinigolfMayhem/Join[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ae807423-6597-4ecd-90b3-dfc2fb960650
+    m_ActionName: 'MinigolfMayhem/Shoot[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6fd8ac2b-7b99-47ac-bbac-eeb7c7633295
+    m_ActionName: 'MinigolfMayhem/Jump[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2fcd0ea7-79bf-481a-8ad0-9fd00f618f61
+    m_ActionName: 'FishingGame/Join[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9007811829784582359}
+        m_TargetAssemblyTypeName: JetskiGame.JetskiController, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 64abd04f-c22d-40a7-aaa4-ed2efd306744
+    m_ActionName: 'JetskiGame/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8095b1f7-a3ec-4cf9-9fdc-c4bb7d52de8e
+    m_ActionName: 'JetskiGame/Join[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f5284c38-a546-43e5-b966-4436bacd65e0
+    m_ActionName: 'HurdleGame/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: da4cc858-f7c2-4834-b23a-83f1948a0d62
+    m_ActionName: 'HurdleGame/Join[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6d7cb911-4255-4d60-a577-159f56863289
+    m_ActionName: 'FishingGameUI/Submit[/Keyboard/enter,/Keyboard/x]'
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Gamepad
+  m_DefaultControlScheme: 
   m_DefaultActionMap: JetskiGame
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 4984407534341963346}
@@ -1561,6 +1643,36 @@ MonoBehaviour:
     m_Bits: 16
   groundCheckRadius: 0.5
   isGrounded: 0
+  OnPauseGame:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: b4c1de7ad322b894b8ed236533a23468, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnUnpauseGame:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: cb8390d9fabb07843b5f42bf6275d672, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   forceMode: 2
   steerWithAddForceAtPos: 1
   jumpForceMode: 1
@@ -2223,6 +2335,95 @@ Transform:
   - {fileID: 7600371937960492791}
   m_Father: {fileID: 6464903134011074840}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6883055866494952646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8624428486470604843}
+  - component: {fileID: 6167540155513479416}
+  - component: {fileID: 6741938847180419184}
+  m_Layer: 8
+  m_Name: GameEventListener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8624428486470604843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6883055866494952646}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.2654076, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0.79999995}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8243889330399340193}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6167540155513479416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6883055866494952646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9007811829784582359}
+        m_TargetAssemblyTypeName: JetskiGame.JetskiController, Assembly-CSharp
+        m_MethodName: EnablePlayerInput
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6741938847180419184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6883055866494952646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: d85f1a13d5f3749468676f87ec48c10f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9007811829784582359}
+        m_TargetAssemblyTypeName: JetskiGame.JetskiController, Assembly-CSharp
+        m_MethodName: DisablePlayerInput
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7045293663253431221
 GameObject:
   m_ObjectHideFlags: 0
@@ -2369,7 +2570,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7938444387761096450}
   - component: {fileID: 4984407534341963346}
-  - component: {fileID: 4795865400843849960}
   - component: {fileID: 255515467096728315}
   - component: {fileID: 1901713920623921160}
   m_Layer: 0
@@ -2445,14 +2645,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &4795865400843849960
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7154529983502029941}
-  m_Enabled: 1
 --- !u!114 &255515467096728315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2675,6 +2867,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8755520025190681177}
+  - component: {fileID: 5278045256667852209}
   m_Layer: 0
   m_Name: PlayerCameraHolder
   m_TagString: Untagged
@@ -2699,6 +2892,18 @@ Transform:
   - {fileID: 4208837530311827490}
   m_Father: {fileID: 8243889330399340193}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5278045256667852209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7552196686894649680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd5b4ee8a6886f4cb006778bd3255c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7653845359028076562
 GameObject:
   m_ObjectHideFlags: 0
@@ -2862,7 +3067,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5891404363016583560
 Transform:
   m_ObjectHideFlags: 0
