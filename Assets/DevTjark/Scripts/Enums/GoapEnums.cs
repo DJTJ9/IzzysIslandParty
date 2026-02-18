@@ -13,7 +13,9 @@
     ReachCheckPoint9,
     ReachCheckPoint10,
     WinGame,
-    AttackingPlayer,
+    AttackingPlayer1,
+    AttackingPlayer2,
+    AttackingPlayer3,
     
     // Location Beliefs
     FinishInReach,
@@ -27,8 +29,9 @@
     CheckPoint8InReach,
     CheckPoint9InReach,
     CheckPoint10InReach,
-    PlayerClose,
-    
+    Player1Close,
+    Player2Close,
+    Player3Close
 }
 
 public enum Actions
@@ -46,7 +49,9 @@ public enum Actions
     GoForCheckPoint9,
     GoForCheckPoint10,
     GoForFinish,
-    AttackPlayer
+    AttackPlayer1,
+    AttackPlayer2,
+    AttackPlayer3
 }
 
 public enum Goals
@@ -64,5 +69,7 @@ public enum Goals
     GoForCheckPoint9,
     GoForCheckPoint10,
     GoForFinish,
-    AttackPlayer
+    AttackPlayer1,
+    AttackPlayer2,
+    AttackPlayer3
 }

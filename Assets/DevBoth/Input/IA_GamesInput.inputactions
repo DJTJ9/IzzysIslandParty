@@ -1692,7 +1692,7 @@
                     "id": "a206f920-19c2-4431-9eec-14a0ffb2c76b",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "StickDeadzone(min=0.8)",
                     "groups": ";ControllerControlScheme;Gamepad",
                     "action": "Look",
                     "isComposite": false,
