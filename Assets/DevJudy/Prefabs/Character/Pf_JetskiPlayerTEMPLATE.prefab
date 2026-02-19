@@ -911,6 +911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9553b1a39a1c7b42b2ed55a2272ae2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerIndex: 0
   motor: {fileID: 7805754833625982404}
   power: 20
   steerPower: 800
@@ -1072,7 +1073,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4827510479769009098}
         m_TargetAssemblyTypeName: JetskiGame.JetskiController, Assembly-CSharp
-        m_MethodName: EnablePlayerInput
+        m_MethodName: SwitchToPlayerInputMap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1100,7 +1101,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4827510479769009098}
         m_TargetAssemblyTypeName: JetskiGame.JetskiController, Assembly-CSharp
-        m_MethodName: DisablePlayerInput
+        m_MethodName: SwitchToUIInputMap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

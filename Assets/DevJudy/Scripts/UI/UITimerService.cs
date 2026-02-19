@@ -8,22 +8,30 @@ namespace UIScripts
     {
         [Header("Timer: ")]
         [SerializeField] private TextMeshProUGUI timerText;
-        
+
+        [SerializeField] private float deductionFeedbackDuration = 1f;
+        [SerializeField] private Color timeDeductionColor;
+
         public void UpdateTimerText(string _timerText)
         {
             timerText.text = _timerText;
         }
-        
-        public IEnumerator TimeDeductionFeedback(float _deductionFeedbackDuration)
-        {
-            timerText.color = Color.red;
 
-            yield return new WaitForSeconds(_deductionFeedbackDuration);
+        public void UpdateTimerPenaltyText(int _minutesPenalty, int _secondsPenalty)
+        {
+            Debug.Log("New time penalty: " + _minutesPenalty + " : " + _secondsPenalty);
+            timerText.text = $"{_minutesPenalty:00}:{_secondsPenalty:00}:{00:00}";
+        }
+
+        public IEnumerator TimeDeductionFeedback()
+        {
+            timerText.color = timeDeductionColor;
+
+            yield return new WaitForSeconds(deductionFeedbackDuration);
 
             timerText.color = Color.white;
 
             yield return null;
         }
     }
-
 }

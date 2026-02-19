@@ -20,24 +20,25 @@ namespace JetskiGame
         private const string dotsText = "...";
         private const string unfinishedRaceText = "--:--:--";
 
-        private const int maxNumberOfPlayers = 5;
+        private const int maxNumberOfPlayers = 4;
 
         #endregion
 
         [Header("Level start/end: ")]
         [SerializeField] private int secondsToStartLevel;
+
         [SerializeField] private Transform goalTransform;
         [SerializeField] private TextMeshProUGUI levelCountdownText;
         [SerializeField] private int secondsToEndLevel = 10;
         private CountdownTimer endLevelTimer;
-        
+
         private bool raceStarted;
         private bool raceEnded;
 
         [Header("Temp ")]
         // !! The text belongs in another class
-        [SerializeField] private TextMeshProUGUI placementText;
         [SerializeField] private TextMeshProUGUI onFinishLineCrossedText;
+
         [SerializeField] private GameAudioManager audioManager;
 
         private void Awake()
@@ -83,15 +84,12 @@ namespace JetskiGame
         {
             if (placementOrder == null || placementOrder.Length < 1)
                 placementOrder = new GameObject[maxNumberOfPlayers];
-            
-            Debug.Log("OnPlayerJoined");
-            
+
             ArrayHelper.AddToArray(placementOrder, _player);
         }
 
         public override void OnNPCJoined(GameObject _npc)
         {
-            Debug.Log("OnNPCJoined");
             ArrayHelper.AddToArray(placementOrder, _npc);
         }
 
@@ -107,13 +105,16 @@ namespace JetskiGame
                 Debug.LogWarning("PlacementOrder array is empty");
                 return;
             }
-            
+
             for (int i = 0; i < placementOrder.Length; i++)
             {
                 if (!placementOrder[i])
+                {
                     Debug.LogWarning($"PlacementOrder[{i}] is empty...");
+                    continue;
+                }
 
-                if (placementOrder[i].TryGetComponent(out PathfindingUnit pathfindingUnit))
+                if (placementOrder[i].TryGetComponent(out JetskiNPCBehaviour pathfindingUnit))
                 {
                     pathfindingUnit.SetTarget(goalTransform);
                     pathfindingUnit.CanFollowPath();
@@ -187,20 +188,18 @@ namespace JetskiGame
                 placementOrder[leftNeighbour + 1] = currentGameObjectBeingCompared;
             }
 
-            var placement = GetPlayerNumber() + 1;
-
-            placementText.text = (placement.ToString() + "/" + placementOrder.Length);
+            SetPlacements();
         }
 
-        private int GetPlayerNumber()
+        private void SetPlacements()
         {
             for (int i = 0; i < placementOrder.Length; i++)
             {
-                if (placementOrder[i].CompareTag("Player"))
-                    return i;
+                if(placementOrder[i].gameObject.TryGetComponent(out JetskiController playerController))
+                    playerController.SetPlacement(i + 1);
+                // else if placementOrder[i].gameObject.TryGetComponent(out NPCBehaviour npc)
+                // npc.SetPlacement(i + 1);
             }
-
-            return -1;
         }
 
         private float GetDistanceToGoal(Vector3 _gameObjectPos)

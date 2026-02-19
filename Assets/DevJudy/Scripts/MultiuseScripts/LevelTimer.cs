@@ -1,3 +1,4 @@
+using JetskiGame;
 using UIScripts;
 using UnityEngine;
 
@@ -7,14 +8,14 @@ namespace MultiuseScripts
     {
         private static LevelTimer instance;
         public static LevelTimer Instance => instance;
-        
+
         [Header("Dependencies: ")]
         [SerializeField] private UITimerManager timerManager;
+
         [SerializeField] private LevelServiceParent levelService;
 
         [Header("Variables: ")]
         [SerializeField] private float durationInMinutes;
-        [SerializeField] private float deductionFeedbackDuration = 2f;
         [SerializeField] private bool timerRunningDown;
         [SerializeField] private bool startTimerOnLevelStart;
 
@@ -24,6 +25,7 @@ namespace MultiuseScripts
         private float milliseconds;
 
         private bool updateTimer = false;
+
         public bool UpdateTimer
         {
             get => updateTimer;
@@ -31,29 +33,33 @@ namespace MultiuseScripts
         }
 
         private bool timerFinished = false;
+
         public bool TimerFinished
         {
             get => timerFinished;
             private set
             {
                 timerFinished = value;
-                
+
                 if (timerFinished)
                     updateTimer = false;
             }
         }
 
-        private LevelTimer()
+        private void Awake()
         {
+            if (instance != null)
+                Destroy(gameObject);
+
             instance = this;
         }
-        
+
         private void Start()
         {
             if (startTimerOnLevelStart)
                 StartTimer();
         }
-        
+
         public void StartTimer()
         {
             if (timerRunningDown)
@@ -79,15 +85,15 @@ namespace MultiuseScripts
         {
             if (timerFinished)
                 return;
-            
+
             if (timerRunningDown)
                 time -= _timeDeduction;
             else
                 time += _timeDeduction;
 
-            StartCoroutine(timerManager.TimeDeductionFeedback(deductionFeedbackDuration));
+            StartCoroutine(timerManager.TimeDeductionFeedback());
         }
-
+        
         private void DisplayRunningTimer()
         {
             time += Time.fixedDeltaTime;
@@ -104,7 +110,7 @@ namespace MultiuseScripts
             {
                 TimerFinished = true;
                 time = 0.00f;
-                
+
                 levelService?.EndLevel();
             }
         }
@@ -123,7 +129,7 @@ namespace MultiuseScripts
         {
             return $"{minutes:00}:{seconds:00}:{milliseconds:00}";
         }
-        
+
         public void EndTimerAndDisplayFinishTime()
         {
             UpdateTimer = false;

@@ -1,8 +1,7 @@
 ﻿using System.Collections;
+using FullscreenEditor;
 using HelperScripts;
-using HurdleGame;
 using MultiuseScripts;
-using Pathfinding;
 using Player.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,53 +16,65 @@ namespace JetskiGame.Player.Multiplayer
         [SerializeField] private SO_PlayerCollectionRacingGames playerCollection;
         [SerializeField] private SO_PlayerCollectionRacingGames npcCollection;
         [SerializeField] private UnityEvent onLevelLoaded;
-        
+
         private int playerIndex;
         private int humanPlayerIndex;
         private int npcIndex;
-        
+
+        [Header("NPC joining: ")]
+        private bool splitScreen;
+
         [SerializeField] private PlayerInputManager playerInputManager;
         [SerializeField] private Controller npcBehaviour;
-
+        private Controller npcBehaviourInstance;
+        
         private void Start()
         {
             onLevelLoaded.Invoke();
             playerIndex = 0;
             currentPlayers.Players.Clear();
         }
-        
+
         private void OnEnable()
         {
             onLevelLoaded.Invoke();
+
+            splitScreen = playerInputManager.splitScreen;
         }
 
         private void OnDestroy()
         {
             ClearPlayerReferences();
         }
-        
+
         public void PlayerJoined(PlayerInput _playerInput)
         {
             playerCollection.Players[playerIndex].PlayerReference = _playerInput.gameObject;
-            
-            if (_playerInput.gameObject.TryGetComponent(out npcBehaviour))
+
+            if (_playerInput.gameObject.TryGetComponent(out npcBehaviourInstance) && npcBehaviourInstance.IsOfType(npcBehaviour.GetType()))
             {
                 if (humanPlayerIndex == 1 && levelService is JetskiGameLevelService)
                 {
-                    Identifier cameraHolder = _playerInput.transform.parent.gameObject.GetComponentInChildren<Identifier>();
-                    cameraHolder.gameObject.SetActive(false);
+                    Identifier cameraHolder = _playerInput.transform.gameObject.GetComponentInChildren<Identifier>();
+                    cameraHolder?.gameObject.SetActive(false);
                 }
-                
-                npcBehaviour.SetPlayerIndex(playerIndex);
-                
-                _playerInput.gameObject.name = npcCollection.Players[npcBehaviour.GetPlayerIndex() - 1].Name;
-                
-                currentPlayers.Players.Add(npcCollection.Players[npcBehaviour.GetPlayerIndex() - 1]);
+
+                npcBehaviourInstance.SetPlayerIndex(playerIndex);
+
+                _playerInput.gameObject.name = npcCollection.Players[npcBehaviourInstance.GetPlayerIndex() - 1].Name;
+
+                currentPlayers.Players.Add(npcCollection.Players[npcBehaviourInstance.GetPlayerIndex() - 1]);
                 levelService.OnNPCJoined(_playerInput.gameObject);
-                
+
+                ++npcIndex;
                 ++playerIndex;
 
                 return;
+            }
+            else
+            {
+               if( _playerInput.gameObject.TryGetComponent(out JetskiController playerController))
+                   playerController.OnPlayerJoined(playerCollection.Players[playerIndex]);
             }
 
             currentPlayers.Players.Add(playerCollection.Players[playerIndex]);
@@ -72,7 +83,9 @@ namespace JetskiGame.Player.Multiplayer
             _playerInput.gameObject.transform.position = playerCollection.Players[playerIndex].SpawnPoint;
             levelService.OnPlayerJoined(_playerInput.gameObject);
 
+            ++humanPlayerIndex;
             ++playerIndex;
+            
             var currentPlayerIndex = playerIndex;
             StartCoroutine(WaitForPlayerJoin(_playerInput.gameObject, currentPlayerIndex));
         }
@@ -88,14 +101,17 @@ namespace JetskiGame.Player.Multiplayer
 
         public void JoinNPCs()
         {
-            if (playerIndex == 1)
+            if (humanPlayerIndex == 1)
                 playerInputManager.splitScreen = false;
+            else
+                playerInputManager.splitScreen = splitScreen;
+
             
             var nPCStartIndex = playerIndex - 1;
 
             for (var i = nPCStartIndex; i < npcCollection.Players.Count; i++)
             {
-                Instantiate(npcCollection.Players[i].PlayerReference, npcCollection.Players[i].SpawnPoint, 
+                Instantiate(npcCollection.Players[i].PlayerReference, npcCollection.Players[i].SpawnPoint,
                     npcCollection.Players[i].PlayerReference.transform.rotation);
             }
         }

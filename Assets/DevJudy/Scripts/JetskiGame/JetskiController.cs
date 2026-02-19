@@ -1,18 +1,28 @@
+using System;
 using Audio;
 using enums;
+using Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 namespace JetskiGame
 {
-    public class JetskiController : MonoBehaviour
+    public class JetskiController : Controller
     {
+        private SO_PlayerRacingGames player;
+
+        private int timeDeductionSeconds;
+
+        private int timeDeductionMinutes;
+        // player.GameScore = placement;
+        // player.time = finishTime + time deduction
+
         [Header("Drive settings: ")]
         [SerializeField] private Transform motor;
 
-        private PlayerInput playerInput;
         private Rigidbody rb;
 
         [SerializeField] private float power = 20f;
@@ -36,10 +46,11 @@ namespace JetskiGame
 
         [Header("Pausing: ")]
         [SerializeField] private UnityEvent OnPauseGame;
+
         [SerializeField] private UnityEvent OnUnpauseGame;
         private bool isPaused;
 
-        
+
         [Header("Temp: ")]
         [SerializeField] private ForceMode forceMode;
 
@@ -53,23 +64,17 @@ namespace JetskiGame
         {
             rb = GetComponent<Rigidbody>();
             playerInput = GetComponent<PlayerInput>();
-
-            //DisablePlayerInput();
         }
 
-
-        public void EnablePlayerInput()
+        public void OnPlayerJoined(SO_PlayerRacingGames _player)
         {
-            if (playerInput != null)
-                playerInput.enabled = true;
+            player = _player;
+
+            player.PlayerScore.Value = 0;
+            player.TimeValue = 0;
+            player.Time = String.Empty;
         }
 
-        public void DisablePlayerInput()
-        {
-            // ?? Doesn't this also disable the ability to pause?
-            playerInput.enabled = false;
-        }
-        
         public void OnPause(InputAction.CallbackContext _context)
         {
             if (_context.started)
@@ -200,6 +205,44 @@ namespace JetskiGame
             Collider[] results = new Collider[1];
 
             isGrounded = Physics.OverlapSphereNonAlloc(groundCheckPosition, groundCheckRadius, results, waterLayerMask) > 0;
+        }
+
+        public void SetPlacement(int _placement)
+        {
+            player.PlayerScore.Value = _placement;
+        }
+
+        public void OnObstacleCleared()
+        {
+            int randomEmote = Random.Range(0, 2);
+
+            // if (randomEmote == 0)
+            //iconHandler.DisplayIcon(EEmotion.Love)
+            //else
+            //iconHandler.DisplayIcon(EEmotion.Happy)
+        }
+
+        public void OnObstacleMissed(float _timeDeduction, out int _timeDeductionMinutes, out int _timeDeductionSeconds)
+        {
+            // !! iconHandler.DisplayIcon(EEmotion.Sad)
+
+            int currentDeduction = (int)(timeDeductionSeconds + _timeDeduction);
+
+            if (currentDeduction >= 60)
+            {
+                timeDeductionMinutes++;
+                timeDeductionSeconds = (currentDeduction % 60);
+            }
+            else
+                timeDeductionSeconds = currentDeduction;
+
+            _timeDeductionMinutes = timeDeductionMinutes;
+            _timeDeductionSeconds = timeDeductionSeconds;
+        }
+
+        public override void SwitchToPlayerInputMap()
+        {
+            playerInput.SwitchCurrentActionMap("JetskiGame");
         }
 
         public void OnDrawGizmos()

@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4792fc4969ebf63409e58426c3117813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiPointsService: {fileID: 0}
   fishList:
   - {fileID: 11400000, guid: 2e9b8d7a63f78b74ba073a9578d1f423, type: 2}
   - {fileID: 11400000, guid: cf07be7dd2fe3f54d902350f2bebcf4c, type: 2}
@@ -134,26 +133,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3886216125875864171}
-        m_TargetAssemblyTypeName: FishingGame.FishingGameLevelService, Assembly-CSharp
-        m_MethodName: GetNPCScores
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   currentPlayers: {fileID: 11400000, guid: 97ae6e8cdb921dd4d97057deb65c1858, type: 2}
   gameAudioManager: {fileID: 0}
   levelTimer: {fileID: 8587489525363768519}
-  playerCollection: {fileID: 11400000, guid: dd4935fb874cc9a49858d0e0e7b59c81, type: 2}
-  playerNames:
-  - Hornet
-  - Peach
-  - Freddy
   npcPointRange: {x: 22, y: 110}
 --- !u!114 &8587489525363768519
 MonoBehaviour:
@@ -170,6 +152,5 @@ MonoBehaviour:
   timerManager: {fileID: 0}
   levelService: {fileID: 3886216125875864171}
   durationInMinutes: 5
-  deductionFeedbackDuration: 0
   timerRunningDown: 1
   startTimerOnLevelStart: 0

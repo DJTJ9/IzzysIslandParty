@@ -1,11 +1,16 @@
+using System.Collections.Generic;
 using Helper;
 using MultiuseScripts;
+using Pathfinding;
+using UIScripts;
 using UnityEngine;
 
 namespace JetskiGame
 {
     public class GateBehaviour : MonoBehaviour
     {
+        private const int maxPlayers = 4;
+
         [SerializeField] private LevelTimer timer;
 
         [SerializeField] private CustomTriggerBehaviour middleCollider;
@@ -14,10 +19,15 @@ namespace JetskiGame
 
         [SerializeField] private FloatReference timeDeduction;
 
-        [SerializeField] private bool clearedGate;
+        [SerializeField] private List<bool> clearedGate = new List<bool>();
 
         private void Start()
         {
+            for (int i = 0; i < maxPlayers; i++)
+            {
+                clearedGate.Add(false);
+            }
+
             middleCollider.EnteredTriggerAction += OnMiddleGateEnter;
 
             leftCollider.EnteredTriggerAction += OnSideGatesEnter;
@@ -26,23 +36,43 @@ namespace JetskiGame
 
         private void OnMiddleGateEnter(Collider _other)
         {
-            if (!clearedGate)
-            {
-                clearedGate = true;
-                //!! Give visual feedback via icons
-            }
+            _other.gameObject.TryGetComponent(out Controller controller);
+            int index = controller.PlayerIndex;
+
+            if (clearedGate[index])
+                return;
+
+            clearedGate[index] = true;
+
+            if (controller is JetskiController playerController)
+                playerController.OnObstacleCleared();
+            else if (controller is JetskiNPCBehaviour npcController)
+                npcController.OnObstacleCleared();
         }
 
         private void OnSideGatesEnter(Collider _other)
         {
-            if (!clearedGate)
+            _other.gameObject.TryGetComponent(out Controller controller);
+            int index = controller.PlayerIndex;
+
+            if (clearedGate[index])
+                return;
+
+            clearedGate[index] = true;
+
+            //timer?.DeduceTime(timeDeduction.Value);
+
+            if (controller is JetskiController playerController)
             {
-                clearedGate = true;
-
-                // !! Give visual feedback via icons
-
-                timer?.DeduceTime(timeDeduction.Value);
+                playerController.OnObstacleMissed(timeDeduction.Value, out var timeDeductionMinutes, out var timeDeductionSeconds);
+              
+                 UITimerManager timerManager = playerController.gameObject.transform.parent.GetComponentInChildren<UITimerManager>();
+              
+                timerManager?.UpdateTimerPenaltyText(timeDeductionMinutes, timeDeductionSeconds);
+                StartCoroutine(timerManager?.TimeDeductionFeedback());
             }
+            else if (controller is JetskiNPCBehaviour npcController)
+                npcController.OnObstacleMissed(timeDeduction.Value, out var timeDeductionMinutes, out var timeDeductionSeconds);
         }
     }
 }
