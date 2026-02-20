@@ -4,35 +4,41 @@ using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
 
 [RequireComponent (typeof(GroundChecker))]
-public class RigidbodyMovement : MonoBehaviour
+public class RigidbodyMovement : MonoBehaviour, IRigidbodyMovement
 {
     [FoldoutGroup("Push Settings", expanded: true)]
     [SerializeField] private float pushForce;
     [SerializeField] private float pushCooldown;
+    
     [FoldoutGroup("Shoot Settings", expanded: true)]
     [SerializeField] public float minShootForce;
     [SerializeField] public float maxShootForce;
     [SerializeField] private float shootForceChangeSpeed;
     [SerializeField] private float shootCooldown;
+    
     [FoldoutGroup("Jump Settings", expanded: true)]
-    [SerializeField] private float jumpPower;
+    [SerializeField] private float jumpForce;
     [SerializeField] private float jumpCooldown;
+    
+    [FoldoutGroup("Hit Impulse Settings", expanded: true)]
+    [SerializeField] private float horizontalImpactForce;
+    [SerializeField] private float verticalImpactForce;
     
     // [SerializeField] private float maxSpeed;
     // [SerializeField] private float jumpSpeedModifier = 1;
     // [SerializeField] private float fallSpeedModifier = 1;
 
     [SerializeField] private Camera cam;
-    private new Rigidbody rigidbody;
+    private Rigidbody rb;
     private GroundChecker groundChecker;
 
     public float CurrentShootForce;
-    private Vector3 moveDirection;
-    private bool canMove = true;
-    private bool canShoot = true;
-    private bool canJump = true;
-    [HideInInspector] public bool IsCharging;
-    private bool isIncreasing = true;
+    private Vector3 m_moveDirection;
+    private bool m_canMove = true;
+    private bool m_canShoot = true;
+    private bool m_canJump = true;
+    private bool m_isCharging;
+    private bool m_isIncreasing = true;
     
     private CountdownTimer pushCooldownTimer;
     private CountdownTimer shootCooldownTimer;
@@ -41,7 +47,7 @@ public class RigidbodyMovement : MonoBehaviour
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         groundChecker = GetComponent<GroundChecker>();
         
         pushCooldownTimer = new CountdownTimer(pushCooldown);
@@ -61,54 +67,41 @@ public class RigidbodyMovement : MonoBehaviour
         UpdateChargePower();
     }
 
-    private void UpdateChargePower()
+    private void OnTriggerEnter(Collider other)
     {
-        if (!IsCharging) return;
-
-        // CurrentShootForce = minShootForce;
-
-        if (isIncreasing)
-        {
-            CurrentShootForce += shootForceChangeSpeed * Time.deltaTime;
-            if (CurrentShootForce >= maxShootForce)
-            {
-                CurrentShootForce = maxShootForce;
-                isIncreasing = false;
-            }
-        }
-        else
-        {
-            CurrentShootForce -= shootForceChangeSpeed * Time.deltaTime;
-            if (CurrentShootForce <= minShootForce)
-            {
-                CurrentShootForce = minShootForce;
-                isIncreasing = true;
-            }
-        }
+        if (!other.CompareTag("Player")) return;
+        if (other.TryGetComponent<IRigidbodyMovement>(out var _rbm)) return;
+        if (_rbm.GetCurrentVelocity() > rb.linearVelocity.magnitude) return;
+            
+        var impactDirection = rb.linearVelocity.normalized;
+        var impulse = impactDirection * (horizontalImpactForce * rb.linearVelocity.magnitude)
+                      + Vector3.up * (verticalImpactForce * rb.linearVelocity.magnitude);
+        
+        if (!other.TryGetComponent<Rigidbody>(out var _rb)) return;
+        _rb.AddForce(impulse, ForceMode.Impulse);
     }
 
     public void StartCharging(InputAction.CallbackContext _context)
     {
         if (_context.started)
         {
-            IsCharging = true;
+            m_isCharging = true;
             CurrentShootForce = minShootForce;
-            isIncreasing = true;
+            m_isIncreasing = true;
         }
         else if (_context.canceled)
         {
             Shoot();
-            IsCharging = false;
+            m_isCharging = false;
         }
     }
-
     
     /// <summary>
-    /// Recieves a move direction
+    /// Receives a move direction
     /// </summary>
     public void Move(Vector3 _direction)
     {
-        if (!canMove) return;
+        if (!m_canMove) return;
         
         var camFwd = cam.transform.forward;   
         var camRight = cam.transform.right;
@@ -118,28 +111,28 @@ public class RigidbodyMovement : MonoBehaviour
 
         var worldDir = camRight * _direction.x + camFwd * _direction.y;
         
-        rigidbody.AddForce(worldDir.normalized * pushForce, ForceMode.Impulse);
+        rb.AddForce(worldDir.normalized * pushForce, ForceMode.Impulse);
         
         pushCooldownTimer.Reset();
         pushCooldownTimer.Start();
-        canMove = false;
+        m_canMove = false;
     }
 
     public void Jump()
     {
-        if (!canJump) return;
+        if (!m_canJump) return;
         if (!groundChecker.IsGrounded) return;
         
-        rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             
         jumpCooldownTimer.Reset();
         jumpCooldownTimer.Start();
-        canJump = false;
+        m_canJump = false;
     }
     
-    public void Shoot()
+    private void Shoot()
     {
-        if (!canShoot) return;
+        if (!m_canShoot) return;
         if (!groundChecker.IsGrounded) return;
 
         var screenCenter = cam.ViewportToScreenPoint(new Vector3(0.5f, 0.5f, 0f));
@@ -148,42 +141,67 @@ public class RigidbodyMovement : MonoBehaviour
 
         var targetPoint = ray.GetPoint(500f);
 
-        var direction = (targetPoint - rigidbody.transform.position).normalized;
+        var direction = (targetPoint - rb.transform.position).normalized;
 
-        rigidbody.AddForce(direction * CurrentShootForce, ForceMode.Impulse);
+        rb.AddForce(direction * CurrentShootForce, ForceMode.Impulse);
 
         CurrentShootForce = minShootForce;
         shootCooldownTimer.Reset();
         shootCooldownTimer.Start();
-        canShoot = false;
+        m_canShoot = false;
     }
 
+    private void UpdateChargePower()
+    {
+        if (!m_isCharging) return;
+
+        if (m_isIncreasing)
+        {
+            CurrentShootForce += shootForceChangeSpeed * Time.deltaTime;
+            
+            if (CurrentShootForce >= maxShootForce)
+            {
+                CurrentShootForce = maxShootForce;
+                m_isIncreasing = false;
+            }
+        }
+        else
+        {
+            CurrentShootForce -= shootForceChangeSpeed * Time.deltaTime;
+            
+            if (CurrentShootForce <= minShootForce)
+            {
+                CurrentShootForce = minShootForce;
+                m_isIncreasing = true;
+            }
+        }
+    }
 
     private void EnableMovement()
     {
-        canMove = true;
+        m_canMove = true;
     }
     
     private void EnableShooting()
     {
-        canShoot = true;
+        m_canShoot = true;
     }
 
     private void EnableJumping()
     {
-        canJump = true;
+        m_canJump = true;
     }
     
     // /// <summary>
-    // /// Collects the current Velocity of the rigidbody and sets the speed
+    // /// Collects the current Velocity of the rb and sets the speed
     // /// Transforms moving direction from local space to world space
     // /// Collects the speed difference to target velocity and clamps the max velocity
     // /// Sets force mode to VelocityChange
     // /// </summary>
     // private void UpdateHorizontalMovement()
     // {
-    //     Vector3 currentVelocity = rigidbody.linearVelocity;
-    //     Vector3 targetVelocity = new Vector3(moveDirection.x, 0f , moveDirection.z);
+    //     Vector3 currentVelocity = rb.linearVelocity;
+    //     Vector3 targetVelocity = new Vector3(m_moveDirection.x, 0f , m_moveDirection.z);
     //     targetVelocity *= pushForce;
     //
     //     targetVelocity = transform.TransformDirection(targetVelocity);
@@ -192,29 +210,33 @@ public class RigidbodyMovement : MonoBehaviour
     //     velocityChange = new Vector3(velocityChange.x, 0f, velocityChange.z);
     //     velocityChange = Vector3.ClampMagnitude(velocityChange, maxSpeed);
     //
-    //     rigidbody.AddForce(velocityChange, ForceMode.Force);
+    //     rb.AddForce(velocityChange, ForceMode.Force);
     // }
     //
     // /// <summary>
     // /// Recieves the current rotation
     // /// Sets the rotation to a target rotation
     // /// </summary>
-    public void RotateHorizontal(float _rotation)
-    {
-        var currentRotation = rigidbody.rotation.eulerAngles;
-        var targetRotation = currentRotation + new Vector3(0f, _rotation, 0f);
-        rigidbody.rotation = Quaternion.Euler(targetRotation);
-    }
-    
+    // public void RotateHorizontal(float _rotation)
+    // {
+    //     var currentRotation = rb.rotation.eulerAngles;
+    //     var targetRotation = currentRotation + new Vector3(0f, _rotation, 0f);
+    //     rb.rotation = Quaternion.Euler(targetRotation);
+    // }
+    //
     // /// <summary>
     // /// Modifies jump and fall speed
     // /// </summary>
     // private void UpdateVerticalMovement()
     // {
-    //     if (rigidbody.linearVelocity.y < 0)
-    //         rigidbody.linearVelocity += Vector3.up * (Physics.gravity.y * (fallSpeedModifier - 1) * Time.fixedDeltaTime);
+    //     if (rb.linearVelocity.y < 0)
+    //         rb.linearVelocity += Vector3.up * (Physics.gravity.y * (fallSpeedModifier - 1) * Time.fixedDeltaTime);
     //
-    //     if (rigidbody.linearVelocity.y > 0)
-    //         rigidbody.linearVelocity += Vector3.up * (Physics.gravity.y * jumpSpeedModifier * Time.fixedDeltaTime);
+    //     if (rb.linearVelocity.y > 0)
+    //         rb.linearVelocity += Vector3.up * (Physics.gravity.y * jumpSpeedModifier * Time.fixedDeltaTime);
     // }
+    public float GetCurrentVelocity()
+    {
+        return rb.linearVelocity.magnitude;
+    }
 }

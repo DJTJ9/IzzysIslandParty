@@ -11,8 +11,8 @@ public class MinigolfHole : MonoBehaviour
     public static event Action<int> onMinigolfPlayerFinished;
     [SerializeField] private UnityEvent onGameEnd;
     
-    private int m_finishedPlayers;
     private const int MAX_PLAYER_COUNT = 4;
+    private int m_finishedPlayers;
 
     private void OnEnable()
     {
@@ -23,7 +23,7 @@ public class MinigolfHole : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
         
-        other.TryGetComponent<Controller>(out var controller);
+        if (other.TryGetComponent<Controller>(out var controller))
         {
             onMinigolfPlayerFinished?.Invoke(controller.PlayerIndex);
             controller.DisableController();
@@ -37,7 +37,7 @@ public class MinigolfHole : MonoBehaviour
             }
         }
         
-        other.TryGetComponent<PlayerControllerMinigolfMayhem>(out var playerController);
+        if (other.TryGetComponent<PlayerControllerMinigolfMayhem>(out var playerController))
         {
             playerController.SwitchToUIInputMap();
         }

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-1000)]
 public class LocationService : MonoBehaviour
 {
     private static LocationService instance;
     public static LocationService Instance => instance;
 
-    private Dictionary<string, Transform> dynamicTransforms = new Dictionary<string, Transform>();
+    private Dictionary<string, Transform> dynamicTransforms = new();
 
     public event Action<string, Vector3> OnTransformPositionChanged;
 
@@ -19,22 +20,22 @@ public class LocationService : MonoBehaviour
         }
     }
 
-    public void RegisterTransform(string key, Transform transform)
+    public void RegisterTransform(string _key, Transform _transform)
     {
-        dynamicTransforms[key] = transform;
+        dynamicTransforms[_key] = _transform;
     }
 
-    public Transform GetTransform(string key)
+    public Transform GetTransform(string _key)
     {
-        return dynamicTransforms.GetValueOrDefault(key);
+        return dynamicTransforms.GetValueOrDefault(_key);
     }
 
-    public void UpdatePosition(string key, Vector3 newPosition)
+    public void UpdatePosition(string _key, Vector3 _newPosition)
     {
-        if (dynamicTransforms.TryGetValue(key, out var transform))
+        if (dynamicTransforms.TryGetValue(_key, out var _transform))
         {
-            transform.position = newPosition;
-            OnTransformPositionChanged?.Invoke(key, newPosition);
+            _transform.position = _newPosition;
+            OnTransformPositionChanged?.Invoke(_key, _newPosition);
         }
     }
 }
