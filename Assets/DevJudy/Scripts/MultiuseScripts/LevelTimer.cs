@@ -125,6 +125,13 @@ namespace MultiuseScripts
             timerManager.UpdateTimerText($"Time: {minutes:00}:{seconds:00}:{milliseconds:00}");
         }
 
+        public void GetTime(out int _minutes, out int _seconds, out int _milliseconds)
+        {
+            _minutes = (int)minutes;
+            _seconds = (int)seconds;
+            _milliseconds = (int)milliseconds;
+        }
+        
         public string GetTimeAsString()
         {
             return $"{minutes:00}:{seconds:00}:{milliseconds:00}";

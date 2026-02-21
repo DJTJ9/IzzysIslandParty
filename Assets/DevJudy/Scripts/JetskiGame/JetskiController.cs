@@ -15,7 +15,6 @@ namespace JetskiGame
         private SO_PlayerRacingGames player;
 
         private int timeDeductionSeconds;
-
         private int timeDeductionMinutes;
         // player.GameScore = placement;
         // player.time = finishTime + time deduction
@@ -211,6 +210,11 @@ namespace JetskiGame
         {
             player.PlayerScore.Value = _placement;
         }
+        
+        public void SetTime(string _time)
+        {
+            player.Time =  _time;
+        }
 
         public void OnObstacleCleared()
         {
@@ -238,6 +242,12 @@ namespace JetskiGame
 
             _timeDeductionMinutes = timeDeductionMinutes;
             _timeDeductionSeconds = timeDeductionSeconds;
+        }
+
+        public void GetFinalTimeDeduction(out int _minutes, out int _seconds)
+        {
+            _minutes = timeDeductionMinutes;
+            _seconds = timeDeductionSeconds;
         }
 
         public override void SwitchToPlayerInputMap()

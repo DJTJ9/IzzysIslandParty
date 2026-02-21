@@ -35,11 +35,12 @@ namespace JetskiGame
         private bool raceStarted;
         private bool raceEnded;
 
-        [Header("Temp ")]
+        [Header("Dependencies: ")]
         // !! The text belongs in another class
         [SerializeField] private TextMeshProUGUI onFinishLineCrossedText;
 
         [SerializeField] private GameAudioManager audioManager;
+        [SerializeField] private LevelTimer levelTimer;
 
         private void Awake()
         {
@@ -195,10 +196,10 @@ namespace JetskiGame
         {
             for (int i = 0; i < placementOrder.Length; i++)
             {
-                if(placementOrder[i].gameObject.TryGetComponent(out JetskiController playerController))
+                if (placementOrder[i].gameObject.TryGetComponent(out JetskiController playerController))
                     playerController.SetPlacement(i + 1);
-                // else if placementOrder[i].gameObject.TryGetComponent(out NPCBehaviour npc)
-                // npc.SetPlacement(i + 1);
+                else if (placementOrder[i].gameObject.TryGetComponent(out JetskiNPCBehaviour npc))
+                    npc.SetPlacement(i + 1);
             }
         }
 
@@ -210,15 +211,38 @@ namespace JetskiGame
         public override void OnFinishLineCrossed(GameObject _triggeringObj)
         {
             int placement = WinnerPlacementOrder.Count + 1;
-            var currentObj = new Tuple<GameObject, string>(_triggeringObj, LevelTimer.Instance.GetTimeAsString());
-            WinnerPlacementOrder.Add(placement, currentObj);
+
+            levelTimer.GetTime(out int minutes, out int seconds, out int milliseconds);
+            GetTimeDeduction(_triggeringObj, out var timeDeductionMinutes, out var timeDeductionSeconds);
+
+            string finishingTime = GetFinishingTimeAsString(minutes + timeDeductionMinutes, seconds + timeDeductionSeconds, milliseconds);
+            
+            
+           // var currentObj = new Tuple<GameObject, string>(_triggeringObj, finishingTime);
+           // WinnerPlacementOrder.Add(placement, currentObj);
 
             if (((1 << _triggeringObj.layer) & playerLayerMask) != 0)
             {
-                OnPlayerCrossedFinishLine();
+                //OnPlayerCrossedFinishLine(); Set the text in the playerObject itself
 
                 StartCoroutine(StartLevelCountdownTimer());
             }
+        }
+
+        private void GetTimeDeduction(GameObject _triggeringObj, out int _timeDeductionMinutes, out int _timeDeductionSeconds)
+        {
+            if (_triggeringObj.TryGetComponent(out JetskiController playerController))
+                playerController.GetFinalTimeDeduction(out _timeDeductionMinutes, out _timeDeductionSeconds);
+            else if (_triggeringObj.TryGetComponent(out JetskiNPCBehaviour jetskiNPCBehaviour))
+                jetskiNPCBehaviour.GetFinalTimeDeduction(out _timeDeductionMinutes, out _timeDeductionSeconds);
+
+            _timeDeductionMinutes = 0;
+            _timeDeductionSeconds = 0;
+        }
+
+        private string GetFinishingTimeAsString(int _minutes, int _seconds, int _milliseconds)
+        {
+            return $"{_minutes:00}:{_seconds:00}:{_milliseconds:00}";
         }
 
         private void OnPlayerCrossedFinishLine()
@@ -237,6 +261,7 @@ namespace JetskiGame
             }
 
             CheckWinnerPlacementList();
+            SetGameScores();
 
             raceEnded = true;
             EndLevel();
@@ -255,9 +280,22 @@ namespace JetskiGame
             }
         }
 
+        private void SetGameScores()
+        {
+            for (int i = 0; i < WinnerPlacementOrder.Count; i++)
+            {
+                if (WinnerPlacementOrder[i].Item1.gameObject.TryGetComponent(out JetskiController playerController))
+                {
+                    playerController.SetPlacement(i + 1);
+                    playerController.SetTime(WinnerPlacementOrder[i].Item2);
+                }
+                Debug.Log(WinnerPlacementOrder[i].Item1.gameObject.name);
+            }
+        }
+
         public override void EndLevel()
         {
-            LevelTimer.Instance.EndTimerAndDisplayFinishTime();
+            levelTimer.EndTimerAndDisplayFinishTime();
 
             onFinishLineCrossedText?.gameObject.SetActive(true);
             raceStarted = false;

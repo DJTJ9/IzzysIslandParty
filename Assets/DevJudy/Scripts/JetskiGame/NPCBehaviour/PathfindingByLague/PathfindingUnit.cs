@@ -45,6 +45,16 @@ namespace Pathfinding
             target = _target;
         }
 
+        public void SetPlacement(int _placement)
+        {
+            player.PlayerScore.Value = _placement;
+        }
+
+        public void SetTime(string _time)
+        {
+            player.Time =  _time;
+        }
+
         public void CanFollowPath()
         {
             canFollowPath = true;
@@ -170,6 +180,11 @@ namespace Pathfinding
             _timeDeductionSeconds = timeDeductionSeconds;
         }
 
+        public void GetFinalTimeDeduction(out int _minutes, out int _seconds)
+        {
+            _minutes = timeDeductionMinutes;
+            _seconds = timeDeductionSeconds;
+        }
 
         public void OnDrawGizmos()
         {

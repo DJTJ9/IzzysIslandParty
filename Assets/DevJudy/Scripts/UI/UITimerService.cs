@@ -19,7 +19,6 @@ namespace UIScripts
 
         public void UpdateTimerPenaltyText(int _minutesPenalty, int _secondsPenalty)
         {
-            Debug.Log("New time penalty: " + _minutesPenalty + " : " + _secondsPenalty);
             timerText.text = $"{_minutesPenalty:00}:{_secondsPenalty:00}:{00:00}";
         }
 
