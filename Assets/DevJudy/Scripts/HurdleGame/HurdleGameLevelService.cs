@@ -47,12 +47,8 @@ namespace HurdleGame.LevelService
 
         [SerializeField] private GameAudioManager audioManager;
         [SerializeField] private bool checkXOnly;
-
-        private void Awake()
-        {
-            WinnerPlacementOrder = new Dictionary<int, Tuple<GameObject, string>>();
-        }
-
+        
+        
         private void Start()
         {
             if (audioManager != null)

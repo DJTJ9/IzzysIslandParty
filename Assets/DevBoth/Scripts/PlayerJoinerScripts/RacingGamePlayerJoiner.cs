@@ -27,7 +27,7 @@ namespace JetskiGame.Player.Multiplayer
         [SerializeField] private PlayerInputManager playerInputManager;
         [SerializeField] private Controller npcBehaviour;
         private Controller npcBehaviourInstance;
-        
+
         private void Start()
         {
             onLevelLoaded.Invoke();
@@ -60,6 +60,7 @@ namespace JetskiGame.Player.Multiplayer
                 }
 
                 npcBehaviourInstance.SetPlayerIndex(playerIndex);
+                npcBehaviourInstance.OnNPCJoined(npcCollection.Players[npcBehaviourInstance.GetPlayerIndex() - 1]);
 
                 _playerInput.gameObject.name = npcCollection.Players[npcBehaviourInstance.GetPlayerIndex() - 1].Name;
 
@@ -71,11 +72,9 @@ namespace JetskiGame.Player.Multiplayer
 
                 return;
             }
-            else
-            {
-               if( _playerInput.gameObject.TryGetComponent(out JetskiController playerController))
-                   playerController.OnPlayerJoined(playerCollection.Players[playerIndex]);
-            }
+
+            if (_playerInput.gameObject.TryGetComponent(out JetskiController playerController))
+                playerController.OnPlayerJoined(playerCollection.Players[playerIndex]);
 
             currentPlayers.Players.Add(playerCollection.Players[playerIndex]);
 
@@ -85,7 +84,7 @@ namespace JetskiGame.Player.Multiplayer
 
             ++humanPlayerIndex;
             ++playerIndex;
-            
+
             var currentPlayerIndex = playerIndex;
             StartCoroutine(WaitForPlayerJoin(_playerInput.gameObject, currentPlayerIndex));
         }
@@ -106,7 +105,7 @@ namespace JetskiGame.Player.Multiplayer
             else
                 playerInputManager.splitScreen = splitScreen;
 
-            
+
             var nPCStartIndex = playerIndex - 1;
 
             for (var i = nPCStartIndex; i < npcCollection.Players.Count; i++)

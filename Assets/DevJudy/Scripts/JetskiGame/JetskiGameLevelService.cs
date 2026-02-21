@@ -3,11 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using HelperScripts;
 using Audio;
-using ImprovedTimers;
 using MultiuseScripts;
 using Pathfinding;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace JetskiGame
@@ -29,23 +27,25 @@ namespace JetskiGame
 
         [SerializeField] private Transform goalTransform;
         [SerializeField] private TextMeshProUGUI levelCountdownText;
-        [SerializeField] private int secondsToEndLevel = 10;
-        private CountdownTimer endLevelTimer;
+        [SerializeField] private int secondsToEndLevel = 30;
+        [SerializeField] private int showCountdownSeconds = 10;
+        private List<Tuple<GameObject, string>> winnerPlacementOrder;
+        private List<float> timePenalties;
 
         private bool raceStarted;
         private bool raceEnded;
 
         [Header("Dependencies: ")]
-        // !! The text belongs in another class
-        [SerializeField] private TextMeshProUGUI onFinishLineCrossedText;
+        [SerializeField] private TextMeshProUGUI onRaceOverText;
 
+        [SerializeField] private TextMeshProUGUI raceCountdownText;
         [SerializeField] private GameAudioManager audioManager;
         [SerializeField] private LevelTimer levelTimer;
 
         private void Awake()
         {
-            WinnerPlacementOrder = new Dictionary<int, Tuple<GameObject, string>>();
-            endLevelTimer = new CountdownTimer(secondsToEndLevel);
+            winnerPlacementOrder = new List<Tuple<GameObject, string>>();
+            timePenalties = new List<float>();
 
             if (checkPlacements)
                 CheckPlacementList();
@@ -162,14 +162,11 @@ namespace JetskiGame
         {
             if (raceStarted && checkPlacements)
                 CheckRacerPlacements();
-
-            if (endLevelTimer.IsRunning)
-                endLevelTimer.Tick(Time.deltaTime);
         }
 
         private void CheckRacerPlacements()
         {
-            for (int i = 1; i < placementOrder.Length; i++)
+            for (int i = 1; i < winnerPlacementOrder.Count; i++)
             {
                 float currentDistanceToCompare = GetDistanceToGoal(placementOrder[i].transform.position);
                 GameObject currentGameObjectBeingCompared = placementOrder[i];
@@ -182,7 +179,7 @@ namespace JetskiGame
                     // Set the index [ln + 1] (first pass index of current key), to be the value of [ln]
                     placementOrder[leftNeighbour + 1] = placementOrder[leftNeighbour];
                     // Then go further down the array and look at the next ln
-                    leftNeighbour = leftNeighbour - 1;
+                    leftNeighbour = (leftNeighbour - 1);
                 }
 
                 // If the distance is less, or all left neighbours have been checked, make sure to give the key value to the current index (ln + 1)
@@ -210,31 +207,42 @@ namespace JetskiGame
 
         public override void OnFinishLineCrossed(GameObject _triggeringObj)
         {
-            int placement = WinnerPlacementOrder.Count + 1;
-
             levelTimer.GetTime(out int minutes, out int seconds, out int milliseconds);
             GetTimeDeduction(_triggeringObj, out var timeDeductionMinutes, out var timeDeductionSeconds);
 
+            timePenalties.Add(timeDeductionMinutes + (timeDeductionSeconds * 0.01f));
+
             string finishingTime = GetFinishingTimeAsString(minutes + timeDeductionMinutes, seconds + timeDeductionSeconds, milliseconds);
-            
-            
-           // var currentObj = new Tuple<GameObject, string>(_triggeringObj, finishingTime);
-           // WinnerPlacementOrder.Add(placement, currentObj);
 
-            if (((1 << _triggeringObj.layer) & playerLayerMask) != 0)
-            {
-                //OnPlayerCrossedFinishLine(); Set the text in the playerObject itself
+            var currentObj = new Tuple<GameObject, string>(_triggeringObj, finishingTime);
+            winnerPlacementOrder.Add(currentObj);
 
+            if (winnerPlacementOrder.Count == 1)
                 StartCoroutine(StartLevelCountdownTimer());
+            else if (winnerPlacementOrder.Count == maxNumberOfPlayers)
+            {
+                CheckIfWinnerPlacementListFull();
+                SetGameScores();
+
+                raceEnded = true;
+                EndLevel();
             }
         }
 
         private void GetTimeDeduction(GameObject _triggeringObj, out int _timeDeductionMinutes, out int _timeDeductionSeconds)
         {
             if (_triggeringObj.TryGetComponent(out JetskiController playerController))
+            {
+                playerController.OnFinishLineCrosses();
                 playerController.GetFinalTimeDeduction(out _timeDeductionMinutes, out _timeDeductionSeconds);
-            else if (_triggeringObj.TryGetComponent(out JetskiNPCBehaviour jetskiNPCBehaviour))
+                return;
+            }
+
+            if (_triggeringObj.TryGetComponent(out JetskiNPCBehaviour jetskiNPCBehaviour))
+            {
                 jetskiNPCBehaviour.GetFinalTimeDeduction(out _timeDeductionMinutes, out _timeDeductionSeconds);
+                return;
+            }
 
             _timeDeductionMinutes = 0;
             _timeDeductionSeconds = 0;
@@ -245,22 +253,21 @@ namespace JetskiGame
             return $"{_minutes:00}:{_seconds:00}:{_milliseconds:00}";
         }
 
-        private void OnPlayerCrossedFinishLine()
-        {
-            if (onFinishLineCrossedText != null)
-                onFinishLineCrossedText.gameObject.SetActive(true);
-        }
-
         private IEnumerator StartLevelCountdownTimer()
         {
-            endLevelTimer.Start();
+            int countdown = secondsToEndLevel;
 
-            while (endLevelTimer.IsRunning)
+            while (countdown > 0)
             {
-                yield return new WaitForFixedUpdate();
+                countdown--;
+
+                yield return new WaitForSecondsRealtime(1f);
+
+                if (countdown <= showCountdownSeconds)
+                    levelCountdownText.text = countdown.ToString() + "...";
             }
 
-            CheckWinnerPlacementList();
+            OrganizeWinnerPlacementList();
             SetGameScores();
 
             raceEnded = true;
@@ -269,27 +276,70 @@ namespace JetskiGame
             yield return null;
         }
 
-        private void CheckWinnerPlacementList()
+        private void OrganizeWinnerPlacementList()
         {
-            if (WinnerPlacementOrder.Count < maxNumberOfPlayers)
+            CheckIfWinnerPlacementListFull();
+
+            for (int i = 1; i < winnerPlacementOrder.Count; i++)
             {
-                for (int i = WinnerPlacementOrder.Count; i < maxNumberOfPlayers; i++)
+                float currentTimePenaltyToCompare = timePenalties[i];
+                var currentGameObjectBeingCompared = winnerPlacementOrder[i];
+
+                int leftNeighbour = i - 1;
+
+                // While the leftNeighbour is not out of bounds, and the ln distance is more than the currentDistance
+                while (leftNeighbour >= 0 && timePenalties[leftNeighbour] > currentTimePenaltyToCompare)
                 {
-                    WinnerPlacementOrder.Add(WinnerPlacementOrder.Count + 1, new Tuple<GameObject, string>(placementOrder[i], unfinishedRaceText));
+                    // Set the index [ln + 1] (first pass index of current key), to be the value of [ln]
+                    winnerPlacementOrder[leftNeighbour + 1] = winnerPlacementOrder[leftNeighbour];
+                    // Then go further down the array and look at the next ln
+                    leftNeighbour = (leftNeighbour - 1);
+                }
+
+                // If the distance is less, or all left neighbours have been checked, make sure to give the key value to the current index (ln + 1)
+                winnerPlacementOrder[leftNeighbour + 1] = currentGameObjectBeingCompared;
+            }
+        }
+
+        private void CheckIfWinnerPlacementListFull()
+        {
+            if (winnerPlacementOrder.Count < maxNumberOfPlayers)
+            {
+                for (int i = 0; i < maxNumberOfPlayers; i++)
+                {
+                    var foundObjectInList = false;
+                    
+                    for (int j = 0; j < winnerPlacementOrder.Count; j++)
+                    {
+                        if (placementOrder[i] == winnerPlacementOrder[j].Item1)
+                        {
+                            foundObjectInList = true;
+                        }
+                    }
+
+                    if (!foundObjectInList)
+                    {
+                        winnerPlacementOrder.Add(new Tuple<GameObject, string>(placementOrder[i], unfinishedRaceText));
+                        timePenalties.Add(1000f + i);
+                    }
                 }
             }
         }
 
         private void SetGameScores()
         {
-            for (int i = 0; i < WinnerPlacementOrder.Count; i++)
+            for (int i = 0; i < winnerPlacementOrder.Count; i++)
             {
-                if (WinnerPlacementOrder[i].Item1.gameObject.TryGetComponent(out JetskiController playerController))
+                if (winnerPlacementOrder[i].Item1.gameObject.TryGetComponent(out JetskiController playerController))
                 {
                     playerController.SetPlacement(i + 1);
-                    playerController.SetTime(WinnerPlacementOrder[i].Item2);
+                    playerController.SetTime(winnerPlacementOrder[i].Item2);
                 }
-                Debug.Log(WinnerPlacementOrder[i].Item1.gameObject.name);
+                else if (winnerPlacementOrder[i].Item1.gameObject.TryGetComponent(out JetskiNPCBehaviour npcController))
+                {
+                    npcController.SetPlacement(i + 1);
+                    npcController.SetTime(winnerPlacementOrder[i].Item2);
+                }
             }
         }
 
@@ -297,7 +347,7 @@ namespace JetskiGame
         {
             levelTimer.EndTimerAndDisplayFinishTime();
 
-            onFinishLineCrossedText?.gameObject.SetActive(true);
+            onRaceOverText?.gameObject.SetActive(true);
             raceStarted = false;
 
             OnLevelEnd?.Invoke();

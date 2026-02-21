@@ -11,8 +11,6 @@ namespace JetskiGame
     {
         private const int maxPlayers = 4;
 
-        [SerializeField] private LevelTimer timer;
-
         [SerializeField] private CustomTriggerBehaviour middleCollider;
         [SerializeField] private CustomTriggerBehaviour leftCollider;
         [SerializeField] private CustomTriggerBehaviour rightCollider;
@@ -59,8 +57,6 @@ namespace JetskiGame
                 return;
 
             clearedGate[index] = true;
-
-            //timer?.DeduceTime(timeDeduction.Value);
 
             if (controller is JetskiController playerController)
             {

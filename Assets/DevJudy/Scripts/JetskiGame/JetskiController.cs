@@ -1,6 +1,7 @@
 using System;
 using Audio;
 using enums;
+using Juice;
 using Player;
 using TMPro;
 using UnityEngine;
@@ -20,18 +21,15 @@ namespace JetskiGame
         // player.time = finishTime + time deduction
 
         [Header("Drive settings: ")]
-        [SerializeField] private Transform motor;
-
         private Rigidbody rb;
-
+        [SerializeField] private Transform motor;
         [SerializeField] private float power = 20f;
         [SerializeField] private float steerPower = 800f;
         private Vector2 moveInput = Vector2.zero;
-        //private bool driving = false;
+        private bool driving;
 
         [Header("Jump settings: ")]
         [SerializeField] private float regJumpHeight = 10f;
-
         [SerializeField] private float cancelledJumpHeight = 2f;
         private float prevUpwardVelocity;
         private float jumpHeight;
@@ -39,25 +37,24 @@ namespace JetskiGame
 
         [Header("GroundCheck settings: ")]
         [SerializeField] private LayerMask waterLayerMask;
-
         [SerializeField] private float groundCheckRadius = 0.2f;
         [SerializeField] private bool isGrounded;
 
         [Header("Pausing: ")]
         [SerializeField] private UnityEvent OnPauseGame;
-
         [SerializeField] private UnityEvent OnUnpauseGame;
         private bool isPaused;
 
-
-        [Header("Temp: ")]
+        [Header("Dependencies: ")]
+        [SerializeField] private IconHandler iconHandler;
+        [SerializeField] private GameObject onFinishLineCrossedText;
+        
+        [Header("Debug: ")]
         [SerializeField] private ForceMode forceMode;
-
         [SerializeField] private bool steerWithAddForceAtPos;
         [SerializeField] private ForceMode jumpForceMode;
         [SerializeField] private TextMeshProUGUI speedText;
 
-        private bool driving;
 
         private void Awake()
         {
@@ -210,25 +207,35 @@ namespace JetskiGame
         {
             player.PlayerScore.Value = _placement;
         }
-        
+
         public void SetTime(string _time)
         {
-            player.Time =  _time;
+            player.Time = _time;
         }
 
         public void OnObstacleCleared()
         {
             int randomEmote = Random.Range(0, 2);
 
-            // if (randomEmote == 0)
-            //iconHandler.DisplayIcon(EEmotion.Love)
-            //else
-            //iconHandler.DisplayIcon(EEmotion.Happy)
+            if (randomEmote == 0)
+                iconHandler.DisplayIcon(EEmotion.Love);
+            else
+                iconHandler.DisplayIcon(EEmotion.Happy);
         }
 
         public void OnObstacleMissed(float _timeDeduction, out int _timeDeductionMinutes, out int _timeDeductionSeconds)
         {
-            // !! iconHandler.DisplayIcon(EEmotion.Sad)
+            int randomEmote = Random.Range(0, 3);
+
+            switch (randomEmote)
+            {
+                case 0:
+                    iconHandler.DisplayIcon(EEmotion.Sad);
+                    break;
+                case 1:
+                    iconHandler.DisplayIcon(EEmotion.Embarrassed);
+                    break;
+            }
 
             int currentDeduction = (int)(timeDeductionSeconds + _timeDeduction);
 
@@ -242,6 +249,11 @@ namespace JetskiGame
 
             _timeDeductionMinutes = timeDeductionMinutes;
             _timeDeductionSeconds = timeDeductionSeconds;
+        }
+
+        public void OnFinishLineCrosses()
+        {
+            onFinishLineCrossedText.SetActive(true);
         }
 
         public void GetFinalTimeDeduction(out int _minutes, out int _seconds)

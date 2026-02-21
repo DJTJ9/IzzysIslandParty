@@ -15,8 +15,6 @@ namespace MultiuseScripts
         [SerializeField] protected GameObject[] placementOrder;
         [SerializeField] protected LayerMask playerLayerMask;
         
-        public Dictionary<int, Tuple<GameObject, string>> WinnerPlacementOrder {get; protected set;}
-        
         public virtual void OnPlayerJoined(GameObject _player) { }
         
         public virtual void OnNPCJoined(GameObject _npc) { }

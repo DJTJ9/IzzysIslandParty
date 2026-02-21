@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using Player;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Pathfinding
 {
@@ -35,9 +37,13 @@ namespace Pathfinding
             rb = GetComponent<Rigidbody>();
         }
 
-        public void OnNPCJoined(SO_PlayerRacingGames _player)
+        public override void OnNPCJoined(SO_PlayerRacingGames _player)
         {
             player = _player;
+            
+            player.Time = String.Empty;
+            player.TimeValue = 0;
+            player.PlayerScore.Value = 0; 
         }
 
         public void SetTarget(Transform _target)
@@ -168,13 +174,15 @@ namespace Pathfinding
         {
             // !! iconHandler.DisplayIcon(EEmotion.Sad)
 
-            var currentDeduction = (timeDeductionSeconds + _timeDeduction);
+            int currentDeduction = (int)(timeDeductionSeconds + _timeDeduction);
 
             if (currentDeduction >= 60)
             {
                 timeDeductionMinutes++;
-                timeDeductionSeconds = (timeDeductionMinutes % 60);
+                timeDeductionSeconds = (currentDeduction % 60);
             }
+            else
+                timeDeductionSeconds = currentDeduction;
 
             _timeDeductionMinutes = timeDeductionMinutes;
             _timeDeductionSeconds = timeDeductionSeconds;

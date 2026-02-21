@@ -1,4 +1,5 @@
 ﻿using System;
+using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,7 +22,9 @@ public class Controller : MonoBehaviour
     public int GetPlayerIndex() => PlayerIndex;
     
     public void SetPlayerIndex(int _playerIndex) => PlayerIndex = _playerIndex;
-    
+
+    public virtual void OnNPCJoined(SO_PlayerRacingGames _player) { }
+
     public void SwitchToUIInputMap()
     {
         playerInput.SwitchCurrentActionMap("UI");

@@ -8,11 +8,14 @@ namespace Juice
     public class IconHandler : MonoBehaviour
     {
         [SerializeField] private MeshRenderer target;
-
         [SerializeField] private SO_Emotion[] emotions;
         [SerializeField] private float displayIconSeconds = 3f;
 
         private CountdownTimer iconTimer;
+
+        [Header("Camera")]
+        [SerializeField] private Camera camera;
+        [SerializeField] private bool rotateToCamera = true;
 
         private void Awake()
         {
@@ -30,15 +33,16 @@ namespace Juice
             iconTimer.OnTimerStart += EnableMeshRenderer;
             iconTimer.OnTimerStop += DisableMeshRenderer;
 
-            SetTargetRotation();
-
             target.gameObject.SetActive(false);
         }
-        
+
         private void EnableMeshRenderer()
         {
             if (!target.gameObject)
                 return;
+            
+            if (rotateToCamera)
+                target.gameObject.transform.LookAt(camera.transform.position);
             
             target.gameObject.SetActive(true);
         }
@@ -47,7 +51,7 @@ namespace Juice
         {
             if (!target.gameObject)
                 return;
-            
+
             target.gameObject.SetActive(false);
         }
 
@@ -55,19 +59,13 @@ namespace Juice
         {
             iconTimer.OnTimerStart -= EnableMeshRenderer;
             iconTimer.OnTimerStop -= DisableMeshRenderer;
-            
+
             iconTimer = null;
         }
 
         private void OnDestroy()
         {
             iconTimer = null;
-        }
-
-        private void SetTargetRotation()
-        {
-            Camera mainCamera = Camera.main;
-            target.gameObject.transform.rotation = Quaternion.LookRotation(-mainCamera.transform.up, -mainCamera.transform.forward);
         }
 
         public void DisplayIcon(EEmotion _emotion)

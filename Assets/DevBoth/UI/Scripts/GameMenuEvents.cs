@@ -641,7 +641,7 @@ public class GameMenuEvents : MonoBehaviour
             row.Q<Label>("NameLabel").text = data.Name;
 
             if (!string.IsNullOrEmpty(data.Time))
-                row.Q<Label>("ScoreLabel").text = data.PlayerScore.Value.ToString(); // <---- Hier Zeit eintragen
+                row.Q<Label>("ScoreLabel").text = data.Time;
             else
                 row.Q<Label>("ScoreLabel").text = "";
             
