@@ -8,7 +8,6 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
 {
     [SerializeField] private bool isRacingGame;
     
-    [SerializeField] private RigidbodyMovement rigidbodyMovement;
     [SerializeField] private Image shootForceBar;
     [SerializeField] private TMP_Text shootForceText;
     [SerializeField] private GameObject timer;
@@ -19,12 +18,14 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
     [SerializeField] private SO_PlayerCollectionRacingGames playersSO;
 
     private Controller playerController;
+    private RigidbodyMovement rigidbodyMovement;
     
     private StopwatchTimer finishTimer;
 
     private void Start()
     {
         playerController = transform.parent.GetComponentInChildren<Controller>();
+        rigidbodyMovement = playerController.transform.parent.GetComponentInChildren<RigidbodyMovement>();
         shootForceBar.fillAmount = 0;
 
         if (isRacingGame)
@@ -51,16 +52,17 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
 
     private void Update()
     {
-        var normalizedForce = (rigidbodyMovement.CurrentShootForce - rigidbodyMovement.minShootForce) / (rigidbodyMovement.maxShootForce - rigidbodyMovement.minShootForce);
-        shootForceBar.fillAmount = Mathf.Clamp01(normalizedForce);
-        shootForceText.text = $"{Mathf.RoundToInt(normalizedForce * 100).ToString()}%";
-
         if (isRacingGame)
         {
             timerText.text = finishTimer.CurrentTime.ToString("0:00");
             playersSO.Players[playerController.PlayerIndex].Time = finishTimer.CurrentTime.ToString("0:00");
             playersSO.Players[playerController.PlayerIndex].TimeValue = finishTimer.CurrentTime;
         }
+        
+        if (rigidbodyMovement == null) return;
+        var normalizedForce = (rigidbodyMovement.CurrentShootForce - rigidbodyMovement.minShootForce) / (rigidbodyMovement.maxShootForce - rigidbodyMovement.minShootForce);
+        shootForceBar.fillAmount = Mathf.Clamp01(normalizedForce);
+        shootForceText.text = $"{Mathf.RoundToInt(normalizedForce * 100).ToString()}%";
         // else
         // {
         //     shootCounterText.text = playerController

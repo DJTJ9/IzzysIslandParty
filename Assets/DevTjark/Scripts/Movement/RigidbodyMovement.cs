@@ -3,30 +3,29 @@ using ImprovedTimers;
 using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
 
-[RequireComponent (typeof(GroundChecker))]
-public class RigidbodyMovement : MonoBehaviour, IRigidbodyMovement
+[RequireComponent(typeof(GroundChecker))]
+public class RigidbodyMovement : MonoBehaviour
 {
-    [FoldoutGroup("Push Settings", expanded: true)]
+    [FoldoutGroup("Push Settings", expanded: true)] 
     [SerializeField] private float pushForce;
     [SerializeField] private float pushCooldown;
-    
-    [FoldoutGroup("Shoot Settings", expanded: true)]
+
+    [FoldoutGroup("Shoot Settings", expanded: true)] 
     [SerializeField] public float minShootForce;
     [SerializeField] public float maxShootForce;
     [SerializeField] private float shootForceChangeSpeed;
     [SerializeField] private float shootCooldown;
-    
-    [FoldoutGroup("Jump Settings", expanded: true)]
+    [SerializeField] private float shootHeight;
+
+    [FoldoutGroup("Jump Settings", expanded: true)] 
     [SerializeField] private float jumpForce;
     [SerializeField] private float jumpCooldown;
-    
-    [FoldoutGroup("Hit Impulse Settings", expanded: true)]
+
+    [FoldoutGroup("Hit Impulse Settings", expanded: true)] 
     [SerializeField] private float horizontalImpactForce;
     [SerializeField] private float verticalImpactForce;
-    
-    // [SerializeField] private float maxSpeed;
-    // [SerializeField] private float jumpSpeedModifier = 1;
-    // [SerializeField] private float fallSpeedModifier = 1;
+    [SerializeField] private float impulseCooldown;
+
 
     [SerializeField] private Camera cam;
     private Rigidbody rb;
@@ -39,29 +38,34 @@ public class RigidbodyMovement : MonoBehaviour, IRigidbodyMovement
     private bool m_canJump = true;
     private bool m_isCharging;
     private bool m_isIncreasing = true;
-    
+    private bool m_impulseApplied;
+
     private CountdownTimer pushCooldownTimer;
     private CountdownTimer shootCooldownTimer;
     private CountdownTimer jumpCooldownTimer;
-    
+    private CountdownTimer impulseCooldownTimer;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         groundChecker = GetComponent<GroundChecker>();
-        
+
         pushCooldownTimer = new CountdownTimer(pushCooldown);
         pushCooldownTimer.OnTimerStop += EnableMovement;
-        
+
         shootCooldownTimer = new CountdownTimer(shootCooldown);
         shootCooldownTimer.OnTimerStop += EnableShooting;
-        
+
         jumpCooldownTimer = new CountdownTimer(jumpCooldown);
         jumpCooldownTimer.OnTimerStop += EnableJumping;
 
+        impulseCooldownTimer = new CountdownTimer(impulseCooldown);
+        impulseCooldownTimer.OnTimerStart += () => m_impulseApplied = true;
+        impulseCooldownTimer.OnTimerStop += () => m_impulseApplied = false;
+
         CurrentShootForce = minShootForce;
     }
-    
+
     private void FixedUpdate()
     {
         UpdateChargePower();
@@ -70,19 +74,30 @@ public class RigidbodyMovement : MonoBehaviour, IRigidbodyMovement
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-        if (other.TryGetComponent<IRigidbodyMovement>(out var _rbm)) return;
-        if (_rbm.GetCurrentVelocity() > rb.linearVelocity.magnitude) return;
-            
+        if (m_impulseApplied) return;
+        impulseCooldownTimer.Start();
+
         var impactDirection = rb.linearVelocity.normalized;
         var impulse = impactDirection * (horizontalImpactForce * rb.linearVelocity.magnitude)
                       + Vector3.up * (verticalImpactForce * rb.linearVelocity.magnitude);
-        
+
         if (!other.TryGetComponent<Rigidbody>(out var _rb)) return;
+        var currentVelocity = Mathf.Abs(_rb.linearVelocity.magnitude);
+        if (rb.linearVelocity.magnitude < currentVelocity) return;
+
         _rb.AddForce(impulse, ForceMode.Impulse);
+        ConsoleProDebug.LogToFilter($"Player applied {impulse} impulse to {other.name}", "Debug");
     }
+
+    // private void OnTriggerExit(Collider other)
+    // {
+    //     m_impulseApplied = false;
+    // }
 
     public void StartCharging(InputAction.CallbackContext _context)
     {
+        if (!groundChecker.IsGrounded) return;
+
         if (_context.started)
         {
             m_isCharging = true;
@@ -95,24 +110,26 @@ public class RigidbodyMovement : MonoBehaviour, IRigidbodyMovement
             m_isCharging = false;
         }
     }
-    
+
     /// <summary>
     /// Receives a move direction
     /// </summary>
     public void Move(Vector3 _direction)
     {
         if (!m_canMove) return;
-        
-        var camFwd = cam.transform.forward;   
+
+        var camFwd = cam.transform.forward;
         var camRight = cam.transform.right;
 
-        camFwd.y = 0f; camRight.y = 0f;
-        camFwd.Normalize(); camRight.Normalize();
+        camFwd.y = 0f;
+        camRight.y = 0f;
+        camFwd.Normalize();
+        camRight.Normalize();
 
         var worldDir = camRight * _direction.x + camFwd * _direction.y;
-        
+
         rb.AddForce(worldDir.normalized * pushForce, ForceMode.Impulse);
-        
+
         pushCooldownTimer.Reset();
         pushCooldownTimer.Start();
         m_canMove = false;
@@ -122,24 +139,25 @@ public class RigidbodyMovement : MonoBehaviour, IRigidbodyMovement
     {
         if (!m_canJump) return;
         if (!groundChecker.IsGrounded) return;
-        
+
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            
+
         jumpCooldownTimer.Reset();
         jumpCooldownTimer.Start();
         m_canJump = false;
     }
-    
+
     private void Shoot()
     {
         if (!m_canShoot) return;
         if (!groundChecker.IsGrounded) return;
 
         var screenCenter = cam.ViewportToScreenPoint(new Vector3(0.5f, 0.5f, 0f));
-        
-        var ray = cam.ScreenPointToRay(screenCenter); 
+
+        var ray = cam.ScreenPointToRay(screenCenter);
 
         var targetPoint = ray.GetPoint(500f);
+        targetPoint.y = shootHeight;
 
         var direction = (targetPoint - rb.transform.position).normalized;
 
@@ -158,7 +176,7 @@ public class RigidbodyMovement : MonoBehaviour, IRigidbodyMovement
         if (m_isIncreasing)
         {
             CurrentShootForce += shootForceChangeSpeed * Time.deltaTime;
-            
+
             if (CurrentShootForce >= maxShootForce)
             {
                 CurrentShootForce = maxShootForce;
@@ -168,7 +186,7 @@ public class RigidbodyMovement : MonoBehaviour, IRigidbodyMovement
         else
         {
             CurrentShootForce -= shootForceChangeSpeed * Time.deltaTime;
-            
+
             if (CurrentShootForce <= minShootForce)
             {
                 CurrentShootForce = minShootForce;
@@ -181,7 +199,7 @@ public class RigidbodyMovement : MonoBehaviour, IRigidbodyMovement
     {
         m_canMove = true;
     }
-    
+
     private void EnableShooting()
     {
         m_canShoot = true;
@@ -191,7 +209,7 @@ public class RigidbodyMovement : MonoBehaviour, IRigidbodyMovement
     {
         m_canJump = true;
     }
-    
+
     // /// <summary>
     // /// Collects the current Velocity of the rb and sets the speed
     // /// Transforms moving direction from local space to world space

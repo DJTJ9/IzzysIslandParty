@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [RequireComponent (typeof(GroundChecker))]
-public class GoapRigidbodyMovement : Controller, IRigidbodyMovement
+public class GoapRigidbodyMovement : Controller
 {
     [FoldoutGroup("Push Settings", expanded: true)]
     [SerializeField] private float pushForce;
@@ -21,6 +21,7 @@ public class GoapRigidbodyMovement : Controller, IRigidbodyMovement
     [FoldoutGroup("Hit Impulse Settings", expanded: true)]
     [SerializeField] private float horizontalImpactForce;
     [SerializeField] private float verticalImpactForce;
+    [SerializeField] private float impulseCooldown;
     
     // [SerializeField] private float maxSpeed;
     // [SerializeField] private float jumpSpeedModifier = 1;
@@ -30,6 +31,9 @@ public class GoapRigidbodyMovement : Controller, IRigidbodyMovement
     private GroundChecker groundChecker;
 
     private Vector3 moveDirection;
+    private bool m_impulseApplied;
+    
+    private CountdownTimer impulseCooldownTimer;
     
     // private bool canMove = true;
     // private bool canShoot = true;
@@ -43,20 +47,32 @@ public class GoapRigidbodyMovement : Controller, IRigidbodyMovement
     {
         rb = GetComponent<Rigidbody>();
         InitializeGroundChecker();
+        
+        impulseCooldownTimer = new CountdownTimer(impulseCooldown);
+        impulseCooldownTimer.OnTimerStop += () => m_impulseApplied = false;
     }
     
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-        if (other.TryGetComponent<IRigidbodyMovement>(out var _rbm)) return;
-        if (_rbm.GetCurrentVelocity() > rb.linearVelocity.magnitude) return;
-            
+        if (m_impulseApplied) return;
+        impulseCooldownTimer.Start();
+
         var impactDirection = rb.linearVelocity.normalized;
         var impulse = impactDirection * (horizontalImpactForce * rb.linearVelocity.magnitude)
                       + Vector3.up * (verticalImpactForce * rb.linearVelocity.magnitude);
-        
+
         if (!other.TryGetComponent<Rigidbody>(out var _rb)) return;
+        var currentVelocity = _rb.linearVelocity;
+        if (rb.linearVelocity.magnitude > currentVelocity.magnitude) return;
+
         _rb.AddForce(impulse, ForceMode.Impulse);
+        ConsoleProDebug.LogToFilter($"NPC applied {impulse} impulse to {other.name}", "Debug");
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        m_impulseApplied = false;
     }
 
     public void Shoot(Vector3 _targetPosition)
