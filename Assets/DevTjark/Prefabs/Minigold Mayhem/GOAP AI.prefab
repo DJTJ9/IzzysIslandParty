@@ -607,13 +607,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1996264897801725228}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fca7a3bbd9b84621aad7cefa3969d72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isRacingGame: 1
-  rigidbodyMovement: {fileID: 0}
   shootForceBar: {fileID: 5951813829337816213}
   shootForceText: {fileID: 7635132459263102232}
   timer: {fileID: 8993062717689221280}
@@ -743,12 +742,17 @@ MonoBehaviour:
   cooldownTimerDuration: 5
   chaseSensor: {fileID: 1788804077569204535}
   attackSensor: {fileID: 3592063401083666373}
-  player1Transform: {fileID: 0}
-  player2Transform: {fileID: 0}
   finishTransform: {fileID: 0}
   checkPoint1: {fileID: 0}
   checkPoint2: {fileID: 0}
   checkPoint3: {fileID: 0}
+  checkPoint4: {fileID: 0}
+  checkPoint5: {fileID: 0}
+  checkPoint6: {fileID: 0}
+  checkPoint7: {fileID: 0}
+  checkPoint8: {fileID: 0}
+  checkPoint9: {fileID: 0}
+  checkPoint10: {fileID: 0}
 --- !u!114 &6969568167537269183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -764,7 +768,7 @@ MonoBehaviour:
   PlayerIndex: 1
   pushForce: 10
   pushCooldown: 3
-  shootForce: 35
+  shootForceFactor: 20
   shootCooldown: 3
   jumpForce: 0
   jumpCooldown: 3
@@ -1142,7 +1146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9014604798097450464
 Transform:
   m_ObjectHideFlags: 0
@@ -1170,7 +1174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce89be83276b4490a3c00a9ad3143382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DetectionRadius: 30
+  DetectionRadius: 50
   timerInterval: 1
 --- !u!135 &8000431795850922033
 SphereCollider:

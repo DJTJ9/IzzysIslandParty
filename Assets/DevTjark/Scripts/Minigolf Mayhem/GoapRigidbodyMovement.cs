@@ -11,7 +11,7 @@ public class GoapRigidbodyMovement : Controller
     [SerializeField] private float pushCooldown;
     
     [FoldoutGroup("Shoot Settings", expanded: true)]
-    [SerializeField] private float shootForce;
+    [SerializeField] private float shootForceFactor;
     [SerializeField] private float shootCooldown;
     
     [FoldoutGroup("Jump Settings", expanded: true)]
@@ -80,7 +80,7 @@ public class GoapRigidbodyMovement : Controller
         if (!m_isActive) return;
         if (!groundChecker.IsGrounded) return;
 
-        var direction = (_targetPosition - rb.transform.position).normalized;
+        // var direction = (_targetPosition - rb.transform.position).normalized;
         
         var impulse = CalculateImpulse(rb, _targetPosition);
         rb.AddForce(impulse, ForceMode.Impulse);
@@ -94,38 +94,17 @@ public class GoapRigidbodyMovement : Controller
         var mass = _rb.mass;
         var gravity = Physics.gravity;
 
-        // --- Horizontale Bewegung ---
         var horizontal = new Vector3(toTarget.x, 0f, toTarget.z);
         var horizontalDistance = horizontal.magnitude;
-
-        var horizontalSpeedFactor = 20f;  // Tuning
+        var horizontalSpeedFactor = shootForceFactor + Random.Range(-5f, 5f);
         var t = horizontalDistance / horizontalSpeedFactor;
-
-        // Horizontal velocity
         var vHorizontal = horizontal / t;
 
-        // --- Vertikale Bewegung ---
         var y = toTarget.y;
-
-        var vY = (y - 0.5f * gravity.y * t * t) / t;
-
-        var v0 = vHorizontal + Vector3.up * vY;
+        var vVertical = (y - 0.5f * gravity.y * t * t) / t;
+        var v0 = vHorizontal + Vector3.up * vVertical;
 
         return mass * v0;
-        
-        // var start = _rb.position;
-        // var toTarget = target - start;
-        // var distance = toTarget.magnitude;
-        //
-        // var speedFactor = 5f;
-        //
-        // var t = distance / speedFactor;
-        //
-        // var gravity = Physics.gravity;
-        //
-        // var v0 = (toTarget - gravity * (0.5f * t * t)) / t;
-        //
-        // return _rb.mass * v0;
     }
 
     private void InitializeGroundChecker()
@@ -134,10 +113,5 @@ public class GoapRigidbodyMovement : Controller
         // groundChecker.groundCheckPosition = new Vector3(0f, -1f, 0f);
         // groundChecker.groundCheckSize = new Vector3(0.7f, 0.1f, 0.7f);
         // groundChecker.groundCheckLayerMask = LayerMask.GetMask("Ground");
-    }
-
-    public float GetCurrentVelocity()
-    {
-        return rb.linearVelocity.magnitude;
     }
 }
