@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using enums;
+using Juice;
 using Player;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -11,6 +13,8 @@ namespace Pathfinding
         private SO_PlayerRacingGames player;
         private Rigidbody rb;
 
+        [SerializeField] private IconHandler iconHandler;
+
         private const float minPathUpdateTime = 0.2f;
         private const float pathUpdateThreshold = 0.5f;
         private const float squareMoveThreshold = pathUpdateThreshold * pathUpdateThreshold;
@@ -21,7 +25,7 @@ namespace Pathfinding
         [SerializeField] private float turnSpeed = 2.5f;
         [SerializeField] private float turnDistance = 10f;
         [SerializeField] private float stoppingDistance = 2f;
-        
+
         private int timeDeductionMinutes;
         private int timeDeductionSeconds;
 
@@ -40,10 +44,10 @@ namespace Pathfinding
         public override void OnNPCJoined(SO_PlayerRacingGames _player)
         {
             player = _player;
-            
+
             player.Time = String.Empty;
             player.TimeValue = 0;
-            player.PlayerScore.Value = 0; 
+            player.PlayerScore.Value = 0;
         }
 
         public void SetTarget(Transform _target)
@@ -58,7 +62,7 @@ namespace Pathfinding
 
         public void SetTime(string _time)
         {
-            player.Time =  _time;
+            player.Time = _time;
         }
 
         public void CanFollowPath()
@@ -159,20 +163,30 @@ namespace Pathfinding
 
             yield return null;
         }
-        
+
         public void OnObstacleCleared()
         {
             int randomEmote = Random.Range(0, 2);
-            
-            // if (randomEmote == 0)
-            //iconHandler.DisplayIcon(EEmotion.Love)
-            //else
-            //iconHandler.DisplayIcon(EEmotion.Happy)
+
+            if (randomEmote == 0)
+                iconHandler.DisplayIcon(EEmotion.Love);
+            else
+                iconHandler.DisplayIcon(EEmotion.Happy);
         }
 
         public void OnObstacleMissed(float _timeDeduction, out int _timeDeductionMinutes, out int _timeDeductionSeconds)
         {
-            // !! iconHandler.DisplayIcon(EEmotion.Sad)
+            int randomEmote = Random.Range(0, 3);
+
+            switch (randomEmote)
+            {
+                case 0:
+                    iconHandler.DisplayIcon(EEmotion.Sad);
+                    break;
+                case 1:
+                    iconHandler.DisplayIcon(EEmotion.Embarrassed);
+                    break;
+            }
 
             int currentDeduction = (int)(timeDeductionSeconds + _timeDeduction);
 

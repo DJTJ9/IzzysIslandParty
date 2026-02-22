@@ -847,8 +847,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerIndex: 0
+  iconHandler: {fileID: 8632361335582471870}
   target: {fileID: 0}
-  speed: 19
+  speed: 20
   turnSpeed: 3
   turnDistance: 10
   stoppingDistance: 3
@@ -907,6 +908,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f354e1cd74e0df84485dab533d894556, type: 2}
   - {fileID: 11400000, guid: 16df746755f4c214aac0797064586155, type: 2}
   displayIconSeconds: 3
+  camera: {fileID: 0}
+  rotateToCamera: 0
 --- !u!1 &6209968601556882392
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,7 +1055,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d18fd6b5060bbea4ab20517ecffc1022, type: 2}
+  - {fileID: 2100000, guid: 8fb76c4e832bf8f458922e1cac90d108, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

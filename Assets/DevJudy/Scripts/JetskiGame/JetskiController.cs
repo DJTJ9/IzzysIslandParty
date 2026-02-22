@@ -17,11 +17,10 @@ namespace JetskiGame
 
         private int timeDeductionSeconds;
         private int timeDeductionMinutes;
-        // player.GameScore = placement;
-        // player.time = finishTime + time deduction
 
         [Header("Drive settings: ")]
         private Rigidbody rb;
+
         [SerializeField] private Transform motor;
         [SerializeField] private float power = 20f;
         [SerializeField] private float steerPower = 800f;
@@ -30,6 +29,7 @@ namespace JetskiGame
 
         [Header("Jump settings: ")]
         [SerializeField] private float regJumpHeight = 10f;
+
         [SerializeField] private float cancelledJumpHeight = 2f;
         private float prevUpwardVelocity;
         private float jumpHeight;
@@ -37,22 +37,24 @@ namespace JetskiGame
 
         [Header("GroundCheck settings: ")]
         [SerializeField] private LayerMask waterLayerMask;
+
         [SerializeField] private float groundCheckRadius = 0.2f;
         [SerializeField] private bool isGrounded;
 
         [Header("Pausing: ")]
         [SerializeField] private UnityEvent OnPauseGame;
+
         [SerializeField] private UnityEvent OnUnpauseGame;
         private bool isPaused;
 
         [Header("Dependencies: ")]
         [SerializeField] private IconHandler iconHandler;
         [SerializeField] private GameObject onFinishLineCrossedText;
-        
+
         [Header("Debug: ")]
         [SerializeField] private ForceMode forceMode;
-        [SerializeField] private bool steerWithAddForceAtPos;
         [SerializeField] private ForceMode jumpForceMode;
+        [SerializeField] private bool showSpeedText;
         [SerializeField] private TextMeshProUGUI speedText;
 
 
@@ -60,6 +62,9 @@ namespace JetskiGame
         {
             rb = GetComponent<Rigidbody>();
             playerInput = GetComponent<PlayerInput>();
+
+            if (!showSpeedText && speedText != null)
+                speedText.gameObject.SetActive(false);
         }
 
         public void OnPlayerJoined(SO_PlayerRacingGames _player)
@@ -114,12 +119,7 @@ namespace JetskiGame
 
         private void MoveJetski()
         {
-            Vector3 moveInput3d;
-
-            if (steerWithAddForceAtPos)
-                moveInput3d = new Vector3(0f, 0f, moveInput.y);
-            else
-                moveInput3d = new Vector3(moveInput.x, 0f, moveInput.y);
+            Vector3 moveInput3d = new Vector3(0f, 0f, moveInput.y);
 
             // !! Change after playtest
             switch (forceMode)
@@ -136,7 +136,7 @@ namespace JetskiGame
                     break;
             }
 
-            if (speedText != null)
+            if (speedText != null && showSpeedText)
                 speedText.text = "Speed: " + Mathf.Round(new Vector3(0f, 0f, rb.linearVelocity.z).magnitude);
         }
 
@@ -176,11 +176,8 @@ namespace JetskiGame
                 Jump(jumpHeight);
             else if (!isGrounded && jumpPressedLastFrame)
                 jumpPressedLastFrame = false;
-
-
-            // First do the steering
-            if (steerWithAddForceAtPos)
-                rb.AddForceAtPosition(transform.right * (-moveInput.x * steerPower) / 100f, motor.position);
+            
+            rb.AddForceAtPosition(transform.right * (-moveInput.x * steerPower) / 100f, motor.position);
 
             MoveJetski();
 
@@ -196,7 +193,7 @@ namespace JetskiGame
 
         private void GroundCheck()
         {
-            var groundCheckPosition = new Vector3(motor.position.x, motor.position.y, cancelledJumpHeight); // - groundCheckOffset
+            var groundCheckPosition = new Vector3(motor.position.x, motor.position.y, cancelledJumpHeight);
 
             Collider[] results = new Collider[1];
 

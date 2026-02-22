@@ -771,7 +771,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4567907800259024328}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 0.8, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -781,7 +781,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -18, y: -120}
+  m_AnchoredPosition: {x: -27, y: -198}
   m_SizeDelta: {x: 699.8, y: 100}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &4215853904273647815
@@ -1535,7 +1535,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerIndex: 0
   motor: {fileID: 3991025528955417679}
-  power: 20
+  power: 21
   steerPower: 800
   regJumpHeight: 10
   cancelledJumpHeight: 2
@@ -1577,8 +1577,8 @@ MonoBehaviour:
   iconHandler: {fileID: 7984487965229195831}
   onFinishLineCrossedText: {fileID: 3251011236727367515}
   forceMode: 2
-  steerWithAddForceAtPos: 1
   jumpForceMode: 1
+  showSpeedText: 0
   speedText: {fileID: 5676121827205454218}
 --- !u!1 &5968206275066761790
 GameObject:
@@ -2129,7 +2129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4268192453360043208
 RectTransform:
   m_ObjectHideFlags: 0
