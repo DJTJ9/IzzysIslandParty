@@ -45,7 +45,7 @@ public class MinigolfMayhemPlayerJoiner : MonoBehaviour
 
         if (_playerInput.gameObject.TryGetComponent(out TransformRegistration transformRegistration))
         {
-            transformRegistration.SetLocationKey($"Player{m_playerIndex}");
+            transformRegistration.SetAndRegisterPlayerLocationKey($"Player{m_playerIndex}");
         }
     }
     

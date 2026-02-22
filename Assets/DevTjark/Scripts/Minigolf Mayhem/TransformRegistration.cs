@@ -11,9 +11,10 @@ public class TransformRegistration : MonoBehaviour
         LocationService.Instance.RegisterTransform(LocationKey, transform);
     }
 
-    public void SetLocationKey(string _key)
+    public void SetAndRegisterPlayerLocationKey(string _key)
     {
         LocationKey = _key;
         LocationService.Instance.RegisterTransform(LocationKey, transform);
+        LocationService.Instance.RegisterPlayerTransform(LocationKey, transform);
     }
 }

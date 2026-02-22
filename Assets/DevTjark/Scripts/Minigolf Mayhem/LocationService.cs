@@ -9,6 +9,7 @@ public class LocationService : MonoBehaviour
     public static LocationService Instance => instance;
 
     private Dictionary<string, Transform> dynamicTransforms = new();
+    public Dictionary<string, Transform> PlayerTransforms = new();
 
     public event Action<string, Vector3> OnTransformPositionChanged;
 
@@ -25,6 +26,10 @@ public class LocationService : MonoBehaviour
         dynamicTransforms[_key] = _transform;
     }
 
+    public void RegisterPlayerTransform(string _key, Transform _transform)
+    {
+        PlayerTransforms[_key] = _transform;
+    }
     public Transform GetTransform(string _key)
     {
         return dynamicTransforms.GetValueOrDefault(_key);

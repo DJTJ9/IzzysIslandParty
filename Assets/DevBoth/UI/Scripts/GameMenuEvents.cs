@@ -382,10 +382,10 @@ public class GameMenuEvents : MonoBehaviour
         controllerSelectionMenu.style.display = DisplayStyle.Flex;
         HideAllGameHeadersAndInstructions();
         FocusButton(controllerSelectionReadyButton);
-        jetskiJoyrideRaceHeader.style.display = DisplayStyle.Flex;
-        jetskiJoyrideRaceInstructions.style.display = DisplayStyle.Flex;
-        jetskiJoyrideRaceInstructionsText.style.display = DisplayStyle.Flex;
-        jetskiJoyrideRacePreviewImage.style.display = DisplayStyle.Flex;
+        jetskiJoyrideSlalomHeader.style.display = DisplayStyle.Flex;
+        jetskiJoyrideSlalomInstructions.style.display = DisplayStyle.Flex;
+        jetskiJoyrideSlalomInstructionsText.style.display = DisplayStyle.Flex;
+        jetskiJoyrideSlalomPreviewImage.style.display = DisplayStyle.Flex;
         uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.JetskiJoyrideSlalom, out var clip) ? clip : throw new KeyNotFoundException());
         uiToolkitVideo.PlayVideo();
     }
