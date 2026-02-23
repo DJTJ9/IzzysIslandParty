@@ -10,6 +10,7 @@ public class LocationService : MonoBehaviour
 
     private Dictionary<string, Transform> dynamicTransforms = new();
     public Dictionary<string, Transform> PlayerTransforms = new();
+    public Dictionary<string, Transform> CheckPointTransforms = new();
 
     public event Action<string, Vector3> OnTransformPositionChanged;
 
@@ -25,11 +26,31 @@ public class LocationService : MonoBehaviour
     {
         dynamicTransforms[_key] = _transform;
     }
+    public void UnregisterTransform(string _key)
+    {
+        dynamicTransforms.Remove(_key);
+    }
 
     public void RegisterPlayerTransform(string _key, Transform _transform)
     {
         PlayerTransforms[_key] = _transform;
     }
+    
+    public void UnregisterPlayerTransform(string _key)
+    {
+        PlayerTransforms.Remove(_key);
+    }
+    
+    public void RegisterCheckPointTransform(string _key, Transform _transform)
+    {
+        CheckPointTransforms[_key] = _transform;
+    }
+    
+    public void UnregisterCheckPointTransform(string _key)
+    {
+        CheckPointTransforms.Remove(_key);
+    }
+    
     public Transform GetTransform(string _key)
     {
         return dynamicTransforms.GetValueOrDefault(_key);
