@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GoapAgent : MonoBehaviour {
     [Header("Settings")]
+    [SerializeField] private float m_playerAttackRange = 15f;
+    [SerializeField] private float m_checkPointDetectionRange = 30f;
     [SerializeField] private float cooldownTimerDuration = 5f;
     
     [Header("Sensors")] 
@@ -28,14 +30,13 @@ public class GoapAgent : MonoBehaviour {
     private Transform checkPoint9;
     private Transform checkPoint10;
 
+    private const int MAX_PLAYERS = 3;
+    private const int MAX_CHECKPOINTS = 30;
     
-    // private Rigidbody rb;
     private GoapRigidbodyMovement rigidbodyMovement;
 
     private CountdownTimer statsTimer;
     private CountdownTimer moveCooldownTimer;
-    
-    // private bool m_isOnCooldown;
     
     private GameObject target;
     private Vector3 destination;
@@ -44,11 +45,9 @@ public class GoapAgent : MonoBehaviour {
     public AgentGoal currentGoal;
     public ActionPlan actionPlan;
     public AgentAction currentAction;
-    
     public Dictionary<Beliefs, AgentBelief> beliefs;
     public HashSet<AgentAction> actions;
     public HashSet<AgentGoal> goals;
-    
     private IGoapPlanner gPlanner;
     
     private void Awake() {
@@ -73,6 +72,7 @@ public class GoapAgent : MonoBehaviour {
         var factory = new BeliefFactory(this, beliefs);
         
         CreatePlayerBeliefs(factory);
+        // CreateCheckPointBeliefs(factory);
         
         factory.AddBelief(Beliefs.Nothing, () => false);
         
@@ -121,30 +121,33 @@ public class GoapAgent : MonoBehaviour {
         
         for (var i = 0; i < playerTransforms.Count; i++)
         {
-            factory.AddLocationBelief(beliefValues[i], 15f, playerTransforms[$"Player{i+1}"]);
+            factory.AddLocationBelief(beliefValues[i], m_playerAttackRange, playerTransforms[$"Player{i+1}"]);
         }
     }
 
+    private void CreateCheckPointBeliefs(BeliefFactory factory)
+    {
+        var checkPointTransforms = LocationService.Instance.CheckPointTransforms;
+        var beliefValues = (Beliefs[])Enum.GetValues(typeof(Beliefs));
+        
+        for (var i = 0; i < checkPointTransforms.Count; i++)
+        {
+            factory.AddBelief(beliefValues[i + MAX_PLAYERS + MAX_PLAYERS], () => false);
+            factory.AddLocationBelief(beliefValues[i + MAX_PLAYERS + MAX_PLAYERS + MAX_CHECKPOINTS], m_checkPointDetectionRange, checkPointTransforms[$"CheckPoint{i + 1}"]);
+        }
+    }
+    
     private void SetupActions() {
         actions = new HashSet<AgentAction>();
         
         CreatePlayerActions(actions);
+        // CreateCheckPointActions(actions);
         
         actions.Add(new AgentAction.Builder(Actions.Relax)
             .WithStrategy(new IdleStrategy(1))
             .AddEffect(beliefs[Beliefs.Nothing])
             .Build());
-        
-        // actions.Add(new AgentAction.Builder("IdleWhileOnCooldown")
-        //     .WithStrategy(new IdleStrategy(moveCooldownTimer.CurrentTime))
-        //     .AddEffect(beliefs["CooldownComplete"])
-        //     .Build());
-        //
-        // actions.Add(new AgentAction.Builder(Actions.MoveToNextPosition)
-        //     .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => finishTransform.position, cooldownTimerDuration))
-        //     .AddEffect(beliefs[Beliefs.FindNextPosition])
-        //     .Build());
-        
+       
         actions.Add(new AgentAction.Builder(Actions.GoForCheckPoint1)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint1.position, cooldownTimerDuration))
             .AddPrecondition(beliefs[Beliefs.CheckPoint1InReach])
@@ -168,43 +171,43 @@ public class GoapAgent : MonoBehaviour {
             .AddPrecondition(beliefs[Beliefs.CheckPoint4InReach])
             .AddEffect(beliefs[Beliefs.ReachCheckPoint4])
             .Build());
-  
+        
         actions.Add(new AgentAction.Builder(Actions.GoForCheckPoint5)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint5.position, cooldownTimerDuration))
             .AddPrecondition(beliefs[Beliefs.CheckPoint5InReach])
             .AddEffect(beliefs[Beliefs.ReachCheckPoint5])
             .Build());
-  
+        
         actions.Add(new AgentAction.Builder(Actions.GoForCheckPoint6)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint6.position, cooldownTimerDuration))
             .AddPrecondition(beliefs[Beliefs.CheckPoint6InReach])
             .AddEffect(beliefs[Beliefs.ReachCheckPoint6])
             .Build());
-  
+        
         actions.Add(new AgentAction.Builder(Actions.GoForCheckPoint7)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint7.position, cooldownTimerDuration))
             .AddPrecondition(beliefs[Beliefs.CheckPoint7InReach])
             .AddEffect(beliefs[Beliefs.ReachCheckPoint7])
             .Build());
-  
+        
         actions.Add(new AgentAction.Builder(Actions.GoForCheckPoint8)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint8.position, cooldownTimerDuration))
             .AddPrecondition(beliefs[Beliefs.CheckPoint8InReach])
             .AddEffect(beliefs[Beliefs.ReachCheckPoint8])
             .Build());
-  
+        
         actions.Add(new AgentAction.Builder(Actions.GoForCheckPoint9)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint9.position, cooldownTimerDuration))
             .AddPrecondition(beliefs[Beliefs.CheckPoint9InReach])
             .AddEffect(beliefs[Beliefs.ReachCheckPoint9])
             .Build());
-  
+        
         actions.Add(new AgentAction.Builder(Actions.GoForCheckPoint10)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint10.position, cooldownTimerDuration))
             .AddPrecondition(beliefs[Beliefs.CheckPoint10InReach])
             .AddEffect(beliefs[Beliefs.ReachCheckPoint10])
             .Build());
-
+        
         
         actions.Add(new AgentAction.Builder(Actions.GoForFinish)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => finishTransform.position, cooldownTimerDuration))
@@ -283,8 +286,8 @@ public class GoapAgent : MonoBehaviour {
         //     .Build());
         #endregion
     }
-
-    private void CreatePlayerActions(HashSet<AgentAction> actions)
+    
+    private void CreatePlayerActions(HashSet<AgentAction> _actions)
     {
         var playerTransforms = LocationService.Instance.PlayerTransforms;
         var beliefValues = (Beliefs[])Enum.GetValues(typeof(Beliefs));
@@ -292,15 +295,31 @@ public class GoapAgent : MonoBehaviour {
 
         for (var i = 0; i < playerTransforms.Count; ++i)
         {
-            actions.Add(new AgentAction.Builder(actionValues[i])
+            _actions.Add(new AgentAction.Builder(actionValues[i])
                 .WithStrategy(new AttackStrategy(rigidbodyMovement, () => playerTransforms[$"Player{i}"].position, cooldownTimerDuration))
                 .AddPrecondition(beliefs[beliefValues[i]])
-                .AddEffect(beliefs[beliefValues[i + 3]])
+                .AddEffect(beliefs[beliefValues[i + MAX_PLAYERS]])
+                .Build());
+        }
+    }
+    
+    private void CreateCheckPointActions(HashSet<AgentAction> _actions)
+    {
+        var checkPointTransforms = LocationService.Instance.CheckPointTransforms;
+        var beliefValues = (Beliefs[])Enum.GetValues(typeof(Beliefs));
+        var actionValues = (Actions[])Enum.GetValues(typeof(Actions));
+
+        for (var i = 0; i < checkPointTransforms.Count - 1; ++i)
+        {
+            _actions.Add(new AgentAction.Builder(actionValues[i + MAX_PLAYERS])
+                .WithStrategy(new AttackStrategy(rigidbodyMovement, () => checkPointTransforms[$"CheckPoint{i + 1}"].position, cooldownTimerDuration))
+                .AddPrecondition(beliefs[beliefValues[i + MAX_PLAYERS + MAX_PLAYERS + MAX_CHECKPOINTS]])
+                .AddEffect(beliefs[beliefValues[i + MAX_PLAYERS + MAX_PLAYERS]])
                 .Build());
         }
     }
 
-    private void CreatePlayerGoals(HashSet<AgentGoal> goals)
+    private void CreatePlayerGoals(HashSet<AgentGoal> _goals)
     {
         var playerTransforms = LocationService.Instance.PlayerTransforms;
         var beliefValues = (Beliefs[])Enum.GetValues(typeof(Beliefs));
@@ -308,10 +327,29 @@ public class GoapAgent : MonoBehaviour {
         
         for (var i = 0; i < playerTransforms.Count; ++i)
         {
-            goals.Add(new AgentGoal.Builder(goalValues[i])
+            _goals.Add(new AgentGoal.Builder(goalValues[i])
                 .WithPriority(500)
                 .WithDesiredEffect(beliefs[beliefValues[i + 3]])
                 .Build());
+        }
+    }
+
+    private void CreateCheckPointGoals(HashSet<AgentGoal> _goals)
+    {
+        var CheckPointTransforms = LocationService.Instance.CheckPointTransforms;
+        var beliefValues = (Beliefs[])Enum.GetValues(typeof(Beliefs));
+        var goalValues = (Goals[])Enum.GetValues(typeof(Goals));
+
+        var priority = 100;
+        
+        for (var i = 0; i < CheckPointTransforms.Count; ++i)
+        {
+            _goals.Add(new AgentGoal.Builder(goalValues[i + MAX_PLAYERS])
+                .WithPriority(priority)
+                .WithDesiredEffect(beliefs[beliefValues[i + MAX_PLAYERS + MAX_PLAYERS]])
+                .Build());
+            
+            priority += 10;
         }
     }
 
@@ -319,6 +357,7 @@ public class GoapAgent : MonoBehaviour {
         goals = new HashSet<AgentGoal>();
         
         CreatePlayerGoals(goals);
+        // CreateCheckPointGoals(goals);
         
         goals.Add(new AgentGoal.Builder(Goals.ChillOut)
             .WithPriority(1)
@@ -369,32 +408,32 @@ public class GoapAgent : MonoBehaviour {
             .WithPriority(130)
             .WithDesiredEffect(beliefs[Beliefs.ReachCheckPoint4])
             .Build());
-  
+        
         goals.Add(new AgentGoal.Builder(Goals.GoForCheckPoint5)
             .WithPriority(140)
             .WithDesiredEffect(beliefs[Beliefs.ReachCheckPoint5])
             .Build());
-  
+        
         goals.Add(new AgentGoal.Builder(Goals.GoForCheckPoint6)
             .WithPriority(150)
             .WithDesiredEffect(beliefs[Beliefs.ReachCheckPoint6])
             .Build());
-  
+        
         goals.Add(new AgentGoal.Builder(Goals.GoForCheckPoint7)
             .WithPriority(160)
             .WithDesiredEffect(beliefs[Beliefs.ReachCheckPoint7])
             .Build());
-  
+        
         goals.Add(new AgentGoal.Builder(Goals.GoForCheckPoint8)
             .WithPriority(170)
             .WithDesiredEffect(beliefs[Beliefs.ReachCheckPoint8])
             .Build());
-  
+        
         goals.Add(new AgentGoal.Builder(Goals.GoForCheckPoint9)
             .WithPriority(180)
             .WithDesiredEffect(beliefs[Beliefs.ReachCheckPoint9])
             .Build());
-  
+        
         goals.Add(new AgentGoal.Builder(Goals.GoForCheckPoint10)
             .WithPriority(190)
             .WithDesiredEffect(beliefs[Beliefs.ReachCheckPoint10])

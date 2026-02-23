@@ -195,7 +195,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00079345703, y: 0}
+  m_AnchoredPosition: {x: -0.0007324219, y: 0}
   m_SizeDelta: {x: 350, y: 100}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &480736729307833718
@@ -880,6 +880,7 @@ GameObject:
   - component: {fileID: 2449911264480491807}
   - component: {fileID: 8809287357707157129}
   - component: {fileID: 4179876104423682454}
+  - component: {fileID: 5640363175447248921}
   m_Layer: 8
   m_Name: FreeLook Camera
   m_TagString: Untagged
@@ -1119,6 +1120,36 @@ MonoBehaviour:
         DecelTime: 0
   PlayerIndex: 0
   AutoEnableInputs: 1
+--- !u!114 &5640363175447248921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7205134141381534054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca7de3aefa901374ba29464584a3109a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraRadius: 0.4
+  Decollision:
+    Enabled: 1
+    ObstacleLayers:
+      serializedVersion: 2
+      m_Bits: 17408
+    UseFollowTarget:
+      Enabled: 1
+      YOffset: 1
+    Damping: 0.5
+    SmoothingTime: 0
+  TerrainResolution:
+    Enabled: 1
+    TerrainLayers:
+      serializedVersion: 2
+      m_Bits: 17408
+    MaximumRaycast: 10
+    Damping: 0.5
 --- !u!1 &8234173984421840248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1376,6 +1407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LocationKey: 
+  m_isCheckPoint: 0
 --- !u!33 &2524120037625186723
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1460,7 +1492,7 @@ SphereCollider:
   m_Material: {fileID: 13400000, guid: 78185ee16eaea1d41897c908fab3070b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 16768
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1938,7 +1970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5831366682775931218, guid: af7bf084c7d704fefbedccb4c5180cc7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.00079345703
+      value: -0.0007324219
       objectReference: {fileID: 0}
     - target: {fileID: 5831366682775931218, guid: af7bf084c7d704fefbedccb4c5180cc7, type: 3}
       propertyPath: m_AnchoredPosition.y

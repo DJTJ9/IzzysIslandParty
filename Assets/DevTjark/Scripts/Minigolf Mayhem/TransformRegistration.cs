@@ -4,11 +4,15 @@ public class TransformRegistration : MonoBehaviour
 {
     public string LocationKey;
 
+    [SerializeField] private bool m_isCheckPoint;
+
     private void Awake()
     {
         if (string.IsNullOrEmpty(LocationKey)) return;
         
         LocationService.Instance.RegisterTransform(LocationKey, transform);
+        
+        if (m_isCheckPoint) LocationService.Instance.RegisterCheckPointTransform(LocationKey, transform);
     }
 
     public void SetAndRegisterPlayerLocationKey(string _key)

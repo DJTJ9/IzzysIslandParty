@@ -699,7 +699,7 @@ GameObject:
   - component: {fileID: 1559408170040216997}
   - component: {fileID: 1830326445522493072}
   - component: {fileID: 503612378261597168}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GOAP AI
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -739,20 +739,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8da9d01438e54f5b985d2c38af4dc2cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playerAttackRange: 15
+  m_checkPointDetectionRange: 30
   cooldownTimerDuration: 5
   chaseSensor: {fileID: 1788804077569204535}
   attackSensor: {fileID: 3592063401083666373}
-  finishTransform: {fileID: 0}
-  checkPoint1: {fileID: 0}
-  checkPoint2: {fileID: 0}
-  checkPoint3: {fileID: 0}
-  checkPoint4: {fileID: 0}
-  checkPoint5: {fileID: 0}
-  checkPoint6: {fileID: 0}
-  checkPoint7: {fileID: 0}
-  checkPoint8: {fileID: 0}
-  checkPoint9: {fileID: 0}
-  checkPoint10: {fileID: 0}
 --- !u!114 &6969568167537269183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -878,7 +869,7 @@ SphereCollider:
   m_Material: {fileID: 13400000, guid: 78185ee16eaea1d41897c908fab3070b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 16768
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1174,7 +1165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce89be83276b4490a3c00a9ad3143382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DetectionRadius: 50
+  DetectionRadius: 30
   timerInterval: 1
 --- !u!135 &8000431795850922033
 SphereCollider:

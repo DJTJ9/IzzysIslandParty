@@ -4,13 +4,14 @@ public class Respawner : MonoBehaviour
 {
     [SerializeField] private Transform respawnPoint;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider _other)
     {
-        if (other.CompareTag("Player"))
+        if (!_other.CompareTag("Player")) return;
+        
+        if (_other.TryGetComponent<Rigidbody>(out var _rb))
         {
-            var rb = other.GetComponent<Rigidbody>();
-            rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
-            other.transform.position = respawnPoint.position;
+            _rb.linearVelocity = new Vector3(0, 0, 0);
+            _other.transform.position = respawnPoint.position;
         }
     }
 }
