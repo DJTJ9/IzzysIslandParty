@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 2242130643346231749}
   - component: {fileID: 3261602100462046286}
   - component: {fileID: 1618295354771691967}
+  - component: {fileID: 7696059095033041770}
   m_Layer: 0
   m_Name: Pf_PlayerManagerFF
   m_TagString: Untagged
@@ -177,7 +178,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 8162944424003685325, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+    m_Reference: {fileID: 3698153326005167589, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
   m_PlayerPrefab: {fileID: 2234337075584315550, guid: 1d8f2bcdc3c3fb7438dd462f7970af09, type: 3}
   m_SplitScreen: 1
   m_MaintainAspectRatioInSplitScreen: 0
@@ -203,4 +204,35 @@ MonoBehaviour:
   currentPlayers: {fileID: 11400000, guid: 97ae6e8cdb921dd4d97057deb65c1858, type: 2}
   npcCollection: {fileID: 11400000, guid: 258eba8b9347dc04ca87b8fc8bede2de, type: 2}
   playerCollectionFF: {fileID: 11400000, guid: dd4935fb874cc9a49858d0e0e7b59c81, type: 2}
+  onLevelLoad:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 130711ff1a6413a4a9f360a3cd13980d, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   playerInputManager: {fileID: 3261602100462046286}
+--- !u!114 &7696059095033041770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4605298520533043165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1b71d1ea2f96d44b052c46d265e630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterMaterialCollection: {fileID: 11400000, guid: 59c5274c2c4bd7f4e92ec8b538f521bb, type: 2}
+  characterMeshCollection: {fileID: 11400000, guid: 81ed3712922cbc74eb64459f960258c2, type: 2}
+  isJetskiGame: 0
+  jetskiMaterialCollection: {fileID: 0}

@@ -471,6 +471,11 @@ MonoBehaviour:
   currentPlayers: {fileID: 11400000, guid: 97ae6e8cdb921dd4d97057deb65c1858, type: 2}
   currentPlayersRacing: {fileID: 0}
   rowTemplate: {fileID: 9197481963319205126, guid: a5da0a2b314073b4f97b6ae48036cd3c, type: 3}
+  animDuration: 0.3
+  holdDuration: 2
+  uiToolkitVideo: {fileID: 1114157902}
+  videoTexture: {fileID: 8400000, guid: 01fe3240f8a7f0842b2dd1b53e3e89d9, type: 2}
+  gamePreviewClipsSO: {fileID: 11400000, guid: 8eb3c35a4de6523458f6accd06a169df, type: 2}
   onGameStart:
     m_PersistentCalls:
       m_Calls:
@@ -543,11 +548,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  animDuration: 0.3
-  holdDuration: 2
-  uiToolkitVideo: {fileID: 1114157902}
-  videoTexture: {fileID: 8400000, guid: 01fe3240f8a7f0842b2dd1b53e3e89d9, type: 2}
-  gamePreviewClipsSO: {fileID: 11400000, guid: 8eb3c35a4de6523458f6accd06a169df, type: 2}
 --- !u!114 &317348924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1511,34 +1511,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1618295354771691967, guid: 7fb49340743dc2e48bca1c4f6f367138, type: 3}
-      propertyPath: onLevelLoad.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1618295354771691967, guid: 7fb49340743dc2e48bca1c4f6f367138, type: 3}
-      propertyPath: onLevelLoad.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1618295354771691967, guid: 7fb49340743dc2e48bca1c4f6f367138, type: 3}
-      propertyPath: onLevelLoad.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 11400000, guid: 130711ff1a6413a4a9f360a3cd13980d, type: 2}
-    - target: {fileID: 1618295354771691967, guid: 7fb49340743dc2e48bca1c4f6f367138, type: 3}
-      propertyPath: onLevelLoad.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1618295354771691967, guid: 7fb49340743dc2e48bca1c4f6f367138, type: 3}
-      propertyPath: onLevelLoad.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Raise
-      objectReference: {fileID: 0}
-    - target: {fileID: 1618295354771691967, guid: 7fb49340743dc2e48bca1c4f6f367138, type: 3}
-      propertyPath: onLevelLoad.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameEvent, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1618295354771691967, guid: 7fb49340743dc2e48bca1c4f6f367138, type: 3}
-      propertyPath: onLevelLoad.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 2242130643346231749, guid: 7fb49340743dc2e48bca1c4f6f367138, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1579,10 +1551,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3261602100462046286, guid: 7fb49340743dc2e48bca1c4f6f367138, type: 3}
-      propertyPath: m_JoinAction.m_Reference
-      value: 
-      objectReference: {fileID: 3698153326005167589, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
     - target: {fileID: 3261602100462046286, guid: 7fb49340743dc2e48bca1c4f6f367138, type: 3}
       propertyPath: m_PlayerLeftEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

@@ -2640,6 +2640,7 @@ GameObject:
   m_Component:
   - component: {fileID: 651437242795570887}
   - component: {fileID: 3768820475352060512}
+  - component: {fileID: 5496224607884349293}
   m_Layer: 8
   m_Name: CharacterPrefab
   m_TagString: Untagged
@@ -2689,6 +2690,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5496224607884349293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4674680182489744588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f11f97646d06094a9b057472377c7c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MeshRenderer>k__BackingField: {fileID: 1046438996721386519}
+  IsJetski: 0
+  JetskiMeshRenderer: {fileID: 0}
 --- !u!1 &4807592442393451893
 GameObject:
   m_ObjectHideFlags: 0
@@ -2777,6 +2793,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f354e1cd74e0df84485dab533d894556, type: 2}
   - {fileID: 11400000, guid: 16df746755f4c214aac0797064586155, type: 2}
   displayIconSeconds: 3
+  camera: {fileID: 0}
+  rotateToCamera: 1
 --- !u!1 &4868470469338574193
 GameObject:
   m_ObjectHideFlags: 0
@@ -3623,6 +3641,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: da4cc858-f7c2-4834-b23a-83f1948a0d62
     m_ActionName: 'HurdleGame/Join[/Keyboard/space,/DualShock4GamepadHID/select]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1741299663787530852}
+        m_TargetAssemblyTypeName: FishingGame.FishingRodController, Assembly-CSharp
+        m_MethodName: OnJoin
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b59bf41b-9b2b-4f85-bb39-53fb6513bdfd
+    m_ActionName: 'UI/Join[/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI
@@ -3640,6 +3674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7967eb4a04d46545bd2e88940c12bbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerIndex: 0
   qteDisplayService: {fileID: 0}
   rodLineRendererPositions:
   - {fileID: 6134812781112865988}
@@ -3704,7 +3739,6 @@ MonoBehaviour:
   QTEDisplayService: {fileID: 0}
   fishDisplay: {fileID: 0}
   iconHandler: {fileID: 4494333840569271728}
-  iconHandlerObj: {fileID: 4855151508116872776}
   pointsService: {fileID: 0}
   pointsText: {fileID: 0}
 --- !u!1 &5589690360245084469

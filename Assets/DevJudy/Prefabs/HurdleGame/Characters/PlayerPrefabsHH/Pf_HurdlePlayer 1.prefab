@@ -1608,6 +1608,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4042608820995357676}
+  - component: {fileID: 6778707973393897839}
   m_Layer: 8
   m_Name: Mesh
   m_TagString: Untagged
@@ -1632,6 +1633,21 @@ Transform:
   - {fileID: 7467892237939773849}
   m_Father: {fileID: 8900232571094970304}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6778707973393897839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3626045259919347095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f11f97646d06094a9b057472377c7c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MeshRenderer>k__BackingField: {fileID: 123323469049276979}
+  IsJetski: 0
+  <JetskiMeshRenderer>k__BackingField: {fileID: 0}
 --- !u!1 &3739278567167126922
 GameObject:
   m_ObjectHideFlags: 0
@@ -2246,6 +2262,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 6d7cb911-4255-4d60-a577-159f56863289
     m_ActionName: 'FishingGameUI/Submit[/Keyboard/enter,/Keyboard/x]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b59bf41b-9b2b-4f85-bb39-53fb6513bdfd
+    m_ActionName: 'UI/Join[/Keyboard/space,/DualShock4GamepadHID/select]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI

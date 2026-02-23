@@ -1,4 +1,5 @@
-﻿using FishingGame.NPCs;
+﻿using CharacterCreator;
+using FishingGame.NPCs;
 using HelperScripts;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,6 +15,8 @@ namespace FishingGame.Player.Multiplayer
 
         [SerializeField]private UnityEvent onLevelLoad;
         
+        private CharacterCreatorService characterCreatorService;
+        
         private int playerIndex;
         private int humanPlayerIndex;
         private int npcIndex;
@@ -22,6 +25,8 @@ namespace FishingGame.Player.Multiplayer
 
         private void Start()
         {
+            characterCreatorService = GetComponent<CharacterCreatorService>();
+            
             playerIndex = 0;
             npcIndex = 0;
             currentPlayers.Players.Clear();
@@ -65,6 +70,15 @@ namespace FishingGame.Player.Multiplayer
                 currentPlayers.Players.Add(npcCollection.Players[npc.GetPlayerIndex() - 1]);
 
                 parent.transform.position = npcCollection.Players[playerIndex - 1].SpawnPoint;
+                
+                PlayerMeshIdentifier npcMesh = _playerInput.gameObject.GetComponentInChildren<PlayerMeshIdentifier>();
+                if (npcMesh != null)
+                {
+                    characterCreatorService.SetMeshAndMaterial(npcMesh.MeshRenderer, playerIndex);
+                   
+                    if (npcMesh.IsJetski)
+                        characterCreatorService.SetJetskiMaterial(npcMesh.JetskiMeshRenderer, playerIndex);
+                }
 
                 ++npcIndex;
                 ++playerIndex;
@@ -77,6 +91,15 @@ namespace FishingGame.Player.Multiplayer
             currentPlayers.Players.Add(playerCollectionFF.Players[playerIndex]);
 
             parent.transform.position = playerCollectionFF.Players[playerIndex].SpawnPoint;
+            
+            PlayerMeshIdentifier playerMesh = _playerInput.gameObject.GetComponentInChildren<PlayerMeshIdentifier>();
+            if (playerMesh != null)
+            {
+                characterCreatorService.SetMeshAndMaterial(playerMesh.MeshRenderer, playerIndex);
+                   
+                if (playerMesh.IsJetski)
+                    characterCreatorService.SetJetskiMaterial(playerMesh.JetskiMeshRenderer, playerIndex);
+            }
 
             ++playerIndex;
             ++humanPlayerIndex;

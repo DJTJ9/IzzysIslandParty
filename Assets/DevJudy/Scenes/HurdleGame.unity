@@ -11563,19 +11563,43 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1700201860007818293, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6223619115058927875}
   m_SourcePrefab: {fileID: 100100000, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
 --- !u!114 &6223619115058927873 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3195554420517741234, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
   m_PrefabInstance: {fileID: 6223619115058927872}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 6223619115058927874}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6223619115058927874 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1700201860007818293, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+  m_PrefabInstance: {fileID: 6223619115058927872}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6223619115058927875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6223619115058927874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1b71d1ea2f96d44b052c46d265e630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterMaterialCollection: {fileID: 11400000, guid: 01d8d0743dc90f94f8ac6717a464c4cb, type: 2}
+  characterMeshCollection: {fileID: 11400000, guid: 0662ba26ce715c044a3563dabdffae5a, type: 2}
+  isJetskiGame: 0
+  jetskiMaterialCollection: {fileID: 0}
 --- !u!4 &7901871804622472836 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 806279231891789792, guid: e80de2aeace119d41a98a09f32c2ba7c, type: 3}

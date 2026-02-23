@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using CharacterCreator;
 using FullscreenEditor;
 using HelperScripts;
 using MultiuseScripts;
@@ -17,6 +18,8 @@ namespace JetskiGame.Player.Multiplayer
         [SerializeField] private SO_PlayerCollectionRacingGames npcCollection;
         [SerializeField] private UnityEvent onLevelLoaded;
 
+        private CharacterCreatorService characterCreatorService;
+        
         private int playerIndex;
         private int humanPlayerIndex;
         private int npcIndex;
@@ -30,6 +33,8 @@ namespace JetskiGame.Player.Multiplayer
 
         private void Start()
         {
+            characterCreatorService = GetComponent<CharacterCreatorService>();
+            
             onLevelLoaded.Invoke();
             playerIndex = 0;
             currentPlayers.Players.Clear();
@@ -67,6 +72,15 @@ namespace JetskiGame.Player.Multiplayer
                 currentPlayers.Players.Add(npcCollection.Players[npcBehaviourInstance.GetPlayerIndex() - 1]);
                 levelService.OnNPCJoined(_playerInput.gameObject);
 
+               PlayerMeshIdentifier npcMesh = _playerInput.gameObject.GetComponentInChildren<PlayerMeshIdentifier>();
+               if (npcMesh != null)
+               {
+                   characterCreatorService.SetMeshAndMaterial(npcMesh.MeshRenderer, playerIndex);
+                   
+                   if (npcMesh.IsJetski)
+                       characterCreatorService.SetJetskiMaterial(npcMesh.JetskiMeshRenderer, playerIndex);
+               }
+
                 ++npcIndex;
                 ++playerIndex;
 
@@ -81,7 +95,16 @@ namespace JetskiGame.Player.Multiplayer
             _playerInput.gameObject.name = playerCollection.Players[playerIndex].Name;
             _playerInput.gameObject.transform.position = playerCollection.Players[playerIndex].SpawnPoint;
             levelService.OnPlayerJoined(_playerInput.gameObject);
-
+            
+            PlayerMeshIdentifier playerMesh = _playerInput.gameObject.GetComponentInChildren<PlayerMeshIdentifier>();
+            if (playerMesh != null)
+            {
+                characterCreatorService.SetMeshAndMaterial(playerMesh.MeshRenderer, playerIndex);
+                
+                if (playerMesh.IsJetski)
+                    characterCreatorService.SetJetskiMaterial(playerMesh.JetskiMeshRenderer, playerIndex);
+            }
+            
             ++humanPlayerIndex;
             ++playerIndex;
 
