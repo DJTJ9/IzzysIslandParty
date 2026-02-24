@@ -77,8 +77,8 @@ namespace JetskiGame.Player.Multiplayer
                {
                    characterCreatorService.SetMeshAndMaterial(npcMesh.MeshRenderer, playerIndex);
                    
-                   if (npcMesh.IsJetski)
-                       characterCreatorService.SetJetskiMaterial(npcMesh.JetskiMeshRenderer, playerIndex);
+                   if (npcMesh.HasTwoMeshes)
+                       characterCreatorService.SetOtherMaterial(npcMesh.OtherMeshRenderer, playerIndex);
                }
 
                 ++npcIndex;
@@ -101,8 +101,8 @@ namespace JetskiGame.Player.Multiplayer
             {
                 characterCreatorService.SetMeshAndMaterial(playerMesh.MeshRenderer, playerIndex);
                 
-                if (playerMesh.IsJetski)
-                    characterCreatorService.SetJetskiMaterial(playerMesh.JetskiMeshRenderer, playerIndex);
+                if (playerMesh.HasTwoMeshes)
+                    characterCreatorService.SetOtherMaterial(playerMesh.OtherMeshRenderer, playerIndex);
             }
             
             ++humanPlayerIndex;

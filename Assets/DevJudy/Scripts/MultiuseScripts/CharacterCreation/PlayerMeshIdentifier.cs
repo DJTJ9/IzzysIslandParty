@@ -7,9 +7,9 @@ namespace CharacterCreator
     {
         [field: SerializeField] public SkinnedMeshRenderer MeshRenderer { get; private set; }
         
-        [SerializeField] public bool IsJetski;
+        [SerializeField] public bool HasTwoMeshes;
 
-        [ShowIf("IsJetski")]
-        [SerializeField] public MeshRenderer JetskiMeshRenderer;
+        [ShowIf("HasTwoMeshes")]
+        [SerializeField] public MeshRenderer OtherMeshRenderer;
     }
 }

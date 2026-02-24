@@ -12,8 +12,6 @@ namespace FishingGame
     [RequireComponent(typeof(PlayerInput))]
     public class FishingRodController : Controller
     {
-        [SerializeField] private QTEDisplayService qteDisplayService;
-
         private static readonly int cast = Animator.StringToHash("IsCast");
         private static readonly int fishBiting = Animator.StringToHash("FishBiting");
 
@@ -22,6 +20,11 @@ namespace FishingGame
         private FishingSystemManager fishingSystemManager;
 
         [SerializeField] private Transform[] rodLineRendererPositions;
+        
+        [Header("Dependencies: ")]
+        [SerializeField] private QTEDisplayService qteDisplayService;
+        [SerializeField] private MeshRenderer animationLureRenderer;
+        [SerializeField] private MeshRenderer physicsLureRenderer;
 
         private bool isCast = false;
         private bool firstTimeCast = true;
@@ -45,6 +48,8 @@ namespace FishingGame
             if (lineRenderer == null)
                 Debug.LogWarning("No lineRenderer attached to " + gameObject.name);
 
+            physicsLureRenderer.material = animationLureRenderer.material;
+            
             lineRenderer.enabled = true;
             lineRenderer.useWorldSpace = true;
             lineRenderer.startWidth = lineRenderer.endWidth = 0.02f;

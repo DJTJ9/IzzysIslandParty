@@ -9,24 +9,23 @@ namespace CharacterCreator
         [SerializeField] private SO_MaterialCollection characterMaterialCollection;
         [SerializeField] private SO_MeshCollection characterMeshCollection;
 
-        [SerializeField] private bool isJetskiGame;
+        [SerializeField] private bool hasTwoMeshes;
 
-        [ShowIf("isJetskiGame")]
-        [SerializeField] private SO_MaterialCollection jetskiMaterialCollection;
+        [ShowIf("hasTwoMeshes")]
+        [SerializeField] private SO_MaterialCollection OtherMaterialCollection;
 
         public void SetMeshAndMaterial(SkinnedMeshRenderer _meshRenderer, int _playerIndex)
         {
-            Debug.Log("SetMeshAndMaterial");
             _meshRenderer.sharedMesh = characterMeshCollection.Meshes[_playerIndex];
             _meshRenderer.sharedMaterial = characterMaterialCollection.Materials[_playerIndex];
         }
 
-        public void SetJetskiMaterial(MeshRenderer _meshRenderer, int _playerIndex)
+        public void SetOtherMaterial(MeshRenderer _meshRenderer, int _playerIndex)
         {
-            if (!isJetskiGame)
+            if (!hasTwoMeshes)
                 return;
 
-            _meshRenderer.sharedMaterial = jetskiMaterialCollection.Materials[_playerIndex];
+            _meshRenderer.sharedMaterial = OtherMaterialCollection.Materials[_playerIndex];
         }
     }
 }

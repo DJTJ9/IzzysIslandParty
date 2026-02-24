@@ -3092,6 +3092,14 @@ PrefabInstance:
       propertyPath: qteDisplayService
       value: 
       objectReference: {fileID: 1683085752960084095}
+    - target: {fileID: 1741299663787530852, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: physicsLureRenderer
+      value: 
+      objectReference: {fileID: 5630609430523852452}
+    - target: {fileID: 1741299663787530852, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: animationLureRenderer
+      value: 
+      objectReference: {fileID: 5599365796476707464}
     - target: {fileID: 4456720291376179614, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
       propertyPath: pointsText
       value: 
@@ -3112,6 +3120,14 @@ PrefabInstance:
       propertyPath: rotateToCamera
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5496224607884349293, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: HasTwoMeshes
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5496224607884349293, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+      propertyPath: OtherMeshRenderer
+      value: 
+      objectReference: {fileID: 5599365796476707464}
     - target: {fileID: 5562084680045443988, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
       propertyPath: m_Name
       value: FishingPlayer
@@ -3220,6 +3236,16 @@ PrefabInstance:
 --- !u!4 &1513869182094466247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5705243393259260562, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+  m_PrefabInstance: {fileID: 6498483857878816341}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5599365796476707464 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1701148057087603933, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
+  m_PrefabInstance: {fileID: 6498483857878816341}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5630609430523852452 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1444725099070267633, guid: 6edbb8024667e124d8f12f5e11d87885, type: 3}
   m_PrefabInstance: {fileID: 6498483857878816341}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5991227984578617490 stripped

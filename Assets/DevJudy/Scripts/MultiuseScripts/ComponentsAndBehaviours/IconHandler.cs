@@ -1,6 +1,7 @@
 using enums;
 using ImprovedTimers;
 using ScriptableObjects;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Juice
@@ -14,8 +15,9 @@ namespace Juice
         private CountdownTimer iconTimer;
 
         [Header("Camera")]
-        [SerializeField] private Camera camera;
         [SerializeField] private bool rotateToCamera = true;
+        [ShowIf("rotateToCamera")]
+        [SerializeField] private Camera mainCamera;
 
         private void Awake()
         {
@@ -41,8 +43,8 @@ namespace Juice
             if (!target.gameObject)
                 return;
             
-            if (rotateToCamera)
-                target.gameObject.transform.LookAt(camera.transform.position);
+            if (rotateToCamera && mainCamera)
+                target.gameObject.transform.LookAt(mainCamera.transform.position);
             
             target.gameObject.SetActive(true);
         }
