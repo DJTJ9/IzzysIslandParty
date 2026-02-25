@@ -117,8 +117,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f354e1cd74e0df84485dab533d894556, type: 2}
   - {fileID: 11400000, guid: 16df746755f4c214aac0797064586155, type: 2}
   displayIconSeconds: 3
-  camera: {fileID: 4984407534341963346}
   rotateToCamera: 0
+  mainCamera: {fileID: 0}
 --- !u!1 &698490128208443931
 GameObject:
   m_ObjectHideFlags: 0
@@ -1084,8 +1084,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MeshRenderer>k__BackingField: {fileID: 26315864496120964}
-  IsJetski: 1
-  <JetskiMeshRenderer>k__BackingField: {fileID: 7230770557749686208}
+  HasTwoMeshes: 0
+  OtherMeshRenderer: {fileID: 0}
 --- !u!1 &5892007110971456045
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,6 +1102,7 @@ GameObject:
   - component: {fileID: 4624504242309314546}
   - component: {fileID: 5806371421312714817}
   - component: {fileID: 9007811829784582359}
+  - component: {fileID: 8328964726244969845}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1596,6 +1597,19 @@ MonoBehaviour:
   jumpForceMode: 1
   showSpeedText: 0
   speedText: {fileID: 5676121827205454218}
+--- !u!114 &8328964726244969845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5892007110971456045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3546377e251af2245a8ba4e2dfe76661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timePenaltyObj: {fileID: 4567907800259024328}
 --- !u!1 &5968206275066761790
 GameObject:
   m_ObjectHideFlags: 0

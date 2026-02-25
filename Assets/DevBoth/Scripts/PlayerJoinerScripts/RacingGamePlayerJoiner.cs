@@ -2,6 +2,7 @@
 using CharacterCreator;
 using FullscreenEditor;
 using HelperScripts;
+using JetskiGame.UI;
 using MultiuseScripts;
 using Player.Collections;
 using UnityEngine;
@@ -19,7 +20,7 @@ namespace JetskiGame.Player.Multiplayer
         [SerializeField] private UnityEvent onLevelLoaded;
 
         private CharacterCreatorService characterCreatorService;
-        
+
         private int playerIndex;
         private int humanPlayerIndex;
         private int npcIndex;
@@ -34,7 +35,7 @@ namespace JetskiGame.Player.Multiplayer
         private void Start()
         {
             characterCreatorService = GetComponent<CharacterCreatorService>();
-            
+
             onLevelLoaded.Invoke();
             playerIndex = 0;
             currentPlayers.Players.Clear();
@@ -54,9 +55,11 @@ namespace JetskiGame.Player.Multiplayer
 
         public void PlayerJoined(PlayerInput _playerInput)
         {
-            playerCollection.Players[playerIndex].PlayerReference = _playerInput.gameObject;
+            GameObject playerObj = _playerInput.gameObject;
 
-            if (_playerInput.gameObject.TryGetComponent(out npcBehaviourInstance) && npcBehaviourInstance.IsOfType(npcBehaviour.GetType()))
+            playerCollection.Players[playerIndex].PlayerReference = playerObj;
+
+            if (playerObj.TryGetComponent(out npcBehaviourInstance) && npcBehaviourInstance.IsOfType(npcBehaviour.GetType()))
             {
                 if (humanPlayerIndex == 1 && levelService is JetskiGameLevelService)
                 {
@@ -67,19 +70,19 @@ namespace JetskiGame.Player.Multiplayer
                 npcBehaviourInstance.SetPlayerIndex(playerIndex);
                 npcBehaviourInstance.OnNPCJoined(npcCollection.Players[npcBehaviourInstance.GetPlayerIndex() - 1]);
 
-                _playerInput.gameObject.name = npcCollection.Players[npcBehaviourInstance.GetPlayerIndex() - 1].Name;
+                playerObj.name = npcCollection.Players[npcBehaviourInstance.GetPlayerIndex() - 1].Name;
 
                 currentPlayers.Players.Add(npcCollection.Players[npcBehaviourInstance.GetPlayerIndex() - 1]);
-                levelService.OnNPCJoined(_playerInput.gameObject);
+                levelService.OnNPCJoined(playerObj);
 
-               PlayerMeshIdentifier npcMesh = _playerInput.gameObject.GetComponentInChildren<PlayerMeshIdentifier>();
-               if (npcMesh != null)
-               {
-                   characterCreatorService.SetMeshAndMaterial(npcMesh.MeshRenderer, playerIndex);
-                   
-                   if (npcMesh.HasTwoMeshes)
-                       characterCreatorService.SetOtherMaterial(npcMesh.OtherMeshRenderer, playerIndex);
-               }
+                PlayerMeshIdentifier npcMesh = playerObj.GetComponentInChildren<PlayerMeshIdentifier>();
+                if (npcMesh != null)
+                {
+                    characterCreatorService.SetMeshAndMaterial(npcMesh.MeshRenderer, playerIndex);
+
+                    if (npcMesh.HasTwoMeshes)
+                        characterCreatorService.SetOtherMaterial(npcMesh.OtherMeshRenderer, playerIndex);
+                }
 
                 ++npcIndex;
                 ++playerIndex;
@@ -87,29 +90,35 @@ namespace JetskiGame.Player.Multiplayer
                 return;
             }
 
-            if (_playerInput.gameObject.TryGetComponent(out JetskiController playerController))
+            if (playerObj.TryGetComponent(out JetskiController playerController))
                 playerController.OnPlayerJoined(playerCollection.Players[playerIndex]);
 
             currentPlayers.Players.Add(playerCollection.Players[playerIndex]);
 
-            _playerInput.gameObject.name = playerCollection.Players[playerIndex].Name;
-            _playerInput.gameObject.transform.position = playerCollection.Players[playerIndex].SpawnPoint;
+            playerObj.name = playerCollection.Players[playerIndex].Name;
+            playerObj.transform.position = playerCollection.Players[playerIndex].SpawnPoint;
             levelService.OnPlayerJoined(_playerInput.gameObject);
-            
-            PlayerMeshIdentifier playerMesh = _playerInput.gameObject.GetComponentInChildren<PlayerMeshIdentifier>();
+
+            PlayerMeshIdentifier playerMesh = playerObj.GetComponentInChildren<PlayerMeshIdentifier>();
             if (playerMesh != null)
             {
                 characterCreatorService.SetMeshAndMaterial(playerMesh.MeshRenderer, playerIndex);
-                
+
                 if (playerMesh.HasTwoMeshes)
                     characterCreatorService.SetOtherMaterial(playerMesh.OtherMeshRenderer, playerIndex);
             }
-            
+
+            if (levelService is JetskiGameLevelService jetskiLevelService)
+            {
+                if (playerObj.TryGetComponent(out JetskiGameUIManager jetskiUIManager))
+                    jetskiUIManager.OnPlayerJoined(jetskiLevelService.IsPvP);
+            }
+
             ++humanPlayerIndex;
             ++playerIndex;
 
             var currentPlayerIndex = playerIndex;
-            StartCoroutine(WaitForPlayerJoin(_playerInput.gameObject, currentPlayerIndex));
+            StartCoroutine(WaitForPlayerJoin(playerObj, currentPlayerIndex));
         }
 
         private IEnumerator WaitForPlayerJoin(GameObject _player, int _currentPlayerIndex)

@@ -22,6 +22,8 @@ namespace JetskiGame
 
         #endregion
 
+        [field: SerializeField] public bool IsPvP { get; private set; }
+
         [Header("Level start/end: ")]
         [SerializeField] private int secondsToStartLevel;
 
@@ -308,7 +310,7 @@ namespace JetskiGame
                 for (int i = 0; i < maxNumberOfPlayers; i++)
                 {
                     var foundObjectInList = false;
-                    
+
                     for (int j = 0; j < winnerPlacementOrder.Count; j++)
                     {
                         if (placementOrder[i] == winnerPlacementOrder[j].Item1)
