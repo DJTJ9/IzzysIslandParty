@@ -297,7 +297,7 @@ public class GameMenuEvents : MonoBehaviour
         HideEndScreenUI();
         FreezeTimeScale();
         // In ein Script was dont denstroy on load ist, vorher szene xy laden, und dann diese hier erneut (kein Laden der selben szene aus sich selbst)
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        AsyncLevelLoader.Instance.RestartLevel();
     }
 
     private void OnResumeGameClick()
@@ -323,6 +323,7 @@ public class GameMenuEvents : MonoBehaviour
 
     private void OnQuitClick()
     {
+        pauseMenu.style.display = DisplayStyle.None;
         UnfreezeTimeScale();
         LoadSingleScene(SceneNames.MainMenu);
     }
@@ -498,11 +499,13 @@ public class GameMenuEvents : MonoBehaviour
         LoadSingleScene(SceneNames.HastyHurdles);
     }
 
-    private void LoadSingleScene(SceneNames sceneName)
+    private void LoadSingleScene(SceneNames _sceneName)
     {
-        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(sceneName, out var sceneNameFromCollection)
-            ? sceneNameFromCollection
-            : throw new KeyNotFoundException());
+        playerHub.style.display = DisplayStyle.None;
+        AsyncLevelLoader.Instance.LoadScene(_sceneName);
+        // SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(_sceneName, out var sceneNameFromCollection)
+        //     ? sceneNameFromCollection
+        //     : throw new KeyNotFoundException());
     }
 
     private void LoadSceneWithLevel(SceneNames gameScene, SceneNames levelScene)

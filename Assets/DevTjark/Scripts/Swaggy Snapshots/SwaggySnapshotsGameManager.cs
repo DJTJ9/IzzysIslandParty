@@ -24,6 +24,7 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
     [FoldoutGroup("Events", expanded: false)] 
     [SerializeField] private UnityEvent onDanceMoveChanged;
     [SerializeField] private UnityEvent onGameStart;
+    [SerializeField] private UnityEvent onRoundStart;
     [SerializeField] private UnityEvent onRoundEnd;
     [SerializeField] private UnityEvent onGameEnd;
     [SerializeField] private UnityEvent onLevelLoaded;
@@ -74,6 +75,7 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
         {
             m_danceMoveSwitchTimer.Start();
             m_roundTimer.Start();
+            onRoundStart.Invoke();
         };
 
         m_danceMoveSwitchTimer = new CountdownTimer(m_danceMoveDuration);

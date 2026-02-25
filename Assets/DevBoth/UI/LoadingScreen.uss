@@ -1,0 +1,23 @@
+#loading-screen__container > #loading-screen-progress-bar__container > #loading-screen__progress_bar > #unity-progress-bar {
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
+}
+
+#loading-screen__container > #loading-screen-progress-bar__container > #loading-screen__progress_bar > #unity-progress-bar > .unity-progress-bar__background {
+    background-image: none;
+    background-size: 100% 100%;
+    height: auto;
+    min-height: auto;
+    max-height: none;
+    -unity-background-image-tint-color: rgb(254, 202, 129);
+    background-color: rgb(254, 202, 129);
+}
+
+#loading-screen__container > #loading-screen-progress-bar__container > #loading-screen__progress_bar > #unity-progress-bar > .unity-progress-bar__background > .unity-progress-bar__progress {
+    background-color: rgb(78, 50, 47);
+}
+
+#loading-screen__container > #loading-screen-progress-bar__container > #loading-screen__progress_bar > #unity-progress-bar > .unity-progress-bar__background > .unity-progress-bar__title-container {
+    -unity-background-image-tint-color: rgb(254, 202, 129);
+}

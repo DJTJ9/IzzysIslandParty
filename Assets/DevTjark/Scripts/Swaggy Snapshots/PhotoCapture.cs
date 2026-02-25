@@ -46,6 +46,7 @@ public class PhotoCapture : MonoBehaviour
     
     private void Update()
     {
+        if (currentPlayersSO.Players[controller.PlayerIndex] == null) return;
         scoreNumber.text = currentPlayersSO.Players[controller.PlayerIndex].PlayerScore.Value.ToString("0");
     }
 
