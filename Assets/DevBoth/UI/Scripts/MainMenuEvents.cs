@@ -91,6 +91,7 @@ public class MainMenuEvents : MonoBehaviour
         BindVisualElements();
         BindButtons();
         RegisterButtonCallbacks();
+        AsyncLevelLoader.OnSceneChange += OpenMainMenu;
 
         FocusButton(startGameButton);
 
@@ -111,6 +112,7 @@ public class MainMenuEvents : MonoBehaviour
     private void OnDisable()
     {
         UnregisterButtonCallbacks();
+        AsyncLevelLoader.OnSceneChange -= OpenMainMenu;
 
         #region Examples
 
@@ -329,7 +331,8 @@ public class MainMenuEvents : MonoBehaviour
 
     private void LoadGameScene(SceneNames _sceneName)
     {
-        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(_sceneName, out var sceneNameFromCollection) ? sceneNameFromCollection : throw new KeyNotFoundException());
+        menusContainer.style.display = DisplayStyle.None;
+        AsyncLevelLoader.Instance.LoadScene(_sceneName);
     }
 
     private void LoadGameSceneWithLevel(SceneNames _gameScene, SceneNames _levelScene)
@@ -341,6 +344,13 @@ public class MainMenuEvents : MonoBehaviour
     private void LoadSceneAdditive(SceneNames _sceneName)
     {
         SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(_sceneName, out var sceneNameFromCollection) ? sceneNameFromCollection : throw new KeyNotFoundException(), LoadSceneMode.Additive);
+    }
+
+    private void OpenMainMenu(SceneNames _sceneName)
+    {
+        if (_sceneName != SceneNames.MainMenu) return;
+        
+        menusContainer.style.display = DisplayStyle.Flex;
     }
 
     public void OnPlayerJoined(PlayerInput _obj)

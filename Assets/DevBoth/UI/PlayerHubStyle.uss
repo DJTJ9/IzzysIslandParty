@@ -23,7 +23,7 @@
 }
 
 .levelButton {
-    height: 40%;
+    height: 80%;
     padding-left: 0;
     margin-right: 5%;
     margin-left: 5%;
@@ -33,11 +33,16 @@
     visibility: visible;
     flex-shrink: 1;
     flex-grow: 0;
-    background-image: url("project://database/Assets/DevBoth/Art/FREE%20KAWAII%20GUI%20PACK/PNG/Panel-Button%202.png?fileID=-490868867&guid=448518432584e0e4ca0839e48ff7b032&type=3#Panel-Button 2_29");
-    font-size: 30px;
+    background-image: url("project://database/Assets/GUIPackCartoon/Demo/Sprites/Icons/Icons%20Colored/Nature/Palm%20Tree.png?fileID=21300000&guid=053c2fc821996461e9aa35e6df3bfeab&type=3#Palm Tree");
+    font-size: 28px;
     -unity-font-definition: url("project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&guid=9edcdbbb09ae8aa46b3612271126dd6b&type=3#DraftingMono-Bold");
-    -unity-background-image-tint-color: rgb(255, 255, 255);
+    -unity-background-image-tint-color: rgb(253, 253, 253);
     background-color: rgba(0, 0, 0, 0);
+    -unity-text-align: upper-center;
+    -unity-font-style: bold;
+    color: rgb(75, 48, 47);
+    -unity-text-outline-color: rgb(254, 202, 129);
+    -unity-text-outline-width: 1.7px;
 }
 
 .levelButton:hover {
@@ -72,4 +77,7 @@
 
 .levelButton:focus {
     scale: 1.1 1.1;
+}
+
+#menu-background__container > #main-menu__container > #loading-screen__progress_bar > #unity-progress-bar {
 }

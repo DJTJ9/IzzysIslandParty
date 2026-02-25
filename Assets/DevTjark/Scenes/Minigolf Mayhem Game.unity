@@ -1007,7 +1007,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &476893795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1210,6 +1210,10 @@ PrefabInstance:
     - target: {fileID: 569612370539826198, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
       propertyPath: m_Name
       value: Player Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 569612370539826198, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1788921434184243773, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
       propertyPath: Target.TrackingTarget
@@ -1610,7 +1614,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &724889777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5073,7 +5077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1703042573
 MonoBehaviour:
   m_ObjectHideFlags: 0
