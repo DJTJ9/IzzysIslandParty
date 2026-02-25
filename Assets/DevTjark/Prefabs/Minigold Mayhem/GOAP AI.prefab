@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5795446568596546596}
-  - component: {fileID: 7761434539873887597}
   - component: {fileID: 2598431387055337013}
   - component: {fileID: 4678444674336680842}
   - component: {fileID: 1880806961987330748}
@@ -35,19 +34,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8501484198063431172}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7761434539873887597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 65042360877810615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a31289e0fcc040a5a0d3b9a13d461a7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Brain: {fileID: 1880806961987330748}
 --- !u!20 &2598431387055337013
 Camera:
   m_ObjectHideFlags: 0
@@ -332,6 +318,7 @@ GameObject:
   - component: {fileID: 6992404324760278208}
   - component: {fileID: 5377050397757354018}
   - component: {fileID: 2314102273501236438}
+  - component: {fileID: 6676301495451379557}
   m_Layer: 0
   m_Name: FreeLook Camera
   m_TagString: Untagged
@@ -558,6 +545,19 @@ MonoBehaviour:
         DecelTime: 0
   PlayerIndex: -1
   AutoEnableInputs: 1
+--- !u!114 &6676301495451379557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149560474938652439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a31289e0fcc040a5a0d3b9a13d461a7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Brain: {fileID: 1880806961987330748}
 --- !u!1 &1996264897801725228
 GameObject:
   m_ObjectHideFlags: 0

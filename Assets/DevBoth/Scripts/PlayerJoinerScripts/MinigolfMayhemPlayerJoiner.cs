@@ -54,9 +54,8 @@ public class MinigolfMayhemPlayerJoiner : MonoBehaviour
         var nPCStartIndex = m_playerIndex - 1;
         for (var i = nPCStartIndex; i < npcCollectionMM.Players.Count; i++)
         {
-            // Instantiate(npcCollectionMM.Players[i].PlayerReference, npcCollectionMM.Players[i].SpawnPoint, Quaternion.identity);
-            var npc = PlayerInput.Instantiate(npcCollectionMM.Players[i].PlayerReference, m_playerIndex, null, pairWithDevice: new InputDevice());
-            npc.transform.position = npcCollectionMM.Players[i].SpawnPoint;
+            Instantiate(npcCollectionMM.Players[i].PlayerReference, npcCollectionMM.Players[i].SpawnPoint, Quaternion.identity);
+            // var npc = Instantiate(npcCollectionMM.Players[i].PlayerReference, npcCollectionMM.Players[i].SpawnPoint, Quaternion.identity);
         }
     }
 }
