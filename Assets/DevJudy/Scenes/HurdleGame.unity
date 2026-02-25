@@ -1409,7 +1409,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 339574425}
   m_Enabled: 1
-  m_VideoClip: {fileID: 0}
+  m_VideoClip: {fileID: 32900000, guid: a04fe1878d6438d4586f1cd3aa1e952d, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -6064,7 +6064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5edf572e6593a647a84449c6f0c10c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  individualMultiplierDeduction: 0.063
+  individualMultiplierDeduction: 0.07
 --- !u!1001 &1171550653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11598,8 +11598,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterMaterialCollection: {fileID: 11400000, guid: 01d8d0743dc90f94f8ac6717a464c4cb, type: 2}
   characterMeshCollection: {fileID: 11400000, guid: 0662ba26ce715c044a3563dabdffae5a, type: 2}
-  isJetskiGame: 0
-  jetskiMaterialCollection: {fileID: 0}
+  hasTwoMeshes: 0
+  OtherMaterialCollection: {fileID: 0}
 --- !u!4 &7901871804622472836 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 806279231891789792, guid: e80de2aeace119d41a98a09f32c2ba7c, type: 3}
