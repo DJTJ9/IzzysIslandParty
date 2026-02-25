@@ -617,8 +617,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterMaterialCollection: {fileID: 11400000, guid: e15516f1f6da0a843a76f992217fcf40, type: 2}
   characterMeshCollection: {fileID: 11400000, guid: e8372d1ff96c03b4ba1e856016a8c95e, type: 2}
-  isJetskiGame: 1
-  jetskiMaterialCollection: {fileID: 11400000, guid: 68caf7f4679c772478b6a3e2268e1442, type: 2}
+  hasTwoMeshes: 0
+  OtherMaterialCollection: {fileID: 0}
 --- !u!1001 &91238349
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7347,7 +7347,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 294894493}
         m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
-        m_MethodName: ShowJetskiJoyrideSlalomStartScreen
+        m_MethodName: ShowJetskiJoyrideRaceStartScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7375,7 +7375,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 294894493}
         m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
-        m_MethodName: ShowJetskiJoyrideSlalomStartScreen
+        m_MethodName: ShowJetskiJoyrideRaceStartScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
