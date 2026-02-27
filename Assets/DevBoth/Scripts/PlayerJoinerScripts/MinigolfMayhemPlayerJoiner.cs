@@ -25,7 +25,7 @@ public class MinigolfMayhemPlayerJoiner : MonoBehaviour
         if (_playerInput.gameObject.TryGetComponent(out GoapRigidbodyMovement npc))
         {
             npc.SetPlayerIndex(m_playerIndex);
-            _playerInput.transform.GetComponentInChildren<CinemachineInputAxisController>().PlayerIndex = npc.GetPlayerIndex();
+            // _playerInput.transform.GetComponentInChildren<CinemachineInputAxisController>().PlayerIndex = npc.GetPlayerIndex();
             currentPlayers.Players.Add(npcCollectionMM.Players[npc.GetPlayerIndex() - 1]);
             _playerInput.gameObject.GetComponent<MeshRenderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1f);
             ++m_playerIndex;

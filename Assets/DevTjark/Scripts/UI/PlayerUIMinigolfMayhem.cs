@@ -1,4 +1,5 @@
-﻿using ImprovedTimers;
+﻿using System.Diagnostics;
+using ImprovedTimers;
 using Player.Collections;
 using TMPro;
 using UnityEngine;
@@ -6,7 +7,8 @@ using UnityEngine.UI;
 
 public class PlayerUIMinigolfMayhem : MonoBehaviour
 {
-    [SerializeField] private bool isRacingGame;
+    [SerializeField] private bool isRacingMode;
+    [SerializeField] private bool isNormalMode;
     
     [SerializeField] private Image shootForceBar;
     [SerializeField] private TMP_Text shootForceText;
@@ -20,7 +22,7 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
     private Controller playerController;
     private RigidbodyMovement rigidbodyMovement;
     
-    private StopwatchTimer finishTimer;
+    private Stopwatch finishTimer;
 
     private void Start()
     {
@@ -28,13 +30,13 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
         rigidbodyMovement = playerController.transform.parent.GetComponentInChildren<RigidbodyMovement>();
         shootForceBar.fillAmount = 0;
 
-        if (isRacingGame)
+        if (isRacingMode)
         {
             timer.SetActive(true);
-            finishTimer = new StopwatchTimer();
+            finishTimer = new Stopwatch();
             finishTimer.Start();
         }
-        // else
+        // if (isNormalMode)
         // {
         //     shootCounter.SetActive(true);
         // }
@@ -52,11 +54,12 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
 
     private void Update()
     {
-        if (isRacingGame)
+        if (isRacingMode)
         {
-            timerText.text = finishTimer.CurrentTime.ToString("0:00");
-            playersSO.Players[playerController.PlayerIndex].Time = finishTimer.CurrentTime.ToString("0:00");
-            playersSO.Players[playerController.PlayerIndex].TimeValue = finishTimer.CurrentTime;
+            // timerText.text = finishTimer.CurrentTime.ToString("m':'ss':'ff");
+            timerText.text = finishTimer.Elapsed.ToString("m':'ss':'ff");
+            playersSO.Players[playerController.PlayerIndex].Time = finishTimer.Elapsed.ToString("m':'ss':'ff");
+            playersSO.Players[playerController.PlayerIndex].TimeValue = (float)finishTimer.Elapsed.TotalMilliseconds;
         }
         
         if (rigidbodyMovement == null) return;
@@ -76,7 +79,7 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
     
     public void StartTimer() => finishTimer.Start();
     
-    public void StopTimer() => finishTimer.Pause();
+    public void StopTimer() => finishTimer.Stop();
     
-    public string GetFinishTime() => finishTimer.CurrentTime.ToString("0:00:00");
+    public string GetFinishTime() => finishTimer.Elapsed.ToString("m':'ss':'ff");
 }
