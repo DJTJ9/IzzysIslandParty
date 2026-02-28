@@ -637,6 +637,7 @@ namespace SingularityGroup.HotReload.Editor {
                         HotReloadPrefs.LoggedInlinedMethodsDialogue = true;
                     }
                     HotReloadTimelineHelper.CreateInlinedMethodsEntry(entryType: EntryType.Foldout, patchedMethodsDisplayNames: newInlinedMethods.Select(mb => $"{mb.DeclaringType?.Name}::{mb.Name}").ToArray());
+                    CodePatcher.I.anyFailures = true;
                     if (HotReloadPrefs.AutoRecompileUnsupportedChangesImmediately || UnityEditorInternal.InternalEditorUtility.isApplicationActive) {
                         TryRecompileUnsupportedChanges();
                     }
@@ -740,6 +741,7 @@ namespace SingularityGroup.HotReload.Editor {
             foreach (var compileFile in compileFiles) {
                 if (assetPath.EndsWith(compileFile, StringComparison.Ordinal)) {
                     HotReloadTimelineHelper.CreateErrorEventEntry(string.Format(Translations.Utility.AssemblyFileEditError, assetPath), entryType: EntryType.Foldout);
+                    CodePatcher.I.anyFailures = true;
                     _applyingFailed = true;
                     if (HotReloadPrefs.AutoRecompileUnsupportedChangesImmediately || UnityEditorInternal.InternalEditorUtility.isApplicationActive) {
                         TryRecompileUnsupportedChanges();
@@ -751,6 +753,7 @@ namespace SingularityGroup.HotReload.Editor {
             foreach (var plugin in plugins) {
                 if (assetPath.EndsWith(plugin, StringComparison.Ordinal)) {
                     HotReloadTimelineHelper.CreateErrorEventEntry(string.Format(Translations.Utility.NativePluginEditError, assetPath), entryType: EntryType.Foldout);
+                    CodePatcher.I.anyFailures = true;
                     _applyingFailed = true;
                     if (HotReloadPrefs.AutoRecompileUnsupportedChangesImmediately || UnityEditorInternal.InternalEditorUtility.isApplicationActive) {
                         TryRecompileUnsupportedChanges();

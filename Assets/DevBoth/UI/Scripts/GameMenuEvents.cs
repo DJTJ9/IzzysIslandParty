@@ -608,7 +608,7 @@ public class GameMenuEvents : MonoBehaviour
 
             row.Q<Label>("RankLabel").text = $"{currentRank}";
             row.Q<Label>("NameLabel").text = data.Name;
-            row.Q<Label>("ScoreLabel").text = data.TimeValue.ToString("0.00:000");
+            row.Q<Label>("ScoreLabel").text = data.TimeValue.ToString("m':'ss':'ff");
 
             previousTime = currentTime;
 

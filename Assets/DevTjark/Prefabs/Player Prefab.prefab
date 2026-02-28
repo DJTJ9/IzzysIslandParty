@@ -91,12 +91,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fca7a3bbd9b84621aad7cefa3969d72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRacingGame: 1
+  isRacingMode: 1
+  isNormalMode: 0
   shootForceBar: {fileID: 6094540324933952581}
   shootForceText: {fileID: 8068286155241944520}
   timer: {fileID: 3594548370693832558}
   timerText: {fileID: 1773167101616748820}
-  playersSO: {fileID: 11400000, guid: d87ffa542b2426249a2decee695a909d, type: 2}
+  playersSO: {fileID: 11400000, guid: 0f53a93ee4a82a94ea1754a908dd21bd, type: 2}
 --- !u!223 &7253874722251467924
 Canvas:
   m_ObjectHideFlags: 0
@@ -880,7 +881,7 @@ GameObject:
   - component: {fileID: 2449911264480491807}
   - component: {fileID: 8809287357707157129}
   - component: {fileID: 4179876104423682454}
-  - component: {fileID: 5640363175447248921}
+  - component: {fileID: 2572967429505129508}
   m_Layer: 8
   m_Name: FreeLook Camera
   m_TagString: Untagged
@@ -1120,7 +1121,7 @@ MonoBehaviour:
         DecelTime: 0
   PlayerIndex: 0
   AutoEnableInputs: 1
---- !u!114 &5640363175447248921
+--- !u!114 &2572967429505129508
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1129,27 +1130,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 7205134141381534054}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca7de3aefa901374ba29464584a3109a, type: 3}
+  m_Script: {fileID: 11500000, guid: dbe43d662878a7c43bcd44d43c9e2094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraRadius: 0.4
-  Decollision:
+  CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 17408
+  IgnoreTag: 
+  TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 17408
+  MinimumDistanceFromTarget: 0.3
+  AvoidObstacles:
     Enabled: 1
-    ObstacleLayers:
-      serializedVersion: 2
-      m_Bits: 17408
+    DistanceLimit: 0
+    MinimumOcclusionTime: 0
+    CameraRadius: 0.4
     UseFollowTarget:
       Enabled: 1
-      YOffset: 1
-    Damping: 0.5
+      YOffset: 0
+    Strategy: 0
+    MaximumEffort: 4
     SmoothingTime: 0
-  TerrainResolution:
-    Enabled: 1
-    TerrainLayers:
-      serializedVersion: 2
-      m_Bits: 17408
-    MaximumRaycast: 10
-    Damping: 0.5
+    Damping: 0.4
+    DampingWhenOccluded: 0.2
+  ShotQualityEvaluation:
+    Enabled: 0
+    OptimalDistance: 10
+    NearLimit: 5
+    FarLimit: 30
+    MaxQualityBoost: 0.2
 --- !u!1 &8234173984421840248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1195,7 +1205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2409164695570728623}
-  offset: {x: 0, y: 2.5, z: 0}
+  offset: {x: 0, y: 1, z: 0}
 --- !u!1 &8492206852831600043
 GameObject:
   m_ObjectHideFlags: 1

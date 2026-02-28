@@ -25,7 +25,7 @@ public class MinigolfMayhemPlayerJoiner : MonoBehaviour
         if (_playerInput.gameObject.TryGetComponent(out GoapRigidbodyMovement npc))
         {
             npc.SetPlayerIndex(m_playerIndex);
-            _playerInput.transform.GetComponentInChildren<CinemachineInputAxisController>().PlayerIndex = npc.GetPlayerIndex();
+            // _playerInput.transform.GetComponentInChildren<CinemachineInputAxisController>().PlayerIndex = npc.GetPlayerIndex();
             currentPlayers.Players.Add(npcCollectionMM.Players[npc.GetPlayerIndex() - 1]);
             _playerInput.gameObject.GetComponent<MeshRenderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1f);
             ++m_playerIndex;
@@ -54,9 +54,8 @@ public class MinigolfMayhemPlayerJoiner : MonoBehaviour
         var nPCStartIndex = m_playerIndex - 1;
         for (var i = nPCStartIndex; i < npcCollectionMM.Players.Count; i++)
         {
-            // Instantiate(npcCollectionMM.Players[i].PlayerReference, npcCollectionMM.Players[i].SpawnPoint, Quaternion.identity);
-            var npc = PlayerInput.Instantiate(npcCollectionMM.Players[i].PlayerReference, m_playerIndex, null, pairWithDevice: new InputDevice());
-            npc.transform.position = npcCollectionMM.Players[i].SpawnPoint;
+            Instantiate(npcCollectionMM.Players[i].PlayerReference, npcCollectionMM.Players[i].SpawnPoint, Quaternion.identity);
+            // var npc = Instantiate(npcCollectionMM.Players[i].PlayerReference, npcCollectionMM.Players[i].SpawnPoint, Quaternion.identity);
         }
     }
 }

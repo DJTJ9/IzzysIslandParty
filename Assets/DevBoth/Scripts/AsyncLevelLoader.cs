@@ -67,7 +67,7 @@ public class AsyncLevelLoader : MonoBehaviour
 
     private void Update()
     {
-        progressBar.value = Mathf.MoveTowards(progressBar.value, target, Time.deltaTime * 0.5f);
+        progressBar.value = Mathf.MoveTowards(progressBar.value, target, Time.unscaledDeltaTime * 0.5f);
         progressBar.title = $"{progressBar.value * 100:0}%";
     }
 
@@ -84,8 +84,8 @@ public class AsyncLevelLoader : MonoBehaviour
             await Task.Delay(300);
 
             var scene = SceneManager.LoadSceneAsync(sceneCollection.Scenes.TryGetValue(_sceneName, out var sceneNameFromCollection)
-                ? sceneNameFromCollection
-                : throw new KeyNotFoundException());
+                ? sceneNameFromCollection : throw new KeyNotFoundException());
+            
             if (scene == null) return;
 
             scene.allowSceneActivation = false;
