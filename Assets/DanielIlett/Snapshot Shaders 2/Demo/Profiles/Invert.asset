@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Invert
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 6529701589866873823}
---- !u!114 &6529701589866873823
+  - {fileID: 1830539440424621739}
+--- !u!114 &1830539440424621739
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -23,8 +23,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cff7ae1c113e66d418c2f8dfc551ecd3, type: 3}
-  m_Name: InvertSettings
+  m_Script: {fileID: 11500000, guid: ae8469506beaf054088292c79972100b, type: 3}
+  m_Name: AfterimageSettings
   m_EditorClassIdentifier: 
   active: 1
   renderPassEvent:
@@ -48,6 +48,9 @@ MonoBehaviour:
   invertMask:
     m_OverrideState: 0
     m_Value: 0
-  strength:
-    m_OverrideState: 1
-    m_Value: 1
+  afterimageMode:
+    m_OverrideState: 0
+    m_Value: 0
+  persistence:
+    m_OverrideState: 0
+    m_Value: 0
