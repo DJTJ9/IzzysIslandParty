@@ -39,10 +39,10 @@ namespace JetskiGame
 
         [Header("Dependencies: ")]
         [SerializeField] private TextMeshProUGUI onRaceOverText;
-
         [SerializeField] private TextMeshProUGUI raceCountdownText;
         [SerializeField] private GameAudioManager audioManager;
         [SerializeField] private LevelTimer levelTimer;
+        private Coroutine endLevelCoroutine;
 
         private void Awake()
         {
@@ -214,16 +214,28 @@ namespace JetskiGame
 
             timePenalties.Add(timeDeductionMinutes + (timeDeductionSeconds * 0.01f));
 
-            string finishingTime = GetFinishingTimeAsString(minutes + timeDeductionMinutes, seconds + timeDeductionSeconds, milliseconds);
+            int finishingTimeMinutes = minutes + timeDeductionMinutes;
+            int finishingTimeSeconds = (seconds + timeDeductionSeconds);
+
+            if (finishingTimeSeconds >= 60f)
+            {
+                finishingTimeMinutes++;
+                finishingTimeSeconds = (finishingTimeMinutes % 60);
+            }
+            
+            string finishingTime = GetFinishingTimeAsString(finishingTimeMinutes, finishingTimeSeconds, milliseconds);
 
             var currentObj = new Tuple<GameObject, string>(_triggeringObj, finishingTime);
             winnerPlacementOrder.Add(currentObj);
 
             if (winnerPlacementOrder.Count == 1)
-                StartCoroutine(StartLevelCountdownTimer());
+               endLevelCoroutine = StartCoroutine(StartLevelCountdownTimer());
             else if (winnerPlacementOrder.Count == maxNumberOfPlayers)
             {
-                CheckIfWinnerPlacementListFull();
+                StopCoroutine(endLevelCoroutine);
+                endLevelCoroutine = null;
+                
+                OrganizeWinnerPlacementList();
                 SetGameScores();
 
                 raceEnded = true;
@@ -268,7 +280,9 @@ namespace JetskiGame
                 if (countdown <= showCountdownSeconds)
                     levelCountdownText.text = countdown.ToString() + "...";
             }
-
+            
+            Debug.Log("StartLevelCountdownTimer");
+            
             OrganizeWinnerPlacementList();
             SetGameScores();
 
@@ -343,10 +357,12 @@ namespace JetskiGame
                     npcController.SetTime(winnerPlacementOrder[i].Item2);
                 }
             }
+            Debug.Log("SetGameScores");
         }
 
         public override void EndLevel()
         {
+            Debug.Log("-EndLevel-");
             levelTimer.EndTimerAndDisplayFinishTime();
 
             onRaceOverText?.gameObject.SetActive(true);

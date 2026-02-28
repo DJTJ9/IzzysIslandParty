@@ -28,7 +28,6 @@ public class GameMenuEvents : MonoBehaviour
 
     [Header("Menus")]
     private VisualElement pauseMenu;
-
     private VisualElement playerHub;
     private VisualElement resultsScreen;
     private VisualElement resultsModal;
@@ -44,7 +43,6 @@ public class GameMenuEvents : MonoBehaviour
 
     [Header("Player HUB Buttons")]
     private Button bowlingBattleButton;
-
     private Button fishingFrenzyButton;
     private Button jetskiJoyrideButton;
     private Button minigolfMayhemButton;
@@ -54,13 +52,15 @@ public class GameMenuEvents : MonoBehaviour
 
     [Header("End Screen Buttons")]
     private Button resultScreenContinueButton;
-
     private Button endScreenRestartButton;
     private Button endScreenChangeLevelButton;
     private Button endScreenQuitButton;
 
+    #region ControllerSelectionMenu
+
     [Header("Controller Selection")]
     [SerializeField] private float animDuration = 0.3f;
+
     [SerializeField] private float holdDuration = 2f;
     [SerializeField] private UIToolkitVideo uiToolkitVideo;
     [SerializeField] private RenderTexture videoTexture;
@@ -102,15 +102,19 @@ public class GameMenuEvents : MonoBehaviour
     private VisualElement[] m_slots;
     private VisualElement joinInstruction;
     private VisualElement startGameInstruction;
-    
+
+    #endregion
+
     [FoldoutGroup("Events", expanded: false)]
     [SerializeField] private UnityEvent onGameStart;
     [SerializeField] private UnityEvent onUnpause;
     [SerializeField] private UnityEvent onRestart;
     [SerializeField] private UnityEvent onLevelLoaded;
-    
+
     private int m_joinedPlayers = 0;
     private bool m_playerJoined = false;
+
+    private bool sorted = false;
 
     private void Awake()
     {
@@ -120,7 +124,7 @@ public class GameMenuEvents : MonoBehaviour
         BindButtons();
         InitializeSlotElements();
         FocusButton(controllerSelectionReadyButton);
-        
+
         onLevelLoaded.Invoke();
     }
 
@@ -129,13 +133,14 @@ public class GameMenuEvents : MonoBehaviour
         RegisterButtonCallbacks();
         m_playerJoined = false;
         StartCoroutine(ShowOnlyJoinInstruction());
-        
+
         onLevelLoaded.Invoke();
     }
 
     private void OnDisable()
     {
         UnregisterButtonCallbacks();
+        StopAllCoroutines();
     }
 
     private void BindVisualElements()
@@ -345,7 +350,9 @@ public class GameMenuEvents : MonoBehaviour
         bowlingBattleInstructions.style.display = DisplayStyle.Flex;
         bowlingBattleInstructionsText.style.display = DisplayStyle.Flex;
         bowlingBattlePreviewImage.style.display = DisplayStyle.Flex;
-        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.BowlingBattle, out var clip) ? clip : throw new KeyNotFoundException());
+        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.BowlingBattle, out var clip)
+            ? clip
+            : throw new KeyNotFoundException());
         uiToolkitVideo.PlayVideo();
     }
 
@@ -359,7 +366,9 @@ public class GameMenuEvents : MonoBehaviour
         fishingFrenzyInstructions.style.display = DisplayStyle.Flex;
         fishingFrenzyInstructionsText.style.display = DisplayStyle.Flex;
         fishingFrenzyPreviewImage.style.display = DisplayStyle.Flex;
-        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.FishingFrenzy, out var clip) ? clip : throw new KeyNotFoundException());
+        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.FishingFrenzy, out var clip)
+            ? clip
+            : throw new KeyNotFoundException());
         uiToolkitVideo.PlayVideo();
     }
 
@@ -373,10 +382,12 @@ public class GameMenuEvents : MonoBehaviour
         jetskiJoyrideRaceInstructions.style.display = DisplayStyle.Flex;
         jetskiJoyrideRaceInstructionsText.style.display = DisplayStyle.Flex;
         jetskiJoyrideRacePreviewImage.style.display = DisplayStyle.Flex;
-        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.JetskiJoyrideRace, out var clip) ? clip : throw new KeyNotFoundException());
+        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.JetskiJoyrideRace, out var clip)
+            ? clip
+            : throw new KeyNotFoundException());
         uiToolkitVideo.PlayVideo();
     }
-    
+
     public void ShowJetskiJoyrideSlalomStartScreen()
     {
         FreezeTimeScale();
@@ -387,7 +398,9 @@ public class GameMenuEvents : MonoBehaviour
         jetskiJoyrideSlalomInstructions.style.display = DisplayStyle.Flex;
         jetskiJoyrideSlalomInstructionsText.style.display = DisplayStyle.Flex;
         jetskiJoyrideSlalomPreviewImage.style.display = DisplayStyle.Flex;
-        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.JetskiJoyrideSlalom, out var clip) ? clip : throw new KeyNotFoundException());
+        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.JetskiJoyrideSlalom, out var clip)
+            ? clip
+            : throw new KeyNotFoundException());
         uiToolkitVideo.PlayVideo();
     }
 
@@ -401,10 +414,12 @@ public class GameMenuEvents : MonoBehaviour
         minigolfMayhemClassicInstructions.style.display = DisplayStyle.Flex;
         minigolfMayhemClassicInstructionsText.style.display = DisplayStyle.Flex;
         minigolfMayhemClassicPreviewImage.style.display = DisplayStyle.Flex;
-        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.MinigolfMayhemClassic, out var clip) ? clip : throw new KeyNotFoundException());
+        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.MinigolfMayhemClassic, out var clip)
+            ? clip
+            : throw new KeyNotFoundException());
         uiToolkitVideo.PlayVideo();
     }
-    
+
     public void ShowMinigolfMayhemRaceStartScreen()
     {
         FreezeTimeScale();
@@ -415,7 +430,9 @@ public class GameMenuEvents : MonoBehaviour
         minigolfMayhemClassicInstructions.style.display = DisplayStyle.Flex;
         minigolfMayhemClassicInstructionsText.style.display = DisplayStyle.Flex;
         minigolfMayhemClassicPreviewImage.style.display = DisplayStyle.Flex;
-        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.MinigolfMayhemRace, out var clip) ? clip : throw new KeyNotFoundException());
+        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.MinigolfMayhemRace, out var clip)
+            ? clip
+            : throw new KeyNotFoundException());
         uiToolkitVideo.PlayVideo();
     }
 
@@ -429,7 +446,9 @@ public class GameMenuEvents : MonoBehaviour
         swaggySnapshotsInstructions.style.display = DisplayStyle.Flex;
         swaggySnapshotsInstructionsText.style.display = DisplayStyle.Flex;
         swaggySnapshotsPreviewImage.style.display = DisplayStyle.Flex;
-        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.SwaggySnapshots, out var clip) ? clip : throw new KeyNotFoundException());
+        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.SwaggySnapshots, out var clip)
+            ? clip
+            : throw new KeyNotFoundException());
         uiToolkitVideo.PlayVideo();
     }
 
@@ -443,7 +462,9 @@ public class GameMenuEvents : MonoBehaviour
         hastyHurdlesInstructions.style.display = DisplayStyle.Flex;
         hastyHurdlesInstructionsText.style.display = DisplayStyle.Flex;
         hastyHurdlesPreviewImage.style.display = DisplayStyle.Flex;
-        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.HastyHurdles, out var clip) ? clip : throw new KeyNotFoundException());
+        uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.HastyHurdles, out var clip)
+            ? clip
+            : throw new KeyNotFoundException());
         uiToolkitVideo.PlayVideo();
     }
 
@@ -534,8 +555,18 @@ public class GameMenuEvents : MonoBehaviour
     public void ShowRaceResultsScreen()
     {
         ShowRaceResults(currentPlayersRacing.Players);
+
+        StartCoroutine(ShowRaceResultsWhenSorted());
+    }
+
+    private IEnumerator ShowRaceResultsWhenSorted()
+    {
+        yield return new WaitUntil(() => sorted);
+
         resultsScreen.style.display = DisplayStyle.Flex;
         FocusButton(resultScreenContinueButton);
+
+        yield return null;
     }
 
     private void ShowResults(List<SO_Player> _results)
@@ -554,6 +585,7 @@ public class GameMenuEvents : MonoBehaviour
 
         for (var i = 0; i < ordered.Count; i++)
         {
+            Debug.Log(i);
             var data = ordered[i];
             var row = rowTemplate.CloneTree();
 
@@ -579,7 +611,7 @@ public class GameMenuEvents : MonoBehaviour
             container.Add(row);
         }
     }
-    
+
     private void ShowMinigolfResults(List<SO_PlayerRacingGames> _results)
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
@@ -624,14 +656,14 @@ public class GameMenuEvents : MonoBehaviour
 
     private void ShowRaceResults(List<SO_PlayerRacingGames> _results)
     {
+        sorted = false;
+        
         var root = GetComponent<UIDocument>().rootVisualElement;
         var container = resultsModal;
 
         container.Clear();
 
-        var ordered = _results
-            .OrderByDescending(_r => _r.PlayerScore.Value)
-            .ToList();
+        var ordered = _results.OrderByDescending(_r => _r.PlayerScore.Value).ToList();
 
         ordered.Reverse();
 
@@ -647,9 +679,10 @@ public class GameMenuEvents : MonoBehaviour
                 row.Q<Label>("ScoreLabel").text = data.Time;
             else
                 row.Q<Label>("ScoreLabel").text = "";
-            
+
             container.Add(row);
         }
+        sorted = true;
     }
 
     private void InitializeSlotElements()
@@ -724,19 +757,19 @@ public class GameMenuEvents : MonoBehaviour
         swaggySnapshotsInstructionsText.style.display = DisplayStyle.None;
         hastyHurdlesInstructionsText.style.display = DisplayStyle.None;
     }
-    
+
     private IEnumerator ShowOnlyJoinInstruction()
     {
         joinInstruction.style.display = DisplayStyle.Flex;
 
         if (joinInstruction.style.scale.value.value.y <= 1f)
         {
-            yield return AnimateScaleCoroutine(joinInstruction, new Vector3(1,0,1), new Vector3(1,1,1), animDuration);
+            yield return AnimateScaleCoroutine(joinInstruction, new Vector3(1, 0, 1), new Vector3(1, 1, 1), animDuration);
         }
 
         yield return new WaitForSecondsRealtime(holdDuration);
 
-        yield return AnimateScaleCoroutine(joinInstruction, new Vector3(1,1,1), new Vector3(1,0,1), animDuration);
+        yield return AnimateScaleCoroutine(joinInstruction, new Vector3(1, 1, 1), new Vector3(1, 0, 1), animDuration);
 
         joinInstruction.style.display = DisplayStyle.None;
 
@@ -746,22 +779,22 @@ public class GameMenuEvents : MonoBehaviour
             StartCoroutine(ShowStartAndJoinInstruction());
             yield break;
         }
-        
+
         StartCoroutine(ShowOnlyJoinInstruction());
     }
-    
+
     private IEnumerator ShowJoinAndStartInstruction()
     {
         joinInstruction.style.display = DisplayStyle.Flex;
 
         if (joinInstruction.style.scale.value.value.y <= 1f)
         {
-            yield return AnimateScaleCoroutine(joinInstruction, new Vector3(1,0,1), new Vector3(1,1,1), animDuration);
+            yield return AnimateScaleCoroutine(joinInstruction, new Vector3(1, 0, 1), new Vector3(1, 1, 1), animDuration);
         }
 
         yield return new WaitForSecondsRealtime(holdDuration);
 
-        yield return AnimateScaleCoroutine(joinInstruction, new Vector3(1,1,1), new Vector3(1,0,1), animDuration);
+        yield return AnimateScaleCoroutine(joinInstruction, new Vector3(1, 1, 1), new Vector3(1, 0, 1), animDuration);
 
         joinInstruction.style.display = DisplayStyle.None;
 
@@ -772,11 +805,11 @@ public class GameMenuEvents : MonoBehaviour
     {
         startGameInstruction.style.display = DisplayStyle.Flex;
 
-        yield return AnimateScaleCoroutine(startGameInstruction, new Vector3(1,0,1), new Vector3(1,1,1), animDuration);
+        yield return AnimateScaleCoroutine(startGameInstruction, new Vector3(1, 0, 1), new Vector3(1, 1, 1), animDuration);
 
         yield return new WaitForSecondsRealtime(holdDuration);
 
-        yield return AnimateScaleCoroutine(startGameInstruction, new Vector3(1,1,1), new Vector3(1,0,1), animDuration);
+        yield return AnimateScaleCoroutine(startGameInstruction, new Vector3(1, 1, 1), new Vector3(1, 0, 1), animDuration);
 
         startGameInstruction.style.display = DisplayStyle.None;
 

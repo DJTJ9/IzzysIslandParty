@@ -8,53 +8,81 @@ namespace Juice
 {
     public class IconHandler : MonoBehaviour
     {
-        [SerializeField] private MeshRenderer target;
+        [SerializeField] private MeshRenderer[] targets;
         [SerializeField] private SO_Emotion[] emotions;
         [SerializeField] private float displayIconSeconds = 3f;
+        private int currentEmotionIndex = -1;
 
         private CountdownTimer iconTimer;
 
         [Header("Camera")]
         [SerializeField] private bool rotateToCamera = true;
+
         [ShowIf("rotateToCamera")]
         [SerializeField] private Camera mainCamera;
 
         private void Awake()
         {
-            if (!target)
-                target = GetComponentInChildren<MeshRenderer>();
+            targets = new MeshRenderer[emotions.Length];
 
-            if (!target.gameObject)
+            if (!targets[0])
+                targets[0] = GetComponentInChildren<MeshRenderer>();
+            else
                 Debug.LogWarning("No target GO set, please add 'CharacterIconPrefab' and set meshRenderer");
         }
 
         private void Start()
         {
+            if (emotions == null)
+                return;
+
+            for (int i = 0; i < emotions.Length; i++)
+            {
+                if (targets[i] == null)
+                {
+                    targets[i] = new GameObject().AddComponent<MeshRenderer>();
+                    var meshFilter = targets[0].gameObject.GetComponent<MeshFilter>();
+                    
+                    targets[i].gameObject.AddComponent<MeshFilter>().mesh = meshFilter.sharedMesh;
+                    targets[i].transform.SetParent(this.transform);
+                    
+                    targets[i].transform.position = targets[0].transform.position;
+                    targets[i].transform.rotation = targets[0].transform.rotation;
+                    targets[i].transform.localScale = targets[0].transform.localScale;
+                }
+
+                targets[i].material = emotions[i].IconMaterial;
+                targets[i].name = emotions[i].name;
+            }
+
             iconTimer = new CountdownTimer(displayIconSeconds);
 
             iconTimer.OnTimerStart += EnableMeshRenderer;
             iconTimer.OnTimerStop += DisableMeshRenderer;
 
-            target.gameObject.SetActive(false);
+            for (int i = 0; i < emotions.Length; i++)
+            {
+                targets[i].gameObject.SetActive(false);
+            }
         }
 
         private void EnableMeshRenderer()
         {
-            if (!target.gameObject)
+            if (!targets[currentEmotionIndex])
                 return;
-            
+
             if (rotateToCamera && mainCamera)
-                target.gameObject.transform.LookAt(mainCamera.transform.position);
-            
-            target.gameObject.SetActive(true);
+                targets[currentEmotionIndex].gameObject.transform.LookAt(mainCamera.transform.position);
+
+            targets[currentEmotionIndex].gameObject.SetActive(true);
         }
 
         private void DisableMeshRenderer()
         {
-            if (!target.gameObject)
+            if (!targets[currentEmotionIndex].gameObject)
                 return;
-
-            target.gameObject.SetActive(false);
+            
+            targets[currentEmotionIndex].gameObject.SetActive(false);
         }
 
         private void OnDisable()
@@ -72,27 +100,29 @@ namespace Juice
 
         public void DisplayIcon(EEmotion _emotion)
         {
-            if (TryGetEmotion(_emotion, out Material iconMaterial))
-            {
-                target.material = iconMaterial;
+            Debug.Log( gameObject.transform.parent.parent.name + " Displaying icon " + _emotion);
+            if (iconTimer.IsRunning)
+                iconTimer.Stop();
+            
+            if (TryGetEmotion(_emotion))
                 iconTimer.Start();
-            }
             else
                 Debug.LogError($"Emotion {_emotion} not registered");
         }
 
-        private bool TryGetEmotion(EEmotion _emotion, out Material _iconMaterial)
+        private bool TryGetEmotion(EEmotion _emotion)
         {
+            currentEmotionIndex = -1;
+
             for (int i = 0; i < emotions.Length; i++)
             {
                 if (emotions[i].Emotion == _emotion)
                 {
-                    _iconMaterial = emotions[i].IconMaterial;
+                    currentEmotionIndex = i;
                     return true;
                 }
             }
 
-            _iconMaterial = null;
             return false;
         }
 

@@ -3,6 +3,7 @@ using Helper;
 using MultiuseScripts;
 using Pathfinding;
 using UIScripts;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace JetskiGame
@@ -34,7 +35,9 @@ namespace JetskiGame
 
         private void OnMiddleGateEnter(Collider _other)
         {
-            _other.gameObject.TryGetComponent(out Controller controller);
+            if (_other.gameObject.CompareTag("Ignore") || !_other.gameObject.TryGetComponent(out Controller controller))
+                return;
+            
             int index = controller.PlayerIndex;
 
             if (clearedGate[index])
@@ -50,7 +53,9 @@ namespace JetskiGame
 
         private void OnSideGatesEnter(Collider _other)
         {
-            _other.gameObject.TryGetComponent(out Controller controller);
+            if (_other.gameObject.CompareTag("Ignore") || !_other.gameObject.TryGetComponent(out Controller controller))
+                return;
+
             int index = controller.PlayerIndex;
 
             if (clearedGate[index])
@@ -61,9 +66,9 @@ namespace JetskiGame
             if (controller is JetskiController playerController)
             {
                 playerController.OnObstacleMissed(timeDeduction.Value, out var timeDeductionMinutes, out var timeDeductionSeconds);
-              
-                 UITimerManager timerManager = playerController.gameObject.transform.parent.GetComponentInChildren<UITimerManager>();
-              
+
+                UITimerManager timerManager = playerController.gameObject.transform.parent.GetComponentInChildren<UITimerManager>();
+
                 timerManager?.UpdateTimerPenaltyText(timeDeductionMinutes, timeDeductionSeconds);
                 StartCoroutine(timerManager?.TimeDeductionFeedback());
             }

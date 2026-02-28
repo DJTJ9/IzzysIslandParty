@@ -1,3 +1,5 @@
+using JetskiGame;
+using Pathfinding;
 using UnityEngine;
 
 namespace MultiuseScripts
@@ -20,9 +22,15 @@ namespace MultiuseScripts
 
         private void OnFinishLineEntered(Collider _triggeringObj)
         {
+            if (_triggeringObj.gameObject.CompareTag("Ignore") || !_triggeringObj.gameObject.TryGetComponent(out Controller controller))
+                return;
             //!! Visual feedback!!
-            
-           levelService?.OnFinishLineCrossed(_triggeringObj.gameObject);
+            if (controller is JetskiController playerController)
+                playerController.OnObstacleCleared();
+            else if (controller is JetskiNPCBehaviour npcController)
+                npcController.OnObstacleCleared();
+
+            levelService?.OnFinishLineCrossed(_triggeringObj.gameObject);
         }
     }
 }

@@ -49,13 +49,17 @@ namespace JetskiGame
 
         [Header("Dependencies: ")]
         [SerializeField] private IconHandler iconHandler;
+
         [SerializeField] private GameObject onFinishLineCrossedText;
+        [SerializeField] private CustomTriggerBehaviour onWallTrigger;
 
         [Header("Debug: ")]
         [SerializeField] private ForceMode forceMode;
+
         [SerializeField] private ForceMode jumpForceMode;
         [SerializeField] private bool showSpeedText;
         [SerializeField] private TextMeshProUGUI speedText;
+        [SerializeField] private float wallPushImpulse = 10f;
 
 
         private void Awake()
@@ -65,6 +69,9 @@ namespace JetskiGame
 
             if (!showSpeedText && speedText != null)
                 speedText.gameObject.SetActive(false);
+
+            if (onWallTrigger != null)
+                onWallTrigger.EnteredTriggerAction += OnHitWall;
         }
 
         public void OnPlayerJoined(SO_PlayerRacingGames _player)
@@ -112,7 +119,6 @@ namespace JetskiGame
             if (_context.canceled)
             {
                 moveInput = Vector2.zero;
-
                 driving = false;
             }
         }
@@ -121,7 +127,6 @@ namespace JetskiGame
         {
             Vector3 moveInput3d = new Vector3(0f, 0f, moveInput.y);
 
-            // !! Change after playtest
             switch (forceMode)
             {
                 case ForceMode.VelocityChange:
@@ -168,6 +173,14 @@ namespace JetskiGame
             jumpPressedLastFrame = false;
         }
 
+        private void OnHitWall(Collider _collider)
+        {
+            if (!_collider.gameObject.CompareTag("Border"))
+                return;
+            
+            rb.AddForce(transform.right * (moveInput.x * wallPushImpulse), ForceMode.Impulse);
+        }
+
         private void FixedUpdate()
         {
             GroundCheck();
@@ -176,7 +189,7 @@ namespace JetskiGame
                 Jump(jumpHeight);
             else if (!isGrounded && jumpPressedLastFrame)
                 jumpPressedLastFrame = false;
-            
+
             rb.AddForceAtPosition(transform.right * (-moveInput.x * steerPower) / 100f, motor.position);
 
             MoveJetski();
