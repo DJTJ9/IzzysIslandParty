@@ -588,7 +588,7 @@ public class GameMenuEvents : MonoBehaviour
         container.Clear();
 
         var ordered = _results
-            .OrderByDescending(_r => _r.TimeValue)
+            .OrderBy(_r => _r.TimeValue)
             .ToList();
 
         var currentRank = 1;
@@ -608,7 +608,7 @@ public class GameMenuEvents : MonoBehaviour
 
             row.Q<Label>("RankLabel").text = $"{currentRank}";
             row.Q<Label>("NameLabel").text = data.Name;
-            row.Q<Label>("ScoreLabel").text = data.TimeValue.ToString("m':'ss':'ff");
+            row.Q<Label>("ScoreLabel").text = data.Time;
 
             previousTime = currentTime;
 

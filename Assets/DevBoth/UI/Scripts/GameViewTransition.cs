@@ -1,52 +1,55 @@
-﻿using SnapshotShaders.URP;
+﻿using System.Collections;
+using Sirenix.OdinInspector;
+using SnapshotShaders.URP;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class GameViewTransition : MonoBehaviour
 {
-    public float newZoomValue = 1.5f;
+    [FoldoutGroup("Settings", expanded: true)]
+    [SerializeField] private float startValue;
+    [SerializeField] private float endValue;
+    [SerializeField] private float duration;
+    
+    [SerializeField] private Volume volume;
+    private CutoutSettings cutoutSettings;
 
-    private void Update()
+    private void Start()
     {
-        if (VolumeManager.instance == null)
+        // Suche nach einem Global Volume, das die CutoutSettings enthält
+        // var volume = FindAnyObjectByType<Volume>();
+        if (volume != null && volume.profile != null)
         {
-            Debug.LogError("VolumeManager.instance ist null. Ist ein Volume in der Szene?");
-            return;
+            volume.profile.TryGet(out cutoutSettings);
         }
-        
-        if (VolumeManager.instance.stack == null)
-        {
-            Debug.LogError("VolumeManager.instance.stack ist null. Es gibt keinen aktiven Volume Stack. Ist das Volume korrekt konfiguriert?");
-            return;
-        }
-
-        // Hole die CutoutSettings vom VolumeManager
-        var cutoutSettings = VolumeManager.instance.stack.GetComponent<CutoutSettings>();
-        
-        if (cutoutSettings == null)
-        {
-            Debug.LogError("CutoutSettings sind nicht im Volume Profile konfiguriert.");
-            return;
-        }
-
-        if (cutoutSettings == null)
-        {
-            Debug.LogError("CutoutSettings sind nicht im Volume Profile konfiguriert.");
-            return;
-        }
-
-        // Aktiv prüfen und Zoom-Wert setzen
-        if (cutoutSettings.IsActive())
-        {
-            cutoutSettings.zoom.overrideState = true; // Override zulassen
-            cutoutSettings.zoom.value = newZoomValue; // Zoom-Wert setzen
-            Debug.Log($"Zoom-Wert auf {newZoomValue} gesetzt.");
-        }
-
         else
         {
-            Debug.LogWarning("CutoutSettings konnten nicht gefunden werden oder sind nicht aktiv.");
+            Debug.LogError("Volume oder VolumeProfile fehlt in der Szene.");
         }
+    }
+
+    public void StartGameViewTransition() => StartCoroutine(AnimateGameViewTransition());
+
+    private IEnumerator AnimateGameViewTransition()
+    {
+        if (cutoutSettings == null)
+        {
+            yield break;
+        }
+
+        cutoutSettings.zoom.overrideState = true;
+        var elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            var t = Mathf.Clamp01(elapsedTime / duration);                 
+            cutoutSettings.zoom.value = Mathf.Lerp(startValue, endValue, t); 
+
+            yield return null;
+        }
+
+        cutoutSettings.zoom.value = endValue;
     }
 
 }

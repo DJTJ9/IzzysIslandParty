@@ -19,31 +19,34 @@ public class MinigolfHole : MonoBehaviour
         m_finishedPlayers = 0;
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider _other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!_other.CompareTag("Player")) return;
         
-        if (other.TryGetComponent<Controller>(out var controller))
+        if (_other.TryGetComponent<Controller>(out var controller))
         {
             onMinigolfPlayerFinished?.Invoke(controller.PlayerIndex);
             controller.DisableController();
             
             ++m_finishedPlayers;
+            ConsoleProDebug.LogToFilter($"Players finished: {m_finishedPlayers}", "Debug");
             
-            if (m_finishedPlayers == MAX_PLAYER_COUNT - 1)
+            if (m_finishedPlayers / 2 == MAX_PLAYER_COUNT- 1)
             {
+                //TODO: Start countdown for last player to finish
+                
                 onGameEnd.Invoke();
                 ConsoleProDebug.LogToFilter("Game End!", "Event");
             }
         }
         
-        if (other.TryGetComponent<PlayerControllerMinigolfMayhem>(out var playerController))
+        if (_other.TryGetComponent<PlayerControllerMinigolfMayhem>(out var _playerController))
         {
-            playerController.SwitchToUIInputMap();
+            _playerController.SwitchToUIInputMap();
         }
         
-        other.transform.parent.GetComponentInChildren<PlayerUIMinigolfMayhem>().StopTimer();
+        _other.transform.parent.GetComponentInChildren<PlayerUIMinigolfMayhem>().StopTimer();
             
-        // other.gameObject.SetActive(false);
+        // _other.gameObject.SetActive(false);
     }
 }

@@ -23,16 +23,6 @@ public class SwallowTitan : MonoBehaviour
         }
     }
     
-    private void OnTriggerExit(Collider _other)
-    {
-        if (!_other.CompareTag("Player")) return;
-
-        if (_other.TryGetComponent<Rigidbody>(out var _rb))
-        {
-            _rb.useGravity = true;
-        }
-    }
-    
     public void EnableTriggerZone() => triggerZone.enabled = true;
     public void DisableTriggerZone() => triggerZone.enabled = false;
     
