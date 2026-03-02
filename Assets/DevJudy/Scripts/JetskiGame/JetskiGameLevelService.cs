@@ -38,7 +38,6 @@ namespace JetskiGame
         private bool raceEnded;
 
         [Header("Dependencies: ")]
-        [SerializeField] private TextMeshProUGUI onRaceOverText;
         [SerializeField] private TextMeshProUGUI raceCountdownText;
         [SerializeField] private GameAudioManager audioManager;
         [SerializeField] private LevelTimer levelTimer;
@@ -254,6 +253,7 @@ namespace JetskiGame
 
             if (_triggeringObj.TryGetComponent(out JetskiNPCBehaviour jetskiNPCBehaviour))
             {
+                jetskiNPCBehaviour.OnFinishLineCrossed();
                 jetskiNPCBehaviour.GetFinalTimeDeduction(out _timeDeductionMinutes, out _timeDeductionSeconds);
                 return;
             }
@@ -273,10 +273,17 @@ namespace JetskiGame
 
             while (countdown > 0)
             {
+                Debug.Log("Countdown: " + countdown);
                 countdown--;
 
                 yield return new WaitForSecondsRealtime(1f);
 
+                if (countdown == showCountdownSeconds)
+                {
+                    Debug.Log("Countdown text active");
+                    levelCountdownText.enabled = true;
+                }
+                
                 if (countdown <= showCountdownSeconds)
                     levelCountdownText.text = countdown.ToString() + "...";
             }
@@ -364,8 +371,6 @@ namespace JetskiGame
         {
             Debug.Log("-EndLevel-");
             levelTimer.EndTimerAndDisplayFinishTime();
-
-            onRaceOverText?.gameObject.SetActive(true);
             raceStarted = false;
 
             OnLevelEnd?.Invoke();

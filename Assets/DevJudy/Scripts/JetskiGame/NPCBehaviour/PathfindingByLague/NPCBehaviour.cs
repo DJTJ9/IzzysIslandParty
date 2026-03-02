@@ -16,7 +16,7 @@ namespace Pathfinding
         [SerializeField] private IconHandler iconHandler;
 
         private const float minPathUpdateTime = 0.2f;
-        private const float pathUpdateThreshold = 0.5f;
+        private const float pathUpdateThreshold = 25f;
         private const float squareMoveThreshold = pathUpdateThreshold * pathUpdateThreshold;
 
         [SerializeField] private Transform target;
@@ -25,6 +25,7 @@ namespace Pathfinding
         [SerializeField] private float turnSpeed = 2.5f;
         [SerializeField] private float turnDistance = 10f;
         [SerializeField] private float stoppingDistance = 2f;
+        private Vector3 previousPosition;
 
         private int timeDeductionMinutes;
         private int timeDeductionSeconds;
@@ -35,10 +36,13 @@ namespace Pathfinding
         private Coroutine followPathRoutine;
 
         private bool canFollowPath = false;
+        private bool finishLineCrossed = false;
 
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
+
+            previousPosition = transform.position;
         }
 
         public override void OnNPCJoined(SO_PlayerRacingGames _player)
@@ -106,14 +110,17 @@ namespace Pathfinding
 
             Vector3 formerTargetPos = Vector3.zero;
 
-            while (canFollowPath)
+            while (canFollowPath && !finishLineCrossed)
             {
                 yield return new WaitForSeconds(minPathUpdateTime);
 
-                if ((target.position - formerTargetPos).sqrMagnitude >= squareMoveThreshold)
+                if ((target.position - formerTargetPos).sqrMagnitude >= squareMoveThreshold ||
+                    (transform.position - previousPosition).sqrMagnitude >= squareMoveThreshold)
                 {
                     PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+
                     formerTargetPos = target.position;
+                    previousPosition = transform.position;
                 }
             }
 
@@ -138,6 +145,8 @@ namespace Pathfinding
                 {
                     if (pathIndex >= path.FinishLineIndex)
                     {
+                        Debug.Log("Stopping here 2 " + gameObject.name);
+
                         followingPath = false;
                         break;
                     }
@@ -155,7 +164,13 @@ namespace Pathfinding
                             followingPath = false;
                     }
 
-                    rb.AddForce((speed * speedPercent) * transform.forward, ForceMode.Force);
+                    if ((previousPosition - transform.position).sqrMagnitude < 0.01f)
+                    {
+                        rb.AddForce((speed * speedPercent) * (transform.forward * -1), ForceMode.Force);
+                        previousPosition = transform.position;
+                    }
+                    else
+                        rb.AddForce((speed * speedPercent) * transform.forward, ForceMode.Force);
                 }
 
                 yield return new WaitForFixedUpdate();
@@ -176,14 +191,14 @@ namespace Pathfinding
 
         public void OnObstacleMissed(float _timeDeduction, out int _timeDeductionMinutes, out int _timeDeductionSeconds)
         {
-            int randomEmote = Random.Range(0, 3);
+            int randomEmote = Random.Range(0, 2);
 
             switch (randomEmote)
             {
                 case 0:
                     iconHandler.DisplayIcon(EEmotion.Sad);
                     break;
-                case 1:
+                default:
                     iconHandler.DisplayIcon(EEmotion.Embarrassed);
                     break;
             }
@@ -200,6 +215,11 @@ namespace Pathfinding
 
             _timeDeductionMinutes = timeDeductionMinutes;
             _timeDeductionSeconds = timeDeductionSeconds;
+        }
+
+        public void OnFinishLineCrossed()
+        {
+            finishLineCrossed = true;
         }
 
         public void GetFinalTimeDeduction(out int _minutes, out int _seconds)

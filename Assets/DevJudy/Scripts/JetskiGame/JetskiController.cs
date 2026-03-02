@@ -235,14 +235,14 @@ namespace JetskiGame
 
         public void OnObstacleMissed(float _timeDeduction, out int _timeDeductionMinutes, out int _timeDeductionSeconds)
         {
-            int randomEmote = Random.Range(0, 3);
+            int randomEmote = Random.Range(0, 2);
 
             switch (randomEmote)
             {
                 case 0:
                     iconHandler.DisplayIcon(EEmotion.Sad);
                     break;
-                case 1:
+                default:
                     iconHandler.DisplayIcon(EEmotion.Embarrassed);
                     break;
             }
