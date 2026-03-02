@@ -68,10 +68,14 @@ public class PlayerControllerMinigolfMayhem : Controller
 
     public void OnRearViewInput(InputAction.CallbackContext _context)
     {
-        // Boolean flag, damit das nur einmal ausgeführt wird. context.canceled -> boolean false
         if (_context.performed)
         {
             cameraController.EnableRearView();
+        }
+
+        if (_context.canceled)
+        {
+            cameraController.DisableRearView();
         }
     }
 

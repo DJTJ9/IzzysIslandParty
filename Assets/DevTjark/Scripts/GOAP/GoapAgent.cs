@@ -456,9 +456,9 @@ public class GoapAgent : MonoBehaviour {
         };
         statsTimer.Start();
         
-        // moveCooldownTimer = new CountdownTimer(3f);
-        // moveCooldownTimer.OnTimerStart += () => m_isOnCooldown = true;
-        // moveCooldownTimer.OnTimerStop += () => m_isOnCooldown = false;
+        // MovementCooldownTimer = new CountdownTimer(3f);
+        // MovementCooldownTimer.OnTimerStart += () => m_isOnCooldown = true;
+        // MovementCooldownTimer.OnTimerStop += () => m_isOnCooldown = false;
     }
 
     // TODO move to stats system
