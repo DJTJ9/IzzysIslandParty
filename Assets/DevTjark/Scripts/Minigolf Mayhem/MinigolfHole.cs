@@ -1,18 +1,30 @@
 ﻿using System;
+using ImprovedTimers;
 using Player;
 using Player.Collections;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class MinigolfHole : MonoBehaviour
 {
+    [FoldoutGroup("Settings", expanded: true)]
+    [SerializeField] private float waitForLastPlayerTime = 10f;
+    
     [SerializeField] private SO_PlayerCollectionRacingGames currentPlayersSO;
-
     public static event Action<int> onMinigolfPlayerFinished;
     [SerializeField] private UnityEvent onGameEnd;
     
+    private CountdownTimer countdownTimer;
+    
     private const int MAX_PLAYER_COUNT = 4;
     private int m_finishedPlayers;
+
+    private void Start()
+    {
+        countdownTimer = new CountdownTimer(waitForLastPlayerTime);
+        countdownTimer.OnTimerStop += () => onGameEnd.Invoke();
+    }
 
     private void OnEnable()
     {
@@ -33,10 +45,8 @@ public class MinigolfHole : MonoBehaviour
             
             if (m_finishedPlayers / 2 == MAX_PLAYER_COUNT- 1)
             {
-                //TODO: Start countdown for last player to finish
-                
-                onGameEnd.Invoke();
-                ConsoleProDebug.LogToFilter("Game End!", "Event");
+                countdownTimer.Start();
+                ConsoleProDebug.LogToFilter("Game End Countdown started!", "Event");
             }
         }
         

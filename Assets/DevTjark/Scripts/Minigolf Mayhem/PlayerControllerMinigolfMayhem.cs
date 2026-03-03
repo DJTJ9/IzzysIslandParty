@@ -8,6 +8,7 @@ public class PlayerControllerMinigolfMayhem : Controller
 {
     [Header("Movement")]
     private RigidbodyMovement rigidbodyMovement;
+    private MinigolfMayhemCameraController cameraController;
 
     [HideInInspector] public int ShootCount;
 
@@ -17,8 +18,9 @@ public class PlayerControllerMinigolfMayhem : Controller
 
     private void Awake()
     {
-        rigidbodyMovement = GetComponent<RigidbodyMovement>();
         playerInput = GetComponent<PlayerInput>();
+        rigidbodyMovement = GetComponent<RigidbodyMovement>();
+        cameraController = GetComponent<MinigolfMayhemCameraController>();
     }
 
     private void OnEnable()
@@ -62,6 +64,19 @@ public class PlayerControllerMinigolfMayhem : Controller
         if (!m_isActive) return;
 
         rigidbodyMovement.Jump();
+    }
+
+    public void OnRearViewInput(InputAction.CallbackContext _context)
+    {
+        if (_context.performed)
+        {
+            cameraController.EnableRearView();
+        }
+
+        if (_context.canceled)
+        {
+            cameraController.DisableRearView();
+        }
     }
 
     public void LockMouseCursor()

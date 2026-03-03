@@ -2,8 +2,9 @@
     <Style src="project://database/Assets/DevBoth/UI/PlayerHubStyle.uss?fileID=7433441132597879392&amp;guid=520cb84fd4065e54db377802fbec6137&amp;type=3#PlayerHubStyle" />
     <Style src="project://database/Assets/DevBoth/UI/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=25d8977cbaec736409b2c76d050db212&amp;type=3#MainMenuStyle" />
     <Style src="project://database/Assets/DevBoth/UI/ControllerSelection.uss?fileID=7433441132597879392&amp;guid=8db747412f6ad684ea1b0a2c67321e71&amp;type=3#ControllerSelection" />
+    <Style src="project://database/Assets/DevBoth/UI/SettingsMenu.uss?fileID=7433441132597879392&amp;guid=6360e900371cea641a9bb138605817a0&amp;type=3#SettingsMenu" />
     <ui:VisualElement name="menu-background__container" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/DevBoth/Art/Izzy%20Island%20Party%20Main%20Menu%20Background.png?fileID=2800000&amp;guid=258d5e495edbf1148898151c157d78b1&amp;type=3#Izzy Island Party Main Menu Background&quot;); display: flex;">
-        <ui:VisualElement name="main-menu__container" style="flex-grow: 1; display: flex;">
+        <ui:VisualElement name="main-menu__container" style="flex-grow: 1; display: none;">
             <ui:Label text="IZZY&apos;S ISLAND PARTY" name="main-menu-header__label" class="header" style="width: 50%; height: 20%; color: rgb(254, 202, 129); -unity-text-outline-width: 3px; -unity-text-outline-color: rgb(75, 48, 47);" />
             <ui:Button text="PLAY" name="main-menu-play__button" class="button" />
             <ui:Button text="SETTINGS" name="main-menu-settings__button" class="button" />
@@ -41,8 +42,11 @@
                 <ui:Button text="BACK" name="player-hub-back__button" class="levelButton" style="background-image: url(&quot;project://database/Assets/DevBoth/Art/FREE%20KAWAII%20GUI%20PACK/PNG/Pannel-Button.png?fileID=1082555080&amp;guid=bf4c5e583cfa0f14dbdf1dbbf52c7fa2&amp;type=3#Pannel-Button_7&quot;); -unity-text-align: middle-center; font-size: 32px; -unity-font-style: bold; background-size: 100% 100%;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="settings-menu__container" style="flex-grow: 1; display: none;">
+        <ui:VisualElement name="settings-menu__container" style="flex-grow: 1; display: flex;">
             <ui:Label text="SETTINGS" name="settings-header__label" class="header" />
+            <ui:Slider label=" MASTER VOLUME:" value="1.06" high-value="1" page-size="0" fill="true" low-value="0.01" name="settings-master-volume__slider" style="-unity-font-definition: url(&quot;project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&amp;guid=9edcdbbb09ae8aa46b3612271126dd6b&amp;type=3#DraftingMono-Bold&quot;); font-size: 42px; width: 60%; height: 6%; align-self: center; -unity-font-style: bold; color: rgb(255, 255, 255);" />
+            <ui:Slider label="  MUSIC VOLUME:" value="0.7" high-value="1" page-size="0" fill="true" low-value="0.01" name="settings-music-volume__slider" style="-unity-font-definition: url(&quot;project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&amp;guid=9edcdbbb09ae8aa46b3612271126dd6b&amp;type=3#DraftingMono-Bold&quot;); font-size: 42px; width: 60%; height: 6%; align-self: center; -unity-font-style: bold; color: rgb(255, 255, 255);" />
+            <ui:Slider label="SOUNDFX VOLUME:" value="100" high-value="1" page-size="0" fill="true" low-value="0.01" name="settings-soundfx-volume__slider" style="-unity-font-definition: url(&quot;project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&amp;guid=9edcdbbb09ae8aa46b3612271126dd6b&amp;type=3#DraftingMono-Bold&quot;); font-size: 42px; width: 60%; height: 6%; align-self: center; -unity-font-style: bold; color: rgb(255, 255, 255);" />
             <ui:Button text="BACK" name="settings-menu-back__button" class="button" style="justify-content: flex-start; display: flex;" />
         </ui:VisualElement>
         <ui:VisualElement name="jetski-joyride-modus-selection__container" style="flex-grow: 1; flex-direction: column; justify-content: center; align-self: auto; align-content: center; align-items: center; display: none;">

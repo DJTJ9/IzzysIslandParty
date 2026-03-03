@@ -11,8 +11,8 @@ public class GoapRigidbodyMovement : Controller
     [SerializeField] private float pushCooldown;
     
     [FoldoutGroup("Shoot Settings", expanded: true)]
+    public float MovementCooldown;
     [SerializeField] private float shootForceFactor;
-    [SerializeField] private float shootCooldown;
     
     [FoldoutGroup("Jump Settings", expanded: true)]
     [SerializeField] private float jumpForce;
@@ -22,17 +22,17 @@ public class GoapRigidbodyMovement : Controller
     [SerializeField] private float horizontalImpactForce;
     [SerializeField] private float verticalImpactForce;
     [SerializeField] private float impulseCooldown;
-    
-    // [SerializeField] private float maxSpeed;
-    // [SerializeField] private float jumpSpeedModifier = 1;
-    // [SerializeField] private float fallSpeedModifier = 1;
+
+    [HideInInspector] public int ShotsTaken;
 
     private Rigidbody rb;
     private GroundChecker groundChecker;
 
     private Vector3 moveDirection;
+    private bool m_canMove = true;
     private bool m_impulseApplied;
     
+    [HideInInspector] public CountdownTimer MovementCooldownTimer;
     private CountdownTimer impulseCooldownTimer;
     
     // private bool canMove = true;
@@ -46,8 +46,10 @@ public class GoapRigidbodyMovement : Controller
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        InitializeGroundChecker();
+        groundChecker = GetComponent<GroundChecker>();
         
+        MovementCooldownTimer = new CountdownTimer(MovementCooldown);
+        MovementCooldownTimer.OnTimerStop += EnableMovement;
         impulseCooldownTimer = new CountdownTimer(impulseCooldown);
         impulseCooldownTimer.OnTimerStop += () => m_impulseApplied = false;
     }
@@ -79,11 +81,15 @@ public class GoapRigidbodyMovement : Controller
     {
         if (!m_isActive) return;
         if (!groundChecker.IsGrounded) return;
-
-        // var direction = (_targetPosition - rb.transform.position).normalized;
+        if (!m_canMove) return;
         
         var impulse = CalculateImpulse(rb, _targetPosition);
         rb.AddForce(impulse, ForceMode.Impulse);
+        
+        ++ShotsTaken;
+        MovementCooldownTimer.Reset();
+        MovementCooldownTimer.Start();
+        m_canMove = false;
     }
     
     private Vector3 CalculateImpulse(Rigidbody _rb, Vector3 target)
@@ -106,12 +112,9 @@ public class GoapRigidbodyMovement : Controller
 
         return mass * v0;
     }
-
-    private void InitializeGroundChecker()
+    
+    private void EnableMovement()
     {
-        groundChecker = GetComponent<GroundChecker>();
-        // groundChecker.groundCheckPosition = new Vector3(0f, -1f, 0f);
-        // groundChecker.groundCheckSize = new Vector3(0.7f, 0.1f, 0.7f);
-        // groundChecker.groundCheckLayerMask = LayerMask.GetMask("Ground");
+        m_canMove = true;
     }
 }

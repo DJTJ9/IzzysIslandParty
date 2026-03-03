@@ -6,15 +6,17 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(GroundChecker))]
 public class RigidbodyMovement : MonoBehaviour
 {
+    [HideInInspector] public float CurrentShootForce;
+    
     [FoldoutGroup("Push Settings", expanded: true)] 
     [SerializeField] private float pushForce;
     [SerializeField] private float pushCooldown;
 
     [FoldoutGroup("Shoot Settings", expanded: true)] 
+    public float MovementCooldown;
     [SerializeField] public float minShootForce;
     [SerializeField] public float maxShootForce;
     [SerializeField] private float shootForceChangeSpeed;
-    [SerializeField] private float shootCooldown;
     [SerializeField] private float shootHeight;
 
     [FoldoutGroup("Jump Settings", expanded: true)] 
@@ -27,22 +29,19 @@ public class RigidbodyMovement : MonoBehaviour
     [SerializeField] private float impulseCooldown;
 
 
-    [SerializeField] private Camera cam;
+    [SerializeField] private Camera playerCamera;
     private Rigidbody rb;
     private GroundChecker groundChecker;
 
-    public float CurrentShootForce;
+    [HideInInspector] public int ShotsTaken;
+    
     private Vector3 m_moveDirection;
     private bool m_canMove = true;
-    private bool m_canShoot = true;
-    private bool m_canJump = true;
     private bool m_isCharging;
     private bool m_isIncreasing = true;
     private bool m_impulseApplied;
 
-    private CountdownTimer pushCooldownTimer;
-    private CountdownTimer shootCooldownTimer;
-    private CountdownTimer jumpCooldownTimer;
+    [HideInInspector] public CountdownTimer MovementCooldownTimer;
     private CountdownTimer impulseCooldownTimer;
 
     private void Awake()
@@ -50,14 +49,8 @@ public class RigidbodyMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         groundChecker = GetComponent<GroundChecker>();
 
-        pushCooldownTimer = new CountdownTimer(pushCooldown);
-        pushCooldownTimer.OnTimerStop += EnableMovement;
-
-        shootCooldownTimer = new CountdownTimer(shootCooldown);
-        shootCooldownTimer.OnTimerStop += EnableShooting;
-
-        jumpCooldownTimer = new CountdownTimer(jumpCooldown);
-        jumpCooldownTimer.OnTimerStop += EnableJumping;
+        MovementCooldownTimer = new CountdownTimer(MovementCooldown);
+        MovementCooldownTimer.OnTimerStop += EnableMovement;
 
         impulseCooldownTimer = new CountdownTimer(impulseCooldown);
         impulseCooldownTimer.OnTimerStart += () => m_impulseApplied = true;
@@ -89,14 +82,10 @@ public class RigidbodyMovement : MonoBehaviour
         ConsoleProDebug.LogToFilter($"Player applied {impulse} impulse to {other.name}", "Debug");
     }
 
-    // private void OnTriggerExit(Collider other)
-    // {
-    //     m_impulseApplied = false;
-    // }
-
     public void StartCharging(InputAction.CallbackContext _context)
     {
-        if (!groundChecker.IsGrounded) return;
+        // if (!groundChecker.IsGrounded) return;
+        // if (!m_canMove) return;
 
         if (_context.started)
         {
@@ -118,8 +107,8 @@ public class RigidbodyMovement : MonoBehaviour
     {
         if (!m_canMove) return;
 
-        var camFwd = cam.transform.forward;
-        var camRight = cam.transform.right;
+        var camFwd = playerCamera.transform.forward;
+        var camRight = playerCamera.transform.right;
 
         camFwd.y = 0f;
         camRight.y = 0f;
@@ -130,31 +119,31 @@ public class RigidbodyMovement : MonoBehaviour
 
         rb.AddForce(worldDir.normalized * pushForce, ForceMode.Impulse);
 
-        pushCooldownTimer.Reset();
-        pushCooldownTimer.Start();
+        MovementCooldownTimer.Reset();
+        MovementCooldownTimer.Start();
         m_canMove = false;
     }
 
     public void Jump()
     {
-        if (!m_canJump) return;
+        if (!m_canMove) return;
         if (!groundChecker.IsGrounded) return;
-
+    
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
-        jumpCooldownTimer.Reset();
-        jumpCooldownTimer.Start();
-        m_canJump = false;
+    
+        MovementCooldownTimer.Reset();
+        MovementCooldownTimer.Start();
+        m_canMove = false;
     }
 
     private void Shoot()
     {
-        if (!m_canShoot) return;
+        if (!m_canMove) return;
         if (!groundChecker.IsGrounded) return;
 
-        var screenCenter = cam.ViewportToScreenPoint(new Vector3(0.5f, 0.5f, 0f));
+        var screenCenter = playerCamera.ViewportToScreenPoint(new Vector3(0.5f, 0.5f, 0f));
 
-        var ray = cam.ScreenPointToRay(screenCenter);
+        var ray = playerCamera.ScreenPointToRay(screenCenter);
 
         var targetPoint = ray.GetPoint(500f);
         targetPoint.y = shootHeight;
@@ -163,10 +152,11 @@ public class RigidbodyMovement : MonoBehaviour
 
         rb.AddForce(direction * CurrentShootForce, ForceMode.Impulse);
 
+        ++ShotsTaken;
         CurrentShootForce = minShootForce;
-        shootCooldownTimer.Reset();
-        shootCooldownTimer.Start();
-        m_canShoot = false;
+        MovementCooldownTimer.Reset();
+        MovementCooldownTimer.Start();
+        m_canMove = false;
     }
 
     private void UpdateChargePower()
@@ -198,16 +188,6 @@ public class RigidbodyMovement : MonoBehaviour
     private void EnableMovement()
     {
         m_canMove = true;
-    }
-
-    private void EnableShooting()
-    {
-        m_canShoot = true;
-    }
-
-    private void EnableJumping()
-    {
-        m_canJump = true;
     }
 
     // /// <summary>
@@ -253,8 +233,4 @@ public class RigidbodyMovement : MonoBehaviour
     //     if (rb.linearVelocity.y > 0)
     //         rb.linearVelocity += Vector3.up * (Physics.gravity.y * jumpSpeedModifier * Time.fixedDeltaTime);
     // }
-    public float GetCurrentVelocity()
-    {
-        return rb.linearVelocity.magnitude;
-    }
 }
