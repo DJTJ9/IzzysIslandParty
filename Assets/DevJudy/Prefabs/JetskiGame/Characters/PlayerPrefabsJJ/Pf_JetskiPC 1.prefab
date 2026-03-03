@@ -1087,8 +1087,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MeshRenderer>k__BackingField: {fileID: 26315864496120964}
-  HasTwoMeshes: 0
-  OtherMeshRenderer: {fileID: 0}
+  HasTwoMeshes: 1
+  OtherMeshRenderer: {fileID: 7230770557749686208}
 --- !u!136 &252181687934071598
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1552,6 +1552,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 6d7cb911-4255-4d60-a577-159f56863289
     m_ActionName: 'FishingGameUI/Submit[/Keyboard/enter,/Keyboard/x]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 873efad3-1799-46b2-83b4-de0e6927f533
+    m_ActionName: 'MinigolfMayhem/Rear View[/Mouse/rightButton,/DualShock4GamepadHID/rightTrigger]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI

@@ -598,6 +598,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 86550982}
     - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      propertyPath: playerLayerIndex.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      propertyPath: 'playerLayerIndex.Array.data[0]'
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      propertyPath: 'playerLayerIndex.Array.data[1]'
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      propertyPath: 'playerLayerIndex.Array.data[2]'
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      propertyPath: 'playerLayerIndex.Array.data[3]'
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
       propertyPath: onLevelLoaded.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -11729,7 +11749,7 @@ MeshCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 491904
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
