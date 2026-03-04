@@ -137,7 +137,7 @@ namespace Pathfinding
             while (!canFollowPath)
                 yield return new WaitForFixedUpdate();
 
-            while (followingPath)
+            while (followingPath && !finishLineCrossed)
             {
                 Vector2 pos2D = new Vector2(transform.position.x, transform.position.z);
 
@@ -145,8 +145,6 @@ namespace Pathfinding
                 {
                     if (pathIndex >= path.FinishLineIndex)
                     {
-                        Debug.Log("Stopping here 2 " + gameObject.name);
-
                         followingPath = false;
                         break;
                     }
