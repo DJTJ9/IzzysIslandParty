@@ -9,6 +9,7 @@ using Player;
 using Player.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
+using UnityEngine.Video;
 using Button = UnityEngine.UIElements.Button;
 
 public class GameMenuEvents : MonoBehaviour
@@ -60,7 +61,6 @@ public class GameMenuEvents : MonoBehaviour
 
     [Header("Controller Selection")]
     [SerializeField] private float animDuration = 0.3f;
-
     [SerializeField] private float holdDuration = 2f;
     [SerializeField] private UIToolkitVideo uiToolkitVideo;
     [SerializeField] private RenderTexture videoTexture;
@@ -301,7 +301,6 @@ public class GameMenuEvents : MonoBehaviour
         onRestart.Invoke();
         HideEndScreenUI();
         FreezeTimeScale();
-        // In ein Script was dont denstroy on load ist, vorher szene xy laden, und dann diese hier erneut (kein Laden der selben szene aus sich selbst)
         AsyncLevelLoader.Instance.RestartLevel();
     }
 
@@ -351,8 +350,7 @@ public class GameMenuEvents : MonoBehaviour
         bowlingBattleInstructionsText.style.display = DisplayStyle.Flex;
         bowlingBattlePreviewImage.style.display = DisplayStyle.Flex;
         uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.BowlingBattle, out var clip)
-            ? clip
-            : throw new KeyNotFoundException());
+            ? clip : throw new KeyNotFoundException());
         uiToolkitVideo.PlayVideo();
     }
 
@@ -367,8 +365,7 @@ public class GameMenuEvents : MonoBehaviour
         fishingFrenzyInstructionsText.style.display = DisplayStyle.Flex;
         fishingFrenzyPreviewImage.style.display = DisplayStyle.Flex;
         uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.FishingFrenzy, out var clip)
-            ? clip
-            : throw new KeyNotFoundException());
+            ? clip : throw new KeyNotFoundException());
         uiToolkitVideo.PlayVideo();
     }
 
@@ -383,8 +380,7 @@ public class GameMenuEvents : MonoBehaviour
         jetskiJoyrideRaceInstructionsText.style.display = DisplayStyle.Flex;
         jetskiJoyrideRacePreviewImage.style.display = DisplayStyle.Flex;
         uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.JetskiJoyrideRace, out var clip)
-            ? clip
-            : throw new KeyNotFoundException());
+            ? clip : throw new KeyNotFoundException());
         uiToolkitVideo.PlayVideo();
     }
 
@@ -399,8 +395,7 @@ public class GameMenuEvents : MonoBehaviour
         jetskiJoyrideSlalomInstructionsText.style.display = DisplayStyle.Flex;
         jetskiJoyrideSlalomPreviewImage.style.display = DisplayStyle.Flex;
         uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.JetskiJoyrideSlalom, out var clip)
-            ? clip
-            : throw new KeyNotFoundException());
+            ? clip : throw new KeyNotFoundException());
         uiToolkitVideo.PlayVideo();
     }
 
@@ -415,8 +410,7 @@ public class GameMenuEvents : MonoBehaviour
         minigolfMayhemClassicInstructionsText.style.display = DisplayStyle.Flex;
         minigolfMayhemClassicPreviewImage.style.display = DisplayStyle.Flex;
         uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.MinigolfMayhemClassic, out var clip)
-            ? clip
-            : throw new KeyNotFoundException());
+            ? clip : throw new KeyNotFoundException());
         uiToolkitVideo.PlayVideo();
     }
 
@@ -426,13 +420,12 @@ public class GameMenuEvents : MonoBehaviour
         controllerSelectionMenu.style.display = DisplayStyle.Flex;
         HideAllGameHeadersAndInstructions();
         FocusButton(controllerSelectionReadyButton);
-        minigolfMayhemClassicHeader.style.display = DisplayStyle.Flex;
-        minigolfMayhemClassicInstructions.style.display = DisplayStyle.Flex;
-        minigolfMayhemClassicInstructionsText.style.display = DisplayStyle.Flex;
-        minigolfMayhemClassicPreviewImage.style.display = DisplayStyle.Flex;
+        minigolfMayhemRaceHeader.style.display = DisplayStyle.Flex;
+        minigolfMayhemRaceInstructions.style.display = DisplayStyle.Flex;
+        minigolfMayhemRaceInstructionsText.style.display = DisplayStyle.Flex;
+        minigolfMayhemRacePreviewImage.style.display = DisplayStyle.Flex;
         uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.MinigolfMayhemRace, out var clip)
-            ? clip
-            : throw new KeyNotFoundException());
+            ? clip : throw new KeyNotFoundException());
         uiToolkitVideo.PlayVideo();
     }
 
@@ -447,8 +440,7 @@ public class GameMenuEvents : MonoBehaviour
         swaggySnapshotsInstructionsText.style.display = DisplayStyle.Flex;
         swaggySnapshotsPreviewImage.style.display = DisplayStyle.Flex;
         uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.SwaggySnapshots, out var clip)
-            ? clip
-            : throw new KeyNotFoundException());
+            ? clip : throw new KeyNotFoundException());
         uiToolkitVideo.PlayVideo();
     }
 
@@ -463,8 +455,7 @@ public class GameMenuEvents : MonoBehaviour
         hastyHurdlesInstructionsText.style.display = DisplayStyle.Flex;
         hastyHurdlesPreviewImage.style.display = DisplayStyle.Flex;
         uiToolkitVideo.SetVideoClip(gamePreviewClipsSO.PreviewClips.TryGetValue(GamePreviewClips.HastyHurdles, out var clip)
-            ? clip
-            : throw new KeyNotFoundException());
+            ? clip : throw new KeyNotFoundException());
         uiToolkitVideo.PlayVideo();
     }
 
@@ -479,6 +470,7 @@ public class GameMenuEvents : MonoBehaviour
 
         StopCoroutine(ShowStartAndJoinInstruction());
         StopCoroutine(ShowJoinAndStartInstruction());
+        uiToolkitVideo.StopVideo();
         UnfreezeTimeScale();
         HideControllerSelectionScreen();
         onGameStart.Invoke();
@@ -492,7 +484,7 @@ public class GameMenuEvents : MonoBehaviour
 
     private void OnLoadBowlingBattle()
     {
-        LoadSingleScene(SceneNames.BowlingBattleGame);
+        LoadSingleScene(SceneNames.BowlingBattle);
     }
 
     private void OnLoadFishingFrenzy()
@@ -507,12 +499,12 @@ public class GameMenuEvents : MonoBehaviour
 
     private void OnLoadMinigolfMayhem()
     {
-        LoadSingleScene(SceneNames.MinigolfMayhemGame);
+        LoadSingleScene(SceneNames.MinigolfMayhemClassic);
     }
 
     private void OnLoadSwaggySnapshots()
     {
-        LoadSingleScene(SceneNames.SwaggySnapshotsGame);
+        LoadSingleScene(SceneNames.SwaggySnapshots);
     }
 
     private void OnLoadHastyHurdles()
@@ -524,18 +516,6 @@ public class GameMenuEvents : MonoBehaviour
     {
         playerHub.style.display = DisplayStyle.None;
         AsyncLevelLoader.Instance.LoadScene(_sceneName);
-        // SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(_sceneName, out var sceneNameFromCollection)
-        //     ? sceneNameFromCollection
-        //     : throw new KeyNotFoundException());
-    }
-
-    private void LoadSceneWithLevel(SceneNames gameScene, SceneNames levelScene)
-    {
-        SceneManager.LoadScene(
-            sceneCollection.Scenes.TryGetValue(gameScene, out var gameSceneName) ? gameSceneName : throw new KeyNotFoundException());
-        SceneManager.LoadScene(
-            sceneCollection.Scenes.TryGetValue(levelScene, out var levelSceneName) ? levelSceneName : throw new KeyNotFoundException(),
-            LoadSceneMode.Additive);
     }
 
     public void ShowResultsScreen()
@@ -545,9 +525,16 @@ public class GameMenuEvents : MonoBehaviour
         FocusButton(resultScreenContinueButton);
     }
 
+    public void ShowMinigolfClassicResultsScreen()
+    {
+        ShowMinigolfClassicResults(currentPlayersRacing.Players);
+        resultsScreen.style.display = DisplayStyle.Flex;
+        FocusButton(resultScreenContinueButton);
+    }
+    
     public void ShowMinigolfRaceResultsScreen()
     {
-        ShowMinigolfResults(currentPlayersRacing.Players);
+        ShowMinigolfRaceResults(currentPlayersRacing.Players);
         resultsScreen.style.display = DisplayStyle.Flex;
         FocusButton(resultScreenContinueButton);
     }
@@ -611,8 +598,51 @@ public class GameMenuEvents : MonoBehaviour
             container.Add(row);
         }
     }
+    
+    private void ShowMinigolfClassicResults(List<SO_PlayerRacingGames> _results)
+    {
+        var root = GetComponent<UIDocument>().rootVisualElement;
+        var container = resultsModal;
 
-    private void ShowMinigolfResults(List<SO_PlayerRacingGames> _results)
+        container.Clear();
+
+        var ordered = _results
+            .OrderBy(_r => _r.PlayerScore.Value)
+            .ToList();
+
+        var currentRank = 1;
+        var previousScore = float.MinValue;
+
+        for (var i = 0; i < ordered.Count; i++)
+        {
+            Debug.Log(i);
+            var data = ordered[i];
+            var row = rowTemplate.CloneTree();
+
+            var currentScore = data.PlayerScore.Value;
+
+            if (i > 0 && currentScore != previousScore)
+            {
+                currentRank = i + 1;
+            }
+
+            row.Q<Label>("RankLabel").text = $"{currentRank}";
+            row.Q<Label>("NameLabel").text = data.Name;
+            row.Q<Label>("ScoreLabel").text = data.PlayerScore.Value.ToString();
+
+            previousScore = currentScore;
+
+            // if (i == 0)
+            //     row.AddToClassList("winner");
+            //
+            // if (data.IsNPC)
+            //     row.AddToClassList("npc");
+
+            container.Add(row);
+        }
+    }
+
+    private void ShowMinigolfRaceResults(List<SO_PlayerRacingGames> _results)
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
         var container = resultsModal;

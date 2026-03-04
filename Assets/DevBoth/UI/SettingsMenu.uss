@@ -4,3 +4,44 @@
     height: 40%;
     background-size: 140% 140%;
 }
+
+#menu-background__container > #settings-menu__container > #settings-master-volume__slider > .unity-slider__input > #unity-drag-container > #unity-dragger {
+}
+
+.unity-tab__content-container {
+    flex-grow: 1;
+    align-items: center;
+}
+
+#menu-background__container > #settings-tab-view__container > #unity-tab-view__content-container {
+    flex-grow: 1;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    top: auto;
+    flex-basis: 80%;
+}
+
+#menu-background__container > #settings-tab-view__container > #settings-video__tab {
+    height: 100%;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.unity-tab {
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+}
+
+#menu-background__container > #settings-tab-view__container > #settings-audio__tab {
+}
+
+.unity-tab-view__header-container {
+    height: 10%;
+    width: 100%;
+    flex-grow: 1;
+}
+
+#menu-background__container > #settings-tab-view__container > #unity-tab-view__header-container {
+}

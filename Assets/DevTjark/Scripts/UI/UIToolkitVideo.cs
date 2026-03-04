@@ -14,4 +14,6 @@ public class UIToolkitVideo : MonoBehaviour
     public void PlayVideo() => VideoPlayer.Play();
     
     public void SetVideoClip(VideoClip clip) => VideoPlayer.clip = clip;
+    
+    public void StopVideo() => VideoPlayer.Stop();
 }

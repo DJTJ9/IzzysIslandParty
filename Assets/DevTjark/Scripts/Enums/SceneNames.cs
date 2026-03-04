@@ -3,14 +3,12 @@
 public enum SceneNames
 {
     MainMenu,
-    BowlingBattleGame,
-    BowlingBattleLevel,
+    BowlingBattle,
     FishingFrenzy,
     JetskiJoyrideRace,
     JetskiJoyrideSlalom,
-    MinigolfMayhemGame,
-    MinigolfMayhemLevel1,
-    SwaggySnapshotsGame,
-    SwaggySnapshotsLevel,
+    MinigolfMayhemClassic,
+    MinigolfMayhemRace,
+    SwaggySnapshots,
     HastyHurdles
 }

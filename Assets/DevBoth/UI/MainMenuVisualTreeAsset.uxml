@@ -4,7 +4,7 @@
     <Style src="project://database/Assets/DevBoth/UI/ControllerSelection.uss?fileID=7433441132597879392&amp;guid=8db747412f6ad684ea1b0a2c67321e71&amp;type=3#ControllerSelection" />
     <Style src="project://database/Assets/DevBoth/UI/SettingsMenu.uss?fileID=7433441132597879392&amp;guid=6360e900371cea641a9bb138605817a0&amp;type=3#SettingsMenu" />
     <ui:VisualElement name="menu-background__container" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/DevBoth/Art/Izzy%20Island%20Party%20Main%20Menu%20Background.png?fileID=2800000&amp;guid=258d5e495edbf1148898151c157d78b1&amp;type=3#Izzy Island Party Main Menu Background&quot;); display: flex;">
-        <ui:VisualElement name="main-menu__container" style="flex-grow: 1; display: none;">
+        <ui:VisualElement name="main-menu__container" style="flex-grow: 1; display: flex;">
             <ui:Label text="IZZY&apos;S ISLAND PARTY" name="main-menu-header__label" class="header" style="width: 50%; height: 20%; color: rgb(254, 202, 129); -unity-text-outline-width: 3px; -unity-text-outline-color: rgb(75, 48, 47);" />
             <ui:Button text="PLAY" name="main-menu-play__button" class="button" />
             <ui:Button text="SETTINGS" name="main-menu-settings__button" class="button" />
@@ -42,13 +42,26 @@
                 <ui:Button text="BACK" name="player-hub-back__button" class="levelButton" style="background-image: url(&quot;project://database/Assets/DevBoth/Art/FREE%20KAWAII%20GUI%20PACK/PNG/Pannel-Button.png?fileID=1082555080&amp;guid=bf4c5e583cfa0f14dbdf1dbbf52c7fa2&amp;type=3#Pannel-Button_7&quot;); -unity-text-align: middle-center; font-size: 32px; -unity-font-style: bold; background-size: 100% 100%;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="settings-menu__container" style="flex-grow: 1; display: flex;">
-            <ui:Label text="SETTINGS" name="settings-header__label" class="header" />
-            <ui:Slider label=" MASTER VOLUME:" value="1.06" high-value="1" page-size="0" fill="true" low-value="0.01" name="settings-master-volume__slider" style="-unity-font-definition: url(&quot;project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&amp;guid=9edcdbbb09ae8aa46b3612271126dd6b&amp;type=3#DraftingMono-Bold&quot;); font-size: 42px; width: 60%; height: 6%; align-self: center; -unity-font-style: bold; color: rgb(255, 255, 255);" />
-            <ui:Slider label="  MUSIC VOLUME:" value="0.7" high-value="1" page-size="0" fill="true" low-value="0.01" name="settings-music-volume__slider" style="-unity-font-definition: url(&quot;project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&amp;guid=9edcdbbb09ae8aa46b3612271126dd6b&amp;type=3#DraftingMono-Bold&quot;); font-size: 42px; width: 60%; height: 6%; align-self: center; -unity-font-style: bold; color: rgb(255, 255, 255);" />
-            <ui:Slider label="SOUNDFX VOLUME:" value="100" high-value="1" page-size="0" fill="true" low-value="0.01" name="settings-soundfx-volume__slider" style="-unity-font-definition: url(&quot;project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&amp;guid=9edcdbbb09ae8aa46b3612271126dd6b&amp;type=3#DraftingMono-Bold&quot;); font-size: 42px; width: 60%; height: 6%; align-self: center; -unity-font-style: bold; color: rgb(255, 255, 255);" />
-            <ui:Button text="BACK" name="settings-menu-back__button" class="button" style="justify-content: flex-start; display: flex;" />
-        </ui:VisualElement>
+        <ui:TabView name="settings-tab-view__container" style="width: 100%; height: 100%; flex-grow: 1; display: none;">
+            <ui:Tab label="AUDIO" name="settings-audio__tab" icon-image="project://database/Assets/GUIPackCartoon/Demo/Sprites/Icons/Icons%20Colored/Emojis/Cartoon/Cool%20-%20Cartoon.png?fileID=21300000&amp;guid=d3d11baf257c9438cae0a87b35c8010c&amp;type=3#Cool - Cartoon" style="width: 100%; height: 100%; flex-grow: 1; align-items: stretch; min-height: 100%; max-height: 100%; -unity-text-align: middle-center; -unity-font-definition: url(&quot;project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&amp;guid=9edcdbbb09ae8aa46b3612271126dd6b&amp;type=3#DraftingMono-Bold&quot;); font-size: 42px; -unity-font-style: bold;">
+                <ui:VisualElement name="settings-menu__container" style="flex-grow: 1; display: flex; width: 100%; height: 100%;">
+                    <ui:Label text="AUDIO" name="settings-header__label" class="header" />
+                    <ui:Slider label=" MASTER VOLUME:" value="1.06" high-value="1" page-size="0" fill="true" low-value="0.01" name="settings-master-volume__slider" style="-unity-font-definition: url(&quot;project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&amp;guid=9edcdbbb09ae8aa46b3612271126dd6b&amp;type=3#DraftingMono-Bold&quot;); font-size: 42px; width: 60%; height: 6%; align-self: center; -unity-font-style: bold; color: rgb(255, 255, 255);" />
+                    <ui:Slider label="  MUSIC VOLUME:" value="0.7" high-value="1" page-size="0" fill="true" low-value="0.01" name="settings-music-volume__slider" style="-unity-font-definition: url(&quot;project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&amp;guid=9edcdbbb09ae8aa46b3612271126dd6b&amp;type=3#DraftingMono-Bold&quot;); font-size: 42px; width: 60%; height: 6%; align-self: center; -unity-font-style: bold; color: rgb(255, 255, 255);" />
+                    <ui:Slider label="SOUNDFX VOLUME:" value="100" high-value="1" page-size="0" fill="true" low-value="0.01" name="settings-soundfx-volume__slider" style="-unity-font-definition: url(&quot;project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&amp;guid=9edcdbbb09ae8aa46b3612271126dd6b&amp;type=3#DraftingMono-Bold&quot;); font-size: 42px; width: 60%; height: 6%; align-self: center; -unity-font-style: bold; color: rgb(255, 255, 255);" />
+                    <ui:VisualElement name="space-holder" style="flex-grow: 1;" />
+                    <ui:Button text="BACK" name="settings-menu-back__button" class="button" style="justify-content: flex-start; display: flex; align-self: center; align-content: flex-start; align-items: stretch; flex-direction: column; margin-bottom: 4%;" />
+                </ui:VisualElement>
+            </ui:Tab>
+            <ui:Tab label="VIDEO" name="settings-video__tab" tabindex="1" style="-unity-font-definition: url(&quot;project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&amp;guid=9edcdbbb09ae8aa46b3612271126dd6b&amp;type=3#DraftingMono-Bold&quot;); font-size: 32px; -unity-font-style: normal;">
+                <ui:VisualElement name="settings-menu__container" style="flex-grow: 1; display: flex; width: 100%; height: 100%;">
+                    <ui:Label text="VIDEO" name="settings-header__label" class="header" />
+                    <ui:DropdownField label="QUALITY :" choices="LOW,MEDIUM,HIGH" index="0" style="width: 30%; height: 10%; justify-content: flex-start; align-self: center; align-content: auto; -unity-text-align: middle-left; -unity-font-style: bold; color: rgb(255, 255, 255);" />
+                    <ui:VisualElement name="space-holder" style="flex-grow: 1;" />
+                    <ui:Button text="BACK" name="settings-menu-back__button" class="button" style="justify-content: flex-start; display: flex; align-self: center; align-content: flex-start; align-items: stretch; flex-direction: column; margin-bottom: 4%;" />
+                </ui:VisualElement>
+            </ui:Tab>
+        </ui:TabView>
         <ui:VisualElement name="jetski-joyride-modus-selection__container" style="flex-grow: 1; flex-direction: column; justify-content: center; align-self: auto; align-content: center; align-items: center; display: none;">
             <ui:VisualElement name="jetski-joyride-modus-selection-buttons__container" style="flex-grow: 1; height: 80%; width: 100%; flex-direction: row; align-items: center; align-content: flex-start; justify-content: center; display: flex; align-self: flex-start;">
                 <ui:Button text="&#10;&#10;&#10;RACE" name="play-jetski-joyride-race__button" class="levelButton" style="height: 50%;" />

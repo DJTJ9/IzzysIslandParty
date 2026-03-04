@@ -25,7 +25,6 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
     private Controller playerController;
     private RigidbodyMovement rigidbodyMovement;
     private GoapRigidbodyMovement goapRigidbodyMovement;
-    
     private Stopwatch finishTimer;
 
     private const float DISAPPEAR_TIME_BUFFER = 0.3f;
@@ -37,7 +36,7 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
     private void Start()
     {
         minigolfMayhemGameManager = FindFirstObjectByType<MinigolfMayhemGameManager>();
-        racingMode = minigolfMayhemGameManager.RacingMode;
+        racingMode = minigolfMayhemGameManager.RaceMode;
         classicMode = minigolfMayhemGameManager.ClassicMode;
         playerController = transform.parent.GetComponentInChildren<Controller>();
         rigidbodyMovement = playerController.transform.parent.GetComponentInChildren<RigidbodyMovement>();
