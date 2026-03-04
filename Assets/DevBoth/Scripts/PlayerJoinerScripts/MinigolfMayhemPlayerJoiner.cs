@@ -22,19 +22,19 @@ public class MinigolfMayhemPlayerJoiner : MonoBehaviour
 
     public void PlayerJoinedMM(PlayerInput _playerInput)
     {
-        if (_playerInput.gameObject.TryGetComponent(out GoapRigidbodyMovement npc))
+        if (_playerInput.gameObject.TryGetComponent(out GoapRigidbodyMovement _npc))
         {
-            npc.SetPlayerIndex(m_playerIndex);
+            _npc.SetPlayerIndex(m_playerIndex);
             // _playerInput.transform.GetComponentInChildren<CinemachineInputAxisController>().PlayerIndex = npc.GetPlayerIndex();
-            currentPlayers.Players.Add(npcCollectionMM.Players[npc.GetPlayerIndex() - 1]);
+            currentPlayers.Players.Add(npcCollectionMM.Players[_npc.GetPlayerIndex() - 1]);
             _playerInput.gameObject.GetComponent<MeshRenderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1f);
             ++m_playerIndex;
             return;
         }
 
-        if (_playerInput.gameObject.TryGetComponent(out PlayerControllerMinigolfMayhem controller))
+        if (_playerInput.gameObject.TryGetComponent(out PlayerControllerMinigolfMayhem _controller))
         {
-            controller.SetPlayerIndex(m_playerIndex);
+            _controller.SetPlayerIndex(m_playerIndex);
             _playerInput.transform.parent.GetComponentInChildren<CinemachineInputAxisController>().PlayerIndex = m_playerIndex;
         }
 

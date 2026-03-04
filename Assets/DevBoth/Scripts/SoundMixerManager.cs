@@ -7,19 +7,14 @@ using UnityEngine.UIElements;
 public class SoundMixerManager : MonoBehaviour
 {
     public static SoundMixerManager Instance;
-    
+
     [SerializeField] 
     private AudioMixer audioMixer;
-    
-    // [FoldoutGroup("Slider"), SerializeField]
+
     private Slider masterVolumeSlider;
-    //
-    // [FoldoutGroup("Slider"), SerializeField]
     private Slider musicVolumeSlider;
-    //
-    // [FoldoutGroup("Slider"), SerializeField]
     private Slider soundFXVolumeSlider;
-    
+
     private void Awake() 
     {
         if (Instance == null) {
@@ -34,31 +29,28 @@ public class SoundMixerManager : MonoBehaviour
     {
         var uiDocument = GetComponent<UIDocument>();
         var root = uiDocument.rootVisualElement;
-        
+
         masterVolumeSlider = root.Q<Slider>("settings-master-volume__slider");
         musicVolumeSlider = root.Q<Slider>("settings-music-volume__slider");
         soundFXVolumeSlider = root.Q<Slider>("settings-soundfx-volume__slider");
+
+        masterVolumeSlider.RegisterValueChangedCallback(evt => SetMasterVolume(evt.newValue));
+        musicVolumeSlider.RegisterValueChangedCallback(evt => SetMusicVolume(evt.newValue));
+        soundFXVolumeSlider.RegisterValueChangedCallback(evt => SetSoundFXVolume(evt.newValue));
     }
 
-    private void Update()
+    private void SetMasterVolume(float volume) 
     {
-        SetMasterVolume(masterVolumeSlider.value);
-        SetMusicVolume(musicVolumeSlider.value);
-        SetSoundFXVolume(soundFXVolumeSlider.value);
+        audioMixer.SetFloat("MainVolume", Mathf.Log10(volume) * 20f);
     }
 
-    public void SetMasterVolume(float volume) 
+    private void SetMusicVolume(float volume) 
     {
-        audioMixer.SetFloat("Master", Mathf.Log10(volume) * 20f);
+        audioMixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20f);
     }
-    
-    public void SetMusicVolume(float volume) 
+
+    private void SetSoundFXVolume(float volume) 
     {
-        audioMixer.SetFloat("Music", Mathf.Log10(volume) * 20f);
-    }
-    
-    public void SetSoundFXVolume(float volume) 
-    {
-        audioMixer.SetFloat("Effects", Mathf.Log10(volume) * 20f);   
+        audioMixer.SetFloat("EffectsVolume", Mathf.Log10(volume) * 20f);
     }
 }

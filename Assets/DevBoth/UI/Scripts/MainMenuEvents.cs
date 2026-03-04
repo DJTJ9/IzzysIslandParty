@@ -145,7 +145,7 @@ public class MainMenuEvents : MonoBehaviour
     {
         menusContainer = document.rootVisualElement.Q("menu-background__container");
         mainMenu = document.rootVisualElement.Q("main-menu__container");
-        settingsMenu = document.rootVisualElement.Q("settings-menu__container");
+        settingsMenu = document.rootVisualElement.Q("settings-tab-view__container");
         playerHub = document.rootVisualElement.Q("player-hub__container");
         controllerSelectionMenu = document.rootVisualElement.Q("controller-selection-menu__container");
         jetskiJoyrideModusSelectionMenu = document.rootVisualElement.Q("jetski-joyride-modus-selection__container");
@@ -305,7 +305,7 @@ public class MainMenuEvents : MonoBehaviour
 
     private void OnLoadBowlingBattle()
     {
-        LoadGameScene(SceneNames.BowlingBattleGame);
+        LoadGameScene(SceneNames.BowlingBattle);
     }
 
     private void OnLoadFishingFrenzy()
@@ -321,12 +321,12 @@ public class MainMenuEvents : MonoBehaviour
 
     private void OnLoadMinigolfMayhem()
     {
-        LoadGameScene(SceneNames.MinigolfMayhemGame);
+        LoadGameScene(SceneNames.MinigolfMayhemClassic);
     }
 
     private void OnLoadSwaggySnapshots()
     {
-        LoadGameScene(SceneNames.SwaggySnapshotsGame);
+        LoadGameScene(SceneNames.SwaggySnapshots);
     }
 
     private void LoadGameScene(SceneNames _sceneName)

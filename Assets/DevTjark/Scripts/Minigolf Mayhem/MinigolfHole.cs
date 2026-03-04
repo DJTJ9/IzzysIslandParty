@@ -15,13 +15,19 @@ public class MinigolfHole : MonoBehaviour
     public static event Action<int> onMinigolfPlayerFinished;
     [SerializeField] private UnityEvent onGameEnd;
     
+    private MinigolfMayhemGameManager minigolfMayhemGameManager;
     private CountdownTimer countdownTimer;
     
-    private const int MAX_PLAYER_COUNT = 4;
+    private const int k_MaxPlayerCount = 4;
     private int m_finishedPlayers;
+    private bool classicMode;
+    private bool raceMode;
 
     private void Start()
     {
+        minigolfMayhemGameManager = FindFirstObjectByType<MinigolfMayhemGameManager>();
+        classicMode = minigolfMayhemGameManager.ClassicMode;
+        raceMode = minigolfMayhemGameManager.RaceMode;
         countdownTimer = new CountdownTimer(waitForLastPlayerTime);
         countdownTimer.OnTimerStop += () => onGameEnd.Invoke();
     }
@@ -43,10 +49,15 @@ public class MinigolfHole : MonoBehaviour
             ++m_finishedPlayers;
             ConsoleProDebug.LogToFilter($"Players finished: {m_finishedPlayers}", "Debug");
             
-            if (m_finishedPlayers / 2 == MAX_PLAYER_COUNT- 1)
+            if (raceMode && m_finishedPlayers / 2 == k_MaxPlayerCount - 1)
             {
                 countdownTimer.Start();
                 ConsoleProDebug.LogToFilter("Game End Countdown started!", "Event");
+            }
+            
+            if (classicMode && m_finishedPlayers / 2 == k_MaxPlayerCount)
+            {
+                onGameEnd.Invoke();
             }
         }
         
