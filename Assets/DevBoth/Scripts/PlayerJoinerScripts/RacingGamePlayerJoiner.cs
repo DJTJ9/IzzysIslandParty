@@ -6,6 +6,7 @@ using HelperScripts;
 using JetskiGame.UI;
 using MultiuseScripts;
 using Player.Collections;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -14,208 +15,210 @@ using UnityEngine.Serialization;
 
 namespace JetskiGame.Player.Multiplayer
 {
-   public class RacingGamePlayerJoiner : MonoBehaviour
-   {
-       [SerializeField] private RacingGameLevelService levelService;
-       [SerializeField] private SO_PlayerCollectionRacingGames currentPlayers;
-       [SerializeField] private SO_PlayerCollectionRacingGames playerCollection;
-       [SerializeField] private SO_PlayerCollectionRacingGames npcCollection;
-       [SerializeField] private UnityEvent onLevelLoaded;
-       private CharacterCreatorService characterCreatorService;
+    public class RacingGamePlayerJoiner : MonoBehaviour
+    {
+        [SerializeField] private RacingGameLevelService levelService;
+        [SerializeField] private SO_PlayerCollectionRacingGames currentPlayers;
+        [SerializeField] private SO_PlayerCollectionRacingGames playerCollection;
+        [SerializeField] private SO_PlayerCollectionRacingGames npcCollection;
+        [SerializeField] private UnityEvent onLevelLoaded;
+        private CharacterCreatorService characterCreatorService;
+        
+        [Header("Player layer: ")]
+        [SerializeField] private bool setPlayerLayer = false;
+        [ShowIf("setPlayerLayer")]
+        [SerializeField] private List<int> playerLayerIndex;
 
+        [Header("NPC joining: ")]
+        [SerializeField] private PlayerInputManager playerInputManager;
+        [SerializeField] private Controller npcBehaviour;
+        private Controller npcBehaviourInstance;
+        
+        private int playerIndex;
+        private int humanPlayerIndex;
+        private int npcIndex;
+        private bool splitScreen;
 
-       [FormerlySerializedAs("playerLayer")]
-       [Header("Player layer: ")]
-       [SerializeField] private List<int> playerLayerIndex;
 
+        private void Start()
+        {
+            characterCreatorService = GetComponent<CharacterCreatorService>();
 
-       private int playerIndex;
-       private int humanPlayerIndex;
-       private int npcIndex;
 
+            onLevelLoaded.Invoke();
+            playerIndex = 0;
+            currentPlayers.Players.Clear();
+        }
 
-       [Header("NPC joining: ")]
-       private bool splitScreen;
 
+        private void OnEnable()
+        {
+            onLevelLoaded.Invoke();
 
-       [SerializeField] private PlayerInputManager playerInputManager;
-       [SerializeField] private Controller npcBehaviour;
-       private Controller npcBehaviourInstance;
 
+            splitScreen = playerInputManager.splitScreen;
+        }
 
-       private void Start()
-       {
-           characterCreatorService = GetComponent<CharacterCreatorService>();
 
+        private void OnDestroy()
+        {
+            ClearPlayerReferences();
+        }
 
-           onLevelLoaded.Invoke();
-           playerIndex = 0;
-           currentPlayers.Players.Clear();
-       }
 
+        public void PlayerJoined(PlayerInput _playerInput)
+        {
+            GameObject playerObj = _playerInput.gameObject;
 
-       private void OnEnable()
-       {
-           onLevelLoaded.Invoke();
 
+            playerCollection.Players[playerIndex].PlayerReference = playerObj;
 
-           splitScreen = playerInputManager.splitScreen;
-       }
 
+            if (playerObj.TryGetComponent(out npcBehaviourInstance) && npcBehaviourInstance.IsOfType(npcBehaviour.GetType()))
+            {
+                NPCJoined(playerObj, _playerInput);
+                return;
+            }
 
-       private void OnDestroy()
-       {
-           ClearPlayerReferences();
-       }
 
+            PCJoined(playerObj, _playerInput);
+        }
 
-       public void PlayerJoined(PlayerInput _playerInput)
-       {
-           GameObject playerObj = _playerInput.gameObject;
 
+        private void NPCJoined(GameObject _playerObj, PlayerInput _playerInput)
+        {
+            if (humanPlayerIndex == 1 && levelService is JetskiGameLevelService)
+            {
+                Identifier cameraHolder = _playerInput.transform.gameObject.GetComponentInChildren<Identifier>();
+                cameraHolder?.gameObject.SetActive(false);
+            }
 
-           playerCollection.Players[playerIndex].PlayerReference = playerObj;
 
+            npcBehaviourInstance.SetPlayerIndex(playerIndex);
+            npcBehaviourInstance.OnNPCJoined(npcCollection.Players[npcBehaviourInstance.GetPlayerIndex() - 1]);
 
-           if (playerObj.TryGetComponent(out npcBehaviourInstance) && npcBehaviourInstance.IsOfType(npcBehaviour.GetType()))
-           {
-               NPCJoined(playerObj, _playerInput);
-               return;
-           }
 
+            _playerObj.name = npcCollection.Players[npcBehaviourInstance.GetPlayerIndex() - 1].Name;
 
-           PCJoined(playerObj, _playerInput);
-       }
 
+            currentPlayers.Players.Add(npcCollection.Players[npcBehaviourInstance.GetPlayerIndex() - 1]);
+            levelService.OnNPCJoined(_playerObj);
 
-       private void NPCJoined(GameObject _playerObj, PlayerInput _playerInput)
-       {
-           if (humanPlayerIndex == 1 && levelService is JetskiGameLevelService)
-           {
-               Identifier cameraHolder = _playerInput.transform.gameObject.GetComponentInChildren<Identifier>();
-               cameraHolder?.gameObject.SetActive(false);
-           }
 
+            PlayerMeshIdentifier npcMesh = _playerObj.GetComponentInChildren<PlayerMeshIdentifier>();
+            if (npcMesh != null)
+            {
+                characterCreatorService.SetMeshAndMaterial(npcMesh.MeshRenderer, playerIndex);
 
-           npcBehaviourInstance.SetPlayerIndex(playerIndex);
-           npcBehaviourInstance.OnNPCJoined(npcCollection.Players[npcBehaviourInstance.GetPlayerIndex() - 1]);
 
+                if (npcMesh.HasTwoMeshes)
+                    characterCreatorService.SetOtherMaterial(npcMesh.OtherMeshRenderer, playerIndex);
+            }
 
-           _playerObj.name = npcCollection.Players[npcBehaviourInstance.GetPlayerIndex() - 1].Name;
 
+            ++npcIndex;
+            ++playerIndex;
+        }
 
-           currentPlayers.Players.Add(npcCollection.Players[npcBehaviourInstance.GetPlayerIndex() - 1]);
-           levelService.OnNPCJoined(_playerObj);
 
+        private void PCJoined(GameObject _playerObj, PlayerInput _playerInput)
+        {
+            if (_playerObj.TryGetComponent(out JetskiController playerController))
+                playerController.OnPlayerJoined(playerCollection.Players[playerIndex]);
 
-           PlayerMeshIdentifier npcMesh = _playerObj.GetComponentInChildren<PlayerMeshIdentifier>();
-           if (npcMesh != null)
-           {
-               characterCreatorService.SetMeshAndMaterial(npcMesh.MeshRenderer, playerIndex);
 
+            currentPlayers.Players.Add(playerCollection.Players[playerIndex]);
 
-               if (npcMesh.HasTwoMeshes)
-                   characterCreatorService.SetOtherMaterial(npcMesh.OtherMeshRenderer, playerIndex);
-           }
 
+            _playerObj.name = playerCollection.Players[playerIndex].Name;
+            _playerObj.transform.position = playerCollection.Players[playerIndex].SpawnPoint;
+            levelService.OnPlayerJoined(_playerInput.gameObject);
 
-           ++npcIndex;
-           ++playerIndex;
-       }
 
+            PlayerMeshIdentifier playerMesh = _playerObj.GetComponentInChildren<PlayerMeshIdentifier>();
+            if (playerMesh != null)
+            {
+                characterCreatorService.SetMeshAndMaterial(playerMesh.MeshRenderer, playerIndex);
 
-       private void PCJoined(GameObject _playerObj, PlayerInput _playerInput)
-       {
-           if (_playerObj.TryGetComponent(out JetskiController playerController))
-               playerController.OnPlayerJoined(playerCollection.Players[playerIndex]);
 
+                if (playerMesh.HasTwoMeshes)
+                    characterCreatorService.SetOtherMaterial(playerMesh.OtherMeshRenderer, playerIndex);
+            }
 
-           currentPlayers.Players.Add(playerCollection.Players[playerIndex]);
 
+            if (levelService is JetskiGameLevelService jetskiLevelService)
+            {
+                if (_playerObj.TryGetComponent(out JetskiGameUIManager jetskiUIManager))
+                    jetskiUIManager.OnPlayerJoined(jetskiLevelService.IsPvP);
+            }
 
-           _playerObj.name = playerCollection.Players[playerIndex].Name;
-           _playerObj.transform.position = playerCollection.Players[playerIndex].SpawnPoint;
-           levelService.OnPlayerJoined(_playerInput.gameObject);
+            if (playerLayerIndex.Count > playerIndex && setPlayerLayer)
+                SetLayerAllChildren(_playerObj.transform);
 
 
-           PlayerMeshIdentifier playerMesh = _playerObj.GetComponentInChildren<PlayerMeshIdentifier>();
-           if (playerMesh != null)
-           {
-               characterCreatorService.SetMeshAndMaterial(playerMesh.MeshRenderer, playerIndex);
+            ++humanPlayerIndex;
+            ++playerIndex;
 
 
-               if (playerMesh.HasTwoMeshes)
-                   characterCreatorService.SetOtherMaterial(playerMesh.OtherMeshRenderer, playerIndex);
-           }
+            var currentPlayerIndex = playerIndex;
+            StartCoroutine(WaitForPlayerJoin(_playerObj, currentPlayerIndex));
+        }
 
+        private void SetLayerAllChildren(Transform _root)
+        {
+            var children = _root.GetComponentsInChildren<Transform>(includeInactive: true);
 
-           if (levelService is JetskiGameLevelService jetskiLevelService)
-           {
-               if (_playerObj.TryGetComponent(out JetskiGameUIManager jetskiUIManager))
-                   jetskiUIManager.OnPlayerJoined(jetskiLevelService.IsPvP);
-           }
-          
-           SetLayerAllChildren(_playerObj.transform);
+            if (children.Length < 1)
+                return;
 
+            foreach (var child in children)
+            {
+                if (!child.gameObject)
+                    continue;
 
-           ++humanPlayerIndex;
-           ++playerIndex;
+                child.gameObject.layer = (playerLayerIndex[playerIndex]);
+            }
+        }
 
 
-           var currentPlayerIndex = playerIndex;
-           StartCoroutine(WaitForPlayerJoin(_playerObj, currentPlayerIndex));
-       }
-      
-       private void SetLayerAllChildren(Transform _root)
-       {
-           var children = _root.GetComponentsInChildren<Transform>(includeInactive: true);
-           foreach (var child in children)
-           {
-               child.gameObject.layer = (playerLayerIndex[playerIndex]);
-           }
-       }
+        private IEnumerator WaitForPlayerJoin(GameObject _player, int _currentPlayerIndex)
+        {
+            yield return new WaitForSeconds(0.5f);
 
 
-       private IEnumerator WaitForPlayerJoin(GameObject _player, int _currentPlayerIndex)
-       {
-           yield return new WaitForSeconds(0.5f);
+            _player.transform.position = playerCollection.Players[_currentPlayerIndex - 1].SpawnPoint;
 
 
-           _player.transform.position = playerCollection.Players[_currentPlayerIndex - 1].SpawnPoint;
+            yield return null;
+        }
 
 
-           yield return null;
-       }
+        public void JoinNPCs()
+        {
+            if (humanPlayerIndex == 1)
+                playerInputManager.splitScreen = false;
+            else
+                playerInputManager.splitScreen = splitScreen;
 
 
-       public void JoinNPCs()
-       {
-           if (humanPlayerIndex == 1)
-               playerInputManager.splitScreen = false;
-           else
-               playerInputManager.splitScreen = splitScreen;
+            var nPCStartIndex = playerIndex - 1;
 
 
+            for (var i = nPCStartIndex; i < npcCollection.Players.Count; i++)
+            {
+                Instantiate(npcCollection.Players[i].PlayerReference, npcCollection.Players[i].SpawnPoint,
+                    npcCollection.Players[i].PlayerReference.transform.rotation);
+            }
+        }
 
 
-           var nPCStartIndex = playerIndex - 1;
-
-
-           for (var i = nPCStartIndex; i < npcCollection.Players.Count; i++)
-           {
-               Instantiate(npcCollection.Players[i].PlayerReference, npcCollection.Players[i].SpawnPoint,
-                   npcCollection.Players[i].PlayerReference.transform.rotation);
-           }
-       }
-
-
-       public void ClearPlayerReferences()
-       {
-           for (int i = 0; i < currentPlayers.Players.Count; i++)
-           {
-               if (!currentPlayers.Players[i].IsNPC)
-                   currentPlayers.Players[i].PlayerReference = null;
-           }
-       }
-   }
+        public void ClearPlayerReferences()
+        {
+            for (int i = 0; i < currentPlayers.Players.Count; i++)
+            {
+                if (!currentPlayers.Players[i].IsNPC)
+                    currentPlayers.Players[i].PlayerReference = null;
+            }
+        }
+    }
 }

@@ -6064,7 +6064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5edf572e6593a647a84449c6f0c10c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  individualMultiplierDeduction: 0.07
+  individualMultiplierDeduction: 0.068
 --- !u!1001 &1171550653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11361,6 +11361,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6093548000382115082, guid: e80de2aeace119d41a98a09f32c2ba7c, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 491904
+      objectReference: {fileID: 0}
     - target: {fileID: 6527276533273050656, guid: e80de2aeace119d41a98a09f32c2ba7c, type: 3}
       propertyPath: m_Name
       value: Line1_Barrel
@@ -11489,9 +11493,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2114804168}
     - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      propertyPath: setPlayerLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
       propertyPath: playerInputManager
       value: 
       objectReference: {fileID: 6223619115058927873}
+    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      propertyPath: playerLayerIndex.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      propertyPath: 'playerLayerIndex.Array.data[0]'
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      propertyPath: 'playerLayerIndex.Array.data[1]'
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      propertyPath: 'playerLayerIndex.Array.data[2]'
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
+      propertyPath: 'playerLayerIndex.Array.data[3]'
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 4644165193290906214, guid: 28f9c4ac55aaf164688099305a138764, type: 3}
       propertyPath: onLevelLoaded.m_PersistentCalls.m_Calls.Array.size
       value: 1
