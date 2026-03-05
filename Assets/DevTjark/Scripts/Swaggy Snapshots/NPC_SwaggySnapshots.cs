@@ -9,10 +9,13 @@ public class NPC_SwaggySnapshots : Controller
 {
     [SerializeField] private UnityEvent<int> onTakePhoto;
 
+    private PhotoCapture photoCapture;
     private CountdownTimer m_photoTimer;
 
     private void Awake()
     {
+        photoCapture = GetComponent<PhotoCapture>();
+        
         m_photoTimer = new CountdownTimer(Random.Range(SwaggySnapshotsGameManager.StartMoveDuration, SwaggySnapshotsGameManager.StartMoveDuration + SwaggySnapshotsGameManager.RoundTime));
         m_photoTimer.OnTimerStop += TakePhoto;
     }

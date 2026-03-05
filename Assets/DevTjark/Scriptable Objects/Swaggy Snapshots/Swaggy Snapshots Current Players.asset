@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 801231c4f8084358adb9e44279d562c8, type: 3}
-  m_Name: Player 1 Swaggy Snapshots
+  m_Script: {fileID: 11500000, guid: afbdd2e473b2485e9e29bbb502250a5c, type: 3}
+  m_Name: Swaggy Snapshots Current Players
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,11 +21,4 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  Name: Player 1
-  PlayerReference: {fileID: 1014812389145759665, guid: d3a7e72e5146ad14689a286b4891657c, type: 3}
-  PlayerScore: {fileID: 11400000, guid: ad9f56ba5343cd341b5921c01c4de459, type: 2}
-  SpawnPoint: {x: -409, y: 260, z: 0}
-  IsNPC: 0
-  HappyFaceScore: 1
-  FacingCameraScore: 2
-  CoolDanceMoveScore: 1
+  Players: []

@@ -41,6 +41,7 @@ public class PlayerControllerSwaggySnapshots : Controller
 
     public void OnPause(InputAction.CallbackContext _context)
     {
+        if (!pauseInputEnabled) return;
         if (!_context.started) return;
 
         onPause.Invoke();
@@ -48,6 +49,7 @@ public class PlayerControllerSwaggySnapshots : Controller
 
     public void OnUnpause(InputAction.CallbackContext _context)
     {
+        if (!pauseInputEnabled) return;
         if (!_context.started) return;
 
         onUnpause.Invoke();
@@ -56,5 +58,15 @@ public class PlayerControllerSwaggySnapshots : Controller
     public override void SwitchToPlayerInputMap()
     {
         playerInput.SwitchCurrentActionMap("SwaggySnapshots");
+    }
+
+    public void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
     }
 }

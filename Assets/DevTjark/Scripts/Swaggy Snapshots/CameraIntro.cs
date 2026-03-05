@@ -14,15 +14,15 @@ public class CameraIntro : MonoBehaviour
     [SerializeField] private float secondStopTime;
     [SerializeField] private Vector3 secondPosition;
     [SerializeField] private float secondMoveTime;
-    [SerializeField] private AnimationCurve cameraUpwardsCurve, cameraForwardAnimationCurve;
+    [SerializeField] private AnimationCurve cameraUpwardsAnimationCurve,cameraSpinAnimationCurve, cameraForwardAnimationCurve;
 
     public void StartCameraIntroSequence() => StartCoroutine(StartCameraIntro());
     
     private IEnumerator StartCameraIntro()
     {
-        yield return transform.DOMove(firstPosition, firstMoveTime).SetEase(cameraUpwardsCurve).WaitForCompletion();
+        yield return transform.DOMove(firstPosition, firstMoveTime).SetEase(cameraUpwardsAnimationCurve).WaitForCompletion();
         yield return new WaitForSeconds(firstStopTime);
-        yield return transform.DOLocalRotate(new Vector3(0, 360, 0), rotationTime, RotateMode.LocalAxisAdd).SetEase(Ease.Linear).WaitForCompletion();
+        yield return transform.DOLocalRotate(new Vector3(0, 900, 0), rotationTime, RotateMode.LocalAxisAdd).SetEase(cameraSpinAnimationCurve).WaitForCompletion();
         yield return new WaitForSeconds(secondStopTime);
         yield return transform.DOMove(secondPosition, secondMoveTime).SetEase(cameraForwardAnimationCurve).WaitForCompletion();
         barrelDistortionVolume.SetActive(true);

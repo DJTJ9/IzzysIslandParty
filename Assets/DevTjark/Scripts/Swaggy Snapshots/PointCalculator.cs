@@ -21,7 +21,7 @@ public class PointCalculator : MonoBehaviour
     [SerializeField] private Animator animator;
     
     [FoldoutGroup("Scriptable Objects", expanded: true)]
-    [SerializeField] private SO_PlayerCollection currentPlayers;
+    [SerializeField] private SO_SwaggySnapshotsPlayerCollection currentPlayers;
     // [SerializeField] private GameScoreSO scoreSO;
     [SerializeField] private FaceSwapSO faceSwapSO;
     [SerializeField] private DanceMovesSO danceMovesSO;
@@ -74,6 +74,7 @@ public class PointCalculator : MonoBehaviour
         }
         
         currentPlayers.Players[_playerIndex].PlayerScore.Value += m_faceForwardPointValue;
+        currentPlayers.Players[_playerIndex].FacingCameraScore += m_faceForwardPointValue;
         // Debug.Log($"Points added from {gameObject.name} for facing the camera!");
     }
 
@@ -89,6 +90,7 @@ public class PointCalculator : MonoBehaviour
         }
         
         currentPlayers.Players[_playerIndex].PlayerScore.Value += m_happyFacePointValue;
+        currentPlayers.Players[_playerIndex].HappyFaceScore += m_happyFacePointValue;
         // Debug.Log($"Points added from {gameObject.name} for happy face!");
     }
 
@@ -103,6 +105,7 @@ public class PointCalculator : MonoBehaviour
         }
         
         currentPlayers.Players[_playerIndex].PlayerScore.Value += m_danceMovePointValue;
+        currentPlayers.Players[_playerIndex].CoolDanceMoveScore += m_danceMovePointValue;
         // Debug.Log($"Points added from {gameObject.name} for cool dance move!");
     }
     

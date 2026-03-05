@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class Controller : MonoBehaviour
 {
     public int PlayerIndex;
+    protected bool pauseInputEnabled;
     protected PlayerInput playerInput;
     protected bool m_isActive = true;
 
@@ -37,4 +38,6 @@ public class Controller : MonoBehaviour
     
     public void EnableController() => m_isActive = true;
     public void DisableController() => m_isActive = false;
+    public void EnablePauseInput() => pauseInputEnabled = true;
+    public void DisablePauseInput() => pauseInputEnabled = false;
 }
