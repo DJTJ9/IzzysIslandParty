@@ -4,7 +4,7 @@
     <Style src="project://database/Assets/DevBoth/UI/ControllerSelection.uss?fileID=7433441132597879392&amp;guid=8db747412f6ad684ea1b0a2c67321e71&amp;type=3#ControllerSelection" />
     <Style src="project://database/Assets/DevBoth/UI/SettingsMenu.uss?fileID=7433441132597879392&amp;guid=6360e900371cea641a9bb138605817a0&amp;type=3#SettingsMenu" />
     <ui:VisualElement name="menu-background__container" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/DevBoth/Art/Izzy%20Island%20Party%20Main%20Menu%20Background.png?fileID=2800000&amp;guid=258d5e495edbf1148898151c157d78b1&amp;type=3#Izzy Island Party Main Menu Background&quot;); display: flex;">
-        <ui:VisualElement name="main-menu__container" style="flex-grow: 1; display: flex;">
+        <ui:VisualElement name="main-menu__container" style="flex-grow: 1; display: none;">
             <ui:Label text="IZZY&apos;S ISLAND PARTY" name="main-menu-header__label" class="header" style="width: 50%; height: 20%; color: rgb(254, 202, 129); -unity-text-outline-width: 3px; -unity-text-outline-color: rgb(75, 48, 47);" />
             <ui:Button text="PLAY" name="main-menu-play__button" class="button" />
             <ui:Button text="SETTINGS" name="main-menu-settings__button" class="button" />
@@ -22,24 +22,24 @@
                 <ui:Button text="BACK" name="controller-selection-back__button" class="button" style="height: 75px; width: 322px;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="player-hub__container" style="flex-grow: 1; flex-direction: column; display: none; visibility: visible;">
+        <ui:VisualElement name="player-hub__container" style="flex-grow: 1; flex-direction: column; display: flex; visibility: visible;">
             <ui:VisualElement name="player-hub-top__container" style="flex-grow: 1;">
                 <ui:Label text="SELECT LEVEL" name="player-hub-header__label" class="header" style="color: rgb(254, 202, 129); -unity-text-outline-color: rgb(75, 48, 47); -unity-text-outline-width: 3px;" />
             </ui:VisualElement>
             <ui:VisualElement name="player-hub-middle__container" style="flex-grow: 1; height: 70%;">
                 <ui:VisualElement name="player-hub-middle-first-row__container" class="gameSelectorContainer" style="width: 90%; justify-content: center;">
-                    <ui:Button text="&#10;&#10;BOWLING BATTLE" name="play-bowling-battle__button" class="levelButton" />
-                    <ui:Button text="&#10;&#10;FISHING FRENZY" name="play-fishing-frenzy__button" class="levelButton" />
-                    <ui:Button text="&#10;&#10;JETSKI JOYRIDE" name="play-jetski-joyride__button" class="levelButton" style="display: flex;" />
+                    <ui:Button text="&#10;&#10;BOWLING BATTLE" name="play-bowling-battle__button" class="levelButton" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                    <ui:Button text="&#10;&#10;FISHING FRENZY" name="play-fishing-frenzy__button" class="levelButton" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                    <ui:Button text="&#10;&#10;JETSKI JOYRIDE" name="play-jetski-joyride__button" class="levelButton" style="display: flex; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="player-hub-middle-second-row__container" class="gameSelectorContainer" style="width: 90%;">
-                    <ui:Button text="&#10;&#10;MINIGOLF MAYHEM" name="play-minigolf-mayhem__button" class="levelButton" style="overflow: visible; display: flex;" />
-                    <ui:Button text="&#10;&#10;SWAGGY SNAPSHOTS" name="play-swaggy-snapshots__button" class="levelButton" />
-                    <ui:Button text="&#10;&#10;HASTY HURDLES" name="play-hasty-hurdles__button" class="levelButton" />
+                    <ui:Button text="&#10;&#10;MINIGOLF MAYHEM" name="play-minigolf-mayhem__button" class="levelButton" style="overflow: visible; display: flex; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                    <ui:Button text="&#10;&#10;SWAGGY SNAPSHOTS" name="play-swaggy-snapshots__button" selectable="false" class="levelButton" style="-unity-text-outline-width: 1px; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                    <ui:Button text="&#10;&#10;HASTY HURDLES" name="play-hasty-hurdles__button" class="levelButton" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="player-hub-bottom__container" style="flex-grow: 1; align-items: center; display: flex; visibility: visible;">
-                <ui:Button text="BACK" name="player-hub-back__button" class="levelButton" style="background-image: url(&quot;project://database/Assets/DevBoth/Art/FREE%20KAWAII%20GUI%20PACK/PNG/Pannel-Button.png?fileID=1082555080&amp;guid=bf4c5e583cfa0f14dbdf1dbbf52c7fa2&amp;type=3#Pannel-Button_7&quot;); -unity-text-align: middle-center; font-size: 32px; -unity-font-style: bold; background-size: 100% 100%;" />
+                <ui:Button text="BACK" name="player-hub-back__button" class="levelButton" style="background-image: url(&quot;project://database/Assets/DevBoth/Art/FREE%20KAWAII%20GUI%20PACK/PNG/Pannel-Button.png?fileID=1082555080&amp;guid=bf4c5e583cfa0f14dbdf1dbbf52c7fa2&amp;type=3#Pannel-Button_7&quot;); -unity-text-align: middle-center; font-size: 32px; -unity-font-style: bold; background-size: 100% 100%; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:TabView name="settings-tab-view__container" style="width: 100%; height: 100%; flex-grow: 1; display: none;">
