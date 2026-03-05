@@ -83,12 +83,12 @@ namespace FishingGame
             if (device is Gamepad gamepad)
             {
                 if (gamepad is DualShockGamepad dualShockGamepad)
-                    qteDisplayService.controlScheme = EControlScheme.PlayStation;
+                    qteDisplayService.OnJoin(EControlScheme.PlayStation, PlayerIndex);
                 else if (gamepad is XInputController xInputController)
-                    qteDisplayService.controlScheme = EControlScheme.Xbox;
+                    qteDisplayService.OnJoin(EControlScheme.Xbox, PlayerIndex);
             }
             else if (device is Keyboard keyboard)
-                qteDisplayService.controlScheme = EControlScheme.Keyboard;
+                qteDisplayService.OnJoin(EControlScheme.Keyboard, PlayerIndex);
         }
 
         public void OnStopFishDisplay(InputAction.CallbackContext _context)

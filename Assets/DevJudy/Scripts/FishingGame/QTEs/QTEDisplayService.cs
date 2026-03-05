@@ -1,6 +1,7 @@
 using enums;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace FishingGame.QuickTimeEvents
 {
@@ -23,12 +24,25 @@ namespace FishingGame.QuickTimeEvents
         private const string southButtonXbox = "A";
         private const string westButtonXbox = "X";
 
+        private const float pointsPosMultiplayer = 1200f;
+
         #endregion
 
-        [SerializeField] private InputAction ia;
+        [SerializeField] private InputAction inputAction;
+        [SerializeField] private Image pointsText;
         
-        public EControlScheme controlScheme;
+        private EControlScheme controlScheme;
 
+        public void OnJoin(EControlScheme _controlScheme, int _playerIndex)
+        {
+            controlScheme = _controlScheme;
+
+            Debug.Log("Playerindex: " +_playerIndex);
+            
+            if (_playerIndex == 1 || _playerIndex == 3)
+                pointsText.transform.position = new Vector3(pointsPosMultiplayer, pointsText.transform.position.y, pointsText.transform.position.z);
+        }
+        
         public string DisplayButtonToPress(EButton _buttonToPress)
         {
             switch (controlScheme)

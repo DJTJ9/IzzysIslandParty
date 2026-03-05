@@ -121,8 +121,8 @@ namespace MultiuseScripts
             seconds = Mathf.FloorToInt(_time % 60);
             milliseconds = Mathf.Round((_time % 1) * 1000);
             milliseconds = Mathf.RoundToInt((milliseconds) / 10);
-
-            timerManager.UpdateTimerText($"Time: {minutes:00}:{seconds:00}:{milliseconds:00}");
+            
+            timerManager.UpdateTimerText($"Time: {minutes:00}:{seconds:00}:{milliseconds % 100:00}");
         }
 
         public void GetTime(out int _minutes, out int _seconds, out int _milliseconds)

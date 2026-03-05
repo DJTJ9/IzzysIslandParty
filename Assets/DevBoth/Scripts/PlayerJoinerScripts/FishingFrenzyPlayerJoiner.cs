@@ -86,8 +86,10 @@ namespace FishingGame.Player.Multiplayer
                 return;
             }
 
+            if (_playerInput.gameObject.TryGetComponent(out FishingRodController playerController))
+                playerController.SetPlayerIndex(playerIndex);
+            
             playerCollectionFF.Players[playerIndex].PlayerReference = _playerInput.gameObject;
-
             currentPlayers.Players.Add(playerCollectionFF.Players[playerIndex]);
 
             parent.transform.position = playerCollectionFF.Players[playerIndex].SpawnPoint;
