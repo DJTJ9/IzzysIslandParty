@@ -4,6 +4,7 @@ using ScriptableObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace FishingGame.Display
 {
@@ -20,7 +21,10 @@ namespace FishingGame.Display
         [SerializeField] private GameObject stopFishDisplayButton;
 
         [Header("Rendering: ")]
-        [SerializeField] private Vector3 fishUIRendererPosition = new Vector3(-0.56f, -50f, -42.87f);
+        [SerializeField] private RawImage fishDisplayImage;
+        [SerializeField] private Camera renderTextureCamera;
+        [SerializeField] private List<Vector3> fishUIRendererPositions;
+        [SerializeField] private List<RenderTexture> renderTextures;
         private GameObject fishUIRenderer;
         private GameObject fishUIRendererParent;
         private GameObject currentFishShown;
@@ -30,9 +34,12 @@ namespace FishingGame.Display
 
         public void SetupFishDisplay(int _playerIndex)
         {
-            if (playerInput == null)
-                Debug.LogError("inputActionAsset is null");
-
+            if (renderTextures.Count > _playerIndex)
+            {
+                fishDisplayImage.texture = renderTextures[_playerIndex];
+                renderTextureCamera.targetTexture = renderTextures[_playerIndex];
+            }
+            
             fishUIRendererParent = GameObject.FindGameObjectWithTag("FishUIRenderer");
             InstantiateFishUIRenderer(_playerIndex);
 
@@ -50,8 +57,7 @@ namespace FishingGame.Display
             fishUIRenderer = instantiatedObj;
             fishUIRenderer.name = "FishUIRendererObjects";
             fishUIRenderer.transform.SetParent(fishUIRendererParent.transform);
-            fishUIRenderer.transform.localPosition = fishUIRendererPosition;
-            fishUIRenderer.transform.rotation = new Quaternion(0f, 90f, 0f, 0f);
+            fishUIRenderer.transform.localPosition = fishUIRendererPositions[_playerIndex];
             fishUIRenderer.layer = fishUIRendererParent.layer;
             
             DestroyImmediate(emptyObj, true);
@@ -61,7 +67,6 @@ namespace FishingGame.Display
         {
             GameObject obj = Instantiate(_fish.Prefab, fishUIRenderer.transform);
             obj.layer = fishUIRenderer.gameObject.layer;
-            obj.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
 
             foreach (Transform child in obj.transform)
                 child.gameObject.layer = obj.layer;
@@ -75,8 +80,6 @@ namespace FishingGame.Display
         {
             playerInput.SwitchCurrentActionMap(uiActionMap);
 
-           // Time.timeScale = 0f;
-
             currentFishShown = _fish.PrefabReferences[_playerIndex].gameObject;
 
             currentFishShown.SetActive(true);
@@ -84,11 +87,11 @@ namespace FishingGame.Display
 
             fishNameText.text = _fish.FishName;
 
-            fishSizeText.text = $"Size: {_fish.GetRandomFromRange(_fish.SizeRange)} {GeSizeMeasureUnit(_fish.FishType)}";
-            fishWeightText.text = $"Weight: {_fish.GetRandomFromRange(_fish.WeightRange)} {GeWeightMeasureUnit(_fish.FishType)}";
+            fishSizeText.text = $"Size: {_fish.GetRandomFromRange(_fish.SizeRange)} {GetSizeMeasureUnit(_fish.FishType)}";
+            fishWeightText.text = $"Weight: {_fish.GetRandomFromRange(_fish.WeightRange)} {GetWeightMeasureUnit(_fish.FishType)}";
         }
 
-        private string GeSizeMeasureUnit(EFish _fishType)
+        private string GetSizeMeasureUnit(EFish _fishType)
         {
             if (_fishType == EFish.BluefinTuna)
                 return "m";
@@ -96,7 +99,7 @@ namespace FishingGame.Display
             return "cm";
         }
 
-        private string GeWeightMeasureUnit(EFish _fishType)
+        private string GetWeightMeasureUnit(EFish _fishType)
         {
             if (_fishType == EFish.BluefinTuna)
                 return "kg";
@@ -110,8 +113,6 @@ namespace FishingGame.Display
                 playerInput.SwitchCurrentActionMap(fishingActionMap);
 
             fishDisplayPanel.SetActive(false);
-            
-           // Time.timeScale = 1f;
             
             currentFishShown.SetActive(false);
             currentFishShown = null;

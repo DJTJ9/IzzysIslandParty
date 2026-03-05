@@ -12,11 +12,10 @@ namespace FishingGame
 {
     public class FishingSystemManager : MonoBehaviour
     {
-        private int playerIndex;
+        public int PlayerIndex { get; private set; }
 
         [Header("Scripts: ")]
         [SerializeField] public QTEController QTEController;
-
         [SerializeField] public QTEDisplayService QTEDisplayService;
         [SerializeField] private FishDisplay fishDisplay;
         [SerializeField] private IconHandler iconHandler;
@@ -31,6 +30,7 @@ namespace FishingGame
         public Coroutine FishingRoutine;
 
         public bool FishHooked { get; set; }
+        public bool InQTE { get; set; }
         public bool FishDisplayActive { get; set; }
 
         private void Awake()
@@ -44,7 +44,7 @@ namespace FishingGame
 
         private void Start()
         {
-            if (playerIndex == 0)
+            if (PlayerIndex == 0)
             {
                 ActivateFishingSystem();
             }
@@ -64,21 +64,21 @@ namespace FishingGame
         public void OnPlayerJoined(GameScoreSO _gameScore, int _playerIndex)
         {
             gameScore = _gameScore;
-            playerIndex = _playerIndex;
+            PlayerIndex = _playerIndex;
 
             gameScore.Value = 0;
         }
 
         public void SetUpFishDisplay(List<SO_Fish> _fishList)
         {
-            if (playerIndex == 0)
+            if (PlayerIndex == 0)
                 fishDisplay.ClearPrefabReferences(_fishList);
 
             if (fishDisplay != null)
             {
                 fishDisplay.enabled = true;
 
-                fishDisplay.SetupFishDisplay(playerIndex);
+                fishDisplay.SetupFishDisplay(PlayerIndex);
 
                 SpawnInFishDisplayObjects(_fishList);
                 StopFishDisplay();
@@ -95,12 +95,12 @@ namespace FishingGame
 
         public void DisplayFish(SO_Fish _caughtFish)
         {
-            fishDisplay?.DisplayFish(_caughtFish, playerIndex);
+            fishDisplay?.DisplayFish(_caughtFish, PlayerIndex);
         }
 
         public void DisplayIcon(EEmotion _emotion)
         {
-            iconHandler?.DisplayIcon(_emotion);
+            iconHandler.DisplayIcon(_emotion);
         }
 
         public void StartFishing()
@@ -113,29 +113,34 @@ namespace FishingGame
 
         public void StartFishEvent(SO_Fish _caughtFish)
         {
-            catchEventHandler.StartFishEvent(_caughtFish, QTEController, QTEDisplayService, playerIndex);
+            InQTE = true;
+            
+            catchEventHandler.StartFishEvent(_caughtFish, QTEController, QTEDisplayService, PlayerIndex);
         }
 
         public bool CheckIfCatchEventFinished()
         {
-            return catchEventHandler.CatchEventVariables[playerIndex].CatchEventFinished;
+            return catchEventHandler.CatchEventVariables[PlayerIndex].CatchEventFinished;
         }
 
         public bool CheckIfCatchEventSucceeded()
         {
-            return catchEventHandler.CatchEventVariables[playerIndex].CatchEventSuccess;
+            return catchEventHandler.CatchEventVariables[PlayerIndex].CatchEventSuccess;
         }
 
         public void PressedCatch()
         {
-            if (!FishingSystem.Instance.PressedCatch)
-                iconHandler?.DisplayIcon(EEmotion.Happy);
+            if (!FishingSystem.Instance.PressedCatch[PlayerIndex])
+                iconHandler.DisplayIcon(EEmotion.Happy);
 
-            FishingSystem.Instance.PressedCatch = true;
+            FishingSystem.Instance.PressedCatch[PlayerIndex] = true;
         }
 
         public void StopFishing()
         {
+            InQTE = false;
+            
+            catchEventHandler.StopQTE(PlayerIndex);
             FishingSystem.Instance.StopFishing(this);
         }
 

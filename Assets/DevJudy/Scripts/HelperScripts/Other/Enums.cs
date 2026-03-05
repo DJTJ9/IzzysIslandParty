@@ -6,6 +6,7 @@ namespace enums
         Keyboard,
         PlayStation,
         Xbox,
+        None,
     }
     
     public enum EButton

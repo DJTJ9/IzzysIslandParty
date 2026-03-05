@@ -12,6 +12,7 @@ namespace FishingGame
     [DefaultExecutionOrder(-100)]
     public class FishingSystem : MonoBehaviour
     {
+        private const int maxNumberOfPlayers = 4;
         [Header("Variables: ")]
         private static FishingSystem instance;
 
@@ -22,9 +23,8 @@ namespace FishingGame
         [SerializeField] private Vector2 buttonPressTimerRange;
         [SerializeField] private FloatReference coyoteTime;
 
-        // Bools
-        private bool fishing;
-        public bool PressedCatch { get; set; }
+        private List<bool> fishing;
+        public List<bool> PressedCatch;
 
         private void Awake()
         {
@@ -41,6 +41,15 @@ namespace FishingGame
         {
             if (fishList == null || fishList.Count <= 0)
                 Debug.LogError("FishingSystem fishList is null");
+
+            fishing = new List<bool>();
+            PressedCatch = new List<bool>();
+            
+            for (int i = 0; i < maxNumberOfPlayers; i++)
+            {
+                fishing.Add(false);
+                PressedCatch.Add(false);
+            }
 
             this.gameObject.SetActive(true);
             this.gameObject.transform.parent.gameObject.SetActive(true);
@@ -64,7 +73,7 @@ namespace FishingGame
 
         public void StartFishing(FishingSystemManager _fishingSystemManager)
         {
-            fishing = true;
+            fishing[_fishingSystemManager.PlayerIndex] = true;
             _fishingSystemManager.FishingRoutine = StartCoroutine(FishingCoroutine(_fishingSystemManager));
         }
 
@@ -72,7 +81,7 @@ namespace FishingGame
         {
             EndCoroutine(_fishingSystemManager);
 
-            fishing = false;
+            fishing[_fishingSystemManager.PlayerIndex] = false;
             _fishingSystemManager.FishHooked = false;
         }
 
@@ -108,7 +117,7 @@ namespace FishingGame
             SO_Fish caughtFish = null;
 
             // Make it so this repeats if no fish was caught!!
-            while (fishing)
+            while (fishing[_fishingSystemManager.PlayerIndex])
             {
                 float randomSecondsUntilBite = Random.Range(secondsUntilFishBiteRange.x, secondsUntilFishBiteRange.y);
                 yield return new WaitForSeconds(randomSecondsUntilBite);
@@ -121,15 +130,15 @@ namespace FishingGame
                 float randomSecondsToPressCatch = Random.Range(buttonPressTimerRange.x, buttonPressTimerRange.y);
                 yield return new WaitForSeconds(randomSecondsToPressCatch);
 
-                if (!PressedCatch)
+                if (!PressedCatch[_fishingSystemManager.PlayerIndex])
                     _fishingSystemManager.StopFishBitingAnimation();
 
                 yield return new WaitForSeconds(coyoteTime.Value);
 
-                if (PressedCatch)
+                if (PressedCatch[_fishingSystemManager.PlayerIndex])
                 {
                     _fishingSystemManager.PlayFishBitingAnimation(false);
-                    fishing = false;
+                    fishing[_fishingSystemManager.PlayerIndex] = false;
 
                     _fishingSystemManager.StartFishEvent(caughtFish);
                     yield return new WaitUntil(_fishingSystemManager.CheckIfCatchEventFinished);
@@ -139,7 +148,7 @@ namespace FishingGame
                 else
                     _fishingSystemManager.DisplayIcon(EEmotion.Embarrassed);
 
-                PressedCatch = false;
+                PressedCatch[_fishingSystemManager.PlayerIndex] = false;
                 _fishingSystemManager.FishHooked = false;
             }
 

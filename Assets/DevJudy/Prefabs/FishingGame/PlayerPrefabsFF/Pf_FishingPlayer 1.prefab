@@ -1773,13 +1773,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4997358684775858759}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.15, y: -58.1, z: -17.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9174448352233099098}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!20 &1693879711644246866
 Camera:
   m_ObjectHideFlags: 0
@@ -3041,7 +3041,18 @@ MonoBehaviour:
   fishWeightText: {fileID: 7778267699284339845}
   fishDisplayPanel: {fileID: 8859049937256378470}
   stopFishDisplayButton: {fileID: 6367206117768532341}
-  fishUIRendererPosition: {x: 0, y: -50, z: 0}
+  fishDisplayImage: {fileID: 3354870316058560550}
+  renderTextureCamera: {fileID: 1693879711644246866}
+  fishUIRendererPositions:
+  - {x: 7.1, y: -50, z: -7.4}
+  - {x: 7.62, y: -50, z: -17.88}
+  - {x: 8.14, y: -50, z: -28.32}
+  - {x: 8.66, y: -50, z: -38.76}
+  renderTextures:
+  - {fileID: 8400000, guid: a97bee2165bce8540b7a58b70f453fd6, type: 2}
+  - {fileID: 8400000, guid: 6ad813c1dfd480043bec10241d9bd4a3, type: 2}
+  - {fileID: 8400000, guid: aed789a6ba230e54989911a3908a1c0c, type: 2}
+  - {fileID: 8400000, guid: 2ccb22751fac0a545ba3256f0c7edd1e, type: 2}
   playerInput: {fileID: 6500719721459496473}
 --- !u!1 &8989522535335573195
 GameObject:

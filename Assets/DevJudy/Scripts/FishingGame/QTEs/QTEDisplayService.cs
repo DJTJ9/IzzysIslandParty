@@ -24,20 +24,20 @@ namespace FishingGame.QuickTimeEvents
         private const string southButtonXbox = "A";
         private const string westButtonXbox = "X";
 
-        private const float pointsPosMultiplayer = 1200f;
+        private const float pointsPosMultiplayer = 120f;
 
         #endregion
 
         [SerializeField] private InputAction inputAction;
         [SerializeField] private Image pointsText;
         
-        private EControlScheme controlScheme;
+        private EControlScheme controlScheme = EControlScheme.None;
 
         public void OnJoin(EControlScheme _controlScheme, int _playerIndex)
         {
             controlScheme = _controlScheme;
 
-            Debug.Log("Playerindex: " +_playerIndex);
+            Debug.Log("Player index: " +_playerIndex);
             
             if (_playerIndex == 1 || _playerIndex == 3)
                 pointsText.transform.position = new Vector3(pointsPosMultiplayer, pointsText.transform.position.y, pointsText.transform.position.z);

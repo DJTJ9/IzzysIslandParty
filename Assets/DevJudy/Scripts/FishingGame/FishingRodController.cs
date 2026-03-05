@@ -34,6 +34,7 @@ namespace FishingGame
 
         [SerializeField] private UnityEvent OnUnpauseGame;
         private bool isPaused;
+        private bool joined = false;
 
         private void Awake()
         {
@@ -78,6 +79,9 @@ namespace FishingGame
 
         public void OnJoin(InputAction.CallbackContext _context)
         {
+            if (joined)
+                return;
+            
             var device = _context.control.device;
 
             if (device is Gamepad gamepad)
@@ -89,6 +93,8 @@ namespace FishingGame
             }
             else if (device is Keyboard keyboard)
                 qteDisplayService.OnJoin(EControlScheme.Keyboard, PlayerIndex);
+
+            joined = true;
         }
 
         public void OnStopFishDisplay(InputAction.CallbackContext _context)
@@ -119,6 +125,9 @@ namespace FishingGame
 
                 if (fishingSystemManager.FishHooked)
                 {
+                    if (fishingSystemManager.InQTE)
+                        PullBackFishingRod();
+                    
                     fishingSystemManager.PressedCatch();
 
                     return;
