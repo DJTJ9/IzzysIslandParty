@@ -8,7 +8,7 @@ namespace FishingGame.QuickTimeEvents
 {
     public class TimingQTE : QuickTimeEvent
     {
-        [SerializeField] private QTEDisplayService qteDisplayService;
+        [SerializeField] private ButtonDisplayService buttonDisplayService;
         [SerializeField] private QTEController qteController;
 
         [Header("TimingEvent needed components: ")]
@@ -64,7 +64,7 @@ namespace FishingGame.QuickTimeEvents
             targetRing.color = ringNormalColor;
 
             currentButtonToPress = (EButton)Random.Range(0, 4);
-            qteButtonText.text = qteDisplayService.DisplayButtonToPress(currentButtonToPress);
+            qteButtonText.text = buttonDisplayService.DisplayButtonToPress(currentButtonToPress);
 
             qteController.CurrentQuickTimeEvent = EQuickTimeEvent.Timing;
 

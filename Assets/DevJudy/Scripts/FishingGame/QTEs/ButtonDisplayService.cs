@@ -1,11 +1,12 @@
 using enums;
+using SerializedObjects;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace FishingGame.QuickTimeEvents
 {
-    public class QTEDisplayService : MonoBehaviour
+    public class ButtonDisplayService : MonoBehaviour
     {
         #region constants
 
@@ -24,25 +25,39 @@ namespace FishingGame.QuickTimeEvents
         private const string southButtonXbox = "A";
         private const string westButtonXbox = "X";
 
-        private const float pointsPosMultiplayer = 120f;
+        private const float pointsPosMultiplayer = 10f;
 
         #endregion
 
+        [Header("FishDisplay Buttons: ")]
+        [SerializeField] private SO_SpriteDictionary buttonSprites;
+
+        [Header("Needed Components: ")]
         [SerializeField] private InputAction inputAction;
-        [SerializeField] private Image pointsText;
-        
+        [SerializeField] private RectTransform pointsObjectRT;
+        [SerializeField] private RectTransform pointsObjRTEvenPlayers;
+
         private EControlScheme controlScheme = EControlScheme.None;
 
-        public void OnJoin(EControlScheme _controlScheme, int _playerIndex)
+        public void SetPointsButtonRect(int _playerIndex)
         {
-            controlScheme = _controlScheme;
-
-            Debug.Log("Player index: " +_playerIndex);
-            
             if (_playerIndex == 1 || _playerIndex == 3)
-                pointsText.transform.position = new Vector3(pointsPosMultiplayer, pointsText.transform.position.y, pointsText.transform.position.z);
+            {
+                Debug.Log("Changing anchored pos");
+                pointsObjectRT.anchoredPosition = pointsObjRTEvenPlayers.anchoredPosition;
+            }
         }
         
+        public void OnRegisterInput(EControlScheme _controlScheme)
+        {
+            controlScheme = _controlScheme;
+        }
+
+        public Sprite GetFishDisplayCloseSprite()
+        {
+            return buttonSprites.Dictionary[controlScheme];
+        }
+
         public string DisplayButtonToPress(EButton _buttonToPress)
         {
             switch (controlScheme)
@@ -73,7 +88,7 @@ namespace FishingGame.QuickTimeEvents
 
             return "?";
         }
-        
+
         private string GetPlayStationButton(EButton _buttonToPress)
         {
             switch (_buttonToPress)
@@ -90,7 +105,7 @@ namespace FishingGame.QuickTimeEvents
 
             return "?";
         }
-        
+
         private string GetXboxButton(EButton _buttonToPress)
         {
             switch (_buttonToPress)

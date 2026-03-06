@@ -8,7 +8,7 @@ namespace FishingGame.QuickTimeEvents
 {
     public class ButtonMashQTE : QuickTimeEvent
     {
-        [SerializeField] private QTEDisplayService qteDisplayService;
+        [SerializeField] private ButtonDisplayService buttonDisplayService;
         [SerializeField] private QTEController qteController;
 
         [Header("MashEvent needed components: ")]
@@ -63,7 +63,7 @@ namespace FishingGame.QuickTimeEvents
             falseButtonCounter = 0;
 
             currentButtonToPress = (EButton)Random.Range(0, 4);
-            mashButtonText.text = qteDisplayService.DisplayButtonToPress(currentButtonToPress);
+            mashButtonText.text = buttonDisplayService.DisplayButtonToPress(currentButtonToPress);
 
             qteController.CurrentQuickTimeEvent = EQuickTimeEvent.ButtonMash;
 

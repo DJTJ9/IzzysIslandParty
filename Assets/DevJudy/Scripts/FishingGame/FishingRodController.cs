@@ -22,7 +22,6 @@ namespace FishingGame
         [SerializeField] private Transform[] rodLineRendererPositions;
         
         [Header("Dependencies: ")]
-        [SerializeField] private QTEDisplayService qteDisplayService;
         [SerializeField] private MeshRenderer animationLureRenderer;
         [SerializeField] private MeshRenderer physicsLureRenderer;
 
@@ -77,7 +76,7 @@ namespace FishingGame
             }
         }
 
-        public void OnJoin(InputAction.CallbackContext _context)
+        public void OnRegisterInput(InputAction.CallbackContext _context)
         {
             if (joined)
                 return;
@@ -87,12 +86,12 @@ namespace FishingGame
             if (device is Gamepad gamepad)
             {
                 if (gamepad is DualShockGamepad dualShockGamepad)
-                    qteDisplayService.OnJoin(EControlScheme.PlayStation, PlayerIndex);
+                    fishingSystemManager.OnRegisteredInput(EControlScheme.PlayStation);
                 else if (gamepad is XInputController xInputController)
-                    qteDisplayService.OnJoin(EControlScheme.Xbox, PlayerIndex);
+                    fishingSystemManager.OnRegisteredInput(EControlScheme.Xbox);
             }
             else if (device is Keyboard keyboard)
-                qteDisplayService.OnJoin(EControlScheme.Keyboard, PlayerIndex);
+                fishingSystemManager.OnRegisteredInput(EControlScheme.Keyboard);
 
             joined = true;
         }
@@ -109,7 +108,7 @@ namespace FishingGame
             {
                 if (firstTimeCast)
                 {
-                    OnJoin(_context);
+                    OnRegisterInput(_context);
                     firstTimeCast = false;
                 }
 
@@ -126,10 +125,12 @@ namespace FishingGame
                 if (fishingSystemManager.FishHooked)
                 {
                     if (fishingSystemManager.InQTE)
+                    {
                         PullBackFishingRod();
+                        return;
+                    }
                     
                     fishingSystemManager.PressedCatch();
-
                     return;
                 }
 

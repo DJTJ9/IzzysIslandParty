@@ -18,7 +18,7 @@ namespace FishingGame.Display
         [SerializeField] private TextMeshProUGUI fishSizeText;
         [SerializeField] private TextMeshProUGUI fishWeightText;
         [SerializeField] private GameObject fishDisplayPanel;
-        [SerializeField] private GameObject stopFishDisplayButton;
+        [SerializeField] private Image stopFishDisplayButton;
 
         [Header("Rendering: ")]
         [SerializeField] private RawImage fishDisplayImage;
@@ -34,6 +34,7 @@ namespace FishingGame.Display
 
         public void SetupFishDisplay(int _playerIndex)
         {
+            
             if (renderTextures.Count > _playerIndex)
             {
                 fishDisplayImage.texture = renderTextures[_playerIndex];
@@ -47,6 +48,11 @@ namespace FishingGame.Display
                 Debug.LogError("No FishDisplayPanel found");
             else
                 fishDisplayPanel.SetActive(false);
+        }
+
+        public void SetFishDisplayCloseButton(Sprite _closeFishDisplayButton)
+        {
+            stopFishDisplayButton.sprite = _closeFishDisplayButton;
         }
 
         private void InstantiateFishUIRenderer(int _playerIndex)
@@ -109,13 +115,13 @@ namespace FishingGame.Display
 
         public void StopDisplayFish()
         {
-            if (playerInput.enabled)
-                playerInput.SwitchCurrentActionMap(fishingActionMap);
-
             fishDisplayPanel.SetActive(false);
             
             currentFishShown.SetActive(false);
             currentFishShown = null;
+            
+            if (playerInput.enabled)
+                playerInput.SwitchCurrentActionMap(fishingActionMap);
         }
 
         public void ClearPrefabReferences(List<SO_Fish> _fishList)

@@ -13,10 +13,10 @@ namespace FishingGame.Player.Multiplayer
         [SerializeField] private SO_PlayerCollection npcCollection;
         public SO_PlayerCollection playerCollectionFF;
 
-        [SerializeField]private UnityEvent onLevelLoad;
-        
+        [SerializeField] private UnityEvent onLevelLoad;
+
         private CharacterCreatorService characterCreatorService;
-        
+
         private int playerIndex;
         private int humanPlayerIndex;
         private int npcIndex;
@@ -26,11 +26,11 @@ namespace FishingGame.Player.Multiplayer
         private void Start()
         {
             characterCreatorService = GetComponent<CharacterCreatorService>();
-            
+
             playerIndex = 0;
             npcIndex = 0;
             currentPlayers.Players.Clear();
-            
+
             onLevelLoad.Invoke();
         }
 
@@ -38,7 +38,7 @@ namespace FishingGame.Player.Multiplayer
         {
             onLevelLoad.Invoke();
         }
-        
+
         private void OnDestroy()
         {
             ClearPlayerReferences();
@@ -52,59 +52,65 @@ namespace FishingGame.Player.Multiplayer
                 return;
             }
 
-            var parent = _playerInput.gameObject.transform.parent;
-
             if (_playerInput.gameObject.TryGetComponent(out FishingGameNPCBehaviour npc))
             {
-                if (humanPlayerIndex == 1)
-                {
-                    Identifier cameraHolder = _playerInput.transform.parent.gameObject.GetComponentInChildren<Identifier>();
-                    cameraHolder.gameObject.SetActive(false);
-                }
-
-                npc.SetPlayerIndex(playerIndex);
-                npc.OnNPCJoined(npcCollection.Players[playerIndex - 1].PlayerScore);
-
-                parent.gameObject.name = npcCollection.Players[npc.GetPlayerIndex() - 1].Name;
-
-                currentPlayers.Players.Add(npcCollection.Players[npc.GetPlayerIndex() - 1]);
-
-                parent.transform.position = npcCollection.Players[playerIndex - 1].SpawnPoint;
-                
-                PlayerMeshIdentifier npcMesh = _playerInput.gameObject.GetComponentInChildren<PlayerMeshIdentifier>();
-                if (npcMesh != null)
-                {
-                    characterCreatorService.SetMeshAndMaterial(npcMesh.MeshRenderer, playerIndex);
-                   
-                    if (npcMesh.HasTwoMeshes)
-                        characterCreatorService.SetOtherMaterial(npcMesh.OtherMeshRenderer, playerIndex);
-                }
-
-                ++npcIndex;
-                ++playerIndex;
-
+                JoinNPC(_playerInput, npc);
                 return;
             }
 
             if (_playerInput.gameObject.TryGetComponent(out FishingRodController playerController))
                 playerController.SetPlayerIndex(playerIndex);
-            
+
+            JoinPlayerCharacter(_playerInput);
+        }
+
+        private void JoinPlayerCharacter(PlayerInput _playerInput)
+        {
             playerCollectionFF.Players[playerIndex].PlayerReference = _playerInput.gameObject;
             currentPlayers.Players.Add(playerCollectionFF.Players[playerIndex]);
 
-            parent.transform.position = playerCollectionFF.Players[playerIndex].SpawnPoint;
-            
+            _playerInput.gameObject.transform.parent.transform.position = playerCollectionFF.Players[playerIndex].SpawnPoint;
+
             PlayerMeshIdentifier playerMesh = _playerInput.gameObject.GetComponentInChildren<PlayerMeshIdentifier>();
             if (playerMesh != null)
             {
                 characterCreatorService.SetMeshAndMaterial(playerMesh.MeshRenderer, playerIndex);
-                   
+
                 if (playerMesh.HasTwoMeshes)
                     characterCreatorService.SetOtherMaterial(playerMesh.OtherMeshRenderer, playerIndex);
             }
 
             ++playerIndex;
             ++humanPlayerIndex;
+        }
+
+        private void JoinNPC(PlayerInput _playerInput, FishingGameNPCBehaviour _npc)
+        {
+            if (humanPlayerIndex == 1)
+            {
+                Identifier cameraHolder = _playerInput.transform.parent.gameObject.GetComponentInChildren<Identifier>();
+                cameraHolder.gameObject.SetActive(false);
+            }
+
+            _npc.SetPlayerIndex(playerIndex);
+            _npc.OnNPCJoined(npcCollection.Players[playerIndex - 1].PlayerScore);
+
+            _playerInput.gameObject.transform.parent.gameObject.name = npcCollection.Players[_npc.GetPlayerIndex() - 1].Name;
+            _playerInput.gameObject.transform.parent.transform.position = npcCollection.Players[playerIndex - 1].SpawnPoint;
+
+            currentPlayers.Players.Add(npcCollection.Players[_npc.GetPlayerIndex() - 1]);
+
+            PlayerMeshIdentifier npcMesh = _playerInput.gameObject.GetComponentInChildren<PlayerMeshIdentifier>();
+            if (npcMesh != null)
+            {
+                characterCreatorService.SetMeshAndMaterial(npcMesh.MeshRenderer, playerIndex);
+
+                if (npcMesh.HasTwoMeshes)
+                    characterCreatorService.SetOtherMaterial(npcMesh.OtherMeshRenderer, playerIndex);
+            }
+
+            ++npcIndex;
+            ++playerIndex;
         }
 
         public void JoinNPCs()

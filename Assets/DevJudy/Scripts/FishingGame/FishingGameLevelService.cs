@@ -10,9 +10,6 @@ namespace FishingGame
         [SerializeField] private GameAudioManager gameAudioManager;
         [SerializeField] private LevelTimer levelTimer;
         
-        [Header("Temp: ")]
-        [SerializeField] private Vector2 npcPointRange;
-        
         private void Start()
         {
             if (gameAudioManager == null || levelTimer == null)

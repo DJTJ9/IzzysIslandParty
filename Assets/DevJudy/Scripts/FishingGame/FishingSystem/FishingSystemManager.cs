@@ -16,7 +16,8 @@ namespace FishingGame
 
         [Header("Scripts: ")]
         [SerializeField] public QTEController QTEController;
-        [SerializeField] public QTEDisplayService QTEDisplayService;
+
+        [SerializeField] public ButtonDisplayService buttonDisplayService;
         [SerializeField] private FishDisplay fishDisplay;
         [SerializeField] private IconHandler iconHandler;
         [SerializeField] private UIPointsService pointsService;
@@ -30,7 +31,7 @@ namespace FishingGame
         public Coroutine FishingRoutine;
 
         public bool FishHooked { get; set; }
-        public bool InQTE { get; set; }
+        public bool InQTE { get; private set; }
         public bool FishDisplayActive { get; set; }
 
         private void Awake()
@@ -67,6 +68,15 @@ namespace FishingGame
             PlayerIndex = _playerIndex;
 
             gameScore.Value = 0;
+
+            buttonDisplayService.SetPointsButtonRect(_playerIndex);
+        }
+
+        public void OnRegisteredInput(EControlScheme _controlScheme)
+        {
+            buttonDisplayService.OnRegisterInput(_controlScheme);
+
+            fishDisplay.SetFishDisplayCloseButton(buttonDisplayService.GetFishDisplayCloseSprite());
         }
 
         public void SetUpFishDisplay(List<SO_Fish> _fishList)
@@ -114,8 +124,8 @@ namespace FishingGame
         public void StartFishEvent(SO_Fish _caughtFish)
         {
             InQTE = true;
-            
-            catchEventHandler.StartFishEvent(_caughtFish, QTEController, QTEDisplayService, PlayerIndex);
+
+            catchEventHandler.StartFishEvent(_caughtFish, QTEController, buttonDisplayService, PlayerIndex);
         }
 
         public bool CheckIfCatchEventFinished()
@@ -130,8 +140,7 @@ namespace FishingGame
 
         public void PressedCatch()
         {
-            if (!FishingSystem.Instance.PressedCatch[PlayerIndex])
-                iconHandler.DisplayIcon(EEmotion.Happy);
+            iconHandler.DisplayIcon(EEmotion.Happy);
 
             FishingSystem.Instance.PressedCatch[PlayerIndex] = true;
         }
@@ -139,7 +148,7 @@ namespace FishingGame
         public void StopFishing()
         {
             InQTE = false;
-            
+
             catchEventHandler.StopQTE(PlayerIndex);
             FishingSystem.Instance.StopFishing(this);
         }

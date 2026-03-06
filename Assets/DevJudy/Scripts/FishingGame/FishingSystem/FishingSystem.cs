@@ -129,7 +129,7 @@ namespace FishingGame
 
                 float randomSecondsToPressCatch = Random.Range(buttonPressTimerRange.x, buttonPressTimerRange.y);
                 yield return new WaitForSeconds(randomSecondsToPressCatch);
-
+                
                 if (!PressedCatch[_fishingSystemManager.PlayerIndex])
                     _fishingSystemManager.StopFishBitingAnimation();
 

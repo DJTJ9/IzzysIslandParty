@@ -52,11 +52,11 @@ namespace FishingGame
             StopAllCoroutines();
         }
 
-        public void StartFishEvent(SO_Fish _fishToCatch, QTEController _qteController, QTEDisplayService _qteDisplayService, int _playerIndex)
+        public void StartFishEvent(SO_Fish _fishToCatch, QTEController _qteController, ButtonDisplayService _buttonDisplayService, int _playerIndex)
         {
             ResetCatchEventVariables(_playerIndex);
 
-            StartCoroutine(CatchEventCoroutine(_fishToCatch.CatchEvents, _playerIndex, _qteController, _qteDisplayService));
+            StartCoroutine(CatchEventCoroutine(_fishToCatch.CatchEvents, _playerIndex, _qteController, _buttonDisplayService));
         }
 
         private void ResetCatchEventVariables(int _playerIndex)
@@ -69,7 +69,7 @@ namespace FishingGame
         }
 
         private IEnumerator CatchEventCoroutine(List<EQuickTimeEvent> _quickTimeEvent, int _playerIndex, QTEController _qteController,
-            QTEDisplayService _qteDisplayService)
+            ButtonDisplayService _buttonDisplayService)
         {
             CatchEventVariables[_playerIndex].CatchEventSuccess = false;
 

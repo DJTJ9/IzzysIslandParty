@@ -17,6 +17,7 @@ namespace Juice
 
         [Header("Camera")]
         [SerializeField] private bool rotateToCamera = true;
+
         [ShowIf("rotateToCamera")]
         [SerializeField] private Camera mainCamera;
 
@@ -43,16 +44,16 @@ namespace Juice
                 {
                     var meshRenderer = targets[0];
                     targets[i] = new GameObject().AddComponent<MeshRenderer>();
-                    
+
                     targets[i].renderingLayerMask = meshRenderer.renderingLayerMask;
                     targets[i].receiveShadows = meshRenderer.receiveShadows;
                     targets[i].shadowCastingMode = meshRenderer.shadowCastingMode;
-                    
+
                     var meshFilter = targets[0].gameObject.GetComponent<MeshFilter>();
-                    
+
                     targets[i].gameObject.AddComponent<MeshFilter>().mesh = meshFilter.sharedMesh;
                     targets[i].transform.SetParent(this.transform);
-                    
+
                     targets[i].transform.position = targets[0].transform.position;
                     targets[i].transform.rotation = targets[0].transform.rotation;
                     targets[i].transform.localScale = targets[0].transform.localScale;
@@ -88,7 +89,7 @@ namespace Juice
         {
             if (!targets[currentEmotionIndex].gameObject)
                 return;
-            
+
             targets[currentEmotionIndex].gameObject.SetActive(false);
         }
 
@@ -108,10 +109,11 @@ namespace Juice
         public void DisplayIcon(EEmotion _emotion)
         {
             if (debug)
-            Debug.Log( gameObject.transform.parent.parent.name + " Displaying icon " + _emotion);
+                Debug.Log(gameObject.transform.parent.parent.name + " Displaying icon " + _emotion);
+            
             if (iconTimer.IsRunning)
                 iconTimer.Stop();
-            
+
             if (TryGetEmotion(_emotion))
                 iconTimer.Start();
             else
