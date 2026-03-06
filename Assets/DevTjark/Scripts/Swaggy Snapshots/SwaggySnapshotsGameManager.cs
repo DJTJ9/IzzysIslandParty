@@ -19,7 +19,7 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
     public static float StartMoveDuration = 5f;
     public static float RoundTime = 15f;
 
-    [SerializeField] private SO_PlayerCollection SO_Players;
+    [SerializeField] private SO_SwaggySnapshotsPlayerCollection playersSO;
 
     [FoldoutGroup("Events", expanded: false)] 
     [SerializeField] private UnityEvent onDanceMoveChanged;
@@ -42,9 +42,10 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
         StartMoveDuration = m_startMoveDuration;
         RoundTime = m_roundTime;
 
-        foreach (var player in SO_Players.Players)
+        foreach (var player in playersSO.Players)
         {
             player.PlayerScore.ResetScore();
+            player.ResetScoreValues();
         }
     }
 

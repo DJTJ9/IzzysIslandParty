@@ -6,11 +6,11 @@ using UnityEngine.Serialization;
 
 public class SwaggySnapshotsPlayerJoiner : MonoBehaviour
 {
-    [SerializeField] private SO_PlayerCollection currentPlayers;
+    [SerializeField] private SO_SwaggySnapshotsPlayerCollection currentPlayers;
     
     [FoldoutGroup("Scriptable Objects", expanded: true)]
-    [SerializeField] private SO_PlayerCollection playerCollectionSS;
-    [SerializeField] private SO_PlayerCollection npcCollectionSS;
+    [SerializeField] private SO_SwaggySnapshotsPlayerCollection playerCollectionSS;
+    [SerializeField] private SO_SwaggySnapshotsPlayerCollection npcCollectionSS;
     [SerializeField] private UnityEvent onLevelLoaded;
 
     private int m_playerIndex = 0;

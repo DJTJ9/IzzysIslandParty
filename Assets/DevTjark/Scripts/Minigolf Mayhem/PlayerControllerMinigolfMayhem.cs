@@ -36,11 +36,17 @@ public class PlayerControllerMinigolfMayhem : Controller
 
     public void OnPauseInput(InputAction.CallbackContext _context)
     {
+        if (!pauseInputEnabled) return;
+        if (!_context.started) return;
+        
         OnPause.Invoke();
     }
 
     public void OnUnpauseInput(InputAction.CallbackContext _context)
     {
+        if (!pauseInputEnabled) return;
+        if (!_context.started) return;
+        
         OnUnpause.Invoke();
     }
 
@@ -62,6 +68,7 @@ public class PlayerControllerMinigolfMayhem : Controller
     public void OnJumpInput(InputAction.CallbackContext _context)
     {
         if (!m_isActive) return;
+        if (!_context.started) return;
 
         rigidbodyMovement.Jump();
     }

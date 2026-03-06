@@ -16,6 +16,9 @@ public class PhotoCapture : MonoBehaviour
     [FoldoutGroup("Score Label", expanded: true)]
     [SerializeField] private TMP_Text scoreLabel;
     [SerializeField] private TMP_Text scoreNumber;
+    [SerializeField] private TMP_Text happyScoreLabel;
+    [SerializeField] private TMP_Text faceScoreLabel;
+    [SerializeField] private TMP_Text coolMoveScoreLabel;
 
     // [SerializeField] private Image photoDisplayArea2;
     // [SerializeField] private GameObject photoFrame2;
@@ -28,7 +31,7 @@ public class PhotoCapture : MonoBehaviour
     [SerializeField] private Animator fadingAnimator;
     [SerializeField] private float fadeInSpeed = 1f;
 
-    [SerializeField] private SO_PlayerCollection currentPlayersSO;
+    [SerializeField] private SO_SwaggySnapshotsPlayerCollection currentPlayersSO;
     private Controller controller;
     
     private Texture2D m_screenCapture;
@@ -48,6 +51,9 @@ public class PhotoCapture : MonoBehaviour
     {
         if (currentPlayersSO.Players[controller.PlayerIndex] == null) return;
         scoreNumber.text = currentPlayersSO.Players[controller.PlayerIndex].PlayerScore.Value.ToString("0");
+        happyScoreLabel.text = $"+{currentPlayersSO.Players[controller.PlayerIndex].HappyFaceScore}";
+        faceScoreLabel.text = $"+{currentPlayersSO.Players[controller.PlayerIndex].FacingCameraScore}";
+        coolMoveScoreLabel.text = $"+{currentPlayersSO.Players[controller.PlayerIndex].CoolDanceMoveScore}";
     }
 
     private void OnEnable()

@@ -115,16 +115,24 @@ private void Start()
 
     public void OnStartGame(InputAction.CallbackContext _context)
     {
+        if (!_context.started) return;
+        
         onGameStart.Invoke();
     }
 
     public void OnPause(InputAction.CallbackContext _context)
     {
+        if (!pauseInputEnabled) return;
+        if (!_context.started) return;
+        
         onPause.Invoke();
     }
     
     public void OnUnpause(InputAction.CallbackContext _context)
     {
+        if (!pauseInputEnabled) return;
+        if (!_context.started) return;
+        
         onUnpause.Invoke();
     }
 
