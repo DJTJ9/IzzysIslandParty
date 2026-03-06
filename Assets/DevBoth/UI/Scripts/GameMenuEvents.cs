@@ -30,6 +30,8 @@ public class GameMenuEvents : MonoBehaviour
     [Header("Menus")]
     private VisualElement pauseMenu;
     private VisualElement playerHub;
+    private VisualElement jetskiJoyrideModusSelection;
+    private VisualElement minigolfMayhemModusSelection;
     private VisualElement resultsScreen;
     private VisualElement resultsModal;
     private VisualElement endScreenUI;
@@ -46,7 +48,13 @@ public class GameMenuEvents : MonoBehaviour
     private Button bowlingBattleButton;
     private Button fishingFrenzyButton;
     private Button jetskiJoyrideButton;
+    private Button jetskiJoyrideRaceButton;
+    private Button jetskiJoyrideSlalomButton;
+    private Button jetskiJoyrideModusSelectionBackButton;
     private Button minigolfMayhemButton;
+    private Button minigolfMayhemClassicButton;
+    private Button minigolfMayhemRaceButton;
+    private Button minigolfMayhemModusSelectionBackButton;
     private Button swaggySnapshotsButton;
     private Button hastyHurdlesButton;
     private Button playerHUBBackButton;
@@ -147,6 +155,8 @@ public class GameMenuEvents : MonoBehaviour
     {
         pauseMenu = document.rootVisualElement.Q("pause-menu__container");
         playerHub = document.rootVisualElement.Q("player-hub__container");
+        jetskiJoyrideModusSelection = document.rootVisualElement.Q("jetski-joyride-modus-selection__container");
+        minigolfMayhemModusSelection = document.rootVisualElement.Q("minigolf-mayhem-modus-selection__container");
         resultsScreen = document.rootVisualElement.Q("results-screen-and-buttons__container");
         resultsModal = document.rootVisualElement.Q("results-screen__container");
         endScreenUI = document.rootVisualElement.Q("end-screen-menu__container");
@@ -165,7 +175,13 @@ public class GameMenuEvents : MonoBehaviour
         bowlingBattleButton = document.rootVisualElement.Q("play-bowling-battle__button") as Button;
         fishingFrenzyButton = document.rootVisualElement.Q("play-fishing-frenzy__button") as Button;
         jetskiJoyrideButton = document.rootVisualElement.Q("play-jetski-joyride__button") as Button;
+        jetskiJoyrideRaceButton = document.rootVisualElement.Q("play-jetski-joyride-race__button") as Button;
+        jetskiJoyrideSlalomButton = document.rootVisualElement.Q("play-jetski-joyride-slalom__button") as Button;
+        jetskiJoyrideModusSelectionBackButton = document.rootVisualElement.Q("jetski-joyride-modus-selection-back__button") as Button;
         minigolfMayhemButton = document.rootVisualElement.Q("play-minigolf-mayhem__button") as Button;
+        minigolfMayhemClassicButton = document.rootVisualElement.Q("play-minigolf-mayhem-classic__button") as Button;
+        minigolfMayhemRaceButton = document.rootVisualElement.Q("play-minigolf-mayhem-race__button") as Button;
+        minigolfMayhemModusSelectionBackButton = document.rootVisualElement.Q("minigolf-mayhem-modus-selection-back__button") as Button;
         swaggySnapshotsButton = document.rootVisualElement.Q("play-swaggy-snapshots__button") as Button;
         hastyHurdlesButton = document.rootVisualElement.Q("play-hasty-hurdles__button") as Button;
         playerHUBBackButton = document.rootVisualElement.Q("player-hub-back__button") as Button;
@@ -226,8 +242,14 @@ public class GameMenuEvents : MonoBehaviour
         // Player HUB buttons
         bowlingBattleButton.clicked += OnLoadBowlingBattle;
         fishingFrenzyButton.clicked += OnLoadFishingFrenzy;
-        jetskiJoyrideButton.clicked += OnLoadJetskiJoyride;
-        minigolfMayhemButton.clicked += OnLoadMinigolfMayhem;
+        jetskiJoyrideButton.clicked += OnSelectJetskiJoyride;
+        jetskiJoyrideRaceButton.clicked += OnLoadJetskiJoyrideRace;
+        jetskiJoyrideSlalomButton.clicked += OnLoadJetskiJoyrideSlalom;
+        jetskiJoyrideModusSelectionBackButton.clicked += OnJetskiJoyrideBack;
+        minigolfMayhemButton.clicked += OnSelectMinigolfMayhem;
+        minigolfMayhemClassicButton.clicked += OnLoadMinigolfMayhemClassic;
+        minigolfMayhemRaceButton.clicked += OnLoadMinigolfMayhemRace;
+        minigolfMayhemModusSelectionBackButton.clicked += OnMinigolfMayhemBack;
         swaggySnapshotsButton.clicked += OnLoadSwaggySnapshots;
         hastyHurdlesButton.clicked += OnLoadHastyHurdles;
         playerHUBBackButton.clicked += OnPlayerHubBack;
@@ -254,8 +276,14 @@ public class GameMenuEvents : MonoBehaviour
         // Player HUB buttons
         bowlingBattleButton.clicked -= OnLoadBowlingBattle;
         fishingFrenzyButton.clicked -= OnLoadFishingFrenzy;
-        jetskiJoyrideButton.clicked -= OnLoadJetskiJoyride;
-        minigolfMayhemButton.clicked -= OnLoadMinigolfMayhem;
+        jetskiJoyrideButton.clicked -= OnSelectJetskiJoyride;
+        jetskiJoyrideRaceButton.clicked -= OnLoadJetskiJoyrideRace;
+        jetskiJoyrideSlalomButton.clicked -= OnLoadJetskiJoyrideSlalom;
+        jetskiJoyrideModusSelectionBackButton.clicked -= OnJetskiJoyrideBack;
+        minigolfMayhemButton.clicked -= OnSelectMinigolfMayhem;
+        minigolfMayhemClassicButton.clicked -= OnLoadMinigolfMayhemClassic;
+        minigolfMayhemRaceButton.clicked -= OnLoadMinigolfMayhemRace;
+        minigolfMayhemModusSelectionBackButton.clicked -= OnMinigolfMayhemBack;
         swaggySnapshotsButton.clicked -= OnLoadSwaggySnapshots;
         hastyHurdlesButton.clicked -= OnLoadHastyHurdles;
         playerHUBBackButton.clicked -= OnPlayerHubBack;
@@ -492,19 +520,55 @@ public class GameMenuEvents : MonoBehaviour
         LoadSingleScene(SceneNames.FishingFrenzy);
     }
 
-    private void OnLoadJetskiJoyride()
+    private void OnSelectJetskiJoyride()
+    {
+        jetskiJoyrideModusSelection.style.display = DisplayStyle.Flex;
+        playerHub.style.display = DisplayStyle.None;
+    }
+
+    private void OnLoadJetskiJoyrideRace()
     {
         LoadSingleScene(SceneNames.JetskiJoyrideRace);
     }
+    
+    private void OnLoadJetskiJoyrideSlalom()
+    {
+        LoadSingleScene(SceneNames.JetskiJoyrideSlalom);
+    }
 
-    private void OnLoadMinigolfMayhem()
+    private void OnJetskiJoyrideBack()
+    {
+        jetskiJoyrideModusSelection.style.display = DisplayStyle.None;
+        playerHub.style.display = DisplayStyle.Flex;
+        FocusButton(bowlingBattleButton);
+    }
+
+    private void OnSelectMinigolfMayhem()
+    {
+        minigolfMayhemModusSelection.style.display = DisplayStyle.Flex;
+        playerHub.style.display = DisplayStyle.None;
+    }
+
+    private void OnLoadMinigolfMayhemClassic()
     {
         LoadSingleScene(SceneNames.MinigolfMayhemClassic);
+    }
+
+    private void OnLoadMinigolfMayhemRace()
+    {
+        LoadSingleScene(SceneNames.MinigolfMayhemRace);
     }
 
     private void OnLoadSwaggySnapshots()
     {
         LoadSingleScene(SceneNames.SwaggySnapshots);
+    }
+
+    private void OnMinigolfMayhemBack()
+    {
+        minigolfMayhemModusSelection.style.display = DisplayStyle.None;
+        playerHub.style.display = DisplayStyle.Flex;
+        FocusButton(bowlingBattleButton);
     }
 
     private void OnLoadHastyHurdles()

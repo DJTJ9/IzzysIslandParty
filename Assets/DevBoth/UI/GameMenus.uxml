@@ -1,8 +1,8 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/DevBoth/UI/PlayerHubStyle.uss?fileID=7433441132597879392&amp;guid=520cb84fd4065e54db377802fbec6137&amp;type=3#PlayerHubStyle" />
-    <Style src="project://database/Assets/DevBoth/UI/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=25d8977cbaec736409b2c76d050db212&amp;type=3#MainMenuStyle" />
-    <Style src="project://database/Assets/DevBoth/UI/PlayerUIStyle.uss?fileID=7433441132597879392&amp;guid=fe566f1f50f552b49b1c1b82b11f38fa&amp;type=3#PlayerUIStyle" />
-    <Style src="project://database/Assets/DevBoth/UI/ControllerSelection.uss?fileID=7433441132597879392&amp;guid=8db747412f6ad684ea1b0a2c67321e71&amp;type=3#ControllerSelection" />
+    <Style src="project://database/Assets/DevBoth/UI/PlayerHubStyle.uss?fileID=7433441132597879392&amp;guid=520cb84fd4065e54db377802fbec6137&amp;type=3" />
+    <Style src="project://database/Assets/DevBoth/UI/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=25d8977cbaec736409b2c76d050db212&amp;type=3" />
+    <Style src="project://database/Assets/DevBoth/UI/PlayerUIStyle.uss?fileID=7433441132597879392&amp;guid=fe566f1f50f552b49b1c1b82b11f38fa&amp;type=3" />
+    <Style src="project://database/Assets/DevBoth/UI/ControllerSelection.uss?fileID=7433441132597879392&amp;guid=8db747412f6ad684ea1b0a2c67321e71&amp;type=3" />
     <ui:VisualElement name="pause-menu__container" style="flex-grow: 1; display: none;">
         <ui:Label text="PAUSE MENU" name="pause-menu-header__label" class="header" style="width: 50%; height: 20%;" />
         <ui:Button text="RESUME" name="pause-menu-resume__button" class="button" />
@@ -16,18 +16,36 @@
         </ui:VisualElement>
         <ui:VisualElement name="player-hub-middle__container" style="flex-grow: 1; height: 70%;">
             <ui:VisualElement name="player-hub-middle-first-row__container" class="gameSelectorContainer" style="width: 90%; justify-content: center;">
-                <ui:Button text="&#10;&#10;BOWLING BATTLE" name="play-bowling-battle__button" class="levelButton" />
-                <ui:Button text="&#10;&#10;FISHING FRENZY" name="play-fishing-frenzy__button" class="levelButton" />
-                <ui:Button text="&#10;&#10;JETSKI JOYRIDE" name="play-jetski-joyride__button" class="levelButton" style="display: flex;" />
+                <ui:Button text="BOWLING BATTLE&#10;&#10;" name="play-bowling-battle__button" class="levelButton" style="background-image: url(&quot;project://database/Assets/DevBoth/Art/Menu_Icons.png?fileID=1384617058&amp;guid=31f4e0ed2a4959940868af16ceb09a31&amp;type=3#Menu_Icons_2&quot;); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; -unity-text-align: lower-center;" />
+                <ui:Button text="FISHING FRENZY&#10;&#10;" name="play-fishing-frenzy__button" class="levelButton" style="-unity-text-align: lower-center; background-image: url(&quot;project://database/Assets/DevBoth/Art/Menu_Icons.png?fileID=-1497446298&amp;guid=31f4e0ed2a4959940868af16ceb09a31&amp;type=3#Menu_Icons_3&quot;); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                <ui:Button text="JETSKI JOYRIDE&#10;&#10;" name="play-jetski-joyride__button" class="levelButton" style="display: flex; background-image: url(&quot;project://database/Assets/DevBoth/Art/Menu_Icons.png?fileID=-1497446298&amp;guid=31f4e0ed2a4959940868af16ceb09a31&amp;type=3#Menu_Icons_3&quot;); -unity-text-align: lower-center; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
             </ui:VisualElement>
             <ui:VisualElement name="player-hub-middle-second-row__container" class="gameSelectorContainer" style="width: 90%;">
-                <ui:Button text="&#10;&#10;MINIGOLF MAYHEM" name="play-minigolf-mayhem__button" class="levelButton" style="overflow: visible; display: flex;" />
-                <ui:Button text="&#10;&#10;SWAGGY SNAPSHOTS" name="play-swaggy-snapshots__button" class="levelButton" />
-                <ui:Button text="&#10;&#10;HASTY HURDLES" name="play-hasty-hurdles__button" class="levelButton" />
+                <ui:Button text="MINIGOLF MAYHEM&#10;&#10;" name="play-minigolf-mayhem__button" class="levelButton" style="overflow: visible; display: flex; -unity-text-align: lower-center; background-image: url(&quot;project://database/Assets/DevBoth/Art/Menu_Icons.png?fileID=-625049339&amp;guid=31f4e0ed2a4959940868af16ceb09a31&amp;type=3#Menu_Icons_1&quot;); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                <ui:Button text="SWAGGY SNAPSHOTS&#10;&#10;" name="play-swaggy-snapshots__button" class="levelButton" style="background-image: url(&quot;project://database/Assets/DevBoth/Art/Discoball.png?fileID=1351780151&amp;guid=05fa86245a93e3447aea06e4055c3df9&amp;type=3#Discoball_0&quot;); -unity-text-align: lower-center; background-size: 100% 100%; font-size: 25px; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                <ui:Button text="HASTY HURDLES&#10;&#10;" name="play-hasty-hurdles__button" class="levelButton" style="-unity-text-align: lower-center; background-image: url(&quot;project://database/Assets/DevBoth/Art/Menu_Icons.png?fileID=-693695246&amp;guid=31f4e0ed2a4959940868af16ceb09a31&amp;type=3#Menu_Icons_0&quot;); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="player-hub-bottom__container" style="flex-grow: 1; align-items: center; display: flex; visibility: visible;">
             <ui:Button text="BACK" name="player-hub-back__button" class="levelButton" style="background-image: none;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="jetski-joyride-modus-selection__container" style="flex-grow: 1; flex-direction: column; justify-content: center; align-self: auto; align-content: center; align-items: center; display: none; background-image: url(&quot;project://database/Assets/DevBoth/Art/Izzy%20Island%20Party%20Main%20Menu%20Background.png?fileID=2800000&amp;guid=258d5e495edbf1148898151c157d78b1&amp;type=3#Izzy Island Party Main Menu Background&quot;);">
+        <ui:VisualElement name="jetski-joyride-modus-selection-buttons__container" style="flex-grow: 1; height: 80%; width: 100%; flex-direction: row; align-items: center; align-content: flex-start; justify-content: center; display: flex; align-self: flex-start;">
+            <ui:Button text="RACE&#10;&#10;" name="play-jetski-joyride-race__button" class="levelButton" style="height: 50%; background-image: url(&quot;project://database/Assets/DevBoth/Art/Menu_Icons_Options.png?fileID=-1150138023&amp;guid=15b3994de8a42cc4391ff1ac5294079c&amp;type=3#Menu_Icons_Options_0&quot;); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; font-size: 26px; width: 31%;" />
+            <ui:Button text="SLALOM&#10;&#10;" name="play-jetski-joyride-slalom__button" parse-escape-sequences="true" class="levelButton" style="height: 50%; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-image: url(&quot;project://database/Assets/DevBoth/Art/Menu_Icons_Options.png?fileID=-1413202283&amp;guid=15b3994de8a42cc4391ff1ac5294079c&amp;type=3#Menu_Icons_Options_3&quot;); font-size: 26px; width: 31%;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="jetski-joyride-modus-selection-back-button__container" style="flex-grow: 1; height: 20%; width: 100%; align-items: center; justify-content: center;">
+            <ui:Button text="BACK" name="jetski-joyride-modus-selection-back__button" class="button" style="height: 50%; width: 20%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="minigolf-mayhem-modus-selection__container" style="flex-grow: 1; flex-direction: column; justify-content: center; align-self: auto; align-content: center; align-items: center; display: none; background-image: url(&quot;project://database/Assets/DevBoth/Art/Izzy%20Island%20Party%20Main%20Menu%20Background.png?fileID=2800000&amp;guid=258d5e495edbf1148898151c157d78b1&amp;type=3#Izzy Island Party Main Menu Background&quot;);">
+        <ui:VisualElement name="minigolf-mayhem-modus-selection-buttons__container" style="flex-grow: 1; height: 80%; width: 100%; flex-direction: row; align-items: center; align-content: flex-start; justify-content: center; display: flex; align-self: flex-start;">
+            <ui:Button text="SLALOM&#10;&#10;" name="play-minigolf-mayhem-classic__button" parse-escape-sequences="true" class="levelButton" style="height: 50%; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-image: url(&quot;project://database/Assets/DevBoth/Art/Menu_Icons_Options.png?fileID=-1210031005&amp;guid=15b3994de8a42cc4391ff1ac5294079c&amp;type=3#Menu_Icons_Options_1&quot;); font-size: 26px; width: 31%;" />
+            <ui:Button text="RACE &#10;&#10;" name="play-minigolf-mayhem-race__button" class="levelButton" style="height: 50%; background-image: url(&quot;project://database/Assets/DevBoth/Art/Menu_Icons_Options.png?fileID=-1282063713&amp;guid=15b3994de8a42cc4391ff1ac5294079c&amp;type=3#Menu_Icons_Options_2&quot;); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; font-size: 26px; width: 31%;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="minigolf-mayhem-modus-selection-back-button__container" style="flex-grow: 1; height: 20%; width: 100%; align-items: center; justify-content: center;">
+            <ui:Button text="BACK" name="minigolf-mayhem-modus-selection-back__button" class="button" style="height: 50%; width: 20%;" />
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="player-ui__container" class="player-ui-main-container" style="flex-grow: 1; display: none;">
