@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace HurdleGame
 {
-    public class HurdlePlayerController : MonoBehaviour
+    public class HurdlePlayerController : Controller
     {
         private CountdownTimer slideTimer;
 
@@ -29,10 +29,6 @@ namespace HurdleGame
 
         private Vector2 regColliderSize = new Vector2(0.2f, 0.61f);
         private Vector3 regColliderCenter = new Vector3(0f, 0.31f, 0f);
-
-        // [Header("Movement variables: ")]
-        // private float allowedPosOffset = 2f;
-        // private Vector3 ogRunningPos;
 
         [Header("GroundCheck variables: ")]
         [SerializeField] private LayerMask groundLayer;

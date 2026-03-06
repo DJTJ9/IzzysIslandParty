@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5413502618019380367}
   - component: {fileID: 3195554420517741234}
   - component: {fileID: 4644165193290906214}
+  - component: {fileID: 7455636160862185399}
   m_Layer: 0
   m_Name: Pf_HurdleGamePlayerManager
   m_TagString: Untagged
@@ -47,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 2
-  m_MaxPlayerCount: -1
+  m_MaxPlayerCount: 4
   m_AllowJoining: 1
   m_JoinBehavior: 1
   m_PlayerJoinedEvent:
@@ -131,6 +132,41 @@ MonoBehaviour:
   currentPlayers: {fileID: 11400000, guid: 0f53a93ee4a82a94ea1754a908dd21bd, type: 2}
   playerCollection: {fileID: 11400000, guid: c941e89a933411f44b2d28cfc2ea31c8, type: 2}
   npcCollection: {fileID: 11400000, guid: 4e2a4e0fcf2c4cf4ba03861788acbf7c, type: 2}
+  onLevelLoaded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 130711ff1a6413a4a9f360a3cd13980d, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  setPlayerLayer: 0
+  playerLayerIndex: 
+  playerInputManager: {fileID: 3195554420517741234}
+  npcBehaviour: {fileID: 0}
+--- !u!114 &7455636160862185399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700201860007818293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1b71d1ea2f96d44b052c46d265e630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterMaterialCollection: {fileID: 11400000, guid: 01d8d0743dc90f94f8ac6717a464c4cb, type: 2}
+  characterMeshCollection: {fileID: 11400000, guid: 0662ba26ce715c044a3563dabdffae5a, type: 2}
+  hasTwoMeshes: 0
+  OtherMaterialCollection: {fileID: 0}
 --- !u!1 &3606515755815814517
 GameObject:
   m_ObjectHideFlags: 0

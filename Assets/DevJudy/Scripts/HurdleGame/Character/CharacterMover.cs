@@ -1,4 +1,7 @@
+using enums;
 using Helper;
+using Juice;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,13 +10,15 @@ namespace HurdleGame
     [RequireComponent(typeof(Rigidbody))]
     public class CharacterMover : MonoBehaviour
     {
+        private const float moveDirMultiplier = 100f;
+        
         private Rigidbody rb;
-
+        [SerializeField] private IconHandler iconHandler;
         [SerializeField] private UnityEvent OnHitObstacleEvents;
         [SerializeField] private FloatReference moveSpeed;
-        private float moveDirMultiplier = 100f;
+        [SerializeField] private FloatReference obstacleHitDeduction;
+        
         private float individualMultiplier = 1f;
-
         public float IndividualMultiplier
         {
             get => individualMultiplier;
@@ -42,11 +47,36 @@ namespace HurdleGame
         public void OnHitObstacle()
         {
             transform.position += new Vector3(-1, 0f, 0f);
-            individualMultiplier -= 0.01f;
+            individualMultiplier -= obstacleHitDeduction.Value;
 
-            // Play animation
-            // Show Icon
+            int randomEmote = Random.Range(0, 2);
+
+            switch (randomEmote)
+            {
+                case 0:
+                        iconHandler.DisplayIcon(EEmotion.Sad);
+                    break;
+                default:
+                        iconHandler.DisplayIcon(EEmotion.Embarrassed);
+                    break;
+            }
+
             OnHitObstacleEvents.Invoke();
+        }
+
+        public void OnClearedObstacle()
+        {
+            int randomEmote = Random.Range(0, 3);
+
+            switch (randomEmote)
+            {
+                case 0:
+                    iconHandler.DisplayIcon(EEmotion.Love);
+                    break;
+                default:
+                    iconHandler.DisplayIcon(EEmotion.Happy);
+                    break;
+            }
         }
 
         private void FixedUpdate()

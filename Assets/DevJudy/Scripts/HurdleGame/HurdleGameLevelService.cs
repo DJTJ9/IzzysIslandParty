@@ -23,9 +23,14 @@ namespace HurdleGame.LevelService
 
         #endregion
 
+        [Header("Dependencies: ")]
+        [SerializeField] private SO_PlayerCollectionRacingGames currentPlayersRacing;
+        [SerializeField] private CameraMoverAddition cameraMoverAddition;
+        [SerializeField] private UIPanelManager uiPanelManager;
+        [SerializeField] private GameAudioManager audioManager;
+        
         [Header("Level start/end: ")]
         [SerializeField] private int secondsToStartLevel;
-
         [SerializeField] private Transform goalTransform;
         [SerializeField] private TextMeshProUGUI levelCountdownText;
 
@@ -35,17 +40,9 @@ namespace HurdleGame.LevelService
 
         private bool raceStarted = false;
         private bool raceEnded = false;
-
-        [Header("Dependencies: ")]
-        [SerializeField] private SO_PlayerCollectionRacingGames currentPlayersRacing;
-        [SerializeField] private CameraMoverAddition cameraMoverAddition;
-        [SerializeField] private UIPanelManager uiPanelManager;
-
-        [Header("Temp ")]
-        //[SerializeField] private TextMeshProUGUI placementText;
+        
+        [Header("Temp: ")]
         [SerializeField] private TextMeshProUGUI onFinishLineCrossedText;
-
-        [SerializeField] private GameAudioManager audioManager;
         [SerializeField] private bool checkXOnly;
         
         
@@ -177,9 +174,6 @@ namespace HurdleGame.LevelService
                 // If the distance is less, or all left neighbours have been checked, make sure to give the key value to the current index (ln + 1)
                 placementOrder[leftNeighbour + 1] = currentGameObjectBeingCompared;
             }
-
-            //var placement = GetPlayerNumber() + 1;
-            //placementText.text = (placement.ToString() + "/" + placementOrder.Length);
         }
 
         private float GetDistanceToGoal(Vector3 _gameObjectPos)
@@ -218,6 +212,7 @@ namespace HurdleGame.LevelService
         private void OnPlayerCrossedFinishLine()
         {
             humanPlayerCount--;
+            Debug.LogWarning("HPC_ " + humanPlayerCount);
 
             if (humanPlayerCount == 0)
             {
@@ -228,6 +223,7 @@ namespace HurdleGame.LevelService
         
         public override void EndLevel()
         {
+            Debug.LogWarning("Ending level");
             raceEnded = true;
 
             onFinishLineCrossedText?.gameObject.SetActive(true);

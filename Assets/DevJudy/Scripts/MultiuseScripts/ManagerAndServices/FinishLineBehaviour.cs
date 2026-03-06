@@ -8,8 +8,6 @@ namespace MultiuseScripts
     {
         [Header("Dependencies: ")]
         [SerializeField] private CustomTriggerBehaviour finishLineTrigger;
-
-        // Change that and ILevelService to a levelService parent 
         [SerializeField] private RacingGameLevelService levelService;
 
         private void Start()
@@ -24,13 +22,13 @@ namespace MultiuseScripts
         {
             if (_triggeringObj.gameObject.CompareTag("Ignore") || !_triggeringObj.gameObject.TryGetComponent(out Controller controller))
                 return;
-            //!! Visual feedback!!
+            
             if (controller is JetskiController playerController)
                 playerController.OnObstacleCleared();
             else if (controller is JetskiNPCBehaviour npcController)
                 npcController.OnObstacleCleared();
 
-            levelService?.OnFinishLineCrossed(_triggeringObj.gameObject);
+            levelService.OnFinishLineCrossed(_triggeringObj.gameObject);
         }
     }
 }
