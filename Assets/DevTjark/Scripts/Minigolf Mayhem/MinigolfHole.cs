@@ -52,7 +52,7 @@ public class MinigolfHole : MonoBehaviour
             if (raceMode && m_finishedPlayers / 2 == k_MaxPlayerCount - 1)
             {
                 countdownTimer.Start();
-                ConsoleProDebug.LogToFilter("Game End Countdown started!", "Event");
+                ConsoleProDebug.LogToFilter($"Game End Countdown with {waitForLastPlayerTime}s started!", "Event");
             }
             
             if (classicMode && m_finishedPlayers / 2 == k_MaxPlayerCount)
@@ -66,7 +66,7 @@ public class MinigolfHole : MonoBehaviour
             _playerController.SwitchToUIInputMap();
         }
         
-        _other.transform.parent.GetComponentInChildren<PlayerUIMinigolfMayhem>().StopTimer();
+        // _other.transform.parent.GetComponentInChildren<PlayerUIMinigolfMayhem>().StopTimer();
             
         // _other.gameObject.SetActive(false);
     }

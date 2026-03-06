@@ -25,34 +25,34 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
     private Controller playerController;
     private RigidbodyMovement rigidbodyMovement;
     private GoapRigidbodyMovement goapRigidbodyMovement;
-    private Stopwatch finishTimer;
+    private Stopwatch m_finishTimer;
 
-    private const float DISAPPEAR_TIME_BUFFER = 0.3f;
-    private bool isPlayer;
-    private bool isNPC;
-    private bool racingMode;
-    private bool classicMode;
+    private const float k_DisappearTimeBuffer = 0.3f;
+    private bool m_isPlayer;
+    private bool m_isNPC;
+    private bool m_racingMode;
+    private bool m_classicMode;
 
     private void Start()
     {
         minigolfMayhemGameManager = FindFirstObjectByType<MinigolfMayhemGameManager>();
-        racingMode = minigolfMayhemGameManager.RaceMode;
-        classicMode = minigolfMayhemGameManager.ClassicMode;
+        m_racingMode = minigolfMayhemGameManager.RaceMode;
+        m_classicMode = minigolfMayhemGameManager.ClassicMode;
         playerController = transform.parent.GetComponentInChildren<Controller>();
         rigidbodyMovement = playerController.transform.parent.GetComponentInChildren<RigidbodyMovement>();
-        isPlayer = rigidbodyMovement != null;
+        m_isPlayer = rigidbodyMovement != null;
         goapRigidbodyMovement = playerController.transform.parent.GetComponentInChildren<GoapRigidbodyMovement>();
-        isNPC = goapRigidbodyMovement != null;
+        m_isNPC = goapRigidbodyMovement != null;
         shootForceBar.fillAmount = 0;
         cooldownBar.fillAmount = 0;
 
-        if (racingMode)
+        if (m_racingMode)
         {
             roundTimer.SetActive(true);
-            finishTimer = new Stopwatch();
-            finishTimer.Start();
+            m_finishTimer = new Stopwatch();
+            m_finishTimer.Start();
         }
-        if (classicMode)
+        if (m_classicMode)
         {
             shootCounter.SetActive(true);
         }
@@ -70,7 +70,7 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayer)
+        if (m_isPlayer)
         {
             var normalizedForce = (rigidbodyMovement.CurrentShootForce - rigidbodyMovement.minShootForce) 
                                   / (rigidbodyMovement.maxShootForce - rigidbodyMovement.minShootForce);
@@ -79,36 +79,40 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
             
             cooldownBar.fillAmount = Mathf.Clamp01(rigidbodyMovement.MovementCooldownTimer.CurrentTime / rigidbodyMovement.MovementCooldown);
             cooldownText.text = $"{Mathf.RoundToInt(rigidbodyMovement.MovementCooldownTimer.CurrentTime).ToString()}s";
-            cooldownTimer.SetActive(rigidbodyMovement.MovementCooldownTimer.CurrentTime > DISAPPEAR_TIME_BUFFER && rigidbodyMovement.MovementCooldownTimer.IsRunning);
+            cooldownTimer.SetActive(rigidbodyMovement.MovementCooldownTimer.CurrentTime > k_DisappearTimeBuffer && rigidbodyMovement.MovementCooldownTimer.IsRunning);
             
             playersSO.Players[playerController.PlayerIndex].PlayerScore.Value = rigidbodyMovement.ShotsTaken;
             shootCounterText.text = rigidbodyMovement.ShotsTaken.ToString();
         }
 
-        if (isNPC)
+        if (m_isNPC)
         {
             cooldownBar.fillAmount = Mathf.Clamp01(goapRigidbodyMovement.MovementCooldownTimer.CurrentTime / goapRigidbodyMovement.MovementCooldown);
             cooldownText.text = $"{Mathf.RoundToInt(goapRigidbodyMovement.MovementCooldownTimer.CurrentTime).ToString()}s";
-            cooldownTimer.SetActive(goapRigidbodyMovement.MovementCooldownTimer.CurrentTime > DISAPPEAR_TIME_BUFFER && goapRigidbodyMovement.MovementCooldownTimer.IsRunning);
+            cooldownTimer.SetActive(goapRigidbodyMovement.MovementCooldownTimer.CurrentTime > k_DisappearTimeBuffer && goapRigidbodyMovement.MovementCooldownTimer.IsRunning);
             
             playersSO.Players[playerController.PlayerIndex].PlayerScore.Value = goapRigidbodyMovement.ShotsTaken;
             shootCounterText.text = goapRigidbodyMovement.ShotsTaken.ToString();
         }
 
-        if (!racingMode) return;
-        roundTimerText.text = finishTimer.Elapsed.ToString("m':'ss':'ff");
-        playersSO.Players[playerController.PlayerIndex].Time = finishTimer.Elapsed.ToString("m':'ss':'ff");
-        playersSO.Players[playerController.PlayerIndex].TimeValue = (float)finishTimer.Elapsed.TotalMilliseconds;
+        if (!m_racingMode) return;
+        roundTimerText.text = m_finishTimer.Elapsed.ToString("m':'ss':'ff");
+        playersSO.Players[playerController.PlayerIndex].Time = m_finishTimer.Elapsed.ToString("m':'ss':'ff");
+        playersSO.Players[playerController.PlayerIndex].TimeValue = (float)m_finishTimer.Elapsed.TotalMilliseconds;
     }
+
+    public void StartTimer()
+    {
+        if (!roundTimer.activeSelf) return;
+        m_finishTimer.Start();
+    }
+    
+    public string GetFinishTime() => m_finishTimer.Elapsed.ToString("m':'ss':'ff");
 
     private void OnPlayerFinished(int _playerIndex)
     {
-        if (_playerIndex == playerController.PlayerIndex) StopTimer();
+        if (_playerIndex == playerController.PlayerIndex && roundTimer.activeSelf) StopTimer();
     }
     
-    public void StartTimer() => finishTimer.Start();
-    
-    public void StopTimer() => finishTimer.Stop();
-    
-    public string GetFinishTime() => finishTimer.Elapsed.ToString("m':'ss':'ff");
+    private void StopTimer() => m_finishTimer.Stop();
 }

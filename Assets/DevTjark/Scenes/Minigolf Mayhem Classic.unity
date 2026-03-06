@@ -2236,63 +2236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 569612370539826198, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4520109491267070112, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4520109491267070112, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4520109491267070112, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 526890204}
-    - target: {fileID: 4520109491267070112, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4520109491267070112, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: DisablePauseInput
-      objectReference: {fileID: 0}
-    - target: {fileID: 4520109491267070112, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: PlayerControllerMinigolfMayhem, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4520109491267070112, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 7984608998311807520, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7984608998311807520, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7984608998311807520, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 526890204}
-    - target: {fileID: 7984608998311807520, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7984608998311807520, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: EnablePauseInput
-      objectReference: {fileID: 0}
-    - target: {fileID: 7984608998311807520, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: PlayerControllerMinigolfMayhem, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7984608998311807520, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8196362803946966465, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2339,17 +2283,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
---- !u!114 &526890204 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2926994867532943103, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
-  m_PrefabInstance: {fileID: 526890203}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c13f386af314c4681a4dc804d9b4c40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &531376612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10969,8 +10902,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3684734565330761391, guid: 550415949d1c0084d865a766e942f318, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3684734565330761391, guid: 550415949d1c0084d865a766e942f318, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0159
+      value: 0.0059
+      objectReference: {fileID: 0}
+    - target: {fileID: 3684734565330761391, guid: 550415949d1c0084d865a766e942f318, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5024
+      objectReference: {fileID: 0}
+    - target: {fileID: 7589119257330870963, guid: 550415949d1c0084d865a766e942f318, type: 3}
+      propertyPath: m_Size.y
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8141240530697059720, guid: 550415949d1c0084d865a766e942f318, type: 3}
       propertyPath: m_Name
