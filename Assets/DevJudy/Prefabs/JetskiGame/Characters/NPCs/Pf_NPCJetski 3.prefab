@@ -611,6 +611,12 @@ MonoBehaviour:
   turnSpeed: 4
   turnDistance: 8
   stoppingDistance: 1
+  obstacleCheckSize: 2
+  obstacleCheckPosition: {x: 0, y: 0.4, z: 3.8}
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  debug: 0
 --- !u!1 &3381622338017256414
 GameObject:
   m_ObjectHideFlags: 0

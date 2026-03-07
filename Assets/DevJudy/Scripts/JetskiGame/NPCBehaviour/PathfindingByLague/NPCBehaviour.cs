@@ -13,23 +13,25 @@ namespace Pathfinding
         private const float minPathUpdateTime = 0.2f;
         private const float pathUpdateThreshold = 25f;
         private const float squareMoveThreshold = pathUpdateThreshold * pathUpdateThreshold;
-        
+
         private SO_PlayerRacingGames player;
         private Rigidbody rb;
 
         [SerializeField] private IconHandler iconHandler;
         [SerializeField] private Transform target;
-        
+
         [Header("Movement variables: ")]
         [SerializeField] private float speed = 20f;
+
         [SerializeField] private float turnSpeed = 2.5f;
         [SerializeField] private float turnDistance = 10f;
         [SerializeField] private float stoppingDistance = 2f;
         private Vector3 previousPosition;
         private Vector3 goingBackwardsFromPosition;
-        
+
         [Header("Obstacle Check:")]
         [SerializeField] private float obstacleCheckSize;
+
         [SerializeField] private Vector3 obstacleCheckPosition;
         [SerializeField] private LayerMask obstacleLayerMask;
 
@@ -37,21 +39,18 @@ namespace Pathfinding
         int pathIndex = 0;
 
         private Coroutine followPathRoutine;
-        
+
         private int timeDeductionMinutes;
         private int timeDeductionSeconds;
-
-        private bool wentFarEnoughBack = false;
-        private bool canFollowPath = false;
-        private bool finishLineCrossed = false;
+        
+        [SerializeField]private bool canFollowPath = false;
+        [SerializeField]private bool finishLineCrossed = false;
 
         [SerializeField] private bool debug;
 
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
-
-            previousPosition = new Vector3(rb.position.x * -2, rb.position.y, rb.position.z * -2);
         }
 
         public override void OnNPCJoined(SO_PlayerRacingGames _player)
@@ -90,7 +89,7 @@ namespace Pathfinding
             if (followPathRoutine != null && !finishLineCrossed)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(path.LookPoints[pathIndex] - transform.position);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.fixedDeltaTime);
             }
         }
 
@@ -168,37 +167,60 @@ namespace Pathfinding
                 {
                     speedPercent = Mathf.Clamp01(path.TurnBoundaries[path.FinishLineIndex].DistanceFromPoint(pos2D) / stoppingDistance);
 
-                    if (speedPercent < 0.01f)
+                    if (speedPercent < 0.01f && finishLineCrossed)
                         followingPath = false;
                 }
 
-                if ((previousPosition - transform.position).sqrMagnitude < 0.01f)
-                {
-                    Collider[] colliders = Physics.OverlapSphere(transform.position + obstacleCheckPosition, obstacleCheckSize, obstacleLayerMask);
-
-                    if (colliders.Length > 1)
-                    {
-                        for (int i = 0; i < colliders.Length; i++)
-                        {
-                            if (!colliders[i].gameObject.CompareTag("Obstacle"))
-                                continue;
-                            
-                            if (debug)
-                                Debug.Log(gameObject.name + " is going backwards");
-                            
-                            rb.AddForce((speed * speedPercent) * (transform.forward * -1), ForceMode.Force);
-                        }
-                    }
-                }
-                else
-                    rb.AddForce((speed * speedPercent) * transform.forward, ForceMode.Force);
-
-                previousPosition = transform.position;
+                MoveJetski(speedPercent);
 
                 yield return new WaitForFixedUpdate();
             }
 
             yield return null;
+        }
+
+        private void MoveJetski(float _speedPercent)
+        {
+            if (debug)
+                Debug.Log("Moving jetski " + gameObject.name);
+            
+            if (!((previousPosition - transform.position).sqrMagnitude < 0.01f))
+            {
+                rb.AddForce((speed * _speedPercent) * transform.forward, ForceMode.Force);
+                previousPosition = transform.position;
+
+                if (debug)
+                    Debug.Log(gameObject.name + " is going forward");
+
+                return;
+            }
+
+            Collider[] colliders = Physics.OverlapSphere(transform.position + obstacleCheckPosition, obstacleCheckSize, obstacleLayerMask);
+
+            if (colliders.Length > 1)
+            {
+                for (int i = 0; i < colliders.Length; i++)
+                {
+                    if (!colliders[i].gameObject.CompareTag("Obstacle"))
+                        continue;
+
+                    if (debug)
+                        Debug.Log(gameObject.name + " is going backwards");
+
+                    PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+
+                    rb.AddForce((speed * _speedPercent) * ((transform.forward + transform.right) * -1.5f), ForceMode.Force);
+                    previousPosition = transform.position;
+
+                    return;
+                }
+            }
+
+            if (debug)
+                Debug.Log(gameObject.name + " is all the way down here");
+
+            rb.AddForce((speed * _speedPercent) * transform.forward, ForceMode.Force);
+            previousPosition = transform.position;
         }
 
         public void OnObstacleCleared()
@@ -254,6 +276,9 @@ namespace Pathfinding
         {
             if (path != null)
                 path.DrawWithGizmos();
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position + obstacleCheckPosition, obstacleCheckSize);
         }
     }
 }

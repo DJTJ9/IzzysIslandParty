@@ -323,6 +323,8 @@ namespace JetskiGame
         {
             if (winnerPlacementOrder.Count < maxNumberOfPlayers)
             {
+                CheckRacerPlacements();
+                
                 for (int i = 0; i < maxNumberOfPlayers; i++)
                 {
                     var foundObjectInList = false;

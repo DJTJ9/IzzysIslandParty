@@ -843,9 +843,17 @@ MonoBehaviour:
   iconHandler: {fileID: 4275719983787225679}
   target: {fileID: 0}
   speed: 21
-  turnSpeed: 1.5
+  turnSpeed: 2
   turnDistance: 15
   stoppingDistance: 0.5
+  obstacleCheckSize: 2
+  obstacleCheckPosition: {x: 0, y: 0.4, z: 3.8}
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  canFollowPath: 0
+  finishLineCrossed: 0
+  debug: 0
 --- !u!1 &4648680551557594294
 GameObject:
   m_ObjectHideFlags: 0
