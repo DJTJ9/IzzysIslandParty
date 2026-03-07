@@ -42,10 +42,9 @@ namespace Pathfinding
 
         private int timeDeductionMinutes;
         private int timeDeductionSeconds;
-
-        private bool wentFarEnoughBack = false;
-        private bool canFollowPath = false;
-        private bool finishLineCrossed = false;
+        
+        [SerializeField]private bool canFollowPath = false;
+        [SerializeField]private bool finishLineCrossed = false;
 
         [SerializeField] private bool debug;
 
@@ -90,7 +89,7 @@ namespace Pathfinding
             if (followPathRoutine != null && !finishLineCrossed)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(path.LookPoints[pathIndex] - transform.position);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.fixedDeltaTime);
             }
         }
 
@@ -168,7 +167,7 @@ namespace Pathfinding
                 {
                     speedPercent = Mathf.Clamp01(path.TurnBoundaries[path.FinishLineIndex].DistanceFromPoint(pos2D) / stoppingDistance);
 
-                    if (speedPercent < 0.01f)
+                    if (speedPercent < 0.01f && finishLineCrossed)
                         followingPath = false;
                 }
 
@@ -182,11 +181,14 @@ namespace Pathfinding
 
         private void MoveJetski(float _speedPercent)
         {
+            if (debug)
+                Debug.Log("Moving jetski " + gameObject.name);
+            
             if (!((previousPosition - transform.position).sqrMagnitude < 0.01f))
             {
                 rb.AddForce((speed * _speedPercent) * transform.forward, ForceMode.Force);
                 previousPosition = transform.position;
-                
+
                 if (debug)
                     Debug.Log(gameObject.name + " is going forward");
 
@@ -194,11 +196,7 @@ namespace Pathfinding
             }
 
             Collider[] colliders = Physics.OverlapSphere(transform.position + obstacleCheckPosition, obstacleCheckSize, obstacleLayerMask);
-            bool moved = false;
 
-            if (debug)
-                Debug.Log(gameObject.name + " is checking collider");
-            
             if (colliders.Length > 1)
             {
                 for (int i = 0; i < colliders.Length; i++)
@@ -209,15 +207,18 @@ namespace Pathfinding
                     if (debug)
                         Debug.Log(gameObject.name + " is going backwards");
 
-                    rb.AddForce((speed * _speedPercent) * (transform.forward * -1), ForceMode.Force);
+                    PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+
+                    rb.AddForce((speed * _speedPercent) * ((transform.forward + transform.right) * -1.5f), ForceMode.Force);
                     previousPosition = transform.position;
-                    
+
                     return;
                 }
             }
+
             if (debug)
                 Debug.Log(gameObject.name + " is all the way down here");
-            
+
             rb.AddForce((speed * _speedPercent) * transform.forward, ForceMode.Force);
             previousPosition = transform.position;
         }
