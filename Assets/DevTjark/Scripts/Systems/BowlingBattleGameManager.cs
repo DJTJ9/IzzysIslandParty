@@ -14,8 +14,7 @@ public class BowlingBattleGameManager : MonoBehaviour
     [SerializeField] private UnityEvent onGameEnd;
     [SerializeField] private UnityEvent onLevelLoaded;
 
-    [FoldoutGroup("Round Settings", expanded: true)] 
-    [SerializeField] private float preparationPhaseDuration = 10f;
+    [FoldoutGroup("Round Settings", expanded: true)] [SerializeField] private float preparationPhaseDuration = 10f;
     [SerializeField] private float roundDuration = 15f;
     [SerializeField] private int maxRounds = 3;
 
@@ -51,14 +50,19 @@ public class BowlingBattleGameManager : MonoBehaviour
 
     private void Update()
     {
-#if !UNITY_EDITOR
-        m_joinPhaseTimer.Tick(Time.deltaTime);
-        m_preparationPhaseTimer.Tick(Time.deltaTime);
-        m_roundTimer.Tick(Time.deltaTime);
-#endif
+        // m_joinPhaseTimer.Tick(Time.deltaTime);
+        // m_preparationPhaseTimer.Tick(Time.deltaTime);
+        // m_roundTimer.Tick(Time.deltaTime);
 
         PreparationPhaseTimer = m_preparationPhaseTimer.IsRunning ? m_preparationPhaseTimer.CurrentTime : preparationPhaseDuration;
         RoundTimer = m_roundTimer.IsRunning ? m_roundTimer.CurrentTime : roundDuration;
+    }
+
+    private void FixedUpdate()
+    {
+        m_joinPhaseTimer.Tick(Time.deltaTime);
+        m_preparationPhaseTimer.Tick(Time.deltaTime);
+        m_roundTimer.Tick(Time.deltaTime);
     }
 
     public void StartGame()

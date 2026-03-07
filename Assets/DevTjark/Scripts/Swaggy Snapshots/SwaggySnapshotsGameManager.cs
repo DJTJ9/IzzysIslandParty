@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class SwaggySnapshotsGameManager : MonoBehaviour
 {
-    [FoldoutGroup("Settings", expanded: true)] [SerializeField] private float m_startMoveDuration = 15f;
+    [FoldoutGroup("Settings", expanded: true)] 
+    [SerializeField] private float m_startMoveDuration = 15f;
     [SerializeField] private float m_roundTime = 15f;
     [SerializeField] private float m_danceMoveDuration = 3f;
     [SerializeField] private float m_photoShowDuration = 10f;
@@ -60,13 +61,14 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
     private void Update()
     {
         RoundTime = !m_roundTimer.IsRunning ? m_roundTime : m_roundTimer.CurrentTime;
+    }
 
-#if !UNITY_EDITOR
+    private void FixedUpdate()
+    {
         m_startMoveTimer.Tick(Time.deltaTime);
         m_danceMoveSwitchTimer.Tick(Time.deltaTime);
         m_roundTimer.Tick(Time.deltaTime);
         m_photoShowTimer.Tick(Time.deltaTime);
-#endif
     }
 
     private void InitializeTimers()

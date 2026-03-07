@@ -73,10 +73,9 @@ public class MinigolfHole : MonoBehaviour
             ++m_finishedPlayers;
         }
 
-        if (_other.TryGetComponent<CinemachineOrbitalFollow>(out var _cinemachine))
+        if (_other.TryGetComponent<GoalCameraController>(out var _goalCameraController))
         {
-            _cinemachine.HorizontalAxis.Value = -88f;
-            _cinemachine.VerticalAxis.Value = 20f;
+            _goalCameraController.SetGoalCameraValues();
         }
 
         if (_other.TryGetComponent<GoalCameraController>(out var goalCameraController))
