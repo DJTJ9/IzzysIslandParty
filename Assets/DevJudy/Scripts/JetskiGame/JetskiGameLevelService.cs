@@ -22,17 +22,14 @@ namespace JetskiGame
 
         #endregion
 
-        [field: SerializeField] public bool IsPvP { get; private set; }
-
         [Header("Level start/end: ")]
         [SerializeField] private int secondsToStartLevel;
-
         [SerializeField] private Transform goalTransform;
         [SerializeField] private TextMeshProUGUI levelCountdownText;
         [SerializeField] private int secondsToEndLevel = 30;
         [SerializeField] private int showCountdownSeconds = 10;
         private List<Tuple<GameObject, string>> winnerPlacementOrder;
-        private List<float> timePenalties;
+        private List<float> finishingTimes;
 
         private bool raceStarted;
         private bool raceEnded;
@@ -46,7 +43,7 @@ namespace JetskiGame
         private void Awake()
         {
             winnerPlacementOrder = new List<Tuple<GameObject, string>>();
-            timePenalties = new List<float>();
+            finishingTimes = new List<float>();
 
             if (checkPlacements)
                 CheckPlacementList();
@@ -210,9 +207,7 @@ namespace JetskiGame
         {
             levelTimer.GetTime(out int minutes, out int seconds, out int milliseconds);
             GetTotalTimeDeduction(_triggeringObj, out var timeDeductionMinutes, out var timeDeductionSeconds);
-
-            timePenalties.Add(timeDeductionMinutes + (timeDeductionSeconds * 0.01f));
-
+            
             int finishingTimeMinutes = minutes + timeDeductionMinutes;
             int finishingTimeSeconds = (seconds + timeDeductionSeconds);
 
@@ -221,6 +216,8 @@ namespace JetskiGame
                 finishingTimeMinutes++;
                 finishingTimeSeconds = (finishingTimeMinutes % 60);
             }
+            
+            finishingTimes.Add(finishingTimeMinutes + (finishingTimeSeconds * 0.010f) + (milliseconds * 0.00010f));
             
             string finishingTime = levelTimer.GetTimeAsString(finishingTimeMinutes, finishingTimeSeconds, milliseconds);
 
@@ -268,7 +265,6 @@ namespace JetskiGame
 
             while (countdown > 0)
             {
-                Debug.Log("Countdown: " + countdown);
                 countdown--;
 
                 yield return new WaitForSecondsRealtime(1f);
@@ -300,13 +296,13 @@ namespace JetskiGame
 
             for (int i = 1; i < winnerPlacementOrder.Count; i++)
             {
-                float currentTimePenaltyToCompare = timePenalties[i];
+                float currentTimePenaltyToCompare = finishingTimes[i];
                 var currentGameObjectBeingCompared = winnerPlacementOrder[i];
 
                 int leftNeighbour = i - 1;
 
                 // While the leftNeighbour is not out of bounds, and the ln distance is more than the currentDistance
-                while (leftNeighbour >= 0 && timePenalties[leftNeighbour] > currentTimePenaltyToCompare)
+                while (leftNeighbour >= 0 && finishingTimes[leftNeighbour] > currentTimePenaltyToCompare)
                 {
                     // Set the index [ln + 1] (first pass index of current key), to be the value of [ln]
                     winnerPlacementOrder[leftNeighbour + 1] = winnerPlacementOrder[leftNeighbour];
@@ -340,7 +336,7 @@ namespace JetskiGame
                     if (!foundObjectInList)
                     {
                         winnerPlacementOrder.Add(new Tuple<GameObject, string>(placementOrder[i], unfinishedRaceText));
-                        timePenalties.Add(1000f + i);
+                        finishingTimes.Add(1000f + i);
                     }
                 }
             }

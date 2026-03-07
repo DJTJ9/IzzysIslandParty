@@ -14,6 +14,9 @@ namespace MultiuseScripts
         [ShowIf("checkPlacements")]
         [SerializeField] protected GameObject[] placementOrder;
         [SerializeField] protected LayerMask playerLayerMask;
+
+        
+        [field: SerializeField] public bool IsPVP { get; protected set; }
         
         public virtual void OnPlayerJoined(GameObject _player) { }
         

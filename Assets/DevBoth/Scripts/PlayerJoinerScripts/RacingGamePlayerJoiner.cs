@@ -127,11 +127,13 @@ namespace JetskiGame.Player.Multiplayer
                 if (playerMesh.HasTwoMeshes)
                     characterCreatorService.SetOtherMaterial(playerMesh.OtherMeshRenderer, playerIndex);
             }
-            
+        
             if (levelService is JetskiGameLevelService jetskiLevelService)
             {
                 if (_playerObj.TryGetComponent(out JetskiGameUIManager jetskiUIManager))
-                    jetskiUIManager.OnPlayerJoined(jetskiLevelService.IsPvP);
+                {
+                    jetskiUIManager.OnPlayerJoined(levelService.IsPVP);
+                }
             }
 
             if (playerLayerIndex.Count > playerIndex && setPlayerLayer)
