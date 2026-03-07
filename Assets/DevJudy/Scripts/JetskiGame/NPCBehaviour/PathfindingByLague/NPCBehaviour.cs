@@ -10,39 +10,48 @@ namespace Pathfinding
 {
     public class JetskiNPCBehaviour : Controller
     {
+        private const float minPathUpdateTime = 0.2f;
+        private const float pathUpdateThreshold = 25f;
+        private const float squareMoveThreshold = pathUpdateThreshold * pathUpdateThreshold;
+        
         private SO_PlayerRacingGames player;
         private Rigidbody rb;
 
         [SerializeField] private IconHandler iconHandler;
-
-        private const float minPathUpdateTime = 0.2f;
-        private const float pathUpdateThreshold = 25f;
-        private const float squareMoveThreshold = pathUpdateThreshold * pathUpdateThreshold;
-
         [SerializeField] private Transform target;
-
+        
+        [Header("Movement variables: ")]
         [SerializeField] private float speed = 20f;
         [SerializeField] private float turnSpeed = 2.5f;
         [SerializeField] private float turnDistance = 10f;
         [SerializeField] private float stoppingDistance = 2f;
         private Vector3 previousPosition;
-
-        private int timeDeductionMinutes;
-        private int timeDeductionSeconds;
+        private Vector3 goingBackwardsFromPosition;
+        
+        [Header("Obstacle Check:")]
+        [SerializeField] private float obstacleCheckSize;
+        [SerializeField] private Vector3 obstacleCheckPosition;
+        [SerializeField] private LayerMask obstacleLayerMask;
 
         private SmoothPath path;
         int pathIndex = 0;
 
         private Coroutine followPathRoutine;
+        
+        private int timeDeductionMinutes;
+        private int timeDeductionSeconds;
 
+        private bool wentFarEnoughBack = false;
         private bool canFollowPath = false;
         private bool finishLineCrossed = false;
+
+        [SerializeField] private bool debug;
 
         private void Start()
         {
             rb = GetComponent<Rigidbody>();
 
-            previousPosition = transform.position;
+            previousPosition = new Vector3(rb.position.x * -2, rb.position.y, rb.position.z * -2);
         }
 
         public override void OnNPCJoined(SO_PlayerRacingGames _player)
@@ -78,7 +87,7 @@ namespace Pathfinding
 
         private void FixedUpdate()
         {
-            if (followPathRoutine != null)
+            if (followPathRoutine != null && !finishLineCrossed)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(path.LookPoints[pathIndex] - transform.position);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
@@ -152,24 +161,39 @@ namespace Pathfinding
                     pathIndex++;
                 }
 
-                if (followingPath)
+                if (!followingPath)
+                    break;
+
+                if (pathIndex >= path.SlowDownIndex && stoppingDistance > 0)
                 {
-                    if (pathIndex >= path.SlowDownIndex && stoppingDistance > 0)
-                    {
-                        speedPercent = Mathf.Clamp01(path.TurnBoundaries[path.FinishLineIndex].DistanceFromPoint(pos2D) / stoppingDistance);
+                    speedPercent = Mathf.Clamp01(path.TurnBoundaries[path.FinishLineIndex].DistanceFromPoint(pos2D) / stoppingDistance);
 
-                        if (speedPercent < 0.01f)
-                            followingPath = false;
-                    }
-
-                    if ((previousPosition - transform.position).sqrMagnitude < 0.01f)
-                    {
-                        rb.AddForce((speed * speedPercent) * (transform.forward * -1), ForceMode.Force);
-                        previousPosition = transform.position;
-                    }
-                    else
-                        rb.AddForce((speed * speedPercent) * transform.forward, ForceMode.Force);
+                    if (speedPercent < 0.01f)
+                        followingPath = false;
                 }
+
+                if ((previousPosition - transform.position).sqrMagnitude < 0.01f)
+                {
+                    Collider[] colliders = Physics.OverlapSphere(transform.position + obstacleCheckPosition, obstacleCheckSize, obstacleLayerMask);
+
+                    if (colliders.Length > 1)
+                    {
+                        for (int i = 0; i < colliders.Length; i++)
+                        {
+                            if (!colliders[i].gameObject.CompareTag("Obstacle"))
+                                continue;
+                            
+                            if (debug)
+                                Debug.Log(gameObject.name + " is going backwards");
+                            
+                            rb.AddForce((speed * speedPercent) * (transform.forward * -1), ForceMode.Force);
+                        }
+                    }
+                }
+                else
+                    rb.AddForce((speed * speedPercent) * transform.forward, ForceMode.Force);
+
+                previousPosition = transform.position;
 
                 yield return new WaitForFixedUpdate();
             }

@@ -132,16 +132,16 @@ namespace MultiuseScripts
             _milliseconds = (int)milliseconds;
         }
         
-        public string GetTimeAsString()
+        public string GetTimeAsString(int _minutes, int _seconds, int _milliseconds)
         {
-            return $"{minutes:00}:{seconds:00}:{milliseconds:00}";
+            return $"{_minutes:00}:{_seconds:00}:{_milliseconds % 100:00}";
         }
 
         public void EndTimerAndDisplayFinishTime()
         {
             UpdateTimer = false;
 
-            timerManager.UpdateTimerText($"Time: {minutes:00}:{seconds:00}:{milliseconds:00}");
+            timerManager.UpdateTimerText($"Time: {minutes:00}:{seconds:00}:{milliseconds % 100:00}");
         }
     }
 }

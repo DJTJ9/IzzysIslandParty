@@ -209,7 +209,7 @@ namespace JetskiGame
         public override void OnFinishLineCrossed(GameObject _triggeringObj)
         {
             levelTimer.GetTime(out int minutes, out int seconds, out int milliseconds);
-            GetTimeDeduction(_triggeringObj, out var timeDeductionMinutes, out var timeDeductionSeconds);
+            GetTotalTimeDeduction(_triggeringObj, out var timeDeductionMinutes, out var timeDeductionSeconds);
 
             timePenalties.Add(timeDeductionMinutes + (timeDeductionSeconds * 0.01f));
 
@@ -222,7 +222,7 @@ namespace JetskiGame
                 finishingTimeSeconds = (finishingTimeMinutes % 60);
             }
             
-            string finishingTime = GetFinishingTimeAsString(finishingTimeMinutes, finishingTimeSeconds, milliseconds);
+            string finishingTime = levelTimer.GetTimeAsString(finishingTimeMinutes, finishingTimeSeconds, milliseconds);
 
             var currentObj = new Tuple<GameObject, string>(_triggeringObj, finishingTime);
             winnerPlacementOrder.Add(currentObj);
@@ -242,7 +242,7 @@ namespace JetskiGame
             }
         }
 
-        private void GetTimeDeduction(GameObject _triggeringObj, out int _timeDeductionMinutes, out int _timeDeductionSeconds)
+        private void GetTotalTimeDeduction(GameObject _triggeringObj, out int _timeDeductionMinutes, out int _timeDeductionSeconds)
         {
             if (_triggeringObj.TryGetComponent(out JetskiController playerController))
             {
@@ -261,12 +261,7 @@ namespace JetskiGame
             _timeDeductionMinutes = 0;
             _timeDeductionSeconds = 0;
         }
-
-        private string GetFinishingTimeAsString(int _minutes, int _seconds, int _milliseconds)
-        {
-            return $"{_minutes:00}:{_seconds:00}:{_milliseconds:00}";
-        }
-
+        
         private IEnumerator StartLevelCountdownTimer()
         {
             int countdown = secondsToEndLevel;
