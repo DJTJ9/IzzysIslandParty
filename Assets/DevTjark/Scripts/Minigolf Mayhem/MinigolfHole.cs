@@ -1,8 +1,10 @@
 ﻿using System;
+using DG.Tweening;
 using ImprovedTimers;
 using Player;
 using Player.Collections;
 using Sirenix.OdinInspector;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,6 +12,9 @@ public class MinigolfHole : MonoBehaviour
 {
     [FoldoutGroup("Settings", expanded: true)]
     [SerializeField] private float waitForLastPlayerTime = 10f;
+    
+    [FoldoutGroup("Easter Egg Positions", expanded: false)]
+    [SerializeField] private Transform[] easterEggPositions;
     
     [SerializeField] private SO_PlayerCollectionRacingGames currentPlayersSO;
     public static event Action<int> onMinigolfPlayerFinished;
@@ -39,14 +44,13 @@ public class MinigolfHole : MonoBehaviour
 
     private void OnTriggerEnter(Collider _other)
     {
-        if (!_other.CompareTag("Player")) return;
+        if (!_other.CompareTag("Player")) return; 
         
         if (_other.TryGetComponent<Controller>(out var controller))
         {
             onMinigolfPlayerFinished?.Invoke(controller.PlayerIndex);
             controller.DisableController();
             
-            ++m_finishedPlayers;
             ConsoleProDebug.LogToFilter($"Players finished: {m_finishedPlayers}", "Debug");
             
             if (raceMode && m_finishedPlayers / 2 == k_MaxPlayerCount - 1)
@@ -59,6 +63,25 @@ public class MinigolfHole : MonoBehaviour
             {
                 onGameEnd.Invoke();
             }
+        }
+        
+        _other.transform.DOMove(easterEggPositions[m_finishedPlayers / 2].position, 2);
+        if (_other.TryGetComponent<Rigidbody>(out var _rb))
+        {
+            _rb.linearVelocity = Vector3.zero;
+            _rb.constraints = RigidbodyConstraints.FreezePosition;
+            ++m_finishedPlayers;
+        }
+
+        if (_other.TryGetComponent<CinemachineOrbitalFollow>(out var _cinemachine))
+        {
+            _cinemachine.HorizontalAxis.Value = -88f;
+            _cinemachine.VerticalAxis.Value = 20f;
+        }
+
+        if (_other.TryGetComponent<GoalCameraController>(out var goalCameraController))
+        {
+            goalCameraController.SwitchToGoalCamera();
         }
         
         if (_other.TryGetComponent<PlayerControllerMinigolfMayhem>(out var _playerController))

@@ -15,6 +15,35 @@ MonoBehaviour:
   components:
   - {fileID: 5909132810617412948}
   - {fileID: 8551014965081924686}
+  - {fileID: 5229004265581129577}
+--- !u!114 &5229004265581129577
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f335fb1ffd8684294ad653bf1c7564, type: 3}
+  m_Name: ColorAdjustments
+  m_EditorClassIdentifier: 
+  active: 1
+  postExposure:
+    m_OverrideState: 1
+    m_Value: 0.64
+  contrast:
+    m_OverrideState: 1
+    m_Value: 18
+  colorFilter:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  hueShift:
+    m_OverrideState: 0
+    m_Value: 0
+  saturation:
+    m_OverrideState: 1
+    m_Value: 78
 --- !u!114 &5909132810617412948
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -27,7 +56,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71227a7e727fb84a8710842b018e658, type: 3}
   m_Name: RetroSettings
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   renderPassEvent:
     m_OverrideState: 0
     m_Value: 550
@@ -100,7 +129,7 @@ MonoBehaviour:
     m_Value: 0.9
   intensity:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 3.85
   scatter:
     m_OverrideState: 0
     m_Value: 0.7

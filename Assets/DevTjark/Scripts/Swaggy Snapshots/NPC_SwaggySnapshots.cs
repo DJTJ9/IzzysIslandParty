@@ -7,8 +7,6 @@ using Random = UnityEngine.Random;
 
 public class NPC_SwaggySnapshots : Controller
 {
-    [SerializeField] private UnityEvent<int> onTakePhoto;
-
     private PhotoCapture photoCapture;
     private CountdownTimer m_photoTimer;
 

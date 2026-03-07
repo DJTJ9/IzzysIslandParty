@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using Audio;
+using enums;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -81,7 +83,9 @@ public class PhotoCapture : MonoBehaviour
         m_photoTaken = true;
         
         // onPhotoTaken.Invoke();
-        StartCoroutine(FlashLightEffect());
+        
+        PlayCameraSound();
+        ShowFlashLight();
         
         yield return new WaitForEndOfFrame();
         
@@ -114,6 +118,14 @@ public class PhotoCapture : MonoBehaviour
         flashLight.SetActive(true);
         yield return new WaitForSeconds(flashLightDuration);
         flashLight.SetActive(false);
+    }
+    
+    private void ShowFlashLight() => StartCoroutine(FlashLightEffect());
+    
+    private void PlayCameraSound()
+    {
+        var cameraSound = AudioService.Instance.CreateSound(AudioCollection.Instance.levelSoundsDictionary.LevelAudios["CameraClick"], EAudioType.SFX);
+        AudioService.Instance.PlaySound(cameraSound);
     }
 
     public void HideScreenshot()

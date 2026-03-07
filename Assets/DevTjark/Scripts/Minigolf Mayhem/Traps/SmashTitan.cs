@@ -1,4 +1,6 @@
-﻿using Sirenix.OdinInspector;
+﻿using Audio;
+using enums;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class SmashTitan : MonoBehaviour
@@ -29,4 +31,10 @@ public class SmashTitan : MonoBehaviour
     public void PlayDustParticles() => dustParticles.Play();
     
     public void StopDustParticles() => dustParticles.Stop();
+
+    public void PlaySmashSound()
+    {
+        var smashSound = AudioService.Instance.CreateSound(AudioCollection.Instance.levelSoundsDictionary.LevelAudios["TitanSmash"], EAudioType.SFX);
+        AudioService.Instance.PlaySound(smashSound);
+    }
 }

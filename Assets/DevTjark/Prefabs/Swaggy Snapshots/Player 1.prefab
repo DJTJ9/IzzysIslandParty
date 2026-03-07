@@ -126,7 +126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerIndex: 0
-  PauseInputEnabled: 0
   onPause:
     m_PersistentCalls:
       m_Calls:
@@ -146,6 +145,21 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: cb8390d9fabb07843b5f42bf6275d672, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onGameStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
         m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 1
@@ -327,7 +341,19 @@ MonoBehaviour:
     m_ActionId: f60f81e8-8952-4e5f-9c65-96b348c0117f
     m_ActionName: New action map/New action
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7646641832864498062}
+        m_TargetAssemblyTypeName: PlayerControllerSwaggySnapshots, Assembly-CSharp
+        m_MethodName: OnStartGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: cde468ba-184e-4c5d-9ae8-96f5986c5dcf
     m_ActionName: 'UI/StartGame[/Keyboard/space,/XInputControllerWindows/buttonNorth]'
   - m_PersistentCalls:

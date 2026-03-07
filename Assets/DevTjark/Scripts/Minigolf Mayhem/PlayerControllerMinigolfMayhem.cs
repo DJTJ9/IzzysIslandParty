@@ -15,6 +15,7 @@ public class PlayerControllerMinigolfMayhem : Controller
     [FoldoutGroup("Events", expanded: true)] 
     [SerializeField] private UnityEvent OnPause;
     [SerializeField] private UnityEvent OnUnpause;
+    [SerializeField] private UnityEvent onGameStart;
 
     private void Awake()
     {
@@ -84,6 +85,11 @@ public class PlayerControllerMinigolfMayhem : Controller
         {
             cameraController.DisableRearView();
         }
+    }
+
+    public void OnStartGame(InputAction.CallbackContext _context)
+    {
+        onGameStart.Invoke();
     }
 
     public void LockMouseCursor()

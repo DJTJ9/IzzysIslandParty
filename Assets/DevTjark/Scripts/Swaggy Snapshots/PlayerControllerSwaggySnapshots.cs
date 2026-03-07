@@ -17,6 +17,7 @@ public class PlayerControllerSwaggySnapshots : Controller
     public static event Action<int> onTakePhoto;
     [SerializeField] private UnityEvent onPause;
     [SerializeField] private UnityEvent onUnpause;
+    [SerializeField] private UnityEvent onGameStart;
     
     private void Awake()
     {
@@ -53,6 +54,11 @@ public class PlayerControllerSwaggySnapshots : Controller
         if (!_context.started) return;
 
         onUnpause.Invoke();
+    }
+
+    public void OnStartGame(InputAction.CallbackContext _context)
+    {
+        onGameStart.Invoke();
     }
     
     public override void SwitchToPlayerInputMap()
