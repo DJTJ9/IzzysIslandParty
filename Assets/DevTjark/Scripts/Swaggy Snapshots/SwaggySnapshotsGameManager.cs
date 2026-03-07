@@ -61,12 +61,20 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
     {
         RoundTime = !m_roundTimer.IsRunning ? m_roundTime : m_roundTimer.CurrentTime;
 
-#if !UNITY_EDITOR
+// #if !UNITY_EDITOR
+//         m_startMoveTimer.Tick(Time.deltaTime);
+//         m_danceMoveSwitchTimer.Tick(Time.deltaTime);
+//         m_roundTimer.Tick(Time.deltaTime);
+//         m_photoShowTimer.Tick(Time.deltaTime);
+// #endif
+    }
+
+    private void FixedUpdate()
+    {
         m_startMoveTimer.Tick(Time.deltaTime);
         m_danceMoveSwitchTimer.Tick(Time.deltaTime);
         m_roundTimer.Tick(Time.deltaTime);
         m_photoShowTimer.Tick(Time.deltaTime);
-#endif
     }
 
     private void InitializeTimers()

@@ -51,14 +51,21 @@ public class BowlingBattleGameManager : MonoBehaviour
 
     private void Update()
     {
-#if !UNITY_EDITOR
-        m_joinPhaseTimer.Tick(Time.deltaTime);
-        m_preparationPhaseTimer.Tick(Time.deltaTime);
-        m_roundTimer.Tick(Time.deltaTime);
-#endif
+// #if !UNITY_EDITOR
+//         m_joinPhaseTimer.Tick(Time.deltaTime);
+//         m_preparationPhaseTimer.Tick(Time.deltaTime);
+//         m_roundTimer.Tick(Time.deltaTime);
+// #endif
 
         PreparationPhaseTimer = m_preparationPhaseTimer.IsRunning ? m_preparationPhaseTimer.CurrentTime : preparationPhaseDuration;
         RoundTimer = m_roundTimer.IsRunning ? m_roundTimer.CurrentTime : roundDuration;
+    }
+
+    private void FixedUpdate()
+    {
+        m_joinPhaseTimer.Tick(Time.deltaTime);
+        m_preparationPhaseTimer.Tick(Time.deltaTime);
+        m_roundTimer.Tick(Time.deltaTime);
     }
 
     public void StartGame()
