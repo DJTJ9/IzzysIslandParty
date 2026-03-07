@@ -1458,7 +1458,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1912335234}
+      - m_Target: {fileID: 904836284}
         m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
         m_MethodName: OnPlayerJoined
         m_Mode: 0
@@ -1473,7 +1473,7 @@ MonoBehaviour:
   m_PlayerLeftEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1912335234}
+      - m_Target: {fileID: 904836284}
         m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
         m_MethodName: OnPlayerLeft
         m_Mode: 0
@@ -2175,7 +2175,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 774865563}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
   m_Name: 
@@ -2553,6 +2553,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a40a603e86c96542bfd7405c856aed5, type: 3}
+--- !u!114 &904836284 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2959331706522202594, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+  m_PrefabInstance: {fileID: 1160986800}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 424d2ca1ec44454289227c131c2564d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &946896506
 GameObject:
   m_ObjectHideFlags: 0
@@ -3116,6 +3127,91 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fdd52d495473d7489ab9f1567a9e810, type: 3}
+--- !u!1001 &1160986800
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 273097479486318097, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowSwaggySnapshotsStartScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 2959331706522202594, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: racingGame
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2959331706522202594, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: swaggySnapshots
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2959331706522202594, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: currentPlayersSwaggySnapshots
+      value: 
+      objectReference: {fileID: 11400000, guid: 882ef21184fdabd4b9a8dcda17ca6b29, type: 2}
+    - target: {fileID: 4600051183545743871, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowSwaggySnapshotsResultScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 5762206781639407265, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: m_Name
+      value: Menus
+      objectReference: {fileID: 0}
+    - target: {fileID: 5762206781639407265, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417799156898099563, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417799156898099563, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417799156898099563, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417799156898099563, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417799156898099563, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417799156898099563, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417799156898099563, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417799156898099563, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417799156898099563, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8417799156898099563, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9114735083709927797, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowSwaggySnapshotsStartScreen
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
 --- !u!1001 &1185936165
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6083,7 +6179,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1912335233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6117,8 +6213,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneCollection: {fileID: 11400000, guid: 6fd8971a4dff91645b76a391153753d8, type: 2}
   racingGame: 0
+  swaggySnapshots: 0
   currentPlayers: {fileID: 11400000, guid: 97ae6e8cdb921dd4d97057deb65c1858, type: 2}
   currentPlayersRacing: {fileID: 0}
+  currentPlayersSwaggySnapshots: {fileID: 0}
   rowTemplate: {fileID: 9197481963319205126, guid: a5da0a2b314073b4f97b6ae48036cd3c, type: 3}
   animDuration: 0.3
   holdDuration: 2
@@ -6869,3 +6967,4 @@ SceneRoots:
   - {fileID: 500015359}
   - {fileID: 1786429304}
   - {fileID: 1354575171}
+  - {fileID: 1160986800}

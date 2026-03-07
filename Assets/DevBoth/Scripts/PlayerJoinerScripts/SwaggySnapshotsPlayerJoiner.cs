@@ -22,10 +22,10 @@ public class SwaggySnapshotsPlayerJoiner : MonoBehaviour
         currentPlayers.Players.Clear();
     }
     
-    private void OnEnable()
-    {
-        onLevelLoaded.Invoke();
-    }
+    // private void OnEnable()
+    // {
+    //     onLevelLoaded.Invoke();
+    // }
 
     public void PlayerJoined(PlayerInput _playerInput)
     {

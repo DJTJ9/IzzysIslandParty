@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 
 public class MinigolfMayhemPlayerJoiner : MonoBehaviour
 {
+    [FoldoutGroup("Goal Camera", expanded: false)]
+    [SerializeField] private CinemachineCamera goalCamera;
+    
     [SerializeField] private SO_PlayerCollectionRacingGames currentPlayers;
     
     [FoldoutGroup("Minigolf Mayhem", expanded: true)]
@@ -36,6 +39,11 @@ public class MinigolfMayhemPlayerJoiner : MonoBehaviour
         {
             _controller.SetPlayerIndex(m_playerIndex);
             _playerInput.transform.parent.GetComponentInChildren<CinemachineInputAxisController>().PlayerIndex = m_playerIndex;
+        }
+
+        if (_playerInput.gameObject.TryGetComponent(out GoalCameraController _goalCameraController))
+        {
+            _goalCameraController.Init(goalCamera);
         }
 
         _playerInput.gameObject.transform.position = playerCollectionMM.Players[m_playerIndex].SpawnPoint;

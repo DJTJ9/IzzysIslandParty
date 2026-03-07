@@ -15,13 +15,17 @@ using Button = UnityEngine.UIElements.Button;
 public class GameMenuEvents : MonoBehaviour
 {
     [SerializeField] private SceneCollectionSO sceneCollection;
-    [SerializeField] private bool racingGame = false;
+    [SerializeField] private bool racingGame;
+    [SerializeField] private bool swaggySnapshots;
 
-    [HideIf("racingGame")]
+    [HideIf("racingGame"), HideIf("swaggySnapshots")]
     [SerializeField] private SO_PlayerCollection currentPlayers;
 
     [ShowIf("racingGame")]
     [SerializeField] private SO_PlayerCollectionRacingGames currentPlayersRacing;
+    
+    [ShowIf("swaggySnapshots")]
+    [SerializeField] private SO_SwaggySnapshotsPlayerCollection currentPlayersSwaggySnapshots;
 
     [SerializeField] private VisualTreeAsset rowTemplate;
 
@@ -524,6 +528,7 @@ public class GameMenuEvents : MonoBehaviour
     {
         jetskiJoyrideModusSelection.style.display = DisplayStyle.Flex;
         playerHub.style.display = DisplayStyle.None;
+        FocusButton(jetskiJoyrideRaceButton);
     }
 
     private void OnLoadJetskiJoyrideRace()
@@ -547,6 +552,7 @@ public class GameMenuEvents : MonoBehaviour
     {
         minigolfMayhemModusSelection.style.display = DisplayStyle.Flex;
         playerHub.style.display = DisplayStyle.None;
+        FocusButton(minigolfMayhemClassicButton);
     }
 
     private void OnLoadMinigolfMayhemClassic()
@@ -585,6 +591,13 @@ public class GameMenuEvents : MonoBehaviour
     public void ShowResultsScreen()
     {
         ShowResults(currentPlayers.Players);
+        resultsScreen.style.display = DisplayStyle.Flex;
+        FocusButton(resultScreenContinueButton);
+    }
+
+    public void ShowSwaggySnapshotsResultScreen()
+    {
+        ShowSwaggySnapshotsResults(currentPlayersSwaggySnapshots.Players);
         resultsScreen.style.display = DisplayStyle.Flex;
         FocusButton(resultScreenContinueButton);
     }
@@ -636,7 +649,48 @@ public class GameMenuEvents : MonoBehaviour
 
         for (var i = 0; i < ordered.Count; i++)
         {
-            Debug.Log(i);
+            var data = ordered[i];
+            var row = rowTemplate.CloneTree();
+
+            var currentScore = data.PlayerScore.Value;
+
+            if (i > 0 && currentScore != previousScore)
+            {
+                currentRank = i + 1;
+            }
+
+            row.Q<Label>("RankLabel").text = $"{currentRank}";
+            row.Q<Label>("NameLabel").text = data.Name;
+            row.Q<Label>("ScoreLabel").text = data.PlayerScore.Value.ToString();
+
+            previousScore = currentScore;
+
+            // if (i == 0)
+            //     row.AddToClassList("winner");
+            //
+            // if (data.IsNPC)
+            //     row.AddToClassList("npc");
+
+            container.Add(row);
+        }
+    }
+    
+    private void ShowSwaggySnapshotsResults(List<SO_PlayerSwaggySnapshots> _results)
+    {
+        var root = GetComponent<UIDocument>().rootVisualElement;
+        var container = resultsModal;
+
+        container.Clear();
+
+        var ordered = _results
+            .OrderByDescending(_r => _r.PlayerScore.Value)
+            .ToList();
+
+        var currentRank = 1;
+        var previousScore = float.MinValue;
+
+        for (var i = 0; i < ordered.Count; i++)
+        {
             var data = ordered[i];
             var row = rowTemplate.CloneTree();
 
@@ -679,7 +733,6 @@ public class GameMenuEvents : MonoBehaviour
 
         for (var i = 0; i < ordered.Count; i++)
         {
-            Debug.Log(i);
             var data = ordered[i];
             var row = rowTemplate.CloneTree();
 

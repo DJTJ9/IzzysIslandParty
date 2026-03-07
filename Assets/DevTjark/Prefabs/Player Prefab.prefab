@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Priority:
-    Enabled: 0
+    Enabled: 1
     m_Value: 0
   OutputChannel: 1
   StandbyUpdate: 2
@@ -1514,6 +1514,7 @@ GameObject:
   - component: {fileID: 1521238598598575120}
   - component: {fileID: 5488783673324431187}
   - component: {fileID: 6519078515828607143}
+  - component: {fileID: 7141264536268998404}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1571,6 +1572,21 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: cb8390d9fabb07843b5f42bf6275d672, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onGameStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
         m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
         m_MethodName: Raise
         m_Mode: 1
@@ -1948,7 +1964,19 @@ MonoBehaviour:
     m_ActionId: 40ca9c30-5f39-43a4-bf92-d909781d54bf
     m_ActionName: 'HurdleGame/Slide[/Keyboard/downArrow,/XInputControllerWindows/buttonWest,/XInputControllerWindows1/buttonWest]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2926994867532943103}
+        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
+        m_MethodName: OnStartGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: cde468ba-184e-4c5d-9ae8-96f5986c5dcf
     m_ActionName: 'UI/StartGame[/Keyboard/space,/XInputControllerWindows/buttonNorth,/XInputControllerWindows1/buttonNorth]'
   - m_PersistentCalls:
@@ -2128,6 +2156,19 @@ MonoBehaviour:
   m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 7057679653509791993}
+--- !u!114 &7141264536268998404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8754331490394771550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a6c5d0c098c4f7d8aa230e4efcfbd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followCamera: {fileID: 1788921434184243773}
 --- !u!1001 &5976114815564013206
 PrefabInstance:
   m_ObjectHideFlags: 0
