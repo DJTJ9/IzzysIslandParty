@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GoalCameraController : MonoBehaviour
 {
-    [SerializeField] private CinemachineCamera followCamera;
+    [SerializeField] private CinemachineOrbitalFollow followCamera;
     private CinemachineCamera goalCamera;
     
     public void Init(CinemachineCamera _goalCamera)
@@ -11,9 +11,15 @@ public class GoalCameraController : MonoBehaviour
         goalCamera = _goalCamera;
     }
 
+    public void SetGoalCameraValues()
+    {
+        followCamera.HorizontalAxis.Value = -88f;
+        followCamera.VerticalAxis.Value = 20f;
+    }
+    
     public void SwitchToGoalCamera()
     {
-        followCamera.Priority = 0;
+        // followCamera.Priority = 0;
         goalCamera.Priority = 10;
     }
 }
