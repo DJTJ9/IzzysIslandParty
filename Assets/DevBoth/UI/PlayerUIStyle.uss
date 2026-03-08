@@ -2,6 +2,15 @@
     flex-direction: row;
 }
 
+.instruction-label {
+    font-size: 28px;
+    -unity-font-style: bold;
+    -unity-font-definition: url("project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&guid=9edcdbbb09ae8aa46b3612271126dd6b&type=3#DraftingMono-Bold");
+    -unity-text-align: middle-left;
+    color: rgb(254, 202, 129);
+    white-space: nowrap;
+}
+
 .player-ui-left {
     width: 15%;
     flex-direction: row;

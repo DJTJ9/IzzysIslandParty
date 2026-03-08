@@ -737,6 +737,7 @@ GameObject:
   - component: {fileID: 6181060658832634671}
   - component: {fileID: 7080182010931715802}
   - component: {fileID: 2581511148949804264}
+  - component: {fileID: 2796957476720486687}
   m_Layer: 7
   m_Name: GOAP AI
   m_TagString: Player
@@ -818,8 +819,8 @@ MonoBehaviour:
   groundCheckLayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  groundCheckPosition: {x: 0, y: -0.5, z: 0}
-  groundCheckSize: {x: 0.7, y: 0.1, z: 0.7}
+  groundCheckPosition: {x: 0, y: -0.6, z: 0}
+  groundCheckSize: {x: 0.7, y: 0.35, z: 0.7}
   <IsGrounded>k__BackingField: 0
 --- !u!33 &2827935659365194997
 MeshFilter:
@@ -973,6 +974,19 @@ MonoBehaviour:
   m_DefaultActionMap: MinigolfMayhem
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 4960205732143118110}
+--- !u!114 &2796957476720486687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6484771465931415211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a6c5d0c098c4f7d8aa230e4efcfbd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followCamera: {fileID: 450519654097088534}
 --- !u!1 &6940917840132600275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,8 +1458,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fca7a3bbd9b84621aad7cefa3969d72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RacingMode: 0
-  NormalMode: 1
   shootForceBar: {fileID: 9080379896918580383}
   shootForceText: {fileID: 5003387895100247314}
   cooldownTimer: {fileID: 5030258908595190817}

@@ -46,6 +46,14 @@ public class MinigolfHole : MonoBehaviour
     {
         if (!_other.CompareTag("Player")) return; 
         
+        _other.transform.DOMove(easterEggPositions[m_finishedPlayers / 2].position, 2);
+        if (_other.TryGetComponent<Rigidbody>(out var _rb))
+        {
+            _rb.linearVelocity = Vector3.zero;
+            _rb.constraints = RigidbodyConstraints.FreezePosition;
+            ++m_finishedPlayers;
+        }
+        
         if (_other.TryGetComponent<Controller>(out var controller))
         {
             onMinigolfPlayerFinished?.Invoke(controller.PlayerIndex);
@@ -64,23 +72,10 @@ public class MinigolfHole : MonoBehaviour
                 onGameEnd.Invoke();
             }
         }
-        
-        _other.transform.DOMove(easterEggPositions[m_finishedPlayers / 2].position, 2);
-        if (_other.TryGetComponent<Rigidbody>(out var _rb))
-        {
-            _rb.linearVelocity = Vector3.zero;
-            _rb.constraints = RigidbodyConstraints.FreezePosition;
-            ++m_finishedPlayers;
-        }
 
         if (_other.TryGetComponent<GoalCameraController>(out var _goalCameraController))
         {
             _goalCameraController.SetGoalCameraValues();
-        }
-
-        if (_other.TryGetComponent<GoalCameraController>(out var goalCameraController))
-        {
-            goalCameraController.SwitchToGoalCamera();
         }
         
         if (_other.TryGetComponent<PlayerControllerMinigolfMayhem>(out var _playerController))

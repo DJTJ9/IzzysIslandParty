@@ -16,10 +16,4 @@ public class GoalCameraController : MonoBehaviour
         followCamera.HorizontalAxis.Value = -88f;
         followCamera.VerticalAxis.Value = 20f;
     }
-    
-    public void SwitchToGoalCamera()
-    {
-        // followCamera.Priority = 0;
-        goalCamera.Priority = 10;
-    }
 }

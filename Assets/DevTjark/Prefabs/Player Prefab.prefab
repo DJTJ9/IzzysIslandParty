@@ -688,7 +688,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &822293108717185880
 Transform:
   m_ObjectHideFlags: 0
@@ -1655,8 +1655,8 @@ MonoBehaviour:
   groundCheckLayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  groundCheckPosition: {x: 0, y: -0.5, z: 0}
-  groundCheckSize: {x: 0.7, y: 0.1, z: 0.7}
+  groundCheckPosition: {x: 0, y: -0.6, z: 0}
+  groundCheckSize: {x: 0.7, y: 0.35, z: 0.7}
   <IsGrounded>k__BackingField: 0
 --- !u!114 &5036048129180631266
 MonoBehaviour:
