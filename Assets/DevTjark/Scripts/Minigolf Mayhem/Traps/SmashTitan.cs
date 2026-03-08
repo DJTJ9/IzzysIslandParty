@@ -19,9 +19,7 @@ public class SmashTitan : MonoBehaviour
         if (_other.TryGetComponent<Rigidbody>(out var _rb))
         {
             var impulseDirection = (impulseTarget.position - _rb.transform.position).normalized;
-            
             _rb.AddForce(impulseDirection * m_impactForce * Time.fixedDeltaTime, ForceMode.Impulse);
-            ConsoleProDebug.LogToFilter("SmashTitan: " + _rb.name + "with " + impulseDirection + " was smashed!", "Debug");
         }
     }
     

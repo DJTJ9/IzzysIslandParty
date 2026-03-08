@@ -19,8 +19,7 @@ public class MinigolfMayhemPlayerJoiner : MonoBehaviour
 
     private void Start()
     {
-        m_playerIndex = 0;
-        currentPlayers.Players.Clear();
+        ResetPlayerData();
     }
 
     public void PlayerJoinedMM(PlayerInput _playerInput)
@@ -28,7 +27,6 @@ public class MinigolfMayhemPlayerJoiner : MonoBehaviour
         if (_playerInput.gameObject.TryGetComponent(out GoapRigidbodyMovement _npc))
         {
             _npc.SetPlayerIndex(m_playerIndex);
-            // _playerInput.transform.GetComponentInChildren<CinemachineInputAxisController>().PlayerIndex = npc.GetPlayerIndex();
             currentPlayers.Players.Add(npcCollectionMM.Players[_npc.GetPlayerIndex() - 1]);
             _playerInput.gameObject.GetComponent<MeshRenderer>().material.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1f);
             ++m_playerIndex;
@@ -39,11 +37,6 @@ public class MinigolfMayhemPlayerJoiner : MonoBehaviour
         {
             _controller.SetPlayerIndex(m_playerIndex);
             _playerInput.transform.parent.GetComponentInChildren<CinemachineInputAxisController>().PlayerIndex = m_playerIndex;
-        }
-
-        if (_playerInput.gameObject.TryGetComponent(out GoalCameraController _goalCameraController))
-        {
-            _goalCameraController.Init(goalCamera);
         }
 
         _playerInput.gameObject.transform.position = playerCollectionMM.Players[m_playerIndex].SpawnPoint;
@@ -63,7 +56,13 @@ public class MinigolfMayhemPlayerJoiner : MonoBehaviour
         for (var i = nPCStartIndex; i < npcCollectionMM.Players.Count; i++)
         {
             Instantiate(npcCollectionMM.Players[i].PlayerReference, npcCollectionMM.Players[i].SpawnPoint, Quaternion.identity);
-            // var npc = Instantiate(npcCollectionMM.Players[i].PlayerReference, npcCollectionMM.Players[i].SpawnPoint, Quaternion.identity);
         }
+    }
+    
+    
+    private void ResetPlayerData()
+    {
+        m_playerIndex = 0;
+        currentPlayers.Players.Clear();
     }
 }

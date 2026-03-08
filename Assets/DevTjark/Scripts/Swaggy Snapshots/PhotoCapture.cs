@@ -71,7 +71,6 @@ public class PhotoCapture : MonoBehaviour
     private void TakePhoto(int _playerIndex)
     {
         if (_playerIndex != controller.GetPlayerIndex()) return;
-        Debug.Log($"Spieler {_playerIndex} hat ein Foto gemacht!");
         StartCoroutine(CaptureScreenshot());
     }
     
@@ -82,8 +81,6 @@ public class PhotoCapture : MonoBehaviour
         if (m_photoTaken || !m_canTakePhoto) yield break;
         m_photoTaken = true;
         
-        // onPhotoTaken.Invoke();
-        
         PlayCameraSound();
         ShowFlashLight();
         
@@ -92,9 +89,6 @@ public class PhotoCapture : MonoBehaviour
         var rect = new Rect(0, 0, Screen.width, Screen.height);
         m_screenCapture.ReadPixels(rect, 0, 0, false);
         m_screenCapture.Apply();
-        // ShowScreenshot();
-        // fadingAnimator.speed = fadeInSpeed;
-        // fadingAnimator.Play(m_fadeInAnimationHash);
     }
 
     private void FadeInPhoto()
