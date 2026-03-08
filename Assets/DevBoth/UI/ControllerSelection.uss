@@ -14,6 +14,12 @@
     -unity-background-image-tint-color: rgb(254, 202, 129);
 }
 
+.play-button-label {
+    top: 70%;
+    bottom: 50%;
+    -unity-font-style: bold;
+}
+
 .waiting {
     background-image: url("project://database/Assets/DevJudy/ByOthers/Garden%20cozy%20kit/Post/Assets/Menu%20Buttons/Clear%20Menu%20Buttons/Buttons-x.png?fileID=2800000&guid=646610f08c07ac94dbde973a70c75f9d&type=3#Buttons-x");
     background-size: 80% 80%;
@@ -31,4 +37,48 @@
     margin-bottom: 2%;
     margin-top: 2%;
     padding-top: 0%;
+    -unity-background-image-tint-color: rgb(78, 102, 151);
+    background-image: url("project://database/Assets/DevBoth/Art/FREE%20KAWAII%20GUI%20PACK/Mega%20Panel%20Pack.png?fileID=847039328&guid=971f2918c9e53214facdd4d1241b39b3&type=3#Mega Panel Pack_21");
+}
+
+.controls-instruction-label {
+    -unity-font-style: bold;
+    font-size: 42px;
+    color: rgb(254, 202, 129);
+    -unity-font-definition: url("project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&guid=9edcdbbb09ae8aa46b3612271126dd6b&type=3#DraftingMono-Bold");
+    white-space: nowrap;
+    -unity-text-align: middle-left;
+}
+
+.instructions-container {
+    width: 80%;
+    height: 100%;
+    min-width: 80%;
+    max-width: 80%;
+    background-image: url("project://database/Assets/DevBoth/Art/ArtByEmma/Menu7.png?fileID=2027748297&guid=721b2f64d2ceda142b29184e35ada6b3&type=3#Menu7_0");
+    background-size: 100% 90%;
+}
+
+.instructions-label {
+    color: rgb(58, 89, 153);
+    font-size: 28px;
+    position: absolute;
+    left: 10%;
+    top: 20%;
+    bottom: 10%;
+    -unity-font-style: bold;
+}
+
+.player-slot-label {
+    width: 24%;
+    min-width: 24%;
+    max-width: 24%;
+    white-space: nowrap;
+    -unity-text-align: lower-center;
+    color: rgb(254, 202, 129);
+    font-size: 42px;
+    -unity-font-style: bold;
+    -unity-font-definition: url("project://database/Assets/DevBoth/UI/Fonts/DraftingMono-Bold.otf?fileID=12800000&guid=9edcdbbb09ae8aa46b3612271126dd6b&type=3#DraftingMono-Bold");
+    -unity-text-outline-width: 5px;
+    -unity-text-outline-color: rgba(115, 67, 58, 0.91);
 }
