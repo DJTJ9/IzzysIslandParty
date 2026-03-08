@@ -1,3 +1,5 @@
+using Audio;
+using enums;
 using ImprovedTimers;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -17,6 +19,8 @@ namespace HurdleGame
         [SerializeField] private float jumpChancePercent = 0.5f;
         [SerializeField] private float jumpForce = 7f;
         [SerializeField] private float hopMultiplier = 0.5f;
+        [SerializeField] private Vector2 jumpVolumeRange = new Vector2(1f, 1f);
+        [SerializeField] private Vector2 jumpPitchRange = new Vector2(1f, 1f);
         private Vector2 bigJumpHeight;
         private Vector2 smallJumpHeight;
 
@@ -83,6 +87,9 @@ namespace HurdleGame
             if (jump * 0.1 >= jumpChancePercent)
                 return;
 
+            AudioService.Instance.PlaySoundWithRandomPitch(AudioCollection.Instance.LevelSoundsDictionary.LevelAudios["JumpingSound"], EAudioType.SFX,
+                jumpVolumeRange, jumpPitchRange);
+            
             Jump(bigJumpHeight);
 
             var bigOrSmall = Random.Range(0, 2);

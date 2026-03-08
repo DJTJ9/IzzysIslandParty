@@ -95,16 +95,31 @@ namespace Audio
 
         /// <summary>
         /// Play an audioSource once and if handleDeletion is enabled, delete it after it's done playing
-        /// Use for audios like ui-sounds
+        /// Used only for already existing sounds
         /// </summary>
         /// <param name="_audioSource"></param>
         /// <param name="_handleDeletion"></param>
-        public void PlaySound(AudioSource _audioSource, bool _handleDeletion = true)
+        private void PlaySound(AudioSource _audioSource, bool _handleDeletion = true)
         {
             _audioSource.Play();
 
             if (_handleDeletion)
                 StopSoundWhenFinished(_audioSource);
+        }
+
+
+        /// <summary>
+        /// Create an audioSource from a given audioClip, play once and delete it after it's done playing
+        /// Use for audios like ui-sounds
+        /// </summary>
+        /// <param name="_audioClip"></param>
+        /// <param name="_audioType"></param>
+        /// <param name="_volume"></param>
+        public void PlaySimpleSound(AudioClip _audioClip, EAudioType _audioType, float _volume = 1f)
+        {
+            AudioSource source = CreateSound(_audioClip, _audioType, _volume);
+            
+            PlaySound(source);
         }
 
         /// <summary>

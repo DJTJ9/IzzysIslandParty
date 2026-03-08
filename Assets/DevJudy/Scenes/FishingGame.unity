@@ -468,8 +468,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneCollection: {fileID: 11400000, guid: 6fd8971a4dff91645b76a391153753d8, type: 2}
   racingGame: 0
+  swaggySnapshots: 0
   currentPlayers: {fileID: 11400000, guid: 97ae6e8cdb921dd4d97057deb65c1858, type: 2}
   currentPlayersRacing: {fileID: 0}
+  currentPlayersSwaggySnapshots: {fileID: 0}
   rowTemplate: {fileID: 9197481963319205126, guid: a5da0a2b314073b4f97b6ae48036cd3c, type: 3}
   animDuration: 0.3
   holdDuration: 2
@@ -1361,6 +1363,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
+      propertyPath: onMusicEnd.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelStart.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -1394,6 +1400,10 @@ PrefabInstance:
       objectReference: {fileID: 1820299509}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
+      propertyPath: onMusicEnd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
@@ -1792,6 +1802,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6692930093732020759}
     - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
+      propertyPath: levelBackgroundMusic
+      value: FishingGameMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
       propertyPath: onMusicEnd.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1827,6 +1841,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6193680053684829511, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
+      propertyPath: LevelSoundsDictionary
+      value: 
+      objectReference: {fileID: 11400000, guid: 78b13e74e04152549b02dacb518e13d8, type: 2}
     - target: {fileID: 9187599527010791171, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

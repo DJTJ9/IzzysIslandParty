@@ -34,7 +34,6 @@ public class SmashTitan : MonoBehaviour
 
     public void PlaySmashSound()
     {
-        var smashSound = AudioService.Instance.CreateSound(AudioCollection.Instance.levelSoundsDictionary.LevelAudios["TitanSmash"], EAudioType.SFX);
-        AudioService.Instance.PlaySound(smashSound);
+        AudioService.Instance.PlaySimpleSound(AudioCollection.Instance.LevelSoundsDictionary.LevelAudios["TitanSmash"], EAudioType.SFX);
     }
 }

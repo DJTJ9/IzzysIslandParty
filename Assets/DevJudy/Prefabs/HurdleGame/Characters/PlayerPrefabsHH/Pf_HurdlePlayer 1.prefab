@@ -2481,8 +2481,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faab426272841964dbbf43a6fd7af9cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerIndex: 0
   jumpForce: 7
   hopMultiplier: 0.5
+  jumpVolumeRange: {x: 0.3, y: 0.35}
+  jumpPitchRange: {x: 0.7, y: 1.3}
   longSlideSeconds: 2
   shortSlideMultiplier: 0.5
   slideColliderSize: {x: 0.2, y: 0.33}

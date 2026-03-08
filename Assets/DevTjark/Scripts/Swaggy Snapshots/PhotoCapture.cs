@@ -124,8 +124,7 @@ public class PhotoCapture : MonoBehaviour
     
     private void PlayCameraSound()
     {
-        var cameraSound = AudioService.Instance.CreateSound(AudioCollection.Instance.levelSoundsDictionary.LevelAudios["CameraClick"], EAudioType.SFX);
-        AudioService.Instance.PlaySound(cameraSound);
+        AudioService.Instance.PlaySimpleSound(AudioCollection.Instance.LevelSoundsDictionary.LevelAudios["CameraClick"], EAudioType.SFX);
     }
 
     public void HideScreenshot()

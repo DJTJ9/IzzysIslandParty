@@ -111,7 +111,7 @@ namespace JetskiGame
                     driving = true;
 
                     AudioService.Instance.PlaySoundWhile(() => driving,
-                        AudioCollection.Instance.levelSoundsDictionary.LevelAudios["JetskiEngineSound"],
+                        AudioCollection.Instance.LevelSoundsDictionary.LevelAudios["JetskiEngineSound"],
                         EAudioType.SFX, true, 0.3f, 0.25f);
                 }
             }

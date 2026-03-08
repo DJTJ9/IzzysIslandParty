@@ -4763,6 +4763,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1864394626685966443, guid: 45ed1282608e84b40954217baa81b167, type: 3}
+      propertyPath: LevelSoundsDictionary
+      value: 
+      objectReference: {fileID: 11400000, guid: e79a08a12b856894e868c1ae4dcecfa8, type: 2}
+    - target: {fileID: 1864394626685966443, guid: 45ed1282608e84b40954217baa81b167, type: 3}
       propertyPath: levelSoundsDictionary
       value: 
       objectReference: {fileID: 11400000, guid: e79a08a12b856894e868c1ae4dcecfa8, type: 2}
@@ -6104,7 +6108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5edf572e6593a647a84449c6f0c10c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  individualMultiplierDeduction: 0.068
+  individualMultiplierDeduction: 0.082
 --- !u!1001 &1171550653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7083,6 +7087,7 @@ MonoBehaviour:
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  <IsPVP>k__BackingField: 0
   currentPlayersRacing: {fileID: 11400000, guid: 0f53a93ee4a82a94ea1754a908dd21bd, type: 2}
   cameraMoverAddition: {fileID: 1158032703}
   uiPanelManager: {fileID: 731037028}
@@ -7369,8 +7374,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneCollection: {fileID: 11400000, guid: 6fd8971a4dff91645b76a391153753d8, type: 2}
   racingGame: 1
+  swaggySnapshots: 0
   currentPlayers: {fileID: 0}
   currentPlayersRacing: {fileID: 11400000, guid: 0f53a93ee4a82a94ea1754a908dd21bd, type: 2}
+  currentPlayersSwaggySnapshots: {fileID: 0}
   rowTemplate: {fileID: 9197481963319205126, guid: a5da0a2b314073b4f97b6ae48036cd3c, type: 3}
   animDuration: 0.3
   holdDuration: 2
@@ -7733,7 +7740,19 @@ MonoBehaviour:
   levelBackgroundMusic: HurdleGameMusic
   onMusicEnd:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1521896059}
+        m_TargetAssemblyTypeName: Audio.GameAudioManager, Assembly-CSharp
+        m_MethodName: SetIsRunningFalse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!81 &1521896060
 AudioListener:
   m_ObjectHideFlags: 0
@@ -11019,6 +11038,8 @@ MonoBehaviour:
   jumpChancePercent: 0.5
   jumpForce: 7
   hopMultiplier: 0.5
+  jumpVolumeRange: {x: 1, y: 1}
+  jumpPitchRange: {x: 1, y: 1}
   groundLayer:
     serializedVersion: 2
     m_Bits: 0

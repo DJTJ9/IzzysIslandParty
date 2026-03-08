@@ -1,3 +1,5 @@
+using Audio;
+using enums;
 using ImprovedTimers;
 using UnityEngine;
 using UnityEngine.Events;
@@ -15,6 +17,8 @@ namespace HurdleGame
         [Header("Jump variables: ")]
         [SerializeField] private float jumpForce = 7f;
         [SerializeField] private float hopMultiplier = 0.5f;
+        [SerializeField] private Vector2 jumpVolumeRange = new Vector2(1f, 1f);
+        [SerializeField] private Vector2 jumpPitchRange = new Vector2(1f, 1f);
         private Vector2 bigJumpHeight;
         private Vector2 smallJumpHeight;
 
@@ -82,7 +86,12 @@ namespace HurdleGame
         public void OnJump(InputAction.CallbackContext _context)
         {
             if (_context.started && IsGrounded)
+            {
+                AudioService.Instance.PlaySoundWithRandomPitch(AudioCollection.Instance.LevelSoundsDictionary.LevelAudios["JumpingSound"], EAudioType.SFX,
+                    jumpVolumeRange, jumpPitchRange);
+                
                 Jump(bigJumpHeight);
+            }
 
             if (_context.canceled)
             {

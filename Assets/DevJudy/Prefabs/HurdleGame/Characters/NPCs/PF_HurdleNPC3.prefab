@@ -4046,9 +4046,11 @@ MonoBehaviour:
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 16384
-  jumpChancePercent: 0.9
+  jumpChancePercent: 0.85
   jumpForce: 7
   hopMultiplier: 0.5
+  jumpVolumeRange: {x: 0.05, y: 0.1}
+  jumpPitchRange: {x: 0.35, y: 0.85}
   groundLayer:
     serializedVersion: 2
     m_Bits: 1024

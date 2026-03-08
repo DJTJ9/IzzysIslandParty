@@ -39,7 +39,7 @@ namespace Audio
                 Debug.LogError("AudioService is null");
             else
             {
-                audioService.PlaySoundWhile(() => !isFinished, levelAudioCollection.levelSoundsDictionary.LevelAudios[levelBackgroundMusic],
+                audioService.PlaySoundWhile(() => !isFinished, levelAudioCollection.LevelSoundsDictionary.LevelAudios[levelBackgroundMusic],
                     EAudioType.Music, onMusicEnd, true, true, bgmFadeInSpeed.Value, bgmVolume.Value);
                 
                 isRunning = true;
@@ -55,7 +55,7 @@ namespace Audio
                 Debug.LogError("AudioService is null");
             else
             {
-                audioService.PlaySoundWhile(_condition, levelAudioCollection.levelSoundsDictionary.LevelAudios[levelBackgroundMusic],
+                audioService.PlaySoundWhile(_condition, levelAudioCollection.LevelSoundsDictionary.LevelAudios[levelBackgroundMusic],
                     EAudioType.Music, true, true, bgmFadeInSpeed.Value, bgmVolume.Value);
                 
                 isRunning = true;

@@ -4077,13 +4077,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerIndex: 0
   obstacleCheckSize: 1
-  obstacleCheckPosition: {x: 7, y: 0, z: 0}
+  obstacleCheckPosition: {x: 6.5, y: 0, z: 0}
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 16384
-  jumpChancePercent: 0.85
-  jumpForce: 7
-  hopMultiplier: 0.5
+  jumpChancePercent: 0.9
+  jumpForce: 7.2
+  hopMultiplier: 0.6
+  jumpVolumeRange: {x: 0.05, y: 0.1}
+  jumpPitchRange: {x: 0.6, y: 1}
   groundLayer:
     serializedVersion: 2
     m_Bits: 1024
