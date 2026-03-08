@@ -1797,54 +1797,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
-      propertyPath: audioService
-      value: 
-      objectReference: {fileID: 6692930093732020759}
-    - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
-      propertyPath: levelBackgroundMusic
-      value: FishingGameMusic
-      objectReference: {fileID: 0}
-    - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
-      propertyPath: onMusicEnd.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
-      propertyPath: onMusicEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
-      propertyPath: onMusicEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 297471805}
-    - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
-      propertyPath: onMusicEnd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
-      propertyPath: onMusicEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetIsRunningFalse
-      objectReference: {fileID: 0}
-    - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
-      propertyPath: onMusicEnd.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Audio.GameAudioManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3736288011132270889, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
-      propertyPath: onMusicEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 4207834752011282111, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
-    - target: {fileID: 4207834752011282111, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6193680053684829511, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
-      propertyPath: LevelSoundsDictionary
-      value: 
-      objectReference: {fileID: 11400000, guid: 78b13e74e04152549b02dacb518e13d8, type: 2}
     - target: {fileID: 9187599527010791171, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1890,17 +1846,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
---- !u!114 &6692930093732020759 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1794162964901148465, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
-  m_PrefabInstance: {fileID: 6692930093732020758}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df81c45e781e04a4cb54fdd681697b89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &7834068491797440682
 CanvasRenderer:
   m_ObjectHideFlags: 0

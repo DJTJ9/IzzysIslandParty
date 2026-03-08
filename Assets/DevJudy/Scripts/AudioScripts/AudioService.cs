@@ -30,7 +30,7 @@ namespace Audio
 
             if (!TryGetComponent(out pool))
                 Debug.LogError("No objectPool attached to go");
-            
+
             gameObject.SetActive(true);
         }
 
@@ -50,6 +50,7 @@ namespace Audio
         public GameObject CreateSound(AudioClip _clip, EAudioType _audioType, float _volume = 1f, float _pitch = 1f)
         {
             var obj = pool.GetObject();
+            obj.name = _clip.name;
 
             AudioSource audioSource = obj.GetComponent<AudioSource>();
             audioSource.clip = _clip;
@@ -105,11 +106,11 @@ namespace Audio
         private void PlaySound(GameObject _audioSourceObj, bool _handleDeletion = true)
         {
             var audioSource = _audioSourceObj.GetComponent<AudioSource>();
-            
+
             audioSource.Play();
 
             if (_handleDeletion)
-                StopSoundWhenFinished(audioSource);
+                StopSoundWhenFinished(_audioSourceObj, audioSource);
         }
 
 
@@ -122,8 +123,8 @@ namespace Audio
         /// <param name="_volume"></param>
         public void PlaySimpleSound(AudioClip _audioClip, EAudioType _audioType, float _volume = 1f)
         {
-            var obj= CreateSound(_audioClip, _audioType, _volume);
-            
+            var obj = CreateSound(_audioClip, _audioType, _volume);
+
             PlaySound(obj);
         }
 
@@ -151,7 +152,7 @@ namespace Audio
         /// <param name="_audioType"></param>
         /// <param name="_volumeRange"></param>
         /// <param name="_pitchRange"></param>
-        public void PlaySoundWithRandomPitch(AudioClip _clip, EAudioType _audioType, Vector2 _volumeRange, Vector2 _pitchRange)
+        public GameObject PlaySoundWithRandomPitch(AudioClip _clip, EAudioType _audioType, Vector2 _volumeRange, Vector2 _pitchRange)
         {
             var randomVolume = Random.Range(_volumeRange.x, _volumeRange.y);
             var randomPitch = Random.Range(_pitchRange.x, _pitchRange.y);
@@ -159,6 +160,8 @@ namespace Audio
             var obj = CreateSound(_clip, _audioType, randomVolume, randomPitch);
 
             PlaySound(obj);
+
+            return obj;
         }
 
         /// <summary>
@@ -242,7 +245,7 @@ namespace Audio
             bool _fadeOut, bool _fadeIn, float _fadeSpeed = 0.2f)
         {
             var obj = CreateSound(_audioClip, _audioType, _goalVolume);
-            
+
             var audioSource = obj.GetComponent<AudioSource>();
             audioSource.loop = true;
 
@@ -301,7 +304,7 @@ namespace Audio
             float _goalVolume, bool _fadeOut, bool _fadeIn, float _fadeSpeed = 0.2f)
         {
             var obj = CreateSound(_audioClip, _audioType, _goalVolume);
-            
+
             var audioSource = obj.GetComponent<AudioSource>();
             audioSource.loop = true;
 
@@ -355,15 +358,22 @@ namespace Audio
         private IEnumerator PlayRandomSoundContinuously(Func<bool> _condition, AudioClip[] _clips, EAudioType _audioType,
             Vector2 _volumeRange, Vector2 _pitchRange)
         {
+            GameObject obj = null;
             AudioSource audioSource = null;
 
             while (_condition())
             {
-                if (!audioSource || !audioSource.isPlaying)
+                if (!obj || !audioSource.isPlaying)
                 {
-                    audioSource = CreateRandomSound(_clips, _audioType).GetComponent<AudioSource>();
+                    var randomVolume = Random.Range(_volumeRange.x, _volumeRange.y + 1);
+                    var randomPitch = Random.Range(_pitchRange.x, _pitchRange.y + 1);
+                    
+                    AudioClip clip = _clips[Random.Range(0, _clips.Length)];
 
-                    PlaySoundWithRandomPitch(audioSource.clip, _audioType, _volumeRange, _pitchRange);
+                    obj = PlaySoundWithRandomPitch(clip, _audioType, _volumeRange, _pitchRange);
+                    audioSource = obj.GetComponent<AudioSource>();
+
+                    yield return new WaitForSecondsRealtime(audioSource.clip.length / 2);
                 }
 
                 yield return new WaitForFixedUpdate();
@@ -375,7 +385,7 @@ namespace Audio
         private IEnumerator FadeInSound(GameObject _audioSourceObj, float _fadeInSpeed, float _goalVolume)
         {
             AudioSource audioSource = _audioSourceObj.GetComponent<AudioSource>();
-            
+
             audioSource.volume = 0f;
             PlaySound(_audioSourceObj, false);
 
@@ -392,20 +402,21 @@ namespace Audio
         /// <summary>
         /// Waits until the sound is done playing to delete it
         /// </summary>
+        /// <param name="_obj"></param>
         /// <param name="_audioSource"></param>
-        private void StopSoundWhenFinished(AudioSource _audioSource)
+        private void StopSoundWhenFinished(GameObject _obj, AudioSource _audioSource)
         {
-            StartCoroutine(WaitTillSoundFinished(_audioSource));
+            StartCoroutine(WaitTillSoundFinished(_obj, _audioSource));
         }
 
-        private IEnumerator WaitTillSoundFinished(AudioSource _audioSource)
-        { 
+        private IEnumerator WaitTillSoundFinished(GameObject _obj, AudioSource _audioSource)
+        {
             float clipLength = _audioSource.clip.length;
-            
+
             yield return new WaitForSeconds(clipLength);
-            
+
             _audioSource.Stop();
-            pool.ReturnObject(_audioSource.gameObject);
+            pool.ReturnObject(_obj);
 
             yield return null;
         }

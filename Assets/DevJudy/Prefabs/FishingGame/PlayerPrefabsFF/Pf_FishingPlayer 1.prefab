@@ -807,7 +807,7 @@ RectTransform:
   m_Father: {fileID: 4630368135521092545}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -5.199997, y: 0}
   m_SizeDelta: {x: 9.6, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -832,7 +832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4117647, g: 0.61960787, b: 1, a: 1}
+  m_Color: {r: 0.18383364, g: 0.5180995, b: 0.899371, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2587,9 +2587,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ead1e14c3bcd841b1734bb426b2f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lureSplashVolume: 0.6
-  fishBitingVolumeRange: {x: 0.05, y: 0.2}
-  fishBitingPitchRange: {x: 0.65, y: 1}
+  isNPC: 0
+  lureSplashVolume: 0.7
+  fishBitingVolumeRange: {x: 0.7, y: 0.8}
+  fishBitingPitchRange: {x: 0.7, y: 1.2}
 --- !u!1 &2010012373061941994
 GameObject:
   m_ObjectHideFlags: 0
@@ -2831,9 +2832,9 @@ MonoBehaviour:
   catcher: {fileID: 6811910979938225069}
   successSlider: {fileID: 6125168425352121898}
   sliderFillImage: {fileID: 5114257673340405221}
-  normalColor: {r: 0.4117647, g: 0.61960787, b: 1, a: 1}
-  catcherInFrameColor: {r: 0.5647059, g: 1, b: 0.65882355, a: 1}
-  catcherOutFrameColor: {r: 0.9607843, g: 0.31764707, b: 0.30588236, a: 1}
+  normalColor: {r: 0.18431373, g: 0.52156866, b: 0.9019608, a: 1}
+  catcherInFrameColor: {r: 0.1843137, g: 0.9019608, b: 0.19288172, a: 1}
+  catcherOutFrameColor: {r: 0.9019608, g: 0.1843137, b: 0.22210018, a: 1}
   targetMaxMovementLeft: -350
   targetMaxMovementRight: 350
   targetMoveSpeed: 250
@@ -2916,7 +2917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.24474892, g: 0.47678375, b: 0.78616345, a: 1}
+  m_Color: {r: 0.28242543, g: 0.53152126, b: 0.8553459, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3077,7 +3078,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4731181267454469009
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3367,8 +3368,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8975864389684278529}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3949,7 +3950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6509433, g: 0.8111269, b: 1, a: 1}
+  m_Color: {r: 0.2799928, g: 0.55150104, b: 0.899371, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

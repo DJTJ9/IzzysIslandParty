@@ -64,10 +64,22 @@ MonoBehaviour:
     UseConstant: 0
     ConstantValue: 0
     Variable: {fileID: 11400000, guid: 8f895c611d0bdcc4eb1e28d4a7867cbe, type: 2}
-  levelBackgroundMusic: MainMenuMusic2
+  levelBackgroundMusic: FishingGameMusic
   onMusicEnd:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3736288011132270889}
+        m_TargetAssemblyTypeName: Audio.GameAudioManager, Assembly-CSharp
+        m_MethodName: SetIsRunningFalse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4974530712765809700
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,6 +189,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1864394626685966443, guid: 45ed1282608e84b40954217baa81b167, type: 3}
+      propertyPath: LevelSoundsDictionary
+      value: 
+      objectReference: {fileID: 11400000, guid: 78b13e74e04152549b02dacb518e13d8, type: 2}
+    - target: {fileID: 1864394626685966443, guid: 45ed1282608e84b40954217baa81b167, type: 3}
       propertyPath: levelSoundsDictionary
       value: 
       objectReference: {fileID: 11400000, guid: f3bb021af4281b8429f96a24db9d46c2, type: 2}
@@ -184,7 +200,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pf_AudioService
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4998504269573624616, guid: 45ed1282608e84b40954217baa81b167, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
