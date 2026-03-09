@@ -21,9 +21,6 @@ public class PhotoCapture : MonoBehaviour
     [SerializeField] private TMP_Text happyScoreLabel;
     [SerializeField] private TMP_Text faceScoreLabel;
     [SerializeField] private TMP_Text coolMoveScoreLabel;
-
-    // [SerializeField] private Image photoDisplayArea2;
-    // [SerializeField] private GameObject photoFrame2;
     
     [FoldoutGroup("Flash Light Effect", expanded: true)]
     [SerializeField] private GameObject flashLight;
@@ -49,6 +46,10 @@ public class PhotoCapture : MonoBehaviour
         m_screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
     }
     
+    /// <summary>
+    /// Updates the score labels on the screen with the current player's score 
+    /// and other related values like happy score, facing camera score, and cool move score.
+    /// </summary>
     private void Update()
     {
         if (currentPlayersSO.Players[controller.PlayerIndex] == null) return;
@@ -68,14 +69,26 @@ public class PhotoCapture : MonoBehaviour
         PlayerControllerSwaggySnapshots.onTakePhoto -= TakePhoto;
     }
 
+    /// <summary>
+    /// Starts the process of capturing a photo for the player at the specified index 
+    /// when the photo-taking event is triggered.
+    /// </summary>
+    /// <param name="_playerIndex">The index of the player taking the photo.</param>
     private void TakePhoto(int _playerIndex)
     {
         if (_playerIndex != controller.GetPlayerIndex()) return;
         StartCoroutine(CaptureScreenshot());
     }
     
+    /// <summary>
+    /// Returns whether the player is currently allowed to take a photo.
+    /// </summary>
     public bool CanTakePhoto() => !m_photoTaken && m_canTakePhoto;
 
+    /// <summary>
+    /// Captures a screenshot of the game screen, applies it to the `m_screenCapture` texture, 
+    /// and plays associated visual and audio effects like flashlight and sound.
+    /// </summary>
     private IEnumerator CaptureScreenshot()
     {
         if (m_photoTaken || !m_canTakePhoto) yield break;
@@ -91,12 +104,20 @@ public class PhotoCapture : MonoBehaviour
         m_screenCapture.Apply();
     }
 
+    /// <summary>
+    /// Starts the fade-in animation for the photo display area, controlled by 
+    /// the defined fade-in speed and animation hash.
+    /// </summary>
     private void FadeInPhoto()
     {
         fadingAnimator.speed = fadeInSpeed;
         fadingAnimator.Play(m_fadeInAnimationHash);
     }
     
+    /// <summary>
+    /// Displays the captured screenshot on the photo frame area and positions it at 
+    /// the player's spawn point, applying a fade-in effect.
+    /// </summary>
     public void ShowScreenshot()
     {
         photoFrameRectTransform.anchoredPosition = currentPlayersSO.Players[controller.PlayerIndex].SpawnPoint;
@@ -107,6 +128,9 @@ public class PhotoCapture : MonoBehaviour
         FadeInPhoto();
     }
 
+    /// <summary>
+    /// Displays and hides the flashlight effect briefly to simulate the camera flash.
+    /// </summary>
     private IEnumerator FlashLightEffect()
     {
         flashLight.SetActive(true);
@@ -114,18 +138,32 @@ public class PhotoCapture : MonoBehaviour
         flashLight.SetActive(false);
     }
     
-    private void ShowFlashLight() => StartCoroutine(FlashLightEffect());
+    /// <summary>
+    /// Starts the flashlight effect by triggering the coroutine.
+    /// </summary>
+    public void ShowFlashLight() => StartCoroutine(FlashLightEffect());
     
+    /// <summary>
+    /// Plays the camera click sound effect when a photo is taken.
+    /// </summary>
     private void PlayCameraSound()
     {
         AudioService.Instance.PlaySimpleSound(AudioCollection.Instance.LevelSoundsDictionary.LevelAudios["CameraClick"], EAudioType.SFX);
     }
 
+    
+    /// <summary>
+    /// Hides the photo screenshot display and resets the photo-taking flag.
+    /// </summary>
     public void HideScreenshot()
     {
         m_photoTaken = false;
         photoFrame.SetActive(false);
     } 
     
+    /// <summary>
+    /// Sets whether the player can take a photo by updating the `m_canTakePhoto` flag.
+    /// </summary>
+    /// <param name="_canTakePhoto">Indicates if photo-taking is allowed.</param>
     public void SetCanTakePhoto(bool _canTakePhoto) => m_canTakePhoto = _canTakePhoto;
 }

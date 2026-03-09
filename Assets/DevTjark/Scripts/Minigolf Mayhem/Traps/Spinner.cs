@@ -13,6 +13,10 @@ public class Spinner : MonoBehaviour
         SpinSpinner();
     }
 
+    /// <summary>
+    /// Rotates the spinner along the Y-axis with a specified duration and direction (clockwise or counterclockwise),
+    /// using a smooth infinite looping animation.
+    /// </summary>
     private void SpinSpinner()
     {
         var  yRotationAngle = clockwise ? -360f : 360f;

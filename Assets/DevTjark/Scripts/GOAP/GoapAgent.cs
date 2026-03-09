@@ -4,21 +4,25 @@ using System.Linq;
 using ImprovedTimers;
 using UnityEngine;
 
-public class GoapAgent : MonoBehaviour {
+public class GoapAgent : MonoBehaviour
+{
     [Header("Settings")]
     [SerializeField] private float m_playerAttackRange = 15f;
+
     [SerializeField] private float m_checkPointDetectionRange = 30f;
     [SerializeField] private float cooldownTimerDuration = 5f;
-    
-    [Header("Sensors")] 
+
+    [Header("Sensors")]
     [SerializeField] private Sensor chaseSensor;
+
     [SerializeField] private Sensor attackSensor;
-    
-    [Header("Known Locations")] 
+
+    [Header("Known Locations")]
     // [SerializeField] private Transform player1Transform;
     // [SerializeField] private Transform player2Transform;
     // [SerializeField] private Transform player3Transform;
     private Transform finishTransform;
+
     private Transform checkPoint1;
     private Transform checkPoint2;
     private Transform checkPoint3;
@@ -32,15 +36,15 @@ public class GoapAgent : MonoBehaviour {
 
     private const int MAX_PLAYERS = 3;
     private const int MAX_CHECKPOINTS = 30;
-    
+
     private GoapRigidbodyMovement rigidbodyMovement;
 
     private CountdownTimer statsTimer;
     private CountdownTimer moveCooldownTimer;
-    
+
     private GameObject target;
     private Vector3 destination;
-    
+
     private AgentGoal lastGoal;
     public AgentGoal currentGoal;
     public ActionPlan actionPlan;
@@ -49,33 +53,36 @@ public class GoapAgent : MonoBehaviour {
     public HashSet<AgentAction> actions;
     public HashSet<AgentGoal> goals;
     private IGoapPlanner gPlanner;
-    
-    private void Awake() {
+
+    private void Awake()
+    {
         // rb = GetComponent<Rigidbody>();
         // rb.freezeRotation = true;
         rigidbodyMovement = GetComponent<GoapRigidbodyMovement>();
-        
+
         gPlanner = new GoapPlanner();
 
         GetTransformsFromLocationService();
     }
 
-    private void Start() {
+    private void Start()
+    {
         SetupTimers();
         SetupBeliefs();
         SetupActions();
         SetupGoals();
     }
 
-    private void SetupBeliefs() {
+    private void SetupBeliefs()
+    {
         beliefs = new Dictionary<Beliefs, AgentBelief>();
         var factory = new BeliefFactory(this, beliefs);
-        
+
         CreatePlayerBeliefs(factory);
         // CreateCheckPointBeliefs(factory);
-        
+
         factory.AddBelief(Beliefs.Nothing, () => false);
-        
+
         factory.AddBelief(Beliefs.FindNextPosition, () => false);
         factory.AddBelief(Beliefs.ReachCheckPoint1, () => false);
         factory.AddBelief(Beliefs.ReachCheckPoint2, () => false);
@@ -101,12 +108,12 @@ public class GoapAgent : MonoBehaviour {
         factory.AddLocationBelief(Beliefs.CheckPoint7InReach, 50f, checkPoint7);
         factory.AddLocationBelief(Beliefs.CheckPoint8InReach, 50f, checkPoint8);
         factory.AddLocationBelief(Beliefs.CheckPoint9InReach, 50f, checkPoint9);
-        factory.AddLocationBelief(Beliefs.CheckPoint10InReach,50f, checkPoint10);
-        
+        factory.AddLocationBelief(Beliefs.CheckPoint10InReach, 50f, checkPoint10);
+
         // factory.AddLocationBelief(Beliefs.Player1Close, 15f, player1Transform);
         // factory.AddLocationBelief(Beliefs.Player2Close, 15f, player2Transform);
         // factory.AddLocationBelief(Beliefs.Player3Close, 15f, player3Transform);
-        
+
         // factory.AddSensorBelief("PlayerInChaseRange", chaseSensor);
         // factory.AddSensorBelief("PlayerInAttackRange", attackSensor);
         factory.AddBelief(Beliefs.AttackingPlayer1, () => false);
@@ -118,10 +125,10 @@ public class GoapAgent : MonoBehaviour {
     {
         var playerTransforms = LocationService.Instance.PlayerTransforms;
         var beliefValues = (Beliefs[])Enum.GetValues(typeof(Beliefs));
-        
+
         for (var i = 0; i < playerTransforms.Count; i++)
         {
-            factory.AddLocationBelief(beliefValues[i], m_playerAttackRange, playerTransforms[$"Player{i+1}"]);
+            factory.AddLocationBelief(beliefValues[i], m_playerAttackRange, playerTransforms[$"Player{i + 1}"]);
         }
     }
 
@@ -129,92 +136,96 @@ public class GoapAgent : MonoBehaviour {
     {
         var checkPointTransforms = LocationService.Instance.CheckPointTransforms;
         var beliefValues = (Beliefs[])Enum.GetValues(typeof(Beliefs));
-        
+
         for (var i = 0; i < checkPointTransforms.Count; i++)
         {
             factory.AddBelief(beliefValues[i + MAX_PLAYERS + MAX_PLAYERS], () => false);
             factory.AddLocationBelief(beliefValues[i + MAX_PLAYERS + MAX_PLAYERS + MAX_CHECKPOINTS], m_checkPointDetectionRange, checkPointTransforms[$"CheckPoint{i + 1}"]);
         }
     }
-    
-    private void SetupActions() {
+
+    private void SetupActions()
+    {
         actions = new HashSet<AgentAction>();
-        
+
         CreatePlayerActions(actions);
         // CreateCheckPointActions(actions);
-        
+
         actions.Add(new AgentAction.Builder(Actions.Relax)
             .WithStrategy(new IdleStrategy(1))
             .AddEffect(beliefs[Beliefs.Nothing])
             .Build());
-       
+
         actions.Add(new AgentAction.Builder(Actions.GoForCheckPoint1)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint1.position, cooldownTimerDuration))
             .AddPrecondition(beliefs[Beliefs.CheckPoint1InReach])
             .AddEffect(beliefs[Beliefs.ReachCheckPoint1])
             .Build());
-        
+
         actions.Add(new AgentAction.Builder(Actions.GoForCheckPoint2)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint2.position, cooldownTimerDuration))
             .AddPrecondition(beliefs[Beliefs.CheckPoint2InReach])
             .AddEffect(beliefs[Beliefs.ReachCheckPoint2])
             .Build());
-        
+
         actions.Add(new AgentAction.Builder(Actions.GoForCheckPoint3)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint3.position, cooldownTimerDuration))
             .AddPrecondition(beliefs[Beliefs.CheckPoint3InReach])
             .AddEffect(beliefs[Beliefs.ReachCheckPoint3])
             .Build());
-        
+
         actions.Add(new AgentAction.Builder(Actions.GoForCheckPoint4)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint4.position, cooldownTimerDuration))
             .AddPrecondition(beliefs[Beliefs.CheckPoint4InReach])
             .AddEffect(beliefs[Beliefs.ReachCheckPoint4])
             .Build());
-        
+
         actions.Add(new AgentAction.Builder(Actions.GoForCheckPoint5)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint5.position, cooldownTimerDuration))
             .AddPrecondition(beliefs[Beliefs.CheckPoint5InReach])
             .AddEffect(beliefs[Beliefs.ReachCheckPoint5])
             .Build());
-        
+
         actions.Add(new AgentAction.Builder(Actions.GoForCheckPoint6)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint6.position, cooldownTimerDuration))
             .AddPrecondition(beliefs[Beliefs.CheckPoint6InReach])
             .AddEffect(beliefs[Beliefs.ReachCheckPoint6])
             .Build());
-        
+
         actions.Add(new AgentAction.Builder(Actions.GoForCheckPoint7)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint7.position, cooldownTimerDuration))
             .AddPrecondition(beliefs[Beliefs.CheckPoint7InReach])
             .AddEffect(beliefs[Beliefs.ReachCheckPoint7])
             .Build());
-        
+
         actions.Add(new AgentAction.Builder(Actions.GoForCheckPoint8)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint8.position, cooldownTimerDuration))
             .AddPrecondition(beliefs[Beliefs.CheckPoint8InReach])
             .AddEffect(beliefs[Beliefs.ReachCheckPoint8])
             .Build());
-        
+
         actions.Add(new AgentAction.Builder(Actions.GoForCheckPoint9)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint9.position, cooldownTimerDuration))
             .AddPrecondition(beliefs[Beliefs.CheckPoint9InReach])
             .AddEffect(beliefs[Beliefs.ReachCheckPoint9])
             .Build());
-        
+
         actions.Add(new AgentAction.Builder(Actions.GoForCheckPoint10)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => checkPoint10.position, cooldownTimerDuration))
             .AddPrecondition(beliefs[Beliefs.CheckPoint10InReach])
             .AddEffect(beliefs[Beliefs.ReachCheckPoint10])
             .Build());
-        
-        
+
+
         actions.Add(new AgentAction.Builder(Actions.GoForFinish)
             .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, () => finishTransform.position, cooldownTimerDuration))
             .AddPrecondition(beliefs[Beliefs.FinishInReach])
             .AddEffect(beliefs[Beliefs.WinGame])
             .Build());
-        
+
+
+        #region Examples
+
         // actions.Add(new AgentAction.Builder("Wander Around")
         //     .WithStrategy(new WanderStrategy(navMeshAgent, 10))
         //     .AddEffect(beliefs["AgentMoving"])
@@ -237,56 +248,16 @@ public class GoapAgent : MonoBehaviour {
         //     .AddPrecondition(beliefs[Beliefs.Player2Close])
         //     .AddEffect(beliefs[Beliefs.AttackingPlayer2])
         //     .Build());
-        
+
         // actions.Add(new AgentAction.Builder(Actions.AttackPlayer3)
         //     .WithStrategy(new AttackStrategy(rigidbodyMovement ,() => player3Transform.position, cooldownTimerDuration))
         //     .AddPrecondition(beliefs[Beliefs.Player3Close])
         //     .AddEffect(beliefs[Beliefs.AttackingPlayer3])
         //     .Build());
-        
-                #region Examples
-        // actions.Add(new AgentAction.Builder("MoveToEatingPosition")
-        //     .WithStrategy(new MoveStrategy(navMeshAgent, () => foodShack.position))
-        //     .AddEffect(beliefs["AgentAtFoodShack"])
-        //     .Build());
-        //
-        // actions.Add(new AgentAction.Builder("Eat")
-        //     .WithStrategy(new IdleStrategy(5))  // Later replace with a Command
-        //     .AddPrecondition(beliefs["AgentAtFoodShack"])
-        //     .AddEffect(beliefs["AgentIsHealthy"])
-        //     .Build());
-        //
-        // actions.Add(new AgentAction.Builder("MoveToDoorOne")
-        //     .WithStrategy(new MoveStrategy(navMeshAgent, () => doorOnePosition.position))
-        //     .AddEffect(beliefs["AgentAtDoorOne"])
-        //     .Build());
-        //
-        // actions.Add(new AgentAction.Builder("MoveToDoorTwo")
-        //     .WithStrategy(new MoveStrategy(navMeshAgent, () => doorTwoPosition.position))
-        //     .AddEffect(beliefs["AgentAtDoorTwo"])
-        //     .Build());
-        //
-        // actions.Add(new AgentAction.Builder("MoveFromDoorOneToRestArea")
-        //     .WithCost(2)
-        //     .WithStrategy(new MoveStrategy(navMeshAgent, () => restingPosition.position))
-        //     .AddPrecondition(beliefs["AgentAtDoorOne"])
-        //     .AddEffect(beliefs["AgentAtRestingPosition"])
-        //     .Build());
-        //
-        // actions.Add(new AgentAction.Builder("MoveFromDoorTwoRestArea")
-        //     .WithStrategy(new MoveStrategy(navMeshAgent, () => restingPosition.position))
-        //     .AddPrecondition(beliefs["AgentAtDoorTwo"])
-        //     .AddEffect(beliefs["AgentAtRestingPosition"])
-        //     .Build());
-        //
-        // actions.Add(new AgentAction.Builder("Rest")
-        //     .WithStrategy(new IdleStrategy(5))
-        //     .AddPrecondition(beliefs["AgentAtRestingPosition"])
-        //     .AddEffect(beliefs["AgentIsRested"])
-        //     .Build());
+
         #endregion
     }
-    
+
     private void CreatePlayerActions(HashSet<AgentAction> _actions)
     {
         var playerTransforms = LocationService.Instance.PlayerTransforms;
@@ -302,7 +273,7 @@ public class GoapAgent : MonoBehaviour {
                 .Build());
         }
     }
-    
+
     private void CreateCheckPointActions(HashSet<AgentAction> _actions)
     {
         var checkPointTransforms = LocationService.Instance.CheckPointTransforms;
@@ -324,7 +295,7 @@ public class GoapAgent : MonoBehaviour {
         var playerTransforms = LocationService.Instance.PlayerTransforms;
         var beliefValues = (Beliefs[])Enum.GetValues(typeof(Beliefs));
         var goalValues = (Goals[])Enum.GetValues(typeof(Goals));
-        
+
         for (var i = 0; i < playerTransforms.Count; ++i)
         {
             _goals.Add(new AgentGoal.Builder(goalValues[i])
@@ -341,39 +312,30 @@ public class GoapAgent : MonoBehaviour {
         var goalValues = (Goals[])Enum.GetValues(typeof(Goals));
 
         var priority = 100;
-        
+
         for (var i = 0; i < CheckPointTransforms.Count; ++i)
         {
             _goals.Add(new AgentGoal.Builder(goalValues[i + MAX_PLAYERS])
                 .WithPriority(priority)
                 .WithDesiredEffect(beliefs[beliefValues[i + MAX_PLAYERS + MAX_PLAYERS]])
                 .Build());
-            
+
             priority += 10;
         }
     }
 
-    private void SetupGoals() {
+    private void SetupGoals()
+    {
         goals = new HashSet<AgentGoal>();
-        
+
         CreatePlayerGoals(goals);
         // CreateCheckPointGoals(goals);
-        
+
         goals.Add(new AgentGoal.Builder(Goals.ChillOut)
             .WithPriority(1)
             .WithDesiredEffect(beliefs[Beliefs.Nothing])
             .Build());
-        //
-        // goals.Add(new AgentGoal.Builder("Wander")
-        //     .WithPriority(1)
-        //     .WithDesiredEffect(beliefs["AgentMoving"])
-        //     .Build());
-        //
-        // goals.Add(new AgentGoal.Builder(Goals.ComingCloserToFinish)
-        //     .WithPriority(20)
-        //     .WithDesiredEffect(beliefs[Beliefs.FindNextPosition])
-        //     .Build());
-        //
+
         // goals.Add(new AgentGoal.Builder(Goals.AttackPlayer1)
         //     .WithPriority(250)
         //     .WithDesiredEffect(beliefs[Beliefs.AttackingPlayer1])
@@ -393,47 +355,47 @@ public class GoapAgent : MonoBehaviour {
             .WithPriority(100)
             .WithDesiredEffect(beliefs[Beliefs.ReachCheckPoint1])
             .Build());
-        
+
         goals.Add(new AgentGoal.Builder(Goals.GoForCheckPoint2)
             .WithPriority(110)
             .WithDesiredEffect(beliefs[Beliefs.ReachCheckPoint2])
             .Build());
-        
+
         goals.Add(new AgentGoal.Builder(Goals.GoForCheckPoint3)
             .WithPriority(120)
             .WithDesiredEffect(beliefs[Beliefs.ReachCheckPoint3])
             .Build());
-          
+
         goals.Add(new AgentGoal.Builder(Goals.GoForCheckPoint4)
             .WithPriority(130)
             .WithDesiredEffect(beliefs[Beliefs.ReachCheckPoint4])
             .Build());
-        
+
         goals.Add(new AgentGoal.Builder(Goals.GoForCheckPoint5)
             .WithPriority(140)
             .WithDesiredEffect(beliefs[Beliefs.ReachCheckPoint5])
             .Build());
-        
+
         goals.Add(new AgentGoal.Builder(Goals.GoForCheckPoint6)
             .WithPriority(150)
             .WithDesiredEffect(beliefs[Beliefs.ReachCheckPoint6])
             .Build());
-        
+
         goals.Add(new AgentGoal.Builder(Goals.GoForCheckPoint7)
             .WithPriority(160)
             .WithDesiredEffect(beliefs[Beliefs.ReachCheckPoint7])
             .Build());
-        
+
         goals.Add(new AgentGoal.Builder(Goals.GoForCheckPoint8)
             .WithPriority(170)
             .WithDesiredEffect(beliefs[Beliefs.ReachCheckPoint8])
             .Build());
-        
+
         goals.Add(new AgentGoal.Builder(Goals.GoForCheckPoint9)
             .WithPriority(180)
             .WithDesiredEffect(beliefs[Beliefs.ReachCheckPoint9])
             .Build());
-        
+
         goals.Add(new AgentGoal.Builder(Goals.GoForCheckPoint10)
             .WithPriority(190)
             .WithDesiredEffect(beliefs[Beliefs.ReachCheckPoint10])
@@ -445,32 +407,22 @@ public class GoapAgent : MonoBehaviour {
             .Build());
     }
 
-    private void SetupTimers() {
+    private void SetupTimers()
+    {
         statsTimer = new CountdownTimer(1f);
-        statsTimer.OnTimerStop += () => {
-            UpdateStats();
+        statsTimer.OnTimerStop += () =>
+        {
             SetupBeliefs();
             SetupActions();
             SetupGoals();
             statsTimer.Start();
         };
         statsTimer.Start();
-        
-        // MovementCooldownTimer = new CountdownTimer(3f);
-        // MovementCooldownTimer.OnTimerStart += () => m_isOnCooldown = true;
-        // MovementCooldownTimer.OnTimerStop += () => m_isOnCooldown = false;
     }
+    
 
-    // TODO move to stats system
-    private void UpdateStats() {
-        // stamina += InRangeOf(restingPosition.position, 3f) ? 20 : -10;
-        // health += InRangeOf(foodShack.position, 3f) ? 20 : -5;
-        // stamina = Mathf.Clamp(stamina, 0, 100);
-        // health = Mathf.Clamp(health, 0, 100);
-    }
-    
     private bool InRangeOf(Vector3 pos, float range) => Vector3.Distance(transform.position, pos) < range;
-    
+
     // void OnEnable() => chaseSensor.OnTargetChanged += HandleTargetChanged;
     // void OnDisable() => chaseSensor.OnTargetChanged -= HandleTargetChanged;
     //
@@ -481,25 +433,29 @@ public class GoapAgent : MonoBehaviour {
     //     currentGoal = null;
     // }
 
-    private void Update() {
+    private void Update()
+    {
         statsTimer.Tick(Time.deltaTime);
-        
-        // Update the plan and current action if there is one
-        if (currentAction == null) {
+
+        if (currentAction == null)
+        {
             Debug.Log("Calculating any potential new plan");
             CalculatePlan();
 
-            if (actionPlan != null && actionPlan.Actions.Count > 0) {
+            if (actionPlan != null && actionPlan.Actions.Count > 0)
+            {
                 // navMeshAgent.ResetPath();
 
                 currentGoal = actionPlan.AgentGoal;
                 Debug.Log($"Goal: {currentGoal.Name} with {actionPlan.Actions.Count} actions in plan");
                 currentAction = actionPlan.Actions.Pop();
                 Debug.Log($"Popped action: {currentAction.Name}");
-                // Verify all precondition effects are true
-                if (currentAction.Preconditions.All(b => b.Evaluate())) {
+                if (currentAction.Preconditions.All(b => b.Evaluate()))
+                {
                     currentAction.Start();
-                } else {
+                }
+                else
+                {
                     Debug.Log("Preconditions not met, clearing current action and goal");
                     currentAction = null;
                     currentGoal = null;
@@ -507,16 +463,18 @@ public class GoapAgent : MonoBehaviour {
             }
         }
 
-        // If we have a current action, execute it
-        if (actionPlan != null && currentAction != null) {
+        if (actionPlan != null && currentAction != null)
+        {
             currentAction.Update(Time.deltaTime);
 
-            if (currentAction.Complete) {
+            if (currentAction.Complete)
+            {
                 Debug.Log($"{currentAction.Name} complete");
                 currentAction.Stop();
                 currentAction = null;
 
-                if (actionPlan.Actions.Count == 0) {
+                if (actionPlan.Actions.Count == 0)
+                {
                     Debug.Log("Plan complete");
                     lastGoal = currentGoal;
                     currentGoal = null;
@@ -525,23 +483,25 @@ public class GoapAgent : MonoBehaviour {
         }
     }
 
-    private void CalculatePlan() {
+    private void CalculatePlan()
+    {
         var priorityLevel = currentGoal?.Priority ?? 0;
-        
+
         HashSet<AgentGoal> goalsToCheck = goals;
-        
-        // If we have a current goal, we only want to check goals with higher priority
-        if (currentGoal != null) {
+
+        if (currentGoal != null)
+        {
             Debug.Log("Current goal exists, checking goals with higher priority");
             goalsToCheck = new HashSet<AgentGoal>(goals.Where(g => g.Priority > priorityLevel));
         }
-        
+
         var potentialPlan = gPlanner.Plan(this, goalsToCheck, lastGoal);
-        if (potentialPlan != null) {
+        if (potentialPlan != null)
+        {
             actionPlan = potentialPlan;
         }
     }
-    
+
     private void GetTransformsFromLocationService()
     {
         // player1Transform = LocationService.Instance.GetTransform("Player1");

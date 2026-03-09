@@ -11,9 +11,13 @@ public class ScoreCalculator : MonoBehaviour
 
     private void OnEnable()
     {
-        scoreSO.Value = 0f;
+        ResetScore();
     }
 
+    /// <summary>
+    /// Checks the score for the current object by calculating if it has fallen.
+    /// If fallen, adds points based on the current ball type and its multiplier.
+    /// </summary>
     public void CheckScore() 
     {
         var dotProduct = Vector3.Dot(transform.up, Vector3.up);
@@ -25,5 +29,8 @@ public class ScoreCalculator : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Resets the game score to zero, typically called to restart or reset the game state.
+    /// </summary>
     public void ResetScore() => scoreSO.Value = 0f;
 }

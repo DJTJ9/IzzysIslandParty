@@ -18,6 +18,14 @@ public class CameraIntro : MonoBehaviour
 
     public void StartCameraIntroSequence() => StartCoroutine(StartCameraIntro());
     
+    /// <summary>
+    /// Plays out the camera's introductory sequence, which includes:
+    /// - Moving to a specified position with a smoothing animation curve.
+    /// - Pausing and then rotating locally by 900 degrees.
+    /// - Moving to a second position with another animation curve.
+    /// - Activating visual effects like barrel distortion and camera optics.
+    /// - Disabling the game object after finishing the sequence.
+    /// </summary>
     private IEnumerator StartCameraIntro()
     {
         yield return transform.DOMove(firstPosition, firstMoveTime).SetEase(cameraUpwardsAnimationCurve).WaitForCompletion();

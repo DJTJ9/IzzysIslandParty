@@ -6,6 +6,4 @@ public class FaceChecker : MonoBehaviour
     public SkinnedMeshRenderer SkinnedMeshRenderer => skinnedMeshRenderer;
     
     private Material m_currentMaterial;
-    
-    
 }

@@ -22,6 +22,12 @@ public class MinigolfMayhemPlayerJoiner : MonoBehaviour
         ResetPlayerData();
     }
 
+    /// <summary>
+    /// Handles the logic for adding a new player or NPC to the Minigolf Mayhem game.
+    /// Assigns the correct spawn position and configuration based on the player's type,
+    /// and updates the list of current players.
+    /// </summary>
+    /// <param name="_playerInput">The `PlayerInput` instance representing the joining player or NPC.</param>
     public void PlayerJoinedMM(PlayerInput _playerInput)
     {
         if (_playerInput.gameObject.TryGetComponent(out GoapRigidbodyMovement _npc))
@@ -49,7 +55,11 @@ public class MinigolfMayhemPlayerJoiner : MonoBehaviour
             transformRegistration.SetAndRegisterPlayerLocationKey($"Player{m_playerIndex}");
         }
     }
-    
+
+    /// <summary>
+    /// Instantiates and adds all remaining NPCs to the current Minigolf Mayhem session,
+    /// spawning them at their corresponding predefined spawn points.
+    /// </summary>
     public void JoinNPCsMM()
     {
         var nPCStartIndex = m_playerIndex - 1;
@@ -59,7 +69,10 @@ public class MinigolfMayhemPlayerJoiner : MonoBehaviour
         }
     }
     
-    
+    /// <summary>
+    /// Resets the internal player index and clears the current players list, 
+    /// ensuring a clean state before starting a new game or session.
+    /// </summary>
     private void ResetPlayerData()
     {
         m_playerIndex = 0;

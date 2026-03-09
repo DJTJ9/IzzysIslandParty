@@ -14,6 +14,10 @@ public class BallCamera : MonoBehaviour
         SetCameraPosition();
     }
 
+    /// <summary>
+    /// Calculates and sets the camera's position based on the target's position
+    /// and a specified offset, with a smoothing transition applied.
+    /// </summary>
     private void SetCameraPosition()
     {
         if (target == null) return;

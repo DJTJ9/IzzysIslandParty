@@ -55,6 +55,10 @@ public class NPC_BowlingBattleController : Controller
         StartPositionMovement();
     }
 
+    /// <summary>
+    /// Determines and applies the NPC's movement based on a directional input,
+    /// adjusting position gradually.
+    /// </summary>
     private void StartPositionMovement()
     {
         GetMoveDirection();
@@ -65,6 +69,10 @@ public class NPC_BowlingBattleController : Controller
         controller.Move(move * Time.deltaTime);
     }
 
+    /// <summary>
+    /// Generates and sets a new random direction for the NPC's movement
+    /// at specified intervals.
+    /// </summary>
     private void GetMoveDirection()
     {
         m_changeDirectionTimer += Time.deltaTime;
@@ -78,31 +86,22 @@ public class NPC_BowlingBattleController : Controller
         }
     }
 
+    /// <summary>
+    /// Swaps the NPC's ball to a randomly selected BallType,
+    /// updating its mesh, material, and active collider.
+    /// </summary>
     public void ChooseRandomBall()
     {
         var ballTypes = (BallType[])System.Enum.GetValues(typeof(BallType));
         var randomIndex = Random.Range(0, ballTypes.Length);
-        // var randomBallType = ballTypes[randomIndex];
         
         bowlingBallSwapper.SwapToBall(randomIndex);
-        
-        // switch (randomBallType)
-        // {
-        //     case BallType.Baseball:
-        //         bowlingBallSwapper.SwapToBaseball();
-        //         break;
-        //     case BallType.Basketball:
-        //         bowlingBallSwapper.SwapToBasketball();
-        //         break;
-        //     case BallType.Football:
-        //         bowlingBallSwapper.SwapToFootball();
-        //         break;
-        //     default: 
-        //         bowlingBallSwapper.SwapToBasketball(); 
-        //         break;
-        // }
     }
     
+    /// <summary>
+    /// Disables player movement and simulates the release of the ball
+    /// by enabling gravity and resetting Rigidbody velocity.
+    /// </summary>
     public void OnReleaseBall()
     {
             if (controller == null) return;
@@ -113,6 +112,10 @@ public class NPC_BowlingBattleController : Controller
             rb.linearVelocity = Vector3.zero;
     }
     
+    /// <summary>
+    /// Resets key components, including Rigidbody and CharacterController,
+    /// and repositions the NPC to its designated spawn point.
+    /// </summary>
     public void ResetComponents()
     {
         rb.linearVelocity = Vector3.zero;
@@ -127,9 +130,19 @@ public class NPC_BowlingBattleController : Controller
         rb.useGravity = false;
     }
     
+    /// <summary>
+    /// Activates the CharacterController for the NPC, enabling movement control.
+    /// </summary>
     public void EnableCharacterController() => controller.enabled = true;
     
+    /// <summary>
+    /// Deactivates the CharacterController for the NPC, disabling movement control.
+    /// </summary>
     public void DisableCharacterController() => controller.enabled = false;
     
+    /// <summary>
+    /// Retrieves the ScriptableObject associated with the NPC, containing its data.
+    /// </summary>
+    /// <returns>The NPC's SO_Player ScriptableObject.</returns>
     public SO_Player GetNpcSO => npcSO;
 }

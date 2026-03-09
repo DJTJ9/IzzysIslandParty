@@ -42,6 +42,12 @@ public class MinigolfHole : MonoBehaviour
         m_finishedPlayers = 0;
     }
 
+    /// <summary>
+    /// Handles player interactions when they enter the minigolf hole.
+    /// Moves players to specific positions, updates player states, applies game mode-specific logic,
+    /// and triggers events for scoring, camera adjustments or UI updates.
+    /// </summary>
+    /// <param name="_other">The player entering the trigger zone.</param>
     private void OnTriggerEnter(Collider _other)
     {
         if (!_other.CompareTag("Player")) return; 

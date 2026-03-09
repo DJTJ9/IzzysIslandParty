@@ -31,19 +31,6 @@ public class PointCalculator : MonoBehaviour
     private Vector3 m_cameraDirection;
     private bool m_turnedAwayFromCamera;
 
-    // private void Awake()
-    // {
-    //     m_faceDirection = transform.forward;
-    //     m_cameraDirection = (mainCamera.transform.position - transform.position).normalized;
-    // }
-    
-    // private void Update()
-    // {
-    //     m_faceDirection = transform.forward;
-    //     m_cameraDirection = (mainCamera.transform.position - transform.position).normalized;
-    //     // m_currentYRotation = transform.eulerAngles.y;
-    // }
-
     private void OnEnable()
     {
         PlayerControllerSwaggySnapshots.onTakePhoto += CalculatePoints;
@@ -54,66 +41,68 @@ public class PointCalculator : MonoBehaviour
         PlayerControllerSwaggySnapshots.onTakePhoto -= CalculatePoints;
     }
 
+    /// <summary>
+    /// Calculates points for a player when a photo is taken, considering three factors:
+    /// - Face direction.
+    /// - Face expression.
+    /// - Dance move being performed.
+    /// </summary>
+    /// <param name="_playerIndex">The index of the player for whom points are calculated.</param>
     public void CalculatePoints(int _playerIndex)
     {
-        Debug.Log($"CalculatePoints wurde aufgerufen für Spieler {_playerIndex}");
         CalculatePointsForFaceDirection(_playerIndex);
         CalculatePointsForFaceExpression(_playerIndex);
         CalculatePointsForDanceMove(_playerIndex);
     }
 
+    /// <summary>
+    /// Awards points to the player if their face is directed towards the camera.
+    /// </summary>
+    /// <param name="_playerIndex">The index of the player to evaluate.</param>
     private void CalculatePointsForFaceDirection(int _playerIndex)
     {
-        // var dotProduct = Vector3.Dot(m_faceDirection, m_cameraDirection);
-        // m_turnedAwayFromCamera = dotProduct < Mathf.Cos(Mathf.Deg2Rad * m_lookAwayAngleTreshold);
-
-        if (m_turnedAwayFromCamera)
-        {
-            // Debug.Log($"No points added from {gameObject.name} for facing the camera!");
-            return;
-        }
+        if (m_turnedAwayFromCamera) return;
         
         currentPlayers.Players[_playerIndex].PlayerScore.Value += m_faceForwardPointValue;
         currentPlayers.Players[_playerIndex].FacingCameraScore += m_faceForwardPointValue;
-        // Debug.Log($"Points added from {gameObject.name} for facing the camera!");
     }
 
+    /// <summary>
+    /// Awards points to the player if their face has a "happy" expression, based on material evaluation.
+    /// </summary>
+    /// <param name="_playerIndex">The index of the player to evaluate.</param>
     private void CalculatePointsForFaceExpression(int _playerIndex)
     {
         var currentFaceMaterial = faceMeshRenderer.sharedMaterial;
         var isHappyFace = faceSwapSO.IsHappyFace(currentFaceMaterial);
 
-        if (!isHappyFace)
-        {
-            // Debug.Log($"No points added from {gameObject.name} for happy face!");
-            return;
-        }
+        if (!isHappyFace) return;
         
         currentPlayers.Players[_playerIndex].PlayerScore.Value += m_happyFacePointValue;
         currentPlayers.Players[_playerIndex].HappyFaceScore += m_happyFacePointValue;
-        // Debug.Log($"Points added from {gameObject.name} for happy face!");
     }
 
+    /// <summary>
+    /// Awards points to the player if they are performing a dance move classified as "cool."
+    /// </summary>
+    /// <param name="_playerIndex">The index of the player to evaluate.</param>
     private void CalculatePointsForDanceMove(int _playerIndex)
     {
         var currentClip = animator.GetCurrentAnimatorClipInfo(0)[0].clip;
 
-        if (!danceMovesSO.IsCoolDanceMove(currentClip))
-        {
-            // Debug.Log($"No points added from {gameObject.name} for cool dance move!");
-            return;
-        }
+        if (!danceMovesSO.IsCoolDanceMove(currentClip)) return;
         
         currentPlayers.Players[_playerIndex].PlayerScore.Value += m_danceMovePointValue;
         currentPlayers.Players[_playerIndex].CoolDanceMoveScore += m_danceMovePointValue;
-        // Debug.Log($"Points added from {gameObject.name} for cool dance move!");
     }
     
+    /// <summary>
+    /// Sets the state indicating that the player has turned away from the camera.
+    /// </summary>
     public void SetTurnedAwayFromCameraToTrue() => m_turnedAwayFromCamera = true;
+    
+    /// <summary>
+    /// Resets the state, indicating that the player is no longer turned away from the camera.
+    /// </summary>
     public void SetTurnedAwayFromCameraToFalse() => m_turnedAwayFromCamera = false;
-
-    // private bool isFacingCamera()
-    // {
-    //     return m_currentYRotation >= maxRotationAngle && m_currentYRotation <= minRotationAngle;
-    // }
 }

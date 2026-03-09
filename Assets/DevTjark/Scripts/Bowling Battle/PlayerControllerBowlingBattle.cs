@@ -28,7 +28,6 @@ public class PlayerControllerBowlingBattle : Controller
 
     [Header("References")] 
     private CharacterController controller;
-    // private PlayerInput playerInput;
     private Rigidbody rb;
 
     [FoldoutGroup("Unity Events", expanded: false)]
@@ -48,19 +47,13 @@ private void Start()
         GameStartConfiguration();
     }
 
-    // private void OnDisable()
-    // {
-    //     UnmapInputActions();
-    // }
-
     private void FixedUpdate()
     {
         if (controller.enabled) Movement();
     }
 
-    public void GameStartConfiguration()
+    private void GameStartConfiguration()
     {
-        // MapInputActions();
         ResetComponents();
     }
     
@@ -69,6 +62,10 @@ private void Start()
         StartPositionMovement();
     }
     
+    /// <summary>
+    /// Moves the player based on the current input vector (X and Y values), 
+    /// applying them using the CharacterController.
+    /// </summary>
     private void StartPositionMovement()
     {
         var move = new Vector3(m_moveInput.x, m_moveInput.y, 0);
@@ -78,11 +75,19 @@ private void Start()
         controller.Move(move * Time.deltaTime);
     }
 
+    /// <summary>
+    /// Captures and updates the movement input vector when the user moves the player.
+    /// </summary>
+    /// <param name="_context">The context of the movement input action.</param>
     public void OnMove(InputAction.CallbackContext _context)
     {
         m_moveInput = _context.ReadValue<Vector2>();
     }
 
+    /// <summary>
+    /// Disables player movement and simulates ball release by enabling gravity 
+    /// and resetting the Rigidbody's velocity.
+    /// </summary>
     public void OnReleaseBall()
     {
             if (controller == null) return;
@@ -93,26 +98,10 @@ private void Start()
             rb.linearVelocity = Vector3.zero;
     }
     
-    // private void MapInputActions() 
-    // {
-    //     m_moveInputAction = playerInput.actions["Move"];
-    //
-    //     m_pauseInputAction = playerInput.actions["Pause"];
-    //     m_pauseInputAction.started += OnPause;
-    //
-    //     m_unpauseInputAction = playerInput.actions["Unpause"];
-    //     m_unpauseInputAction.started += OnUnpause;
-    //
-    //     m_startInputAction = playerInput.actions["StartGame"];
-    //     m_startInputAction.started += OnStartGame;
-    // }
-
-    // private void UnmapInputActions()
-    // {
-    //     m_pauseInputAction.started -= OnPause;
-    //     m_unpauseInputAction.started -= OnUnpause;
-    // }
-
+    /// <summary>
+    /// Invokes the game start event when the start game input is triggered.
+    /// </summary>
+    /// <param name="_context">The context of the start game action.</param>
     public void OnStartGame(InputAction.CallbackContext _context)
     {
         if (!_context.started) return;
@@ -120,6 +109,10 @@ private void Start()
         onGameStart.Invoke();
     }
 
+    /// <summary>
+    /// Pauses the game upon detecting a valid pause input action and invokes the pause event.
+    /// </summary>
+    /// <param name="_context">The context of the pause input action.</param>
     public void OnPause(InputAction.CallbackContext _context)
     {
         if (!pauseInputEnabled) return;
@@ -128,6 +121,10 @@ private void Start()
         onPause.Invoke();
     }
     
+    /// <summary>
+    /// Unpauses the game upon detecting a valid unpause input action and invokes the unpause event.
+    /// </summary>
+    /// <param name="_context">The context of the unpause input action.</param>
     public void OnUnpause(InputAction.CallbackContext _context)
     {
         if (!pauseInputEnabled) return;
@@ -136,6 +133,10 @@ private void Start()
         onUnpause.Invoke();
     }
 
+    /// <summary>
+    /// Resets all key player components (Rigidbody, CharacterController, PlayerInput) 
+    /// and repositions the player to their spawn point, preparing them for the game.
+    /// </summary>
     public void ResetComponents()
     {
         if (rb == null) rb = GetComponent<Rigidbody>();
@@ -156,11 +157,18 @@ private void Start()
         playerInput.enabled = true;
     }
 
+    /// <summary>
+    /// Switches the player's current input action map to the "Player" map, enabling player-specific controls.
+    /// </summary>
     public override void SwitchToPlayerInputMap()
     {
         playerInput.SwitchCurrentActionMap("Player");
     }
 
+    /// <summary>
+    /// Assigns a new `SO_Player` scriptable object to the player and updates their position to the specified spawn point.
+    /// </summary>
+    /// <param name="_playerSO">The scriptable object containing the player's data.</param>
     public void BindPlayerSO(SO_Player _playerSO)
     {
         playerSO = _playerSO;
