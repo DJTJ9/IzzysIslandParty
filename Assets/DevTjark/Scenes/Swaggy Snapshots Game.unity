@@ -1839,7 +1839,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -1870,89 +1870,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6913102652683971386, guid: 7213b88c7d43e444fa0e1a35c425195f, type: 3}
   m_PrefabInstance: {fileID: 482554237}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &630125571
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 630125572}
-  - component: {fileID: 630125574}
-  - component: {fileID: 630125573}
-  m_Layer: 0
-  m_Name: Video Player
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &630125572
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 630125571}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1912335235}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!328 &630125573
-VideoPlayer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 630125571}
-  m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: e6c9b3c066cbeae438c193fb1f8178be, type: 3}
-  m_TargetCameraAlpha: 1
-  m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 0}
-  m_TimeReference: 0
-  m_TargetMaterialRenderer: {fileID: 0}
-  m_TargetMaterialProperty: <noninit>
-  m_RenderMode: 2
-  m_AspectRatio: 2
-  m_DataSource: 0
-  m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
-  m_TargetAudioSources:
-  - {fileID: 0}
-  m_DirectAudioVolumes:
-  - 1
-  m_Url: 
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
-  m_SkipOnDrop: 1
-  m_Looping: 1
-  m_WaitForFirstFrame: 1
-  m_FrameReadyEventEnabled: 0
-  m_VideoShaders: []
---- !u!114 &630125574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 630125571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92375721d0a04523a4f68e3c0a62669c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VideoPlayer: {fileID: 630125573}
-  RenderTexture: {fileID: 8400000, guid: 01fe3240f8a7f0842b2dd1b53e3e89d9, type: 2}
 --- !u!4 &640624018 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2553781000201929646, guid: 0a40a603e86c96542bfd7405c856aed5, type: 3}
@@ -3148,6 +3065,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2959331706522202594, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: mouseSensitivityX
+      value: 
+      objectReference: {fileID: 11400000, guid: 0dc660cf08d445042b2273e6fba6ac3a, type: 2}
+    - target: {fileID: 2959331706522202594, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: mouseSensitivityY
+      value: 
+      objectReference: {fileID: 11400000, guid: 9b6eb9ad758627d4b9e8bc495117e51b, type: 2}
+    - target: {fileID: 2959331706522202594, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
       propertyPath: currentPlayersSwaggySnapshots
       value: 
       objectReference: {fileID: 11400000, guid: 882ef21184fdabd4b9a8dcda17ca6b29, type: 2}
@@ -3850,182 +3775,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1354575171}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1340340584
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1340340585}
-  - component: {fileID: 1340340586}
-  - component: {fileID: 1340340588}
-  - component: {fileID: 1340340587}
-  - component: {fileID: 1340340589}
-  - component: {fileID: 1340340590}
-  m_Layer: 0
-  m_Name: Game Event Listeners
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1340340585
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340340584}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1912335235}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1340340586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340340584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: d85f1a13d5f3749468676f87ec48c10f, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1912335234}
-        m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
-        m_MethodName: ShowResultsScreen
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1340340587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340340584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: cb8390d9fabb07843b5f42bf6275d672, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1912335234}
-        m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
-        m_MethodName: HidePauseMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1340340588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340340584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: b4c1de7ad322b894b8ed236533a23468, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1912335234}
-        m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
-        m_MethodName: ShowPauseMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1340340589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340340584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 130711ff1a6413a4a9f360a3cd13980d, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1912335234}
-        m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
-        m_MethodName: ShowSwaggySnapshotsStartScreen
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1340340590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340340584}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: d9ada080521e16b4682bc5df10c7b166, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1912335234}
-        m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
-        m_MethodName: ShowSwaggySnapshotsStartScreen
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1354393117
 GameObject:
   m_ObjectHideFlags: 0
@@ -5855,6 +5604,10 @@ PrefabInstance:
       value: Pf_AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 6193680053684829511, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
+      propertyPath: LevelSoundsDictionary
+      value: 
+      objectReference: {fileID: 11400000, guid: 535cd725e9dada2469fc80a5545ba149, type: 2}
+    - target: {fileID: 6193680053684829511, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
       propertyPath: levelSoundsDictionary
       value: 
       objectReference: {fileID: 11400000, guid: 535cd725e9dada2469fc80a5545ba149, type: 2}
@@ -6166,132 +5919,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4052608687973690, guid: 353ccef398dfc9a4cb8496b98e5bb67c, type: 3}
   m_PrefabInstance: {fileID: 1185936165}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1912335232
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1912335235}
-  - component: {fileID: 1912335234}
-  - component: {fileID: 1912335233}
-  m_Layer: 0
-  m_Name: Pause Menu
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1912335233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912335232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: f80ea9de16d74154c96bf0b95ca6c4d6, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 847f07b047b41004fae7983b1e2ce5f7, type: 3}
-  m_SortingOrder: 0
-  m_WorldSpaceSizeMode: 1
-  m_WorldSpaceWidth: 1920
-  m_WorldSpaceHeight: 1080
---- !u!114 &1912335234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912335232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 424d2ca1ec44454289227c131c2564d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneCollection: {fileID: 11400000, guid: 6fd8971a4dff91645b76a391153753d8, type: 2}
-  racingGame: 0
-  swaggySnapshots: 0
-  currentPlayers: {fileID: 11400000, guid: 97ae6e8cdb921dd4d97057deb65c1858, type: 2}
-  currentPlayersRacing: {fileID: 0}
-  currentPlayersSwaggySnapshots: {fileID: 0}
-  rowTemplate: {fileID: 9197481963319205126, guid: a5da0a2b314073b4f97b6ae48036cd3c, type: 3}
-  animDuration: 0.3
-  holdDuration: 2
-  uiToolkitVideo: {fileID: 630125574}
-  videoTexture: {fileID: 8400000, guid: 01fe3240f8a7f0842b2dd1b53e3e89d9, type: 2}
-  gamePreviewClipsSO: {fileID: 11400000, guid: 8eb3c35a4de6523458f6accd06a169df, type: 2}
-  onGameStart:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onUnpause:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: cb8390d9fabb07843b5f42bf6275d672, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onRestart:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: d9ada080521e16b4682bc5df10c7b166, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onLevelLoaded:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!4 &1912335235
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912335232}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 630125572}
-  - {fileID: 1340340585}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1935987995
 GameObject:
   m_ObjectHideFlags: 0
@@ -6965,10 +6592,9 @@ SceneRoots:
   - {fileID: 1239769168}
   - {fileID: 7287902982189475959}
   - {fileID: 1699100079494935429}
-  - {fileID: 1912335235}
+  - {fileID: 1160986800}
   - {fileID: 1007614473}
   - {fileID: 1641325847}
   - {fileID: 500015359}
   - {fileID: 1786429304}
   - {fileID: 1354575171}
-  - {fileID: 1160986800}

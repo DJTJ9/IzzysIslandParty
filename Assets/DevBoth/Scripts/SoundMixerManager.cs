@@ -1,19 +1,13 @@
-﻿using System;
-using Sirenix.OdinInspector;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UIElements;
 
+[DefaultExecutionOrder(-1000)]
 public class SoundMixerManager : MonoBehaviour
 {
     public static SoundMixerManager Instance;
 
     [SerializeField] 
     private AudioMixer audioMixer;
-
-    private Slider masterVolumeSlider;
-    private Slider musicVolumeSlider;
-    private Slider soundFXVolumeSlider;
 
     private void Awake() 
     {
@@ -25,32 +19,18 @@ public class SoundMixerManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void SetMasterVolume(float _volume) 
     {
-        var uiDocument = GetComponent<UIDocument>();
-        var root = uiDocument.rootVisualElement;
-
-        masterVolumeSlider = root.Q<Slider>("settings-master-volume__slider");
-        musicVolumeSlider = root.Q<Slider>("settings-music-volume__slider");
-        soundFXVolumeSlider = root.Q<Slider>("settings-soundfx-volume__slider");
-
-        masterVolumeSlider.RegisterValueChangedCallback(evt => SetMasterVolume(evt.newValue));
-        musicVolumeSlider.RegisterValueChangedCallback(evt => SetMusicVolume(evt.newValue));
-        soundFXVolumeSlider.RegisterValueChangedCallback(evt => SetSoundFXVolume(evt.newValue));
+        audioMixer.SetFloat("MainVolume", Mathf.Log10(_volume) * 20f);
     }
 
-    private void SetMasterVolume(float volume) 
+    public void SetMusicVolume(float _volume) 
     {
-        audioMixer.SetFloat("MainVolume", Mathf.Log10(volume) * 20f);
+        audioMixer.SetFloat("MusicVolume", Mathf.Log10(_volume) * 20f);
     }
 
-    private void SetMusicVolume(float volume) 
+    public void SetSoundFXVolume(float _volume) 
     {
-        audioMixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20f);
-    }
-
-    private void SetSoundFXVolume(float volume) 
-    {
-        audioMixer.SetFloat("EffectsVolume", Mathf.Log10(volume) * 20f);
+        audioMixer.SetFloat("EffectsVolume", Mathf.Log10(_volume) * 20f);
     }
 }
