@@ -38,8 +38,7 @@ namespace FishingGame.Animations
                 return;
             
             fishBiting = true;
-
-            Debug.Log("Playing FishBiting");
+            
             AudioClip[] fishBitingClips = new AudioClip[]
             {
                 AudioCollection.Instance.LevelSoundsDictionary.LevelAudios["FishBiting"],
@@ -54,7 +53,6 @@ namespace FishingGame.Animations
             if (!fishBiting || isNPC)
                 return;
             
-            Debug.Log("Stopping FishBiting");
             fishBiting = false;
         }
     }

@@ -111,7 +111,7 @@ namespace JetskiGame.Player.Multiplayer
         private void PlayerCharacterJoined(GameObject _playerObj, PlayerInput _playerInput)
         {
             if (_playerObj.TryGetComponent(out JetskiController playerController))
-                playerController.OnPlayerJoined(playerCollection.Players[playerIndex]);
+                playerController.OnPlayerJoined(playerCollection.Players[playerIndex], playerIndex);
 
             currentPlayers.Players.Add(playerCollection.Players[playerIndex]);
 

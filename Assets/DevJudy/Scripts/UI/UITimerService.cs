@@ -11,6 +11,7 @@ namespace UIScripts
 
         [SerializeField] private float deductionFeedbackDuration = 1f;
         [SerializeField] private Color timeDeductionColor;
+        [SerializeField] private Color regularTimeColor;
         
         public void UpdateTimerText(string _timerText)
         {
@@ -28,7 +29,7 @@ namespace UIScripts
 
             yield return new WaitForSeconds(deductionFeedbackDuration);
 
-            timerText.color = Color.white;
+            timerText.color = regularTimeColor;
 
             yield return null;
         }

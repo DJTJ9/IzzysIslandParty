@@ -4,6 +4,7 @@ using enums;
 using Juice;
 using Player;
 using TMPro;
+using UIScripts;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -43,15 +44,14 @@ namespace JetskiGame
 
         [Header("Pausing: ")]
         [SerializeField] private UnityEvent OnPauseGame;
-
         [SerializeField] private UnityEvent OnUnpauseGame;
         private bool isPaused;
 
         [Header("Dependencies: ")]
         [SerializeField] private IconHandler iconHandler;
-
         [SerializeField] private GameObject onFinishLineCrossedText;
         [SerializeField] private CustomTriggerBehaviour onWallTrigger;
+        [SerializeField] private UIPointsLayoutService uiPointsLayoutService;
 
         [Header("Debug: ")]
         [SerializeField] private ForceMode forceMode;
@@ -74,13 +74,16 @@ namespace JetskiGame
                 onWallTrigger.EnteredTriggerAction += OnHitWall;
         }
 
-        public void OnPlayerJoined(SO_PlayerRacingGames _player)
+        public void OnPlayerJoined(SO_PlayerRacingGames _player, int _playerIndex)
         {
+            PlayerIndex = _playerIndex;
             player = _player;
 
             player.PlayerScore.Value = 0;
             player.TimeValue = 0;
             player.Time = String.Empty;
+            
+           uiPointsLayoutService.SetPointsButtonRect(PlayerIndex);
         }
 
         public void OnPause(InputAction.CallbackContext _context)

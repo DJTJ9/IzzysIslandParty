@@ -1152,7 +1152,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1084376969987498641}
-  - component: {fileID: 4728837477227789601}
   m_Layer: 8
   m_Name: FishingRodLineRendererPoint
   m_TagString: Untagged
@@ -1170,32 +1169,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13.036, y: -0.146, z: 3.271}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8836797334288260113}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4728837477227789601
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1240907510783755405}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 0.1, y: 0.1, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1246980408723838304
 GameObject:
   m_ObjectHideFlags: 0
@@ -2589,7 +2567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isNPC: 0
   lureSplashVolume: 0.7
-  fishBitingVolumeRange: {x: 0.7, y: 0.8}
+  fishBitingVolumeRange: {x: 0.6, y: 0.65}
   fishBitingPitchRange: {x: 0.85, y: 1.4}
 --- !u!1 &2010012373061941994
 GameObject:
@@ -5170,6 +5148,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3862827711135702720}
+        m_TargetAssemblyTypeName: FishingGame.Animations.FishingAnimationAudioHandler,
+          Assembly-CSharp
+        m_MethodName: StopFishBitingSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 4757233264109423665}
         m_TargetAssemblyTypeName: FishingGame.FishingRodController, Assembly-CSharp
         m_MethodName: SwitchToUIInputMap
@@ -7551,8 +7542,6 @@ GameObject:
   - component: {fileID: 1731387959685711117}
   - component: {fileID: 3902726572767742248}
   - component: {fileID: 5599365796476707464}
-  - component: {fileID: 1392766059319065737}
-  - component: {fileID: 8890999231182231855}
   m_Layer: 8
   m_Name: AnimationLure
   m_TagString: Untagged
@@ -7628,56 +7617,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1392766059319065737
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8118110171694713717}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &8890999231182231855
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8118110171694713717}
-  serializedVersion: 4
-  m_Mass: 4
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &8305734998791210448
 GameObject:
   m_ObjectHideFlags: 0
