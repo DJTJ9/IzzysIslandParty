@@ -1,8 +1,13 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 public class BallBlocker : MonoBehaviour
 {
-    [SerializeField] private float returnForce = 30f;
+    [FoldoutGroup("Settings", expanded: true)]
+    [SerializeField] private float m_returnForce = 30f;
+    [SerializeField] private float m_randomRangeX = 5f;
+    [SerializeField] private float m_randomRangeY = 5f;
+    
     [SerializeField] private Transform returnPoint;
 
     /// <summary>
@@ -15,7 +20,7 @@ public class BallBlocker : MonoBehaviour
     {
         var rb = _other.GetComponent<Rigidbody>();
         rb.linearVelocity = Vector3.zero;
-        rb.AddForce((returnPoint.position + new Vector3(Random.Range(-1,1), Random.Range(-1,1), Random.Range(-1,1)) - transform.position).normalized * returnForce, ForceMode.Impulse);
+        rb.AddForce((returnPoint.position + new Vector3(Random.Range(-m_randomRangeX,m_randomRangeX), Random.Range(-m_randomRangeY,m_randomRangeY), 0f) - transform.position).normalized * m_returnForce, ForceMode.Impulse);
     }
 
 }

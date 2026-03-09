@@ -1,4 +1,5 @@
 ﻿using System;
+using ScriptableObjects;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,6 +13,9 @@ public class PlayerControllerMinigolfMayhem : Controller
 
     [HideInInspector] public int ShootCount;
 
+    [SerializeField] private SO_FloatVariable mouseSensitivityX;
+    [SerializeField] private SO_FloatVariable mouseSensitivityY;
+   
     [FoldoutGroup("Events", expanded: true)] 
     [SerializeField] private UnityEvent OnPause;
     [SerializeField] private UnityEvent OnUnpause;

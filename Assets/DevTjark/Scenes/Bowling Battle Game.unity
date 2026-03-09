@@ -173,6 +173,10 @@ PrefabInstance:
       value: Pf_AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 6193680053684829511, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
+      propertyPath: LevelSoundsDictionary
+      value: 
+      objectReference: {fileID: 11400000, guid: 80c2985484ac395409818c1833837e70, type: 2}
+    - target: {fileID: 6193680053684829511, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
       propertyPath: levelSoundsDictionary
       value: 
       objectReference: {fileID: 11400000, guid: 80c2985484ac395409818c1833837e70, type: 2}
@@ -3266,6 +3270,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2959331706522202594, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: mouseSensitivityX
+      value: 
+      objectReference: {fileID: 11400000, guid: 0dc660cf08d445042b2273e6fba6ac3a, type: 2}
+    - target: {fileID: 2959331706522202594, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
+      propertyPath: mouseSensitivityY
+      value: 
+      objectReference: {fileID: 11400000, guid: 9b6eb9ad758627d4b9e8bc495117e51b, type: 2}
     - target: {fileID: 5762206781639407265, guid: bf82764c1a98a654f85f58e55a411e51, type: 3}
       propertyPath: m_Name
       value: Menus

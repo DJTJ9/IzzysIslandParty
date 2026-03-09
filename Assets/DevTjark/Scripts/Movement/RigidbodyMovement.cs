@@ -84,7 +84,6 @@ public class RigidbodyMovement : MonoBehaviour
         if (rb.linearVelocity.magnitude < currentVelocity) return;
 
         _rb.AddForce(impulse, ForceMode.Impulse);
-        ConsoleProDebug.LogToFilter($"Player applied {impulse} impulse to {other.name}", "Debug");
     }
 
     /// <summary>

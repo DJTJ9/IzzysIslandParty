@@ -22,6 +22,13 @@ public class LocationService : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        dynamicTransforms.Clear();
+        PlayerTransforms.Clear();
+        CheckPointTransforms.Clear();
+    }
+
     public void RegisterTransform(string _key, Transform _transform)
     {
         dynamicTransforms[_key] = _transform;

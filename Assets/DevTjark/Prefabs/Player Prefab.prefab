@@ -1553,6 +1553,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerIndex: 0
   ShootCount: 0
+  mouseSensitivityX: {fileID: 0}
+  mouseSensitivityY: {fileID: 0}
   OnPause:
     m_PersistentCalls:
       m_Calls:
@@ -1638,6 +1640,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orbitalFollow: {fileID: 6315098519535762074}
+  mouseSensitivityX: {fileID: 11400000, guid: 0dc660cf08d445042b2273e6fba6ac3a, type: 2}
+  mouseSensitivityY: {fileID: 11400000, guid: 9b6eb9ad758627d4b9e8bc495117e51b, type: 2}
   isLookingBack: 0
 --- !u!114 &9201151259296887277
 MonoBehaviour:
@@ -2140,6 +2144,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 873efad3-1799-46b2-83b4-de0e6927f533
     m_ActionName: 'MinigolfMayhem/Rear View[/Mouse/rightButton,/XInputControllerWindows/rightTrigger]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d0e2fb38-7efd-43a0-b874-f8205d44bce0
+    m_ActionName: 'UI/ControllerSelectionBack[/Keyboard/escape,/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI

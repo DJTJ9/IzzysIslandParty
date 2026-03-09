@@ -23,7 +23,6 @@ public class BowlingBattleGameManager : MonoBehaviour
 
     private int m_roundIndex = 1;
 
-    private CountdownTimer m_joinPhaseTimer;
     private CountdownTimer m_preparationPhaseTimer;
     private CountdownTimer m_roundTimer;
 
@@ -62,7 +61,6 @@ public class BowlingBattleGameManager : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        m_joinPhaseTimer.Tick(Time.deltaTime);
         m_preparationPhaseTimer.Tick(Time.deltaTime);
         m_roundTimer.Tick(Time.deltaTime);
     }
