@@ -35,14 +35,6 @@ public class GoapRigidbodyMovement : Controller
     [HideInInspector] public CountdownTimer MovementCooldownTimer;
     private CountdownTimer impulseCooldownTimer;
     
-    // private bool canMove = true;
-    // private bool canShoot = true;
-    // private bool canJump = true;
-    //
-    // private CountdownTimer pushCooldownTimer;
-    // private CountdownTimer shootCooldownTimer;
-    // private CountdownTimer jumpCooldownTimer;
-    
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -74,7 +66,6 @@ public class GoapRigidbodyMovement : Controller
         if (rb.linearVelocity.magnitude > currentVelocity.magnitude) return;
 
         _rb.AddForce(impulse, ForceMode.Impulse);
-        ConsoleProDebug.LogToFilter($"NPC applied {impulse} impulse to {other.name}", "Debug");
     }
     
     /// <summary>
@@ -123,7 +114,7 @@ public class GoapRigidbodyMovement : Controller
 
         var horizontal = new Vector3(toTarget.x, 0f, toTarget.z);
         var horizontalDistance = horizontal.magnitude;
-        var horizontalSpeedFactor = shootForceFactor + Random.Range(-5f, 5f);
+        var horizontalSpeedFactor = shootForceFactor + Random.Range(-2f, 2f);
         var t = horizontalDistance / horizontalSpeedFactor;
         var vHorizontal = horizontal / t;
 
