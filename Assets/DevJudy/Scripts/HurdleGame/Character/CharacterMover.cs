@@ -1,3 +1,4 @@
+using Audio;
 using enums;
 using Helper;
 using Juice;
@@ -17,6 +18,10 @@ namespace HurdleGame
         [SerializeField] private UnityEvent OnHitObstacleEvents;
         [SerializeField] private FloatReference moveSpeed;
         [SerializeField] private FloatReference obstacleHitDeduction;
+        
+        [Header("Audio: ")]
+        [SerializeField] private Vector2 hitVolumeRange = new Vector2(1f, 1f);
+        [SerializeField] private Vector2 hitPitchRange = new Vector2(1f, 1f);
         
         private float individualMultiplier = 1f;
         public float IndividualMultiplier
@@ -46,6 +51,9 @@ namespace HurdleGame
 
         public void OnHitObstacle()
         {
+            AudioService.Instance.PlaySoundWithRandomPitch(AudioCollection.Instance.LevelSoundsDictionary.LevelAudios["HitObstacleSound"], EAudioType.SFX,
+                hitVolumeRange, hitPitchRange);
+            
             transform.position += new Vector3(-1, 0f, 0f);
             individualMultiplier -= obstacleHitDeduction.Value;
 

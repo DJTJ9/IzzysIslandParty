@@ -165,11 +165,6 @@ namespace HurdleGame
 
         private void FixedUpdate()
         {
-           // if (slideTimer.IsRunning && !slideTimer.IsRunning)
-           // {
-           //     ChangeCollider(false);
-           // }
-
             GroundCheck();
         }
 
@@ -178,9 +173,6 @@ namespace HurdleGame
             Vector3 groundCheckPos = new Vector3(transform.position.x, transform.position.y - groundCheckOffset, transform.position.z);
 
             IsGrounded = Physics.OverlapSphere(groundCheckPos, groundCheckRadius, groundLayer).Length > 0;
-
-            //if (!IsGrounded && rb.linearVelocity.y < 0.01f)
-            // isFalling = true;
         }
 
         public void OnDrawGizmos()
