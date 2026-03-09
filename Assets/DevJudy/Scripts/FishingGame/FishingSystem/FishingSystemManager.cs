@@ -140,6 +140,9 @@ namespace FishingGame
 
         public void PressedCatch()
         {
+            if (FishingSystem.Instance.PressedCatch[PlayerIndex])
+                return;
+            
             iconHandler.DisplayIcon(EEmotion.Happy);
 
             FishingSystem.Instance.PressedCatch[PlayerIndex] = true;
