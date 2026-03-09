@@ -11,11 +11,6 @@ namespace UIScripts
 
         [SerializeField] private float deductionFeedbackDuration = 1f;
         [SerializeField] private Color timeDeductionColor;
-
-        public void SetTextAlignment()
-        {
-            timerText.alignment = TextAlignmentOptions.Center;
-        }
         
         public void UpdateTimerText(string _timerText)
         {
