@@ -11,6 +11,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
+[DefaultExecutionOrder(-1000)]
 public class AsyncLevelLoader : MonoBehaviour
 {
     [SerializeField] private SceneCollectionSO sceneCollection;

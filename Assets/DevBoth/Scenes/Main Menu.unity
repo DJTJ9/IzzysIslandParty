@@ -119,6 +119,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &27892422
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 27892424}
+  - component: {fileID: 27892423}
+  m_Layer: 0
+  m_Name: Sound Mixer Mananger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &27892423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27892422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3bb4957f5124069adaad5f0f76571cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 21fcae5a62532a54885ae9ba05b29096, type: 2}
+--- !u!4 &27892424
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27892422}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &668927269
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +457,6 @@ GameObject:
   - component: {fileID: 1112710742}
   - component: {fileID: 1112710743}
   - component: {fileID: 1112710741}
-  - component: {fileID: 1112710744}
   m_Layer: 5
   m_Name: Main Menu UI
   m_TagString: Untagged
@@ -466,6 +510,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4100418ff54740245acd917a7fe720c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseSensitivityX: {fileID: 11400000, guid: 0dc660cf08d445042b2273e6fba6ac3a, type: 2}
+  mouseSensitivityY: {fileID: 11400000, guid: 9b6eb9ad758627d4b9e8bc495117e51b, type: 2}
   sceneCollection: {fileID: 11400000, guid: 6fd8971a4dff91645b76a391153753d8, type: 2}
   onGameStart:
     m_PersistentCalls:
@@ -482,19 +528,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1112710744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1112710740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3bb4957f5124069adaad5f0f76571cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 21fcae5a62532a54885ae9ba05b29096, type: 2}
 --- !u!1001 &1123899390
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -507,6 +540,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pf_AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6193680053684829511, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
+      propertyPath: LevelSoundsDictionary
+      value: 
+      objectReference: {fileID: 11400000, guid: f3bb021af4281b8429f96a24db9d46c2, type: 2}
     - target: {fileID: 9187599527010791171, guid: b5127d88e002ac749821368064fe6e2d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -704,5 +741,6 @@ SceneRoots:
   - {fileID: 697717970}
   - {fileID: 668927271}
   - {fileID: 1332255141}
-  - {fileID: 1640082913}
   - {fileID: 1123899390}
+  - {fileID: 1640082913}
+  - {fileID: 27892424}

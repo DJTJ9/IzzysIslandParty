@@ -1,15 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
-using UnityEngine.SceneManagement;
 using System.Linq;
 using Player;
 using Player.Collections;
+using ScriptableObjects;
 using Sirenix.OdinInspector;
 using UnityEngine.InputSystem;
-using UnityEngine.Video;
 using Button = UnityEngine.UIElements.Button;
 
 public class GameMenuEvents : MonoBehaviour
@@ -17,6 +17,10 @@ public class GameMenuEvents : MonoBehaviour
     [SerializeField] private SceneCollectionSO sceneCollection;
     [SerializeField] private bool racingGame;
     [SerializeField] private bool swaggySnapshots;
+    
+    [FoldoutGroup("Mouse Sensitivity", expanded: false)]
+    [SerializeField] private SO_FloatVariable mouseSensitivityX;
+    [SerializeField] private SO_FloatVariable mouseSensitivityY;
 
     [HideIf("racingGame"), HideIf("swaggySnapshots")]
     [SerializeField] private SO_PlayerCollection currentPlayers;
@@ -30,9 +34,11 @@ public class GameMenuEvents : MonoBehaviour
     [SerializeField] private VisualTreeAsset rowTemplate;
 
     private UIDocument document;
+    private VisualElement root;
 
     [Header("Menus")]
     private VisualElement pauseMenu;
+    private VisualElement settingsMenu;
     private VisualElement playerHub;
     private VisualElement jetskiJoyrideModusSelection;
     private VisualElement minigolfMayhemModusSelection;
@@ -43,11 +49,18 @@ public class GameMenuEvents : MonoBehaviour
 
     [Header("Pause Menu Buttons")]
     private Button pauseMenuResumeButton;
-
     private Button pauseMenuRestartButton;
     private Button pauseMenuChangeLevelButton;
+    private Button pauseMenuSettingsButton;
     private Button pauseMenuQuitButton;
 
+    [Header("Settings Menu Elements")]
+    private Slider mouseSensitivitySlider;
+    private Slider masterVolumeSlider;
+    private Slider musicVolumeSlider;
+    private Slider soundFXVolumeSlider;
+    private Button settingsBackButton;
+    
     [Header("Player HUB Buttons")]
     private Button bowlingBattleButton;
     private Button fishingFrenzyButton;
@@ -122,15 +135,18 @@ public class GameMenuEvents : MonoBehaviour
     [SerializeField] private UnityEvent onUnpause;
     [SerializeField] private UnityEvent onRestart;
     [SerializeField] private UnityEvent onLevelLoaded;
+    
+    public static event Action<float> OnMouseSettingsChanged;
 
-    private int m_joinedPlayers = 0;
-    private bool m_playerJoined = false;
+    private int m_joinedPlayers;
+    private bool m_playerJoined;
 
-    private bool sorted = false;
+    private bool sorted;
 
     private void Awake()
     {
         document = GetComponent<UIDocument>();
+        root = document.rootVisualElement;
 
         BindVisualElements();
         BindButtons();
@@ -143,6 +159,7 @@ public class GameMenuEvents : MonoBehaviour
     private void OnEnable()
     {
         RegisterButtonCallbacks();
+        SetUpPlayerHUBNavigation();
         m_playerJoined = false;
         StartCoroutine(ShowOnlyJoinInstruction());
 
@@ -157,82 +174,91 @@ public class GameMenuEvents : MonoBehaviour
 
     private void BindVisualElements()
     {
-        pauseMenu = document.rootVisualElement.Q("pause-menu__container");
-        playerHub = document.rootVisualElement.Q("player-hub__container");
-        jetskiJoyrideModusSelection = document.rootVisualElement.Q("jetski-joyride-modus-selection__container");
-        minigolfMayhemModusSelection = document.rootVisualElement.Q("minigolf-mayhem-modus-selection__container");
-        resultsScreen = document.rootVisualElement.Q("results-screen-and-buttons__container");
-        resultsModal = document.rootVisualElement.Q("results-screen__container");
-        endScreenUI = document.rootVisualElement.Q("end-screen-menu__container");
-        controllerSelectionMenu = document.rootVisualElement.Q("controller-selection-menu__container");
+        pauseMenu = root.Q("pause-menu__container");
+        settingsMenu = root.Q("settings-menu__container");
+        playerHub = root.Q("player-hub__container");
+        jetskiJoyrideModusSelection = root.Q("jetski-joyride-modus-selection__container");
+        minigolfMayhemModusSelection = root.Q("minigolf-mayhem-modus-selection__container");
+        resultsScreen = root.Q("results-screen-and-buttons__container");
+        resultsModal = root.Q("results-screen__container");
+        endScreenUI = root.Q("end-screen-menu__container");
+        controllerSelectionMenu = root.Q("controller-selection-menu__container");
     }
 
     private void BindButtons()
     {
         // Pause menu buttons
-        pauseMenuResumeButton = document.rootVisualElement.Q("pause-menu-resume__button") as Button;
-        pauseMenuRestartButton = document.rootVisualElement.Q("pause-menu-restart__button") as Button;
-        pauseMenuChangeLevelButton = document.rootVisualElement.Q("pause-menu-change-level__button") as Button;
-        pauseMenuQuitButton = document.rootVisualElement.Q("pause-menu-quit__button") as Button;
+        pauseMenuResumeButton = root.Q("pause-menu-resume__button") as Button;
+        pauseMenuRestartButton = root.Q("pause-menu-restart__button") as Button;
+        pauseMenuChangeLevelButton = root.Q("pause-menu-change-level__button") as Button;
+        pauseMenuSettingsButton = root.Q("pause-menu-settings__button") as Button;
+        pauseMenuQuitButton = root.Q("pause-menu-quit__button") as Button;
+        
+        // Settings menu elements
+        mouseSensitivitySlider = root.Q<Slider>("settings-mouse-sensitivity__slider");
+        masterVolumeSlider = root.Q<Slider>("settings-master-volume__slider");
+        musicVolumeSlider = root.Q<Slider>("settings-music-volume__slider");
+        soundFXVolumeSlider = root.Q<Slider>("settings-soundfx-volume__slider");
+        settingsBackButton = root.Q("settings-menu-back__button") as Button;
 
         // Player HUB buttons
-        bowlingBattleButton = document.rootVisualElement.Q("play-bowling-battle__button") as Button;
-        fishingFrenzyButton = document.rootVisualElement.Q("play-fishing-frenzy__button") as Button;
-        jetskiJoyrideButton = document.rootVisualElement.Q("play-jetski-joyride__button") as Button;
-        jetskiJoyrideRaceButton = document.rootVisualElement.Q("play-jetski-joyride-race__button") as Button;
-        jetskiJoyrideSlalomButton = document.rootVisualElement.Q("play-jetski-joyride-slalom__button") as Button;
-        jetskiJoyrideModusSelectionBackButton = document.rootVisualElement.Q("jetski-joyride-modus-selection-back__button") as Button;
-        minigolfMayhemButton = document.rootVisualElement.Q("play-minigolf-mayhem__button") as Button;
-        minigolfMayhemClassicButton = document.rootVisualElement.Q("play-minigolf-mayhem-classic__button") as Button;
-        minigolfMayhemRaceButton = document.rootVisualElement.Q("play-minigolf-mayhem-race__button") as Button;
-        minigolfMayhemModusSelectionBackButton = document.rootVisualElement.Q("minigolf-mayhem-modus-selection-back__button") as Button;
-        swaggySnapshotsButton = document.rootVisualElement.Q("play-swaggy-snapshots__button") as Button;
-        hastyHurdlesButton = document.rootVisualElement.Q("play-hasty-hurdles__button") as Button;
-        playerHUBBackButton = document.rootVisualElement.Q("player-hub-back__button") as Button;
+        bowlingBattleButton = root.Q("play-bowling-battle__button") as Button;
+        fishingFrenzyButton = root.Q("play-fishing-frenzy__button") as Button;
+        jetskiJoyrideButton = root.Q("play-jetski-joyride__button") as Button;
+        jetskiJoyrideRaceButton = root.Q("play-jetski-joyride-race__button") as Button;
+        jetskiJoyrideSlalomButton = root.Q("play-jetski-joyride-slalom__button") as Button;
+        jetskiJoyrideModusSelectionBackButton = root.Q("jetski-joyride-modus-selection-back__button") as Button;
+        minigolfMayhemButton = root.Q("play-minigolf-mayhem__button") as Button;
+        minigolfMayhemClassicButton = root.Q("play-minigolf-mayhem-classic__button") as Button;
+        minigolfMayhemRaceButton = root.Q("play-minigolf-mayhem-race__button") as Button;
+        minigolfMayhemModusSelectionBackButton = root.Q("minigolf-mayhem-modus-selection-back__button") as Button;
+        swaggySnapshotsButton = root.Q("play-swaggy-snapshots__button") as Button;
+        hastyHurdlesButton = root.Q("play-hasty-hurdles__button") as Button;
+        playerHUBBackButton = root.Q("player-hub-back__button") as Button;
 
         // End screen buttons
-        resultScreenContinueButton = document.rootVisualElement.Q("results-screen-continue__button") as Button;
-        endScreenRestartButton = document.rootVisualElement.Q("end-screen-menu-restart__button") as Button;
-        endScreenChangeLevelButton = document.rootVisualElement.Q("end-screen-menu-change-level__button") as Button;
-        endScreenQuitButton = document.rootVisualElement.Q("end-screen-menu-quit__button") as Button;
+        resultScreenContinueButton = root.Q("results-screen-continue__button") as Button;
+        endScreenRestartButton = root.Q("end-screen-menu-restart__button") as Button;
+        endScreenChangeLevelButton = root.Q("end-screen-menu-change-level__button") as Button;
+        endScreenQuitButton = root.Q("end-screen-menu-quit__button") as Button;
 
         // Controller selection menu
-        controllerSelectionReadyButton = document.rootVisualElement.Q("controller-selection-ready__button") as Button;
-        controllerSelectionBackButton = document.rootVisualElement.Q("controller-selection-back__button") as Button;
-        bowlingBattleHeader = document.rootVisualElement.Q("bb-controller-selection-header__container");
-        fishingFrenzyHeader = document.rootVisualElement.Q("ff-controller-selection-header__container");
-        jetskiJoyrideRaceHeader = document.rootVisualElement.Q("jj-race-controller-selection-header__container");
-        jetskiJoyrideSlalomHeader = document.rootVisualElement.Q("jj-slalom-controller-selection-header__container");
-        minigolfMayhemClassicHeader = document.rootVisualElement.Q("mm-classic-controller-selection-header__container");
-        minigolfMayhemRaceHeader = document.rootVisualElement.Q("mm-race-controller-selection-header__container");
-        swaggySnapshotsHeader = document.rootVisualElement.Q("ss-controller-selection-header__container");
-        hastyHurdlesHeader = document.rootVisualElement.Q("hh-controller-selection-header__container");
-        bowlingBattleInstructions = document.rootVisualElement.Q("bb-controls__container");
-        fishingFrenzyInstructions = document.rootVisualElement.Q("ff-controls__container");
-        jetskiJoyrideRaceInstructions = document.rootVisualElement.Q("jj-race-controls__container");
-        jetskiJoyrideSlalomInstructions = document.rootVisualElement.Q("jj-slalom-controls__container");
-        minigolfMayhemClassicInstructions = document.rootVisualElement.Q("mm-classic-controls__container");
-        minigolfMayhemRaceInstructions = document.rootVisualElement.Q("mm-race-controls__container");
-        swaggySnapshotsInstructions = document.rootVisualElement.Q("ss-controls__container");
-        hastyHurdlesInstructions = document.rootVisualElement.Q("hh-controls__container");
-        bowlingBattlePreviewImage = document.rootVisualElement.Q("bb-game-preview__image");
-        fishingFrenzyPreviewImage = document.rootVisualElement.Q("ff-game-preview__image");
-        jetskiJoyrideRacePreviewImage = document.rootVisualElement.Q("jj-race-game-preview__image");
-        jetskiJoyrideSlalomPreviewImage = document.rootVisualElement.Q("jj-slalom-game-preview__image");
-        minigolfMayhemClassicPreviewImage = document.rootVisualElement.Q("mm-classic-game-preview__image");
-        minigolfMayhemRacePreviewImage = document.rootVisualElement.Q("mm-race-game-preview__image");
-        swaggySnapshotsPreviewImage = document.rootVisualElement.Q("ss-game-preview__image");
-        hastyHurdlesPreviewImage = document.rootVisualElement.Q("hh-game-preview__image");
-        bowlingBattleInstructionsText = document.rootVisualElement.Q("bb-game-instruction-text__label");
-        fishingFrenzyInstructionsText = document.rootVisualElement.Q("ff-game-instruction-text__label");
-        jetskiJoyrideRaceInstructionsText = document.rootVisualElement.Q("jj-race-game-instruction-text__label");
-        jetskiJoyrideSlalomInstructionsText = document.rootVisualElement.Q("jj-slalom-game-instruction-text__label");
-        minigolfMayhemClassicInstructionsText = document.rootVisualElement.Q("mm-classic-game-instruction-text__label");
-        minigolfMayhemRaceInstructionsText = document.rootVisualElement.Q("mm-race-game-instruction-text__label");
-        swaggySnapshotsInstructionsText = document.rootVisualElement.Q("ss-game-instruction-text__label");
-        hastyHurdlesInstructionsText = document.rootVisualElement.Q("hh-game-instruction-text__label");
-        joinInstruction = document.rootVisualElement.Q("join-instruction");
-        startGameInstruction = document.rootVisualElement.Q("start-game-instruction");
+        controllerSelectionReadyButton = root.Q("controller-selection-ready__button") as Button;
+        controllerSelectionBackButton = root.Q("controller-selection-back__button") as Button;
+        bowlingBattleHeader = root.Q("bb-controller-selection-header__container");
+        fishingFrenzyHeader = root.Q("ff-controller-selection-header__container");
+        jetskiJoyrideRaceHeader = root.Q("jj-race-controller-selection-header__container");
+        jetskiJoyrideSlalomHeader = root.Q("jj-slalom-controller-selection-header__container");
+        minigolfMayhemClassicHeader = root.Q("mm-classic-controller-selection-header__container");
+        minigolfMayhemRaceHeader = root.Q("mm-race-controller-selection-header__container");
+        swaggySnapshotsHeader = root.Q("ss-controller-selection-header__container");
+        hastyHurdlesHeader = root.Q("hh-controller-selection-header__container");
+        bowlingBattleInstructions = root.Q("bb-controls__container");
+        fishingFrenzyInstructions = root.Q("ff-controls__container");
+        jetskiJoyrideRaceInstructions = root.Q("jj-race-controls__container");
+        jetskiJoyrideSlalomInstructions = root.Q("jj-slalom-controls__container");
+        minigolfMayhemClassicInstructions = root.Q("mm-classic-controls__container");
+        minigolfMayhemRaceInstructions = root.Q("mm-race-controls__container");
+        swaggySnapshotsInstructions = root.Q("ss-controls__container");
+        hastyHurdlesInstructions = root.Q("hh-controls__container");
+        bowlingBattlePreviewImage = root.Q("bb-game-preview__image");
+        fishingFrenzyPreviewImage = root.Q("ff-game-preview__image");
+        jetskiJoyrideRacePreviewImage = root.Q("jj-race-game-preview__image");
+        jetskiJoyrideSlalomPreviewImage = root.Q("jj-slalom-game-preview__image");
+        minigolfMayhemClassicPreviewImage = root.Q("mm-classic-game-preview__image");
+        minigolfMayhemRacePreviewImage = root.Q("mm-race-game-preview__image");
+        swaggySnapshotsPreviewImage = root.Q("ss-game-preview__image");
+        hastyHurdlesPreviewImage = root.Q("hh-game-preview__image");
+        bowlingBattleInstructionsText = root.Q("bb-game-instruction-text__label");
+        fishingFrenzyInstructionsText = root.Q("ff-game-instruction-text__label");
+        jetskiJoyrideRaceInstructionsText = root.Q("jj-race-game-instruction-text__label");
+        jetskiJoyrideSlalomInstructionsText = root.Q("jj-slalom-game-instruction-text__label");
+        minigolfMayhemClassicInstructionsText = root.Q("mm-classic-game-instruction-text__label");
+        minigolfMayhemRaceInstructionsText = root.Q("mm-race-game-instruction-text__label");
+        swaggySnapshotsInstructionsText = root.Q("ss-game-instruction-text__label");
+        hastyHurdlesInstructionsText = root.Q("hh-game-instruction-text__label");
+        joinInstruction = root.Q("join-instruction");
+        startGameInstruction = root.Q("start-game-instruction");
     }
 
     private void RegisterButtonCallbacks()
@@ -241,7 +267,15 @@ public class GameMenuEvents : MonoBehaviour
         pauseMenuResumeButton.clicked += OnResumeGameClick;
         pauseMenuRestartButton.clicked += OnRestartGameClick;
         pauseMenuChangeLevelButton.clicked += OnChangeLevelClick;
+        pauseMenuSettingsButton.clicked += OnSettingsButtonClick;
         pauseMenuQuitButton.clicked += OnQuitClick;
+        
+        // Settings menu buttons
+        mouseSensitivitySlider.RegisterValueChangedCallback(OnMouseSensitivityChange);
+        masterVolumeSlider.RegisterValueChangedCallback(OnMasterVolumeChange);
+        musicVolumeSlider.RegisterValueChangedCallback(OnMusicVolumeChange);
+        soundFXVolumeSlider.RegisterValueChangedCallback(OnSoundFXVolumeChange);
+        settingsBackButton.clicked += OnSettingsBackButtonClick;
 
         // Player HUB buttons
         bowlingBattleButton.clicked += OnLoadBowlingBattle;
@@ -275,7 +309,15 @@ public class GameMenuEvents : MonoBehaviour
         pauseMenuResumeButton.clicked -= OnResumeGameClick;
         pauseMenuRestartButton.clicked -= OnRestartGameClick;
         pauseMenuChangeLevelButton.clicked -= OnChangeLevelClick;
+        pauseMenuSettingsButton.clicked -= OnSettingsButtonClick;
         pauseMenuQuitButton.clicked -= OnQuitClick;
+        
+        // Settings menu buttons
+        mouseSensitivitySlider.UnregisterValueChangedCallback(OnMouseSensitivityChange);
+        masterVolumeSlider.UnregisterValueChangedCallback(OnMasterVolumeChange);
+        musicVolumeSlider.UnregisterValueChangedCallback(OnMusicVolumeChange);
+        soundFXVolumeSlider.UnregisterValueChangedCallback(OnSoundFXVolumeChange);
+        settingsBackButton.clicked -= OnSettingsBackButtonClick;
 
         // Player HUB buttons
         bowlingBattleButton.clicked -= OnLoadBowlingBattle;
@@ -307,13 +349,42 @@ public class GameMenuEvents : MonoBehaviour
     {
         pauseMenu.style.display = DisplayStyle.Flex;
         FocusButton(pauseMenuResumeButton);
-        Time.timeScale = 0f;
+        FreezeTimeScale();
     }
 
     public void HidePauseMenu()
     {
         pauseMenu.style.display = DisplayStyle.None;
         UnfreezeTimeScale();
+    }
+    
+    private void OnMouseSensitivityChange(ChangeEvent<float> _evt)
+    {
+        mouseSensitivityX.Value = _evt.newValue;
+        mouseSensitivityY.Value = _evt.newValue;
+        OnMouseSettingsChanged?.Invoke(_evt.newValue);
+    }
+    
+    private void OnSettingsBackButtonClick()
+    {
+        settingsMenu.style.display = DisplayStyle.None;
+        pauseMenu.style.display = DisplayStyle.Flex;
+        FocusButton(pauseMenuSettingsButton);
+    }
+    
+    private void OnMasterVolumeChange(ChangeEvent<float> _evt)
+    {
+        SoundMixerManager.Instance.SetMasterVolume(_evt.newValue);
+    }
+    
+    private void OnMusicVolumeChange(ChangeEvent<float> _evt)
+    {
+        SoundMixerManager.Instance.SetMusicVolume(_evt.newValue);
+    }
+    
+    private void OnSoundFXVolumeChange(ChangeEvent<float> _evt)
+    {
+        SoundMixerManager.Instance.SetSoundFXVolume(_evt.newValue);
     }
 
     public void ShowEndScreenUI()
@@ -348,6 +419,13 @@ public class GameMenuEvents : MonoBehaviour
         endScreenUI.style.display = DisplayStyle.None;
         playerHub.style.display = DisplayStyle.Flex;
         FocusButton(bowlingBattleButton);
+    }
+    
+    private void OnSettingsButtonClick()
+    {
+        pauseMenu.style.display = DisplayStyle.None;
+        settingsMenu.style.display = DisplayStyle.Flex;
+        FocusButton(mouseSensitivitySlider);
     }
 
     private void OnPlayerHubBack()
@@ -635,7 +713,6 @@ public class GameMenuEvents : MonoBehaviour
 
     private void ShowResults(List<SO_Player> _results)
     {
-        var root = GetComponent<UIDocument>().rootVisualElement;
         var container = resultsModal;
 
         container.Clear();
@@ -677,7 +754,6 @@ public class GameMenuEvents : MonoBehaviour
     
     private void ShowSwaggySnapshotsResults(List<SO_PlayerSwaggySnapshots> _results)
     {
-        var root = GetComponent<UIDocument>().rootVisualElement;
         var container = resultsModal;
 
         container.Clear();
@@ -719,7 +795,6 @@ public class GameMenuEvents : MonoBehaviour
     
     private void ShowMinigolfClassicResults(List<SO_PlayerRacingGames> _results)
     {
-        var root = GetComponent<UIDocument>().rootVisualElement;
         var container = resultsModal;
 
         container.Clear();
@@ -761,7 +836,6 @@ public class GameMenuEvents : MonoBehaviour
 
     private void ShowMinigolfRaceResults(List<SO_PlayerRacingGames> _results)
     {
-        var root = GetComponent<UIDocument>().rootVisualElement;
         var container = resultsModal;
 
         container.Clear();
@@ -805,7 +879,6 @@ public class GameMenuEvents : MonoBehaviour
     {
         sorted = false;
         
-        var root = GetComponent<UIDocument>().rootVisualElement;
         var container = resultsModal;
 
         container.Clear();
@@ -983,6 +1056,308 @@ public class GameMenuEvents : MonoBehaviour
         }
 
         element.style.scale = new Scale(to);
+    }
+    
+    private void SetUpPlayerHUBNavigation()
+    {
+        bowlingBattleButton.RegisterCallback<NavigationMoveEvent>(_evt =>
+        {
+            switch (_evt.direction)
+            {
+                case NavigationMoveEvent.Direction.Down:
+                    FocusButton(jetskiJoyrideButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Up:
+                    FocusButton(playerHUBBackButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Left:
+                    FocusButton(hastyHurdlesButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Right:
+                    FocusButton(fishingFrenzyButton);
+                    _evt.StopPropagation();
+                    break;
+            }
+        });
+        
+        fishingFrenzyButton.RegisterCallback<NavigationMoveEvent>(_evt =>
+        {
+            switch (_evt.direction)
+            {
+                case NavigationMoveEvent.Direction.Down:
+                    FocusButton(minigolfMayhemButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Up:
+                    FocusButton(playerHUBBackButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Left:
+                    FocusButton(bowlingBattleButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Right:
+                    FocusButton(hastyHurdlesButton);
+                    _evt.StopPropagation();
+                    break;
+            }
+        });
+        
+        hastyHurdlesButton.RegisterCallback<NavigationMoveEvent>(_evt =>
+        {
+            switch (_evt.direction)
+            {
+                case NavigationMoveEvent.Direction.Down:
+                    FocusButton(swaggySnapshotsButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Up:
+                    FocusButton(playerHUBBackButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Left:
+                    FocusButton(fishingFrenzyButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Right:
+                    FocusButton(bowlingBattleButton);
+                    _evt.StopPropagation();
+                    break;
+            }
+        });
+        
+        jetskiJoyrideButton.RegisterCallback<NavigationMoveEvent>(_evt =>
+        {
+            switch (_evt.direction)
+            {
+                case NavigationMoveEvent.Direction.Down:
+                    FocusButton(playerHUBBackButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Up:
+                    FocusButton(bowlingBattleButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Left:
+                    FocusButton(swaggySnapshotsButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Right:
+                    FocusButton(minigolfMayhemButton);
+                    _evt.StopPropagation();
+                    break;
+            }
+        });
+        
+        minigolfMayhemButton.RegisterCallback<NavigationMoveEvent>(_evt =>
+        {
+            switch (_evt.direction)
+            {
+                case NavigationMoveEvent.Direction.Down:
+                    FocusButton(playerHUBBackButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Up:
+                    FocusButton(fishingFrenzyButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Left:
+                    FocusButton(jetskiJoyrideButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Right:
+                    FocusButton(swaggySnapshotsButton);
+                    _evt.StopPropagation();
+                    break;
+            }
+        });
+        
+        swaggySnapshotsButton.RegisterCallback<NavigationMoveEvent>(_evt =>
+        {
+            switch (_evt.direction)
+            {
+                case NavigationMoveEvent.Direction.Down:
+                    FocusButton(playerHUBBackButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Up:
+                    FocusButton(hastyHurdlesButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Left:
+                    FocusButton(minigolfMayhemButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Right:
+                    FocusButton(jetskiJoyrideButton);
+                    _evt.StopPropagation();
+                    break;
+            }
+        });
+        
+        playerHUBBackButton.RegisterCallback<NavigationMoveEvent>(_evt =>
+        {
+            switch (_evt.direction)
+            {
+                case NavigationMoveEvent.Direction.Down:
+                    FocusButton(fishingFrenzyButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Up:
+                    FocusButton(minigolfMayhemButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Left:
+                    FocusButton(jetskiJoyrideButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Right:
+                    FocusButton(swaggySnapshotsButton);
+                    _evt.StopPropagation();
+                    break;
+            }
+        });
+        
+        jetskiJoyrideRaceButton.RegisterCallback<NavigationMoveEvent>(_evt =>
+        {
+            switch (_evt.direction)
+            {
+                case NavigationMoveEvent.Direction.Down:
+                    FocusButton(jetskiJoyrideModusSelectionBackButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Up:
+                    FocusButton(jetskiJoyrideModusSelectionBackButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Left:
+                    FocusButton(jetskiJoyrideSlalomButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Right:
+                    FocusButton(jetskiJoyrideSlalomButton);
+                    _evt.StopPropagation();
+                    break;
+            }
+        });
+        
+        jetskiJoyrideSlalomButton.RegisterCallback<NavigationMoveEvent>(_evt =>
+        {
+            switch (_evt.direction)
+            {
+                case NavigationMoveEvent.Direction.Down:
+                    FocusButton(jetskiJoyrideModusSelectionBackButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Up:
+                    FocusButton(jetskiJoyrideModusSelectionBackButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Left:
+                    FocusButton(jetskiJoyrideRaceButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Right:
+                    FocusButton(jetskiJoyrideRaceButton);
+                    _evt.StopPropagation();
+                    break;
+            }
+        });
+        
+        jetskiJoyrideModusSelectionBackButton.RegisterCallback<NavigationMoveEvent>(_evt =>
+        {
+            switch (_evt.direction)
+            {
+                case NavigationMoveEvent.Direction.Down:
+                    FocusButton(jetskiJoyrideSlalomButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Up:
+                    FocusButton(jetskiJoyrideRaceButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Left:
+                    FocusButton(jetskiJoyrideRaceButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Right:
+                    FocusButton(jetskiJoyrideSlalomButton);
+                    _evt.StopPropagation();
+                    break;
+            }
+        });
+        
+        minigolfMayhemClassicButton.RegisterCallback<NavigationMoveEvent>(_evt =>
+        {
+            switch (_evt.direction)
+            {
+                case NavigationMoveEvent.Direction.Down:
+                    FocusButton(minigolfMayhemModusSelectionBackButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Up:
+                    FocusButton(minigolfMayhemModusSelectionBackButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Left:
+                    FocusButton(minigolfMayhemRaceButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Right:
+                    FocusButton(minigolfMayhemRaceButton);
+                    _evt.StopPropagation();
+                    break;
+            }
+        });
+        
+        minigolfMayhemRaceButton.RegisterCallback<NavigationMoveEvent>(_evt =>
+        {
+            switch (_evt.direction)
+            {
+                case NavigationMoveEvent.Direction.Down:
+                    FocusButton(minigolfMayhemModusSelectionBackButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Up:
+                    FocusButton(minigolfMayhemModusSelectionBackButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Left:
+                    FocusButton(minigolfMayhemClassicButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Right:
+                    FocusButton(minigolfMayhemClassicButton);
+                    _evt.StopPropagation();
+                    break;
+            }
+        });
+        
+        minigolfMayhemModusSelectionBackButton.RegisterCallback<NavigationMoveEvent>(_evt =>
+        {
+            switch (_evt.direction)
+            {
+                case NavigationMoveEvent.Direction.Down:
+                    FocusButton(minigolfMayhemRaceButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Up:
+                    FocusButton(minigolfMayhemClassicButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Left:
+                    FocusButton(minigolfMayhemClassicButton);
+                    _evt.StopPropagation();
+                    break;
+                case NavigationMoveEvent.Direction.Right:
+                    FocusButton(minigolfMayhemRaceButton);
+                    _evt.StopPropagation();
+                    break;
+            }
+        });
     }
 
     private void FreezeTimeScale() => Time.timeScale = 0;
