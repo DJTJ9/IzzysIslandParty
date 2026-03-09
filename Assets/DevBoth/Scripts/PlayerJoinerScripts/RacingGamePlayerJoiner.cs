@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using CharacterCreator;
-using FullscreenEditor;
 using HelperScripts;
 using JetskiGame.UI;
 using MultiuseScripts;
@@ -67,8 +66,8 @@ namespace JetskiGame.Player.Multiplayer
             GameObject playerObj = _playerInput.gameObject;
             
             playerCollection.Players[playerIndex].PlayerReference = playerObj;
-            
-            if (playerObj.TryGetComponent(out npcBehaviourInstance) && npcBehaviourInstance.IsOfType(npcBehaviour.GetType()))
+        
+            if (playerObj.TryGetComponent(out npcBehaviourInstance) && npcBehaviourInstance.GetType() == npcBehaviour.GetType())
             {
                 NPCJoined(playerObj, _playerInput);
                 return;
