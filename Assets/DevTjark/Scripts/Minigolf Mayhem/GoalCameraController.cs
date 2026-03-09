@@ -4,13 +4,11 @@ using UnityEngine;
 public class GoalCameraController : MonoBehaviour
 {
     [SerializeField] private CinemachineOrbitalFollow followCamera;
-    private CinemachineCamera goalCamera;
-    
-    public void Init(CinemachineCamera _goalCamera)
-    {
-        goalCamera = _goalCamera;
-    }
 
+    /// <summary>
+    /// Adjusts the goal camera's horizontal and vertical axis values
+    /// to predefined angles, ensuring an optimal viewing position in finish hole.
+    /// </summary>
     public void SetGoalCameraValues()
     {
         followCamera.HorizontalAxis.Value = -88f;

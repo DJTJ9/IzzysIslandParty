@@ -64,6 +64,11 @@ public class RigidbodyMovement : MonoBehaviour
         UpdateChargePower();
     }
 
+    /// <summary>
+    /// Handles impulse application when colliding with another player,
+    /// applying a force if cooldown restrictions are respected.
+    /// </summary>
+    /// <param name="other">The collider entering the trigger zone.</param>
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
@@ -82,11 +87,13 @@ public class RigidbodyMovement : MonoBehaviour
         ConsoleProDebug.LogToFilter($"Player applied {impulse} impulse to {other.name}", "Debug");
     }
 
+    /// <summary>
+    /// Starts or completes the process of charging and shooting. Shooting
+    /// applies a force toward a target defined by the camera's direction.
+    /// </summary>
+    /// <param name="_context">The input context controlling the action.</param>
     public void StartCharging(InputAction.CallbackContext _context)
     {
-        // if (!groundChecker.IsGrounded) return;
-        // if (!m_canMove) return;
-
         if (_context.started)
         {
             m_isCharging = true;
@@ -101,8 +108,10 @@ public class RigidbodyMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// Receives a move direction
+    /// Moves the player in the given direction based on camera orientation,
+    /// applying an impulse force and starting a movement cooldown.
     /// </summary>
+    /// <param name="_direction">The direction of movement.</param>
     public void Move(Vector3 _direction)
     {
         if (!m_canMove) return;
@@ -124,6 +133,10 @@ public class RigidbodyMovement : MonoBehaviour
         m_canMove = false;
     }
 
+    /// <summary>
+    /// Makes the player jump with an upward impulse, ensuring movement cooldown
+    /// and grounding restrictions are respected.
+    /// </summary>
     public void Jump()
     {
         if (!m_canMove) return;
@@ -136,6 +149,10 @@ public class RigidbodyMovement : MonoBehaviour
         m_canMove = false;
     }
 
+    /// <summary>
+    /// Shoots the player toward a target defined by the camera's center,
+    /// applying a calculated force and updating shot statistics.
+    /// </summary>
     private void Shoot()
     {
         if (!m_canMove) return;
@@ -159,6 +176,11 @@ public class RigidbodyMovement : MonoBehaviour
         m_canMove = false;
     }
 
+    /// <summary>
+    /// Adjusts the current shoot force during the charging process. 
+    /// Alternates between increasing and decreasing the force within the defined minimum 
+    /// and maximum range, based on `shootForceChangeSpeed`.
+    /// </summary>
     private void UpdateChargePower()
     {
         if (!m_isCharging) return;
@@ -185,52 +207,11 @@ public class RigidbodyMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Enables player movement after a cooldown ends, resetting the movement flag.
+    /// </summary>
     private void EnableMovement()
     {
         m_canMove = true;
     }
-
-    // /// <summary>
-    // /// Collects the current Velocity of the rb and sets the speed
-    // /// Transforms moving direction from local space to world space
-    // /// Collects the speed difference to target velocity and clamps the max velocity
-    // /// Sets force mode to VelocityChange
-    // /// </summary>
-    // private void UpdateHorizontalMovement()
-    // {
-    //     Vector3 currentVelocity = rb.linearVelocity;
-    //     Vector3 targetVelocity = new Vector3(m_moveDirection.x, 0f , m_moveDirection.z);
-    //     targetVelocity *= pushForce;
-    //
-    //     targetVelocity = transform.TransformDirection(targetVelocity);
-    //
-    //     Vector3 velocityChange = targetVelocity - currentVelocity;
-    //     velocityChange = new Vector3(velocityChange.x, 0f, velocityChange.z);
-    //     velocityChange = Vector3.ClampMagnitude(velocityChange, maxSpeed);
-    //
-    //     rb.AddForce(velocityChange, ForceMode.Force);
-    // }
-    //
-    // /// <summary>
-    // /// Recieves the current rotation
-    // /// Sets the rotation to a target rotation
-    // /// </summary>
-    // public void RotateHorizontal(float _rotation)
-    // {
-    //     var currentRotation = rb.rotation.eulerAngles;
-    //     var targetRotation = currentRotation + new Vector3(0f, _rotation, 0f);
-    //     rb.rotation = Quaternion.Euler(targetRotation);
-    // }
-    //
-    // /// <summary>
-    // /// Modifies jump and fall speed
-    // /// </summary>
-    // private void UpdateVerticalMovement()
-    // {
-    //     if (rb.linearVelocity.y < 0)
-    //         rb.linearVelocity += Vector3.up * (Physics.gravity.y * (fallSpeedModifier - 1) * Time.fixedDeltaTime);
-    //
-    //     if (rb.linearVelocity.y > 0)
-    //         rb.linearVelocity += Vector3.up * (Physics.gravity.y * jumpSpeedModifier * Time.fixedDeltaTime);
-    // }
 }

@@ -13,23 +13,6 @@ using UnityEngine.UIElements;
 
 public class AsyncLevelLoader : MonoBehaviour
 {
-    // [Header("Menu Screens"), SerializeField]
-    // private GameObject mainMenu;
-    //
-    // [SerializeField]
-    // private GameObject mainMenuImage;
-    //
-    // [SerializeField]
-    // private GameObject loadingScreen;
-    //
-    // [Header("Fade Image"), SerializeField]
-    // private Image loadingScreenImage;
-    //
-    // [SerializeField]
-    // private float duration = 1f;
-
-    // [Header("Progress Bar"), SerializeField]
-
     [SerializeField] private SceneCollectionSO sceneCollection;
 
     public static event Action<SceneNames> OnSceneChange;
@@ -45,6 +28,10 @@ public class AsyncLevelLoader : MonoBehaviour
 
     private float target;
 
+    /// <summary>
+    /// Initializes the singleton instance of `AsyncLevelLoader`, ensuring it persists across scenes.
+    /// If another instance already exists, it destroys the duplicate.
+    /// </summary>
     private void Awake()
     {
         if (Instance == null)
@@ -56,6 +43,10 @@ public class AsyncLevelLoader : MonoBehaviour
             Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Prepares the loading screen elements from the `UIDocument`,
+    /// including the progress bar and container for managing the loading UI.
+    /// </summary>
     private void Start()
     {
         uiDocument = GetComponent<UIDocument>();
@@ -67,10 +58,14 @@ public class AsyncLevelLoader : MonoBehaviour
 
     private void Update()
     {
-        progressBar.value = Mathf.MoveTowards(progressBar.value, target, Time.unscaledDeltaTime * 0.5f);
-        progressBar.title = $"{progressBar.value * 100:0}%";
+        UpdateLoadingScreenBar();
     }
 
+    /// <summary>
+    /// Loads a scene asynchronously by its name with a loading screen. 
+    /// Waits until the scene is ready before displaying it, ensuring fluid transitions.
+    /// </summary>
+    /// <param name="_sceneName">The scene to load.</param>
     public async void LoadScene(SceneNames _sceneName)
     {
         try
@@ -78,8 +73,6 @@ public class AsyncLevelLoader : MonoBehaviour
             loadingScreenContainer.style.display = DisplayStyle.Flex;
             progressBar.value = zero;
             target = zero;
-
-            // SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(SceneNames.MainMenu, out var mainMenuSceneName) ? mainMenuSceneName : throw new KeyNotFoundException());
 
             await Task.Delay(300);
 
@@ -112,6 +105,10 @@ public class AsyncLevelLoader : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Restarts the current level asynchronously with a loading screen, ensuring a seamless reload process.
+    /// Returns to the main menu in case of an issue while handling the scene reinitialization.
+    /// </summary>
     public async void RestartLevel()
     {
         var currentSceneName = SceneManager.GetActiveScene().name;
@@ -139,7 +136,6 @@ public class AsyncLevelLoader : MonoBehaviour
             target = one;
             await Task.Delay(2000);
 
-            // FadeOutLoadingScreen();
             scene.allowSceneActivation = true;
 
             await Task.Delay(1000);
@@ -151,39 +147,13 @@ public class AsyncLevelLoader : MonoBehaviour
         }
     }
 
-    // public void FadeOutLoadingScreen()
-    // {
-    //     StartCoroutine(FadeOutLoadingScreenCoroutine());
-    // }
-    //
-    // private IEnumerator FadeOutLoadingScreenCoroutine()
-    // {
-    //     if (loadingScreenImage == null || duration <= 0f)
-    //         yield break;
-    //
-    //     progressBar.gameObject.SetActive(false);
-    //
-    //     var color = loadingScreenImage.color;
-    //     color.a = 1f; 
-    //     loadingScreenImage.color = color;
-    //
-    //     float elapsed = 0f;
-    //     while (elapsed < duration)
-    //     {
-    //         elapsed += Time.deltaTime;
-    //         float t = Mathf.Clamp01(elapsed / duration);
-    //         color.a = Mathf.Lerp(1f, 0f, t);
-    //         loadingScreenImage.color = color;
-    //         yield return null;
-    //     }
-    //
-    //     color.a = 0f;
-    //     loadingScreenImage.color = color;
-    //     loadingScreen.SetActive(false);
-    // }
-    //
-    // public void SetTimeScale(float timeScale)
-    // {
-    //     Time.timeScale = timeScale;
-    // }
+    /// <summary>
+    /// Gradually updates the loading progress bar's value and visual title
+    /// to reflect the current stage of the scene loading process.
+    /// </summary>
+    private void UpdateLoadingScreenBar()
+    {
+        progressBar.value = Mathf.MoveTowards(progressBar.value, target, Time.unscaledDeltaTime * 0.5f);
+        progressBar.title = $"{progressBar.value * 100:0}%";
+    }
 }

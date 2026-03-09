@@ -1,7 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Unity.Cinemachine;
 
+// Unity Tutorial: https://www.youtube.com/watch?v=lGxXQzE5Vu8
 public class CameraFocus : MonoBehaviour
 {
     public CinemachineBrain Brain;

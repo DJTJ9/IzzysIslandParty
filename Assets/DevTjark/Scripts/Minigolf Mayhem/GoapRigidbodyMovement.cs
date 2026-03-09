@@ -35,14 +35,6 @@ public class GoapRigidbodyMovement : Controller
     [HideInInspector] public CountdownTimer MovementCooldownTimer;
     private CountdownTimer impulseCooldownTimer;
     
-    // private bool canMove = true;
-    // private bool canShoot = true;
-    // private bool canJump = true;
-    //
-    // private CountdownTimer pushCooldownTimer;
-    // private CountdownTimer shootCooldownTimer;
-    // private CountdownTimer jumpCooldownTimer;
-    
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -54,6 +46,11 @@ public class GoapRigidbodyMovement : Controller
         impulseCooldownTimer.OnTimerStop += () => m_impulseApplied = false;
     }
     
+    /// <summary>
+    /// Applies an impulse force to colliding players, based on the current direction and velocity,
+    /// if cooldown conditions allow. Prevents impulses beyond a certain frequency.
+    /// </summary>
+    /// <param name="other">The collider that triggered the interaction.</param>
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
@@ -69,14 +66,22 @@ public class GoapRigidbodyMovement : Controller
         if (rb.linearVelocity.magnitude > currentVelocity.magnitude) return;
 
         _rb.AddForce(impulse, ForceMode.Impulse);
-        ConsoleProDebug.LogToFilter($"NPC applied {impulse} impulse to {other.name}", "Debug");
     }
     
+    /// <summary>
+    /// Resets the impulse application flag when an object leaves the trigger zone.
+    /// </summary>
+    /// <param name="other">The collider leaving the trigger zone.</param>
     private void OnTriggerExit(Collider other)
     {
         m_impulseApplied = false;
     }
 
+    /// <summary>
+    /// Executes the "shoot" action by calculating and applying an impulse force to the rigidbody
+    /// to reach the target position. Tracks the number of shots taken and initiates a movement cooldown.
+    /// </summary>
+    /// <param name="_targetPosition">The target position the shot will aim for.</param>
     public void Shoot(Vector3 _targetPosition)
     {
         if (!m_isActive) return;
@@ -92,6 +97,13 @@ public class GoapRigidbodyMovement : Controller
         m_canMove = false;
     }
     
+    /// <summary>
+    /// Calculates an impulse vector required to move the rigidbody to the target position,
+    /// considering factors like mass, gravity, and random variations in horizontal speed.
+    /// </summary>
+    /// <param name="_rb">The rigidbody being moved.</param>
+    /// <param name="target">The desired target position.</param>
+    /// <returns>A vector representing the force to apply for movement.</returns>
     private Vector3 CalculateImpulse(Rigidbody _rb, Vector3 target)
     {
         var start = _rb.position;
@@ -102,7 +114,7 @@ public class GoapRigidbodyMovement : Controller
 
         var horizontal = new Vector3(toTarget.x, 0f, toTarget.z);
         var horizontalDistance = horizontal.magnitude;
-        var horizontalSpeedFactor = shootForceFactor + Random.Range(-5f, 5f);
+        var horizontalSpeedFactor = shootForceFactor + Random.Range(-2f, 2f);
         var t = horizontalDistance / horizontalSpeedFactor;
         var vHorizontal = horizontal / t;
 
@@ -113,6 +125,10 @@ public class GoapRigidbodyMovement : Controller
         return mass * v0;
     }
     
+    /// <summary>
+    /// Enables movement functionality by resetting the "can move" flag,
+    /// usually called after a movement cooldown ends.
+    /// </summary>
     private void EnableMovement()
     {
         m_canMove = true;

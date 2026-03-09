@@ -14,6 +14,9 @@ public class PinReseter : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    /// <summary>
+    /// Resets the pin's position, rotation, and velocity back to its starting state.
+    /// </summary>
     public void ResetPinPosition()
     {
         rb.linearVelocity = Vector3.zero;

@@ -33,6 +33,11 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
     private bool m_racingMode;
     private bool m_classicMode;
 
+    /// <summary>
+    /// Initializes the UI elements for the player or NPC, sets up references,
+    /// and configures modes (racing or classic) depending on the game manager's settings.
+    /// Starts a timer if in racing mode.
+    /// </summary>
     private void Start()
     {
         minigolfMayhemGameManager = FindFirstObjectByType<MinigolfMayhemGameManager>();
@@ -68,6 +73,12 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
         MinigolfHole.onMinigolfPlayerFinished -= OnPlayerFinished;
     }
 
+    /// <summary>
+    /// Updates UI elements dynamically based on the player's or NPC's actions:
+    /// - Update shoot force bar and text based on current force.
+    /// - Update cooldown bar and text based on cooldown timers.
+    /// - Update round timer and shoot counter depending on the game state.
+    /// </summary>
     private void Update()
     {
         if (m_isPlayer)
@@ -101,18 +112,33 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
         playersSO.Players[playerController.PlayerIndex].TimeValue = (float)m_finishTimer.Elapsed.TotalMilliseconds;
     }
 
+    /// <summary>
+    /// Starts the round timer if racing mode is active.
+    /// </summary>
     public void StartTimer()
     {
         if (!roundTimer.activeSelf) return;
         m_finishTimer.Start();
     }
     
+    /// <summary>
+    /// Gets the formatted finish time from the timer.
+    /// </summary>
+    /// <returns>A string representing the finish time in the format "m:ss:ff".</returns>
     public string GetFinishTime() => m_finishTimer.Elapsed.ToString("m':'ss':'ff");
 
+    /// <summary>
+    /// Handles the logic for when a player finishes the game:
+    /// Stops the round timer if racing mode is active.
+    /// </summary>
+    /// <param name="_playerIndex">The index of the player who finished.</param>
     private void OnPlayerFinished(int _playerIndex)
     {
         if (_playerIndex == playerController.PlayerIndex && roundTimer.activeSelf) StopTimer();
     }
     
+    /// <summary>
+    /// Stops the round timer.
+    /// </summary>
     private void StopTimer() => m_finishTimer.Stop();
 }

@@ -1507,6 +1507,7 @@ GameObject:
   - component: {fileID: 2527513405859033214}
   - component: {fileID: 2440918592770101203}
   - component: {fileID: 9201151259296887277}
+  - component: {fileID: 7141264536268998404}
   - component: {fileID: 5036048129180631266}
   - component: {fileID: 2524120037625186723}
   - component: {fileID: 8540537644126442398}
@@ -1514,7 +1515,6 @@ GameObject:
   - component: {fileID: 1521238598598575120}
   - component: {fileID: 5488783673324431187}
   - component: {fileID: 6519078515828607143}
-  - component: {fileID: 7141264536268998404}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1614,7 +1614,7 @@ MonoBehaviour:
   pushForce: 10
   pushCooldown: 0.1
   MovementCooldown: 3
-  minShootForce: 10
+  minShootForce: 5
   maxShootForce: 50
   shootForceChangeSpeed: 60
   shootHeight: 0.5
@@ -1637,8 +1637,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00a2fb300884410b9d8ebc251da14a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLookingBack: 0
   orbitalFollow: {fileID: 6315098519535762074}
+  isLookingBack: 0
 --- !u!114 &9201151259296887277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1658,6 +1658,19 @@ MonoBehaviour:
   groundCheckPosition: {x: 0, y: -0.6, z: 0}
   groundCheckSize: {x: 0.7, y: 0.35, z: 0.7}
   <IsGrounded>k__BackingField: 0
+--- !u!114 &7141264536268998404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8754331490394771550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a6c5d0c098c4f7d8aa230e4efcfbd85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followCamera: {fileID: 6315098519535762074}
 --- !u!114 &5036048129180631266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2048,19 +2061,7 @@ MonoBehaviour:
     m_ActionId: 6d7cb911-4255-4d60-a577-159f56863289
     m_ActionName: 'FishingGameUI/Submit[/Keyboard/enter,/Keyboard/x,/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2926994867532943103}
-        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
-        m_MethodName: OnMoveInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 1adf136c-4b4a-4528-981e-ae2a2886385c
     m_ActionName: 'Mingolf Mayhem/Move[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
@@ -2104,19 +2105,7 @@ MonoBehaviour:
     m_ActionId: ae807423-6597-4ecd-90b3-dfc2fb960650
     m_ActionName: 'Mingolf Mayhem/Shoot[/Mouse/leftButton,/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2926994867532943103}
-        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
-        m_MethodName: OnJumpInput
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 6fd8ac2b-7b99-47ac-bbac-eeb7c7633295
     m_ActionName: 'Mingolf Mayhem/Jump[/Keyboard/space,/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]'
   - m_PersistentCalls:
@@ -2156,19 +2145,6 @@ MonoBehaviour:
   m_DefaultActionMap: UI
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 7057679653509791993}
---- !u!114 &7141264536268998404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8754331490394771550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a6c5d0c098c4f7d8aa230e4efcfbd85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followCamera: {fileID: 6315098519535762074}
 --- !u!1001 &5976114815564013206
 PrefabInstance:
   m_ObjectHideFlags: 0

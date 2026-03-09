@@ -22,10 +22,18 @@ public class GroundChecker : MonoBehaviour {
             CheckForGround();
     }
 
+    /// <summary>
+    /// Checks if the object is grounded by detecting overlap with ground layers
+    /// using a box at a defined position and size. Updates the `IsGrounded` property.
+    /// </summary>
     private void CheckForGround() {
         IsGrounded = Physics.OverlapBox(transform.position + groundCheckPosition, groundCheckSize / 2, Quaternion.identity, groundCheckLayerMask).Length > 0;
     }
 
+    /// <summary>
+    /// Draws a visualization of the ground check box in the Scene View
+    /// to assist with debugging ground detection behavior.
+    /// </summary>
     private void OnDrawGizmosSelected() {
         transform = GetComponent<Transform>();
 

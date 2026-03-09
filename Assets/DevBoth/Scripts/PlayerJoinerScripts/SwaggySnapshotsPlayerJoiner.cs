@@ -15,18 +15,22 @@ public class SwaggySnapshotsPlayerJoiner : MonoBehaviour
 
     private int m_playerIndex = 0;
 
+    /// <summary>
+    /// Initializes the player index, clears the current players list,
+    /// and invokes the level loaded event to prepare the game state.
+    /// </summary>
     private void Start()
     {
         onLevelLoaded.Invoke();
         m_playerIndex = 0;
         currentPlayers.Players.Clear();
     }
-    
-    // private void OnEnable()
-    // {
-    //     onLevelLoaded.Invoke();
-    // }
 
+    /// <summary>
+    /// Adds a player or NPC to the Swaggy Snapshots game, assigning
+    /// the correct player data and updating the current players list.
+    /// </summary>
+    /// <param name="_playerInput">The `PlayerInput` instance of the joining player or NPC.</param>
     public void PlayerJoined(PlayerInput _playerInput)
     {
         if (_playerInput.gameObject.TryGetComponent(out NPC_SwaggySnapshots npc))
@@ -42,6 +46,10 @@ public class SwaggySnapshotsPlayerJoiner : MonoBehaviour
         ++m_playerIndex;
     }
     
+    /// <summary>
+    /// Instantiates and adds all remaining NPCs to the game by
+    /// spawning them at their respective predefined spawn points.
+    /// </summary>
     public void JoinNPCs()
     {
         var nPCStartIndex = m_playerIndex - 1;

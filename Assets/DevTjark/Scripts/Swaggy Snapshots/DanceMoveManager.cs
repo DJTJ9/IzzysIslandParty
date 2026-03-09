@@ -16,11 +16,18 @@ public class DanceMoveManager : MonoBehaviour
         m_animator.Play("Start_Move");
     }
 
+    /// <summary>
+    /// Updates the animator to trigger a random dance move based on predefined triggers from the scriptable object.
+    /// </summary>
     public void ChangeDanceMove()
     {
         m_animator.SetTrigger(danceMoveTriggersSO.GetRandomDanceMove());
     }
 
+    /// <summary>
+    /// Changes the skinned mesh renderer's material to a random face material,
+    /// chosen from a set defined in the scriptable object.
+    /// </summary>
     public void ChangeFace()
     {
         skinnedMeshRenderer.material = faceSwapSO.GetRandomFace(skinnedMeshRenderer.material);

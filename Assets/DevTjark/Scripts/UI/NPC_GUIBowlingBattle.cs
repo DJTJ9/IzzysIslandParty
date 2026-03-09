@@ -7,7 +7,6 @@ public class NPC_GUIBowlingBattle : MonoBehaviour
 {
     [FoldoutGroup("Canvas Elements", expanded: false)]
     [SerializeField] private GameObject bowlingBattleUI;
-    // [SerializeField] private GameObject ballButtons;
     [SerializeField] private GameObject timer;
     [SerializeField] private TMP_Text timerLabel;
     [SerializeField] private GameObject roundTimer;
@@ -18,6 +17,12 @@ public class NPC_GUIBowlingBattle : MonoBehaviour
     
     [SerializeField] private NPC_BowlingBattleController npcController;
 
+    /// <summary>
+    /// Updates the UI elements dynamically:
+    /// - Updates the preparation phase timer label.
+    /// - Updates the round timer label.
+    /// - Updates the NPC's score label using data from the NPC's Player Collection.
+    /// </summary>
     private void Update()
     {
         timerLabel.text = BowlingBattleGameManager.PreparationPhaseTimer.ToString("0");
@@ -25,23 +30,37 @@ public class NPC_GUIBowlingBattle : MonoBehaviour
         scoreLabel.text = npcSO.Players[npcController.NPCIndex].PlayerScore.Value.ToString("0");
     }
 
+    /// <summary>
+    /// Displays the preparation phase timer by enabling the bowling battle UI 
+    /// and making the timer element visible.
+    /// </summary>
     public void ShowPreparationPhaseTimer()
     {
         bowlingBattleUI.SetActive(true);
         timer.SetActive(true);
     }
 
+    /// <summary>
+    /// Hides the preparation phase timer by disabling the timer element.
+    /// </summary>
     public void HidePreparationPhaseTimer()
     {
         timer.SetActive(false);
     } 
     
+    /// <summary>
+    /// Displays the round timer by enabling the bowling battle UI 
+    /// and making the round timer element visible.
+    /// </summary>
     public void ShowRoundTimer()
     {
         bowlingBattleUI.SetActive(true);
         roundTimer.SetActive(true);
     }
     
+    /// <summary>
+    /// Hides the round timer by disabling the round timer element.
+    /// </summary>
     public void HideRoundTimer()
     {
         roundTimer.SetActive(false);

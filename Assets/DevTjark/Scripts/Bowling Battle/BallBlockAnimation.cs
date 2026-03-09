@@ -9,6 +9,10 @@ public class BallBlockAnimation : MonoBehaviour
         if (other.CompareTag("Player")) PlayBlockBallAnimation();
     }
     
+    /// <summary>
+    /// Plays the block ball animation by activating the corresponding trigger
+    /// in the animator.
+    /// </summary>
     private void PlayBlockBallAnimation()
     {
         animator.SetTrigger("Block");

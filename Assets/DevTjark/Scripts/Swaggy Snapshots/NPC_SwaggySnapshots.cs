@@ -10,6 +10,10 @@ public class NPC_SwaggySnapshots : Controller
     private PhotoCapture photoCapture;
     private CountdownTimer m_photoTimer;
 
+    /// <summary>
+    /// Initializes a countdown timer for NPC photo-taking, with a random duration
+    /// based on game configuration, and sets up the callback to trigger taking a photo.
+    /// </summary>
     private void Awake()
     {
         photoCapture = GetComponent<PhotoCapture>();
@@ -23,9 +27,13 @@ public class NPC_SwaggySnapshots : Controller
         m_photoTimer.Start();
     }
 
+    /// <summary>
+    /// Invokes the photo-taking event for the NPC, using the player's index
+    /// to notify the relevant controllers.
+    /// </summary>
     private void TakePhoto()
     {
-        Debug.Log($"NPC {GetPlayerIndex()} hat ein Foto gemacht!");
         PlayerControllerSwaggySnapshots.InvokePhotoTaken(GetPlayerIndex());
+        photoCapture.ShowFlashLight();
     }
 }
