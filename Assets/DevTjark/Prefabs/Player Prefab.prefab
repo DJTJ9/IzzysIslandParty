@@ -1196,7 +1196,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         InputAction: {fileID: -6618255283441881228, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
-        Gain: 10
+        Gain: 100
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -1207,7 +1207,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         InputAction: {fileID: -6618255283441881228, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
-        Gain: -10
+        Gain: -100
         CancelDeltaTime: 0
       InputValue: 0
       Driver:
@@ -1599,6 +1599,7 @@ MonoBehaviour:
         m_CallState: 2
   mouseSensitivityX: {fileID: 11400000, guid: 0dc660cf08d445042b2273e6fba6ac3a, type: 2}
   mouseSensitivityY: {fileID: 11400000, guid: 9b6eb9ad758627d4b9e8bc495117e51b, type: 2}
+  m_isGamepad: 0
 --- !u!114 &2527513405859033214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1638,7 +1639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00a2fb300884410b9d8ebc251da14a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultMouseSensitivity: 10
+  defaultMouseSensitivity: 100
   orbitalFollow: {fileID: 6315098519535762074}
   mouseSensitivityX: {fileID: 11400000, guid: 0dc660cf08d445042b2273e6fba6ac3a, type: 2}
   mouseSensitivityY: {fileID: 11400000, guid: 9b6eb9ad758627d4b9e8bc495117e51b, type: 2}
@@ -1981,22 +1982,6 @@ MonoBehaviour:
     m_ActionId: 40ca9c30-5f39-43a4-bf92-d909781d54bf
     m_ActionName: 'HurdleGame/Slide[/Keyboard/downArrow,/XInputControllerWindows/buttonWest,/XInputControllerWindows1/buttonWest]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2926994867532943103}
-        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
-        m_MethodName: OnStartGame
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: cde468ba-184e-4c5d-9ae8-96f5986c5dcf
-    m_ActionName: 'UI/StartGame[/Keyboard/space,/XInputControllerWindows/buttonNorth,/XInputControllerWindows1/buttonNorth]'
-  - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 8095b1f7-a3ec-4cf9-9fdc-c4bb7d52de8e
     m_ActionName: 'JetskiGame/Join[/Keyboard/anyKey,/XInputControllerWindows/select,/XInputControllerWindows1/select]'
@@ -2069,7 +2054,19 @@ MonoBehaviour:
     m_ActionId: 1adf136c-4b4a-4528-981e-ae2a2886385c
     m_ActionName: 'Mingolf Mayhem/Move[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2926994867532943103}
+        m_TargetAssemblyTypeName: PlayerControllerMinigolfMayhem, Assembly-CSharp
+        m_MethodName: OnLookInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 3b7c6bd0-e2bf-4021-b694-19075839718a
     m_ActionName: 'Mingolf Mayhem/Look[/Mouse/delta,/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]'
   - m_PersistentCalls:

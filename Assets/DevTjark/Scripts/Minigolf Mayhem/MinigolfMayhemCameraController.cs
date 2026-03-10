@@ -14,6 +14,7 @@ public class MinigolfMayhemCameraController : MonoBehaviour
     [HideInInspector] public bool isLookingBack;
     
     private CinemachineInputAxisController inputAxisController;
+    private PlayerControllerMinigolfMayhem playerController;
 
     private void Start()
     {
@@ -38,10 +39,24 @@ public class MinigolfMayhemCameraController : MonoBehaviour
             switch (c.Name)
             {
                 case "Look Orbit X":
-                    c.Input.Gain = defaultMouseSensitivity * mouseSensitivityX.Value;
+                    if (playerController.m_isGamepad)
+                    {
+                        c.Input.Gain = defaultMouseSensitivity * 10f * mouseSensitivityX.Value;
+                    }
+                    else
+                    {
+                        c.Input.Gain = defaultMouseSensitivity * mouseSensitivityX.Value;
+                    }
                     break;
                 case "Look Orbit Y":
-                    c.Input.Gain = -defaultMouseSensitivity * mouseSensitivityY.Value;
+                    if (playerController.m_isGamepad)
+                    {
+                        c.Input.Gain = -defaultMouseSensitivity * 10f * mouseSensitivityY.Value;
+                    }
+                    else
+                    {
+                        c.Input.Gain = defaultMouseSensitivity * mouseSensitivityY.Value;
+                    }
                     break;
             }
         }

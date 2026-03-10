@@ -8,11 +8,15 @@ public class PlayerControllerMinigolfMayhem : Controller
 {
     [Header("Movement")]
     private RigidbodyMovement rigidbodyMovement;
+
     private MinigolfMayhemCameraController cameraController;
 
     [SerializeField] private SO_FloatVariable mouseSensitivityX;
     [SerializeField] private SO_FloatVariable mouseSensitivityY;
-   
+
+    public bool m_isGamepad;
+    private bool m_registeredInput;
+
     // [FoldoutGroup("Events", expanded: true)] 
     // [SerializeField] private UnityEvent OnPause;
     // [SerializeField] private UnityEvent OnUnpause;
@@ -74,7 +78,7 @@ public class PlayerControllerMinigolfMayhem : Controller
     public void OnMoveInput(InputAction.CallbackContext _context)
     {
         if (!m_isActive) return;
-        
+
         rigidbodyMovement.Move(_context.ReadValue<Vector2>());
     }
 
@@ -101,6 +105,25 @@ public class PlayerControllerMinigolfMayhem : Controller
         if (!_context.started) return;
 
         rigidbodyMovement.Jump();
+    }
+
+    public void OnLookInput(InputAction.CallbackContext _context)
+    {
+        if (m_registeredInput)
+            return;
+
+        var device = _context.control.device;
+
+        if (device is Gamepad gamepad)
+        {
+            m_isGamepad = true;
+        }
+        else if (device is Keyboard keyboard)
+        {
+            m_isGamepad = false;
+        }
+
+        m_registeredInput = true;
     }
 
     /// <summary>

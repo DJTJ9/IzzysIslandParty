@@ -1502,7 +1502,7 @@
                     "type": "Value",
                     "id": "3b7c6bd0-e2bf-4021-b694-19075839718a",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "StickDeadzone(min=0.9,max=1)",
                     "interactions": "",
                     "initialStateCheck": true
                 },
@@ -1699,9 +1699,9 @@
                 {
                     "name": "",
                     "id": "a206f920-19c2-4431-9eec-14a0ffb2c76b",
-                    "path": "<Gamepad>/rightStick",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
-                    "processors": "StickDeadzone(min=0.8)",
+                    "processors": "StickDeadzone(min=0.9,max=1)",
                     "groups": ";ControllerControlScheme;Gamepad",
                     "action": "Look",
                     "isComposite": false,
