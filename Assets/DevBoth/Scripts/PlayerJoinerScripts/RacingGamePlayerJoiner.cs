@@ -63,6 +63,9 @@ namespace JetskiGame.Player.Multiplayer
 
         public void PlayerJoined(PlayerInput _playerInput)
         {
+            if (playerIndex == 0)
+                Time.timeScale = 1;
+            
             GameObject playerObj = _playerInput.gameObject;
             
             playerCollection.Players[playerIndex].PlayerReference = playerObj;

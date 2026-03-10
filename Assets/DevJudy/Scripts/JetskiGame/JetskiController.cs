@@ -73,6 +73,18 @@ namespace JetskiGame
             if (onWallTrigger != null)
                 onWallTrigger.EnteredTriggerAction += OnHitWall;
         }
+        
+        public void HideCursor()
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        public void ShowCursor()
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
 
         public void OnPlayerJoined(SO_PlayerRacingGames _player, int _playerIndex)
         {

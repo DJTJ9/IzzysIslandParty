@@ -154,7 +154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -211, y: -12.51}
+  m_AnchoredPosition: {x: -205.79999, y: -9.2}
   m_SizeDelta: {x: 437.09, y: 59}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &7394863337551368236
@@ -187,8 +187,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Penalty: +'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7108fd0238a900949ada465ba41b7c49, type: 2}
-  m_sharedMaterial: {fileID: 3417923580986627390, guid: 7108fd0238a900949ada465ba41b7c49, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
+  m_sharedMaterial: {fileID: -4084469442324921828, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -212,8 +212,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 65
+  m_fontSizeBase: 65
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -222,8 +222,8 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: -10
-  m_wordSpacing: 0
+  m_characterSpacing: -2
+  m_wordSpacing: -21.5
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
@@ -357,7 +357,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -33, y: -15.2}
+  m_AnchoredPosition: {x: -53.700012, y: -11.3}
   m_SizeDelta: {x: 336.7, y: 59}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &8392028833694644796
@@ -390,8 +390,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 00:00:00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7108fd0238a900949ada465ba41b7c49, type: 2}
-  m_sharedMaterial: {fileID: 3417923580986627390, guid: 7108fd0238a900949ada465ba41b7c49, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
+  m_sharedMaterial: {fileID: -4084469442324921828, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -415,8 +415,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
-  m_fontSizeBase: 55
+  m_fontSize: 65
+  m_fontSizeBase: 65
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -639,7 +639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8669517620682760718
 RectTransform:
   m_ObjectHideFlags: 0
@@ -690,8 +690,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Termin\xE9"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 72e3bfb5980d67d4189c88df90162578, type: 2}
-  m_sharedMaterial: {fileID: 8683182613885920577, guid: 72e3bfb5980d67d4189c88df90162578, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
+  m_sharedMaterial: {fileID: -4084469442324921828, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1745,6 +1745,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 873efad3-1799-46b2-83b4-de0e6927f533
     m_ActionName: 'MinigolfMayhem/Rear View[/Mouse/rightButton,/DualShock4GamepadHID/rightTrigger]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d0e2fb38-7efd-43a0-b874-f8205d44bce0
+    m_ActionName: 'UI/ControllerSelectionBack[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI
@@ -1762,7 +1766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3219f6c7118b42d4ba7c7d03667642d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  airDrag: 0
+  airDrag: 0.38
   waterDrag: 0.5
   affectDirection: 1
   attachToSurface: 1
@@ -1864,7 +1868,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4695821329002207067
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1916,8 +1920,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 72e3bfb5980d67d4189c88df90162578, type: 2}
-  m_sharedMaterial: {fileID: 8683182613885920577, guid: 72e3bfb5980d67d4189c88df90162578, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
+  m_sharedMaterial: {fileID: -4084469442324921828, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2002,7 +2006,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7003298071158530497
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2019,7 +2023,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 195.00006, y: -1023}
+  m_AnchoredPosition: {x: 195, y: -1023}
   m_SizeDelta: {x: 926.2, y: 59}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &6406576691357051597
@@ -2052,8 +2056,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Speed: '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 91c430c638dcb7943a350c0cc01032a7, type: 2}
-  m_sharedMaterial: {fileID: -3257682548569002286, guid: 91c430c638dcb7943a350c0cc01032a7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
+  m_sharedMaterial: {fileID: -4084469442324921828, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2188,8 +2192,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Termin\xE9"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 72e3bfb5980d67d4189c88df90162578, type: 2}
-  m_sharedMaterial: {fileID: 8683182613885920577, guid: 72e3bfb5980d67d4189c88df90162578, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
+  m_sharedMaterial: {fileID: -4084469442324921828, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2303,6 +2307,8 @@ GameObject:
   - component: {fileID: 8624428486470604843}
   - component: {fileID: 6167540155513479416}
   - component: {fileID: 6741938847180419184}
+  - component: {fileID: 4851556897012457577}
+  - component: {fileID: 1556918756620567358}
   m_Layer: 8
   m_Name: GameEventListener
   m_TagString: Untagged
@@ -2381,6 +2387,86 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4851556897012457577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6883055866494952646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: b4c1de7ad322b894b8ed236533a23468, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9007811829784582359}
+        m_TargetAssemblyTypeName: JetskiGame.JetskiController, Assembly-CSharp
+        m_MethodName: SwitchToUIInputMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 9007811829784582359}
+        m_TargetAssemblyTypeName: JetskiGame.JetskiController, Assembly-CSharp
+        m_MethodName: ShowCursor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1556918756620567358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6883055866494952646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: cb8390d9fabb07843b5f42bf6275d672, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9007811829784582359}
+        m_TargetAssemblyTypeName: JetskiGame.JetskiController, Assembly-CSharp
+        m_MethodName: SwitchToPlayerInputMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 9007811829784582359}
+        m_TargetAssemblyTypeName: JetskiGame.JetskiController, Assembly-CSharp
+        m_MethodName: HideCursor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7045293663253431221
 GameObject:
   m_ObjectHideFlags: 0
@@ -2448,7 +2534,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1/5
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 91c430c638dcb7943a350c0cc01032a7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
   m_sharedMaterial: {fileID: -3257682548569002286, guid: 91c430c638dcb7943a350c0cc01032a7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2514,7 +2600,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &7154529983502029941

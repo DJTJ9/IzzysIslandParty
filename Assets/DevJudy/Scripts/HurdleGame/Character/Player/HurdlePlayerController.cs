@@ -78,7 +78,6 @@ namespace HurdleGame
             Cursor.lockState = CursorLockMode.None;
 
         }
-
         
         public void OnPause(InputAction.CallbackContext _context)
         {

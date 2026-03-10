@@ -9,12 +9,13 @@ namespace MultiuseScripts
         public static LevelTimer Instance => instance;
 
         [Header("Dependencies: ")]
-        [SerializeField] private UITimerManager timerManager;
+        [SerializeField] private UITimerService timerService;
 
         [SerializeField] private LevelServiceParent levelService;
 
         [Header("Variables: ")]
         [SerializeField] private float durationInMinutes;
+
         [SerializeField] private bool timerRunningDown;
         [SerializeField] private bool startTimerOnLevelStart;
 
@@ -90,9 +91,9 @@ namespace MultiuseScripts
             else
                 time += _timeDeduction;
 
-            StartCoroutine(timerManager.TimeDeductionFeedback());
+            StartCoroutine(timerService.TimeDeductionFeedback());
         }
-        
+
         private void DisplayRunningTimer()
         {
             time += Time.fixedDeltaTime;
@@ -120,8 +121,8 @@ namespace MultiuseScripts
             seconds = Mathf.FloorToInt(_time % 60);
             milliseconds = Mathf.Round((_time % 1) * 1000);
             milliseconds = Mathf.RoundToInt((milliseconds) / 10);
-            
-            timerManager.UpdateTimerText($"Time: {minutes:00}:{seconds:00}:{milliseconds % 100:00}");
+
+            timerService.UpdateTimerText($"Time: {minutes:00}:{seconds:00}:{milliseconds % 100:00}");
         }
 
         public void GetTime(out int _minutes, out int _seconds, out int _milliseconds)
@@ -130,7 +131,7 @@ namespace MultiuseScripts
             _seconds = (int)seconds;
             _milliseconds = (int)milliseconds;
         }
-        
+
         public string GetTimeAsString(int _minutes, int _seconds, int _milliseconds)
         {
             return $"{_minutes:00}:{_seconds:00}:{_milliseconds % 100:00}";
@@ -140,7 +141,7 @@ namespace MultiuseScripts
         {
             UpdateTimer = false;
 
-            timerManager.UpdateTimerText($"Time: {minutes:00}:{seconds:00}:{milliseconds % 100:00}");
+            timerService.UpdateTimerText($"Time: {minutes:00}:{seconds:00}:{milliseconds % 100:00}");
         }
     }
 }
