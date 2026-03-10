@@ -11,15 +11,13 @@ public class PlayerControllerMinigolfMayhem : Controller
     private RigidbodyMovement rigidbodyMovement;
     private MinigolfMayhemCameraController cameraController;
 
-    [HideInInspector] public int ShootCount;
-
     [SerializeField] private SO_FloatVariable mouseSensitivityX;
     [SerializeField] private SO_FloatVariable mouseSensitivityY;
    
-    [FoldoutGroup("Events", expanded: true)] 
-    [SerializeField] private UnityEvent OnPause;
-    [SerializeField] private UnityEvent OnUnpause;
-    [SerializeField] private UnityEvent onGameStart;
+    // [FoldoutGroup("Events", expanded: true)] 
+    // [SerializeField] private UnityEvent OnPause;
+    // [SerializeField] private UnityEvent OnUnpause;
+    // [SerializeField] private UnityEvent onGameStart;
 
     private void Awake()
     {
@@ -28,15 +26,14 @@ public class PlayerControllerMinigolfMayhem : Controller
         cameraController = GetComponent<MinigolfMayhemCameraController>();
     }
 
-    /// <summary>
-    /// Activates the "MinigolfMayhem" input action map and resets the shoot count.
-    /// Runs every time the player component is enabled.
-    /// </summary>
-    private void OnEnable()
-    {
-        playerInput.SwitchCurrentActionMap("MinigolfMayhem");
-        ShootCount = 0;
-    }
+    // /// <summary>
+    // /// Activates the "MinigolfMayhem" input action map and resets the shoot count.
+    // /// Runs every time the player component is enabled.
+    // /// </summary>
+    // private void OnEnable()
+    // {
+    //     playerInput.SwitchCurrentActionMap("MinigolfMayhem");
+    // }
 
     /// <summary>
     /// Switches the input action map for the player to "MinigolfMayhem," enabling minigolf-specific controls.
@@ -46,29 +43,29 @@ public class PlayerControllerMinigolfMayhem : Controller
         playerInput.SwitchCurrentActionMap("MinigolfMayhem");
     }
 
-    /// <summary>
-    /// Invokes the pause event when a valid pause action is triggered.
-    /// </summary>
-    /// <param name="_context">The context of the pause input action.</param>
-    public void OnPauseInput(InputAction.CallbackContext _context)
-    {
-        if (!pauseInputEnabled) return;
-        if (!_context.started) return;
-        
-        OnPause.Invoke();
-    }
-
-    /// <summary>
-    /// Invokes the unpause event when a valid unpause action is triggered.
-    /// </summary>
-    /// <param name="_context">The context of the unpause input action.</param>
-    public void OnUnpauseInput(InputAction.CallbackContext _context)
-    {
-        if (!pauseInputEnabled) return;
-        if (!_context.started) return;
-        
-        OnUnpause.Invoke();
-    }
+    // /// <summary>
+    // /// Invokes the pause event when a valid pause action is triggered.
+    // /// </summary>
+    // /// <param name="_context">The context of the pause input action.</param>
+    // public void OnPauseInput(InputAction.CallbackContext _context)
+    // {
+    //     if (!pauseInputEnabled) return;
+    //     if (!_context.started) return;
+    //     
+    //     OnPause.Invoke();
+    // }
+    //
+    // /// <summary>
+    // /// Invokes the unpause event when a valid unpause action is triggered.
+    // /// </summary>
+    // /// <param name="_context">The context of the unpause input action.</param>
+    // public void OnUnpauseInput(InputAction.CallbackContext _context)
+    // {
+    //     if (!pauseInputEnabled) return;
+    //     if (!_context.started) return;
+    //     
+    //     OnUnpause.Invoke();
+    // }
 
     /// <summary>
     /// Moves the player based on the movement input received. 
@@ -92,7 +89,7 @@ public class PlayerControllerMinigolfMayhem : Controller
         if (!m_isActive) return;
 
         rigidbodyMovement.StartCharging(_context);
-        ++ShootCount;
+        // ++ShootCount;
     }
 
     /// <summary>
@@ -123,15 +120,6 @@ public class PlayerControllerMinigolfMayhem : Controller
         {
             cameraController.DisableRearView();
         }
-    }
-
-    /// <summary>
-    /// Triggers the `onGameStart` event to notify that the game has started.
-    /// </summary>
-    /// <param name="_context">The context of the start game input action.</param>
-    public void OnStartGame(InputAction.CallbackContext _context)
-    {
-        onGameStart.Invoke();
     }
 
     /// <summary>

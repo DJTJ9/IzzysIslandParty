@@ -163,7 +163,7 @@ public class GameMenuEvents : MonoBehaviour
         m_playerJoined = false;
         StartCoroutine(ShowOnlyJoinInstruction());
 
-        onLevelLoaded.Invoke();
+        // onLevelLoaded.Invoke();
     }
 
     private void OnDisable()
@@ -298,9 +298,9 @@ public class GameMenuEvents : MonoBehaviour
         endScreenChangeLevelButton.clicked += OnChangeLevelClick;
         endScreenQuitButton.clicked += OnQuitClick;
 
-        // Controller selection buttons
-        controllerSelectionReadyButton.clicked += OnControllerSelectionReadyButtonClick;
-        controllerSelectionBackButton.clicked += OnControllerSelectionBackButtonClick;
+        // // Controller selection buttons
+        // controllerSelectionReadyButton.clicked += OnControllerSelectionReady;
+        // controllerSelectionBackButton.clicked += OnControllerSelectionBackButtonClick;
     }
 
     private void UnregisterButtonCallbacks()
@@ -340,9 +340,9 @@ public class GameMenuEvents : MonoBehaviour
         endScreenChangeLevelButton.clicked -= OnChangeLevelClick;
         endScreenQuitButton.clicked -= OnQuitClick;
 
-        // Controller selection buttons
-        controllerSelectionReadyButton.clicked -= OnControllerSelectionReadyButtonClick;
-        controllerSelectionBackButton.clicked -= OnControllerSelectionBackButtonClick;
+        // // Controller selection buttons
+        // controllerSelectionReadyButton.clicked -= OnControllerSelectionReady;
+        // controllerSelectionBackButton.clicked -= OnControllerSelectionBackButtonClick;
     }
 
     public void ShowPauseMenu()
@@ -574,7 +574,7 @@ public class GameMenuEvents : MonoBehaviour
         controllerSelectionMenu.style.display = DisplayStyle.None;
     }
 
-    private void OnControllerSelectionReadyButtonClick()
+    public void OnControllerSelectionReady()
     {
         if (!m_playerJoined) return;
 
@@ -583,14 +583,14 @@ public class GameMenuEvents : MonoBehaviour
         uiToolkitVideo.StopVideo();
         UnfreezeTimeScale();
         HideControllerSelectionScreen();
-        onGameStart.Invoke();
+        // onGameStart.Invoke();
     }
 
-    private void OnControllerSelectionBackButtonClick()
-    {
-        controllerSelectionMenu.style.display = DisplayStyle.None;
-        LoadSingleScene(SceneNames.MainMenu);
-    }
+    // private void OnControllerSelectionBackButtonClick()
+    // {
+    //     controllerSelectionMenu.style.display = DisplayStyle.None;
+    //     LoadSingleScene(SceneNames.MainMenu);
+    // }
 
     private void OnLoadBowlingBattle()
     {
