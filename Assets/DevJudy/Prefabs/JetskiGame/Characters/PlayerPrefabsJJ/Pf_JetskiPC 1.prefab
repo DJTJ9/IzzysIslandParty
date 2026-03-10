@@ -154,7 +154,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -205.79999, y: -9.2}
+  m_AnchoredPosition: {x: -196.75, y: -9.2}
   m_SizeDelta: {x: 437.09, y: 59}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &7394863337551368236
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Penalty: +'
+  m_text: 'Penalty: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
   m_sharedMaterial: {fileID: -4084469442324921828, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
@@ -421,7 +421,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535

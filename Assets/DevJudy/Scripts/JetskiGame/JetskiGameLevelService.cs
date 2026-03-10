@@ -208,6 +208,9 @@ namespace JetskiGame
 
         public override void OnFinishLineCrossed(GameObject _triggeringObj)
         {
+            if (CheckIfPlayerHasCrossedFinishLineBefore(_triggeringObj))
+                return;
+            
             levelTimer.GetTime(out int minutes, out int seconds, out int milliseconds);
             GetTotalTimeDeduction(_triggeringObj, out var timeDeductionMinutes, out var timeDeductionSeconds);
             
@@ -242,6 +245,19 @@ namespace JetskiGame
             }
         }
 
+        private bool CheckIfPlayerHasCrossedFinishLineBefore(GameObject _triggeringObj)
+        {
+            for (int i = 0; i < winnerPlacementOrder.Count; i++)
+            {
+                if (_triggeringObj == winnerPlacementOrder[i].Item1)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private void GetTotalTimeDeduction(GameObject _triggeringObj, out int _timeDeductionMinutes, out int _timeDeductionSeconds)
         {
             if (_triggeringObj.TryGetComponent(out JetskiController playerController))
@@ -273,16 +289,11 @@ namespace JetskiGame
                 yield return new WaitForSecondsRealtime(1f);
 
                 if (countdown == showCountdownSeconds)
-                {
-                    Debug.Log("Countdown text active");
                     levelCountdownText.enabled = true;
-                }
                 
                 if (countdown <= showCountdownSeconds)
                     levelCountdownText.text = countdown.ToString() + "...";
             }
-            
-            Debug.Log("StartLevelCountdownTimer");
             
             OrganizeWinnerPlacementList();
             SetGameScores();
@@ -299,22 +310,24 @@ namespace JetskiGame
 
             for (int i = 1; i < winnerPlacementOrder.Count; i++)
             {
-                float currentTimePenaltyToCompare = finishingTimes[i];
+                float currentTimeToCompare = finishingTimes[i];
                 var currentGameObjectBeingCompared = winnerPlacementOrder[i];
 
                 int leftNeighbour = i - 1;
 
                 // While the leftNeighbour is not out of bounds, and the ln distance is more than the currentDistance
-                while (leftNeighbour >= 0 && finishingTimes[leftNeighbour] > currentTimePenaltyToCompare)
+                while (leftNeighbour >= 0 && finishingTimes[leftNeighbour] > currentTimeToCompare)
                 {
                     // Set the index [ln + 1] (first pass index of current key), to be the value of [ln]
                     winnerPlacementOrder[leftNeighbour + 1] = winnerPlacementOrder[leftNeighbour];
+                    finishingTimes[leftNeighbour + 1] = finishingTimes[leftNeighbour];
                     // Then go further down the array and look at the next ln
                     leftNeighbour = (leftNeighbour - 1);
                 }
 
                 // If the distance is less, or all left neighbours have been checked, make sure to give the key value to the current index (ln + 1)
                 winnerPlacementOrder[leftNeighbour + 1] = currentGameObjectBeingCompared;
+                finishingTimes[leftNeighbour + 1] = currentTimeToCompare;
             }
         }
 
@@ -339,7 +352,7 @@ namespace JetskiGame
                     if (!foundObjectInList)
                     {
                         winnerPlacementOrder.Add(new Tuple<GameObject, string>(placementOrder[i], unfinishedRaceText));
-                        finishingTimes.Add(1000f + i);
+                        finishingTimes.Add(1000f);
                     }
                 }
             }
@@ -360,12 +373,10 @@ namespace JetskiGame
                     npcController.SetTime(winnerPlacementOrder[i].Item2);
                 }
             }
-            Debug.Log("SetGameScores");
         }
 
         public override void EndLevel()
         {
-            Debug.Log("-EndLevel-");
             levelTimer.EndTimerAndDisplayFinishTime();
             raceStarted = false;
 

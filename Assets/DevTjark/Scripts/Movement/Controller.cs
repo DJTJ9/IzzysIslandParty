@@ -101,8 +101,11 @@ public class Controller : MonoBehaviour
     public void DisableController() => m_isActive = false;
     public void EnablePauseInput() => pauseInputEnabled = true;
     public void DisablePauseInput() => pauseInputEnabled = false;
-    
-    public void NoGoingBack() => m_noGoingBack = true;
-    
+
+    public void NoGoingBack()
+    {
+        m_noGoingBack = true;
+    }
+
     public void CanGoBack() => m_noGoingBack = false;
 }

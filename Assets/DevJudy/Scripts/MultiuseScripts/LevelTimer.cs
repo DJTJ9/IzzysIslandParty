@@ -111,7 +111,7 @@ namespace MultiuseScripts
                 TimerFinished = true;
                 time = 0.00f;
 
-                levelService?.EndLevel();
+                levelService.EndLevel();
             }
         }
 

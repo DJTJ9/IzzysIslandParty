@@ -11,7 +11,6 @@ namespace UIScripts
         {
             if (_playerIndex == 1 || _playerIndex == 3)
             {
-                Debug.Log("Changing anchored pos");
                 pointsObjectRT.anchoredPosition = pointsObjRTEvenPlayers.anchoredPosition;
             }
         }
