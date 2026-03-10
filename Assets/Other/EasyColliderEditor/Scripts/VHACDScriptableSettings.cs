@@ -1,8 +1,6 @@
 ﻿#if (UNITY_EDITOR && !UNITY_EDITOR_LINUX)
 namespace ECE
 {
-  using System.Collections;
-  using System.Collections.Generic;
   using UnityEngine;
   using UnityEditor;
   public class VHACDScriptableSettings : ScriptableObject

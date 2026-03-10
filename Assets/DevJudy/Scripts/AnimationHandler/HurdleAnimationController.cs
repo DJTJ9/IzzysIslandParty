@@ -1,4 +1,3 @@
-using HurdleGame;
 using ImprovedTimers;
 using UnityEngine;
 
@@ -11,12 +10,11 @@ namespace AnimationHandler
         private static readonly int velocityY = Animator.StringToHash("VelocityY");
         private static readonly int hitObstacle = Animator.StringToHash("HitObstacle");
         private static readonly int gameStart = Animator.StringToHash("GameStart");
+        private const float obstacleHitCountdown = 0.65f;
 
         [SerializeField] private Animator animator;
         private Rigidbody rb;
-
         private Timer obstacleHitTimer;
-        private float obstacleHitCountdown = 1f;
 
         private void Awake()
         {
@@ -62,7 +60,7 @@ namespace AnimationHandler
             obstacleHitTimer.Start();
         }
 
-        private void HitObstacleOver()
+        public void HitObstacleOver()
         {
             animator.SetBool(hitObstacle, false);
         }

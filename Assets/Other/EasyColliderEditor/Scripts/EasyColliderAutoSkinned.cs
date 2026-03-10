@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEditor;
 using System.Linq;
-using System.Collections;
 #if UNITY_2019_1_OR_NEWER
 using Unity.Collections;
 #endif

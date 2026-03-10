@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-    public class Swapper4 : MonoBehaviour
+public class Swapper4 : MonoBehaviour
     {
 
         public GameObject[] character;

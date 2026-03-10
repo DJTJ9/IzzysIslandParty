@@ -2415,6 +2415,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 873efad3-1799-46b2-83b4-de0e6927f533
     m_ActionName: 'MinigolfMayhem/Rear View[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d0e2fb38-7efd-43a0-b874-f8205d44bce0
+    m_ActionName: 'UI/ControllerSelectionBack[/Keyboard/escape,/DualShock4GamepadHID/buttonEast]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI
@@ -4056,6 +4060,18 @@ MonoBehaviour:
           m_StringArgument: UI
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3691804831972753286}
+        m_TargetAssemblyTypeName: HurdleGame.HurdlePlayerController, Assembly-CSharp
+        m_MethodName: ShowCursor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: UI
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8966336014354646601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4076,6 +4092,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.InputSystem.PlayerInput, Unity.InputSystem
         m_MethodName: SwitchCurrentActionMap
         m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: HurdleGame
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3691804831972753286}
+        m_TargetAssemblyTypeName: HurdleGame.HurdlePlayerController, Assembly-CSharp
+        m_MethodName: HideCursor
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

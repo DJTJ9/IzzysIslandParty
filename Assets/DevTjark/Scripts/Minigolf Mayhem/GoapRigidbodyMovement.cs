@@ -1,7 +1,6 @@
 ﻿using ImprovedTimers;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [RequireComponent (typeof(GroundChecker))]
 public class GoapRigidbodyMovement : Controller

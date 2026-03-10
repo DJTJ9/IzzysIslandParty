@@ -1,7 +1,6 @@
 using System;
 using ScriptableObjects;
 using Sirenix.OdinInspector;
-using UnityEngine.UIElements;
 
 namespace Helper
 {

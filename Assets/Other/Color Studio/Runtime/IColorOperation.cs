@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace ColorStudio {
+﻿namespace ColorStudio {
 
     public interface IColorOperation {
         ColorEntry[] colorOperations { get; set; }

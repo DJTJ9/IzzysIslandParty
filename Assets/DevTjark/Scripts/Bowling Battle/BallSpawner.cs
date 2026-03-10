@@ -1,7 +1,5 @@
-﻿using System;
-using DependencyInjection;
+﻿using DependencyInjection;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class BallSpawner : MonoBehaviour, IDependencyProvider
 {

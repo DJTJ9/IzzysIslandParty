@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
-using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using ECUI = ECE.EasyColliderUIHelpers;
-using UnityEngine.SceneManagement;
 
 #if (UNITY_2021_2_OR_NEWER)
 // prefab stage out of experimental.

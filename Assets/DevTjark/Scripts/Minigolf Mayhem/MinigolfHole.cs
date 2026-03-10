@@ -1,10 +1,8 @@
 ﻿using System;
 using DG.Tweening;
 using ImprovedTimers;
-using Player;
 using Player.Collections;
 using Sirenix.OdinInspector;
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 

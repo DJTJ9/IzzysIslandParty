@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 
 namespace DanielIlett.SnapshotShaders2.URP
 {

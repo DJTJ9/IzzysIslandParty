@@ -1,8 +1,4 @@
-﻿using System;
-using ImprovedTimers;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.InputSystem;
+﻿using ImprovedTimers;
 using Random = UnityEngine.Random;
 
 public class NPC_SwaggySnapshots : Controller

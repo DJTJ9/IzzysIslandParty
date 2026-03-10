@@ -1,6 +1,5 @@
 ﻿using DependencyInjection;
 using UnityEngine;
-using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;

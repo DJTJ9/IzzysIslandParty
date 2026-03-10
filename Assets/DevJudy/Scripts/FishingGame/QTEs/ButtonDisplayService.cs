@@ -2,7 +2,6 @@ using enums;
 using SerializedObjects;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 namespace FishingGame.QuickTimeEvents
 {

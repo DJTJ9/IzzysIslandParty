@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GenericGameEvent<T> : ScriptableObject {
     // private readonly List<GenericGameEventListener<T>> listeners = new List<GenericGameEventListener<T>>();

@@ -1,5 +1,3 @@
-using System;
-using DependencyInjection;
 using UnityEngine;
 
 public class BallCamera : MonoBehaviour

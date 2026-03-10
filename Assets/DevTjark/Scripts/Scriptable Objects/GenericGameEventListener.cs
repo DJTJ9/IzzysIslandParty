@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 
 public class GenericGameEventListener<T> : MonoBehaviour {
     // #region Serialized Fields

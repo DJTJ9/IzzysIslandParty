@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using Helper;
-using MultiuseScripts;
 using Pathfinding;
 using UIScripts;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace JetskiGame

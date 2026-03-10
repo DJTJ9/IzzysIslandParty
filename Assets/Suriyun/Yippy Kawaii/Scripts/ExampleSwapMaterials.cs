@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 // Change renderer's material each changeInterval
 // seconds from the material array defined in the inspector.

@@ -1,5 +1,4 @@
-﻿using System;
-using ScriptableObjects;
+﻿using ScriptableObjects;
 using Unity.Cinemachine;
 using UnityEngine;
 

@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class FilterGameEventListenerInt : GameEventListenerInt
+﻿public class FilterGameEventListenerInt : GameEventListenerInt
 {
     public int TriggerValue;
 

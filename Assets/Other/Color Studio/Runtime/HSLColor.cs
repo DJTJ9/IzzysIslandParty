@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace ColorStudio {
+﻿namespace ColorStudio {
 
     public struct HSLColor {
         public float h;

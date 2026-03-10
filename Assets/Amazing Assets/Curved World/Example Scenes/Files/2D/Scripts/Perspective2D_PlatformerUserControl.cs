@@ -1,7 +1,6 @@
 // Curved World <http://u3d.as/1W8h>
 // Copyright (c) Amazing Assets <https://amazingassets.world>
- 
-using System;
+
 using UnityEngine;
 
 #if USE_INPUT_SYSTEM && ENABLE_INPUT_SYSTEM

@@ -2,7 +2,6 @@ using Audio;
 using enums;
 using MultiuseScripts;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace FishingGame
 {

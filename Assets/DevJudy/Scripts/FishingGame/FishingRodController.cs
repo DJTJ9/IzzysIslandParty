@@ -1,5 +1,4 @@
 using enums;
-using FishingGame.QuickTimeEvents;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;

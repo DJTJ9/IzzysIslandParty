@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Audio;
 using HelperScripts;
 using HurdleGame.Camera;
@@ -48,6 +46,9 @@ namespace HurdleGame.LevelService
         
         private void Start()
         {
+           Cursor.visible = false;
+           //Cursor.lockState = CursorLockMode.Locked;
+            
             if (audioManager != null)
             {
                 audioManager.gameObject.SetActive(true);
@@ -212,7 +213,6 @@ namespace HurdleGame.LevelService
         private void OnPlayerCrossedFinishLine()
         {
             humanPlayerCount--;
-            Debug.LogWarning("HPC_ " + humanPlayerCount);
 
             if (humanPlayerCount == 0)
             {
@@ -223,13 +223,15 @@ namespace HurdleGame.LevelService
         
         public override void EndLevel()
         {
-            Debug.LogWarning("Ending level");
             raceEnded = true;
 
             onFinishLineCrossedText?.gameObject.SetActive(true);
             raceStarted = false;
 
             OnLevelEnd?.Invoke();
+
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 }

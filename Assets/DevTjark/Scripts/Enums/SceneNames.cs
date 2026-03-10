@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public enum SceneNames
+﻿public enum SceneNames
 {
     MainMenu,
     BowlingBattle,

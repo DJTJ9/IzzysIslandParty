@@ -1,11 +1,6 @@
-﻿using System.Collections;
-using System.Linq;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.UI;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class GUIBowlingBattle : MonoBehaviour

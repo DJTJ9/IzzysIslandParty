@@ -1,5 +1,4 @@
-﻿using System;
-using ScriptableObjects;
+﻿using ScriptableObjects;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;

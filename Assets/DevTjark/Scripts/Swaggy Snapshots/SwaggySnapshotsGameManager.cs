@@ -1,9 +1,7 @@
-﻿using System;
-using ImprovedTimers;
+﻿using ImprovedTimers;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 public class SwaggySnapshotsGameManager : MonoBehaviour
 {

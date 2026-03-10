@@ -66,6 +66,20 @@ namespace HurdleGame
             shortSlideSeconds = longSlideSeconds * shortSlideMultiplier;
         }
 
+        public void HideCursor()
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        public void ShowCursor()
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+        }
+
+        
         public void OnPause(InputAction.CallbackContext _context)
         {
             if (_context.started)

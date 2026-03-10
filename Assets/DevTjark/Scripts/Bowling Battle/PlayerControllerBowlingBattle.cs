@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using DG.Tweening;
 using Sirenix.OdinInspector;
-using Unity.VisualScripting;
-using UnityEngine.InputSystem.UI;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(CharacterController), typeof(Rigidbody))]
 public class PlayerControllerBowlingBattle : Controller

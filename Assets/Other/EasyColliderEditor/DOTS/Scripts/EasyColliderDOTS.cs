@@ -1,8 +1,5 @@
 ﻿#if (UNITY_EDITOR)
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 namespace ECE
 {
   // This is just the empty class that get's overwritten to add DOTS support.

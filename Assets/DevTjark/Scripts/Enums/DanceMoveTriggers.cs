@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public enum DanceMoveTriggers
+﻿public enum DanceMoveTriggers
 {
     StartMove,
     DanceMove1,
