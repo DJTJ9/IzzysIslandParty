@@ -4016,6 +4016,7 @@ GameObject:
   - component: {fileID: 62102623215973565}
   - component: {fileID: 8132312495684259728}
   - component: {fileID: 8966336014354646601}
+  - component: {fileID: 8273093026189303256}
   - component: {fileID: 2639455260784604316}
   m_Layer: 8
   m_Name: GameEventListener
@@ -4083,6 +4084,30 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.InputSystem.PlayerInput, Unity.InputSystem
         m_MethodName: SwitchCurrentActionMap
         m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: HurdleGame
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3691804831972753286}
+        m_TargetAssemblyTypeName: HurdleGame.HurdlePlayerController, Assembly-CSharp
+        m_MethodName: EnablePauseInput
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: HurdleGame
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3691804831972753286}
+        m_TargetAssemblyTypeName: HurdleGame.HurdlePlayerController, Assembly-CSharp
+        m_MethodName: HideCursor
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4171,6 +4196,34 @@ MonoBehaviour:
           m_StringArgument: HurdleGame
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8273093026189303256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846488232658209156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3691804831972753286}
+        m_TargetAssemblyTypeName: HurdleGame.HurdlePlayerController, Assembly-CSharp
+        m_MethodName: NoGoingBack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2639455260784604316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4215,6 +4268,30 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.InputSystem.PlayerInput, Unity.InputSystem
         m_MethodName: SwitchCurrentActionMap
         m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: UI
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3691804831972753286}
+        m_TargetAssemblyTypeName: HurdleGame.HurdlePlayerController, Assembly-CSharp
+        m_MethodName: ShowCursor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: UI
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3691804831972753286}
+        m_TargetAssemblyTypeName: HurdleGame.HurdlePlayerController, Assembly-CSharp
+        m_MethodName: DisablePauseInput
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

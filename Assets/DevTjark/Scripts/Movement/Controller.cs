@@ -18,6 +18,7 @@ public class Controller : MonoBehaviour
 
     protected bool m_isActive = true;
     protected bool m_hasJoinedGame;
+    protected bool m_noGoingBack;
     private bool pauseInputEnabled;
 
     protected PlayerInput playerInput;
@@ -81,7 +82,7 @@ public class Controller : MonoBehaviour
     
     public void OnControllerSelectionBack(InputAction.CallbackContext _context)
     {
-        if (!_context.started) return;
+        if (!_context.started || m_noGoingBack) return;
         
         AsyncLevelLoader.Instance.LoadScene(SceneNames.MainMenu);
     }
@@ -100,4 +101,8 @@ public class Controller : MonoBehaviour
     public void DisableController() => m_isActive = false;
     public void EnablePauseInput() => pauseInputEnabled = true;
     public void DisablePauseInput() => pauseInputEnabled = false;
+    
+    public void NoGoingBack() => m_noGoingBack = true;
+    
+    public void CanGoBack() => m_noGoingBack = false;
 }

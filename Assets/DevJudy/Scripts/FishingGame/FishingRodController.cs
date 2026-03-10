@@ -56,6 +56,19 @@ namespace FishingGame
         {
             m_hasJoinedGame = true;
         }
+        
+        public void HideCursor()
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        public void ShowCursor()
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+        }
 
         public void OnRegisterInput(InputAction.CallbackContext _context)
         {

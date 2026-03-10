@@ -86,8 +86,7 @@ namespace HurdleGame.LevelService
         {
             if (placementOrder.Length >= maxNumberOfPlayers)
                 return;
-            
-            Debug.Log("here");
+
             if (placementOrder == null || placementOrder.Length < 1)
                 placementOrder = new GameObject[maxNumberOfPlayers];
 
@@ -97,7 +96,6 @@ namespace HurdleGame.LevelService
             if (placementOrder.Length == 1)
                 cameraMoverAddition.SetOrientationCharacter(_player.GetComponent<CharacterMover>());
 
-            Debug.Log("Adding human player to array");
             ArrayHelper.AddToArray(placementOrder, _player);
 
             playerCount++;
