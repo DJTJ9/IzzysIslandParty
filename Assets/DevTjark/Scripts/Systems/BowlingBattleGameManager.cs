@@ -32,13 +32,17 @@ public class BowlingBattleGameManager : MonoBehaviour
 
         InstantiateCountdownTimers();
         SubscribeToCountdownTimersActions();
+    }
+    
+    private void Start()
+    {
         onLevelLoaded.Invoke();
     }
 
-    // private void OnEnable()
-    // {
-    //     // onLevelLoaded.Invoke();
-    // }
+    private void OnEnable()
+    {
+        onLevelLoaded.Invoke();
+    }
 
     private void OnDisable()
     {
