@@ -793,10 +793,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerIndex: 1
+  onPause:
+    m_PersistentCalls:
+      m_Calls: []
+  onUnpause:
+    m_PersistentCalls:
+      m_Calls: []
+  onGameStart:
+    m_PersistentCalls:
+      m_Calls: []
   pushForce: 10
   pushCooldown: 3
   MovementCooldown: 3
-  shootForceFactor: 20
+  shootForceFactor: 15
   jumpForce: 0
   jumpCooldown: 3
   horizontalImpactForce: 1

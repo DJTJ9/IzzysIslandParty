@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -8,14 +9,21 @@ using UnityEngine.UIElements;
 [DefaultExecutionOrder(-1000)]
 public class AsyncLevelLoader : MonoBehaviour
 {
+    [FoldoutGroup("Settings", expanded: false)] 
+    [SerializeField] private float progressBarSpeed = 0.5f;
+    [SerializeField] private int firstLoadingScreenDelay = 300;
+    [SerializeField] private int secondLoadingScreenDelay = 500;
+    [SerializeField] private int thirdLoadingScreenDelay = 2000;
+    [SerializeField] private int endLoadingScreenDelay = 1000;
+    
     [SerializeField] private SceneCollectionSO sceneCollection;
 
     public static event Action<SceneNames> OnSceneChange;
 
     public static AsyncLevelLoader Instance;
 
-    private const float zero = 0f;
-    private const float one = 1f;
+    private const float k_Zero = 0f;
+    private const float k_One = 1f;
 
     private UIDocument uiDocument;
     private VisualElement loadingScreenContainer;
@@ -51,7 +59,7 @@ public class AsyncLevelLoader : MonoBehaviour
         progressBar = root.Q<ProgressBar>("loading-screen__progress_bar");
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         UpdateLoadingScreenBar();
     }
@@ -65,11 +73,11 @@ public class AsyncLevelLoader : MonoBehaviour
     {
         try
         {
+            progressBar.value = k_Zero;
+            target = k_Zero;
             loadingScreenContainer.style.display = DisplayStyle.Flex;
-            progressBar.value = zero;
-            target = zero;
 
-            await Task.Delay(300);
+            await Task.Delay(firstLoadingScreenDelay);
 
             var scene = SceneManager.LoadSceneAsync(sceneCollection.Scenes.TryGetValue(_sceneName, out var sceneNameFromCollection)
                 ? sceneNameFromCollection : throw new KeyNotFoundException());
@@ -80,18 +88,17 @@ public class AsyncLevelLoader : MonoBehaviour
 
             do
             {
-                await Task.Delay(500);
+                await Task.Delay(secondLoadingScreenDelay);
                 target = Mathf.Clamp01(scene.progress / 0.9f);
             } while (scene.progress < 0.9f);
 
-            target = one;
+            target = k_One;
             OnSceneChange?.Invoke(_sceneName);
-            await Task.Delay(2000);
+            await Task.Delay(thirdLoadingScreenDelay);
 
-            // FadeOutLoadingScreen();
             scene.allowSceneActivation = true;
 
-            await Task.Delay(1000);
+            await Task.Delay(endLoadingScreenDelay);
             loadingScreenContainer.style.display = DisplayStyle.None;
         }
         catch (Exception e)
@@ -112,10 +119,10 @@ public class AsyncLevelLoader : MonoBehaviour
         try
         {
             loadingScreenContainer.style.display = DisplayStyle.Flex;
-            progressBar.value = zero;
-            target = zero;
+            progressBar.value = k_Zero;
+            target = k_Zero;
 
-            await Task.Delay(300);
+            await Task.Delay(firstLoadingScreenDelay);
 
             var scene = SceneManager.LoadSceneAsync(currentSceneName);
             if (scene == null) return;
@@ -124,16 +131,16 @@ public class AsyncLevelLoader : MonoBehaviour
 
             do
             {
-                await Task.Delay(500);
+                await Task.Delay(secondLoadingScreenDelay);
                 target = Mathf.Clamp01(scene.progress / 0.9f);
             } while (scene.progress < 0.9f);
 
-            target = one;
-            await Task.Delay(2000);
+            target = k_One;
+            await Task.Delay(thirdLoadingScreenDelay);
 
             scene.allowSceneActivation = true;
 
-            await Task.Delay(1000);
+            await Task.Delay(endLoadingScreenDelay);
             loadingScreenContainer.style.display = DisplayStyle.None;
         }
         catch (Exception e)
@@ -148,7 +155,7 @@ public class AsyncLevelLoader : MonoBehaviour
     /// </summary>
     private void UpdateLoadingScreenBar()
     {
-        progressBar.value = Mathf.MoveTowards(progressBar.value, target, Time.unscaledDeltaTime * 0.5f);
+        progressBar.value = Mathf.MoveTowards(progressBar.value, target, Time.unscaledDeltaTime * progressBarSpeed);
         progressBar.title = $"{progressBar.value * 100:0}%";
     }
 }

@@ -6,6 +6,7 @@ public class MinigolfMayhemCameraController : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private float defaultMouseSensitivity = 10f;
+    [SerializeField] private float gamepadSensitivityMultiplier = 10f;
     
     [SerializeField] private CinemachineOrbitalFollow orbitalFollow;
     [SerializeField] private SO_FloatVariable mouseSensitivityX;
@@ -18,6 +19,7 @@ public class MinigolfMayhemCameraController : MonoBehaviour
 
     private void Start()
     {
+        playerController = GetComponent<PlayerControllerMinigolfMayhem>();
         inputAxisController = transform.parent.GetComponentInChildren<CinemachineInputAxisController>();
         SetMouseSensitivity();
     }
@@ -41,7 +43,7 @@ public class MinigolfMayhemCameraController : MonoBehaviour
                 case "Look Orbit X":
                     if (playerController.m_isGamepad)
                     {
-                        c.Input.Gain = defaultMouseSensitivity * 10f * mouseSensitivityX.Value;
+                        c.Input.Gain = defaultMouseSensitivity * gamepadSensitivityMultiplier * mouseSensitivityX.Value;
                     }
                     else
                     {
@@ -51,11 +53,11 @@ public class MinigolfMayhemCameraController : MonoBehaviour
                 case "Look Orbit Y":
                     if (playerController.m_isGamepad)
                     {
-                        c.Input.Gain = -defaultMouseSensitivity * 10f * mouseSensitivityY.Value;
+                        c.Input.Gain = -defaultMouseSensitivity * gamepadSensitivityMultiplier * mouseSensitivityY.Value;
                     }
                     else
                     {
-                        c.Input.Gain = defaultMouseSensitivity * mouseSensitivityY.Value;
+                        c.Input.Gain = -defaultMouseSensitivity * mouseSensitivityY.Value;
                     }
                     break;
             }
