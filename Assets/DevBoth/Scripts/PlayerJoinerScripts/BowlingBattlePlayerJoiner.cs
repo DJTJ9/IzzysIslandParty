@@ -12,6 +12,7 @@ public class BowlingBattlePlayerJoiner : MonoBehaviour
 
     private int m_playerIndex = 0;
     private int m_npcIndex = 0;
+    private bool m_npcsSpawned;
 
     /// <summary>
     /// Initializes the player and NPC indices to 0 and clears the list of current players.
@@ -51,9 +52,13 @@ public class BowlingBattlePlayerJoiner : MonoBehaviour
     /// </summary>
     public void JoinNPCsBB()
     {
+        if (m_npcsSpawned) return;
+        
         for (var i = m_playerIndex - 1; i < npcCollectionBB.Players.Count; i++)
         {
             Instantiate(npcCollectionBB.Players[i].PlayerReference, npcCollectionBB.Players[i].SpawnPoint, Quaternion.identity);
         }
+        
+        m_npcsSpawned = true;
     }
 }

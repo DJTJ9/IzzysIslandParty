@@ -24,21 +24,17 @@ public class PlayerControllerBowlingBattle : Controller
     private CharacterController controller;
     private Rigidbody rb;
 
-    [FoldoutGroup("Unity Events", expanded: false)]
-    [SerializeField] private UnityEvent onPause;
-    [SerializeField] private UnityEvent onUnpause;
-    [SerializeField] private UnityEvent onGameStart;
-
     [FoldoutGroup("Scriptable Objects", expanded: false)]
     [SerializeField] private SO_Player playerSO;
     [SerializeField] private SO_PlayerCollection playerCollectionBB;
 
-private void Start()
+    private void Start()
     {
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
         GameStartConfiguration();
+        m_hasJoinedGame = true;
     }
 
     private void FixedUpdate()
@@ -90,41 +86,6 @@ private void Start()
             rb.useGravity = true;
             m_moveInput = Vector2.zero;
             rb.linearVelocity = Vector3.zero;
-    }
-    
-    /// <summary>
-    /// Invokes the game start event when the start game input is triggered.
-    /// </summary>
-    /// <param name="_context">The context of the start game action.</param>
-    public void OnStartGame(InputAction.CallbackContext _context)
-    {
-        if (!_context.started) return;
-        
-        onGameStart.Invoke();
-    }
-
-    /// <summary>
-    /// Pauses the game upon detecting a valid pause input action and invokes the pause event.
-    /// </summary>
-    /// <param name="_context">The context of the pause input action.</param>
-    public void OnPause(InputAction.CallbackContext _context)
-    {
-        if (!pauseInputEnabled) return;
-        if (!_context.started) return;
-        
-        onPause.Invoke();
-    }
-    
-    /// <summary>
-    /// Unpauses the game upon detecting a valid unpause input action and invokes the unpause event.
-    /// </summary>
-    /// <param name="_context">The context of the unpause input action.</param>
-    public void OnUnpause(InputAction.CallbackContext _context)
-    {
-        if (!pauseInputEnabled) return;
-        if (!_context.started) return;
-        
-        onUnpause.Invoke();
     }
 
     /// <summary>

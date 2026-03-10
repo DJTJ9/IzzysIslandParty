@@ -106,15 +106,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "StartGame",
-                    "type": "Button",
-                    "id": "cde468ba-184e-4c5d-9ae8-96f5986c5dcf",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Join",
                     "type": "Button",
                     "id": "b59bf41b-9b2b-4f85-bb39-53fb6513bdfd",
@@ -609,28 +600,6 @@
                 },
                 {
                     "name": "",
-                    "id": "ea7ab018-88e3-4596-8d6e-e6b186629afc",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "StartGame",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6e53df10-7a92-4ba3-9a79-8716313871e4",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "StartGame",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "3b1b55e0-7b95-4d1a-bbc4-a5310dc7bb99",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -643,7 +612,7 @@
                 {
                     "name": "",
                     "id": "67e58660-cfcf-4e93-a489-f5ef1d96cf92",
-                    "path": "<Gamepad>/select",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": ";ControllerControlScheme;Gamepad",
@@ -2551,6 +2520,107 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "ControllerSelection",
+            "id": "d35f3ffa-0065-4809-9284-ce6d4dde7882",
+            "actions": [
+                {
+                    "name": "StartGame",
+                    "type": "Button",
+                    "id": "7518576f-851d-4569-a5ed-c3988533d1ec",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Join",
+                    "type": "Button",
+                    "id": "4314bf30-f08c-47ad-94e4-b6737ee656b1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ControllerSelectionBack",
+                    "type": "Button",
+                    "id": "48096ae4-e3c7-4439-9a45-d8af0a8d6ab9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9961c696-c49f-41fb-97a6-49a2b6c34afe",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "StartGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d0e0c1c7-b3a8-43e7-9fdb-d7b2ea491ed2",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "StartGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c363908d-ca82-49d1-8896-42510cc51ad9",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardControlScheme;Keyboard&Mouse",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b0660e34-3cb6-4d91-aa0c-d31a65589f09",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";ControllerControlScheme;Gamepad",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2141f3ca-aa25-40ee-b6df-601bd2879d2f",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "ControllerSelectionBack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "17fcc319-2489-4142-af9e-81cddffb286f",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "ControllerSelectionBack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

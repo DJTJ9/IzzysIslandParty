@@ -439,24 +439,18 @@ public class GoapAgent : MonoBehaviour
 
         if (currentAction == null)
         {
-            Debug.Log("Calculating any potential new plan");
             CalculatePlan();
 
             if (actionPlan != null && actionPlan.Actions.Count > 0)
             {
-                // navMeshAgent.ResetPath();
-
                 currentGoal = actionPlan.AgentGoal;
-                Debug.Log($"Goal: {currentGoal.Name} with {actionPlan.Actions.Count} actions in plan");
                 currentAction = actionPlan.Actions.Pop();
-                Debug.Log($"Popped action: {currentAction.Name}");
                 if (currentAction.Preconditions.All(b => b.Evaluate()))
                 {
                     currentAction.Start();
                 }
                 else
                 {
-                    Debug.Log("Preconditions not met, clearing current action and goal");
                     currentAction = null;
                     currentGoal = null;
                 }
@@ -469,13 +463,11 @@ public class GoapAgent : MonoBehaviour
 
             if (currentAction.Complete)
             {
-                Debug.Log($"{currentAction.Name} complete");
                 currentAction.Stop();
                 currentAction = null;
 
                 if (actionPlan.Actions.Count == 0)
                 {
-                    Debug.Log("Plan complete");
                     lastGoal = currentGoal;
                     currentGoal = null;
                 }
@@ -491,7 +483,6 @@ public class GoapAgent : MonoBehaviour
 
         if (currentGoal != null)
         {
-            Debug.Log("Current goal exists, checking goals with higher priority");
             goalsToCheck = new HashSet<AgentGoal>(goals.Where(g => g.Priority > priorityLevel));
         }
 
