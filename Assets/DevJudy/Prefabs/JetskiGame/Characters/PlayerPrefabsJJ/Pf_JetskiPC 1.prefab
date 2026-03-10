@@ -1590,7 +1590,19 @@ MonoBehaviour:
     m_ActionId: 09ff5283-225b-46b2-91d4-ce404689c100
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9007811829784582359}
+        m_TargetAssemblyTypeName: JetskiGame.JetskiController, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d8db3f96-6d5c-4180-b583-ebc634144dea
     m_ActionName: 'UI/Unpause[/Keyboard/escape]'
   - m_PersistentCalls:
@@ -1617,10 +1629,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f60f81e8-8952-4e5f-9c65-96b348c0117f
     m_ActionName: New action map/New action
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: cde468ba-184e-4c5d-9ae8-96f5986c5dcf
-    m_ActionName: 'UI/StartGame[/Keyboard/p]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: b59bf41b-9b2b-4f85-bb39-53fb6513bdfd
@@ -1749,9 +1757,45 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: d0e2fb38-7efd-43a0-b874-f8205d44bce0
     m_ActionName: 'UI/ControllerSelectionBack[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9007811829784582359}
+        m_TargetAssemblyTypeName: JetskiGame.JetskiController, Assembly-CSharp
+        m_MethodName: OnStartGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7518576f-851d-4569-a5ed-c3988533d1ec
+    m_ActionName: 'ControllerSelection/StartGame[/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4314bf30-f08c-47ad-94e4-b6737ee656b1
+    m_ActionName: 'ControllerSelection/Join[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9007811829784582359}
+        m_TargetAssemblyTypeName: JetskiGame.JetskiController, Assembly-CSharp
+        m_MethodName: OnControllerSelectionBack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 48096ae4-e3c7-4439-9a45-d8af0a8d6ab9
+    m_ActionName: 'ControllerSelection/ControllerSelectionBack[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: UI
+  m_DefaultActionMap: ControllerSelection
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 4984407534341963346}
 --- !u!114 &5806371421312714817
@@ -1789,17 +1833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerIndex: 0
-  motor: {fileID: 3991025528955417679}
-  power: 21
-  steerPower: 800
-  regJumpHeight: 10
-  cancelledJumpHeight: 2
-  waterLayerMask:
-    serializedVersion: 2
-    m_Bits: 16
-  groundCheckRadius: 0.5
-  isGrounded: 0
-  OnPauseGame:
+  onPause:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: b4c1de7ad322b894b8ed236533a23468, type: 2}
@@ -1814,7 +1848,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnUnpauseGame:
+  onUnpause:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: cb8390d9fabb07843b5f42bf6275d672, type: 2}
@@ -1829,6 +1863,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onGameStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  motor: {fileID: 3991025528955417679}
+  power: 21
+  steerPower: 800
+  regJumpHeight: 10
+  cancelledJumpHeight: 2
+  waterLayerMask:
+    serializedVersion: 2
+    m_Bits: 16
+  groundCheckRadius: 0.5
+  isGrounded: 0
   iconHandler: {fileID: 7984487965229195831}
   onFinishLineCrossedText: {fileID: 3251011236727367515}
   onWallTrigger: {fileID: 9051664905454560451}

@@ -42,11 +42,6 @@ namespace JetskiGame
         [SerializeField] private float groundCheckRadius = 0.2f;
         [SerializeField] private bool isGrounded;
 
-        [Header("Pausing: ")]
-        [SerializeField] private UnityEvent OnPauseGame;
-        [SerializeField] private UnityEvent OnUnpauseGame;
-        private bool isPaused;
-
         [Header("Dependencies: ")]
         [SerializeField] private IconHandler iconHandler;
         [SerializeField] private GameObject onFinishLineCrossedText;
@@ -73,6 +68,11 @@ namespace JetskiGame
             if (onWallTrigger != null)
                 onWallTrigger.EnteredTriggerAction += OnHitWall;
         }
+
+        private void Start()
+        {
+            m_hasJoinedGame = true;
+        }
         
         public void HideCursor()
         {
@@ -96,23 +96,6 @@ namespace JetskiGame
             player.Time = String.Empty;
             
            uiPointsLayoutService.SetPointsButtonRect(PlayerIndex);
-        }
-
-        public void OnPause(InputAction.CallbackContext _context)
-        {
-            if (_context.started)
-            {
-                if (!isPaused)
-                {
-                    isPaused = true;
-                    OnPauseGame.Invoke();
-                }
-                else
-                {
-                    isPaused = false;
-                    OnUnpauseGame.Invoke();
-                }
-            }
         }
 
         public void OnMove(InputAction.CallbackContext _context)

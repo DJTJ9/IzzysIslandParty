@@ -44,11 +44,6 @@ namespace HurdleGame
             get;
             set;
         }
-        
-        [Header("Pausing: ")]
-        [SerializeField] private UnityEvent OnPauseGame;
-        [SerializeField] private UnityEvent OnUnpauseGame;
-        private bool isPaused;
 
         private void Awake()
         {
@@ -66,6 +61,11 @@ namespace HurdleGame
             shortSlideSeconds = longSlideSeconds * shortSlideMultiplier;
         }
 
+        private void Start()
+        {
+            m_hasJoinedGame = true;
+        }
+        
         public void HideCursor()
         {
             Cursor.visible = false;
@@ -77,23 +77,6 @@ namespace HurdleGame
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
 
-        }
-        
-        public void OnPause(InputAction.CallbackContext _context)
-        {
-            if (_context.started)
-            {
-                if (!isPaused)
-                {
-                    isPaused = true;
-                    OnPauseGame.Invoke();
-                }
-                else
-                {
-                    isPaused = false;
-                    OnUnpauseGame.Invoke();
-                }
-            }
         }
         
         public void OnJump(InputAction.CallbackContext _context)
