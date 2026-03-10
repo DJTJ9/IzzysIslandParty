@@ -2,7 +2,6 @@ using Audio;
 using enums;
 using ImprovedTimers;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace HurdleGame

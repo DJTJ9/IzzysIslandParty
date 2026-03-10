@@ -6,7 +6,6 @@ using Player;
 using TMPro;
 using UIScripts;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
