@@ -74,8 +74,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1091,7 +1091,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerIndex: 0
-  m_moveSpeed: 3
   onPause:
     m_PersistentCalls:
       m_Calls:
@@ -1137,6 +1136,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_moveSpeed: 3
   playerSO: {fileID: 11400000, guid: ba77c3e7aa5b8ea47bc44097c5c35728, type: 2}
   playerCollectionBB: {fileID: 11400000, guid: b311deb974e253d4a87e88e50d801712, type: 2}
 --- !u!114 &8667246314631877422
@@ -1500,22 +1500,6 @@ MonoBehaviour:
     m_ActionName: 'JetskiGame/Join[/Keyboard/anyKey,/XInputControllerWindows/select,/XInputControllerWindows1/select]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7304025793670330477}
-        m_TargetAssemblyTypeName: PlayerControllerBowlingBattle, Assembly-CSharp
-        m_MethodName: OnStartGame
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: cde468ba-184e-4c5d-9ae8-96f5986c5dcf
-    m_ActionName: 'UI/StartGame[/Keyboard/space,/XInputControllerWindows/buttonNorth,/XInputControllerWindows1/buttonNorth]'
-  - m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 8667246314631877422}
         m_TargetAssemblyTypeName: BowlingBallSwapper, Assembly-CSharp
         m_MethodName: SwapToPreviousBall
@@ -1688,7 +1672,7 @@ MonoBehaviour:
     m_ActionName: 'ControllerSelection/ControllerSelectionBack[/Keyboard/escape,/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: d35f3ffa-0065-4809-9284-ce6d4dde7882
+  m_DefaultActionMap: ControllerSelection
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 6607725431701992283}
 --- !u!1 &5491872388274443183
@@ -1765,8 +1749,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2024,8 +2008,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2666,6 +2650,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23427729319033122, guid: 84bc8d8ea60615b4fae8d814a8927043, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2740,6 +2728,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23036643151327276, guid: fd5766eb174aefe419e80433eb9b27a9, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2812,6 +2804,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4632484273909962, guid: 1a00e19e9b5f26d43b88d623e5429f17, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23898675907561966, guid: 1a00e19e9b5f26d43b88d623e5429f17, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
