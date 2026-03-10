@@ -84,6 +84,9 @@ namespace HurdleGame.LevelService
 
         public override void OnPlayerJoined(GameObject _player)
         {
+            if (placementOrder.Length >= maxNumberOfPlayers)
+                return;
+
             if (placementOrder == null || placementOrder.Length < 1)
                 placementOrder = new GameObject[maxNumberOfPlayers];
 
@@ -103,6 +106,10 @@ namespace HurdleGame.LevelService
 
         public override void OnNPCJoined(GameObject _npc)
         {
+            if (placementOrder.Length >= maxNumberOfPlayers)
+                return;
+            
+            Debug.Log("Adding npc to array");
             ArrayHelper.AddToArray(placementOrder, _npc);
             playerCount++;
         }
@@ -128,6 +135,7 @@ namespace HurdleGame.LevelService
             if (levelCountdownText == null)
                 OnCoroutineOver();
 
+            levelCountdownText.gameObject.SetActive(true);
             levelCountdownText.enabled = true;
 
             for (int i = secondsToStartLevel; i > 0; i--)

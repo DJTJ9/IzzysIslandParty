@@ -83,6 +83,11 @@ public class MainMenuEvents : MonoBehaviour
         #endregion
     }
 
+    private void Start()
+    {
+        onGameStart.Invoke();
+    }
+
     private void OnEnable()
     {
         BindVisualElements();
@@ -95,8 +100,6 @@ public class MainMenuEvents : MonoBehaviour
         mouseSensitivityY.Value = mouseSensitivitySlider.value;
 
         FocusButton(startGameButton);
-
-        onGameStart.Invoke();
     }
 
     private void OnDisable()

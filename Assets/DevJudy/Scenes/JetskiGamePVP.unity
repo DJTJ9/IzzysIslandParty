@@ -1600,14 +1600,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.116526216, g: 0.11093305, b: 0.49685526, a: 0.7921569}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 847039328, guid: 971f2918c9e53214facdd4d1241b39b3, type: 3}
+  m_Sprite: {fileID: -315260091, guid: e747c2d18bb6a124daf7427de42a070e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4771,43 +4771,43 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2795996539215933563, guid: b2981534d2ac4244fafb153e0cb4c9c2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2795996539215933563, guid: b2981534d2ac4244fafb153e0cb4c9c2, type: 3}
       propertyPath: m_LocalScale.y
-      value: 4
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2795996539215933563, guid: b2981534d2ac4244fafb153e0cb4c9c2, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2795996539215933563, guid: b2981534d2ac4244fafb153e0cb4c9c2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 414.01382
+      value: 415.67
       objectReference: {fileID: 0}
     - target: {fileID: 2795996539215933563, guid: b2981534d2ac4244fafb153e0cb4c9c2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.681
+      value: -4.05
       objectReference: {fileID: 0}
     - target: {fileID: 2795996539215933563, guid: b2981534d2ac4244fafb153e0cb4c9c2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 226.08861
+      value: 225.14
       objectReference: {fileID: 0}
     - target: {fileID: 2795996539215933563, guid: b2981534d2ac4244fafb153e0cb4c9c2, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.48254985
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2795996539215933563, guid: b2981534d2ac4244fafb153e0cb4c9c2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2795996539215933563, guid: b2981534d2ac4244fafb153e0cb4c9c2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.87586856
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2795996539215933563, guid: b2981534d2ac4244fafb153e0cb4c9c2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2795996539215933563, guid: b2981534d2ac4244fafb153e0cb4c9c2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7345,7 +7345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5519186754039999077, guid: 05b16bfa55f1dbd4e8d41f3cf56a4b25, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.41
+      value: -9.48
       objectReference: {fileID: 0}
     - target: {fileID: 5519186754039999077, guid: 05b16bfa55f1dbd4e8d41f3cf56a4b25, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7410,7 +7410,7 @@ GameObject:
   - component: {fileID: 1002128361}
   - component: {fileID: 1002128360}
   m_Layer: 0
-  m_Name: Game Event Listeneres
+  m_Name: Game Event Listeners
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7531,6 +7531,18 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 294894493}
+        m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
+        m_MethodName: OnControllerSelectionReady
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 2001284365}
         m_TargetAssemblyTypeName: JetskiGame.JetskiGameLevelService, Assembly-CSharp
         m_MethodName: StartLevel
@@ -7972,15 +7984,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Termin\xE9"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
+  m_sharedMaterial: {fileID: -4084469442324921828, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4293717228
+  m_fontColor: {r: 0.9254902, g: 0.9254902, b: 0.9254902, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -10066,7 +10078,7 @@ Transform:
   m_GameObject: {fileID: 1487135515}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 416.6, y: 0, z: -414.34}
+  m_LocalPosition: {x: 417.1, y: 0, z: -414.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11537,7 +11549,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1707071721
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11579,15 +11591,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
+  m_sharedMaterial: {fileID: -4084469442324921828, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4293717228
+  m_fontColor: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -12865,15 +12877,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Time: 00:00:00'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7108fd0238a900949ada465ba41b7c49, type: 2}
-  m_sharedMaterial: {fileID: 3417923580986627390, guid: 7108fd0238a900949ada465ba41b7c49, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
+  m_sharedMaterial: {fileID: -4084469442324921828, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4288108586
+  m_fontColor: {r: 0.16546015, g: 0.34367478, b: 0.59119487, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -13866,7 +13878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bce12737ce32a64ca8776d25f07b301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerManager: {fileID: 345387529}
+  timerService: {fileID: 345387529}
   levelService: {fileID: 2001284365}
   durationInMinutes: 5
   timerRunningDown: 0
@@ -14173,7 +14185,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2053893514
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14216,8 +14228,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Termin\xE9"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
+  m_sharedMaterial: {fileID: -4084469442324921828, guid: 16d60128a4734c34b9a1b38ea214d227, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14393,6 +14405,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerIndex: 0
+  onPause:
+    m_PersistentCalls:
+      m_Calls: []
+  onUnpause:
+    m_PersistentCalls:
+      m_Calls: []
+  onGameStart:
+    m_PersistentCalls:
+      m_Calls: []
   iconHandler: {fileID: 0}
   target: {fileID: 0}
   speed: 20
@@ -14926,7 +14947,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -4675742942015640628, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+    m_Reference: {fileID: 2064196526506401898, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
   m_PlayerPrefab: {fileID: 1353377157112977573, guid: 16c19efb55ee62849b803a3d670d18dc, type: 3}
   m_SplitScreen: 1
   m_MaintainAspectRatioInSplitScreen: 0
@@ -15036,7 +15057,6 @@ GameObject:
   m_Component:
   - component: {fileID: 309136008704060392}
   - component: {fileID: 5873450204392525891}
-  - component: {fileID: 6434350905194235979}
   m_Layer: 0
   m_Name: GameEventListener
   m_TagString: Untagged
@@ -15468,35 +15488,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4299894756745962143, guid: 7bc4fe1424ab2ad47bedc95b17c1eefa, type: 3}
   m_PrefabInstance: {fileID: 2756406311937958415}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6434350905194235979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3606515755768147120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: d85f1a13d5f3749468676f87ec48c10f, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4644165193377436579}
-        m_TargetAssemblyTypeName: JetskiGame.Player.Multiplayer.RacingGamePlayerJoiner,
-          Assembly-CSharp
-        m_MethodName: ClearPlayerReferences
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

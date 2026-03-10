@@ -42,6 +42,8 @@ namespace JetskiGame
 
         private void Awake()
         {
+            Cursor.visible = false;
+            
             winnerPlacementOrder = new List<Tuple<GameObject, string>>();
             finishingTimes = new List<float>();
 
@@ -136,6 +138,7 @@ namespace JetskiGame
             if (levelCountdownText == null)
                 OnCoroutineOver();
 
+            levelCountdownText.gameObject.SetActive(true);
             levelCountdownText.enabled = true;
 
             for (int i = secondsToStartLevel; i > 0; i--)
@@ -367,6 +370,9 @@ namespace JetskiGame
             raceStarted = false;
 
             OnLevelEnd?.Invoke();
+            
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 }

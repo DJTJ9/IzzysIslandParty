@@ -14,23 +14,27 @@ namespace JetskiGame.Player.Multiplayer
 {
     public class RacingGamePlayerJoiner : MonoBehaviour
     {
+        private const int maxAmountOfPlayers = 4;
+
         [SerializeField] private RacingGameLevelService levelService;
         [SerializeField] private SO_PlayerCollectionRacingGames currentPlayers;
         [SerializeField] private SO_PlayerCollectionRacingGames playerCollection;
         [SerializeField] private SO_PlayerCollectionRacingGames npcCollection;
         [SerializeField] private UnityEvent onLevelLoaded;
         private CharacterCreatorService characterCreatorService;
-        
+
         [Header("Player layer: ")]
         [SerializeField] private bool setPlayerLayer = false;
+
         [ShowIf("setPlayerLayer")]
         [SerializeField] private List<int> playerLayerIndex;
 
         [Header("NPC joining: ")]
         [SerializeField] private PlayerInputManager playerInputManager;
+
         [SerializeField] private Controller npcBehaviour;
         private Controller npcBehaviourInstance;
-        
+
         private int playerIndex;
         private int humanPlayerIndex;
         private int npcIndex;
@@ -63,10 +67,16 @@ namespace JetskiGame.Player.Multiplayer
 
         public void PlayerJoined(PlayerInput _playerInput)
         {
-            GameObject playerObj = _playerInput.gameObject;
+            if (currentPlayers.Players.Count >= maxAmountOfPlayers)
+                return;
             
+            if (playerIndex == 0)
+                Time.timeScale = 1;
+
+            GameObject playerObj = _playerInput.gameObject;
+
             playerCollection.Players[playerIndex].PlayerReference = playerObj;
-        
+
             if (playerObj.TryGetComponent(out npcBehaviourInstance) && npcBehaviourInstance.GetType() == npcBehaviour.GetType())
             {
                 NPCJoined(playerObj, _playerInput);
@@ -87,12 +97,12 @@ namespace JetskiGame.Player.Multiplayer
 
             npcBehaviourInstance.SetPlayerIndex(playerIndex);
             npcBehaviourInstance.OnNPCJoined(npcCollection.Players[npcBehaviourInstance.GetPlayerIndex() - 1]);
-            
+
             _playerObj.name = npcCollection.Players[npcBehaviourInstance.GetPlayerIndex() - 1].Name;
 
             currentPlayers.Players.Add(npcCollection.Players[npcBehaviourInstance.GetPlayerIndex() - 1]);
             levelService.OnNPCJoined(_playerObj);
-            
+
             PlayerMeshIdentifier npcMesh = _playerObj.GetComponentInChildren<PlayerMeshIdentifier>();
             if (npcMesh != null)
             {
@@ -117,7 +127,7 @@ namespace JetskiGame.Player.Multiplayer
             _playerObj.name = playerCollection.Players[playerIndex].Name;
             _playerObj.transform.position = playerCollection.Players[playerIndex].SpawnPoint;
             levelService.OnPlayerJoined(_playerInput.gameObject);
-            
+
             PlayerMeshIdentifier playerMesh = _playerObj.GetComponentInChildren<PlayerMeshIdentifier>();
             if (playerMesh != null)
             {
@@ -126,7 +136,7 @@ namespace JetskiGame.Player.Multiplayer
                 if (playerMesh.HasTwoMeshes)
                     characterCreatorService.SetOtherMaterial(playerMesh.OtherMeshRenderer, playerIndex);
             }
-        
+
             if (levelService is JetskiGameLevelService jetskiLevelService)
             {
                 if (_playerObj.TryGetComponent(out JetskiGameUIManager jetskiUIManager))
@@ -165,15 +175,18 @@ namespace JetskiGame.Player.Multiplayer
         private IEnumerator WaitForPlayerJoin(GameObject _player, int _currentPlayerIndex)
         {
             yield return new WaitForSeconds(0.5f);
-            
+
             _player.transform.position = playerCollection.Players[_currentPlayerIndex - 1].SpawnPoint;
-            
+
             yield return null;
         }
 
 
         public void JoinNPCs()
         {
+            if (currentPlayers.Players.Count >= maxAmountOfPlayers)
+                return;
+
             if (humanPlayerIndex == 1)
                 playerInputManager.splitScreen = false;
             else

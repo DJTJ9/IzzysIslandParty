@@ -65,10 +65,10 @@ namespace JetskiGame
             {
                 playerController.OnObstacleMissed(timeDeduction.Value, out var timeDeductionMinutes, out var timeDeductionSeconds);
 
-                UITimerManager timerManager = playerController.gameObject.transform.parent.GetComponentInChildren<UITimerManager>();
+                UITimerService timerService = playerController.gameObject.transform.parent.GetComponentInChildren<UITimerService>();
 
-                timerManager?.UpdateTimerPenaltyText(timeDeductionMinutes, timeDeductionSeconds);
-                StartCoroutine(timerManager?.TimeDeductionFeedback());
+                timerService?.UpdateTimerPenaltyText(timeDeductionMinutes, timeDeductionSeconds);
+                StartCoroutine(timerService?.TimeDeductionFeedback());
             }
             else if (controller is JetskiNPCBehaviour npcController)
                 npcController.OnObstacleMissed(timeDeduction.Value, out var timeDeductionMinutes, out var timeDeductionSeconds);

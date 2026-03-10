@@ -4,7 +4,7 @@ using TMPro;
 
 namespace UIScripts
 {
-    public class UITimerManager : MonoBehaviour
+    public class UITimerService : MonoBehaviour
     {
         [Header("Timer: ")]
         [SerializeField] private TextMeshProUGUI timerText;

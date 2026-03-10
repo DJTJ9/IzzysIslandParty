@@ -2196,7 +2196,19 @@ MonoBehaviour:
     m_ActionId: 09ff5283-225b-46b2-91d4-ce404689c100
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3691804831972753286}
+        m_TargetAssemblyTypeName: HurdleGame.HurdlePlayerController, Assembly-CSharp
+        m_MethodName: OnUnpause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d8db3f96-6d5c-4180-b583-ebc634144dea
     m_ActionName: 'UI/Unpause[/Keyboard/escape]'
   - m_PersistentCalls:
@@ -2287,10 +2299,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f60f81e8-8952-4e5f-9c65-96b348c0117f
     m_ActionName: New action map/New action
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: cde468ba-184e-4c5d-9ae8-96f5986c5dcf
-    m_ActionName: 'UI/StartGame[/Keyboard/space,/XInputControllerWindows/buttonNorth]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 8095b1f7-a3ec-4cf9-9fdc-c4bb7d52de8e
@@ -2419,9 +2427,45 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: d0e2fb38-7efd-43a0-b874-f8205d44bce0
     m_ActionName: 'UI/ControllerSelectionBack[/Keyboard/escape,/DualShock4GamepadHID/buttonEast]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3691804831972753286}
+        m_TargetAssemblyTypeName: HurdleGame.HurdlePlayerController, Assembly-CSharp
+        m_MethodName: OnStartGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7518576f-851d-4569-a5ed-c3988533d1ec
+    m_ActionName: 'ControllerSelection/StartGame[/Keyboard/enter]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4314bf30-f08c-47ad-94e4-b6737ee656b1
+    m_ActionName: 'ControllerSelection/Join[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3691804831972753286}
+        m_TargetAssemblyTypeName: HurdleGame.HurdlePlayerController, Assembly-CSharp
+        m_MethodName: OnControllerSelectionBack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 48096ae4-e3c7-4439-9a45-d8af0a8d6ab9
+    m_ActionName: 'ControllerSelection/ControllerSelectionBack[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: UI
+  m_DefaultActionMap: ControllerSelection
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &7044458665979774597
@@ -2488,20 +2532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerIndex: 0
-  jumpForce: 7
-  hopMultiplier: 0.5
-  jumpVolumeRange: {x: 0.3, y: 0.35}
-  jumpPitchRange: {x: 0.7, y: 1.3}
-  longSlideSeconds: 2
-  shortSlideMultiplier: 0.5
-  slideColliderSize: {x: 0.2, y: 0.33}
-  slideColliderCenter: {x: 0, y: 0.2, z: 0}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  groundCheckOffset: -0.05
-  groundCheckRadius: 0.3
-  OnPauseGame:
+  onPause:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: b4c1de7ad322b894b8ed236533a23468, type: 2}
@@ -2516,7 +2547,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnUnpauseGame:
+  onUnpause:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: cb8390d9fabb07843b5f42bf6275d672, type: 2}
@@ -2531,6 +2562,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onGameStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
+        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  jumpForce: 7
+  hopMultiplier: 0.5
+  jumpVolumeRange: {x: 0.3, y: 0.35}
+  jumpPitchRange: {x: 0.7, y: 1.3}
+  longSlideSeconds: 2
+  shortSlideMultiplier: 0.5
+  slideColliderSize: {x: 0.2, y: 0.33}
+  slideColliderCenter: {x: 0, y: 0.2, z: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  groundCheckOffset: -0.05
+  groundCheckRadius: 0.3
 --- !u!1 &4792716026928164661
 GameObject:
   m_ObjectHideFlags: 0
@@ -3957,6 +4016,7 @@ GameObject:
   - component: {fileID: 62102623215973565}
   - component: {fileID: 8132312495684259728}
   - component: {fileID: 8966336014354646601}
+  - component: {fileID: 8273093026189303256}
   - component: {fileID: 2639455260784604316}
   m_Layer: 8
   m_Name: GameEventListener
@@ -4024,6 +4084,30 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.InputSystem.PlayerInput, Unity.InputSystem
         m_MethodName: SwitchCurrentActionMap
         m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: HurdleGame
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3691804831972753286}
+        m_TargetAssemblyTypeName: HurdleGame.HurdlePlayerController, Assembly-CSharp
+        m_MethodName: EnablePauseInput
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: HurdleGame
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3691804831972753286}
+        m_TargetAssemblyTypeName: HurdleGame.HurdlePlayerController, Assembly-CSharp
+        m_MethodName: HideCursor
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4112,6 +4196,34 @@ MonoBehaviour:
           m_StringArgument: HurdleGame
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8273093026189303256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846488232658209156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3691804831972753286}
+        m_TargetAssemblyTypeName: HurdleGame.HurdlePlayerController, Assembly-CSharp
+        m_MethodName: NoGoingBack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2639455260784604316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4156,6 +4268,30 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.InputSystem.PlayerInput, Unity.InputSystem
         m_MethodName: SwitchCurrentActionMap
         m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: UI
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3691804831972753286}
+        m_TargetAssemblyTypeName: HurdleGame.HurdlePlayerController, Assembly-CSharp
+        m_MethodName: ShowCursor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: UI
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3691804831972753286}
+        m_TargetAssemblyTypeName: HurdleGame.HurdlePlayerController, Assembly-CSharp
+        m_MethodName: DisablePauseInput
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

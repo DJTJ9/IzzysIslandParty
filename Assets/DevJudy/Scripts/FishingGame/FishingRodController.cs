@@ -26,13 +26,7 @@ namespace FishingGame
 
         private bool isCast = false;
         private bool firstTimeCast = true;
-
-        [Header("Pausing: ")]
-        [SerializeField] private UnityEvent OnPauseGame;
-
-        [SerializeField] private UnityEvent OnUnpauseGame;
-        private bool isPaused;
-        private bool joined = false;
+        private bool registeredInput = false;
 
         private void Awake()
         {
@@ -58,26 +52,27 @@ namespace FishingGame
             lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
         }
 
-        public void OnPause(InputAction.CallbackContext _context)
+        private void Start()
         {
-            if (_context.started)
-            {
-                if (!isPaused)
-                {
-                    isPaused = true;
-                    OnPauseGame.Invoke();
-                }
-                else
-                {
-                    isPaused = false;
-                    OnUnpauseGame.Invoke();
-                }
-            }
+            m_hasJoinedGame = true;
+        }
+        
+        public void HideCursor()
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        public void ShowCursor()
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
         }
 
         public void OnRegisterInput(InputAction.CallbackContext _context)
         {
-            if (joined)
+            if (registeredInput)
                 return;
             
             var device = _context.control.device;
@@ -91,8 +86,8 @@ namespace FishingGame
             }
             else if (device is Keyboard keyboard)
                 fishingSystemManager.OnRegisteredInput(EControlScheme.Keyboard);
-
-            joined = true;
+            
+            registeredInput = true;
         }
 
         public void OnStopFishDisplay(InputAction.CallbackContext _context)
@@ -100,7 +95,7 @@ namespace FishingGame
             if (_context.performed)
                 fishingSystemManager.StopFishDisplay();
         }
-
+        
         public void OnCast(InputAction.CallbackContext _context)
         {
             if (_context.performed)
