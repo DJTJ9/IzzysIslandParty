@@ -32,13 +32,17 @@ public class BowlingBattleGameManager : MonoBehaviour
 
         InstantiateCountdownTimers();
         SubscribeToCountdownTimersActions();
+    }
+    
+    private void Start()
+    {
         onLevelLoaded.Invoke();
     }
 
-    // private void OnEnable()
-    // {
-    //     // onLevelLoaded.Invoke();
-    // }
+    private void OnEnable()
+    {
+        onLevelLoaded.Invoke();
+    }
 
     private void OnDisable()
     {
@@ -57,11 +61,11 @@ public class BowlingBattleGameManager : MonoBehaviour
     /// <summary>
     /// Processes countdown timer ticks in fixed intervals to ensure accurate updates for join phase, preparation phase, and round timers.
     /// </summary>
-    private void FixedUpdate()
-    {
-        m_preparationPhaseTimer.Tick(Time.deltaTime);
-        m_roundTimer.Tick(Time.deltaTime);
-    }
+    // private void FixedUpdate()
+    // {
+    //     m_preparationPhaseTimer.Tick(Time.deltaTime);
+    //     m_roundTimer.Tick(Time.deltaTime);
+    // }
 
     /// <summary>
     /// Invokes the game start event to notify that the game has begun.

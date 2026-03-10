@@ -28,7 +28,6 @@ public class RigidbodyMovement : MonoBehaviour
     [SerializeField] private float verticalImpactForce;
     [SerializeField] private float impulseCooldown;
 
-
     [SerializeField] private Camera playerCamera;
     private Rigidbody rb;
     private GroundChecker groundChecker;
@@ -62,6 +61,8 @@ public class RigidbodyMovement : MonoBehaviour
     private void FixedUpdate()
     {
         UpdateChargePower();
+        MovementCooldownTimer.Tick(Time.deltaTime);
+        impulseCooldownTimer.Tick(Time.deltaTime);
     }
 
     /// <summary>

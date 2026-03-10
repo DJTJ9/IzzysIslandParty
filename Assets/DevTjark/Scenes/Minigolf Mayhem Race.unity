@@ -170,6 +170,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8514120952503301511, guid: 9dbc24b0f5e12b94e90f0a3539c594d2, type: 3}
   m_PrefabInstance: {fileID: 1351203444}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &15178366 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3684734565330761391, guid: 550415949d1c0084d865a766e942f318, type: 3}
+  m_PrefabInstance: {fileID: 2547018272854265237}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &35692668
 GameObject:
   m_ObjectHideFlags: 0
@@ -4384,6 +4389,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2072686449}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &943871047
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 943871048}
+  - component: {fileID: 943871049}
+  m_Layer: 0
+  m_Name: Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &943871048
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943871047}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 15178366}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &943871049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943871047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 461ae83138334f97ab48e1c13e66791b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LocationKey: Finish
+  m_isCheckPoint: 0
 --- !u!1 &944531940
 GameObject:
   m_ObjectHideFlags: 0
@@ -12084,6 +12135,10 @@ PrefabInstance:
       value: 0.5024
       objectReference: {fileID: 0}
     - target: {fileID: 3783162566173907803, guid: 550415949d1c0084d865a766e942f318, type: 3}
+      propertyPath: waitForLastPlayerTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3783162566173907803, guid: 550415949d1c0084d865a766e942f318, type: 3}
       propertyPath: easterEggPositions.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -12119,12 +12174,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackRoyalHole_01
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8154551141000321098, guid: 550415949d1c0084d865a766e942f318, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 149761019710762984, guid: 550415949d1c0084d865a766e942f318, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1258264356}
+    - targetCorrespondingSourceObject: {fileID: 3684734565330761391, guid: 550415949d1c0084d865a766e942f318, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 943871048}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 550415949d1c0084d865a766e942f318, type: 3}
 --- !u!1001 &3715144101700801102

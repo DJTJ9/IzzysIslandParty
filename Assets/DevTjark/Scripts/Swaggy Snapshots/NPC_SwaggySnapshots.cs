@@ -1,4 +1,6 @@
-﻿using ImprovedTimers;
+﻿using System;
+using ImprovedTimers;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class NPC_SwaggySnapshots : Controller
@@ -21,6 +23,11 @@ public class NPC_SwaggySnapshots : Controller
     private void Start()
     {
         m_photoTimer.Start();
+    }
+
+    private void FixedUpdate()
+    {
+        m_photoTimer.Tick(Time.deltaTime);
     }
 
     /// <summary>

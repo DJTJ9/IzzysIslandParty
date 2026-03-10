@@ -1,6 +1,8 @@
-﻿using ImprovedTimers;
+﻿using System;
+using ImprovedTimers;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent (typeof(GroundChecker))]
 public class GoapRigidbodyMovement : Controller
@@ -44,7 +46,13 @@ public class GoapRigidbodyMovement : Controller
         impulseCooldownTimer = new CountdownTimer(impulseCooldown);
         impulseCooldownTimer.OnTimerStop += () => m_impulseApplied = false;
     }
-    
+
+    private void FixedUpdate()
+    {
+        MovementCooldownTimer.Tick(Time.deltaTime);
+        impulseCooldownTimer.Tick(Time.deltaTime);
+    }
+
     /// <summary>
     /// Applies an impulse force to colliding players, based on the current direction and velocity,
     /// if cooldown conditions allow. Prevents impulses beyond a certain frequency.

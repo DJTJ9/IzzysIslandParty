@@ -13,5 +13,6 @@ public class GoalCameraController : MonoBehaviour
     {
         followCamera.HorizontalAxis.Value = -88f;
         followCamera.VerticalAxis.Value = 20f;
+        followCamera.Orbits.Top.Radius = 2.5f;
     }
 }

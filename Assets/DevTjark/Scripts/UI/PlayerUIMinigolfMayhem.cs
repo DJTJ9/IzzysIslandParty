@@ -88,7 +88,7 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
             shootForceText.text = $"{Mathf.RoundToInt(normalizedForce * 100).ToString()}%";
             
             cooldownBar.fillAmount = Mathf.Clamp01(rigidbodyMovement.MovementCooldownTimer.CurrentTime / rigidbodyMovement.MovementCooldown);
-            cooldownText.text = $"{Mathf.RoundToInt(rigidbodyMovement.MovementCooldownTimer.CurrentTime).ToString()}s";
+            cooldownText.text = $"{Mathf.RoundToInt(rigidbodyMovement.MovementCooldownTimer.CurrentTime).ToString()}";
             cooldownTimer.SetActive(rigidbodyMovement.MovementCooldownTimer.CurrentTime > k_DisappearTimeBuffer && rigidbodyMovement.MovementCooldownTimer.IsRunning);
             
             playersSO.Players[playerController.PlayerIndex].PlayerScore.Value = rigidbodyMovement.ShotsTaken;

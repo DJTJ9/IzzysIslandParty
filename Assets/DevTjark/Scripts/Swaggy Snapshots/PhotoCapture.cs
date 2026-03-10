@@ -148,7 +148,6 @@ public class PhotoCapture : MonoBehaviour
     {
         AudioService.Instance.PlaySimpleSound(AudioCollection.Instance.LevelSoundsDictionary.LevelAudios["CameraClick"], EAudioType.SFX);
     }
-
     
     /// <summary>
     /// Hides the photo screenshot display and resets the photo-taking flag.

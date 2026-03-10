@@ -18,9 +18,12 @@ public class BallBlocker : MonoBehaviour
     /// <param name="_other">The collider entering the trigger zone.</param>
     private void OnTriggerEnter(Collider _other)
     {
-        var rb = _other.GetComponent<Rigidbody>();
-        rb.linearVelocity = Vector3.zero;
-        rb.AddForce((returnPoint.position + new Vector3(Random.Range(-m_randomRangeX,m_randomRangeX), Random.Range(-m_randomRangeY,m_randomRangeY), 0f) - transform.position).normalized * m_returnForce, ForceMode.Impulse);
+        if (_other.TryGetComponent<Rigidbody>(out var _rb))
+        {
+            _rb.linearVelocity = Vector3.zero;
+            _rb.AddForce((returnPoint.position + new Vector3(Random.Range(-m_randomRangeX, m_randomRangeX), Random.Range(-m_randomRangeY, m_randomRangeY), 0f) 
+                         - transform.position).normalized * m_returnForce, ForceMode.Impulse);
+        }
     }
 
 }

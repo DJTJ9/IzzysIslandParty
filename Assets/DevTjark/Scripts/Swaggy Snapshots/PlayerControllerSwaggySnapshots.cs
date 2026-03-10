@@ -15,9 +15,6 @@ public class PlayerControllerSwaggySnapshots : Controller
     private PhotoCapture photoCapture;
 
     public static event Action<int> onTakePhoto;
-    [SerializeField] private UnityEvent onPause;
-    [SerializeField] private UnityEvent onUnpause;
-    [SerializeField] private UnityEvent onGameStart;
     
     private void Awake()
     {
