@@ -50,41 +50,6 @@ public class PlayerControllerSwaggySnapshots : Controller
     }
 
     /// <summary>
-    /// Pauses the game when a valid pause input action is detected and invokes
-    /// the assigned pause Unity event.
-    /// </summary>
-    /// <param name="_context">The context of the pause input action.</param>
-    public void OnPause(InputAction.CallbackContext _context)
-    {
-        if (!pauseInputEnabled) return;
-        if (!_context.started) return;
-
-        onPause.Invoke();
-    }
-
-    /// <summary>
-    /// Unpauses the game when a valid unpause input action is detected and triggers
-    /// the associated unpause Unity event.
-    /// </summary>
-    /// <param name="_context">The context of the unpause input action.</param>
-    public void OnUnpause(InputAction.CallbackContext _context)
-    {
-        if (!pauseInputEnabled) return;
-        if (!_context.started) return;
-
-        onUnpause.Invoke();
-    }
-
-    /// <summary>
-    /// Triggers the `onGameStart` Unity event, indicating the start of the game.
-    /// </summary>
-    /// <param name="_context">The context of the start game input action.</param>
-    public void OnStartGame(InputAction.CallbackContext _context)
-    {
-        onGameStart.Invoke();
-    }
-    
-    /// <summary>
     /// Switches the player's current input action map to "SwaggySnapshots," enabling
     /// controls specific to the Swaggy Snapshots game mode.
     /// </summary>

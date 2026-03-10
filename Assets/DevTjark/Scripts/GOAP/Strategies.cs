@@ -32,7 +32,7 @@ public class AttackStrategy : IActionStrategy
     private readonly float shootCooldownTimerDuration;
     readonly Func<Vector3> destination;
     
-    public bool CanPerform => true; // Agent can always attack
+    public bool CanPerform => true;
     public bool Complete   { get; private set; }
 
 
@@ -59,7 +59,7 @@ public class AttackStrategy : IActionStrategy
     }
     public void Stop()
     {
-        shootCooldownTimer.Dispose();
+        shootCooldownTimer.Stop();
     }
 }
 
@@ -98,7 +98,7 @@ public class AimForNextPositionStrategy : IActionStrategy
     
     public void Stop()
     {
-        shootCooldownTimer.Dispose();
+        shootCooldownTimer.Stop();
     }
 }
 
@@ -116,6 +116,18 @@ public class IdleStrategy : IActionStrategy
         timer.OnTimerStop += () => Complete = true;
     }
 
-    public void Start() => timer.Start();
-    public void Update(float _deltaTime) => timer.Tick(_deltaTime);
+    public void Start()
+    {
+        timer.Start();
+    }
+
+    public void Update(float _deltaTime)
+    {
+        timer.Tick(_deltaTime);
+    }
+
+    public void Stop()
+    {
+        timer.Stop();
+    }
 }

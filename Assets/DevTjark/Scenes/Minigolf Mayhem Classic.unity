@@ -1257,6 +1257,7 @@ GameObject:
   - component: {fileID: 252338172}
   - component: {fileID: 252338171}
   - component: {fileID: 252338170}
+  - component: {fileID: 252338174}
   m_Layer: 5
   m_Name: Game Event Listeners
   m_TagString: Untagged
@@ -1382,6 +1383,34 @@ MonoBehaviour:
       - m_Target: {fileID: 476893799}
         m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
         m_MethodName: ShowMinigolfMayhemClassicStartScreen
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &252338174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252338168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 476893799}
+        m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
+        m_MethodName: OnControllerSelectionReady
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8420,7 +8449,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 3698153326005167589, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
+    m_Reference: {fileID: 2064196526506401898, guid: b1e3a069e2596074c815970b2129fe8e, type: 3}
   m_PlayerPrefab: {fileID: 569612370539826198, guid: a76163d45d0a6044b8436fb0a5249510, type: 3}
   m_SplitScreen: 1
   m_MaintainAspectRatioInSplitScreen: 0

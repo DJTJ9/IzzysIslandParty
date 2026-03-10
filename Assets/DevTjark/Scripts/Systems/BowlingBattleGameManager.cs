@@ -25,20 +25,20 @@ public class BowlingBattleGameManager : MonoBehaviour
     private CountdownTimer m_roundTimer;
 
 
-    private void Start()
+    private void Awake()
     {
         ResetRoundIndex();
+        FreezeTimeScale();
 
         InstantiateCountdownTimers();
         SubscribeToCountdownTimersActions();
         onLevelLoaded.Invoke();
     }
 
-    private void OnEnable()
-    {
-        FreezeTimeScale();
-        onLevelLoaded.Invoke();
-    }
+    // private void OnEnable()
+    // {
+    //     // onLevelLoaded.Invoke();
+    // }
 
     private void OnDisable()
     {
