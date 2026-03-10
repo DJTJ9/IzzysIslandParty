@@ -56,6 +56,11 @@ namespace FishingGame.NPCs
             lineRenderer.SetPosition(0, rodLineRendererPositions[0].position);
             lineRenderer.SetPosition(1, rodLineRendererPositions[1].position);
         }
+
+        private void Start()
+        {
+            StartFishingCycle();
+        }
         
         private void OnDisable()
         {
@@ -79,6 +84,8 @@ namespace FishingGame.NPCs
 
         private IEnumerator StartFishingCycleCoroutine()
         {
+            yield return new WaitForSecondsRealtime(1.5f);
+            
             var randomWaitTime = Random.Range(waitTimeBetweenFishEvents.x, waitTimeBetweenFishEvents.y);
             yield return new WaitForSecondsRealtime(randomWaitTime);
 

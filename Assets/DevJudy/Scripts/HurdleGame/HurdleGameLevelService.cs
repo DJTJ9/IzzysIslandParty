@@ -84,9 +84,9 @@ namespace HurdleGame.LevelService
 
         public override void OnPlayerJoined(GameObject _player)
         {
-            if (placementOrder.Length >= maxNumberOfPlayers)
+            if (humanPlayerCount >= maxNumberOfPlayers)
                 return;
-
+            
             if (placementOrder == null || placementOrder.Length < 1)
                 placementOrder = new GameObject[maxNumberOfPlayers];
 

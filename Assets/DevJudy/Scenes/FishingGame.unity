@@ -482,31 +482,7 @@ MonoBehaviour:
   gamePreviewClipsSO: {fileID: 11400000, guid: 8eb3c35a4de6523458f6accd06a169df, type: 2}
   onGameStart:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
-        m_TargetAssemblyTypeName: GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1820299507}
-        m_TargetAssemblyTypeName: FishingGame.FishingGameLevelService, Assembly-CSharp
-        m_MethodName: StartLevel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onUnpause:
     m_PersistentCalls:
       m_Calls:
@@ -922,9 +898,9 @@ GameObject:
   - component: {fileID: 1463357251}
   - component: {fileID: 1463357250}
   - component: {fileID: 1463357254}
+  - component: {fileID: 1463357255}
   - component: {fileID: 1463357249}
   - component: {fileID: 1463357253}
-  - component: {fileID: 1463357255}
   m_Layer: 0
   m_Name: Game Event Listeners
   m_TagString: Untagged
@@ -1106,6 +1082,18 @@ MonoBehaviour:
       - m_Target: {fileID: 317348923}
         m_TargetAssemblyTypeName: GameMenuEvents, Assembly-CSharp
         m_MethodName: OnControllerSelectionReady
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1820299507}
+        m_TargetAssemblyTypeName: FishingGame.FishingGameLevelService, Assembly-CSharp
+        m_MethodName: StartLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1407,15 +1395,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelStart.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
-      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
-      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
@@ -1424,11 +1412,11 @@ PrefabInstance:
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1820299509}
+      objectReference: {fileID: 11400000, guid: d85f1a13d5f3749468676f87ec48c10f, type: 2}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 11400000, guid: d85f1a13d5f3749468676f87ec48c10f, type: 2}
+      objectReference: {fileID: 1820299509}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -1440,7 +1428,7 @@ PrefabInstance:
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelStart.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 11400000, guid: ded65a7fc45340e4cbc4ec7f22216ec5, type: 2}
+      objectReference: {fileID: 1820299509}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelStart.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -1463,11 +1451,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: EndTimerAndDisplayFinishTime
+      value: Raise
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: Raise
+      value: EndTimerAndDisplayFinishTime
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -1479,7 +1467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelStart.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Raise
+      value: StartTimer
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelStart.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -1487,11 +1475,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MultiuseScripts.LevelTimer, Assembly-CSharp
+      value: GameEvent, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: GameEvent, Assembly-CSharp
+      value: MultiuseScripts.LevelTimer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
@@ -1499,7 +1487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelStart.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameEvent, Assembly-CSharp
+      value: MultiuseScripts.LevelTimer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelStart.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -1507,11 +1495,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3886216125875864171, guid: 28a4d6a465612ee4c8fea82efc6ee420, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName

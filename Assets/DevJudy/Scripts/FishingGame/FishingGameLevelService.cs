@@ -28,6 +28,7 @@ namespace FishingGame
         
         public override void StartLevel()
         {
+            Debug.Log("OnStartLevel");
             OnLevelStart.Invoke();
         }
         
