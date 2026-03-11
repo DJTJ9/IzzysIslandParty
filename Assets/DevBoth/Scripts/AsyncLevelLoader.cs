@@ -9,13 +9,12 @@ using UnityEngine.UIElements;
 [DefaultExecutionOrder(-1000)]
 public class AsyncLevelLoader : MonoBehaviour
 {
-    [FoldoutGroup("Settings", expanded: false)] 
-    [SerializeField] private float progressBarSpeed = 0.5f;
+    [FoldoutGroup("Settings", expanded: false)] [SerializeField] private float progressBarSpeed = 0.5f;
     [SerializeField] private int firstLoadingScreenDelay = 300;
     [SerializeField] private int secondLoadingScreenDelay = 500;
     [SerializeField] private int thirdLoadingScreenDelay = 2000;
     [SerializeField] private int endLoadingScreenDelay = 1000;
-    
+
     [SerializeField] private SceneCollectionSO sceneCollection;
 
     public static event Action<SceneNames> OnSceneChange;
@@ -69,7 +68,7 @@ public class AsyncLevelLoader : MonoBehaviour
     /// Waits until the scene is ready before displaying it, ensuring fluid transitions.
     /// </summary>
     /// <param name="_sceneName">The scene to load.</param>
-    public async void LoadScene(SceneNames _sceneName)
+    public async Task LoadScene(SceneNames _sceneName)
     {
         try
         {
@@ -80,8 +79,9 @@ public class AsyncLevelLoader : MonoBehaviour
             await Task.Delay(firstLoadingScreenDelay);
 
             var scene = SceneManager.LoadSceneAsync(sceneCollection.Scenes.TryGetValue(_sceneName, out var sceneNameFromCollection)
-                ? sceneNameFromCollection : throw new KeyNotFoundException());
-            
+                ? sceneNameFromCollection
+                : throw new KeyNotFoundException());
+
             if (scene == null) return;
 
             scene.allowSceneActivation = false;
@@ -111,11 +111,11 @@ public class AsyncLevelLoader : MonoBehaviour
     /// Restarts the current level asynchronously with a loading screen, ensuring a seamless reload process.
     /// Returns to the main menu in case of an issue while handling the scene reinitialization.
     /// </summary>
-    public async void RestartLevel()
+    public async Task RestartLevel()
     {
         var currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(SceneNames.MainMenu, out var mainMenuSceneName) ? mainMenuSceneName : throw new KeyNotFoundException());
-        
+
         try
         {
             loadingScreenContainer.style.display = DisplayStyle.Flex;

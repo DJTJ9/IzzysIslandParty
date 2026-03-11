@@ -26,12 +26,14 @@ public class MinigolfMayhemCameraController : MonoBehaviour
 
     private void OnEnable()
     {
-        GameMenuEvents.OnMouseSettingsChanged += OnMouseSensitivityChanged;
+        GameMenuEvents.OnMouseXSettingsChanged += OnMouseXSensitivityChanged;
+        GameMenuEvents.OnMouseYSettingsChanged += OnMouseYSensitivityChanged;
     }
     
     private void OnDisable()
     {
-        GameMenuEvents.OnMouseSettingsChanged -= OnMouseSensitivityChanged;
+        GameMenuEvents.OnMouseXSettingsChanged -= OnMouseXSensitivityChanged;
+        GameMenuEvents.OnMouseYSettingsChanged -= OnMouseYSensitivityChanged;   
     }
 
     private void SetMouseSensitivity()
@@ -64,10 +66,9 @@ public class MinigolfMayhemCameraController : MonoBehaviour
         }
     }
 
-    private void OnMouseSensitivityChanged(float _value)
+    private void OnMouseXSensitivityChanged(float _value)
     {
         mouseSensitivityX.Value = _value;
-        mouseSensitivityY.Value = _value;
         
         foreach (var c in inputAxisController.Controllers)
         {
@@ -76,6 +77,18 @@ public class MinigolfMayhemCameraController : MonoBehaviour
                 case "Look Orbit X":
                     c.Input.Gain = defaultMouseSensitivity * mouseSensitivityX.Value;
                     break;
+            }
+        }
+    }
+    
+    private void OnMouseYSensitivityChanged(float _value)
+    {
+        mouseSensitivityY.Value = _value;
+        
+        foreach (var c in inputAxisController.Controllers)
+        {
+            switch (c.Name)
+            {
                 case "Look Orbit Y":
                     c.Input.Gain = -defaultMouseSensitivity * mouseSensitivityY.Value;
                     break;

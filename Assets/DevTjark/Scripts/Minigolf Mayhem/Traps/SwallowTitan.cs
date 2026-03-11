@@ -9,6 +9,14 @@ public class SwallowTitan : MonoBehaviour
     [SerializeField] private Transform swallowTarget;
     [SerializeField] private BoxCollider triggerZone;
     [SerializeField] private ParticleSystem windParticles;
+    
+    private float m_defaultAccelerationForce;
+
+    private const float k_Zero = 0f;
+    private void Start()
+    {
+        m_defaultAccelerationForce = m_accelerationForce;
+    }
 
     /// <summary>
     /// Continuously applies a pulling force to the player within the trigger zone,
@@ -30,12 +38,12 @@ public class SwallowTitan : MonoBehaviour
     /// <summary>
     /// Enables the trigger zone to detect player presence.
     /// </summary>
-    public void EnableTriggerZone() => triggerZone.enabled = true;
+    public void EnableTriggerZone() => m_accelerationForce = m_defaultAccelerationForce;
     
     /// <summary>
     /// Disables the trigger zone to stop detecting player presence.
     /// </summary>
-    public void DisableTriggerZone() => triggerZone.enabled = false;
+    public void DisableTriggerZone() => m_accelerationForce = k_Zero;
     
     /// <summary>
     /// Activates the wind particle effect.

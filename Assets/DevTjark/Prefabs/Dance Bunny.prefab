@@ -1416,8 +1416,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4185008212866109269}
-  - component: {fileID: 3769476287999843007}
-  - component: {fileID: 8918133386215926332}
   m_Layer: 0
   m_Name: Root_M
   m_TagString: Untagged
@@ -1444,42 +1442,6 @@ Transform:
   - {fileID: 8699357872163653194}
   m_Father: {fileID: 1639696655244002029}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: -98.57}
---- !u!114 &3769476287999843007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3153338899834395852}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2c66e4071074e8494fd698175ec6f93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_faceForwardPointValue: 1
-  m_happyFacePointValue: 1
-  faceMeshRenderer: {fileID: 7398630618334704471}
-  m_danceMovePointValue: 1
-  animator: {fileID: 3690112078750080850}
-  currentPlayers: {fileID: 0}
-  faceSwapSO: {fileID: 11400000, guid: 81a820629255773488a08ac37764e04f, type: 2}
-  danceMovesSO: {fileID: 11400000, guid: 15d8be9fbb7c5844e89f80fbe24e2baf, type: 2}
---- !u!114 &8918133386215926332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3153338899834395852}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff87b603802742debe14a14cd94fdc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: bf384125dce74794292e08119c0ed727, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &3246693587793420151
 GameObject:
   m_ObjectHideFlags: 0
@@ -1756,7 +1718,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095a42a1f442b6247b2f9b70ceeae3f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skinnedMeshRenderer: {fileID: 7398630618334704471}
+  skinMeshRenderer: {fileID: 430798686650344317}
+  faceMeshRenderer: {fileID: 7398630618334704471}
   danceMoveTriggersSO: {fileID: 11400000, guid: 027be34b5c9494044ac02a5e0e7d6378, type: 2}
   faceSwapSO: {fileID: 11400000, guid: 81a820629255773488a08ac37764e04f, type: 2}
 --- !u!114 &8364671312235059741

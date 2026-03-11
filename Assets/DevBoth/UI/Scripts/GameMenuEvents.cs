@@ -18,9 +18,12 @@ public class GameMenuEvents : MonoBehaviour
     [SerializeField] private bool racingGame;
     [SerializeField] private bool swaggySnapshots;
     
-    [FoldoutGroup("Mouse Sensitivity", expanded: false)]
+    [FoldoutGroup("Settings SOs", expanded: false)]
     [SerializeField] private SO_FloatVariable mouseSensitivityX;
     [SerializeField] private SO_FloatVariable mouseSensitivityY;
+    [SerializeField] private SO_FloatVariable masterVolume;
+    [SerializeField] private SO_FloatVariable musicVolume;
+    [SerializeField] private SO_FloatVariable soundFXVolume;
 
     [HideIf("racingGame"), HideIf("swaggySnapshots")]
     [SerializeField] private SO_PlayerCollection currentPlayers;
@@ -55,7 +58,8 @@ public class GameMenuEvents : MonoBehaviour
     private Button pauseMenuQuitButton;
 
     [Header("Settings Menu Elements")]
-    private Slider mouseSensitivitySlider;
+    private Slider mouseSensitivityXSlider;
+    private Slider mouseSensitivityYSlider;
     private Slider masterVolumeSlider;
     private Slider musicVolumeSlider;
     private Slider soundFXVolumeSlider;
@@ -127,6 +131,7 @@ public class GameMenuEvents : MonoBehaviour
     private VisualElement[] m_slots;
     private VisualElement joinInstruction;
     private VisualElement startGameInstruction;
+    private VisualElement quitInstruction;
 
     #endregion
 
@@ -136,7 +141,8 @@ public class GameMenuEvents : MonoBehaviour
     [SerializeField] private UnityEvent onRestart;
     [SerializeField] private UnityEvent onLevelLoaded;
     
-    public static event Action<float> OnMouseSettingsChanged;
+    public static event Action<float> OnMouseXSettingsChanged;
+    public static event Action<float> OnMouseYSettingsChanged;
 
     private int m_joinedPlayers;
     private bool m_playerJoined;
@@ -152,7 +158,11 @@ public class GameMenuEvents : MonoBehaviour
         BindButtons();
         InitializeSlotElements();
         FocusButton(controllerSelectionReadyButton);
+    }
 
+    private void Start()
+    {
+        InitializeSliderValues();
         onLevelLoaded.Invoke();
     }
 
@@ -160,10 +170,9 @@ public class GameMenuEvents : MonoBehaviour
     {
         RegisterButtonCallbacks();
         SetUpPlayerHUBNavigation();
+        InitializeSliderValues();
         m_playerJoined = false;
         StartCoroutine(ShowOnlyJoinInstruction());
-
-        // onLevelLoaded.Invoke();
     }
 
     private void OnDisable()
@@ -195,7 +204,8 @@ public class GameMenuEvents : MonoBehaviour
         pauseMenuQuitButton = root.Q("pause-menu-quit__button") as Button;
         
         // Settings menu elements
-        mouseSensitivitySlider = root.Q<Slider>("settings-mouse-sensitivity__slider");
+        mouseSensitivityXSlider = root.Q<Slider>("settings-mouse-sensitivity-x__slider");
+        mouseSensitivityYSlider = root.Q<Slider>("settings-mouse-sensitivity-y__slider");
         masterVolumeSlider = root.Q<Slider>("settings-master-volume__slider");
         musicVolumeSlider = root.Q<Slider>("settings-music-volume__slider");
         soundFXVolumeSlider = root.Q<Slider>("settings-soundfx-volume__slider");
@@ -259,6 +269,7 @@ public class GameMenuEvents : MonoBehaviour
         hastyHurdlesInstructionsText = root.Q("hh-game-instruction-text__label");
         joinInstruction = root.Q("join-instruction");
         startGameInstruction = root.Q("start-game-instruction");
+        quitInstruction = root.Q("quit-game-instruction");
     }
 
     private void RegisterButtonCallbacks()
@@ -271,7 +282,8 @@ public class GameMenuEvents : MonoBehaviour
         pauseMenuQuitButton.clicked += OnQuitClick;
         
         // Settings menu buttons
-        mouseSensitivitySlider.RegisterValueChangedCallback(OnMouseSensitivityChange);
+        mouseSensitivityXSlider.RegisterValueChangedCallback(OnMouseSensitivityXChange);
+        mouseSensitivityYSlider.RegisterValueChangedCallback(OnMouseSensitivityYChange);
         masterVolumeSlider.RegisterValueChangedCallback(OnMasterVolumeChange);
         musicVolumeSlider.RegisterValueChangedCallback(OnMusicVolumeChange);
         soundFXVolumeSlider.RegisterValueChangedCallback(OnSoundFXVolumeChange);
@@ -297,10 +309,6 @@ public class GameMenuEvents : MonoBehaviour
         endScreenRestartButton.clicked += OnRestartGameClick;
         endScreenChangeLevelButton.clicked += OnChangeLevelClick;
         endScreenQuitButton.clicked += OnQuitClick;
-
-        // // Controller selection buttons
-        // controllerSelectionReadyButton.clicked += OnControllerSelectionReady;
-        // controllerSelectionBackButton.clicked += OnControllerSelectionBackButtonClick;
     }
 
     private void UnregisterButtonCallbacks()
@@ -313,7 +321,8 @@ public class GameMenuEvents : MonoBehaviour
         pauseMenuQuitButton.clicked -= OnQuitClick;
         
         // Settings menu buttons
-        mouseSensitivitySlider.UnregisterValueChangedCallback(OnMouseSensitivityChange);
+        mouseSensitivityXSlider.UnregisterValueChangedCallback(OnMouseSensitivityXChange);
+        mouseSensitivityYSlider.UnregisterValueChangedCallback(OnMouseSensitivityYChange);
         masterVolumeSlider.UnregisterValueChangedCallback(OnMasterVolumeChange);
         musicVolumeSlider.UnregisterValueChangedCallback(OnMusicVolumeChange);
         soundFXVolumeSlider.UnregisterValueChangedCallback(OnSoundFXVolumeChange);
@@ -339,10 +348,15 @@ public class GameMenuEvents : MonoBehaviour
         endScreenRestartButton.clicked -= OnRestartGameClick;
         endScreenChangeLevelButton.clicked -= OnChangeLevelClick;
         endScreenQuitButton.clicked -= OnQuitClick;
-
-        // // Controller selection buttons
-        // controllerSelectionReadyButton.clicked -= OnControllerSelectionReady;
-        // controllerSelectionBackButton.clicked -= OnControllerSelectionBackButtonClick;
+    }
+    
+    private void InitializeSliderValues()
+    {
+        mouseSensitivityXSlider.value = mouseSensitivityX.Value;
+        mouseSensitivityYSlider.value = mouseSensitivityY.Value;
+        masterVolumeSlider.value = masterVolume.Value;
+        musicVolumeSlider.value = musicVolume.Value;
+        soundFXVolumeSlider.value = soundFXVolume.Value;
     }
 
     public void ShowPauseMenu()
@@ -358,11 +372,16 @@ public class GameMenuEvents : MonoBehaviour
         UnfreezeTimeScale();
     }
     
-    private void OnMouseSensitivityChange(ChangeEvent<float> _evt)
+    private void OnMouseSensitivityXChange(ChangeEvent<float> _evt)
     {
         mouseSensitivityX.Value = _evt.newValue;
+        OnMouseXSettingsChanged?.Invoke(_evt.newValue);
+    }
+    
+    private void OnMouseSensitivityYChange(ChangeEvent<float> _evt)
+    {
         mouseSensitivityY.Value = _evt.newValue;
-        OnMouseSettingsChanged?.Invoke(_evt.newValue);
+        OnMouseYSettingsChanged?.Invoke(_evt.newValue);
     }
     
     private void OnSettingsBackButtonClick()
@@ -425,7 +444,7 @@ public class GameMenuEvents : MonoBehaviour
     {
         pauseMenu.style.display = DisplayStyle.None;
         settingsMenu.style.display = DisplayStyle.Flex;
-        FocusButton(mouseSensitivitySlider);
+        FocusButton(mouseSensitivityXSlider);
     }
 
     private void OnPlayerHubBack()
@@ -578,19 +597,13 @@ public class GameMenuEvents : MonoBehaviour
     {
         if (!m_playerJoined) return;
 
-        StopCoroutine(ShowStartAndJoinInstruction());
-        StopCoroutine(ShowJoinAndStartInstruction());
+        StopCoroutine(ShowStartInstructionInCycle());
+        StopCoroutine(ShowJoinInstructionInCycle());
+        StopCoroutine(ShowQuitInstructionInCycle());
         uiToolkitVideo.StopVideo();
         UnfreezeTimeScale();
         HideControllerSelectionScreen();
-        // onGameStart.Invoke();
     }
-
-    // private void OnControllerSelectionBackButtonClick()
-    // {
-    //     controllerSelectionMenu.style.display = DisplayStyle.None;
-    //     LoadSingleScene(SceneNames.MainMenu);
-    // }
 
     private void OnLoadBowlingBattle()
     {
@@ -996,14 +1009,14 @@ public class GameMenuEvents : MonoBehaviour
         if (m_playerJoined)
         {
             StopCoroutine(ShowOnlyJoinInstruction());
-            StartCoroutine(ShowStartAndJoinInstruction());
+            StartCoroutine(ShowStartInstructionInCycle());
             yield break;
         }
 
         StartCoroutine(ShowOnlyJoinInstruction());
     }
 
-    private IEnumerator ShowJoinAndStartInstruction()
+    private IEnumerator ShowJoinInstructionInCycle()
     {
         joinInstruction.style.display = DisplayStyle.Flex;
 
@@ -1018,10 +1031,10 @@ public class GameMenuEvents : MonoBehaviour
 
         joinInstruction.style.display = DisplayStyle.None;
 
-        StartCoroutine(ShowStartAndJoinInstruction());
+        StartCoroutine(ShowStartInstructionInCycle());
     }
 
-    private IEnumerator ShowStartAndJoinInstruction()
+    private IEnumerator ShowStartInstructionInCycle()
     {
         startGameInstruction.style.display = DisplayStyle.Flex;
 
@@ -1033,7 +1046,22 @@ public class GameMenuEvents : MonoBehaviour
 
         startGameInstruction.style.display = DisplayStyle.None;
 
-        StartCoroutine(ShowJoinAndStartInstruction());
+        StartCoroutine(ShowQuitInstructionInCycle());
+    }
+    
+    private IEnumerator ShowQuitInstructionInCycle()
+    {
+        quitInstruction.style.display = DisplayStyle.Flex;
+
+        yield return AnimateScaleCoroutine(quitInstruction, new Vector3(1, 0, 1), new Vector3(1, 1, 1), animDuration);
+
+        yield return new WaitForSecondsRealtime(holdDuration);
+
+        yield return AnimateScaleCoroutine(quitInstruction, new Vector3(1, 1, 1), new Vector3(1, 0, 1), animDuration);
+
+        quitInstruction.style.display = DisplayStyle.None;
+
+        StartCoroutine(ShowJoinInstructionInCycle());
     }
 
     private IEnumerator AnimateScaleCoroutine(VisualElement element, Vector3 from, Vector3 to, float duration)

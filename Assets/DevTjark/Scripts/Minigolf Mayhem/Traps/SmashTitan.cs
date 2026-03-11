@@ -11,6 +11,15 @@ public class SmashTitan : MonoBehaviour
     [SerializeField] private Transform impulseTarget;
     [SerializeField] private BoxCollider triggerZone;
     [SerializeField] private ParticleSystem dustParticles;
+    
+    private float m_defaultImpactForce;
+    
+    private const float k_Zero = 0f;
+    
+    private void Start()
+    {
+        m_defaultImpactForce = m_impactForce;
+    }
 
     /// <summary>
     /// Detects when the player enters the trigger zone and applies an impulse force
