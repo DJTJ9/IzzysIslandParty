@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class PlayerUIMinigolfMayhem : MonoBehaviour
 {
+    [SerializeField] private bool isNPC;
+    
     [FoldoutGroup("Canvas Elements", expanded: false)]
     [SerializeField] private Image shootForceBar;
     [SerializeField] private TMP_Text shootForceText;
@@ -49,16 +51,21 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
         m_isNPC = goapRigidbodyMovement != null;
         shootForceBar.fillAmount = 0;
         cooldownBar.fillAmount = 0;
+        m_finishTimer = new Stopwatch();
 
         if (m_racingMode)
         {
             roundTimer.SetActive(true);
-            m_finishTimer = new Stopwatch();
-            m_finishTimer.Start();
         }
+        
         if (m_classicMode)
         {
             shootCounter.SetActive(true);
+        }
+
+        if (isNPC)
+        {
+            m_finishTimer.Start();
         }
     }
 
@@ -116,7 +123,6 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
     /// </summary>
     public void StartTimer()
     {
-        if (!roundTimer.activeSelf) return;
         m_finishTimer.Start();
     }
     
@@ -135,7 +141,7 @@ public class PlayerUIMinigolfMayhem : MonoBehaviour
     {
         if (_playerIndex == playerController.PlayerIndex && roundTimer.activeSelf) StopTimer();
     }
-    
+
     /// <summary>
     /// Stops the round timer.
     /// </summary>

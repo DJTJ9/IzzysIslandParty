@@ -2,7 +2,8 @@
 
 public class DanceMoveManager : MonoBehaviour
 {
-    [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
+    [SerializeField] private SkinnedMeshRenderer skinMeshRenderer;
+    [SerializeField] private SkinnedMeshRenderer faceMeshRenderer;
 
     [SerializeField] private DanceMoveTriggersSO danceMoveTriggersSO;
     [SerializeField] private FaceSwapSO faceSwapSO;
@@ -29,6 +30,16 @@ public class DanceMoveManager : MonoBehaviour
     /// </summary>
     public void ChangeFace()
     {
-        skinnedMeshRenderer.material = faceSwapSO.GetRandomFace(skinnedMeshRenderer.material);
+        faceMeshRenderer.material = faceSwapSO.GetRandomFace(faceMeshRenderer.material);
+    }
+
+    public void StartGlowEffect()
+    {
+        skinMeshRenderer.material.SetFloat("_Glow", 3f);
+    }
+    
+    public void StopGlowEffect()
+    {
+        skinMeshRenderer.material.SetFloat("_Glow", 1f);
     }
 }

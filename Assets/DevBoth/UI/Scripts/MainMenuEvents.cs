@@ -1,18 +1,27 @@
 ﻿#if UNITY_EDITOR
 using UnityEditor;
 #endif
+using System;
 using System.Collections;
 using ScriptableObjects;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class MainMenuEvents : MonoBehaviour
 {
+    [FoldoutGroup("Settings SOs", expanded: false)]
     [SerializeField] private SO_FloatVariable mouseSensitivityX;
     [SerializeField] private SO_FloatVariable mouseSensitivityY;
+    [SerializeField] private SO_FloatVariable masterVolume;
+    [SerializeField] private SO_FloatVariable musicVolume;
+    [SerializeField] private SO_FloatVariable soundFXVolume;
     [SerializeField] private SceneCollectionSO sceneCollection;
     [SerializeField] private UnityEvent onGameStart;
+    
+    public static event Action<float> OnMouseXSettingsChanged;
+    public static event Action<float> OnMouseYSettingsChanged;
 
     private UIDocument document;
     private VisualElement root;
@@ -32,7 +41,8 @@ public class MainMenuEvents : MonoBehaviour
     private Button mainMenuQuitButton;
 
     [Header("Settings Menu Elements")]
-    private Slider mouseSensitivitySlider;
+    private Slider mouseSensitivityXSlider;
+    private Slider mouseSensitivityYSlider;
     private Slider masterVolumeSlider;
     private Slider musicVolumeSlider;
     private Slider soundFXVolumeSlider;
@@ -94,10 +104,8 @@ public class MainMenuEvents : MonoBehaviour
         BindButtons();
         RegisterButtonCallbacks();
         SetUpPlayerHUBNavigation();
+        InitializeSliderValues();
         AsyncLevelLoader.OnSceneChange += OpenMainMenu;
-                
-        mouseSensitivityX.Value = mouseSensitivitySlider.value;
-        mouseSensitivityY.Value = mouseSensitivitySlider.value;
 
         FocusButton(startGameButton);
     }
@@ -152,7 +160,8 @@ public class MainMenuEvents : MonoBehaviour
         mainMenuQuitButton = root.Q("main-menu-quit__button") as Button;
 
         // Settings menu elements
-        mouseSensitivitySlider = root.Q<Slider>("settings-mouse-sensitivity__slider");
+        mouseSensitivityXSlider = root.Q<Slider>("settings-mouse-sensitivity-x__slider");
+        mouseSensitivityYSlider = root.Q<Slider>("settings-mouse-sensitivity-y__slider");
         masterVolumeSlider = root.Q<Slider>("settings-master-volume__slider");
         musicVolumeSlider = root.Q<Slider>("settings-music-volume__slider");
         soundFXVolumeSlider = root.Q<Slider>("settings-soundfx-volume__slider");
@@ -186,7 +195,8 @@ public class MainMenuEvents : MonoBehaviour
         mainMenuQuitButton.clicked += OnQuitClick;
 
         // Settings menu buttons
-        mouseSensitivitySlider.RegisterValueChangedCallback(OnMouseSensitivityChange);
+        mouseSensitivityXSlider.RegisterValueChangedCallback(OnMouseSensitivityXChange);
+        mouseSensitivityYSlider.RegisterValueChangedCallback(OnMouseSensitivityYChange);
         masterVolumeSlider.RegisterValueChangedCallback(OnMasterVolumeChange);
         musicVolumeSlider.RegisterValueChangedCallback(OnMusicVolumeChange);
         soundFXVolumeSlider.RegisterValueChangedCallback(OnSoundFXVolumeChange);
@@ -220,7 +230,8 @@ public class MainMenuEvents : MonoBehaviour
         mainMenuQuitButton.clicked -= OnQuitClick;
 
         // Settings menu buttons
-        mouseSensitivitySlider.UnregisterValueChangedCallback(OnMouseSensitivityChange);
+        mouseSensitivityXSlider.UnregisterValueChangedCallback(OnMouseSensitivityXChange);
+        mouseSensitivityYSlider.UnregisterValueChangedCallback(OnMouseSensitivityYChange);
         masterVolumeSlider.UnregisterValueChangedCallback(OnMasterVolumeChange);
         musicVolumeSlider.UnregisterValueChangedCallback(OnMusicVolumeChange);
         soundFXVolumeSlider.UnregisterValueChangedCallback(OnSoundFXVolumeChange);
@@ -245,6 +256,15 @@ public class MainMenuEvents : MonoBehaviour
         minigolfMayhemRaceButton.clicked -= OnMinigolfMayhemRaceButtonClick;
         minigolfMayhemModusSelectionBackButton.clicked -= OnMinigolfMayhemModusSelectionBackButtonClick;
     }
+    
+    private void InitializeSliderValues()
+    {
+        mouseSensitivityXSlider.value = mouseSensitivityX.Value;
+        mouseSensitivityXSlider.value = mouseSensitivityY.Value;
+        masterVolumeSlider.value = masterVolume.Value;
+        musicVolumeSlider.value = musicVolume.Value;
+        soundFXVolumeSlider.value = soundFXVolume.Value;
+    }
 
     private void OnStartButtonClick()
     {
@@ -257,7 +277,7 @@ public class MainMenuEvents : MonoBehaviour
     {
         mainMenu.style.display = DisplayStyle.None;
         settingsMenu.style.display = DisplayStyle.Flex;
-        FocusButton(mouseSensitivitySlider);
+        FocusButton(mouseSensitivityXSlider);
     }
 
     private void OnSettingsBackButtonClick()
@@ -282,10 +302,16 @@ public class MainMenuEvents : MonoBehaviour
         Application.Quit();
     }
 
-    private void OnMouseSensitivityChange(ChangeEvent<float> _evt)
+    private void OnMouseSensitivityXChange(ChangeEvent<float> _evt)
     {
         mouseSensitivityX.Value = _evt.newValue;
+        OnMouseXSettingsChanged?.Invoke(_evt.newValue);
+    }
+    
+    private void OnMouseSensitivityYChange(ChangeEvent<float> _evt)
+    {
         mouseSensitivityY.Value = _evt.newValue;
+        OnMouseYSettingsChanged?.Invoke(_evt.newValue);
     }
     
     private void OnMasterVolumeChange(ChangeEvent<float> _evt)

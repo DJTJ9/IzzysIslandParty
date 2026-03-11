@@ -71,10 +71,10 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
     private void FixedUpdate()
     {
         UpdateRoundTime();
-        m_startMoveTimer.Tick(Time.deltaTime);
-        m_danceMoveSwitchTimer.Tick(Time.deltaTime);
-        m_roundTimer.Tick(Time.deltaTime);
-        m_photoShowTimer.Tick(Time.deltaTime);
+        // m_startMoveTimer.Tick(Time.deltaTime);
+        // m_danceMoveSwitchTimer.Tick(Time.deltaTime);
+        // m_roundTimer.Tick(Time.deltaTime);
+        // m_photoShowTimer.Tick(Time.deltaTime);
     }
 
     /// <summary>

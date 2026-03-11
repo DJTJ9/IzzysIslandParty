@@ -148,6 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3bb4957f5124069adaad5f0f76571cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterVolume: {fileID: 11400000, guid: a3aa635e389146f4a8e797b0fe98a4e7, type: 2}
+  musicVolume: {fileID: 11400000, guid: 7d181876f97bfbc4cb047ccc8d8f0559, type: 2}
+  soundFXVolume: {fileID: 11400000, guid: a6e60d8886b89394f83e981eb4bc9e41, type: 2}
   audioMixer: {fileID: 24100000, guid: 21fcae5a62532a54885ae9ba05b29096, type: 2}
 --- !u!4 &27892424
 Transform:
@@ -512,6 +515,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivityX: {fileID: 11400000, guid: 0dc660cf08d445042b2273e6fba6ac3a, type: 2}
   mouseSensitivityY: {fileID: 11400000, guid: 9b6eb9ad758627d4b9e8bc495117e51b, type: 2}
+  masterVolume: {fileID: 11400000, guid: a3aa635e389146f4a8e797b0fe98a4e7, type: 2}
+  musicVolume: {fileID: 11400000, guid: 7d181876f97bfbc4cb047ccc8d8f0559, type: 2}
+  soundFXVolume: {fileID: 11400000, guid: a6e60d8886b89394f83e981eb4bc9e41, type: 2}
   sceneCollection: {fileID: 11400000, guid: 6fd8971a4dff91645b76a391153753d8, type: 2}
   onGameStart:
     m_PersistentCalls:
@@ -652,6 +658,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21dc894de0e340958869053875cfd77e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  progressBarSpeed: 0.5
+  firstLoadingScreenDelay: 300
+  secondLoadingScreenDelay: 500
+  thirdLoadingScreenDelay: 2000
+  endLoadingScreenDelay: 1000
   sceneCollection: {fileID: 11400000, guid: 6fd8971a4dff91645b76a391153753d8, type: 2}
 --- !u!114 &1640082915
 MonoBehaviour:
