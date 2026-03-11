@@ -37,7 +37,7 @@
     flex-grow: 0;
     background-image: url("project://database/Assets/DevBoth/Art/ArtByEmma/Menu_6.png?fileID=-985483820&guid=084eede09e9a72b4fb9087a1f9ea2404&type=3#Menu_6_0");
     font-size: 23px;
-    -unity-font-definition: url('project://database/Assets/DevJudy/ByOthers/Fonts/KineksRound-Regular.otf?fileID=12800000&guid=7d0f4bf2e8102454aa122a3ddceb6ef8&type=3#KineksRound-Regular');
+    -unity-font-definition: url("project://database/Assets/DevJudy/ByOthers/Fonts/KineksRound-Regular-byBykineks.otf?fileID=12800000&guid=7d0f4bf2e8102454aa122a3ddceb6ef8&type=3#KineksRound-Regular-byBykineks");
     -unity-background-image-tint-color: rgb(253, 253, 253);
     background-color: rgba(0, 0, 0, 0);
     -unity-text-align: lower-center;
@@ -100,9 +100,6 @@
     -unity-text-align: upper-left;
 }
 
-#menu-background__container > #settings-tab-view__container > #unity-tab-view__header-container > #unity-tab__header {
-}
-
 .play-button-container {
     width: 25%;
     height: 75%;
@@ -125,4 +122,86 @@
     -unity-font-style: bold;
     -unity-font-definition: url("project://database/Assets/DevJudy/ByOthers/Fonts/ComputerModernFontFamily-byDonaldE.Knuth.ttf?fileID=12800000&guid=4e1cc141d8f91634e9dc87c4d06818d6&type=3#ComputerModernFontFamily-byDonaldE.Knuth");
     font-size: 19px;
+}
+
+#settings-menu__container > #settings-mouse-sensitivity-x__slider > .unity-slider__label {
+    color: rgb(254, 202, 129);
+    -unity-text-outline-color: rgb(58, 89, 153);
+    -unity-text-outline-width: 2px;
+}
+
+#settings-menu__container > #settings-mouse-sensitivity-y__slider > .unity-slider__label {
+    color: rgb(254, 202, 129);
+    -unity-text-outline-color: rgb(58, 89, 153);
+    -unity-text-outline-width: 2px;
+}
+
+#settings-menu__container > #settings-master-volume__slider > .unity-slider__label {
+    color: rgb(254, 202, 129);
+    -unity-text-outline-color: rgb(58, 89, 153);
+    -unity-text-outline-width: 2px;
+}
+
+#settings-menu__container > #settings-music-volume__slider > .unity-slider__label {
+    color: rgb(254, 202, 129);
+    -unity-text-outline-color: rgb(58, 89, 153);
+    -unity-text-outline-width: 2px;
+}
+
+#settings-menu__container > #settings-mouse-sensitivity-x__slider > .unity-slider__input > #unity-drag-container > #unity-dragger {
+    -unity-background-image-tint-color: rgb(254, 202, 129);
+    background-color: rgb(254, 202, 129);
+}
+
+#settings-menu__container > #settings-mouse-sensitivity-x__slider > .unity-slider__input > #unity-drag-container > #unity-tracker {
+    -unity-background-image-tint-color: rgb(75, 48, 47);
+    background-color: rgb(75, 48, 47);
+}
+
+#settings-menu__container > #settings-mouse-sensitivity-y__slider > .unity-slider__input > #unity-drag-container > #unity-tracker {
+    background-color: rgb(75, 48, 47);
+}
+
+#settings-menu__container > #settings-mouse-sensitivity-y__slider > .unity-slider__input > #unity-drag-container > #unity-dragger {
+    -unity-background-image-tint-color: rgb(254, 202, 129);
+    background-color: rgb(254, 202, 129);
+}
+
+#settings-menu__container > #settings-master-volume__slider > .unity-slider__input > #unity-drag-container > #unity-tracker {
+    background-color: rgb(75, 48, 47);
+}
+
+#settings-menu__container > #settings-music-volume__slider > .unity-slider__input > #unity-drag-container > #unity-tracker {
+    background-color: rgb(75, 48, 47);
+}
+
+#settings-menu__container > #settings-music-volume__slider > .unity-slider__input > #unity-drag-container > #unity-dragger {
+    background-color: rgb(254, 202, 129);
+}
+
+#settings-menu__container > #settings-soundfx-volume__slider > .unity-slider__input > #unity-drag-container > #unity-tracker {
+    background-color: rgb(75, 48, 47);
+}
+
+#settings-menu__container > #settings-soundfx-volume__slider > .unity-slider__input > #unity-drag-container > #unity-dragger {
+    background-color: rgb(254, 202, 129);
+}
+
+#settings-menu__container > #settings-soundfx-volume__slider > .unity-slider__label {
+    -unity-text-outline-color: rgb(58, 89, 153);
+    -unity-text-outline-width: 2px;
+}
+
+#menu-background__container > #settings-menu__container > #settings-master-volume__slider > .unity-slider__input > #unity-drag-container > #unity-dragger {
+    background-color: rgb(254, 202, 129);
+}
+
+#menu-background__container > #settings-menu__container > #settings-soundfx-volume__slider > .unity-slider__label {
+    -unity-text-outline-color: rgb(58, 89, 153);
+    -unity-text-outline-width: 2px;
+    color: rgb(254, 202, 129);
+}
+
+#settings-menu__container > #settings-master-volume__slider > .unity-slider__input > #unity-drag-container > #unity-dragger {
+    background-color: rgb(254, 202, 129);
 }

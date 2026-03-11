@@ -66,7 +66,7 @@ public class MinigolfHole : MonoBehaviour
         if (_other.TryGetComponent<Controller>(out var controller))
         {
             onMinigolfPlayerFinished?.Invoke(controller.PlayerIndex);
-            controller.DisableController();
+            // controller.DisableController();
             
             if (raceMode && m_finishedPlayers / 2 == k_MaxPlayerCount - 1)
             {
