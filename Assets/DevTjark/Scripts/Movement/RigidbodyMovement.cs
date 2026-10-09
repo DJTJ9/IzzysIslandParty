@@ -48,10 +48,10 @@ public class RigidbodyMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         groundChecker = GetComponent<GroundChecker>();
 
-        MovementCooldownTimer = new CountdownTimer(MovementCooldown);
+        MovementCooldownTimer = new CountdownTimer(MovementCooldown, autoTick: true);
         MovementCooldownTimer.OnTimerStop += EnableMovement;
 
-        impulseCooldownTimer = new CountdownTimer(impulseCooldown);
+        impulseCooldownTimer = new CountdownTimer(impulseCooldown, autoTick: true);
         impulseCooldownTimer.OnTimerStart += () => m_impulseApplied = true;
         impulseCooldownTimer.OnTimerStop += () => m_impulseApplied = false;
 
@@ -61,8 +61,12 @@ public class RigidbodyMovement : MonoBehaviour
     private void FixedUpdate()
     {
         UpdateChargePower();
-        MovementCooldownTimer.Tick(Time.deltaTime);
-        impulseCooldownTimer.Tick(Time.deltaTime);
+    }
+
+    private void OnDestroy()
+    {
+        MovementCooldownTimer.Dispose();
+        impulseCooldownTimer.Dispose();
     }
 
     /// <summary>

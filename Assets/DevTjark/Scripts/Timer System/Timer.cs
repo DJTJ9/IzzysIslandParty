@@ -15,9 +15,11 @@ namespace ImprovedTimers {
         public Action OnTimerStop = delegate { };
 
         bool disposed;
+        readonly bool autoTick;
 
-        protected Timer(float value) {
+        protected Timer(float value, bool autoTick = false) {
             initialTime = value;
+            this.autoTick = autoTick;
             IsRunning = false;
         }
 
@@ -25,7 +27,7 @@ namespace ImprovedTimers {
             CurrentTime = initialTime;
             if (!IsRunning) {
                 IsRunning = true;
-                TimerManager.RegisterTimer(this);
+                if (autoTick) TimerManager.RegisterTimer(this);
                 OnTimerStart.Invoke();
             }
         }

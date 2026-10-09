@@ -45,18 +45,14 @@ public class AttackStrategy : IActionStrategy
 
     public void Start()
     {
-        shootCooldownTimer = new CountdownTimer(shootCooldownTimerDuration);
+        shootCooldownTimer = new CountdownTimer(shootCooldownTimerDuration, autoTick: true);
         shootCooldownTimer.OnTimerStart += () => Complete = false;
         shootCooldownTimer.OnTimerStop += () => Complete = true;
-        
+
         rigidbodyMovement.Shoot(destination() + new Vector3(0, 1f, 0));
         shootCooldownTimer.Start();
     }
-    
-    public void Update(float _deltaTime)
-    {
-        shootCooldownTimer.Tick(_deltaTime);
-    }
+
     public void Stop()
     {
         shootCooldownTimer.Stop();
@@ -83,7 +79,7 @@ public class AimForNextPositionStrategy : IActionStrategy
 
     public void Start()
     {
-        shootCooldownTimer = new CountdownTimer(shootCooldownTimerDuration);
+        shootCooldownTimer = new CountdownTimer(shootCooldownTimerDuration, autoTick: true);
         shootCooldownTimer.OnTimerStart += () => Complete = false;
         shootCooldownTimer.OnTimerStop += () => Complete = true;
 
@@ -91,11 +87,6 @@ public class AimForNextPositionStrategy : IActionStrategy
         shootCooldownTimer.Start();
     }
 
-    public void Update(float _deltaTime)
-    {
-        shootCooldownTimer.Tick(_deltaTime);
-    }
-    
     public void Stop()
     {
         shootCooldownTimer.Stop();
@@ -111,7 +102,7 @@ public class IdleStrategy : IActionStrategy
 
     public IdleStrategy(float duration)
     {
-        timer = new CountdownTimer(duration);
+        timer = new CountdownTimer(duration, autoTick: true);
         timer.OnTimerStart += () => Complete = false;
         timer.OnTimerStop += () => Complete = true;
     }
@@ -119,11 +110,6 @@ public class IdleStrategy : IActionStrategy
     public void Start()
     {
         timer.Start();
-    }
-
-    public void Update(float _deltaTime)
-    {
-        timer.Tick(_deltaTime);
     }
 
     public void Stop()

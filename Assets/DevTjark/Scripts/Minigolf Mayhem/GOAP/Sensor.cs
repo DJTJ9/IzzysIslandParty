@@ -25,16 +25,16 @@ public class Sensor : MonoBehaviour {
     }
 
     void Start() {
-        timer = new CountdownTimer(timerInterval);
+        timer = new CountdownTimer(timerInterval, autoTick: true);
         timer.OnTimerStop += () => {
             UpdateTargetPosition(target);
             timer.Start();
         };
         timer.Start();
     }
-    
-    void Update() {
-        timer.Tick(Time.deltaTime);
+
+    void OnDestroy() {
+        timer?.Dispose();
     }
 
     void UpdateTargetPosition(GameObject target = null) {

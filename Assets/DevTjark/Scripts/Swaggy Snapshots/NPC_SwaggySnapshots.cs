@@ -16,7 +16,7 @@ public class NPC_SwaggySnapshots : Controller
     {
         photoCapture = GetComponent<PhotoCapture>();
         
-        m_photoTimer = new CountdownTimer(Random.Range(SwaggySnapshotsGameManager.StartMoveDuration, SwaggySnapshotsGameManager.StartMoveDuration + SwaggySnapshotsGameManager.RoundTime));
+        m_photoTimer = new CountdownTimer(Random.Range(SwaggySnapshotsGameManager.StartMoveDuration, SwaggySnapshotsGameManager.StartMoveDuration + SwaggySnapshotsGameManager.RoundTime), autoTick: true);
         m_photoTimer.OnTimerStop += TakePhoto;
     }
 
@@ -25,9 +25,9 @@ public class NPC_SwaggySnapshots : Controller
         m_photoTimer.Start();
     }
 
-    private void FixedUpdate()
+    private void OnDestroy()
     {
-        m_photoTimer.Tick(Time.deltaTime);
+        m_photoTimer.Dispose();
     }
 
     /// <summary>

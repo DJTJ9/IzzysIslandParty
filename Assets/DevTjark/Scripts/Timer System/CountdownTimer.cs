@@ -2,7 +2,7 @@ namespace ImprovedTimers
 {
     public class CountdownTimer : Timer
     {
-        public CountdownTimer(float value) : base(value)
+        public CountdownTimer(float value, bool autoTick = false) : base(value, autoTick)
         {
         }
 

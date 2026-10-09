@@ -1,4 +1,6 @@
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.LowLevel;
 using UnityEngine.PlayerLoop;
@@ -18,7 +20,6 @@ namespace ImprovedTimers {
             }
 
             PlayerLoop.SetPlayerLoop(currentPlayerLoop);
-            PlayerLoopUtils.PrintPlayerLoop(currentPlayerLoop);
 
 #if UNITY_EDITOR
             EditorApplication.playModeStateChanged -= OnPlayModeChange;
@@ -26,6 +27,7 @@ namespace ImprovedTimers {
 #endif
         }
 
+#if UNITY_EDITOR
         static void OnPlayModeChange(PlayModeStateChange state) {
             if (state == PlayModeStateChange.ExitingPlayMode) {
                 PlayerLoopSystem currentPlayerLoop = PlayerLoop.GetCurrentPlayerLoop();
@@ -35,6 +37,7 @@ namespace ImprovedTimers {
                 TimerManager.Clear();
             }
         }
+#endif
 
         static void RemoveTimerManager<T>(ref PlayerLoopSystem loop) {
             PlayerLoopUtils.RemoveSystem<T>(ref loop, in timerSystem);

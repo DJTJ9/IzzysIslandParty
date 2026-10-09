@@ -409,7 +409,7 @@ public class GoapAgent : MonoBehaviour
 
     private void SetupTimers()
     {
-        statsTimer = new CountdownTimer(1f);
+        statsTimer = new CountdownTimer(1f, autoTick: true);
         statsTimer.OnTimerStop += () =>
         {
             SetupBeliefs();
@@ -435,8 +435,6 @@ public class GoapAgent : MonoBehaviour
 
     private void Update()
     {
-        statsTimer.Tick(Time.deltaTime);
-
         if (currentAction == null)
         {
             CalculatePlan();
@@ -473,6 +471,12 @@ public class GoapAgent : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        statsTimer?.Dispose();
+        currentAction?.Stop();
     }
 
     private void CalculatePlan()

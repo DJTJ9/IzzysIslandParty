@@ -49,6 +49,12 @@ public class BowlingBattleGameManager : MonoBehaviour
         UnsubscribeFromCountdownTimersActions();
     }
 
+    private void OnDestroy()
+    {
+        m_preparationPhaseTimer.Dispose();
+        m_roundTimer.Dispose();
+    }
+
     /// <summary>
     /// Updates the preparation and round timers, ensuring they reflect the timers' current states.
     /// </summary>
@@ -56,15 +62,6 @@ public class BowlingBattleGameManager : MonoBehaviour
     {
         PreparationPhaseTimer = m_preparationPhaseTimer.IsRunning ? m_preparationPhaseTimer.CurrentTime : preparationPhaseDuration;
         RoundTimer = m_roundTimer.IsRunning ? m_roundTimer.CurrentTime : roundDuration;
-    }
-
-    /// <summary>
-    /// Processes countdown timer ticks in fixed intervals to ensure accurate updates for join phase, preparation phase, and round timers.
-    /// </summary>
-    private void FixedUpdate()
-    {
-        m_preparationPhaseTimer.Tick(Time.deltaTime);
-        m_roundTimer.Tick(Time.deltaTime);
     }
 
     /// <summary>
@@ -89,8 +86,8 @@ public class BowlingBattleGameManager : MonoBehaviour
     /// </summary>
     private void InstantiateCountdownTimers()
     {
-        m_preparationPhaseTimer = new CountdownTimer(preparationPhaseDuration);
-        m_roundTimer = new CountdownTimer(roundDuration);
+        m_preparationPhaseTimer = new CountdownTimer(preparationPhaseDuration, autoTick: true);
+        m_roundTimer = new CountdownTimer(roundDuration, autoTick: true);
     }
 
     /// <summary>

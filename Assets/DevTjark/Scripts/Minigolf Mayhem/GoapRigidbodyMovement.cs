@@ -41,16 +41,16 @@ public class GoapRigidbodyMovement : Controller
         rb = GetComponent<Rigidbody>();
         groundChecker = GetComponent<GroundChecker>();
         
-        MovementCooldownTimer = new CountdownTimer(MovementCooldown);
+        MovementCooldownTimer = new CountdownTimer(MovementCooldown, autoTick: true);
         MovementCooldownTimer.OnTimerStop += EnableMovement;
-        impulseCooldownTimer = new CountdownTimer(impulseCooldown);
+        impulseCooldownTimer = new CountdownTimer(impulseCooldown, autoTick: true);
         impulseCooldownTimer.OnTimerStop += () => m_impulseApplied = false;
     }
 
-    private void FixedUpdate()
+    private void OnDestroy()
     {
-        MovementCooldownTimer.Tick(Time.deltaTime);
-        impulseCooldownTimer.Tick(Time.deltaTime);
+        MovementCooldownTimer.Dispose();
+        impulseCooldownTimer.Dispose();
     }
 
     /// <summary>

@@ -31,7 +31,7 @@ public class MinigolfHole : MonoBehaviour
         minigolfMayhemGameManager = FindFirstObjectByType<MinigolfMayhemGameManager>();
         classicMode = minigolfMayhemGameManager.ClassicMode;
         raceMode = minigolfMayhemGameManager.RaceMode;
-        countdownTimer = new CountdownTimer(waitForLastPlayerTime);
+        countdownTimer = new CountdownTimer(waitForLastPlayerTime, autoTick: true);
         countdownTimer.OnTimerStop += () => onGameEnd.Invoke();
     }
 
@@ -40,9 +40,9 @@ public class MinigolfHole : MonoBehaviour
         m_finishedPlayers = 0;
     }
 
-    private void FixedUpdate()
+    private void OnDestroy()
     {
-        countdownTimer.Tick(Time.deltaTime);
+        countdownTimer?.Dispose();
     }
 
     /// <summary>

@@ -105,7 +105,6 @@ public class MainMenuEvents : MonoBehaviour
         RegisterButtonCallbacks();
         SetUpPlayerHUBNavigation();
         InitializeSliderValues();
-        AsyncLevelLoader.OnSceneChange += OpenMainMenu;
 
         FocusButton(startGameButton);
     }
@@ -113,7 +112,6 @@ public class MainMenuEvents : MonoBehaviour
     private void OnDisable()
     {
         UnregisterButtonCallbacks();
-        AsyncLevelLoader.OnSceneChange -= OpenMainMenu;
 
         #region Examples
 
@@ -401,13 +399,6 @@ public class MainMenuEvents : MonoBehaviour
     {
         menusContainer.style.display = DisplayStyle.None;
         AsyncLevelLoader.Instance.LoadScene(_sceneName);
-    }
-
-    private void OpenMainMenu(SceneNames _sceneName)
-    {
-        if (_sceneName != SceneNames.MainMenu) return;
-        
-        menusContainer.style.display = DisplayStyle.Flex;
     }
 
     private void FocusButton(VisualElement _button) => StartCoroutine(FocusButtonCoroutine(_button));

@@ -7,8 +7,14 @@ namespace ImprovedTimers
     {
         static readonly List<Timer> timers = new();
 
-        public static void RegisterTimer(Timer timer) => timers.Add(timer);
+        public static void RegisterTimer(Timer timer)
+        {
+            if (!timers.Contains(timer)) timers.Add(timer);
+        }
+
         public static void DeregisterTimer(Timer timer) => timers.Remove(timer);
+
+        public static bool IsRegistered(Timer timer) => timers.Contains(timer);
 
         public static void UpdateTimers()
         {

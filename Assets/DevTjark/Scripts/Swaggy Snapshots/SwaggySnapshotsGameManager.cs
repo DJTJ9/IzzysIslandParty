@@ -65,16 +65,11 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
     }
     
     /// <summary>
-    /// Advances all countdown timers by the fixed time delta. 
-    /// Handles logic for start moves, dance switches and photo show countdowns.
+    /// Keeps the static remaining round time in sync with the round timer.
     /// </summary>
     private void FixedUpdate()
     {
         UpdateRoundTime();
-        m_startMoveTimer.Tick(Time.deltaTime);
-        m_danceMoveSwitchTimer.Tick(Time.deltaTime);
-        m_roundTimer.Tick(Time.deltaTime);
-        m_photoShowTimer.Tick(Time.deltaTime);
     }
 
     /// <summary>
@@ -83,7 +78,7 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
     /// </summary>
     private void InitializeTimers()
     {
-        m_startMoveTimer = new CountdownTimer(m_startMoveDuration);
+        m_startMoveTimer = new CountdownTimer(m_startMoveDuration, autoTick: true);
         m_startMoveTimer.OnTimerStop += () =>
         {
             m_danceMoveSwitchTimer.Start();
@@ -91,7 +86,7 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
             onRoundStart.Invoke();
         };
 
-        m_danceMoveSwitchTimer = new CountdownTimer(m_danceMoveDuration);
+        m_danceMoveSwitchTimer = new CountdownTimer(m_danceMoveDuration, autoTick: true);
         m_danceMoveSwitchTimer.OnTimerStart += () => onDanceMoveChanged.Invoke();
         m_danceMoveSwitchTimer.OnTimerStop += () =>
         {
@@ -99,10 +94,10 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
             m_danceMoveSwitchTimer.Start();
         };
 
-        m_roundTimer = new CountdownTimer(m_roundTime);
+        m_roundTimer = new CountdownTimer(m_roundTime, autoTick: true);
         m_roundTimer.OnTimerStop += OnRoundEnd;
 
-        m_photoShowTimer = new CountdownTimer(m_photoShowDuration);
+        m_photoShowTimer = new CountdownTimer(m_photoShowDuration, autoTick: true);
         m_photoShowTimer.OnTimerStop += () => onGameEnd.Invoke();
     }
     
