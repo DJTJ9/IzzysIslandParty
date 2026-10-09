@@ -149,6 +149,9 @@ public class GameMenuEvents : MonoBehaviour
 
     private bool sorted;
 
+    private bool m_hubOpenedFromEndScreen;
+    private Coroutine m_instructionRoutine;
+
     private void Awake()
     {
         document = GetComponent<UIDocument>();
@@ -172,7 +175,7 @@ public class GameMenuEvents : MonoBehaviour
         SetUpPlayerHUBNavigation();
         InitializeSliderValues();
         m_playerJoined = false;
-        StartCoroutine(ShowOnlyJoinInstruction());
+        RunInstructionRoutine(ShowOnlyJoinInstruction());
     }
 
     private void OnDisable()
@@ -307,7 +310,7 @@ public class GameMenuEvents : MonoBehaviour
         // End screen buttons
         resultScreenContinueButton.clicked += OnResultScreenContinue;
         endScreenRestartButton.clicked += OnRestartGameClick;
-        endScreenChangeLevelButton.clicked += OnChangeLevelClick;
+        endScreenChangeLevelButton.clicked += OnEndScreenChangeLevelClick;
         endScreenQuitButton.clicked += OnQuitClick;
     }
 
@@ -346,7 +349,7 @@ public class GameMenuEvents : MonoBehaviour
         // End screen buttons
         resultScreenContinueButton.clicked -= OnResultScreenContinue;
         endScreenRestartButton.clicked -= OnRestartGameClick;
-        endScreenChangeLevelButton.clicked -= OnChangeLevelClick;
+        endScreenChangeLevelButton.clicked -= OnEndScreenChangeLevelClick;
         endScreenQuitButton.clicked -= OnQuitClick;
     }
     
@@ -434,12 +437,19 @@ public class GameMenuEvents : MonoBehaviour
 
     private void OnChangeLevelClick()
     {
+        m_hubOpenedFromEndScreen = false;
         pauseMenu.style.display = DisplayStyle.None;
         endScreenUI.style.display = DisplayStyle.None;
         playerHub.style.display = DisplayStyle.Flex;
         FocusButton(bowlingBattleButton);
     }
-    
+
+    private void OnEndScreenChangeLevelClick()
+    {
+        OnChangeLevelClick();
+        m_hubOpenedFromEndScreen = true;
+    }
+
     private void OnSettingsButtonClick()
     {
         pauseMenu.style.display = DisplayStyle.None;
@@ -449,8 +459,16 @@ public class GameMenuEvents : MonoBehaviour
 
     private void OnPlayerHubBack()
     {
-        pauseMenu.style.display = DisplayStyle.Flex;
         playerHub.style.display = DisplayStyle.None;
+
+        if (m_hubOpenedFromEndScreen)
+        {
+            endScreenUI.style.display = DisplayStyle.Flex;
+            FocusButton(endScreenRestartButton);
+            return;
+        }
+
+        pauseMenu.style.display = DisplayStyle.Flex;
         FocusButton(pauseMenuResumeButton);
     }
 
@@ -597,9 +615,7 @@ public class GameMenuEvents : MonoBehaviour
     {
         if (!m_playerJoined) return;
 
-        StopCoroutine(ShowStartInstructionInCycle());
-        StopCoroutine(ShowJoinInstructionInCycle());
-        StopCoroutine(ShowQuitInstructionInCycle());
+        if (m_instructionRoutine != null) StopCoroutine(m_instructionRoutine);
         uiToolkitVideo.StopVideo();
         UnfreezeTimeScale();
         HideControllerSelectionScreen();
@@ -991,6 +1007,8 @@ public class GameMenuEvents : MonoBehaviour
         hastyHurdlesInstructionsText.style.display = DisplayStyle.None;
     }
 
+    private void RunInstructionRoutine(IEnumerator _routine) => m_instructionRoutine = StartCoroutine(_routine);
+
     private IEnumerator ShowOnlyJoinInstruction()
     {
         joinInstruction.style.display = DisplayStyle.Flex;
@@ -1008,12 +1026,11 @@ public class GameMenuEvents : MonoBehaviour
 
         if (m_playerJoined)
         {
-            StopCoroutine(ShowOnlyJoinInstruction());
-            StartCoroutine(ShowStartInstructionInCycle());
+            RunInstructionRoutine(ShowStartInstructionInCycle());
             yield break;
         }
 
-        StartCoroutine(ShowOnlyJoinInstruction());
+        RunInstructionRoutine(ShowOnlyJoinInstruction());
     }
 
     private IEnumerator ShowJoinInstructionInCycle()
@@ -1031,7 +1048,7 @@ public class GameMenuEvents : MonoBehaviour
 
         joinInstruction.style.display = DisplayStyle.None;
 
-        StartCoroutine(ShowStartInstructionInCycle());
+        RunInstructionRoutine(ShowStartInstructionInCycle());
     }
 
     private IEnumerator ShowStartInstructionInCycle()
@@ -1046,7 +1063,7 @@ public class GameMenuEvents : MonoBehaviour
 
         startGameInstruction.style.display = DisplayStyle.None;
 
-        StartCoroutine(ShowQuitInstructionInCycle());
+        RunInstructionRoutine(ShowQuitInstructionInCycle());
     }
     
     private IEnumerator ShowQuitInstructionInCycle()
@@ -1061,7 +1078,7 @@ public class GameMenuEvents : MonoBehaviour
 
         quitInstruction.style.display = DisplayStyle.None;
 
-        StartCoroutine(ShowJoinInstructionInCycle());
+        RunInstructionRoutine(ShowJoinInstructionInCycle());
     }
 
     private IEnumerator AnimateScaleCoroutine(VisualElement element, Vector3 from, Vector3 to, float duration)

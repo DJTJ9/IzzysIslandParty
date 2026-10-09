@@ -30,6 +30,8 @@ public class AsyncLevelLoader : MonoBehaviour
 
     private float target;
 
+    private bool m_isLoading;
+
     /// <summary>
     /// Initializes the singleton instance of `AsyncLevelLoader`, ensuring it persists across scenes.
     /// If another instance already exists, it destroys the duplicate.
@@ -58,7 +60,7 @@ public class AsyncLevelLoader : MonoBehaviour
         progressBar = root.Q<ProgressBar>("loading-screen__progress_bar");
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         UpdateLoadingScreenBar();
     }
@@ -70,6 +72,9 @@ public class AsyncLevelLoader : MonoBehaviour
     /// <param name="_sceneName">The scene to load.</param>
     public async Task LoadScene(SceneNames _sceneName)
     {
+        if (m_isLoading) return;
+        m_isLoading = true;
+
         try
         {
             progressBar.value = k_Zero;
@@ -80,9 +85,9 @@ public class AsyncLevelLoader : MonoBehaviour
 
             var scene = SceneManager.LoadSceneAsync(sceneCollection.Scenes.TryGetValue(_sceneName, out var sceneNameFromCollection)
                 ? sceneNameFromCollection
-                : throw new KeyNotFoundException());
+                : throw new KeyNotFoundException($"Scene {_sceneName} missing in scene collection"));
 
-            if (scene == null) return;
+            if (scene == null) throw new InvalidOperationException($"LoadSceneAsync returned null for {_sceneName}");
 
             scene.allowSceneActivation = false;
 
@@ -96,6 +101,7 @@ public class AsyncLevelLoader : MonoBehaviour
             OnSceneChange?.Invoke(_sceneName);
             await Task.Delay(thirdLoadingScreenDelay);
 
+            Time.timeScale = k_One;
             scene.allowSceneActivation = true;
 
             await Task.Delay(endLoadingScreenDelay);
@@ -103,7 +109,11 @@ public class AsyncLevelLoader : MonoBehaviour
         }
         catch (Exception e)
         {
-            throw new Exception($"{e}");
+            FallBackToMainMenu(e);
+        }
+        finally
+        {
+            m_isLoading = false;
         }
     }
 
@@ -113,11 +123,14 @@ public class AsyncLevelLoader : MonoBehaviour
     /// </summary>
     public async Task RestartLevel()
     {
-        var currentSceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(SceneNames.MainMenu, out var mainMenuSceneName) ? mainMenuSceneName : throw new KeyNotFoundException());
+        if (m_isLoading) return;
+        m_isLoading = true;
 
         try
         {
+            var currentSceneName = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(sceneCollection.Scenes.TryGetValue(SceneNames.MainMenu, out var mainMenuSceneName) ? mainMenuSceneName : throw new KeyNotFoundException());
+
             loadingScreenContainer.style.display = DisplayStyle.Flex;
             progressBar.value = k_Zero;
             target = k_Zero;
@@ -125,7 +138,7 @@ public class AsyncLevelLoader : MonoBehaviour
             await Task.Delay(firstLoadingScreenDelay);
 
             var scene = SceneManager.LoadSceneAsync(currentSceneName);
-            if (scene == null) return;
+            if (scene == null) throw new InvalidOperationException($"LoadSceneAsync returned null for {currentSceneName}");
 
             scene.allowSceneActivation = false;
 
@@ -138,6 +151,7 @@ public class AsyncLevelLoader : MonoBehaviour
             target = k_One;
             await Task.Delay(thirdLoadingScreenDelay);
 
+            Time.timeScale = k_One;
             scene.allowSceneActivation = true;
 
             await Task.Delay(endLoadingScreenDelay);
@@ -145,8 +159,25 @@ public class AsyncLevelLoader : MonoBehaviour
         }
         catch (Exception e)
         {
-            throw new Exception($"{e}");
+            FallBackToMainMenu(e);
         }
+        finally
+        {
+            m_isLoading = false;
+        }
+    }
+
+    /// <summary>
+    /// Logs a failed load and returns to the main menu so the loading screen never stays stuck.
+    /// </summary>
+    private void FallBackToMainMenu(Exception _exception)
+    {
+        Debug.LogException(_exception);
+        Time.timeScale = k_One;
+        loadingScreenContainer.style.display = DisplayStyle.None;
+
+        if (sceneCollection.Scenes.TryGetValue(SceneNames.MainMenu, out var mainMenuSceneName))
+            SceneManager.LoadScene(mainMenuSceneName);
     }
 
     /// <summary>

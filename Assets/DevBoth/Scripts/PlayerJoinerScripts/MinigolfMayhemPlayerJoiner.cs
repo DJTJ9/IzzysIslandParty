@@ -16,6 +16,7 @@ public class MinigolfMayhemPlayerJoiner : MonoBehaviour
     [SerializeField] private SO_PlayerCollectionRacingGames npcCollectionMM;
 
     private int m_playerIndex = 0;
+    private bool m_npcsSpawned;
 
     private void Start()
     {
@@ -62,11 +63,15 @@ public class MinigolfMayhemPlayerJoiner : MonoBehaviour
     /// </summary>
     public void JoinNPCsMM()
     {
+        if (m_npcsSpawned) return;
+
         var nPCStartIndex = m_playerIndex - 1;
         for (var i = nPCStartIndex; i < npcCollectionMM.Players.Count; i++)
         {
             Instantiate(npcCollectionMM.Players[i].PlayerReference, npcCollectionMM.Players[i].SpawnPoint, Quaternion.identity);
         }
+
+        m_npcsSpawned = true;
     }
     
     /// <summary>

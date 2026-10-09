@@ -13,6 +13,7 @@ public class SwaggySnapshotsPlayerJoiner : MonoBehaviour
     [SerializeField] private UnityEvent onLevelLoaded;
 
     private int m_playerIndex = 0;
+    private bool m_npcsSpawned;
 
     /// <summary>
     /// Initializes the player index, clears the current players list,
@@ -51,10 +52,14 @@ public class SwaggySnapshotsPlayerJoiner : MonoBehaviour
     /// </summary>
     public void JoinNPCs()
     {
+        if (m_npcsSpawned) return;
+
         var nPCStartIndex = m_playerIndex - 1;
         for (var i = nPCStartIndex; i < npcCollectionSS.Players.Count; i++)
         {
             Instantiate(npcCollectionSS.Players[i].PlayerReference, npcCollectionSS.Players[i].SpawnPoint, Quaternion.identity);
         }
+
+        m_npcsSpawned = true;
     }
 }

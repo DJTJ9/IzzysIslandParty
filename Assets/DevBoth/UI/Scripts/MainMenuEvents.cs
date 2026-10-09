@@ -258,7 +258,7 @@ public class MainMenuEvents : MonoBehaviour
     private void InitializeSliderValues()
     {
         mouseSensitivityXSlider.value = mouseSensitivityX.Value;
-        mouseSensitivityXSlider.value = mouseSensitivityY.Value;
+        mouseSensitivityYSlider.value = mouseSensitivityY.Value;
         masterVolumeSlider.value = masterVolume.Value;
         musicVolumeSlider.value = musicVolume.Value;
         soundFXVolumeSlider.value = soundFXVolume.Value;
