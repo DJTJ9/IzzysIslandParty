@@ -11,6 +11,7 @@ public class GoapAgent : MonoBehaviour
 
     [SerializeField] private float m_checkPointDetectionRange = 30f;
     [SerializeField] private float cooldownTimerDuration = 5f;
+    [SerializeField] private float attackGoalCooldown = 8f;
 
     [Header("Sensors")]
     [SerializeField] private Sensor chaseSensor;
@@ -44,6 +45,7 @@ public class GoapAgent : MonoBehaviour
 
     private GameObject target;
     private Vector3 destination;
+    private float m_attackReadyTime;
 
     private AgentGoal lastGoal;
     public AgentGoal currentGoal;
@@ -128,7 +130,8 @@ public class GoapAgent : MonoBehaviour
 
         for (var i = 0; i < playerTransforms.Count; i++)
         {
-            factory.AddLocationBelief(beliefValues[i], m_playerAttackRange, playerTransforms[$"Player{i + 1}"]);
+            var playerTransform = playerTransforms[$"Player{i + 1}"];
+            factory.AddBelief(beliefValues[i], () => Time.time >= m_attackReadyTime && InRangeOf(playerTransform.position, m_playerAttackRange));
         }
     }
 
@@ -223,6 +226,12 @@ public class GoapAgent : MonoBehaviour
             .AddEffect(beliefs[Beliefs.WinGame])
             .Build());
 
+        // Fallback without reach precondition: head for the nearest course target so the bot never idles forever
+        actions.Add(new AgentAction.Builder(Actions.MoveToNextPosition)
+            .WithStrategy(new AimForNextPositionStrategy(rigidbodyMovement, NearestCourseTargetPosition, cooldownTimerDuration))
+            .AddEffect(beliefs[Beliefs.FindNextPosition])
+            .Build());
+
 
         #region Examples
 
@@ -266,8 +275,10 @@ public class GoapAgent : MonoBehaviour
 
         for (var i = 0; i < playerTransforms.Count; ++i)
         {
+            // Local copy: the lambda must not capture the loop variable
+            var playerTransform = playerTransforms[$"Player{i + 1}"];
             _actions.Add(new AgentAction.Builder(actionValues[i])
-                .WithStrategy(new AttackStrategy(rigidbodyMovement, () => playerTransforms[$"Player{i}"].position, cooldownTimerDuration))
+                .WithStrategy(new AttackStrategy(rigidbodyMovement, () => playerTransform.position, cooldownTimerDuration))
                 .AddPrecondition(beliefs[beliefValues[i]])
                 .AddEffect(beliefs[beliefValues[i + MAX_PLAYERS]])
                 .Build());
@@ -334,6 +345,11 @@ public class GoapAgent : MonoBehaviour
         goals.Add(new AgentGoal.Builder(Goals.ChillOut)
             .WithPriority(1)
             .WithDesiredEffect(beliefs[Beliefs.Nothing])
+            .Build());
+
+        goals.Add(new AgentGoal.Builder(Goals.ComingCloserToFinish)
+            .WithPriority(50)
+            .WithDesiredEffect(beliefs[Beliefs.FindNextPosition])
             .Build());
 
         // goals.Add(new AgentGoal.Builder(Goals.AttackPlayer1)
@@ -423,6 +439,34 @@ public class GoapAgent : MonoBehaviour
 
     private bool InRangeOf(Vector3 pos, float range) => Vector3.Distance(transform.position, pos) < range;
 
+    private static bool IsAttackAction(Actions _action) =>
+        _action is Actions.AttackPlayer1 or Actions.AttackPlayer2 or Actions.AttackPlayer3;
+
+    private Vector3 NearestCourseTargetPosition()
+    {
+        Transform[] courseTargets =
+        {
+            checkPoint1, checkPoint2, checkPoint3, checkPoint4, checkPoint5,
+            checkPoint6, checkPoint7, checkPoint8, checkPoint9, checkPoint10, finishTransform
+        };
+
+        var nearest = finishTransform.position;
+        var nearestDistance = float.MaxValue;
+
+        foreach (var courseTarget in courseTargets)
+        {
+            if (courseTarget == null) continue;
+
+            var distance = Vector3.Distance(transform.position, courseTarget.position);
+            if (distance >= nearestDistance) continue;
+
+            nearestDistance = distance;
+            nearest = courseTarget.position;
+        }
+
+        return nearest;
+    }
+
     // void OnEnable() => chaseSensor.OnTargetChanged += HandleTargetChanged;
     // void OnDisable() => chaseSensor.OnTargetChanged -= HandleTargetChanged;
     //
@@ -461,6 +505,8 @@ public class GoapAgent : MonoBehaviour
 
             if (currentAction.Complete)
             {
+                if (IsAttackAction(currentAction.Name)) m_attackReadyTime = Time.time + attackGoalCooldown;
+
                 currentAction.Stop();
                 currentAction = null;
 

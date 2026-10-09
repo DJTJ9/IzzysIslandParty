@@ -828,21 +828,26 @@ public class GameMenuEvents : MonoBehaviour
 
         container.Clear();
 
+        // Players list index equals PlayerIndex (join order). Non-finishers rank behind all finishers.
         var ordered = _results
-            .OrderBy(_r => _r.PlayerScore.Value)
+            .Select((_r, _index) => (data: _r, finished: MinigolfHole.HasFinished(_index)))
+            .OrderByDescending(_e => _e.finished)
+            .ThenBy(_e => _e.data.PlayerScore.Value)
             .ToList();
 
         var currentRank = 1;
         var previousScore = float.MinValue;
+        var previousFinished = true;
 
         for (var i = 0; i < ordered.Count; i++)
         {
-            var data = ordered[i];
+            var data = ordered[i].data;
+            var finished = ordered[i].finished;
             var row = rowTemplate.CloneTree();
 
             var currentScore = data.PlayerScore.Value;
 
-            if (i > 0 && currentScore != previousScore)
+            if (i > 0 && (currentScore != previousScore || finished != previousFinished))
             {
                 currentRank = i + 1;
             }
@@ -852,6 +857,7 @@ public class GameMenuEvents : MonoBehaviour
             row.Q<Label>("ScoreLabel").text = data.PlayerScore.Value.ToString();
 
             previousScore = currentScore;
+            previousFinished = finished;
 
             // if (i == 0)
             //     row.AddToClassList("winner");

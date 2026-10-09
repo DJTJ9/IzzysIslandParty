@@ -49,7 +49,12 @@ public class AttackStrategy : IActionStrategy
         shootCooldownTimer.OnTimerStart += () => Complete = false;
         shootCooldownTimer.OnTimerStop += () => Complete = true;
 
-        rigidbodyMovement.Shoot(destination() + new Vector3(0, 1f, 0));
+        if (!rigidbodyMovement.Shoot(destination() + new Vector3(0, 1f, 0)))
+        {
+            Complete = true;
+            return;
+        }
+
         shootCooldownTimer.Start();
     }
 
@@ -83,7 +88,12 @@ public class AimForNextPositionStrategy : IActionStrategy
         shootCooldownTimer.OnTimerStart += () => Complete = false;
         shootCooldownTimer.OnTimerStop += () => Complete = true;
 
-        rigidbodyMovement.Shoot(finish());
+        if (!rigidbodyMovement.Shoot(finish()))
+        {
+            Complete = true;
+            return;
+        }
+
         shootCooldownTimer.Start();
     }
 

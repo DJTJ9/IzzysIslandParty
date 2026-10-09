@@ -89,19 +89,21 @@ public class GoapRigidbodyMovement : Controller
     /// to reach the target position. Tracks the number of shots taken and initiates a movement cooldown.
     /// </summary>
     /// <param name="_targetPosition">The target position the shot will aim for.</param>
-    public void Shoot(Vector3 _targetPosition)
+    /// <returns>True if the shot was fired, false if it was rejected (inactive, airborne or on cooldown).</returns>
+    public bool Shoot(Vector3 _targetPosition)
     {
-        if (!m_isActive) return;
-        if (!groundChecker.IsGrounded) return;
-        if (!m_canMove) return;
-        
+        if (!m_isActive) return false;
+        if (!groundChecker.IsGrounded) return false;
+        if (!m_canMove) return false;
+
         var impulse = CalculateImpulse(rb, _targetPosition);
         rb.AddForce(impulse, ForceMode.Impulse);
-        
+
         ++ShotsTaken;
         MovementCooldownTimer.Reset();
         MovementCooldownTimer.Start();
         m_canMove = false;
+        return true;
     }
     
     /// <summary>
