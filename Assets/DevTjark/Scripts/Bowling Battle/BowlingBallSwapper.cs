@@ -27,6 +27,7 @@ public class BowlingBallSwapper : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         m_ballColliders = GetComponents<Collider>();
         m_currentCollider = basketBallCollider;
+        m_currentBallType = (BallType)m_currentBallIndex;
     }
 
     /// <summary>
@@ -60,7 +61,7 @@ public class BowlingBallSwapper : MonoBehaviour
     /// <param name="_context">The input action context.</param>
     public void SwapToNextBall(InputAction.CallbackContext _context)
     {
-        if (!_context.started) return;
+        if (!_context.started || !BowlingBattleGameManager.IsPreparationPhase) return;
         
         ++m_currentBallIndex;
         if (m_currentBallIndex >= m_ballColliders.Length - 1) m_currentBallIndex = 0;
@@ -74,7 +75,7 @@ public class BowlingBallSwapper : MonoBehaviour
     /// <param name="_context">The input action context.</param>
     public void SwapToPreviousBall(InputAction.CallbackContext _context)
     {
-        if (!_context.started) return;
+        if (!_context.started || !BowlingBattleGameManager.IsPreparationPhase) return;
         
         --m_currentBallIndex;
         if (m_currentBallIndex < 0) m_currentBallIndex = m_ballColliders.Length - 2;

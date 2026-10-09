@@ -18,6 +18,7 @@ public class BowlingBattleGameManager : MonoBehaviour
 
     [HideInInspector] public static float PreparationPhaseTimer;
     [HideInInspector] public static float RoundTimer;
+    public static bool IsPreparationPhase { get; private set; }
 
     private int m_roundIndex = 1;
 
@@ -27,6 +28,7 @@ public class BowlingBattleGameManager : MonoBehaviour
 
     private void Awake()
     {
+        IsPreparationPhase = false;
         ResetRoundIndex();
         FreezeTimeScale();
 
@@ -35,11 +37,6 @@ public class BowlingBattleGameManager : MonoBehaviour
     }
     
     private void Start()
-    {
-        onLevelLoaded.Invoke();
-    }
-
-    private void OnEnable()
     {
         onLevelLoaded.Invoke();
     }
@@ -77,6 +74,7 @@ public class BowlingBattleGameManager : MonoBehaviour
     /// </summary>
     public void StartPreparationPhase()
     {
+        IsPreparationPhase = true;
         onPreparationPhaseStart.Invoke();
         m_preparationPhaseTimer.Start();
     }
@@ -125,6 +123,7 @@ public class BowlingBattleGameManager : MonoBehaviour
     /// </summary>
     private void ReleaseBall()
     {
+        IsPreparationPhase = false;
         onReleaseBall.Invoke();
         m_roundTimer.Start();
     }

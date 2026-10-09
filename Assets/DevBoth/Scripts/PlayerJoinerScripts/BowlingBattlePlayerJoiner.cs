@@ -34,8 +34,10 @@ public class BowlingBattlePlayerJoiner : MonoBehaviour
     {
         if (_playerInput.gameObject.TryGetComponent(out NPC_BowlingBattleController npc))
         {
-            _playerInput.gameObject.transform.position = npcCollectionBB.Players[m_npcIndex].SpawnPoint;
-            currentPlayers.Players.Add(npcCollectionBB.Players[m_npcIndex]);
+            // NPCs are spawned from slot (humans - 1) on, see JoinNPCsBB
+            var npcSlot = m_playerIndex - 1 + m_npcIndex;
+            _playerInput.gameObject.transform.position = npcCollectionBB.Players[npcSlot].SpawnPoint;
+            currentPlayers.Players.Add(npcCollectionBB.Players[npcSlot]);
             ++m_npcIndex;
             return;
         }
