@@ -9,10 +9,12 @@ public class DanceMoveManager : MonoBehaviour
     [SerializeField] private FaceSwapSO faceSwapSO;
 
     private Animator m_animator;
+    private PointCalculator m_pointCalculator;
 
     private void Awake()
     {
         m_animator = GetComponent<Animator>();
+        m_pointCalculator = GetComponent<PointCalculator>();
         m_animator.Play("Start_Move");
     }
 
@@ -21,6 +23,8 @@ public class DanceMoveManager : MonoBehaviour
     /// </summary>
     public void ChangeDanceMove()
     {
+        // New move starts facing the camera; animation events set it again if the move turns away
+        if (m_pointCalculator != null) m_pointCalculator.SetTurnedAwayFromCameraToFalse();
         m_animator.SetTrigger(danceMoveTriggersSO.GetRandomDanceMove());
     }
 
@@ -30,7 +34,7 @@ public class DanceMoveManager : MonoBehaviour
     /// </summary>
     public void ChangeFace()
     {
-        faceMeshRenderer.material = faceSwapSO.GetRandomFace(faceMeshRenderer.material);
+        faceMeshRenderer.sharedMaterial = faceSwapSO.GetRandomFace(faceMeshRenderer.sharedMaterial);
     }
 
     public void StartGlowEffect()

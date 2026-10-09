@@ -86,7 +86,13 @@ public class PointCalculator : MonoBehaviour
     /// <param name="_playerIndex">The index of the player to evaluate.</param>
     private void CalculatePointsForDanceMove(int _playerIndex)
     {
-        var currentClip = animator.GetCurrentAnimatorClipInfo(0)[0].clip;
+        var clipInfo = animator.IsInTransition(0)
+            ? animator.GetNextAnimatorClipInfo(0)
+            : animator.GetCurrentAnimatorClipInfo(0);
+
+        if (clipInfo.Length == 0) return;
+
+        var currentClip = clipInfo[0].clip;
 
         if (!danceMovesSO.IsCoolDanceMove(currentClip)) return;
         

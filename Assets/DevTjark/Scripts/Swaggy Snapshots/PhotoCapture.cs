@@ -36,7 +36,8 @@ public class PhotoCapture : MonoBehaviour
     private bool m_photoTaken;
     
     private readonly int m_fadeInAnimationHash = Animator.StringToHash("PhotoFadeIn");
-    
+    private static readonly Color32 k_PlaceholderColor = new(64, 64, 64, 255);
+
     private void Start()
     {
         controller = GetComponent<Controller>();
@@ -96,7 +97,10 @@ public class PhotoCapture : MonoBehaviour
         ShowFlashLight();
         
         yield return new WaitForEndOfFrame();
-        
+
+        if (m_screenCapture.width != Screen.width || m_screenCapture.height != Screen.height)
+            m_screenCapture.Reinitialize(Screen.width, Screen.height);
+
         var rect = new Rect(0, 0, Screen.width, Screen.height);
         m_screenCapture.ReadPixels(rect, 0, 0, false);
         m_screenCapture.Apply();
@@ -118,12 +122,26 @@ public class PhotoCapture : MonoBehaviour
     /// </summary>
     public void ShowScreenshot()
     {
+        if (!m_photoTaken) FillWithPlaceholder();
+
         photoFrameRectTransform.anchoredPosition = currentPlayersSO.Players[controller.PlayerIndex].SpawnPoint;
         Sprite photoSprite = Sprite.Create(m_screenCapture, new Rect(0, 0, m_screenCapture.width, m_screenCapture.height), new Vector2(0.5f, 0.5f), 100f);
         photoDisplayArea.sprite = photoSprite;
-        
+
         photoFrame.SetActive(true);
         FadeInPhoto();
+    }
+
+    /// <summary>
+    /// Fills the capture texture with a neutral color for players who took no photo,
+    /// so the frame never shows uninitialized texture memory.
+    /// </summary>
+    private void FillWithPlaceholder()
+    {
+        var pixels = new Color32[m_screenCapture.width * m_screenCapture.height];
+        System.Array.Fill(pixels, k_PlaceholderColor);
+        m_screenCapture.SetPixels32(pixels);
+        m_screenCapture.Apply();
     }
 
     /// <summary>

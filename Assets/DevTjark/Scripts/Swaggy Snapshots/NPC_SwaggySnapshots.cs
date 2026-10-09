@@ -5,6 +5,8 @@ using Random = UnityEngine.Random;
 
 public class NPC_SwaggySnapshots : Controller
 {
+    [SerializeField] private float photoEndMargin = 0.5f;
+
     private PhotoCapture photoCapture;
     private CountdownTimer m_photoTimer;
 
@@ -15,8 +17,10 @@ public class NPC_SwaggySnapshots : Controller
     private void Awake()
     {
         photoCapture = GetComponent<PhotoCapture>();
-        
-        m_photoTimer = new CountdownTimer(Random.Range(SwaggySnapshotsGameManager.StartMoveDuration, SwaggySnapshotsGameManager.StartMoveDuration + SwaggySnapshotsGameManager.RoundTime), autoTick: true);
+
+        var photoWindowStart = SwaggySnapshotsGameManager.StartMoveDuration;
+        var photoWindowEnd = SwaggySnapshotsGameManager.StartMoveDuration + SwaggySnapshotsGameManager.RoundTime - photoEndMargin;
+        m_photoTimer = new CountdownTimer(Random.Range(photoWindowStart, photoWindowEnd), autoTick: true);
         m_photoTimer.OnTimerStop += TakePhoto;
     }
 
@@ -36,6 +40,8 @@ public class NPC_SwaggySnapshots : Controller
     /// </summary>
     private void TakePhoto()
     {
+        if (!photoCapture.CanTakePhoto()) return;
+
         PlayerControllerSwaggySnapshots.InvokePhotoTaken(GetPlayerIndex());
         photoCapture.ShowFlashLight();
     }

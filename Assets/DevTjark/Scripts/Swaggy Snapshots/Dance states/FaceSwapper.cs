@@ -10,6 +10,6 @@ public class FaceSwapper : StateMachineBehaviour
     {
         var meshRendererReference = animator.GetComponentInChildren<FaceChecker>();
         m_skinnedMeshRenderer = meshRendererReference.SkinnedMeshRenderer;
-        m_skinnedMeshRenderer.material = faceSwapSO.GetRandomFace(m_skinnedMeshRenderer.material);
+        m_skinnedMeshRenderer.sharedMaterial = faceSwapSO.GetRandomFace(m_skinnedMeshRenderer.sharedMaterial);
     }
 }

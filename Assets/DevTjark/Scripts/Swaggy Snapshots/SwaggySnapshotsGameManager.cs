@@ -30,6 +30,7 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
     
     private CountdownTimer m_roundTimer;
     private CountdownTimer m_photoShowTimer;
+    private bool m_roundActive;
 
     /// <summary>
     /// Initializes timers, resets time scale and invokes the level loaded event.
@@ -81,6 +82,7 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
         m_startMoveTimer = new CountdownTimer(m_startMoveDuration, autoTick: true);
         m_startMoveTimer.OnTimerStop += () =>
         {
+            m_roundActive = true;
             m_danceMoveSwitchTimer.Start();
             m_roundTimer.Start();
             onRoundStart.Invoke();
@@ -90,6 +92,7 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
         m_danceMoveSwitchTimer.OnTimerStart += () => onDanceMoveChanged.Invoke();
         m_danceMoveSwitchTimer.OnTimerStop += () =>
         {
+            if (!m_roundActive) return;
             m_danceMoveSwitchTimer.Reset();
             m_danceMoveSwitchTimer.Start();
         };
@@ -126,6 +129,8 @@ public class SwaggySnapshotsGameManager : MonoBehaviour
     /// </summary>
     private void OnRoundEnd()
     {
+        m_roundActive = false;
+        m_danceMoveSwitchTimer.Stop();
         onRoundEnd.Invoke();
         m_photoShowTimer.Start();
     }
