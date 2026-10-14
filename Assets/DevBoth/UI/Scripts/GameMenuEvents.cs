@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -151,8 +151,10 @@ public class GameMenuEvents : MonoBehaviour
 
     private bool m_hubOpenedFromEndScreen;
     private Coroutine m_instructionRoutine;
+    private VisualElement m_lastFocusedElement;
 
-    private void Awake()
+
+private void Awake()
     {
         document = GetComponent<UIDocument>();
         root = document.rootVisualElement;
@@ -160,6 +162,8 @@ public class GameMenuEvents : MonoBehaviour
         BindVisualElements();
         BindButtons();
         InitializeSlotElements();
+        root.RegisterCallback<FocusInEvent>(OnMenuFocusIn);
+        root.RegisterCallback<FocusOutEvent>(OnMenuFocusOut);
         FocusButton(controllerSelectionReadyButton);
     }
 
@@ -1012,6 +1016,30 @@ public class GameMenuEvents : MonoBehaviour
         swaggySnapshotsInstructionsText.style.display = DisplayStyle.None;
         hastyHurdlesInstructionsText.style.display = DisplayStyle.None;
     }
+
+
+    private void OnMenuFocusIn(FocusInEvent _evt)
+    {
+        if (_evt.target is VisualElement element) m_lastFocusedElement = element;
+    }
+
+    /// <summary>
+    /// A pointer click on empty space (outside any focusable control) clears focus entirely in UI Toolkit.
+    /// With no focused element, gamepad/keyboard Submit and NavigationMoveEvent stop firing, and Esc/Cancel
+    /// becomes the only way out. Re-focus the last known element so input keeps working.
+    /// </summary>
+    private void OnMenuFocusOut(FocusOutEvent _evt)
+    {
+        if (_evt.relatedTarget != null) return;
+        if (m_lastFocusedElement == null) return;
+
+        root.schedule.Execute(() =>
+        {
+            if (root.panel.focusController.focusedElement == null)
+                m_lastFocusedElement.Focus();
+        });
+    }
+
 
     private void RunInstructionRoutine(IEnumerator _routine) => m_instructionRoutine = StartCoroutine(_routine);
 
