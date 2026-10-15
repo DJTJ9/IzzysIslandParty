@@ -37,7 +37,7 @@ public class PlayerControllerBowlingBattle : Controller
         m_hasJoinedGame = true;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (controller.enabled) Movement();
     }

@@ -31,7 +31,7 @@ public class NPC_BowlingBattleController : Controller
         GameStartConfiguration();
     }
     
-    private void FixedUpdate()
+    private void Update()
     {
         if (controller.enabled) Movement();
     }
