@@ -46,8 +46,9 @@ public class NPC_BowlingBattleController : Controller
 
         rb.freezeRotation = true;
         rb.useGravity = false;
+        rb.isKinematic = true;
     }
-    
+
     private void Movement()
     {
         StartPositionMovement();
@@ -104,6 +105,7 @@ public class NPC_BowlingBattleController : Controller
     {
             if (controller == null) return;
             controller.enabled = false;
+            rb.isKinematic = false;
             rb.freezeRotation = false;
             rb.useGravity = true;
             m_moveInput = Vector2.zero;
@@ -126,8 +128,9 @@ public class NPC_BowlingBattleController : Controller
         controller.enabled = true;
         rb.freezeRotation = true;
         rb.useGravity = false;
+        rb.isKinematic = true;
     }
-    
+
     /// <summary>
     /// Activates the CharacterController for the NPC, enabling movement control.
     /// </summary>
