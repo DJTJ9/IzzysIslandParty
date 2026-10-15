@@ -78,6 +78,7 @@ public class AsyncLevelLoader : MonoBehaviour
         try
         {
             progressBar.value = k_Zero;
+            progressBar.title = "0%";
             target = k_Zero;
             loadingScreenContainer.style.display = DisplayStyle.Flex;
 
@@ -133,6 +134,7 @@ public class AsyncLevelLoader : MonoBehaviour
 
             loadingScreenContainer.style.display = DisplayStyle.Flex;
             progressBar.value = k_Zero;
+            progressBar.title = "0%";
             target = k_Zero;
 
             await Task.Delay(firstLoadingScreenDelay);

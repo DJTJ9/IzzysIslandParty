@@ -164,6 +164,7 @@ private void Awake()
         InitializeSlotElements();
         root.RegisterCallback<FocusInEvent>(OnMenuFocusIn);
         root.RegisterCallback<FocusOutEvent>(OnMenuFocusOut);
+        root.RegisterCallback<NavigationCancelEvent>(OnControllerSelectionCancel);
         FocusButton(controllerSelectionReadyButton);
     }
 
@@ -316,6 +317,9 @@ private void Awake()
         endScreenRestartButton.clicked += OnRestartGameClick;
         endScreenChangeLevelButton.clicked += OnEndScreenChangeLevelClick;
         endScreenQuitButton.clicked += OnQuitClick;
+
+        // Controller selection menu
+        controllerSelectionBackButton.clicked += OnControllerSelectionBack;
     }
 
     private void UnregisterButtonCallbacks()
@@ -355,6 +359,9 @@ private void Awake()
         endScreenRestartButton.clicked -= OnRestartGameClick;
         endScreenChangeLevelButton.clicked -= OnEndScreenChangeLevelClick;
         endScreenQuitButton.clicked -= OnQuitClick;
+
+        // Controller selection menu
+        controllerSelectionBackButton.clicked -= OnControllerSelectionBack;
     }
     
     private void InitializeSliderValues()
@@ -494,6 +501,7 @@ private void Awake()
     {
         FreezeTimeScale();
         controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        controllerSelectionBackButton.style.display = DisplayStyle.Flex;
         HideAllGameHeadersAndInstructions();
         FocusButton(controllerSelectionReadyButton);
         bowlingBattleHeader.style.display = DisplayStyle.Flex;
@@ -509,6 +517,7 @@ private void Awake()
     {
         FreezeTimeScale();
         controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        controllerSelectionBackButton.style.display = DisplayStyle.Flex;
         HideAllGameHeadersAndInstructions();
         FocusButton(controllerSelectionReadyButton);
         fishingFrenzyHeader.style.display = DisplayStyle.Flex;
@@ -524,6 +533,7 @@ private void Awake()
     {
         FreezeTimeScale();
         controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        controllerSelectionBackButton.style.display = DisplayStyle.Flex;
         HideAllGameHeadersAndInstructions();
         FocusButton(controllerSelectionReadyButton);
         jetskiJoyrideRaceHeader.style.display = DisplayStyle.Flex;
@@ -539,6 +549,7 @@ private void Awake()
     {
         FreezeTimeScale();
         controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        controllerSelectionBackButton.style.display = DisplayStyle.Flex;
         HideAllGameHeadersAndInstructions();
         FocusButton(controllerSelectionReadyButton);
         jetskiJoyrideSlalomHeader.style.display = DisplayStyle.Flex;
@@ -554,6 +565,7 @@ private void Awake()
     {
         FreezeTimeScale();
         controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        controllerSelectionBackButton.style.display = DisplayStyle.Flex;
         HideAllGameHeadersAndInstructions();
         FocusButton(controllerSelectionReadyButton);
         minigolfMayhemClassicHeader.style.display = DisplayStyle.Flex;
@@ -569,6 +581,7 @@ private void Awake()
     {
         FreezeTimeScale();
         controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        controllerSelectionBackButton.style.display = DisplayStyle.Flex;
         HideAllGameHeadersAndInstructions();
         FocusButton(controllerSelectionReadyButton);
         minigolfMayhemRaceHeader.style.display = DisplayStyle.Flex;
@@ -584,6 +597,7 @@ private void Awake()
     {
         FreezeTimeScale();
         controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        controllerSelectionBackButton.style.display = DisplayStyle.Flex;
         HideAllGameHeadersAndInstructions();
         FocusButton(controllerSelectionReadyButton);
         swaggySnapshotsHeader.style.display = DisplayStyle.Flex;
@@ -599,6 +613,7 @@ private void Awake()
     {
         FreezeTimeScale();
         controllerSelectionMenu.style.display = DisplayStyle.Flex;
+        controllerSelectionBackButton.style.display = DisplayStyle.Flex;
         HideAllGameHeadersAndInstructions();
         FocusButton(controllerSelectionReadyButton);
         hastyHurdlesHeader.style.display = DisplayStyle.Flex;
@@ -613,6 +628,7 @@ private void Awake()
     private void HideControllerSelectionScreen()
     {
         controllerSelectionMenu.style.display = DisplayStyle.None;
+        controllerSelectionBackButton.style.display = DisplayStyle.None;
     }
 
     public void OnControllerSelectionReady()
@@ -623,6 +639,23 @@ private void Awake()
         uiToolkitVideo.StopVideo();
         UnfreezeTimeScale();
         HideControllerSelectionScreen();
+    }
+
+    private void OnControllerSelectionBack()
+    {
+        if (m_instructionRoutine != null) StopCoroutine(m_instructionRoutine);
+        uiToolkitVideo.StopVideo();
+        UnfreezeTimeScale();
+        HideControllerSelectionScreen();
+        LoadSingleScene(SceneNames.MainMenu);
+    }
+
+    private void OnControllerSelectionCancel(NavigationCancelEvent _evt)
+    {
+        if (controllerSelectionMenu.style.display != DisplayStyle.Flex) return;
+
+        _evt.StopPropagation();
+        OnControllerSelectionBack();
     }
 
     private void OnLoadBowlingBattle()

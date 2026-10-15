@@ -35,6 +35,8 @@ public class MainMenuEvents : MonoBehaviour
     private VisualElement jetskiJoyrideModusSelectionMenu;
     private VisualElement minigolfMayhemModusSelectionMenu;
 
+    private bool m_navigationLocked;
+
     [Header("Main Menu Buttons")]
     private Button startGameButton;
     private Button settingsButton;
@@ -397,17 +399,24 @@ public class MainMenuEvents : MonoBehaviour
 
     private void LoadGameScene(SceneNames _sceneName)
     {
+        if (m_navigationLocked) return;
+
         menusContainer.style.display = DisplayStyle.None;
         AsyncLevelLoader.Instance.LoadScene(_sceneName);
     }
 
-    private void FocusButton(VisualElement _button) => StartCoroutine(FocusButtonCoroutine(_button));
+    private void FocusButton(VisualElement _button)
+    {
+        m_navigationLocked = true;
+        StartCoroutine(FocusButtonCoroutine(_button));
+    }
 
     private IEnumerator FocusButtonCoroutine(VisualElement _button)
     {
         yield return null;
         yield return null;
         _button.Focus();
+        m_navigationLocked = false;
     }
     
     private void SetUpPlayerHUBNavigation()
