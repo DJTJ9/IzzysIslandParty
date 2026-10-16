@@ -875,6 +875,7 @@ GameObject:
   - component: {fileID: 7080182010931715802}
   - component: {fileID: 2581511148949804264}
   - component: {fileID: 2796957476720486687}
+  - component: {fileID: 8496391057616614271}
   m_Layer: 7
   m_Name: GOAP AI
   m_TagString: Player
@@ -1134,6 +1135,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followCamera: {fileID: 450519654097088534}
+--- !u!114 &8496391057616614271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6484771465931415211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68efac6a9c82efa41a2f5d472e1c10d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxUpwardDeltaPerStep: 6
+  legitImpulseGrace: 0.2
+  logClamps: 1
 --- !u!1 &6862577389318809551
 GameObject:
   m_ObjectHideFlags: 0
