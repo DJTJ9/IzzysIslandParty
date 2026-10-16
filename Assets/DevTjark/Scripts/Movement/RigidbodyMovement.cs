@@ -31,6 +31,7 @@ public class RigidbodyMovement : MonoBehaviour
     [SerializeField] private Camera playerCamera;
     private Rigidbody rb;
     private GroundChecker groundChecker;
+    private BallPopGuard popGuard;
 
     [HideInInspector] public int ShotsTaken;
     
@@ -47,6 +48,7 @@ public class RigidbodyMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         groundChecker = GetComponent<GroundChecker>();
+        TryGetComponent(out popGuard);
 
         MovementCooldownTimer = new CountdownTimer(MovementCooldown, autoTick: true);
         MovementCooldownTimer.OnTimerStop += EnableMovement;
@@ -88,6 +90,7 @@ public class RigidbodyMovement : MonoBehaviour
         var currentVelocity = Mathf.Abs(_rb.linearVelocity.magnitude);
         if (rb.linearVelocity.magnitude < currentVelocity) return;
 
+        if (other.TryGetComponent<BallPopGuard>(out var otherGuard)) otherGuard.AllowUpwardImpulse();
         _rb.AddForce(impulse, ForceMode.Impulse);
     }
 
@@ -146,6 +149,7 @@ public class RigidbodyMovement : MonoBehaviour
         if (!m_canMove) return;
         if (!groundChecker.IsGrounded) return;
     
+        if (popGuard != null) popGuard.AllowUpwardImpulse();
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     
         MovementCooldownTimer.Reset();
@@ -171,6 +175,7 @@ public class RigidbodyMovement : MonoBehaviour
 
         var direction = (targetPoint - rb.transform.position).normalized;
 
+        if (popGuard != null) popGuard.AllowUpwardImpulse();
         rb.AddForce(direction * CurrentShootForce, ForceMode.Impulse);
 
         ++ShotsTaken;
