@@ -28,6 +28,7 @@ public class GoapRigidbodyMovement : Controller
 
     private Rigidbody rb;
     private GroundChecker groundChecker;
+    private BallPopGuard popGuard;
 
     private Vector3 moveDirection;
     private bool m_canMove = true;
@@ -40,10 +41,12 @@ public class GoapRigidbodyMovement : Controller
     {
         rb = GetComponent<Rigidbody>();
         groundChecker = GetComponent<GroundChecker>();
+        TryGetComponent(out popGuard);
         
         MovementCooldownTimer = new CountdownTimer(MovementCooldown, autoTick: true);
         MovementCooldownTimer.OnTimerStop += EnableMovement;
         impulseCooldownTimer = new CountdownTimer(impulseCooldown, autoTick: true);
+        impulseCooldownTimer.OnTimerStart += () => m_impulseApplied = true;
         impulseCooldownTimer.OnTimerStop += () => m_impulseApplied = false;
     }
 
@@ -70,18 +73,10 @@ public class GoapRigidbodyMovement : Controller
 
         if (!other.TryGetComponent<Rigidbody>(out var _rb)) return;
         var currentVelocity = _rb.linearVelocity;
-        if (rb.linearVelocity.magnitude > currentVelocity.magnitude) return;
+        if (rb.linearVelocity.magnitude < currentVelocity.magnitude) return;
 
+        if (other.TryGetComponent<BallPopGuard>(out var otherGuard)) otherGuard.AllowUpwardImpulse();
         _rb.AddForce(impulse, ForceMode.Impulse);
-    }
-    
-    /// <summary>
-    /// Resets the impulse application flag when an object leaves the trigger zone.
-    /// </summary>
-    /// <param name="other">The collider leaving the trigger zone.</param>
-    private void OnTriggerExit(Collider other)
-    {
-        m_impulseApplied = false;
     }
 
     /// <summary>
@@ -97,6 +92,7 @@ public class GoapRigidbodyMovement : Controller
         if (!m_canMove) return false;
 
         var impulse = CalculateImpulse(rb, _targetPosition);
+        if (popGuard != null) popGuard.AllowUpwardImpulse();
         rb.AddForce(impulse, ForceMode.Impulse);
 
         ++ShotsTaken;
